@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Account display name in Eon. | 
-**RestoreAccountConfig** | [**AccountConfigInput**](AccountConfigInput.md) |  | 
+**RestoreAccountAttributes** | [**AccountConfigInput**](AccountConfigInput.md) |  | 
 
 ## Methods
 
 ### NewConnectRestoreAccountRequest
 
-`func NewConnectRestoreAccountRequest(name string, restoreAccountConfig AccountConfigInput, ) *ConnectRestoreAccountRequest`
+`func NewConnectRestoreAccountRequest(name string, restoreAccountAttributes AccountConfigInput, ) *ConnectRestoreAccountRequest`
 
 NewConnectRestoreAccountRequest instantiates a new ConnectRestoreAccountRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,24 +46,24 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetRestoreAccountConfig
+### GetRestoreAccountAttributes
 
-`func (o *ConnectRestoreAccountRequest) GetRestoreAccountConfig() AccountConfigInput`
+`func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributes() AccountConfigInput`
 
-GetRestoreAccountConfig returns the RestoreAccountConfig field if non-nil, zero value otherwise.
+GetRestoreAccountAttributes returns the RestoreAccountAttributes field if non-nil, zero value otherwise.
 
-### GetRestoreAccountConfigOk
+### GetRestoreAccountAttributesOk
 
-`func (o *ConnectRestoreAccountRequest) GetRestoreAccountConfigOk() (*AccountConfigInput, bool)`
+`func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributesOk() (*AccountConfigInput, bool)`
 
-GetRestoreAccountConfigOk returns a tuple with the RestoreAccountConfig field if it's non-nil, zero value otherwise
+GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRestoreAccountConfig
+### SetRestoreAccountAttributes
 
-`func (o *ConnectRestoreAccountRequest) SetRestoreAccountConfig(v AccountConfigInput)`
+`func (o *ConnectRestoreAccountRequest) SetRestoreAccountAttributes(v AccountConfigInput)`
 
-SetRestoreAccountConfig sets RestoreAccountConfig field to given value.
+SetRestoreAccountAttributes sets RestoreAccountAttributes field to given value.
 
 
 

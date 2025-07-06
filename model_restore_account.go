@@ -26,7 +26,7 @@ type RestoreAccount struct {
 	// Cloud-provider-assigned account ID.
 	ProviderAccountId string `json:"providerAccountId"`
 	Status AccountState `json:"status"`
-	RestoreAccountConfig AccountConfig `json:"restoreAccountConfig"`
+	RestoreAccountAttributes *AccountConfig `json:"restoreAccountAttributes,omitempty"`
 }
 
 type _RestoreAccount RestoreAccount
@@ -35,12 +35,11 @@ type _RestoreAccount RestoreAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreAccount(id string, providerAccountId string, status AccountState, restoreAccountConfig AccountConfig) *RestoreAccount {
+func NewRestoreAccount(id string, providerAccountId string, status AccountState) *RestoreAccount {
 	this := RestoreAccount{}
 	this.Id = id
 	this.ProviderAccountId = providerAccountId
 	this.Status = status
-	this.RestoreAccountConfig = restoreAccountConfig
 	return &this
 }
 
@@ -124,28 +123,36 @@ func (o *RestoreAccount) SetStatus(v AccountState) {
 	o.Status = v
 }
 
-// GetRestoreAccountConfig returns the RestoreAccountConfig field value
-func (o *RestoreAccount) GetRestoreAccountConfig() AccountConfig {
-	if o == nil {
+// GetRestoreAccountAttributes returns the RestoreAccountAttributes field value if set, zero value otherwise.
+func (o *RestoreAccount) GetRestoreAccountAttributes() AccountConfig {
+	if o == nil || IsNil(o.RestoreAccountAttributes) {
 		var ret AccountConfig
 		return ret
 	}
-
-	return o.RestoreAccountConfig
+	return *o.RestoreAccountAttributes
 }
 
-// GetRestoreAccountConfigOk returns a tuple with the RestoreAccountConfig field value
+// GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RestoreAccount) GetRestoreAccountConfigOk() (*AccountConfig, bool) {
-	if o == nil {
+func (o *RestoreAccount) GetRestoreAccountAttributesOk() (*AccountConfig, bool) {
+	if o == nil || IsNil(o.RestoreAccountAttributes) {
 		return nil, false
 	}
-	return &o.RestoreAccountConfig, true
+	return o.RestoreAccountAttributes, true
 }
 
-// SetRestoreAccountConfig sets field value
-func (o *RestoreAccount) SetRestoreAccountConfig(v AccountConfig) {
-	o.RestoreAccountConfig = v
+// HasRestoreAccountAttributes returns a boolean if a field has been set.
+func (o *RestoreAccount) HasRestoreAccountAttributes() bool {
+	if o != nil && !IsNil(o.RestoreAccountAttributes) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreAccountAttributes gets a reference to the given AccountConfig and assigns it to the RestoreAccountAttributes field.
+func (o *RestoreAccount) SetRestoreAccountAttributes(v AccountConfig) {
+	o.RestoreAccountAttributes = &v
 }
 
 func (o RestoreAccount) MarshalJSON() ([]byte, error) {
@@ -161,7 +168,9 @@ func (o RestoreAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["providerAccountId"] = o.ProviderAccountId
 	toSerialize["status"] = o.Status
-	toSerialize["restoreAccountConfig"] = o.RestoreAccountConfig
+	if !IsNil(o.RestoreAccountAttributes) {
+		toSerialize["restoreAccountAttributes"] = o.RestoreAccountAttributes
+	}
 	return toSerialize, nil
 }
 
@@ -173,7 +182,6 @@ func (o *RestoreAccount) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"providerAccountId",
 		"status",
-		"restoreAccountConfig",
 	}
 
 	allProperties := make(map[string]interface{})

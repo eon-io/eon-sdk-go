@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Name** | **string** | Account display name in Eon. | 
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
 **Status** | [**AccountState**](AccountState.md) |  | 
-**SourceAccountConfig** | [**AccountConfig**](AccountConfig.md) |  | 
+**SourceAccountAttributes** | Pointer to [**AccountConfig**](AccountConfig.md) |  | [optional] 
 
 ## Methods
 
 ### NewSourceAccount
 
-`func NewSourceAccount(id string, name string, providerAccountId string, status AccountState, sourceAccountConfig AccountConfig, ) *SourceAccount`
+`func NewSourceAccount(id string, name string, providerAccountId string, status AccountState, ) *SourceAccount`
 
 NewSourceAccount instantiates a new SourceAccount object
 This constructor will assign default values to properties that have it defined,
@@ -109,25 +109,30 @@ and a boolean to check if the value has been set.
 SetStatus sets Status field to given value.
 
 
-### GetSourceAccountConfig
+### GetSourceAccountAttributes
 
-`func (o *SourceAccount) GetSourceAccountConfig() AccountConfig`
+`func (o *SourceAccount) GetSourceAccountAttributes() AccountConfig`
 
-GetSourceAccountConfig returns the SourceAccountConfig field if non-nil, zero value otherwise.
+GetSourceAccountAttributes returns the SourceAccountAttributes field if non-nil, zero value otherwise.
 
-### GetSourceAccountConfigOk
+### GetSourceAccountAttributesOk
 
-`func (o *SourceAccount) GetSourceAccountConfigOk() (*AccountConfig, bool)`
+`func (o *SourceAccount) GetSourceAccountAttributesOk() (*AccountConfig, bool)`
 
-GetSourceAccountConfigOk returns a tuple with the SourceAccountConfig field if it's non-nil, zero value otherwise
+GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceAccountConfig
+### SetSourceAccountAttributes
 
-`func (o *SourceAccount) SetSourceAccountConfig(v AccountConfig)`
+`func (o *SourceAccount) SetSourceAccountAttributes(v AccountConfig)`
 
-SetSourceAccountConfig sets SourceAccountConfig field to given value.
+SetSourceAccountAttributes sets SourceAccountAttributes field to given value.
 
+### HasSourceAccountAttributes
+
+`func (o *SourceAccount) HasSourceAccountAttributes() bool`
+
+HasSourceAccountAttributes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

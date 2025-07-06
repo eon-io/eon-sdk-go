@@ -292,11 +292,4 @@ model_tag_keys_filters.go
 model_token_response.go
 model_volume_settings.go
 response.go
-test/api_accounts_test.go
-test/api_auth_test.go
-test/api_dashboard_test.go
-test/api_database_snapshots_test.go
-test/api_jobs_test.go
-test/api_resources_test.go
-test/api_snapshots_test.go
 utils.go

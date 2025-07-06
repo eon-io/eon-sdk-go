@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Id** | **string** | Eon-assigned restore account ID. | 
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
 **Status** | [**AccountState**](AccountState.md) |  | 
-**RestoreAccountConfig** | [**AccountConfig**](AccountConfig.md) |  | 
+**RestoreAccountAttributes** | Pointer to [**AccountConfig**](AccountConfig.md) |  | [optional] 
 
 ## Methods
 
 ### NewRestoreAccount
 
-`func NewRestoreAccount(id string, providerAccountId string, status AccountState, restoreAccountConfig AccountConfig, ) *RestoreAccount`
+`func NewRestoreAccount(id string, providerAccountId string, status AccountState, ) *RestoreAccount`
 
 NewRestoreAccount instantiates a new RestoreAccount object
 This constructor will assign default values to properties that have it defined,
@@ -88,25 +88,30 @@ and a boolean to check if the value has been set.
 SetStatus sets Status field to given value.
 
 
-### GetRestoreAccountConfig
+### GetRestoreAccountAttributes
 
-`func (o *RestoreAccount) GetRestoreAccountConfig() AccountConfig`
+`func (o *RestoreAccount) GetRestoreAccountAttributes() AccountConfig`
 
-GetRestoreAccountConfig returns the RestoreAccountConfig field if non-nil, zero value otherwise.
+GetRestoreAccountAttributes returns the RestoreAccountAttributes field if non-nil, zero value otherwise.
 
-### GetRestoreAccountConfigOk
+### GetRestoreAccountAttributesOk
 
-`func (o *RestoreAccount) GetRestoreAccountConfigOk() (*AccountConfig, bool)`
+`func (o *RestoreAccount) GetRestoreAccountAttributesOk() (*AccountConfig, bool)`
 
-GetRestoreAccountConfigOk returns a tuple with the RestoreAccountConfig field if it's non-nil, zero value otherwise
+GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRestoreAccountConfig
+### SetRestoreAccountAttributes
 
-`func (o *RestoreAccount) SetRestoreAccountConfig(v AccountConfig)`
+`func (o *RestoreAccount) SetRestoreAccountAttributes(v AccountConfig)`
 
-SetRestoreAccountConfig sets RestoreAccountConfig field to given value.
+SetRestoreAccountAttributes sets RestoreAccountAttributes field to given value.
 
+### HasRestoreAccountAttributes
+
+`func (o *RestoreAccount) HasRestoreAccountAttributes() bool`
+
+HasRestoreAccountAttributes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

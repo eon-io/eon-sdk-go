@@ -23,7 +23,7 @@ var _ MappedNullable = &ConnectSourceAccountRequest{}
 type ConnectSourceAccountRequest struct {
 	// Account display name in Eon.
 	Name string `json:"name"`
-	SourceAccountConfig AccountConfigInput `json:"sourceAccountConfig"`
+	SourceAccountAttributes AccountConfigInput `json:"sourceAccountAttributes"`
 }
 
 type _ConnectSourceAccountRequest ConnectSourceAccountRequest
@@ -32,10 +32,10 @@ type _ConnectSourceAccountRequest ConnectSourceAccountRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectSourceAccountRequest(name string, sourceAccountConfig AccountConfigInput) *ConnectSourceAccountRequest {
+func NewConnectSourceAccountRequest(name string, sourceAccountAttributes AccountConfigInput) *ConnectSourceAccountRequest {
 	this := ConnectSourceAccountRequest{}
 	this.Name = name
-	this.SourceAccountConfig = sourceAccountConfig
+	this.SourceAccountAttributes = sourceAccountAttributes
 	return &this
 }
 
@@ -71,28 +71,28 @@ func (o *ConnectSourceAccountRequest) SetName(v string) {
 	o.Name = v
 }
 
-// GetSourceAccountConfig returns the SourceAccountConfig field value
-func (o *ConnectSourceAccountRequest) GetSourceAccountConfig() AccountConfigInput {
+// GetSourceAccountAttributes returns the SourceAccountAttributes field value
+func (o *ConnectSourceAccountRequest) GetSourceAccountAttributes() AccountConfigInput {
 	if o == nil {
 		var ret AccountConfigInput
 		return ret
 	}
 
-	return o.SourceAccountConfig
+	return o.SourceAccountAttributes
 }
 
-// GetSourceAccountConfigOk returns a tuple with the SourceAccountConfig field value
+// GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field value
 // and a boolean to check if the value has been set.
-func (o *ConnectSourceAccountRequest) GetSourceAccountConfigOk() (*AccountConfigInput, bool) {
+func (o *ConnectSourceAccountRequest) GetSourceAccountAttributesOk() (*AccountConfigInput, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.SourceAccountConfig, true
+	return &o.SourceAccountAttributes, true
 }
 
-// SetSourceAccountConfig sets field value
-func (o *ConnectSourceAccountRequest) SetSourceAccountConfig(v AccountConfigInput) {
-	o.SourceAccountConfig = v
+// SetSourceAccountAttributes sets field value
+func (o *ConnectSourceAccountRequest) SetSourceAccountAttributes(v AccountConfigInput) {
+	o.SourceAccountAttributes = v
 }
 
 func (o ConnectSourceAccountRequest) MarshalJSON() ([]byte, error) {
@@ -106,7 +106,7 @@ func (o ConnectSourceAccountRequest) MarshalJSON() ([]byte, error) {
 func (o ConnectSourceAccountRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	toSerialize["sourceAccountConfig"] = o.SourceAccountConfig
+	toSerialize["sourceAccountAttributes"] = o.SourceAccountAttributes
 	return toSerialize, nil
 }
 
@@ -116,7 +116,7 @@ func (o *ConnectSourceAccountRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"sourceAccountConfig",
+		"sourceAccountAttributes",
 	}
 
 	allProperties := make(map[string]interface{})

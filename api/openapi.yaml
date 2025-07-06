@@ -2812,7 +2812,7 @@ components:
     ConnectSourceAccountRequest:
       example:
         name: prod-eu
-        sourceAccountConfig:
+        sourceAccountAttributes:
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -2821,11 +2821,11 @@ components:
           description: Account display name in Eon.
           example: prod-eu
           type: string
-        sourceAccountConfig:
+        sourceAccountAttributes:
           $ref: '#/components/schemas/AccountConfigInput'
       required:
       - name
-      - sourceAccountConfig
+      - sourceAccountAttributes
       type: object
     AccountState:
       description: "Connection status of the AWS account, Azure subscription, or GCP\
@@ -2869,11 +2869,11 @@ components:
       example:
         providerAccountId: "123412341234"
         name: prod-eu
-        sourceAccountConfig:
+        id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+        sourceAccountAttributes:
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
-        id: fc495499-9796-5fc9-ade7-1ba924cbcc42
         status: CONNECTED
       properties:
         id:
@@ -2890,13 +2890,12 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/AccountState'
-        sourceAccountConfig:
+        sourceAccountAttributes:
           $ref: '#/components/schemas/AccountConfig'
       required:
       - id
       - name
       - providerAccountId
-      - sourceAccountConfig
       - status
       type: object
     ConnectSourceAccountResponse:
@@ -2904,11 +2903,11 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
-          sourceAccountConfig:
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          sourceAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
-          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           status: CONNECTED
       properties:
         sourceAccount:
@@ -3007,19 +3006,19 @@ components:
         accounts:
         - providerAccountId: "123412341234"
           name: prod-eu
-          sourceAccountConfig:
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          sourceAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
-          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           status: CONNECTED
         - providerAccountId: "123412341234"
           name: prod-eu
-          sourceAccountConfig:
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          sourceAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
-          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           status: CONNECTED
         totalCount: 13
       properties:
@@ -3046,11 +3045,11 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
-          sourceAccountConfig:
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          sourceAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
-          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           status: CONNECTED
       properties:
         sourceAccount:
@@ -3063,11 +3062,11 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
-          sourceAccountConfig:
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          sourceAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
-          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           status: CONNECTED
       properties:
         sourceAccount:
@@ -3077,7 +3076,7 @@ components:
       type: object
     ConnectRestoreAccountRequest:
       example:
-        restoreAccountConfig:
+        restoreAccountAttributes:
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -3087,15 +3086,15 @@ components:
           description: Account display name in Eon.
           example: restore-sandbox
           type: string
-        restoreAccountConfig:
+        restoreAccountAttributes:
           $ref: '#/components/schemas/AccountConfigInput'
       required:
       - name
-      - restoreAccountConfig
+      - restoreAccountAttributes
       type: object
     RestoreAccount:
       example:
-        restoreAccountConfig:
+        restoreAccountAttributes:
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -3113,18 +3112,17 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/AccountState'
-        restoreAccountConfig:
+        restoreAccountAttributes:
           $ref: '#/components/schemas/AccountConfig'
       required:
       - id
       - providerAccountId
-      - restoreAccountConfig
       - status
       type: object
     ConnectRestoreAccountResponse:
       example:
         restoreAccount:
-          restoreAccountConfig:
+          restoreAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -3158,14 +3156,14 @@ components:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         accounts:
-        - restoreAccountConfig:
+        - restoreAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           providerAccountId: "123412341234"
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           status: CONNECTED
-        - restoreAccountConfig:
+        - restoreAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -3195,7 +3193,7 @@ components:
     DisconnectRestoreAccountResponse:
       example:
         restoreAccount:
-          restoreAccountConfig:
+          restoreAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -3211,7 +3209,7 @@ components:
     ReconnectRestoreAccountResponse:
       example:
         restoreAccount:
-          restoreAccountConfig:
+          restoreAccountAttributes:
             cloudProvider: AWS
             aws:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole

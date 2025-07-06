@@ -23,7 +23,7 @@ var _ MappedNullable = &ConnectRestoreAccountRequest{}
 type ConnectRestoreAccountRequest struct {
 	// Account display name in Eon.
 	Name string `json:"name"`
-	RestoreAccountConfig AccountConfigInput `json:"restoreAccountConfig"`
+	RestoreAccountAttributes AccountConfigInput `json:"restoreAccountAttributes"`
 }
 
 type _ConnectRestoreAccountRequest ConnectRestoreAccountRequest
@@ -32,10 +32,10 @@ type _ConnectRestoreAccountRequest ConnectRestoreAccountRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectRestoreAccountRequest(name string, restoreAccountConfig AccountConfigInput) *ConnectRestoreAccountRequest {
+func NewConnectRestoreAccountRequest(name string, restoreAccountAttributes AccountConfigInput) *ConnectRestoreAccountRequest {
 	this := ConnectRestoreAccountRequest{}
 	this.Name = name
-	this.RestoreAccountConfig = restoreAccountConfig
+	this.RestoreAccountAttributes = restoreAccountAttributes
 	return &this
 }
 
@@ -71,28 +71,28 @@ func (o *ConnectRestoreAccountRequest) SetName(v string) {
 	o.Name = v
 }
 
-// GetRestoreAccountConfig returns the RestoreAccountConfig field value
-func (o *ConnectRestoreAccountRequest) GetRestoreAccountConfig() AccountConfigInput {
+// GetRestoreAccountAttributes returns the RestoreAccountAttributes field value
+func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributes() AccountConfigInput {
 	if o == nil {
 		var ret AccountConfigInput
 		return ret
 	}
 
-	return o.RestoreAccountConfig
+	return o.RestoreAccountAttributes
 }
 
-// GetRestoreAccountConfigOk returns a tuple with the RestoreAccountConfig field value
+// GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field value
 // and a boolean to check if the value has been set.
-func (o *ConnectRestoreAccountRequest) GetRestoreAccountConfigOk() (*AccountConfigInput, bool) {
+func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributesOk() (*AccountConfigInput, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.RestoreAccountConfig, true
+	return &o.RestoreAccountAttributes, true
 }
 
-// SetRestoreAccountConfig sets field value
-func (o *ConnectRestoreAccountRequest) SetRestoreAccountConfig(v AccountConfigInput) {
-	o.RestoreAccountConfig = v
+// SetRestoreAccountAttributes sets field value
+func (o *ConnectRestoreAccountRequest) SetRestoreAccountAttributes(v AccountConfigInput) {
+	o.RestoreAccountAttributes = v
 }
 
 func (o ConnectRestoreAccountRequest) MarshalJSON() ([]byte, error) {
@@ -106,7 +106,7 @@ func (o ConnectRestoreAccountRequest) MarshalJSON() ([]byte, error) {
 func (o ConnectRestoreAccountRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	toSerialize["restoreAccountConfig"] = o.RestoreAccountConfig
+	toSerialize["restoreAccountAttributes"] = o.RestoreAccountAttributes
 	return toSerialize, nil
 }
 
@@ -116,7 +116,7 @@ func (o *ConnectRestoreAccountRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"restoreAccountConfig",
+		"restoreAccountAttributes",
 	}
 
 	allProperties := make(map[string]interface{})

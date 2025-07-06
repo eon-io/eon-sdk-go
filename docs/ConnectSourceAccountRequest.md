@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Account display name in Eon. | 
-**SourceAccountConfig** | [**AccountConfigInput**](AccountConfigInput.md) |  | 
+**SourceAccountAttributes** | [**AccountConfigInput**](AccountConfigInput.md) |  | 
 
 ## Methods
 
 ### NewConnectSourceAccountRequest
 
-`func NewConnectSourceAccountRequest(name string, sourceAccountConfig AccountConfigInput, ) *ConnectSourceAccountRequest`
+`func NewConnectSourceAccountRequest(name string, sourceAccountAttributes AccountConfigInput, ) *ConnectSourceAccountRequest`
 
 NewConnectSourceAccountRequest instantiates a new ConnectSourceAccountRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,24 +46,24 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetSourceAccountConfig
+### GetSourceAccountAttributes
 
-`func (o *ConnectSourceAccountRequest) GetSourceAccountConfig() AccountConfigInput`
+`func (o *ConnectSourceAccountRequest) GetSourceAccountAttributes() AccountConfigInput`
 
-GetSourceAccountConfig returns the SourceAccountConfig field if non-nil, zero value otherwise.
+GetSourceAccountAttributes returns the SourceAccountAttributes field if non-nil, zero value otherwise.
 
-### GetSourceAccountConfigOk
+### GetSourceAccountAttributesOk
 
-`func (o *ConnectSourceAccountRequest) GetSourceAccountConfigOk() (*AccountConfigInput, bool)`
+`func (o *ConnectSourceAccountRequest) GetSourceAccountAttributesOk() (*AccountConfigInput, bool)`
 
-GetSourceAccountConfigOk returns a tuple with the SourceAccountConfig field if it's non-nil, zero value otherwise
+GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceAccountConfig
+### SetSourceAccountAttributes
 
-`func (o *ConnectSourceAccountRequest) SetSourceAccountConfig(v AccountConfigInput)`
+`func (o *ConnectSourceAccountRequest) SetSourceAccountAttributes(v AccountConfigInput)`
 
-SetSourceAccountConfig sets SourceAccountConfig field to given value.
+SetSourceAccountAttributes sets SourceAccountAttributes field to given value.
 
 
 
