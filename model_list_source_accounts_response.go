@@ -182,8 +182,7 @@ func (o *ListSourceAccountsResponse) UnmarshalJSON(data []byte) (err error) {
 	varListSourceAccountsResponse := _ListSourceAccountsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListSourceAccountsResponse)
 
 	if err != nil {

@@ -165,8 +165,7 @@ func (o *RestoreFilesRequest) UnmarshalJSON(data []byte) (err error) {
 	varRestoreFilesRequest := _RestoreFilesRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreFilesRequest)
 
 	if err != nil {

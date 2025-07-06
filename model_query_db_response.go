@@ -108,8 +108,7 @@ func (o *QueryDBResponse) UnmarshalJSON(data []byte) (err error) {
 	varQueryDBResponse := _QueryDBResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQueryDBResponse)
 
 	if err != nil {

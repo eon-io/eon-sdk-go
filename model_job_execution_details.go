@@ -391,9 +391,7 @@ func (o *JobExecutionDetails) UnmarshalJSON(data []byte) (err error) {
 	varJobExecutionDetails := _JobExecutionDetails{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// // Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varJobExecutionDetails)
 
 	if err != nil {

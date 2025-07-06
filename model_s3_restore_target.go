@@ -182,8 +182,7 @@ func (o *S3RestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	varS3RestoreTarget := _S3RestoreTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varS3RestoreTarget)
 
 	if err != nil {

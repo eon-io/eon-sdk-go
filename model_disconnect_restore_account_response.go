@@ -107,8 +107,7 @@ func (o *DisconnectRestoreAccountResponse) UnmarshalJSON(data []byte) (err error
 	varDisconnectRestoreAccountResponse := _DisconnectRestoreAccountResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDisconnectRestoreAccountResponse)
 
 	if err != nil {

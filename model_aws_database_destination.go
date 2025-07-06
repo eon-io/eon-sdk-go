@@ -277,8 +277,7 @@ func (o *AwsDatabaseDestination) UnmarshalJSON(data []byte) (err error) {
 	varAwsDatabaseDestination := _AwsDatabaseDestination{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAwsDatabaseDestination)
 
 	if err != nil {

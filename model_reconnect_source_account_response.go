@@ -107,8 +107,7 @@ func (o *ReconnectSourceAccountResponse) UnmarshalJSON(data []byte) (err error) 
 	varReconnectSourceAccountResponse := _ReconnectSourceAccountResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReconnectSourceAccountResponse)
 
 	if err != nil {

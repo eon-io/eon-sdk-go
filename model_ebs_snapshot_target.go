@@ -211,8 +211,7 @@ func (o *EbsSnapshotTarget) UnmarshalJSON(data []byte) (err error) {
 	varEbsSnapshotTarget := _EbsSnapshotTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEbsSnapshotTarget)
 
 	if err != nil {

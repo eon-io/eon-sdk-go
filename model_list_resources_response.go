@@ -182,8 +182,7 @@ func (o *ListResourcesResponse) UnmarshalJSON(data []byte) (err error) {
 	varListResourcesResponse := _ListResourcesResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListResourcesResponse)
 
 	if err != nil {

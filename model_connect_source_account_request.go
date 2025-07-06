@@ -136,8 +136,7 @@ func (o *ConnectSourceAccountRequest) UnmarshalJSON(data []byte) (err error) {
 	varConnectSourceAccountRequest := _ConnectSourceAccountRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varConnectSourceAccountRequest)
 
 	if err != nil {

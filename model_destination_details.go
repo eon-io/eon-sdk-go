@@ -194,8 +194,7 @@ func (o *DestinationDetails) UnmarshalJSON(data []byte) (err error) {
 	varDestinationDetails := _DestinationDetails{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDestinationDetails)
 
 	if err != nil {

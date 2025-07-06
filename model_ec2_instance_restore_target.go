@@ -269,8 +269,7 @@ func (o *Ec2InstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	varEc2InstanceRestoreTarget := _Ec2InstanceRestoreTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEc2InstanceRestoreTarget)
 
 	if err != nil {

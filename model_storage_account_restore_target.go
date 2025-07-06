@@ -211,8 +211,7 @@ func (o *StorageAccountRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	varStorageAccountRestoreTarget := _StorageAccountRestoreTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varStorageAccountRestoreTarget)
 
 	if err != nil {

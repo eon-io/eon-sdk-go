@@ -136,8 +136,7 @@ func (o *RestoreDbToRdsInstanceRequest) UnmarshalJSON(data []byte) (err error) {
 	varRestoreDbToRdsInstanceRequest := _RestoreDbToRdsInstanceRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreDbToRdsInstanceRequest)
 
 	if err != nil {

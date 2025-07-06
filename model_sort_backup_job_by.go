@@ -135,8 +135,7 @@ func (o *SortBackupJobBy) UnmarshalJSON(data []byte) (err error) {
 	varSortBackupJobBy := _SortBackupJobBy{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSortBackupJobBy)
 
 	if err != nil {

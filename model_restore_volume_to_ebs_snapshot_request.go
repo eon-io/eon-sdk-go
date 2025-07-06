@@ -165,8 +165,7 @@ func (o *RestoreVolumeToEbsSnapshotRequest) UnmarshalJSON(data []byte) (err erro
 	varRestoreVolumeToEbsSnapshotRequest := _RestoreVolumeToEbsSnapshotRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreVolumeToEbsSnapshotRequest)
 
 	if err != nil {

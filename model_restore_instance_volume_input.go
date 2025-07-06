@@ -239,8 +239,7 @@ func (o *RestoreInstanceVolumeInput) UnmarshalJSON(data []byte) (err error) {
 	varRestoreInstanceVolumeInput := _RestoreInstanceVolumeInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreInstanceVolumeInput)
 
 	if err != nil {

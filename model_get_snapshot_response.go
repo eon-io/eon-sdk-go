@@ -107,9 +107,7 @@ func (o *GetSnapshotResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetSnapshotResponse := _GetSnapshotResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// // Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetSnapshotResponse)
 
 	if err != nil {

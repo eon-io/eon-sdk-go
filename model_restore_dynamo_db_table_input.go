@@ -136,8 +136,7 @@ func (o *RestoreDynamoDBTableInput) UnmarshalJSON(data []byte) (err error) {
 	varRestoreDynamoDBTableInput := _RestoreDynamoDBTableInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreDynamoDBTableInput)
 
 	if err != nil {

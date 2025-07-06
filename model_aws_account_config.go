@@ -108,8 +108,7 @@ func (o *AwsAccountConfig) UnmarshalJSON(data []byte) (err error) {
 	varAwsAccountConfig := _AwsAccountConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAwsAccountConfig)
 
 	if err != nil {

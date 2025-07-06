@@ -182,8 +182,7 @@ func (o *ListInventorySnapshotsResponse) UnmarshalJSON(data []byte) (err error) 
 	varListInventorySnapshotsResponse := _ListInventorySnapshotsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListInventorySnapshotsResponse)
 
 	if err != nil {

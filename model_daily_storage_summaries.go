@@ -108,8 +108,7 @@ func (o *DailyStorageSummaries) UnmarshalJSON(data []byte) (err error) {
 	varDailyStorageSummaries := _DailyStorageSummaries{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDailyStorageSummaries)
 
 	if err != nil {

@@ -136,8 +136,7 @@ func (o *ConnectRestoreAccountRequest) UnmarshalJSON(data []byte) (err error) {
 	varConnectRestoreAccountRequest := _ConnectRestoreAccountRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varConnectRestoreAccountRequest)
 
 	if err != nil {

@@ -153,8 +153,7 @@ func (o *AccountConfigInput) UnmarshalJSON(data []byte) (err error) {
 	varAccountConfigInput := _AccountConfigInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAccountConfigInput)
 
 	if err != nil {

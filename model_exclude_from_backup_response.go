@@ -108,8 +108,7 @@ func (o *ExcludeFromBackupResponse) UnmarshalJSON(data []byte) (err error) {
 	varExcludeFromBackupResponse := _ExcludeFromBackupResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varExcludeFromBackupResponse)
 
 	if err != nil {

@@ -107,9 +107,7 @@ func (o *GetRestoreJobResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetRestoreJobResponse := _GetRestoreJobResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// // Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetRestoreJobResponse)
 
 	if err != nil {

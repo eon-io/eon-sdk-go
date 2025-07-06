@@ -137,8 +137,7 @@ func (o *ApiCredentials) UnmarshalJSON(data []byte) (err error) {
 	varApiCredentials := _ApiCredentials{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varApiCredentials)
 
 	if err != nil {

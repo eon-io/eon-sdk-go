@@ -137,8 +137,7 @@ func (o *FilePath) UnmarshalJSON(data []byte) (err error) {
 	varFilePath := _FilePath{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varFilePath)
 
 	if err != nil {

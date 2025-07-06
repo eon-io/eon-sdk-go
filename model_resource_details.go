@@ -309,8 +309,7 @@ func (o *ResourceDetails) UnmarshalJSON(data []byte) (err error) {
 	varResourceDetails := _ResourceDetails{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	// Allow unknown fields to handle API schema differences
-	// decoder.DisallowUnknownFields()
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResourceDetails)
 
 	if err != nil {
