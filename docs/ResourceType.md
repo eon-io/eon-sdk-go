@@ -1,0 +1,61 @@
+# ResourceType
+
+## Enum
+
+
+* `AWS_EC2` (value: `"AWS_EC2"`)
+
+* `AWS_RDS` (value: `"AWS_RDS"`)
+
+* `AWS_S3` (value: `"AWS_S3"`)
+
+* `AWS_EFS` (value: `"AWS_EFS"`)
+
+* `AWS_EKS_NAMESPACE` (value: `"AWS_EKS_NAMESPACE"`)
+
+* `AWS_DYNAMO_DB` (value: `"AWS_DYNAMO_DB"`)
+
+* `AZURE_VIRTUAL_MACHINE` (value: `"AZURE_VIRTUAL_MACHINE"`)
+
+* `AZURE_FILE_SHARE` (value: `"AZURE_FILE_SHARE"`)
+
+* `AZURE_STORAGE_ACCOUNT` (value: `"AZURE_STORAGE_ACCOUNT"`)
+
+* `AZURE_DISK` (value: `"AZURE_DISK"`)
+
+* `AZURE_SQL_DATABASE` (value: `"AZURE_SQL_DATABASE"`)
+
+* `AZURE_SQL_MANAGED_INSTANCE` (value: `"AZURE_SQL_MANAGED_INSTANCE"`)
+
+* `AZURE_SQL_VIRTUAL_MACHINE` (value: `"AZURE_SQL_VIRTUAL_MACHINE"`)
+
+* `AZURE_MYSQL` (value: `"AZURE_MYSQL"`)
+
+* `AZURE_POSTGRESQL` (value: `"AZURE_POSTGRESQL"`)
+
+* `AZURE_COSMOSDB_MONGODB` (value: `"AZURE_COSMOSDB_MONGODB"`)
+
+* `AZURE_COSMOSDB_NOSQL` (value: `"AZURE_COSMOSDB_NOSQL"`)
+
+* `AZURE_AKS_NAMESPACE` (value: `"AZURE_AKS_NAMESPACE"`)
+
+* `ATLAS_MONGODB_CLUSTER` (value: `"ATLAS_MONGODB_CLUSTER"`)
+
+* `GCP_COMPUTE_ENGINE_INSTANCE` (value: `"GCP_COMPUTE_ENGINE_INSTANCE"`)
+
+* `GCP_CLOUD_SQL_INSTANCE` (value: `"GCP_CLOUD_SQL_INSTANCE"`)
+
+* `GCP_CLOUD_STORAGE_BUCKET` (value: `"GCP_CLOUD_STORAGE_BUCKET"`)
+
+* `GCP_GKE_NAMESPACE` (value: `"GCP_GKE_NAMESPACE"`)
+
+* `GCP_BIG_QUERY` (value: `"GCP_BIG_QUERY"`)
+
+* `GCP_CLOUD_FIRESTORE` (value: `"GCP_CLOUD_FIRESTORE"`)
+
+* `RESOURCE_TYPE_UNSPECIFIED` (value: `"RESOURCE_TYPE_UNSPECIFIED"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
