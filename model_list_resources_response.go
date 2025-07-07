@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &ListResourcesResponse{}
 type ListResourcesResponse struct {
 	// List of retrieved resources.
 	Resources []InventoryResource `json:"resources"`
-	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request.
 	NextToken *string `json:"nextToken,omitempty"`
 	// Total number of resources that matched the filter options.
 	TotalCount *int32 `json:"totalCount,omitempty"`
@@ -138,7 +138,7 @@ func (o *ListResourcesResponse) SetTotalCount(v int32) {
 }
 
 func (o ListResourcesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -170,10 +170,10 @@ func (o *ListResourcesResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -182,7 +182,7 @@ func (o *ListResourcesResponse) UnmarshalJSON(data []byte) (err error) {
 	varListResourcesResponse := _ListResourcesResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListResourcesResponse)
 
 	if err != nil {
@@ -229,5 +229,3 @@ func (v *NullableListResourcesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

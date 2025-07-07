@@ -11,10 +11,10 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the InventoryResource type satisfies the MappedNullable interface at compile time
@@ -31,28 +31,28 @@ type InventoryResource struct {
 	// Date and time of the resource's latest Eon snapshot.
 	LatestSnapshotTime *time.Time `json:"latestSnapshotTime,omitempty"`
 	// Date and time of the resource's first Eon snapshot.
-	OldestSnapshotTime *time.Time `json:"oldestSnapshotTime,omitempty"`
-	BackupStatus BackupStatus `json:"backupStatus"`
+	OldestSnapshotTime *time.Time   `json:"oldestSnapshotTime,omitempty"`
+	BackupStatus       BackupStatus `json:"backupStatus"`
 	// Cloud-provider-assigned resource ID.
 	ProviderResourceId string `json:"providerResourceId"`
 	// Resource display name.
-	ResourceName string `json:"resourceName"`
+	ResourceName    string           `json:"resourceName"`
 	Classifications *Classifications `json:"classifications,omitempty"`
 	// Cloud-provider-assigned account ID.
-	ProviderAccountId string `json:"providerAccountId"`
-	SnapshotStorage SnapshotStorage `json:"snapshotStorage"`
-	SourceStorage SourceStorage `json:"sourceStorage"`
+	ProviderAccountId      string             `json:"providerAccountId"`
+	SnapshotStorage        SnapshotStorage    `json:"snapshotStorage"`
+	SourceStorage          SourceStorage      `json:"sourceStorage"`
 	ControlViolationCounts *ControlViolations `json:"controlViolationCounts,omitempty"`
-	// Resource tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"env\": \"prod\", \"app\": \"web\"}` 
-	Tags map[string]string `json:"tags"`
-	CloudProvider Provider `json:"cloudProvider"`
-	ResourceType ResourceType `json:"resourceType"`
+	// Resource tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"env\": \"prod\", \"app\": \"web\"}`
+	Tags          map[string]string `json:"tags"`
+	CloudProvider Provider          `json:"cloudProvider"`
+	ResourceType  ResourceType      `json:"resourceType"`
 	// Region the resource is hosted in.
 	Region string `json:"region"`
 	// VPC the resource is in.
 	Vpc *string `json:"vpc,omitempty"`
 	// List of subnets the resource belongs to.
-	Subnets []string `json:"subnets,omitempty"`
+	Subnets            []string                   `json:"subnets,omitempty"`
 	ResourceProperties NullableResourceProperties `json:"resourceProperties,omitempty"`
 }
 
@@ -638,6 +638,7 @@ func (o *InventoryResource) HasResourceProperties() bool {
 func (o *InventoryResource) SetResourceProperties(v ResourceProperties) {
 	o.ResourceProperties.Set(&v)
 }
+
 // SetResourcePropertiesNil sets the value for ResourceProperties to be an explicit nil
 func (o *InventoryResource) SetResourcePropertiesNil() {
 	o.ResourceProperties.Set(nil)
@@ -649,7 +650,7 @@ func (o *InventoryResource) UnsetResourceProperties() {
 }
 
 func (o InventoryResource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -722,10 +723,10 @@ func (o *InventoryResource) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -734,7 +735,7 @@ func (o *InventoryResource) UnmarshalJSON(data []byte) (err error) {
 	varInventoryResource := _InventoryResource{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInventoryResource)
 
 	if err != nil {
@@ -781,5 +782,3 @@ func (v *NullableInventoryResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &AccountConfigInput{}
 
 // AccountConfigInput struct for AccountConfigInput
 type AccountConfigInput struct {
-	CloudProvider Provider `json:"cloudProvider"`
-	Aws NullableAwsAccountConfigInput `json:"aws,omitempty"`
+	CloudProvider Provider                      `json:"cloudProvider"`
+	Aws           NullableAwsAccountConfigInput `json:"aws,omitempty"`
 }
 
 type _AccountConfigInput AccountConfigInput
@@ -101,6 +101,7 @@ func (o *AccountConfigInput) HasAws() bool {
 func (o *AccountConfigInput) SetAws(v AwsAccountConfigInput) {
 	o.Aws.Set(&v)
 }
+
 // SetAwsNil sets the value for Aws to be an explicit nil
 func (o *AccountConfigInput) SetAwsNil() {
 	o.Aws.Set(nil)
@@ -112,7 +113,7 @@ func (o *AccountConfigInput) UnsetAws() {
 }
 
 func (o AccountConfigInput) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +142,10 @@ func (o *AccountConfigInput) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -153,7 +154,7 @@ func (o *AccountConfigInput) UnmarshalJSON(data []byte) (err error) {
 	varAccountConfigInput := _AccountConfigInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAccountConfigInput)
 
 	if err != nil {
@@ -200,5 +201,3 @@ func (v *NullableAccountConfigInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,15 +21,15 @@ var _ MappedNullable = &EbsTarget{}
 
 // EbsTarget struct for EbsTarget
 type EbsTarget struct {
-	// Description to apply to the restored volume.  Default: No description. 
+	// Description to apply to the restored volume.  Default: No description.
 	Description *string `json:"description,omitempty"`
-	// Tags to apply to the restored volume as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
+	// Tags to apply to the restored volume as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}`
 	Tags *map[string]string `json:"tags,omitempty"`
 	// ID of the key you want Eon to use for encrypting the restored volume.
 	VolumeEncryptionKeyId string `json:"volumeEncryptionKeyId"`
 	// Availability zone to restore the volume to.
-	AvailabilityZone string `json:"availabilityZone"`
-	VolumeSettings VolumeSettings `json:"volumeSettings"`
+	AvailabilityZone string         `json:"availabilityZone"`
+	VolumeSettings   VolumeSettings `json:"volumeSettings"`
 }
 
 type _EbsTarget EbsTarget
@@ -191,7 +191,7 @@ func (o *EbsTarget) SetVolumeSettings(v VolumeSettings) {
 }
 
 func (o EbsTarget) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -227,10 +227,10 @@ func (o *EbsTarget) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -239,7 +239,7 @@ func (o *EbsTarget) UnmarshalJSON(data []byte) (err error) {
 	varEbsTarget := _EbsTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEbsTarget)
 
 	if err != nil {
@@ -286,5 +286,3 @@ func (v *NullableEbsTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

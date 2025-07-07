@@ -11,18 +11,18 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the SortRestoreJobBy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SortRestoreJobBy{}
 
-// SortRestoreJobBy List of sorting options. Sorting is applied in the order passed in the list. 
+// SortRestoreJobBy List of sorting options. Sorting is applied in the order passed in the list.
 type SortRestoreJobBy struct {
 	Field RestoreJobSortField `json:"field"`
-	Order SortOrder `json:"order"`
+	Order SortOrder           `json:"order"`
 }
 
 type _SortRestoreJobBy SortRestoreJobBy
@@ -95,7 +95,7 @@ func (o *SortRestoreJobBy) SetOrder(v SortOrder) {
 }
 
 func (o SortRestoreJobBy) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,10 +123,10 @@ func (o *SortRestoreJobBy) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -135,7 +135,7 @@ func (o *SortRestoreJobBy) UnmarshalJSON(data []byte) (err error) {
 	varSortRestoreJobBy := _SortRestoreJobBy{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSortRestoreJobBy)
 
 	if err != nil {
@@ -182,5 +182,3 @@ func (v *NullableSortRestoreJobBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

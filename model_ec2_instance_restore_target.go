@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -29,9 +29,9 @@ type Ec2InstanceRestoreTarget struct {
 	SubnetId string `json:"subnetId"`
 	// List of security group IDs to associate with the restored instance.
 	SecurityGroupIds []string `json:"securityGroupIds,omitempty"`
-	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
+	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}`
 	Tags *map[string]string `json:"tags,omitempty"`
-	// Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot. The root volume must be present in the list. 
+	// Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot. The root volume must be present in the list.
 	VolumeRestoreParameters []RestoreInstanceVolumeInput `json:"volumeRestoreParameters"`
 }
 
@@ -219,7 +219,7 @@ func (o *Ec2InstanceRestoreTarget) SetVolumeRestoreParameters(v []RestoreInstanc
 }
 
 func (o Ec2InstanceRestoreTarget) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -257,10 +257,10 @@ func (o *Ec2InstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -269,7 +269,7 @@ func (o *Ec2InstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	varEc2InstanceRestoreTarget := _Ec2InstanceRestoreTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEc2InstanceRestoreTarget)
 
 	if err != nil {
@@ -316,5 +316,3 @@ func (v *NullableEc2InstanceRestoreTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

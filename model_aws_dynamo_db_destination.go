@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -29,7 +29,7 @@ type AwsDynamoDBDestination struct {
 	RestoredName string `json:"restoredName"`
 	// The number of write capacity units for the restored table. If not specified, the default is 5.
 	WriteCapacityUnits *int32 `json:"writeCapacityUnits,omitempty"`
-	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
+	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}`
 	Tags *map[string]string `json:"tags,omitempty"`
 }
 
@@ -192,7 +192,7 @@ func (o *AwsDynamoDBDestination) SetTags(v map[string]string) {
 }
 
 func (o AwsDynamoDBDestination) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,10 +228,10 @@ func (o *AwsDynamoDBDestination) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -240,7 +240,7 @@ func (o *AwsDynamoDBDestination) UnmarshalJSON(data []byte) (err error) {
 	varAwsDynamoDBDestination := _AwsDynamoDBDestination{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAwsDynamoDBDestination)
 
 	if err != nil {
@@ -287,5 +287,3 @@ func (v *NullableAwsDynamoDBDestination) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

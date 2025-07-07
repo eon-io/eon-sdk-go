@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -24,8 +24,8 @@ type RestoreAccount struct {
 	// Eon-assigned restore account ID.
 	Id string `json:"id"`
 	// Cloud-provider-assigned account ID.
-	ProviderAccountId string `json:"providerAccountId"`
-	Status AccountState `json:"status"`
+	ProviderAccountId        string         `json:"providerAccountId"`
+	Status                   AccountState   `json:"status"`
 	RestoreAccountAttributes *AccountConfig `json:"restoreAccountAttributes,omitempty"`
 }
 
@@ -156,7 +156,7 @@ func (o *RestoreAccount) SetRestoreAccountAttributes(v AccountConfig) {
 }
 
 func (o RestoreAccount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -189,10 +189,10 @@ func (o *RestoreAccount) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,7 +201,7 @@ func (o *RestoreAccount) UnmarshalJSON(data []byte) (err error) {
 	varRestoreAccount := _RestoreAccount{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreAccount)
 
 	if err != nil {
@@ -248,5 +248,3 @@ func (v *NullableRestoreAccount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

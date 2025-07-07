@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -24,8 +24,8 @@ type RestoreVolumeToEbsSnapshotRequest struct {
 	// Cloud-provider-assigned ID of the volume to restore.
 	ProviderVolumeId string `json:"providerVolumeId"`
 	// Eon-assigned ID of the restore account.
-	RestoreAccountId string `json:"restoreAccountId"`
-	Destination EbsSnapshotRestoreDestination `json:"destination"`
+	RestoreAccountId string                        `json:"restoreAccountId"`
+	Destination      EbsSnapshotRestoreDestination `json:"destination"`
 }
 
 type _RestoreVolumeToEbsSnapshotRequest RestoreVolumeToEbsSnapshotRequest
@@ -123,7 +123,7 @@ func (o *RestoreVolumeToEbsSnapshotRequest) SetDestination(v EbsSnapshotRestoreD
 }
 
 func (o RestoreVolumeToEbsSnapshotRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,10 +153,10 @@ func (o *RestoreVolumeToEbsSnapshotRequest) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -165,7 +165,7 @@ func (o *RestoreVolumeToEbsSnapshotRequest) UnmarshalJSON(data []byte) (err erro
 	varRestoreVolumeToEbsSnapshotRequest := _RestoreVolumeToEbsSnapshotRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreVolumeToEbsSnapshotRequest)
 
 	if err != nil {
@@ -212,5 +212,3 @@ func (v *NullableRestoreVolumeToEbsSnapshotRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

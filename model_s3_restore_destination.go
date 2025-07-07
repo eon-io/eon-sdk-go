@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,9 +21,9 @@ var _ MappedNullable = &S3RestoreDestination{}
 
 // S3RestoreDestination S3 bucket.
 type S3RestoreDestination struct {
-	// Name of an existing bucket to restore query results to. Must be in the same region as the snapshot's vault. 
+	// Name of an existing bucket to restore query results to. Must be in the same region as the snapshot's vault.
 	BucketName string `json:"bucketName"`
-	// Prefix to prepend to the restore path. If omitted, query results are restored to the bucket root. 
+	// Prefix to prepend to the restore path. If omitted, query results are restored to the bucket root.
 	Prefix *string `json:"prefix,omitempty"`
 }
 
@@ -104,7 +104,7 @@ func (o *S3RestoreDestination) SetPrefix(v string) {
 }
 
 func (o S3RestoreDestination) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,10 +133,10 @@ func (o *S3RestoreDestination) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -145,7 +145,7 @@ func (o *S3RestoreDestination) UnmarshalJSON(data []byte) (err error) {
 	varS3RestoreDestination := _S3RestoreDestination{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varS3RestoreDestination)
 
 	if err != nil {
@@ -192,5 +192,3 @@ func (v *NullableS3RestoreDestination) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

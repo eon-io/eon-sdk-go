@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -22,8 +22,8 @@ var _ MappedNullable = &RestoreDbToRdsInstanceRequest{}
 // RestoreDbToRdsInstanceRequest struct for RestoreDbToRdsInstanceRequest
 type RestoreDbToRdsInstanceRequest struct {
 	// Eon-assigned ID of the restore account.
-	RestoreAccountId string `json:"restoreAccountId"`
-	Destination DatabaseDestination `json:"destination"`
+	RestoreAccountId string              `json:"restoreAccountId"`
+	Destination      DatabaseDestination `json:"destination"`
 }
 
 type _RestoreDbToRdsInstanceRequest RestoreDbToRdsInstanceRequest
@@ -96,7 +96,7 @@ func (o *RestoreDbToRdsInstanceRequest) SetDestination(v DatabaseDestination) {
 }
 
 func (o RestoreDbToRdsInstanceRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -124,10 +124,10 @@ func (o *RestoreDbToRdsInstanceRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -136,7 +136,7 @@ func (o *RestoreDbToRdsInstanceRequest) UnmarshalJSON(data []byte) (err error) {
 	varRestoreDbToRdsInstanceRequest := _RestoreDbToRdsInstanceRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreDbToRdsInstanceRequest)
 
 	if err != nil {
@@ -183,5 +183,3 @@ func (v *NullableRestoreDbToRdsInstanceRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

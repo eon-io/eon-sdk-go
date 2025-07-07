@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &QueryDBResponse{}
 
 // QueryDBResponse struct for QueryDBResponse
 type QueryDBResponse struct {
-	// Query ID. Can be used to call [Get Query Status](./get-query-status) and [Get Query Result](./get-query-result). 
+	// Query ID. Can be used to call [Get Query Status](./get-query-status) and [Get Query Result](./get-query-result).
 	QueryId string `json:"queryId"`
 }
 
@@ -70,7 +70,7 @@ func (o *QueryDBResponse) SetQueryId(v string) {
 }
 
 func (o QueryDBResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -96,10 +96,10 @@ func (o *QueryDBResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -108,7 +108,7 @@ func (o *QueryDBResponse) UnmarshalJSON(data []byte) (err error) {
 	varQueryDBResponse := _QueryDBResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQueryDBResponse)
 
 	if err != nil {
@@ -155,5 +155,3 @@ func (v *NullableQueryDBResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

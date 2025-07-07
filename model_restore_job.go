@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,12 +21,12 @@ var _ MappedNullable = &RestoreJob{}
 
 // RestoreJob struct for RestoreJob
 type RestoreJob struct {
-	JobExecutionDetails JobExecutionDetails `json:"jobExecutionDetails"`
-	ResourceDetails NullableResourceDetails `json:"resourceDetails,omitempty"`
-	SnapshotDetails NullableJobSnapshotDetails `json:"snapshotDetails,omitempty"`
-	DestinationDetails DestinationDetails `json:"destinationDetails"`
-	Vault NullableBackupVault `json:"vault,omitempty"`
-	RestoreType RestoreJobType `json:"restoreType"`
+	JobExecutionDetails JobExecutionDetails        `json:"jobExecutionDetails"`
+	ResourceDetails     NullableResourceDetails    `json:"resourceDetails,omitempty"`
+	SnapshotDetails     NullableJobSnapshotDetails `json:"snapshotDetails,omitempty"`
+	DestinationDetails  DestinationDetails         `json:"destinationDetails"`
+	Vault               NullableBackupVault        `json:"vault,omitempty"`
+	RestoreType         RestoreJobType             `json:"restoreType"`
 }
 
 type _RestoreJob RestoreJob
@@ -107,6 +107,7 @@ func (o *RestoreJob) HasResourceDetails() bool {
 func (o *RestoreJob) SetResourceDetails(v ResourceDetails) {
 	o.ResourceDetails.Set(&v)
 }
+
 // SetResourceDetailsNil sets the value for ResourceDetails to be an explicit nil
 func (o *RestoreJob) SetResourceDetailsNil() {
 	o.ResourceDetails.Set(nil)
@@ -149,6 +150,7 @@ func (o *RestoreJob) HasSnapshotDetails() bool {
 func (o *RestoreJob) SetSnapshotDetails(v JobSnapshotDetails) {
 	o.SnapshotDetails.Set(&v)
 }
+
 // SetSnapshotDetailsNil sets the value for SnapshotDetails to be an explicit nil
 func (o *RestoreJob) SetSnapshotDetailsNil() {
 	o.SnapshotDetails.Set(nil)
@@ -215,6 +217,7 @@ func (o *RestoreJob) HasVault() bool {
 func (o *RestoreJob) SetVault(v BackupVault) {
 	o.Vault.Set(&v)
 }
+
 // SetVaultNil sets the value for Vault to be an explicit nil
 func (o *RestoreJob) SetVaultNil() {
 	o.Vault.Set(nil)
@@ -250,7 +253,7 @@ func (o *RestoreJob) SetRestoreType(v RestoreJobType) {
 }
 
 func (o RestoreJob) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -289,10 +292,10 @@ func (o *RestoreJob) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -301,7 +304,7 @@ func (o *RestoreJob) UnmarshalJSON(data []byte) (err error) {
 	varRestoreJob := _RestoreJob{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRestoreJob)
 
 	if err != nil {
@@ -348,5 +351,3 @@ func (v *NullableRestoreJob) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

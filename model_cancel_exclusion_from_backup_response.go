@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &CancelExclusionFromBackupResponse{}
 
 // CancelExclusionFromBackupResponse struct for CancelExclusionFromBackupResponse
 type CancelExclusionFromBackupResponse struct {
-	// Whether the call was successful. Expected to be `true`. 
+	// Whether the call was successful. Expected to be `true`.
 	IsExclusionCanceled bool `json:"isExclusionCanceled"`
 }
 
@@ -70,7 +70,7 @@ func (o *CancelExclusionFromBackupResponse) SetIsExclusionCanceled(v bool) {
 }
 
 func (o CancelExclusionFromBackupResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -96,10 +96,10 @@ func (o *CancelExclusionFromBackupResponse) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -108,7 +108,7 @@ func (o *CancelExclusionFromBackupResponse) UnmarshalJSON(data []byte) (err erro
 	varCancelExclusionFromBackupResponse := _CancelExclusionFromBackupResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCancelExclusionFromBackupResponse)
 
 	if err != nil {
@@ -155,5 +155,3 @@ func (v *NullableCancelExclusionFromBackupResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -27,11 +27,11 @@ type AwsDatabaseDestination struct {
 	EncryptionKeyId string `json:"encryptionKeyId"`
 	// Name to assign to the restored resource.
 	RestoredName string `json:"restoredName"`
-	// List of security group IDs to associate with the restored resource. Must be in the same VPC of `subnetGroup`. 
+	// List of security group IDs to associate with the restored resource. Must be in the same VPC of `subnetGroup`.
 	SecurityGroups []string `json:"securityGroups,omitempty"`
-	// Subnet group ID to associate with the restored resource. Must be in the same VPC of `securityGroup`. 
+	// Subnet group ID to associate with the restored resource. Must be in the same VPC of `securityGroup`.
 	SubnetGroup *string `json:"subnetGroup,omitempty"`
-	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
+	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}`
 	Tags *map[string]string `json:"tags,omitempty"`
 }
 
@@ -226,7 +226,7 @@ func (o *AwsDatabaseDestination) SetTags(v map[string]string) {
 }
 
 func (o AwsDatabaseDestination) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,10 +265,10 @@ func (o *AwsDatabaseDestination) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -277,7 +277,7 @@ func (o *AwsDatabaseDestination) UnmarshalJSON(data []byte) (err error) {
 	varAwsDatabaseDestination := _AwsDatabaseDestination{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAwsDatabaseDestination)
 
 	if err != nil {
@@ -324,5 +324,3 @@ func (v *NullableAwsDatabaseDestination) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

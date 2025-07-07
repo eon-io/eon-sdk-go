@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -23,11 +23,11 @@ var _ MappedNullable = &QueryDBRequest{}
 type QueryDBRequest struct {
 	// Name of the database to query.
 	DatabaseName string `json:"databaseName"`
-	// SQL query to run against the database. Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html). 
+	// SQL query to run against the database. Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html).
 	Query string `json:"query"`
 	// Eon-assigned ID of the [restore account](./list-restore-accounts).
-	RestoreAccountId string `json:"restoreAccountId"`
-	Destination QueryDBRestoreDestination `json:"destination"`
+	RestoreAccountId string                    `json:"restoreAccountId"`
+	Destination      QueryDBRestoreDestination `json:"destination"`
 }
 
 type _QueryDBRequest QueryDBRequest
@@ -150,7 +150,7 @@ func (o *QueryDBRequest) SetDestination(v QueryDBRestoreDestination) {
 }
 
 func (o QueryDBRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -182,10 +182,10 @@ func (o *QueryDBRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -194,7 +194,7 @@ func (o *QueryDBRequest) UnmarshalJSON(data []byte) (err error) {
 	varQueryDBRequest := _QueryDBRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQueryDBRequest)
 
 	if err != nil {
@@ -241,5 +241,3 @@ func (v *NullableQueryDBRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

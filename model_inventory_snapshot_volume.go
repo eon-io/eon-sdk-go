@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -27,9 +27,9 @@ type InventorySnapshotVolume struct {
 	Region string `json:"region"`
 	// Availability zone the volume is hosted in.
 	AvailabilityZone string `json:"availabilityZone"`
-	// Volume tags as key-value pairs. Both keys and values are strings.  **Example**: `{\"env\": \"prod\", \"db\": \"\"}` 
-	Tags map[string]string `json:"tags"`
-	VolumeSettings VolumeSettings `json:"volumeSettings"`
+	// Volume tags as key-value pairs. Both keys and values are strings.  **Example**: `{\"env\": \"prod\", \"db\": \"\"}`
+	Tags           map[string]string `json:"tags"`
+	VolumeSettings VolumeSettings    `json:"volumeSettings"`
 }
 
 type _InventorySnapshotVolume InventorySnapshotVolume
@@ -177,7 +177,7 @@ func (o *InventorySnapshotVolume) SetVolumeSettings(v VolumeSettings) {
 }
 
 func (o InventorySnapshotVolume) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -211,10 +211,10 @@ func (o *InventorySnapshotVolume) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -223,7 +223,7 @@ func (o *InventorySnapshotVolume) UnmarshalJSON(data []byte) (err error) {
 	varInventorySnapshotVolume := _InventorySnapshotVolume{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInventorySnapshotVolume)
 
 	if err != nil {
@@ -270,5 +270,3 @@ func (v *NullableInventorySnapshotVolume) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

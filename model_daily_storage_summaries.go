@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -70,7 +70,7 @@ func (o *DailyStorageSummaries) SetData(v []DailyStorageSummary) {
 }
 
 func (o DailyStorageSummaries) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -96,10 +96,10 @@ func (o *DailyStorageSummaries) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -108,7 +108,7 @@ func (o *DailyStorageSummaries) UnmarshalJSON(data []byte) (err error) {
 	varDailyStorageSummaries := _DailyStorageSummaries{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
+	//decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDailyStorageSummaries)
 
 	if err != nil {
@@ -155,5 +155,3 @@ func (v *NullableDailyStorageSummaries) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
