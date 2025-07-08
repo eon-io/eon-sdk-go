@@ -6,12 +6,15 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ConnectRestoreAccount**](AccountsAPI.md#ConnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts | Connect Restore Account
 [**ConnectSourceAccount**](AccountsAPI.md#ConnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts | Connect Source Account
+[**DeleteRestoreAccountConnectivityConfig**](AccountsAPI.md#DeleteRestoreAccountConnectivityConfig) | **Delete** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Delete Restore Account Connectivity Configuration
 [**DisconnectRestoreAccount**](AccountsAPI.md#DisconnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts/{accountId}/disconnect | Disconnect Restore Account
 [**DisconnectSourceAccount**](AccountsAPI.md#DisconnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts/{accountId}/disconnect | Disconnect Source Account
+[**GetRestoreAccountConnectivityConfig**](AccountsAPI.md#GetRestoreAccountConnectivityConfig) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Get Restore Account Connectivity Configuration
 [**ListRestoreAccounts**](AccountsAPI.md#ListRestoreAccounts) | **Post** /v1/projects/{projectId}/restore-accounts/list | List Restore Accounts
 [**ListSourceAccounts**](AccountsAPI.md#ListSourceAccounts) | **Post** /v1/projects/{projectId}/source-accounts/list | List Source Accounts
 [**ReconnectRestoreAccount**](AccountsAPI.md#ReconnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts/{accountId}/reconnect | Reconnect Restore Account
 [**ReconnectSourceAccount**](AccountsAPI.md#ReconnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts/{accountId}/reconnect | Reconnect Source Account
+[**UpdateRestoreAccountConnectivityConfig**](AccountsAPI.md#UpdateRestoreAccountConnectivityConfig) | **Put** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Update Restore Account Connectivity Configuration
 
 
 
@@ -159,6 +162,77 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteRestoreAccountConnectivityConfig
+
+> DeleteRestoreAccountConnectivityConfig(ctx, accountId, projectId).Execute()
+
+Delete Restore Account Connectivity Configuration
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.AccountsAPI.DeleteRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.DeleteRestoreAccountConnectivityConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
+**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteRestoreAccountConnectivityConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DisconnectRestoreAccount
 
 > DisconnectRestoreAccountResponse DisconnectRestoreAccount(ctx, projectId, accountId).Execute()
@@ -290,6 +364,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DisconnectSourceAccountResponse**](DisconnectSourceAccountResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRestoreAccountConnectivityConfig
+
+> GetRestoreAccountConnectivityConfigResponse GetRestoreAccountConnectivityConfig(ctx, accountId, projectId).Execute()
+
+Get Restore Account Connectivity Configuration
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.GetRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetRestoreAccountConnectivityConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRestoreAccountConnectivityConfig`: GetRestoreAccountConnectivityConfigResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.GetRestoreAccountConnectivityConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
+**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRestoreAccountConnectivityConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GetRestoreAccountConnectivityConfigResponse**](GetRestoreAccountConnectivityConfigResponse.md)
 
 ### Authorization
 
@@ -478,7 +625,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the restore account to reconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -499,7 +646,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
 **accountId** | **string** | Eon-assigned ID of the restore account to reconnect. | 
 
 ### Other Parameters
@@ -551,7 +698,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the source account to reconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -572,7 +719,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
 **accountId** | **string** | Eon-assigned ID of the source account to reconnect. | 
 
 ### Other Parameters
@@ -596,6 +743,81 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateRestoreAccountConnectivityConfig
+
+> UpdateRestoreAccountConnectivityConfigResponse UpdateRestoreAccountConnectivityConfig(ctx, accountId, projectId).UpdateRestoreAccountConnectivityConfigRequest(updateRestoreAccountConnectivityConfigRequest).Execute()
+
+Update Restore Account Connectivity Configuration
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	updateRestoreAccountConnectivityConfigRequest := *openapiclient.NewUpdateRestoreAccountConnectivityConfigRequest() // UpdateRestoreAccountConnectivityConfigRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.UpdateRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).UpdateRestoreAccountConnectivityConfigRequest(updateRestoreAccountConnectivityConfigRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.UpdateRestoreAccountConnectivityConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateRestoreAccountConnectivityConfig`: UpdateRestoreAccountConnectivityConfigResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.UpdateRestoreAccountConnectivityConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string** | ID of the restore account | 
+**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateRestoreAccountConnectivityConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateRestoreAccountConnectivityConfigRequest** | [**UpdateRestoreAccountConnectivityConfigRequest**](UpdateRestoreAccountConnectivityConfigRequest.md) |  | 
+
+### Return type
+
+[**UpdateRestoreAccountConnectivityConfigResponse**](UpdateRestoreAccountConnectivityConfigResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

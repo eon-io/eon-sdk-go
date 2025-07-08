@@ -11,10 +11,10 @@ package eon
 
 import (
 	"context"
+	openapiclient "github.com/eon.io/eon
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
 )
 
 func Test_eon_AccountsAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	t.Run("Test AccountsAPIService ConnectRestoreAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 
@@ -38,7 +38,7 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	t.Run("Test AccountsAPIService ConnectSourceAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 
@@ -50,9 +50,23 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService DeleteRestoreAccountConnectivityConfig", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var accountId string
+		var projectId string
+
+		httpRes, err := apiClient.AccountsAPI.DeleteRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService DisconnectRestoreAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 		var accountId string
@@ -67,7 +81,7 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	t.Run("Test AccountsAPIService DisconnectSourceAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 		var accountId string
@@ -80,9 +94,24 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService GetRestoreAccountConnectivityConfig", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var accountId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.GetRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService ListRestoreAccounts", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 
@@ -96,7 +125,7 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	t.Run("Test AccountsAPIService ListSourceAccounts", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 
@@ -110,7 +139,7 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	t.Run("Test AccountsAPIService ReconnectRestoreAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 		var accountId string
@@ -125,12 +154,27 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	t.Run("Test AccountsAPIService ReconnectSourceAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var projectId string
 		var accountId string
 
 		resp, httpRes, err := apiClient.AccountsAPI.ReconnectSourceAccount(context.Background(), projectId, accountId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountsAPIService UpdateRestoreAccountConnectivityConfig", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var accountId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.UpdateRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

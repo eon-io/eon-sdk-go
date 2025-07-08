@@ -19,10 +19,12 @@ var _ MappedNullable = &DataClassesFilters{}
 
 // DataClassesFilters struct for DataClassesFilters
 type DataClassesFilters struct {
-	// Matches if any value in this list equals `dataClasses`.
-	In []DataClass `json:"in,omitempty"`
-	// Matches if no value in this list equals `dataClasses` list.
-	NotIn []DataClass `json:"notIn,omitempty"`
+	// Matches if any value in this list is in the `dataClasses` list.
+	ContainsAnyOf []DataClass `json:"containsAnyOf,omitempty"`
+	// Matches if none of the values in this list are in the `dataClasses` list.
+	ContainsNoneOf []DataClass `json:"containsNoneOf,omitempty"`
+	// Matches if all values in this list are in the `dataClasses` list.
+	ContainsAllOf []string `json:"containsAllOf,omitempty"`
 }
 
 // NewDataClassesFilters instantiates a new DataClassesFilters object
@@ -42,72 +44,104 @@ func NewDataClassesFiltersWithDefaults() *DataClassesFilters {
 	return &this
 }
 
-// GetIn returns the In field value if set, zero value otherwise.
-func (o *DataClassesFilters) GetIn() []DataClass {
-	if o == nil || IsNil(o.In) {
+// GetContainsAnyOf returns the ContainsAnyOf field value if set, zero value otherwise.
+func (o *DataClassesFilters) GetContainsAnyOf() []DataClass {
+	if o == nil || IsNil(o.ContainsAnyOf) {
 		var ret []DataClass
 		return ret
 	}
-	return o.In
+	return o.ContainsAnyOf
 }
 
-// GetInOk returns a tuple with the In field value if set, nil otherwise
+// GetContainsAnyOfOk returns a tuple with the ContainsAnyOf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataClassesFilters) GetInOk() ([]DataClass, bool) {
-	if o == nil || IsNil(o.In) {
+func (o *DataClassesFilters) GetContainsAnyOfOk() ([]DataClass, bool) {
+	if o == nil || IsNil(o.ContainsAnyOf) {
 		return nil, false
 	}
-	return o.In, true
+	return o.ContainsAnyOf, true
 }
 
-// HasIn returns a boolean if a field has been set.
-func (o *DataClassesFilters) HasIn() bool {
-	if o != nil && !IsNil(o.In) {
+// HasContainsAnyOf returns a boolean if a field has been set.
+func (o *DataClassesFilters) HasContainsAnyOf() bool {
+	if o != nil && !IsNil(o.ContainsAnyOf) {
 		return true
 	}
 
 	return false
 }
 
-// SetIn gets a reference to the given []DataClass and assigns it to the In field.
-func (o *DataClassesFilters) SetIn(v []DataClass) {
-	o.In = v
+// SetContainsAnyOf gets a reference to the given []DataClass and assigns it to the ContainsAnyOf field.
+func (o *DataClassesFilters) SetContainsAnyOf(v []DataClass) {
+	o.ContainsAnyOf = v
 }
 
-// GetNotIn returns the NotIn field value if set, zero value otherwise.
-func (o *DataClassesFilters) GetNotIn() []DataClass {
-	if o == nil || IsNil(o.NotIn) {
+// GetContainsNoneOf returns the ContainsNoneOf field value if set, zero value otherwise.
+func (o *DataClassesFilters) GetContainsNoneOf() []DataClass {
+	if o == nil || IsNil(o.ContainsNoneOf) {
 		var ret []DataClass
 		return ret
 	}
-	return o.NotIn
+	return o.ContainsNoneOf
 }
 
-// GetNotInOk returns a tuple with the NotIn field value if set, nil otherwise
+// GetContainsNoneOfOk returns a tuple with the ContainsNoneOf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataClassesFilters) GetNotInOk() ([]DataClass, bool) {
-	if o == nil || IsNil(o.NotIn) {
+func (o *DataClassesFilters) GetContainsNoneOfOk() ([]DataClass, bool) {
+	if o == nil || IsNil(o.ContainsNoneOf) {
 		return nil, false
 	}
-	return o.NotIn, true
+	return o.ContainsNoneOf, true
 }
 
-// HasNotIn returns a boolean if a field has been set.
-func (o *DataClassesFilters) HasNotIn() bool {
-	if o != nil && !IsNil(o.NotIn) {
+// HasContainsNoneOf returns a boolean if a field has been set.
+func (o *DataClassesFilters) HasContainsNoneOf() bool {
+	if o != nil && !IsNil(o.ContainsNoneOf) {
 		return true
 	}
 
 	return false
 }
 
-// SetNotIn gets a reference to the given []DataClass and assigns it to the NotIn field.
-func (o *DataClassesFilters) SetNotIn(v []DataClass) {
-	o.NotIn = v
+// SetContainsNoneOf gets a reference to the given []DataClass and assigns it to the ContainsNoneOf field.
+func (o *DataClassesFilters) SetContainsNoneOf(v []DataClass) {
+	o.ContainsNoneOf = v
+}
+
+// GetContainsAllOf returns the ContainsAllOf field value if set, zero value otherwise.
+func (o *DataClassesFilters) GetContainsAllOf() []string {
+	if o == nil || IsNil(o.ContainsAllOf) {
+		var ret []string
+		return ret
+	}
+	return o.ContainsAllOf
+}
+
+// GetContainsAllOfOk returns a tuple with the ContainsAllOf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataClassesFilters) GetContainsAllOfOk() ([]string, bool) {
+	if o == nil || IsNil(o.ContainsAllOf) {
+		return nil, false
+	}
+	return o.ContainsAllOf, true
+}
+
+// HasContainsAllOf returns a boolean if a field has been set.
+func (o *DataClassesFilters) HasContainsAllOf() bool {
+	if o != nil && !IsNil(o.ContainsAllOf) {
+		return true
+	}
+
+	return false
+}
+
+// SetContainsAllOf gets a reference to the given []string and assigns it to the ContainsAllOf field.
+func (o *DataClassesFilters) SetContainsAllOf(v []string) {
+	o.ContainsAllOf = v
 }
 
 func (o DataClassesFilters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,11 +150,14 @@ func (o DataClassesFilters) MarshalJSON() ([]byte, error) {
 
 func (o DataClassesFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.In) {
-		toSerialize["in"] = o.In
+	if !IsNil(o.ContainsAnyOf) {
+		toSerialize["containsAnyOf"] = o.ContainsAnyOf
 	}
-	if !IsNil(o.NotIn) {
-		toSerialize["notIn"] = o.NotIn
+	if !IsNil(o.ContainsNoneOf) {
+		toSerialize["containsNoneOf"] = o.ContainsNoneOf
+	}
+	if !IsNil(o.ContainsAllOf) {
+		toSerialize["containsAllOf"] = o.ContainsAllOf
 	}
 	return toSerialize, nil
 }
@@ -160,5 +197,3 @@ func (v *NullableDataClassesFilters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

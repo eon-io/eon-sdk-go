@@ -53,6 +53,10 @@ tags:
     [Query Database Snapshots]: /user-guide/searching-exploring-and-querying/query/query-database-snapshots?interface=api
   name: databaseSnapshots
   x-displayName: Database Snapshots
+- description: The Backup Policies API allows you to manage your project's backup
+    policies.
+  name: backupPolicies
+  x-displayName: Backup Policies
 - description: The Jobs API allows you to read and monitor asynchronous backup and
     restore jobs.
   name: jobs
@@ -279,7 +283,7 @@ paths:
       operationId: ReconnectSourceAccount
       parameters:
       - description: |
-          ID of the project.
+          ID of the project whose source account you want to reconnect.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
@@ -553,7 +557,7 @@ paths:
       operationId: ReconnectRestoreAccount
       parameters:
       - description: |
-          ID of the project.
+          ID of the project whose restore account you want to reconnect.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
@@ -608,6 +612,197 @@ paths:
         action: update
         entityRefs:
         - entityType: account
+          in: path
+          key: accountId
+  /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config:
+    delete:
+      description: |
+        Description: Deletes the restore account connectivity configuration, reverting to the default settings.
+      operationId: deleteRestoreAccountConnectivityConfig
+      parameters:
+      - description: Eon-assigned ID of the restore account.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose restore account connectivity configuration you want to delete.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Restore account connectivity configuration deleted.
+        "404":
+          description: Restore account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete Restore Account Connectivity Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:restore_accounts
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: restore_cloud_account
+          in: path
+          key: accountId
+    get:
+      description: |
+        Description: Retrieves the connectivity configuration of the specified restore account.
+      operationId: getRestoreAccountConnectivityConfig
+      parameters:
+      - description: Eon-assigned ID of the restore account.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose restore account connectivity configuration you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRestoreAccountConnectivityConfigResponse'
+          description: Restore account connectivity configuration retrieved.
+        "404":
+          description: Restore account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Restore Account Connectivity Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore_accounts
+      x-audit-log:
+        excluded: true
+    put:
+      description: |
+        Description: Updates the connectivity configuration of the specified restore account.
+      operationId: updateRestoreAccountConnectivityConfig
+      parameters:
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose restore account connectivity configuration you want to update.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRestoreAccountConnectivityConfigRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRestoreAccountConnectivityConfigResponse'
+          description: Restore account connectivity configuration updated.
+        "404":
+          description: Restore account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update Restore Account Connectivity Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:restore_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: restore_cloud_account
           in: path
           key: accountId
   /v1/projects/{projectId}/backup-jobs:
@@ -902,6 +1097,309 @@ paths:
         - in: path
           entityType: restore_job
           key: jobId
+  /v1/projects/{projectId}/backup-policies:
+    post:
+      description: "Description: Creates a backup policy."
+      operationId: createBackupPolicy
+      parameters:
+      - description: |
+          ID of the project you want to create a backup policy in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBackupPolicyRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBackupPolicyResponse'
+          description: Backup policy created.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create Backup Policy
+      tags:
+      - backupPolicies
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:policies
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: backup_policy
+          in: resBody
+          key: id
+  /v1/projects/{projectId}/backup-policies/list:
+    post:
+      description: |
+        Description: Retrieves a list of backup policies in the specified project.
+      operationId: listBackupPolicies
+      parameters:
+      - description: |
+          ID of the project whose backup policies you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBackupPoliciesResponse'
+          description: Backup policies retrieved.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Backup Policies
+      tags:
+      - backupPolicies
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:policies
+      x-audit-log:
+        excluded: true
+  /v1/projects/{projectId}/backup-policies/{backupPolicyId}:
+    delete:
+      description: "Description: Deletes a backup policy."
+      operationId: deleteBackupPolicy
+      parameters:
+      - description: ID of the backup policy to delete
+        explode: false
+        in: path
+        name: backupPolicyId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose backup policy you want to delete.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Backup policy deleted.
+        "404":
+          description: Backup policy wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete Backup Policy
+      tags:
+      - backupPolicies
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:policies
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: backup_policy
+          in: path
+          key: backupPolicyId
+    get:
+      description: "Description: Retrieves a backup policy."
+      operationId: getBackupPolicy
+      parameters:
+      - description: ID of the backup policy to retrieve
+        explode: false
+        in: path
+        name: backupPolicyId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose backup policy you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBackupPolicyResponse'
+          description: Backup policy retrieved.
+        "404":
+          description: Backup policy wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Backup Policy
+      tags:
+      - backupPolicies
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:policies
+      x-audit-log:
+        excluded: true
+    put:
+      description: "Description: Updates a backup policy."
+      operationId: updateBackupPolicy
+      parameters:
+      - description: ID of the backup policy to update
+        explode: false
+        in: path
+        name: backupPolicyId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose backup policy you want to update.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBackupPolicyRequest'
+        description: The request body for updating a policy
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBackupPolicyResponse'
+          description: Backup policy updated.
+        "404":
+          description: Backup policy wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update Backup Policy
+      tags:
+      - backupPolicies
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:policies
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: backup_policy
+          in: path
+          key: backupPolicyId
   /v1/token:
     post:
       description: |
@@ -934,7 +1432,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Integration not found.
+          description: API credentials not found.
         "1XX":
           description: Informational
         "3XX":
@@ -997,7 +1495,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Integration not found.
+          description: API credentials not found.
         "1XX":
           description: Informational
         "3XX":
@@ -3222,6 +3720,303 @@ components:
       required:
       - restoreAccount
       type: object
+    SubnetPerAvailabilityZone:
+      example:
+        subnetId: subnet-01234567890123456
+        availabilityZone: us-east-1a
+      properties:
+        availabilityZone:
+          description: Availability zone.
+          example: us-east-1a
+          type: string
+        subnetId:
+          description: Subnet ID to use.
+          example: subnet-01234567890123456
+          type: string
+      required:
+      - availabilityZone
+      - subnetId
+      type: object
+    ResourceTypeToSecurityGroup:
+      example:
+        restoreServer:
+        - sg-0d447a77aa14f9e90
+        restoredRdsInstance:
+        - sg-02ce123456e7893c7
+      properties:
+        restoreServer:
+          description: |
+            Security group to use for the restore server.
+            If not specified, Eon attempts to use the default security group.
+
+            Currently, a single security group is supported.
+          example:
+          - sg-0d447a77aa14f9e90
+          items:
+            type: string
+          type: array
+        restoredRdsInstance:
+          description: |
+            Security group to use for restored RDS instances.
+            If not specified, Eon attempts to use the default security group.
+
+            Currently, a single security group is supported.
+          example:
+          - sg-02ce123456e7893c7
+          items:
+            type: string
+          type: array
+      type: object
+    AwsVpcConnectivityConfig:
+      example:
+        vpc: vpc-01234567890123456
+        securityGroups:
+          restoreServer:
+          - sg-0d447a77aa14f9e90
+          restoredRdsInstance:
+          - sg-02ce123456e7893c7
+        region: us-east-1
+        subnetsPerAvailabilityZone:
+        - subnetId: subnet-01234567890123456
+          availabilityZone: us-east-1a
+        - subnetId: subnet-01234567890123456
+          availabilityZone: us-east-1a
+      properties:
+        region:
+          description: VPC region.
+          example: us-east-1
+          type: string
+        vpc:
+          description: VPC ID.
+          example: vpc-01234567890123456
+          type: string
+        subnetsPerAvailabilityZone:
+          description: |
+            Subnets to configure for availability zones in the VPC.
+            For availability zones not specified in this list, Eon attempts to use the default subnet.
+          items:
+            $ref: '#/components/schemas/SubnetPerAvailabilityZone'
+          type: array
+        securityGroups:
+          $ref: '#/components/schemas/ResourceTypeToSecurityGroup'
+      required:
+      - region
+      - vpc
+      type: object
+    AwsRestoreAccountConnectivityConfig:
+      example:
+        vpcConfigs:
+        - vpc: vpc-01234567890123456
+          securityGroups:
+            restoreServer:
+            - sg-0d447a77aa14f9e90
+            restoredRdsInstance:
+            - sg-02ce123456e7893c7
+          region: us-east-1
+          subnetsPerAvailabilityZone:
+          - subnetId: subnet-01234567890123456
+            availabilityZone: us-east-1a
+          - subnetId: subnet-01234567890123456
+            availabilityZone: us-east-1a
+        - vpc: vpc-01234567890123456
+          securityGroups:
+            restoreServer:
+            - sg-0d447a77aa14f9e90
+            restoredRdsInstance:
+            - sg-02ce123456e7893c7
+          region: us-east-1
+          subnetsPerAvailabilityZone:
+          - subnetId: subnet-01234567890123456
+            availabilityZone: us-east-1a
+          - subnetId: subnet-01234567890123456
+            availabilityZone: us-east-1a
+      nullable: true
+      properties:
+        vpcConfigs:
+          description: VPCs to configure.
+          items:
+            $ref: '#/components/schemas/AwsVpcConnectivityConfig'
+          type: array
+      type: object
+    ProviderRestoreAccountConnectivityConfig:
+      example:
+        aws:
+          vpcConfigs:
+          - vpc: vpc-01234567890123456
+            securityGroups:
+              restoreServer:
+              - sg-0d447a77aa14f9e90
+              restoredRdsInstance:
+              - sg-02ce123456e7893c7
+            region: us-east-1
+            subnetsPerAvailabilityZone:
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+          - vpc: vpc-01234567890123456
+            securityGroups:
+              restoreServer:
+              - sg-0d447a77aa14f9e90
+              restoredRdsInstance:
+              - sg-02ce123456e7893c7
+            region: us-east-1
+            subnetsPerAvailabilityZone:
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+      properties:
+        aws:
+          $ref: '#/components/schemas/AwsRestoreAccountConnectivityConfig'
+      type: object
+    RestoreAccountConnectivityConfig:
+      example:
+        restoreAccountId: 7fb4bfae-853e-5e4f-9d35-ad8a1d2a0ad6
+        config:
+          aws:
+            vpcConfigs:
+            - vpc: vpc-01234567890123456
+              securityGroups:
+                restoreServer:
+                - sg-0d447a77aa14f9e90
+                restoredRdsInstance:
+                - sg-02ce123456e7893c7
+              region: us-east-1
+              subnetsPerAvailabilityZone:
+              - subnetId: subnet-01234567890123456
+                availabilityZone: us-east-1a
+              - subnetId: subnet-01234567890123456
+                availabilityZone: us-east-1a
+            - vpc: vpc-01234567890123456
+              securityGroups:
+                restoreServer:
+                - sg-0d447a77aa14f9e90
+                restoredRdsInstance:
+                - sg-02ce123456e7893c7
+              region: us-east-1
+              subnetsPerAvailabilityZone:
+              - subnetId: subnet-01234567890123456
+                availabilityZone: us-east-1a
+              - subnetId: subnet-01234567890123456
+                availabilityZone: us-east-1a
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 7fb4bfae-853e-5e4f-9d35-ad8a1d2a0ad6
+          type: string
+        config:
+          $ref: '#/components/schemas/ProviderRestoreAccountConnectivityConfig'
+      required:
+      - config
+      - restoreAccountId
+      type: object
+    GetRestoreAccountConnectivityConfigResponse:
+      example:
+        restoreAccountConfig:
+          restoreAccountId: 7fb4bfae-853e-5e4f-9d35-ad8a1d2a0ad6
+          config:
+            aws:
+              vpcConfigs:
+              - vpc: vpc-01234567890123456
+                securityGroups:
+                  restoreServer:
+                  - sg-0d447a77aa14f9e90
+                  restoredRdsInstance:
+                  - sg-02ce123456e7893c7
+                region: us-east-1
+                subnetsPerAvailabilityZone:
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+              - vpc: vpc-01234567890123456
+                securityGroups:
+                  restoreServer:
+                  - sg-0d447a77aa14f9e90
+                  restoredRdsInstance:
+                  - sg-02ce123456e7893c7
+                region: us-east-1
+                subnetsPerAvailabilityZone:
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+      properties:
+        restoreAccountConfig:
+          $ref: '#/components/schemas/RestoreAccountConnectivityConfig'
+      required:
+      - restoreAccountConfig
+      type: object
+    UpdateRestoreAccountConnectivityConfigRequest:
+      example:
+        aws:
+          vpcConfigs:
+          - vpc: vpc-01234567890123456
+            securityGroups:
+              restoreServer:
+              - sg-0d447a77aa14f9e90
+              restoredRdsInstance:
+              - sg-02ce123456e7893c7
+            region: us-east-1
+            subnetsPerAvailabilityZone:
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+          - vpc: vpc-01234567890123456
+            securityGroups:
+              restoreServer:
+              - sg-0d447a77aa14f9e90
+              restoredRdsInstance:
+              - sg-02ce123456e7893c7
+            region: us-east-1
+            subnetsPerAvailabilityZone:
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+            - subnetId: subnet-01234567890123456
+              availabilityZone: us-east-1a
+      properties:
+        aws:
+          $ref: '#/components/schemas/AwsRestoreAccountConnectivityConfig'
+      type: object
+    UpdateRestoreAccountConnectivityConfigResponse:
+      example:
+        restoreAccountConfig:
+          restoreAccountId: 7fb4bfae-853e-5e4f-9d35-ad8a1d2a0ad6
+          config:
+            aws:
+              vpcConfigs:
+              - vpc: vpc-01234567890123456
+                securityGroups:
+                  restoreServer:
+                  - sg-0d447a77aa14f9e90
+                  restoredRdsInstance:
+                  - sg-02ce123456e7893c7
+                region: us-east-1
+                subnetsPerAvailabilityZone:
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+              - vpc: vpc-01234567890123456
+                securityGroups:
+                  restoreServer:
+                  - sg-0d447a77aa14f9e90
+                  restoredRdsInstance:
+                  - sg-02ce123456e7893c7
+                region: us-east-1
+                subnetsPerAvailabilityZone:
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+                - subnetId: subnet-01234567890123456
+                  availabilityZone: us-east-1a
+      properties:
+        restoreAccountConfig:
+          $ref: '#/components/schemas/RestoreAccountConnectivityConfig'
+      required:
+      - restoreAccountConfig
+      type: object
     JobIdFilters:
       additionalProperties: false
       example:
@@ -4195,6 +4990,3596 @@ components:
       required:
       - job
       type: object
+    ResourceSelectorMode:
+      enum:
+      - ALL
+      - NONE
+      - CONDITIONAL
+      example: CONDITIONAL
+      type: string
+      x-enum-varnames:
+      - RESOURCE_SELECTOR_MODE_ALL
+      - RESOURCE_SELECTOR_MODE_NONE
+      - RESOURCE_SELECTOR_MODE_CONDITIONAL
+    LogicalOperator:
+      description: |
+        Logical operator to apply to the list of `operands`.
+      enum:
+      - AND
+      - OR
+      example: AND
+      type: string
+      x-enum-varnames:
+      - AND_OPERATOR
+      - OR_OPERATOR
+    BackupPolicyExpression:
+      example:
+        resourceId:
+          operator: IN
+          resourceIds:
+          - resourceIds
+          - resourceIds
+        resourceGroupName:
+          resourceGroupNames:
+          - resourceGroupNames
+          - resourceGroupNames
+          operator: IN
+        tagKeys:
+          tagKeys:
+          - tagKeys
+          - tagKeys
+          operator: CONTAINS_ANY_OF
+        vpc:
+          vpcs:
+          - vpcs
+          - vpcs
+          operator: IN
+        resourceName:
+          resourceNames:
+          - resourceNames
+          - resourceNames
+          operator: IN
+        dataClasses:
+          dataClasses:
+          - PII
+          - PII
+          operator: CONTAINS_ANY_OF
+        accountId:
+          accountIds:
+          - accountIds
+          - accountIds
+          operator: IN
+        environment:
+          environments:
+          - PROD
+          - PROD
+          operator: IN
+        tagKeyValues:
+          tagKeyValues:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          operator: CONTAINS_ANY_OF
+        cloudProvider:
+          cloudProviders:
+          - AWS
+          - AWS
+          operator: IN
+        sourceRegion:
+          regions:
+          - regions
+          - regions
+          operator: IN
+        subnets:
+          subnets:
+          - subnets
+          - subnets
+          operator: CONTAINS_ANY_OF
+        group:
+          operands:
+          - resourceType:
+              operator: IN
+              resourceTypes:
+              - AWS_EC2
+              - AWS_RDS
+          - environment:
+              operator: IN
+              environments:
+              - PROD
+              - PROD_INTERNAL
+          operator: AND
+        resourceType:
+          resourceTypes:
+          - AWS_EC2
+          - AWS_EC2
+          operator: IN
+        apps:
+          operator: CONTAINS_ANY_OF
+          apps:
+          - apps
+          - apps
+      properties:
+        group:
+          $ref: '#/components/schemas/BackupPolicyGroupCondition'
+        resourceType:
+          $ref: '#/components/schemas/ResourceTypeCondition'
+        dataClasses:
+          $ref: '#/components/schemas/DataClassesCondition'
+        environment:
+          $ref: '#/components/schemas/EnvironmentCondition'
+        apps:
+          $ref: '#/components/schemas/AppsCondition'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderCondition'
+        accountId:
+          $ref: '#/components/schemas/AccountIdCondition'
+        sourceRegion:
+          $ref: '#/components/schemas/RegionCondition'
+        vpc:
+          $ref: '#/components/schemas/VpcCondition'
+        subnets:
+          $ref: '#/components/schemas/SubnetsCondition'
+        resourceGroupName:
+          $ref: '#/components/schemas/ResourceGroupNameCondition'
+        resourceName:
+          $ref: '#/components/schemas/ResourceNameCondition'
+        resourceId:
+          $ref: '#/components/schemas/ResourceIdCondition'
+        tagKeys:
+          $ref: '#/components/schemas/TagKeysCondition'
+        tagKeyValues:
+          $ref: '#/components/schemas/TagKeyValuesCondition'
+      type: object
+    BackupPolicyGroupCondition:
+      example:
+        operands:
+        - resourceType:
+            operator: IN
+            resourceTypes:
+            - AWS_EC2
+            - AWS_RDS
+        - environment:
+            operator: IN
+            environments:
+            - PROD
+            - PROD_INTERNAL
+        operator: AND
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/LogicalOperator'
+        operands:
+          description: |
+            List of expressions to evaluate using the logical operator specified in `operator`.
+            Each item in the list can be either a grouped expression of type `BackupPolicyLogicalExpression` or a basic selector of type `BackupPolicyBasicSelector`.
+
+            Must contain at least 2 items.
+          example:
+          - resourceType:
+              operator: IN
+              resourceTypes:
+              - AWS_EC2
+              - AWS_RDS
+          - environment:
+              operator: IN
+              environments:
+              - PROD
+              - PROD_INTERNAL
+          items:
+            $ref: '#/components/schemas/BackupPolicyExpression'
+          minItems: 2
+          type: array
+      required:
+      - operands
+      - operator
+      type: object
+    ScalarOperators:
+      enum:
+      - IN
+      - NOT_IN
+      example: IN
+      type: string
+      x-enum-varnames:
+      - IN_OPERATOR
+      - NOT_IN_OPERATOR
+    ResourceTypeCondition:
+      example:
+        resourceTypes:
+        - AWS_EC2
+        - AWS_EC2
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceTypes:
+          items:
+            $ref: '#/components/schemas/ResourceType'
+          type: array
+      required:
+      - operator
+      - resourceTypes
+      type: object
+    ListOperators:
+      enum:
+      - CONTAINS_ANY_OF
+      - CONTAINS_NONE_OF
+      - CONTAINS_ALL_OF
+      example: CONTAINS_ANY_OF
+      type: string
+      x-enum-varnames:
+      - CONTAINS_ANY_OF_OPERATOR
+      - CONTAINS_NONE_OF_OPERATOR
+      - CONTAINS_ALL_OF_OPERATOR
+    DataClass:
+      description: Data classes.
+      enum:
+      - FI
+      - PHI
+      - PII
+      - DATA_CLASS_UNSPECIFIED
+      example: PII
+      type: string
+    DataClassesCondition:
+      example:
+        dataClasses:
+        - PII
+        - PII
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        dataClasses:
+          items:
+            $ref: '#/components/schemas/DataClass'
+          type: array
+      required:
+      - dataClasses
+      - operator
+      type: object
+    Environment:
+      description: |
+        The resource's environment: production, internal production, or staging.
+      enum:
+      - PROD
+      - PROD_INTERNAL
+      - STAGE
+      - ENVIRONMENT_UNSPECIFIED
+      example: PROD
+      type: string
+    EnvironmentCondition:
+      example:
+        environments:
+        - PROD
+        - PROD
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        environments:
+          items:
+            $ref: '#/components/schemas/Environment'
+          type: array
+      required:
+      - environments
+      - operator
+      type: object
+    AppsCondition:
+      example:
+        operator: CONTAINS_ANY_OF
+        apps:
+        - apps
+        - apps
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        apps:
+          items:
+            type: string
+          type: array
+      required:
+      - apps
+      - operator
+      type: object
+    CloudProviderCondition:
+      example:
+        cloudProviders:
+        - AWS
+        - AWS
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        cloudProviders:
+          items:
+            $ref: '#/components/schemas/Provider'
+          type: array
+      required:
+      - cloudProviders
+      - operator
+      type: object
+    AccountIdCondition:
+      example:
+        accountIds:
+        - accountIds
+        - accountIds
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        accountIds:
+          items:
+            type: string
+          type: array
+      required:
+      - accountIds
+      - operator
+      type: object
+    RegionCondition:
+      example:
+        regions:
+        - regions
+        - regions
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        regions:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - regions
+      type: object
+    VpcCondition:
+      example:
+        vpcs:
+        - vpcs
+        - vpcs
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        vpcs:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - vpcs
+      type: object
+    SubnetsCondition:
+      example:
+        subnets:
+        - subnets
+        - subnets
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        subnets:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - subnets
+      type: object
+    ResourceGroupNameCondition:
+      example:
+        resourceGroupNames:
+        - resourceGroupNames
+        - resourceGroupNames
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceGroupNames:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - resourceGroupNames
+      type: object
+    ResourceNameCondition:
+      example:
+        resourceNames:
+        - resourceNames
+        - resourceNames
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceNames:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - resourceNames
+      type: object
+    ResourceIdCondition:
+      example:
+        operator: IN
+        resourceIds:
+        - resourceIds
+        - resourceIds
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceIds:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - resourceIds
+      type: object
+    TagKeysCondition:
+      example:
+        tagKeys:
+        - tagKeys
+        - tagKeys
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        tagKeys:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - tagKeys
+      type: object
+    TagKeyValue:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    TagKeyValuesCondition:
+      example:
+        tagKeyValues:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        tagKeyValues:
+          items:
+            $ref: '#/components/schemas/TagKeyValue'
+          type: array
+      required:
+      - operator
+      - tagKeyValues
+      type: object
+    BackupPolicyResourceSelector:
+      example:
+        expression:
+          resourceId:
+            operator: IN
+            resourceIds:
+            - resourceIds
+            - resourceIds
+          resourceGroupName:
+            resourceGroupNames:
+            - resourceGroupNames
+            - resourceGroupNames
+            operator: IN
+          tagKeys:
+            tagKeys:
+            - tagKeys
+            - tagKeys
+            operator: CONTAINS_ANY_OF
+          vpc:
+            vpcs:
+            - vpcs
+            - vpcs
+            operator: IN
+          resourceName:
+            resourceNames:
+            - resourceNames
+            - resourceNames
+            operator: IN
+          dataClasses:
+            dataClasses:
+            - PII
+            - PII
+            operator: CONTAINS_ANY_OF
+          accountId:
+            accountIds:
+            - accountIds
+            - accountIds
+            operator: IN
+          environment:
+            environments:
+            - PROD
+            - PROD
+            operator: IN
+          tagKeyValues:
+            tagKeyValues:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            operator: CONTAINS_ANY_OF
+          cloudProvider:
+            cloudProviders:
+            - AWS
+            - AWS
+            operator: IN
+          sourceRegion:
+            regions:
+            - regions
+            - regions
+            operator: IN
+          subnets:
+            subnets:
+            - subnets
+            - subnets
+            operator: CONTAINS_ANY_OF
+          group:
+            operands:
+            - resourceType:
+                operator: IN
+                resourceTypes:
+                - AWS_EC2
+                - AWS_RDS
+            - environment:
+                operator: IN
+                environments:
+                - PROD
+                - PROD_INTERNAL
+            operator: AND
+          resourceType:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
+            operator: IN
+          apps:
+            operator: CONTAINS_ANY_OF
+            apps:
+            - apps
+            - apps
+        resourceSelectionMode: CONDITIONAL
+        resourceExclusionOverride:
+        - i-0b0f5b5ef75b1c009
+        - 43d9cc0b-b633-5431-93d0-38aa70a13745
+        resourceInclusionOverride:
+        - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+        - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+      properties:
+        resourceSelectionMode:
+          $ref: '#/components/schemas/ResourceSelectorMode'
+        expression:
+          $ref: '#/components/schemas/BackupPolicyExpression'
+        resourceInclusionOverride:
+          description: |
+            List of cloud-provider-assigned resource IDs to include in the backup policy, regardless of whether they're excluded by `resourceSelectionMode` and `expression`.
+          example:
+          - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+          - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+          items:
+            type: string
+          type: array
+        resourceExclusionOverride:
+          description: |
+            List of cloud-provider-assigned resource IDs to exclude from the backup policy, regardless of whether they're included by `resourceSelectionMode` and `expression`.
+          example:
+          - i-0b0f5b5ef75b1c009
+          - 43d9cc0b-b633-5431-93d0-38aa70a13745
+          items:
+            type: string
+          type: array
+      required:
+      - resourceSelectionMode
+      type: object
+    BackupPolicyType:
+      description: |
+        The type of the policy.
+      enum:
+      - UNSPECIFIED
+      - STANDARD
+      - HIGH_FREQUENCY
+      - PITR
+      example: STANDARD
+      type: string
+      x-enum-varnames:
+      - BACKUP_POLICY_TYPE_UNSPECIFIED
+      - BACKUP_POLICY_TYPE_STANDARD
+      - BACKUP_POLICY_TYPE_HIGH_FREQUENCY
+      - BACKUP_POLICY_TYPE_PITR
+    StandardBackupScheduleFrequency:
+      enum:
+      - HOURLY
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      - ANNUALLY
+      example: WEEKLY
+      type: string
+      x-enum-varnames:
+      - STANDARD_BACKUP_SCHEDULE_HOURLY
+      - STANDARD_BACKUP_SCHEDULE_DAILY
+      - STANDARD_BACKUP_SCHEDULE_WEEKLY
+      - STANDARD_BACKUP_SCHEDULE_MONTHLY
+      - STANDARD_BACKUP_SCHEDULE_ANNUALLY
+    StandardHourlyConfig:
+      example:
+        intervalHours: 8
+      nullable: true
+      properties:
+        intervalHours:
+          description: |
+            Backup frequency, in hours.
+          enum:
+          - 6
+          - 8
+          - 12
+          example: 8
+          type: integer
+      required:
+      - intervalHours
+      type: object
+    TimeOfDay:
+      example:
+        hour: 12
+        minutes: 30
+      properties:
+        hour:
+          default: 0
+          description: Hour of the day.
+          example: 12
+          maximum: 23
+          minimum: 0
+          type: integer
+        minutes:
+          default: 0
+          description: Minute of the hour.
+          example: 30
+          maximum: 59
+          minimum: 0
+          type: integer
+      required:
+      - hour
+      - minutes
+      type: object
+    DailyConfig:
+      example:
+        startWindowMinutes: 240
+        timeOfDay:
+          hour: 12
+          minutes: 30
+      nullable: true
+      properties:
+        timeOfDay:
+          $ref: '#/components/schemas/TimeOfDay'
+        startWindowMinutes:
+          default: 240
+          description: |
+            The window of time after the start time you want the backup to start, in minutes.
+            Defaults to `240` (4 hours).
+          example: 240
+          format: long
+          maximum: 1320
+          minimum: 240
+          type: integer
+      type: object
+    WeeklyConfig:
+      example:
+        startWindowMinutes: 240
+        daysOfWeek:
+        - MONDAY
+        - THURSDAY
+        timeOfDay:
+          hour: 12
+          minutes: 30
+      nullable: true
+      properties:
+        daysOfWeek:
+          default:
+          - SUNDAY
+          description: |
+            Days of the week to schedule backups.
+          example:
+          - MONDAY
+          - THURSDAY
+          items:
+            enum:
+            - MONDAY
+            - TUESDAY
+            - WEDNESDAY
+            - THURSDAY
+            - FRIDAY
+            - SATURDAY
+            - SUNDAY
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
+        timeOfDay:
+          $ref: '#/components/schemas/TimeOfDay'
+        startWindowMinutes:
+          default: 240
+          description: |
+            The window of time after the start time you want the backup to start, in minutes.
+            Defaults to `240` (4 hours).
+          example: 240
+          format: long
+          maximum: 1320
+          minimum: 240
+          type: integer
+      type: object
+    MonthlyConfig:
+      example:
+        startWindowMinutes: 240
+        dayOfMonth:
+        - 5
+        - 10
+        - 15
+        lastDayOfMonth: true
+        timeOfDay:
+          hour: 12
+          minutes: 30
+      nullable: true
+      properties:
+        dayOfMonth:
+          description: |
+            Days of the month to schedule backups.
+          example:
+          - 5
+          - 10
+          - 15
+          items:
+            maximum: 28
+            minimum: 1
+            type: integer
+          minLength: 1
+          type: array
+          uniqueItems: true
+        lastDayOfMonth:
+          description: |
+            Whether to schedule backups on the last day of the month.
+            Used only when `dayOfMonth` is not specified.
+          example: true
+          type: boolean
+        timeOfDay:
+          $ref: '#/components/schemas/TimeOfDay'
+        startWindowMinutes:
+          default: 240
+          description: |
+            The window of time after the start time you want the backup to start, in minutes.
+            Defaults to `240` (4 hours).
+          example: 240
+          format: long
+          maximum: 1320
+          minimum: 240
+          type: integer
+      type: object
+    TimeOfYear:
+      example:
+        month: 5
+        dayOfMonth: 14
+      properties:
+        month:
+          example: 5
+          maximum: 12
+          minimum: 1
+          type: integer
+        dayOfMonth:
+          example: 14
+          maximum: 31
+          minimum: 1
+          type: integer
+      required:
+      - dayOfMonth
+      - month
+      type: object
+    AnnuallyConfig:
+      example:
+        startWindowMinutes: 240
+        timeOfYear:
+          month: 5
+          dayOfMonth: 14
+        timeOfDay:
+          hour: 12
+          minutes: 30
+      nullable: true
+      properties:
+        timeOfDay:
+          $ref: '#/components/schemas/TimeOfDay'
+        timeOfYear:
+          $ref: '#/components/schemas/TimeOfYear'
+        startWindowMinutes:
+          default: 240
+          description: |
+            The window of time after the start time you want the backup to start, in minutes.
+            Defaults to `240` (4 hours).
+          example: 240
+          format: long
+          maximum: 1320
+          minimum: 240
+          type: integer
+      type: object
+    StandardBackupScheduleConfig:
+      example:
+        monthlyConfig:
+          startWindowMinutes: 240
+          dayOfMonth:
+          - 5
+          - 10
+          - 15
+          lastDayOfMonth: true
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        weeklyConfig:
+          startWindowMinutes: 240
+          daysOfWeek:
+          - MONDAY
+          - THURSDAY
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        hourlyConfig:
+          intervalHours: 8
+        annuallyConfig:
+          startWindowMinutes: 240
+          timeOfYear:
+            month: 5
+            dayOfMonth: 14
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        dailyConfig:
+          startWindowMinutes: 240
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        frequency: WEEKLY
+      properties:
+        frequency:
+          $ref: '#/components/schemas/StandardBackupScheduleFrequency'
+        hourlyConfig:
+          $ref: '#/components/schemas/StandardHourlyConfig'
+        dailyConfig:
+          $ref: '#/components/schemas/DailyConfig'
+        weeklyConfig:
+          $ref: '#/components/schemas/WeeklyConfig'
+        monthlyConfig:
+          $ref: '#/components/schemas/MonthlyConfig'
+        annuallyConfig:
+          $ref: '#/components/schemas/AnnuallyConfig'
+      required:
+      - frequency
+      type: object
+    StandardBackupSchedules:
+      example:
+        vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+        scheduleConfig:
+          monthlyConfig:
+            startWindowMinutes: 240
+            dayOfMonth:
+            - 5
+            - 10
+            - 15
+            lastDayOfMonth: true
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          weeklyConfig:
+            startWindowMinutes: 240
+            daysOfWeek:
+            - MONDAY
+            - THURSDAY
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          hourlyConfig:
+            intervalHours: 8
+          annuallyConfig:
+            startWindowMinutes: 240
+            timeOfYear:
+              month: 5
+              dayOfMonth: 14
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          dailyConfig:
+            startWindowMinutes: 240
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          frequency: WEEKLY
+        backupRetentionDays: 30
+      properties:
+        vaultId:
+          description: Vault ID.
+          example: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          type: string
+        scheduleConfig:
+          $ref: '#/components/schemas/StandardBackupScheduleConfig'
+        backupRetentionDays:
+          description: "Backup retention period, in days."
+          example: 30
+          type: integer
+      required:
+      - backupRetentionDays
+      - scheduleConfig
+      - vaultId
+      type: object
+    StandardBackupPolicyPlan:
+      example:
+        backupSchedules:
+        - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          scheduleConfig:
+            monthlyConfig:
+              startWindowMinutes: 240
+              dayOfMonth:
+              - 5
+              - 10
+              - 15
+              lastDayOfMonth: true
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            weeklyConfig:
+              startWindowMinutes: 240
+              daysOfWeek:
+              - MONDAY
+              - THURSDAY
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            hourlyConfig:
+              intervalHours: 8
+            annuallyConfig:
+              startWindowMinutes: 240
+              timeOfYear:
+                month: 5
+                dayOfMonth: 14
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            dailyConfig:
+              startWindowMinutes: 240
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            frequency: WEEKLY
+          backupRetentionDays: 30
+        - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          scheduleConfig:
+            monthlyConfig:
+              startWindowMinutes: 240
+              dayOfMonth:
+              - 5
+              - 10
+              - 15
+              lastDayOfMonth: true
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            weeklyConfig:
+              startWindowMinutes: 240
+              daysOfWeek:
+              - MONDAY
+              - THURSDAY
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            hourlyConfig:
+              intervalHours: 8
+            annuallyConfig:
+              startWindowMinutes: 240
+              timeOfYear:
+                month: 5
+                dayOfMonth: 14
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            dailyConfig:
+              startWindowMinutes: 240
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            frequency: WEEKLY
+          backupRetentionDays: 30
+      nullable: true
+      properties:
+        backupSchedules:
+          description: |
+            List of backup schedules.
+            Each schedule specifies a backup frequency, retention period, and vault.
+          items:
+            $ref: '#/components/schemas/StandardBackupSchedules'
+          minItems: 1
+          type: array
+      required:
+      - backupSchedules
+      type: object
+    HighFrequencyBackupResourceType:
+      allOf:
+      - $ref: '#/components/schemas/ResourceType'
+      - enum:
+        - AWS_S3
+        - AWS_DYNAMO_DB
+        example: AWS_S3
+        type: string
+    HighFrequencyBackupScheduleFrequency:
+      enum:
+      - INTERVAL
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      - ANNUALLY
+      example: WEEKLY
+      type: string
+      x-enum-varnames:
+      - HIGH_FREQUENCY_BACKUP_SCHEDULE_INTERVAL
+      - HIGH_FREQUENCY_BACKUP_SCHEDULE_DAILY
+      - HIGH_FREQUENCY_BACKUP_SCHEDULE_WEEKLY
+      - HIGH_FREQUENCY_BACKUP_SCHEDULE_MONTHLY
+      - HIGH_FREQUENCY_BACKUP_SCHEDULE_ANNUALLY
+    HighFrequencyIntervalConfig:
+      example:
+        intervalMinutes: 360
+      nullable: true
+      properties:
+        intervalMinutes:
+          enum:
+          - 30
+          - 60
+          - 120
+          - 180
+          - 240
+          - 360
+          - 480
+          - 720
+          example: 360
+          type: integer
+      required:
+      - intervalMinutes
+      type: object
+    HighFrequencyBackupScheduleConfig:
+      example:
+        monthlyConfig:
+          startWindowMinutes: 240
+          dayOfMonth:
+          - 5
+          - 10
+          - 15
+          lastDayOfMonth: true
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        intervalConfig:
+          intervalMinutes: 360
+        weeklyConfig:
+          startWindowMinutes: 240
+          daysOfWeek:
+          - MONDAY
+          - THURSDAY
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        annuallyConfig:
+          startWindowMinutes: 240
+          timeOfYear:
+            month: 5
+            dayOfMonth: 14
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        dailyConfig:
+          startWindowMinutes: 240
+          timeOfDay:
+            hour: 12
+            minutes: 30
+        frequency: WEEKLY
+      properties:
+        frequency:
+          $ref: '#/components/schemas/HighFrequencyBackupScheduleFrequency'
+        intervalConfig:
+          $ref: '#/components/schemas/HighFrequencyIntervalConfig'
+        dailyConfig:
+          $ref: '#/components/schemas/DailyConfig'
+        weeklyConfig:
+          $ref: '#/components/schemas/WeeklyConfig'
+        monthlyConfig:
+          $ref: '#/components/schemas/MonthlyConfig'
+        annuallyConfig:
+          $ref: '#/components/schemas/AnnuallyConfig'
+      type: object
+    HighFrequencyBackupSchedules:
+      example:
+        vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+        scheduleConfig:
+          monthlyConfig:
+            startWindowMinutes: 240
+            dayOfMonth:
+            - 5
+            - 10
+            - 15
+            lastDayOfMonth: true
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          intervalConfig:
+            intervalMinutes: 360
+          weeklyConfig:
+            startWindowMinutes: 240
+            daysOfWeek:
+            - MONDAY
+            - THURSDAY
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          annuallyConfig:
+            startWindowMinutes: 240
+            timeOfYear:
+              month: 5
+              dayOfMonth: 14
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          dailyConfig:
+            startWindowMinutes: 240
+            timeOfDay:
+              hour: 12
+              minutes: 30
+          frequency: WEEKLY
+        backupRetentionDays: 30
+      properties:
+        vaultId:
+          description: Vault ID.
+          example: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          type: string
+        scheduleConfig:
+          $ref: '#/components/schemas/HighFrequencyBackupScheduleConfig'
+        backupRetentionDays:
+          description: "Backup retention period, in days."
+          example: 30
+          type: integer
+      required:
+      - backupRetentionDays
+      - scheduleConfig
+      - vaultId
+      type: object
+    HighFrequencyBackupPolicyPlan:
+      example:
+        resourceTypes:
+        - AWS_S3
+        backupSchedules:
+        - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          scheduleConfig:
+            monthlyConfig:
+              startWindowMinutes: 240
+              dayOfMonth:
+              - 5
+              - 10
+              - 15
+              lastDayOfMonth: true
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            intervalConfig:
+              intervalMinutes: 360
+            weeklyConfig:
+              startWindowMinutes: 240
+              daysOfWeek:
+              - MONDAY
+              - THURSDAY
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            annuallyConfig:
+              startWindowMinutes: 240
+              timeOfYear:
+                month: 5
+                dayOfMonth: 14
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            dailyConfig:
+              startWindowMinutes: 240
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            frequency: WEEKLY
+          backupRetentionDays: 30
+        - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          scheduleConfig:
+            monthlyConfig:
+              startWindowMinutes: 240
+              dayOfMonth:
+              - 5
+              - 10
+              - 15
+              lastDayOfMonth: true
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            intervalConfig:
+              intervalMinutes: 360
+            weeklyConfig:
+              startWindowMinutes: 240
+              daysOfWeek:
+              - MONDAY
+              - THURSDAY
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            annuallyConfig:
+              startWindowMinutes: 240
+              timeOfYear:
+                month: 5
+                dayOfMonth: 14
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            dailyConfig:
+              startWindowMinutes: 240
+              timeOfDay:
+                hour: 12
+                minutes: 30
+            frequency: WEEKLY
+          backupRetentionDays: 30
+      nullable: true
+      properties:
+        resourceTypes:
+          description: Resource types to backup.
+          example:
+          - AWS_S3
+          items:
+            $ref: '#/components/schemas/HighFrequencyBackupResourceType'
+          minItems: 1
+          type: array
+          uniqueItems: true
+        backupSchedules:
+          description: |
+            List of backup schedules.
+            Each schedule specifies a backup frequency, retention period, and vault.
+          items:
+            $ref: '#/components/schemas/HighFrequencyBackupSchedules'
+          minItems: 1
+          type: array
+      required:
+      - backupSchedules
+      - resourceTypes
+      type: object
+    BackupPolicyPlan:
+      example:
+        backupPolicyType: STANDARD
+        highFrequencyPlan:
+          resourceTypes:
+          - AWS_S3
+          backupSchedules:
+          - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            scheduleConfig:
+              monthlyConfig:
+                startWindowMinutes: 240
+                dayOfMonth:
+                - 5
+                - 10
+                - 15
+                lastDayOfMonth: true
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              intervalConfig:
+                intervalMinutes: 360
+              weeklyConfig:
+                startWindowMinutes: 240
+                daysOfWeek:
+                - MONDAY
+                - THURSDAY
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              annuallyConfig:
+                startWindowMinutes: 240
+                timeOfYear:
+                  month: 5
+                  dayOfMonth: 14
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              dailyConfig:
+                startWindowMinutes: 240
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              frequency: WEEKLY
+            backupRetentionDays: 30
+          - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            scheduleConfig:
+              monthlyConfig:
+                startWindowMinutes: 240
+                dayOfMonth:
+                - 5
+                - 10
+                - 15
+                lastDayOfMonth: true
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              intervalConfig:
+                intervalMinutes: 360
+              weeklyConfig:
+                startWindowMinutes: 240
+                daysOfWeek:
+                - MONDAY
+                - THURSDAY
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              annuallyConfig:
+                startWindowMinutes: 240
+                timeOfYear:
+                  month: 5
+                  dayOfMonth: 14
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              dailyConfig:
+                startWindowMinutes: 240
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              frequency: WEEKLY
+            backupRetentionDays: 30
+        standardPlan:
+          backupSchedules:
+          - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            scheduleConfig:
+              monthlyConfig:
+                startWindowMinutes: 240
+                dayOfMonth:
+                - 5
+                - 10
+                - 15
+                lastDayOfMonth: true
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              weeklyConfig:
+                startWindowMinutes: 240
+                daysOfWeek:
+                - MONDAY
+                - THURSDAY
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              hourlyConfig:
+                intervalHours: 8
+              annuallyConfig:
+                startWindowMinutes: 240
+                timeOfYear:
+                  month: 5
+                  dayOfMonth: 14
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              dailyConfig:
+                startWindowMinutes: 240
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              frequency: WEEKLY
+            backupRetentionDays: 30
+          - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            scheduleConfig:
+              monthlyConfig:
+                startWindowMinutes: 240
+                dayOfMonth:
+                - 5
+                - 10
+                - 15
+                lastDayOfMonth: true
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              weeklyConfig:
+                startWindowMinutes: 240
+                daysOfWeek:
+                - MONDAY
+                - THURSDAY
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              hourlyConfig:
+                intervalHours: 8
+              annuallyConfig:
+                startWindowMinutes: 240
+                timeOfYear:
+                  month: 5
+                  dayOfMonth: 14
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              dailyConfig:
+                startWindowMinutes: 240
+                timeOfDay:
+                  hour: 12
+                  minutes: 30
+              frequency: WEEKLY
+            backupRetentionDays: 30
+      properties:
+        backupPolicyType:
+          $ref: '#/components/schemas/BackupPolicyType'
+        standardPlan:
+          $ref: '#/components/schemas/StandardBackupPolicyPlan'
+        highFrequencyPlan:
+          $ref: '#/components/schemas/HighFrequencyBackupPolicyPlan'
+      required:
+      - backupPolicyType
+      type: object
+    CreateBackupPolicyRequest:
+      example:
+        name: Production with PII
+        backupPlan:
+          backupPolicyType: STANDARD
+          highFrequencyPlan:
+            resourceTypes:
+            - AWS_S3
+            backupSchedules:
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                intervalConfig:
+                  intervalMinutes: 360
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                intervalConfig:
+                  intervalMinutes: 360
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+          standardPlan:
+            backupSchedules:
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                hourlyConfig:
+                  intervalHours: 8
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                hourlyConfig:
+                  intervalHours: 8
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+          resourceExclusionOverride:
+          - i-0b0f5b5ef75b1c009
+          - 43d9cc0b-b633-5431-93d0-38aa70a13745
+          resourceInclusionOverride:
+          - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+          - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+        enabled: true
+      properties:
+        name:
+          description: Backup policy display name.
+          example: Production with PII
+          type: string
+        enabled:
+          default: true
+          description: Whether the backup policy is enabled.
+          example: true
+          type: boolean
+        resourceSelector:
+          $ref: '#/components/schemas/BackupPolicyResourceSelector'
+        backupPlan:
+          $ref: '#/components/schemas/BackupPolicyPlan'
+      required:
+      - backupPlan
+      - name
+      - resourceSelector
+      type: object
+    BackupPolicy:
+      example:
+        name: Production with PII
+        backupPlan:
+          backupPolicyType: STANDARD
+          highFrequencyPlan:
+            resourceTypes:
+            - AWS_S3
+            backupSchedules:
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                intervalConfig:
+                  intervalMinutes: 360
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                intervalConfig:
+                  intervalMinutes: 360
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+          standardPlan:
+            backupSchedules:
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                hourlyConfig:
+                  intervalHours: 8
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                hourlyConfig:
+                  intervalHours: 8
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+        id: de308488-df3d-5b82-8f37-477ef529f491
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+          resourceExclusionOverride:
+          - i-0b0f5b5ef75b1c009
+          - 43d9cc0b-b633-5431-93d0-38aa70a13745
+          resourceInclusionOverride:
+          - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+          - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+        enabled: true
+      properties:
+        id:
+          description: Backup policy ID.
+          example: de308488-df3d-5b82-8f37-477ef529f491
+          type: string
+        name:
+          description: Backup policy display name.
+          example: Production with PII
+          type: string
+        enabled:
+          description: Whether the backup policy is enabled.
+          example: true
+          type: boolean
+        resourceSelector:
+          $ref: '#/components/schemas/BackupPolicyResourceSelector'
+        backupPlan:
+          $ref: '#/components/schemas/BackupPolicyPlan'
+      required:
+      - backupPlan
+      - enabled
+      - id
+      - name
+      - resourceSelector
+      type: object
+    CreateBackupPolicyResponse:
+      example:
+        backupPolicy:
+          name: Production with PII
+          backupPlan:
+            backupPolicyType: STANDARD
+            highFrequencyPlan:
+              resourceTypes:
+              - AWS_S3
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+            standardPlan:
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+          id: de308488-df3d-5b82-8f37-477ef529f491
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - i-0b0f5b5ef75b1c009
+            - 43d9cc0b-b633-5431-93d0-38aa70a13745
+            resourceInclusionOverride:
+            - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+            - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+          enabled: true
+      properties:
+        backupPolicy:
+          $ref: '#/components/schemas/BackupPolicy'
+      required:
+      - backupPolicy
+      type: object
+    ListBackupPoliciesResponse:
+      example:
+        nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+        backupPolicies:
+        - name: Production with PII
+          backupPlan:
+            backupPolicyType: STANDARD
+            highFrequencyPlan:
+              resourceTypes:
+              - AWS_S3
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+            standardPlan:
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+          id: de308488-df3d-5b82-8f37-477ef529f491
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - i-0b0f5b5ef75b1c009
+            - 43d9cc0b-b633-5431-93d0-38aa70a13745
+            resourceInclusionOverride:
+            - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+            - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+          enabled: true
+        - name: Production with PII
+          backupPlan:
+            backupPolicyType: STANDARD
+            highFrequencyPlan:
+              resourceTypes:
+              - AWS_S3
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+            standardPlan:
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+          id: de308488-df3d-5b82-8f37-477ef529f491
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - i-0b0f5b5ef75b1c009
+            - 43d9cc0b-b633-5431-93d0-38aa70a13745
+            resourceInclusionOverride:
+            - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+            - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+          enabled: true
+        totalCount: 2347
+      properties:
+        backupPolicies:
+          items:
+            $ref: '#/components/schemas/BackupPolicy'
+          type: array
+        nextToken:
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+          type: string
+        totalCount:
+          description: Total number of backup jobs that matched the filter options.
+          example: 2347
+          type: integer
+      type: object
+    GetBackupPolicyResponse:
+      example:
+        backupPolicy:
+          name: Production with PII
+          backupPlan:
+            backupPolicyType: STANDARD
+            highFrequencyPlan:
+              resourceTypes:
+              - AWS_S3
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+            standardPlan:
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+          id: de308488-df3d-5b82-8f37-477ef529f491
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - i-0b0f5b5ef75b1c009
+            - 43d9cc0b-b633-5431-93d0-38aa70a13745
+            resourceInclusionOverride:
+            - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+            - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+          enabled: true
+      properties:
+        backupPolicy:
+          $ref: '#/components/schemas/BackupPolicy'
+      required:
+      - backupPolicy
+      type: object
+    UpdateBackupPolicyRequest:
+      example:
+        name: Production with PII
+        backupPlan:
+          backupPolicyType: STANDARD
+          highFrequencyPlan:
+            resourceTypes:
+            - AWS_S3
+            backupSchedules:
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                intervalConfig:
+                  intervalMinutes: 360
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                intervalConfig:
+                  intervalMinutes: 360
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+          standardPlan:
+            backupSchedules:
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                hourlyConfig:
+                  intervalHours: 8
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+            - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  dayOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  lastDayOfMonth: true
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MONDAY
+                  - THURSDAY
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                hourlyConfig:
+                  intervalHours: 8
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minutes: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+          resourceExclusionOverride:
+          - i-0b0f5b5ef75b1c009
+          - 43d9cc0b-b633-5431-93d0-38aa70a13745
+          resourceInclusionOverride:
+          - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+          - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+        enabled: true
+      properties:
+        name:
+          description: Backup policy display name.
+          example: Production with PII
+          type: string
+        enabled:
+          default: true
+          description: Whether the policy is enabled.
+          example: true
+          type: boolean
+        resourceSelector:
+          $ref: '#/components/schemas/BackupPolicyResourceSelector'
+        backupPlan:
+          $ref: '#/components/schemas/BackupPolicyPlan'
+      required:
+      - backupPlan
+      - name
+      - resourceSelector
+      type: object
+    UpdateBackupPolicyResponse:
+      example:
+        backupPolicy:
+          name: Production with PII
+          backupPlan:
+            backupPolicyType: STANDARD
+            highFrequencyPlan:
+              resourceTypes:
+              - AWS_S3
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  intervalConfig:
+                    intervalMinutes: 360
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+            standardPlan:
+              backupSchedules:
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+              - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    dayOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    lastDayOfMonth: true
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MONDAY
+                    - THURSDAY
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  hourlyConfig:
+                    intervalHours: 8
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minutes: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+          id: de308488-df3d-5b82-8f37-477ef529f491
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - i-0b0f5b5ef75b1c009
+            - 43d9cc0b-b633-5431-93d0-38aa70a13745
+            resourceInclusionOverride:
+            - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
+            - db-FE4MOD3UCIYIQKXF3UVTCB55FA
+          enabled: true
+      properties:
+        backupPolicy:
+          $ref: '#/components/schemas/BackupPolicy'
+      required:
+      - backupPolicy
+      type: object
     ApiCredentials:
       additionalProperties: false
       example:
@@ -4372,16 +8757,6 @@ components:
             $ref: '#/components/schemas/ResourceType'
           type: array
       type: object
-    Environment:
-      description: |
-        The resource's environment: production, internal production, or staging.
-      enum:
-      - PROD
-      - PROD_INTERNAL
-      - STAGE
-      - ENVIRONMENT_UNSPECIFIED
-      example: PROD
-      type: string
     EnvironmentFilters:
       additionalProperties: false
       example:
@@ -4508,38 +8883,42 @@ components:
             type: string
           type: array
       type: object
-    DataClass:
-      description: Data classes.
-      enum:
-      - FI
-      - PHI
-      - PII
-      - DATA_CLASS_UNSPECIFIED
-      example: PII
-      type: string
     DataClassesFilters:
       additionalProperties: false
       example:
-        in:
+        containsAllOf:
+        - PHI
+        - PII
+        containsNoneOf:
+        - PHI
+        containsAnyOf:
         - PII
         - PHI
-        notIn:
-        - PHI
       properties:
-        in:
-          description: Matches if any value in this list equals `dataClasses`.
+        containsAnyOf:
+          description: Matches if any value in this list is in the `dataClasses` list.
           example:
           - PII
           - PHI
           items:
             $ref: '#/components/schemas/DataClass'
           type: array
-        notIn:
-          description: Matches if no value in this list equals `dataClasses` list.
+        containsNoneOf:
+          description: Matches if none of the values in this list are in the `dataClasses`
+            list.
           example:
           - PHI
           items:
             $ref: '#/components/schemas/DataClass'
+          type: array
+        containsAllOf:
+          description: Matches if all values in this list are in the `dataClasses`
+            list.
+          example:
+          - PHI
+          - PII
+          items:
+            type: string
           type: array
       type: object
     BackupStatus:
@@ -4737,10 +9116,13 @@ components:
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
         dataClasses:
-          in:
-          - PII
+          containsAllOf:
           - PHI
-          notIn:
+          - PII
+          containsNoneOf:
+          - PHI
+          containsAnyOf:
+          - PII
           - PHI
         resourceType:
           in:
@@ -4855,10 +9237,13 @@ components:
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
           dataClasses:
-            in:
-            - PII
+            containsAllOf:
             - PHI
-            notIn:
+            - PII
+            containsNoneOf:
+            - PHI
+            containsAnyOf:
+            - PII
             - PHI
           resourceType:
             in:
