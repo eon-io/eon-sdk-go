@@ -71,7 +71,6 @@ func (o *ProviderRestoreAccountConnectivityConfig) HasAws() bool {
 func (o *ProviderRestoreAccountConnectivityConfig) SetAws(v AwsRestoreAccountConnectivityConfig) {
 	o.Aws.Set(&v)
 }
-
 // SetAwsNil sets the value for Aws to be an explicit nil
 func (o *ProviderRestoreAccountConnectivityConfig) SetAwsNil() {
 	o.Aws.Set(nil)
@@ -83,7 +82,7 @@ func (o *ProviderRestoreAccountConnectivityConfig) UnsetAws() {
 }
 
 func (o ProviderRestoreAccountConnectivityConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,3 +132,5 @@ func (v *NullableProviderRestoreAccountConnectivityConfig) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

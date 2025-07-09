@@ -20,9 +20,10 @@ type ListOperators string
 
 // List of ListOperators
 const (
-	CONTAINS_ANY_OF_OPERATOR  ListOperators = "CONTAINS_ANY_OF"
+	CONTAINS_ANY_OF_OPERATOR ListOperators = "CONTAINS_ANY_OF"
 	CONTAINS_NONE_OF_OPERATOR ListOperators = "CONTAINS_NONE_OF"
-	CONTAINS_ALL_OF_OPERATOR  ListOperators = "CONTAINS_ALL_OF"
+	CONTAINS_ALL_OF_OPERATOR ListOperators = "CONTAINS_ALL_OF"
+	LIST_OPERATOR_UNSPECIFIED ListOperators = "UNSPECIFIED"
 )
 
 // All allowed values of ListOperators enum
@@ -30,6 +31,7 @@ var AllowedListOperatorsEnumValues = []ListOperators{
 	"CONTAINS_ANY_OF",
 	"CONTAINS_NONE_OF",
 	"CONTAINS_ALL_OF",
+	"UNSPECIFIED",
 }
 
 func (v *ListOperators) UnmarshalJSON(src []byte) error {
@@ -110,3 +112,4 @@ func (v *NullableListOperators) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

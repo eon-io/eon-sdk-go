@@ -20,14 +20,16 @@ type ScalarOperators string
 
 // List of ScalarOperators
 const (
-	IN_OPERATOR     ScalarOperators = "IN"
+	IN_OPERATOR ScalarOperators = "IN"
 	NOT_IN_OPERATOR ScalarOperators = "NOT_IN"
+	SCALAR_OPERATOR_UNSPECIFIED ScalarOperators = "UNSPECIFIED"
 )
 
 // All allowed values of ScalarOperators enum
 var AllowedScalarOperatorsEnumValues = []ScalarOperators{
 	"IN",
 	"NOT_IN",
+	"UNSPECIFIED",
 }
 
 func (v *ScalarOperators) UnmarshalJSON(src []byte) error {
@@ -108,3 +110,4 @@ func (v *NullableScalarOperators) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

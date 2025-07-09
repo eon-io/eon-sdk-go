@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Frequency** | [**StandardBackupScheduleFrequency**](StandardBackupScheduleFrequency.md) |  | 
-**HourlyConfig** | Pointer to [**NullableStandardHourlyConfig**](StandardHourlyConfig.md) |  | [optional] 
+**IntervalConfig** | Pointer to [**NullableStandardIntervalConfig**](StandardIntervalConfig.md) |  | [optional] 
 **DailyConfig** | Pointer to [**NullableDailyConfig**](DailyConfig.md) |  | [optional] 
 **WeeklyConfig** | Pointer to [**NullableWeeklyConfig**](WeeklyConfig.md) |  | [optional] 
 **MonthlyConfig** | Pointer to [**NullableMonthlyConfig**](MonthlyConfig.md) |  | [optional] 
@@ -50,41 +50,41 @@ and a boolean to check if the value has been set.
 SetFrequency sets Frequency field to given value.
 
 
-### GetHourlyConfig
+### GetIntervalConfig
 
-`func (o *StandardBackupScheduleConfig) GetHourlyConfig() StandardHourlyConfig`
+`func (o *StandardBackupScheduleConfig) GetIntervalConfig() StandardIntervalConfig`
 
-GetHourlyConfig returns the HourlyConfig field if non-nil, zero value otherwise.
+GetIntervalConfig returns the IntervalConfig field if non-nil, zero value otherwise.
 
-### GetHourlyConfigOk
+### GetIntervalConfigOk
 
-`func (o *StandardBackupScheduleConfig) GetHourlyConfigOk() (*StandardHourlyConfig, bool)`
+`func (o *StandardBackupScheduleConfig) GetIntervalConfigOk() (*StandardIntervalConfig, bool)`
 
-GetHourlyConfigOk returns a tuple with the HourlyConfig field if it's non-nil, zero value otherwise
+GetIntervalConfigOk returns a tuple with the IntervalConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHourlyConfig
+### SetIntervalConfig
 
-`func (o *StandardBackupScheduleConfig) SetHourlyConfig(v StandardHourlyConfig)`
+`func (o *StandardBackupScheduleConfig) SetIntervalConfig(v StandardIntervalConfig)`
 
-SetHourlyConfig sets HourlyConfig field to given value.
+SetIntervalConfig sets IntervalConfig field to given value.
 
-### HasHourlyConfig
+### HasIntervalConfig
 
-`func (o *StandardBackupScheduleConfig) HasHourlyConfig() bool`
+`func (o *StandardBackupScheduleConfig) HasIntervalConfig() bool`
 
-HasHourlyConfig returns a boolean if a field has been set.
+HasIntervalConfig returns a boolean if a field has been set.
 
-### SetHourlyConfigNil
+### SetIntervalConfigNil
 
-`func (o *StandardBackupScheduleConfig) SetHourlyConfigNil(b bool)`
+`func (o *StandardBackupScheduleConfig) SetIntervalConfigNil(b bool)`
 
- SetHourlyConfigNil sets the value for HourlyConfig to be an explicit nil
+ SetIntervalConfigNil sets the value for IntervalConfig to be an explicit nil
 
-### UnsetHourlyConfig
-`func (o *StandardBackupScheduleConfig) UnsetHourlyConfig()`
+### UnsetIntervalConfig
+`func (o *StandardBackupScheduleConfig) UnsetIntervalConfig()`
 
-UnsetHourlyConfig ensures that no value is present for HourlyConfig, not even an explicit nil
+UnsetIntervalConfig ensures that no value is present for IntervalConfig, not even an explicit nil
 ### GetDailyConfig
 
 `func (o *StandardBackupScheduleConfig) GetDailyConfig() DailyConfig`

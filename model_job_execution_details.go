@@ -11,10 +11,10 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the JobExecutionDetails type satisfies the MappedNullable interface at compile time
@@ -23,11 +23,11 @@ var _ MappedNullable = &JobExecutionDetails{}
 // JobExecutionDetails struct for JobExecutionDetails
 type JobExecutionDetails struct {
 	// Job ID.
-	JobId  string    `json:"jobId"`
+	JobId string `json:"jobId"`
 	Status JobStatus `json:"status"`
 	// Date and time the job was created.
 	CreatedTime time.Time `json:"createdTime"`
-	// Date and time the job is expected to start. Returned only for pending jobs.
+	// Date and time the job is expected to start. Returned only for pending jobs. 
 	ExpectedStartTime NullableTime `json:"expectedStartTime,omitempty"`
 	// Date and time the job started.
 	StartTime NullableTime `json:"startTime,omitempty"`
@@ -165,7 +165,6 @@ func (o *JobExecutionDetails) HasExpectedStartTime() bool {
 func (o *JobExecutionDetails) SetExpectedStartTime(v time.Time) {
 	o.ExpectedStartTime.Set(&v)
 }
-
 // SetExpectedStartTimeNil sets the value for ExpectedStartTime to be an explicit nil
 func (o *JobExecutionDetails) SetExpectedStartTimeNil() {
 	o.ExpectedStartTime.Set(nil)
@@ -208,7 +207,6 @@ func (o *JobExecutionDetails) HasStartTime() bool {
 func (o *JobExecutionDetails) SetStartTime(v time.Time) {
 	o.StartTime.Set(&v)
 }
-
 // SetStartTimeNil sets the value for StartTime to be an explicit nil
 func (o *JobExecutionDetails) SetStartTimeNil() {
 	o.StartTime.Set(nil)
@@ -251,7 +249,6 @@ func (o *JobExecutionDetails) HasEndTime() bool {
 func (o *JobExecutionDetails) SetEndTime(v time.Time) {
 	o.EndTime.Set(&v)
 }
-
 // SetEndTimeNil sets the value for EndTime to be an explicit nil
 func (o *JobExecutionDetails) SetEndTimeNil() {
 	o.EndTime.Set(nil)
@@ -294,7 +291,6 @@ func (o *JobExecutionDetails) HasDurationSeconds() bool {
 func (o *JobExecutionDetails) SetDurationSeconds(v int64) {
 	o.DurationSeconds.Set(&v)
 }
-
 // SetDurationSecondsNil sets the value for DurationSeconds to be an explicit nil
 func (o *JobExecutionDetails) SetDurationSecondsNil() {
 	o.DurationSeconds.Set(nil)
@@ -338,7 +334,7 @@ func (o *JobExecutionDetails) SetStatusMessage(v string) {
 }
 
 func (o JobExecutionDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -383,10 +379,10 @@ func (o *JobExecutionDetails) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -442,3 +438,5 @@ func (v *NullableJobExecutionDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

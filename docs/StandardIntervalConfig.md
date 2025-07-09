@@ -1,4 +1,4 @@
-# StandardHourlyConfig
+# StandardIntervalConfig
 
 ## Properties
 
@@ -8,39 +8,39 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewStandardHourlyConfig
+### NewStandardIntervalConfig
 
-`func NewStandardHourlyConfig(intervalHours int32, ) *StandardHourlyConfig`
+`func NewStandardIntervalConfig(intervalHours int32, ) *StandardIntervalConfig`
 
-NewStandardHourlyConfig instantiates a new StandardHourlyConfig object
+NewStandardIntervalConfig instantiates a new StandardIntervalConfig object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewStandardHourlyConfigWithDefaults
+### NewStandardIntervalConfigWithDefaults
 
-`func NewStandardHourlyConfigWithDefaults() *StandardHourlyConfig`
+`func NewStandardIntervalConfigWithDefaults() *StandardIntervalConfig`
 
-NewStandardHourlyConfigWithDefaults instantiates a new StandardHourlyConfig object
+NewStandardIntervalConfigWithDefaults instantiates a new StandardIntervalConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetIntervalHours
 
-`func (o *StandardHourlyConfig) GetIntervalHours() int32`
+`func (o *StandardIntervalConfig) GetIntervalHours() int32`
 
 GetIntervalHours returns the IntervalHours field if non-nil, zero value otherwise.
 
 ### GetIntervalHoursOk
 
-`func (o *StandardHourlyConfig) GetIntervalHoursOk() (*int32, bool)`
+`func (o *StandardIntervalConfig) GetIntervalHoursOk() (*int32, bool)`
 
 GetIntervalHoursOk returns a tuple with the IntervalHours field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIntervalHours
 
-`func (o *StandardHourlyConfig) SetIntervalHours(v int32)`
+`func (o *StandardIntervalConfig) SetIntervalHours(v int32)`
 
 SetIntervalHours sets IntervalHours field to given value.
 

@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &ResourceIdCondition{}
 
 // ResourceIdCondition struct for ResourceIdCondition
 type ResourceIdCondition struct {
-	Operator    ScalarOperators `json:"operator"`
-	ResourceIds []string        `json:"resourceIds"`
+	Operator ScalarOperators `json:"operator"`
+	ResourceIds []string `json:"resourceIds"`
 }
 
 type _ResourceIdCondition ResourceIdCondition
@@ -95,7 +95,7 @@ func (o *ResourceIdCondition) SetResourceIds(v []string) {
 }
 
 func (o ResourceIdCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,10 +123,10 @@ func (o *ResourceIdCondition) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -182,3 +182,5 @@ func (v *NullableResourceIdCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

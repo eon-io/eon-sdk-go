@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -25,9 +25,9 @@ type AwsVpcConnectivityConfig struct {
 	Region string `json:"region"`
 	// VPC ID.
 	Vpc string `json:"vpc"`
-	// Subnets to configure for availability zones in the VPC. For availability zones not specified in this list, Eon attempts to use the default subnet.
-	SubnetsPerAvailabilityZone []SubnetPerAvailabilityZone  `json:"subnetsPerAvailabilityZone,omitempty"`
-	SecurityGroups             *ResourceTypeToSecurityGroup `json:"securityGroups,omitempty"`
+	// Subnets to configure for availability zones in the VPC. For availability zones not specified in this list, Eon attempts to use the default subnet. 
+	SubnetsPerAvailabilityZone []SubnetPerAvailabilityZone `json:"subnetsPerAvailabilityZone,omitempty"`
+	SecurityGroups *ResourceTypeToSecurityGroup `json:"securityGroups,omitempty"`
 }
 
 type _AwsVpcConnectivityConfig AwsVpcConnectivityConfig
@@ -164,7 +164,7 @@ func (o *AwsVpcConnectivityConfig) SetSecurityGroups(v ResourceTypeToSecurityGro
 }
 
 func (o AwsVpcConnectivityConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,10 +198,10 @@ func (o *AwsVpcConnectivityConfig) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -257,3 +257,5 @@ func (v *NullableAwsVpcConnectivityConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -26,11 +26,11 @@ type ResourceDetails struct {
 	// Cloud-provider-assigned resource ID.
 	ProviderResourceId string `json:"providerResourceId"`
 	// Resource display name.
-	ResourceName string       `json:"resourceName"`
+	ResourceName string `json:"resourceName"`
 	ResourceType ResourceType `json:"resourceType"`
 	// Cloud-provider-assigned account ID.
-	ProviderAccountId string   `json:"providerAccountId"`
-	CloudProvider     Provider `json:"cloudProvider"`
+	ProviderAccountId string `json:"providerAccountId"`
+	CloudProvider Provider `json:"cloudProvider"`
 	// Region the resource is hosted in.
 	Region string `json:"region"`
 	// Total storage size at the source, in bytes.
@@ -257,7 +257,7 @@ func (o *ResourceDetails) SetSourceStorageSizeBytes(v int64) {
 }
 
 func (o ResourceDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -297,10 +297,10 @@ func (o *ResourceDetails) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -356,3 +356,5 @@ func (v *NullableResourceDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

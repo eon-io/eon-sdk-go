@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &App{}
 
 // App struct for App
 type App struct {
-	// App display name. For a list of supported apps, see [Apps](/docs/user-guide/backing-up/resource-classifications#apps).
+	// App display name. For a list of supported apps, see [Apps](/docs/user-guide/backing-up/resource-classifications#apps). 
 	Name string `json:"name"`
 	// List of paths where the app was found.
 	Paths []string `json:"paths,omitempty"`
@@ -104,7 +104,7 @@ func (o *App) SetPaths(v []string) {
 }
 
 func (o App) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,10 +133,10 @@ func (o *App) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -192,3 +192,5 @@ func (v *NullableApp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

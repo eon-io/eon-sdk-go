@@ -69,6 +69,7 @@ docs/DataClassesDetails.md
 docs/DataClassesFilters.md
 docs/DatabaseDestination.md
 docs/DatabaseSnapshotsAPI.md
+docs/DayOfWeek.md
 docs/DestinationDetails.md
 docs/DisconnectRestoreAccountResponse.md
 docs/DisconnectSourceAccountResponse.md
@@ -193,7 +194,7 @@ docs/StandardBackupPolicyPlan.md
 docs/StandardBackupScheduleConfig.md
 docs/StandardBackupScheduleFrequency.md
 docs/StandardBackupSchedules.md
-docs/StandardHourlyConfig.md
+docs/StandardIntervalConfig.md
 docs/StorageAccountRestoreTarget.md
 docs/SubnetFilters.md
 docs/SubnetPerAvailabilityZone.md
@@ -266,6 +267,7 @@ model_data_classes_condition.go
 model_data_classes_details.go
 model_data_classes_filters.go
 model_database_destination.go
+model_day_of_week.go
 model_destination_details.go
 model_disconnect_restore_account_response.go
 model_disconnect_source_account_response.go
@@ -387,7 +389,7 @@ model_standard_backup_policy_plan.go
 model_standard_backup_schedule_config.go
 model_standard_backup_schedule_frequency.go
 model_standard_backup_schedules.go
-model_standard_hourly_config.go
+model_standard_interval_config.go
 model_storage_account_restore_target.go
 model_subnet_filters.go
 model_subnet_per_availability_zone.go

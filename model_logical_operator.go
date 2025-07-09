@@ -15,19 +15,21 @@ import (
 	"fmt"
 )
 
-// LogicalOperator Logical operator to apply to the list of `operands`.
+// LogicalOperator Logical operator to apply to the list of `operands`. 
 type LogicalOperator string
 
 // List of LogicalOperator
 const (
 	AND_OPERATOR LogicalOperator = "AND"
-	OR_OPERATOR  LogicalOperator = "OR"
+	OR_OPERATOR LogicalOperator = "OR"
+	LOGICAL_OPERATOR_UNSPECIFIED LogicalOperator = "UNSPECIFIED"
 )
 
 // All allowed values of LogicalOperator enum
 var AllowedLogicalOperatorEnumValues = []LogicalOperator{
 	"AND",
 	"OR",
+	"UNSPECIFIED",
 }
 
 func (v *LogicalOperator) UnmarshalJSON(src []byte) error {
@@ -108,3 +110,4 @@ func (v *NullableLogicalOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

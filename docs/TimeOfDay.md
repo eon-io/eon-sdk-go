@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Hour** | **int32** | Hour of the day. | [default to 0]
-**Minutes** | **int32** | Minute of the hour. | [default to 0]
+**Minute** | **int32** | Minute of the hour. | [default to 0]
 
 ## Methods
 
 ### NewTimeOfDay
 
-`func NewTimeOfDay(hour int32, minutes int32, ) *TimeOfDay`
+`func NewTimeOfDay(hour int32, minute int32, ) *TimeOfDay`
 
 NewTimeOfDay instantiates a new TimeOfDay object
 This constructor will assign default values to properties that have it defined,
@@ -46,24 +46,24 @@ and a boolean to check if the value has been set.
 SetHour sets Hour field to given value.
 
 
-### GetMinutes
+### GetMinute
 
-`func (o *TimeOfDay) GetMinutes() int32`
+`func (o *TimeOfDay) GetMinute() int32`
 
-GetMinutes returns the Minutes field if non-nil, zero value otherwise.
+GetMinute returns the Minute field if non-nil, zero value otherwise.
 
-### GetMinutesOk
+### GetMinuteOk
 
-`func (o *TimeOfDay) GetMinutesOk() (*int32, bool)`
+`func (o *TimeOfDay) GetMinuteOk() (*int32, bool)`
 
-GetMinutesOk returns a tuple with the Minutes field if it's non-nil, zero value otherwise
+GetMinuteOk returns a tuple with the Minute field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMinutes
+### SetMinute
 
-`func (o *TimeOfDay) SetMinutes(v int32)`
+`func (o *TimeOfDay) SetMinute(v int32)`
 
-SetMinutes sets Minutes field to given value.
+SetMinute sets Minute field to given value.
 
 
 

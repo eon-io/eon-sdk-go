@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -25,7 +25,7 @@ type EbsSnapshotTarget struct {
 	Region string `json:"region"`
 	// Description to apply to the EBS snapshot.
 	Description *string `json:"description,omitempty"`
-	// Tags to apply to the EBS snapshot as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}`
+	// Tags to apply to the EBS snapshot as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 	// ID of the key you want Eon to use for encrypting the EBS snapshot.
 	SnapshotEncryptionKeyId string `json:"snapshotEncryptionKeyId"`
@@ -165,7 +165,7 @@ func (o *EbsSnapshotTarget) SetSnapshotEncryptionKeyId(v string) {
 }
 
 func (o EbsSnapshotTarget) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,10 +199,10 @@ func (o *EbsSnapshotTarget) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -258,3 +258,5 @@ func (v *NullableEbsSnapshotTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

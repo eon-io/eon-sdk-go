@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &TagKeyValue{}
 
 // TagKeyValue struct for TagKeyValue
 type TagKeyValue struct {
-	Key   string `json:"key"`
+	Key string `json:"key"`
 	Value string `json:"value"`
 }
 
@@ -95,7 +95,7 @@ func (o *TagKeyValue) SetValue(v string) {
 }
 
 func (o TagKeyValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,10 +123,10 @@ func (o *TagKeyValue) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -182,3 +182,5 @@ func (v *NullableTagKeyValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

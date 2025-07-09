@@ -20,8 +20,8 @@ type ResourceSelectorMode string
 
 // List of ResourceSelectorMode
 const (
-	RESOURCE_SELECTOR_MODE_ALL         ResourceSelectorMode = "ALL"
-	RESOURCE_SELECTOR_MODE_NONE        ResourceSelectorMode = "NONE"
+	RESOURCE_SELECTOR_MODE_ALL ResourceSelectorMode = "ALL"
+	RESOURCE_SELECTOR_MODE_NONE ResourceSelectorMode = "NONE"
 	RESOURCE_SELECTOR_MODE_CONDITIONAL ResourceSelectorMode = "CONDITIONAL"
 )
 
@@ -110,3 +110,4 @@ func (v *NullableResourceSelectorMode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

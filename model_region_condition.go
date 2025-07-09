@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &RegionCondition{}
 // RegionCondition struct for RegionCondition
 type RegionCondition struct {
 	Operator ScalarOperators `json:"operator"`
-	Regions  []string        `json:"regions"`
+	Regions []string `json:"regions"`
 }
 
 type _RegionCondition RegionCondition
@@ -95,7 +95,7 @@ func (o *RegionCondition) SetRegions(v []string) {
 }
 
 func (o RegionCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,10 +123,10 @@ func (o *RegionCondition) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -182,3 +182,5 @@ func (v *NullableRegionCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

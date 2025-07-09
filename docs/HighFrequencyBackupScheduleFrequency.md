@@ -13,6 +13,8 @@
 
 * `HIGH_FREQUENCY_BACKUP_SCHEDULE_ANNUALLY` (value: `"ANNUALLY"`)
 
+* `HIGH_FREQUENCY_BACKUP_SCHEDULE_UNSPECIFIED` (value: `"UNSPECIFIED"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &TimeOfYear{}
 
 // TimeOfYear struct for TimeOfYear
 type TimeOfYear struct {
-	Month      int32 `json:"month"`
+	Month int32 `json:"month"`
 	DayOfMonth int32 `json:"dayOfMonth"`
 }
 
@@ -95,7 +95,7 @@ func (o *TimeOfYear) SetDayOfMonth(v int32) {
 }
 
 func (o TimeOfYear) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,10 +123,10 @@ func (o *TimeOfYear) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -182,3 +182,5 @@ func (v *NullableTimeOfYear) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

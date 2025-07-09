@@ -4,8 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DayOfMonth** | Pointer to **[]int32** | Days of the month to schedule backups.  | [optional] 
-**LastDayOfMonth** | Pointer to **bool** | Whether to schedule backups on the last day of the month. Used only when &#x60;dayOfMonth&#x60; is not specified.  | [optional] 
+**DaysOfMonth** | Pointer to **[]int32** | Days of the month to schedule backups.  | [optional] 
 **TimeOfDay** | Pointer to [**TimeOfDay**](TimeOfDay.md) |  | [optional] 
 **StartWindowMinutes** | Pointer to **int32** | The window of time after the start time you want the backup to start, in minutes. Defaults to &#x60;240&#x60; (4 hours).  | [optional] [default to 240]
 
@@ -28,55 +27,30 @@ NewMonthlyConfigWithDefaults instantiates a new MonthlyConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetDayOfMonth
+### GetDaysOfMonth
 
-`func (o *MonthlyConfig) GetDayOfMonth() []int32`
+`func (o *MonthlyConfig) GetDaysOfMonth() []int32`
 
-GetDayOfMonth returns the DayOfMonth field if non-nil, zero value otherwise.
+GetDaysOfMonth returns the DaysOfMonth field if non-nil, zero value otherwise.
 
-### GetDayOfMonthOk
+### GetDaysOfMonthOk
 
-`func (o *MonthlyConfig) GetDayOfMonthOk() (*[]int32, bool)`
+`func (o *MonthlyConfig) GetDaysOfMonthOk() (*[]int32, bool)`
 
-GetDayOfMonthOk returns a tuple with the DayOfMonth field if it's non-nil, zero value otherwise
+GetDaysOfMonthOk returns a tuple with the DaysOfMonth field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDayOfMonth
+### SetDaysOfMonth
 
-`func (o *MonthlyConfig) SetDayOfMonth(v []int32)`
+`func (o *MonthlyConfig) SetDaysOfMonth(v []int32)`
 
-SetDayOfMonth sets DayOfMonth field to given value.
+SetDaysOfMonth sets DaysOfMonth field to given value.
 
-### HasDayOfMonth
+### HasDaysOfMonth
 
-`func (o *MonthlyConfig) HasDayOfMonth() bool`
+`func (o *MonthlyConfig) HasDaysOfMonth() bool`
 
-HasDayOfMonth returns a boolean if a field has been set.
-
-### GetLastDayOfMonth
-
-`func (o *MonthlyConfig) GetLastDayOfMonth() bool`
-
-GetLastDayOfMonth returns the LastDayOfMonth field if non-nil, zero value otherwise.
-
-### GetLastDayOfMonthOk
-
-`func (o *MonthlyConfig) GetLastDayOfMonthOk() (*bool, bool)`
-
-GetLastDayOfMonthOk returns a tuple with the LastDayOfMonth field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastDayOfMonth
-
-`func (o *MonthlyConfig) SetLastDayOfMonth(v bool)`
-
-SetLastDayOfMonth sets LastDayOfMonth field to given value.
-
-### HasLastDayOfMonth
-
-`func (o *MonthlyConfig) HasLastDayOfMonth() bool`
-
-HasLastDayOfMonth returns a boolean if a field has been set.
+HasDaysOfMonth returns a boolean if a field has been set.
 
 ### GetTimeOfDay
 

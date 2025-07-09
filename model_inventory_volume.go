@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -29,11 +29,11 @@ type InventoryVolume struct {
 	Region string `json:"region"`
 	// ID of the encryption key used to encrypt the volume.
 	EncryptionKeyId *string `json:"encryptionKeyId,omitempty"`
-	// Volume tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"primary\": \"\"}`
+	// Volume tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"primary\": \"\"}` 
 	Tags map[string]string `json:"tags"`
 	// Volume availability zone.
-	AvailabilityZone string         `json:"availabilityZone"`
-	VolumeSettings   VolumeSettings `json:"volumeSettings"`
+	AvailabilityZone string `json:"availabilityZone"`
+	VolumeSettings VolumeSettings `json:"volumeSettings"`
 }
 
 type _InventoryVolume InventoryVolume
@@ -238,7 +238,7 @@ func (o *InventoryVolume) SetVolumeSettings(v VolumeSettings) {
 }
 
 func (o InventoryVolume) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -277,10 +277,10 @@ func (o *InventoryVolume) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -336,3 +336,5 @@ func (v *NullableInventoryVolume) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

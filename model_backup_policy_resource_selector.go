@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,11 +21,11 @@ var _ MappedNullable = &BackupPolicyResourceSelector{}
 
 // BackupPolicyResourceSelector struct for BackupPolicyResourceSelector
 type BackupPolicyResourceSelector struct {
-	ResourceSelectionMode ResourceSelectorMode    `json:"resourceSelectionMode"`
-	Expression            *BackupPolicyExpression `json:"expression,omitempty"`
-	// List of cloud-provider-assigned resource IDs to include in the backup policy, regardless of whether they're excluded by `resourceSelectionMode` and `expression`.
+	ResourceSelectionMode ResourceSelectorMode `json:"resourceSelectionMode"`
+	Expression NullableBackupPolicyExpression `json:"expression,omitempty"`
+	// List of cloud-provider-assigned resource IDs to include in the backup policy, regardless of whether they're excluded by `resourceSelectionMode` and `expression`. 
 	ResourceInclusionOverride []string `json:"resourceInclusionOverride,omitempty"`
-	// List of cloud-provider-assigned resource IDs to exclude from the backup policy, regardless of whether they're included by `resourceSelectionMode` and `expression`.
+	// List of cloud-provider-assigned resource IDs to exclude from the backup policy, regardless of whether they're included by `resourceSelectionMode` and `expression`. 
 	ResourceExclusionOverride []string `json:"resourceExclusionOverride,omitempty"`
 }
 
@@ -73,36 +73,46 @@ func (o *BackupPolicyResourceSelector) SetResourceSelectionMode(v ResourceSelect
 	o.ResourceSelectionMode = v
 }
 
-// GetExpression returns the Expression field value if set, zero value otherwise.
+// GetExpression returns the Expression field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BackupPolicyResourceSelector) GetExpression() BackupPolicyExpression {
-	if o == nil || IsNil(o.Expression) {
+	if o == nil || IsNil(o.Expression.Get()) {
 		var ret BackupPolicyExpression
 		return ret
 	}
-	return *o.Expression
+	return *o.Expression.Get()
 }
 
 // GetExpressionOk returns a tuple with the Expression field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BackupPolicyResourceSelector) GetExpressionOk() (*BackupPolicyExpression, bool) {
-	if o == nil || IsNil(o.Expression) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Expression, true
+	return o.Expression.Get(), o.Expression.IsSet()
 }
 
 // HasExpression returns a boolean if a field has been set.
 func (o *BackupPolicyResourceSelector) HasExpression() bool {
-	if o != nil && !IsNil(o.Expression) {
+	if o != nil && o.Expression.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpression gets a reference to the given BackupPolicyExpression and assigns it to the Expression field.
+// SetExpression gets a reference to the given NullableBackupPolicyExpression and assigns it to the Expression field.
 func (o *BackupPolicyResourceSelector) SetExpression(v BackupPolicyExpression) {
-	o.Expression = &v
+	o.Expression.Set(&v)
+}
+// SetExpressionNil sets the value for Expression to be an explicit nil
+func (o *BackupPolicyResourceSelector) SetExpressionNil() {
+	o.Expression.Set(nil)
+}
+
+// UnsetExpression ensures that no value is present for Expression, not even an explicit nil
+func (o *BackupPolicyResourceSelector) UnsetExpression() {
+	o.Expression.Unset()
 }
 
 // GetResourceInclusionOverride returns the ResourceInclusionOverride field value if set, zero value otherwise.
@@ -170,7 +180,7 @@ func (o *BackupPolicyResourceSelector) SetResourceExclusionOverride(v []string) 
 }
 
 func (o BackupPolicyResourceSelector) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -180,8 +190,8 @@ func (o BackupPolicyResourceSelector) MarshalJSON() ([]byte, error) {
 func (o BackupPolicyResourceSelector) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["resourceSelectionMode"] = o.ResourceSelectionMode
-	if !IsNil(o.Expression) {
-		toSerialize["expression"] = o.Expression
+	if o.Expression.IsSet() {
+		toSerialize["expression"] = o.Expression.Get()
 	}
 	if !IsNil(o.ResourceInclusionOverride) {
 		toSerialize["resourceInclusionOverride"] = o.ResourceInclusionOverride
@@ -205,10 +215,10 @@ func (o *BackupPolicyResourceSelector) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -264,3 +274,5 @@ func (v *NullableBackupPolicyResourceSelector) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

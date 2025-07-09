@@ -5007,11 +5007,13 @@ components:
       enum:
       - AND
       - OR
+      - UNSPECIFIED
       example: AND
       type: string
       x-enum-varnames:
       - AND_OPERATOR
       - OR_OPERATOR
+      - LOGICAL_OPERATOR_UNSPECIFIED
     BackupPolicyExpression:
       example:
         resourceId:
@@ -5099,6 +5101,7 @@ components:
           apps:
           - apps
           - apps
+      nullable: true
       properties:
         group:
           $ref: '#/components/schemas/BackupPolicyGroupCondition'
@@ -5178,11 +5181,13 @@ components:
       enum:
       - IN
       - NOT_IN
+      - UNSPECIFIED
       example: IN
       type: string
       x-enum-varnames:
       - IN_OPERATOR
       - NOT_IN_OPERATOR
+      - SCALAR_OPERATOR_UNSPECIFIED
     ResourceTypeCondition:
       example:
         resourceTypes:
@@ -5206,12 +5211,14 @@ components:
       - CONTAINS_ANY_OF
       - CONTAINS_NONE_OF
       - CONTAINS_ALL_OF
+      - UNSPECIFIED
       example: CONTAINS_ANY_OF
       type: string
       x-enum-varnames:
       - CONTAINS_ANY_OF_OPERATOR
       - CONTAINS_NONE_OF_OPERATOR
       - CONTAINS_ALL_OF_OPERATOR
+      - LIST_OPERATOR_UNSPECIFIED
     DataClass:
       description: Data classes.
       enum:
@@ -5618,20 +5625,22 @@ components:
       - BACKUP_POLICY_TYPE_PITR
     StandardBackupScheduleFrequency:
       enum:
-      - HOURLY
+      - INTERVAL
       - DAILY
       - WEEKLY
       - MONTHLY
       - ANNUALLY
+      - UNSPECIFIED
       example: WEEKLY
       type: string
       x-enum-varnames:
-      - STANDARD_BACKUP_SCHEDULE_HOURLY
+      - STANDARD_BACKUP_SCHEDULE_INTERVAL
       - STANDARD_BACKUP_SCHEDULE_DAILY
       - STANDARD_BACKUP_SCHEDULE_WEEKLY
       - STANDARD_BACKUP_SCHEDULE_MONTHLY
       - STANDARD_BACKUP_SCHEDULE_ANNUALLY
-    StandardHourlyConfig:
+      - STANDARD_BACKUP_SCHEDULE_UNSPECIFIED
+    StandardIntervalConfig:
       example:
         intervalHours: 8
       nullable: true
@@ -5651,7 +5660,7 @@ components:
     TimeOfDay:
       example:
         hour: 12
-        minutes: 30
+        minute: 30
       properties:
         hour:
           default: 0
@@ -5660,7 +5669,7 @@ components:
           maximum: 23
           minimum: 0
           type: integer
-        minutes:
+        minute:
           default: 0
           description: Minute of the hour.
           example: 30
@@ -5669,14 +5678,14 @@ components:
           type: integer
       required:
       - hour
-      - minutes
+      - minute
       type: object
     DailyConfig:
       example:
         startWindowMinutes: 240
         timeOfDay:
           hour: 12
-          minutes: 30
+          minute: 30
       nullable: true
       properties:
         timeOfDay:
@@ -5692,35 +5701,38 @@ components:
           minimum: 240
           type: integer
       type: object
+    DayOfWeek:
+      enum:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+      - SUN
+      example: MON
+      type: string
     WeeklyConfig:
       example:
         startWindowMinutes: 240
         daysOfWeek:
-        - MONDAY
-        - THURSDAY
+        - MON
+        - THU
         timeOfDay:
           hour: 12
-          minutes: 30
+          minute: 30
       nullable: true
       properties:
         daysOfWeek:
           default:
-          - SUNDAY
+          - SUN
           description: |
             Days of the week to schedule backups.
           example:
-          - MONDAY
-          - THURSDAY
+          - MON
+          - THU
           items:
-            enum:
-            - MONDAY
-            - TUESDAY
-            - WEDNESDAY
-            - THURSDAY
-            - FRIDAY
-            - SATURDAY
-            - SUNDAY
-            type: string
+            $ref: '#/components/schemas/DayOfWeek'
           minItems: 1
           type: array
           uniqueItems: true
@@ -5736,21 +5748,23 @@ components:
           maximum: 1320
           minimum: 240
           type: integer
+      required:
+      - daysOfWeek
+      - timeOfDay
       type: object
     MonthlyConfig:
       example:
         startWindowMinutes: 240
-        dayOfMonth:
+        daysOfMonth:
         - 5
         - 10
         - 15
-        lastDayOfMonth: true
         timeOfDay:
           hour: 12
-          minutes: 30
+          minute: 30
       nullable: true
       properties:
-        dayOfMonth:
+        daysOfMonth:
           description: |
             Days of the month to schedule backups.
           example:
@@ -5764,12 +5778,6 @@ components:
           minLength: 1
           type: array
           uniqueItems: true
-        lastDayOfMonth:
-          description: |
-            Whether to schedule backups on the last day of the month.
-            Used only when `dayOfMonth` is not specified.
-          example: true
-          type: boolean
         timeOfDay:
           $ref: '#/components/schemas/TimeOfDay'
         startWindowMinutes:
@@ -5810,7 +5818,7 @@ components:
           dayOfMonth: 14
         timeOfDay:
           hour: 12
-          minutes: 30
+          minute: 30
       nullable: true
       properties:
         timeOfDay:
@@ -5832,24 +5840,23 @@ components:
       example:
         monthlyConfig:
           startWindowMinutes: 240
-          dayOfMonth:
+          daysOfMonth:
           - 5
           - 10
           - 15
-          lastDayOfMonth: true
           timeOfDay:
             hour: 12
-            minutes: 30
+            minute: 30
+        intervalConfig:
+          intervalHours: 8
         weeklyConfig:
           startWindowMinutes: 240
           daysOfWeek:
-          - MONDAY
-          - THURSDAY
+          - MON
+          - THU
           timeOfDay:
             hour: 12
-            minutes: 30
-        hourlyConfig:
-          intervalHours: 8
+            minute: 30
         annuallyConfig:
           startWindowMinutes: 240
           timeOfYear:
@@ -5857,18 +5864,18 @@ components:
             dayOfMonth: 14
           timeOfDay:
             hour: 12
-            minutes: 30
+            minute: 30
         dailyConfig:
           startWindowMinutes: 240
           timeOfDay:
             hour: 12
-            minutes: 30
+            minute: 30
         frequency: WEEKLY
       properties:
         frequency:
           $ref: '#/components/schemas/StandardBackupScheduleFrequency'
-        hourlyConfig:
-          $ref: '#/components/schemas/StandardHourlyConfig'
+        intervalConfig:
+          $ref: '#/components/schemas/StandardIntervalConfig'
         dailyConfig:
           $ref: '#/components/schemas/DailyConfig'
         weeklyConfig:
@@ -5886,24 +5893,23 @@ components:
         scheduleConfig:
           monthlyConfig:
             startWindowMinutes: 240
-            dayOfMonth:
+            daysOfMonth:
             - 5
             - 10
             - 15
-            lastDayOfMonth: true
             timeOfDay:
               hour: 12
-              minutes: 30
+              minute: 30
+          intervalConfig:
+            intervalHours: 8
           weeklyConfig:
             startWindowMinutes: 240
             daysOfWeek:
-            - MONDAY
-            - THURSDAY
+            - MON
+            - THU
             timeOfDay:
               hour: 12
-              minutes: 30
-          hourlyConfig:
-            intervalHours: 8
+              minute: 30
           annuallyConfig:
             startWindowMinutes: 240
             timeOfYear:
@@ -5911,12 +5917,12 @@ components:
               dayOfMonth: 14
             timeOfDay:
               hour: 12
-              minutes: 30
+              minute: 30
           dailyConfig:
             startWindowMinutes: 240
             timeOfDay:
               hour: 12
-              minutes: 30
+              minute: 30
           frequency: WEEKLY
         backupRetentionDays: 30
       properties:
@@ -5942,24 +5948,23 @@ components:
           scheduleConfig:
             monthlyConfig:
               startWindowMinutes: 240
-              dayOfMonth:
+              daysOfMonth:
               - 5
               - 10
               - 15
-              lastDayOfMonth: true
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
+            intervalConfig:
+              intervalHours: 8
             weeklyConfig:
               startWindowMinutes: 240
               daysOfWeek:
-              - MONDAY
-              - THURSDAY
+              - MON
+              - THU
               timeOfDay:
                 hour: 12
-                minutes: 30
-            hourlyConfig:
-              intervalHours: 8
+                minute: 30
             annuallyConfig:
               startWindowMinutes: 240
               timeOfYear:
@@ -5967,36 +5972,35 @@ components:
                 dayOfMonth: 14
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             dailyConfig:
               startWindowMinutes: 240
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           scheduleConfig:
             monthlyConfig:
               startWindowMinutes: 240
-              dayOfMonth:
+              daysOfMonth:
               - 5
               - 10
               - 15
-              lastDayOfMonth: true
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
+            intervalConfig:
+              intervalHours: 8
             weeklyConfig:
               startWindowMinutes: 240
               daysOfWeek:
-              - MONDAY
-              - THURSDAY
+              - MON
+              - THU
               timeOfDay:
                 hour: 12
-                minutes: 30
-            hourlyConfig:
-              intervalHours: 8
+                minute: 30
             annuallyConfig:
               startWindowMinutes: 240
               timeOfYear:
@@ -6004,12 +6008,12 @@ components:
                 dayOfMonth: 14
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             dailyConfig:
               startWindowMinutes: 240
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
       nullable: true
@@ -6026,13 +6030,19 @@ components:
       - backupSchedules
       type: object
     HighFrequencyBackupResourceType:
-      allOf:
-      - $ref: '#/components/schemas/ResourceType'
-      - enum:
-        - AWS_S3
-        - AWS_DYNAMO_DB
-        example: AWS_S3
-        type: string
+      example:
+        resourceType: AWS_S3
+      properties:
+        resourceType:
+          allOf:
+          - $ref: '#/components/schemas/ResourceType'
+          - enum:
+            - AWS_S3
+            - AWS_DYNAMO_DB
+            - RESOURCE_TYPE_UNSPECIFIED
+            type: string
+          example: AWS_S3
+      type: object
     HighFrequencyBackupScheduleFrequency:
       enum:
       - INTERVAL
@@ -6040,6 +6050,7 @@ components:
       - WEEKLY
       - MONTHLY
       - ANNUALLY
+      - UNSPECIFIED
       example: WEEKLY
       type: string
       x-enum-varnames:
@@ -6048,6 +6059,7 @@ components:
       - HIGH_FREQUENCY_BACKUP_SCHEDULE_WEEKLY
       - HIGH_FREQUENCY_BACKUP_SCHEDULE_MONTHLY
       - HIGH_FREQUENCY_BACKUP_SCHEDULE_ANNUALLY
+      - HIGH_FREQUENCY_BACKUP_SCHEDULE_UNSPECIFIED
     HighFrequencyIntervalConfig:
       example:
         intervalMinutes: 360
@@ -6072,24 +6084,23 @@ components:
       example:
         monthlyConfig:
           startWindowMinutes: 240
-          dayOfMonth:
+          daysOfMonth:
           - 5
           - 10
           - 15
-          lastDayOfMonth: true
           timeOfDay:
             hour: 12
-            minutes: 30
+            minute: 30
         intervalConfig:
           intervalMinutes: 360
         weeklyConfig:
           startWindowMinutes: 240
           daysOfWeek:
-          - MONDAY
-          - THURSDAY
+          - MON
+          - THU
           timeOfDay:
             hour: 12
-            minutes: 30
+            minute: 30
         annuallyConfig:
           startWindowMinutes: 240
           timeOfYear:
@@ -6097,12 +6108,12 @@ components:
             dayOfMonth: 14
           timeOfDay:
             hour: 12
-            minutes: 30
+            minute: 30
         dailyConfig:
           startWindowMinutes: 240
           timeOfDay:
             hour: 12
-            minutes: 30
+            minute: 30
         frequency: WEEKLY
       properties:
         frequency:
@@ -6124,24 +6135,23 @@ components:
         scheduleConfig:
           monthlyConfig:
             startWindowMinutes: 240
-            dayOfMonth:
+            daysOfMonth:
             - 5
             - 10
             - 15
-            lastDayOfMonth: true
             timeOfDay:
               hour: 12
-              minutes: 30
+              minute: 30
           intervalConfig:
             intervalMinutes: 360
           weeklyConfig:
             startWindowMinutes: 240
             daysOfWeek:
-            - MONDAY
-            - THURSDAY
+            - MON
+            - THU
             timeOfDay:
               hour: 12
-              minutes: 30
+              minute: 30
           annuallyConfig:
             startWindowMinutes: 240
             timeOfYear:
@@ -6149,12 +6159,12 @@ components:
               dayOfMonth: 14
             timeOfDay:
               hour: 12
-              minutes: 30
+              minute: 30
           dailyConfig:
             startWindowMinutes: 240
             timeOfDay:
               hour: 12
-              minutes: 30
+              minute: 30
           frequency: WEEKLY
         backupRetentionDays: 30
       properties:
@@ -6176,30 +6186,30 @@ components:
     HighFrequencyBackupPolicyPlan:
       example:
         resourceTypes:
-        - AWS_S3
+        - resourceType: AWS_S3
+        - resourceType: AWS_S3
         backupSchedules:
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           scheduleConfig:
             monthlyConfig:
               startWindowMinutes: 240
-              dayOfMonth:
+              daysOfMonth:
               - 5
               - 10
               - 15
-              lastDayOfMonth: true
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             intervalConfig:
               intervalMinutes: 360
             weeklyConfig:
               startWindowMinutes: 240
               daysOfWeek:
-              - MONDAY
-              - THURSDAY
+              - MON
+              - THU
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             annuallyConfig:
               startWindowMinutes: 240
               timeOfYear:
@@ -6207,36 +6217,35 @@ components:
                 dayOfMonth: 14
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             dailyConfig:
               startWindowMinutes: 240
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           scheduleConfig:
             monthlyConfig:
               startWindowMinutes: 240
-              dayOfMonth:
+              daysOfMonth:
               - 5
               - 10
               - 15
-              lastDayOfMonth: true
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             intervalConfig:
               intervalMinutes: 360
             weeklyConfig:
               startWindowMinutes: 240
               daysOfWeek:
-              - MONDAY
-              - THURSDAY
+              - MON
+              - THU
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             annuallyConfig:
               startWindowMinutes: 240
               timeOfYear:
@@ -6244,25 +6253,22 @@ components:
                 dayOfMonth: 14
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             dailyConfig:
               startWindowMinutes: 240
               timeOfDay:
                 hour: 12
-                minutes: 30
+                minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
       nullable: true
       properties:
         resourceTypes:
           description: Resource types to backup.
-          example:
-          - AWS_S3
           items:
             $ref: '#/components/schemas/HighFrequencyBackupResourceType'
           minItems: 1
           type: array
-          uniqueItems: true
         backupSchedules:
           description: |
             List of backup schedules.
@@ -6280,30 +6286,30 @@ components:
         backupPolicyType: STANDARD
         highFrequencyPlan:
           resourceTypes:
-          - AWS_S3
+          - resourceType: AWS_S3
+          - resourceType: AWS_S3
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             scheduleConfig:
               monthlyConfig:
                 startWindowMinutes: 240
-                dayOfMonth:
+                daysOfMonth:
                 - 5
                 - 10
                 - 15
-                lastDayOfMonth: true
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               intervalConfig:
                 intervalMinutes: 360
               weeklyConfig:
                 startWindowMinutes: 240
                 daysOfWeek:
-                - MONDAY
-                - THURSDAY
+                - MON
+                - THU
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               annuallyConfig:
                 startWindowMinutes: 240
                 timeOfYear:
@@ -6311,36 +6317,35 @@ components:
                   dayOfMonth: 14
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               dailyConfig:
                 startWindowMinutes: 240
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             scheduleConfig:
               monthlyConfig:
                 startWindowMinutes: 240
-                dayOfMonth:
+                daysOfMonth:
                 - 5
                 - 10
                 - 15
-                lastDayOfMonth: true
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               intervalConfig:
                 intervalMinutes: 360
               weeklyConfig:
                 startWindowMinutes: 240
                 daysOfWeek:
-                - MONDAY
-                - THURSDAY
+                - MON
+                - THU
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               annuallyConfig:
                 startWindowMinutes: 240
                 timeOfYear:
@@ -6348,12 +6353,12 @@ components:
                   dayOfMonth: 14
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               dailyConfig:
                 startWindowMinutes: 240
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
         standardPlan:
@@ -6362,24 +6367,23 @@ components:
             scheduleConfig:
               monthlyConfig:
                 startWindowMinutes: 240
-                dayOfMonth:
+                daysOfMonth:
                 - 5
                 - 10
                 - 15
-                lastDayOfMonth: true
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
+              intervalConfig:
+                intervalHours: 8
               weeklyConfig:
                 startWindowMinutes: 240
                 daysOfWeek:
-                - MONDAY
-                - THURSDAY
+                - MON
+                - THU
                 timeOfDay:
                   hour: 12
-                  minutes: 30
-              hourlyConfig:
-                intervalHours: 8
+                  minute: 30
               annuallyConfig:
                 startWindowMinutes: 240
                 timeOfYear:
@@ -6387,36 +6391,35 @@ components:
                   dayOfMonth: 14
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               dailyConfig:
                 startWindowMinutes: 240
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             scheduleConfig:
               monthlyConfig:
                 startWindowMinutes: 240
-                dayOfMonth:
+                daysOfMonth:
                 - 5
                 - 10
                 - 15
-                lastDayOfMonth: true
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
+              intervalConfig:
+                intervalHours: 8
               weeklyConfig:
                 startWindowMinutes: 240
                 daysOfWeek:
-                - MONDAY
-                - THURSDAY
+                - MON
+                - THU
                 timeOfDay:
                   hour: 12
-                  minutes: 30
-              hourlyConfig:
-                intervalHours: 8
+                  minute: 30
               annuallyConfig:
                 startWindowMinutes: 240
                 timeOfYear:
@@ -6424,12 +6427,12 @@ components:
                   dayOfMonth: 14
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               dailyConfig:
                 startWindowMinutes: 240
                 timeOfDay:
                   hour: 12
-                  minutes: 30
+                  minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
       properties:
@@ -6449,30 +6452,30 @@ components:
           backupPolicyType: STANDARD
           highFrequencyPlan:
             resourceTypes:
-            - AWS_S3
+            - resourceType: AWS_S3
+            - resourceType: AWS_S3
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 intervalConfig:
                   intervalMinutes: 360
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6480,36 +6483,35 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 intervalConfig:
                   intervalMinutes: 360
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6517,12 +6519,12 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
@@ -6531,24 +6533,23 @@ components:
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 8
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
-                hourlyConfig:
-                  intervalHours: 8
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6556,36 +6557,35 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 8
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
-                hourlyConfig:
-                  intervalHours: 8
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6593,12 +6593,12 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
         resourceSelector:
@@ -6722,30 +6722,30 @@ components:
           backupPolicyType: STANDARD
           highFrequencyPlan:
             resourceTypes:
-            - AWS_S3
+            - resourceType: AWS_S3
+            - resourceType: AWS_S3
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 intervalConfig:
                   intervalMinutes: 360
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6753,36 +6753,35 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 intervalConfig:
                   intervalMinutes: 360
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6790,12 +6789,12 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
@@ -6804,24 +6803,23 @@ components:
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 8
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
-                hourlyConfig:
-                  intervalHours: 8
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6829,36 +6827,35 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 8
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
-                hourlyConfig:
-                  intervalHours: 8
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -6866,12 +6863,12 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
         id: de308488-df3d-5b82-8f37-477ef529f491
@@ -7002,30 +6999,30 @@ components:
             backupPolicyType: STANDARD
             highFrequencyPlan:
               resourceTypes:
-              - AWS_S3
+              - resourceType: AWS_S3
+              - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7033,36 +7030,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7070,12 +7066,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
@@ -7084,24 +7080,23 @@ components:
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7109,36 +7104,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7146,12 +7140,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
           id: de308488-df3d-5b82-8f37-477ef529f491
@@ -7265,30 +7259,30 @@ components:
             backupPolicyType: STANDARD
             highFrequencyPlan:
               resourceTypes:
-              - AWS_S3
+              - resourceType: AWS_S3
+              - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7296,36 +7290,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7333,12 +7326,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
@@ -7347,24 +7340,23 @@ components:
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7372,36 +7364,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7409,12 +7400,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
           id: de308488-df3d-5b82-8f37-477ef529f491
@@ -7518,30 +7509,30 @@ components:
             backupPolicyType: STANDARD
             highFrequencyPlan:
               resourceTypes:
-              - AWS_S3
+              - resourceType: AWS_S3
+              - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7549,36 +7540,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7586,12 +7576,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
@@ -7600,24 +7590,23 @@ components:
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7625,36 +7614,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7662,12 +7650,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
           id: de308488-df3d-5b82-8f37-477ef529f491
@@ -7791,30 +7779,30 @@ components:
             backupPolicyType: STANDARD
             highFrequencyPlan:
               resourceTypes:
-              - AWS_S3
+              - resourceType: AWS_S3
+              - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7822,36 +7810,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7859,12 +7846,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
@@ -7873,24 +7860,23 @@ components:
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7898,36 +7884,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -7935,12 +7920,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
           id: de308488-df3d-5b82-8f37-477ef529f491
@@ -8052,30 +8037,30 @@ components:
           backupPolicyType: STANDARD
           highFrequencyPlan:
             resourceTypes:
-            - AWS_S3
+            - resourceType: AWS_S3
+            - resourceType: AWS_S3
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 intervalConfig:
                   intervalMinutes: 360
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -8083,36 +8068,35 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 intervalConfig:
                   intervalMinutes: 360
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -8120,12 +8104,12 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
@@ -8134,24 +8118,23 @@ components:
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 8
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
-                hourlyConfig:
-                  intervalHours: 8
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -8159,36 +8142,35 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
-                  dayOfMonth:
+                  daysOfMonth:
                   - 5
                   - 10
                   - 15
-                  lastDayOfMonth: true
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 8
                 weeklyConfig:
                   startWindowMinutes: 240
                   daysOfWeek:
-                  - MONDAY
-                  - THURSDAY
+                  - MON
+                  - THU
                   timeOfDay:
                     hour: 12
-                    minutes: 30
-                hourlyConfig:
-                  intervalHours: 8
+                    minute: 30
                 annuallyConfig:
                   startWindowMinutes: 240
                   timeOfYear:
@@ -8196,12 +8178,12 @@ components:
                     dayOfMonth: 14
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 dailyConfig:
                   startWindowMinutes: 240
                   timeOfDay:
                     hour: 12
-                    minutes: 30
+                    minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
         resourceSelector:
@@ -8326,30 +8308,30 @@ components:
             backupPolicyType: STANDARD
             highFrequencyPlan:
               resourceTypes:
-              - AWS_S3
+              - resourceType: AWS_S3
+              - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -8357,36 +8339,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   intervalConfig:
                     intervalMinutes: 360
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -8394,12 +8375,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
@@ -8408,24 +8389,23 @@ components:
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -8433,36 +8413,35 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
-                    dayOfMonth:
+                    daysOfMonth:
                     - 5
                     - 10
                     - 15
-                    lastDayOfMonth: true
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 8
                   weeklyConfig:
                     startWindowMinutes: 240
                     daysOfWeek:
-                    - MONDAY
-                    - THURSDAY
+                    - MON
+                    - THU
                     timeOfDay:
                       hour: 12
-                      minutes: 30
-                  hourlyConfig:
-                    intervalHours: 8
+                      minute: 30
                   annuallyConfig:
                     startWindowMinutes: 240
                     timeOfYear:
@@ -8470,12 +8449,12 @@ components:
                       dayOfMonth: 14
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   dailyConfig:
                     startWindowMinutes: 240
                     timeOfDay:
                       hour: 12
-                      minutes: 30
+                      minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
           id: de308488-df3d-5b82-8f37-477ef529f491

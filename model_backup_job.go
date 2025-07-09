@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,11 +21,11 @@ var _ MappedNullable = &BackupJob{}
 
 // BackupJob struct for BackupJob
 type BackupJob struct {
-	JobExecutionDetails JobExecutionDetails        `json:"jobExecutionDetails"`
-	ResourceDetails     NullableResourceDetails    `json:"resourceDetails,omitempty"`
-	SnapshotDetails     NullableJobSnapshotDetails `json:"snapshotDetails,omitempty"`
-	BackupType          BackupJobType              `json:"backupType"`
-	Vault               NullableBackupVault        `json:"vault,omitempty"`
+	JobExecutionDetails JobExecutionDetails `json:"jobExecutionDetails"`
+	ResourceDetails NullableResourceDetails `json:"resourceDetails,omitempty"`
+	SnapshotDetails NullableJobSnapshotDetails `json:"snapshotDetails,omitempty"`
+	BackupType BackupJobType `json:"backupType"`
+	Vault NullableBackupVault `json:"vault,omitempty"`
 }
 
 type _BackupJob BackupJob
@@ -105,7 +105,6 @@ func (o *BackupJob) HasResourceDetails() bool {
 func (o *BackupJob) SetResourceDetails(v ResourceDetails) {
 	o.ResourceDetails.Set(&v)
 }
-
 // SetResourceDetailsNil sets the value for ResourceDetails to be an explicit nil
 func (o *BackupJob) SetResourceDetailsNil() {
 	o.ResourceDetails.Set(nil)
@@ -148,7 +147,6 @@ func (o *BackupJob) HasSnapshotDetails() bool {
 func (o *BackupJob) SetSnapshotDetails(v JobSnapshotDetails) {
 	o.SnapshotDetails.Set(&v)
 }
-
 // SetSnapshotDetailsNil sets the value for SnapshotDetails to be an explicit nil
 func (o *BackupJob) SetSnapshotDetailsNil() {
 	o.SnapshotDetails.Set(nil)
@@ -215,7 +213,6 @@ func (o *BackupJob) HasVault() bool {
 func (o *BackupJob) SetVault(v BackupVault) {
 	o.Vault.Set(&v)
 }
-
 // SetVaultNil sets the value for Vault to be an explicit nil
 func (o *BackupJob) SetVaultNil() {
 	o.Vault.Set(nil)
@@ -227,7 +224,7 @@ func (o *BackupJob) UnsetVault() {
 }
 
 func (o BackupJob) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -264,10 +261,10 @@ func (o *BackupJob) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -323,3 +320,5 @@ func (v *NullableBackupJob) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

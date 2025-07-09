@@ -19,21 +19,21 @@ var _ MappedNullable = &BackupPolicyExpression{}
 
 // BackupPolicyExpression struct for BackupPolicyExpression
 type BackupPolicyExpression struct {
-	Group             NullableBackupPolicyGroupCondition `json:"group,omitempty"`
-	ResourceType      NullableResourceTypeCondition      `json:"resourceType,omitempty"`
-	DataClasses       NullableDataClassesCondition       `json:"dataClasses,omitempty"`
-	Environment       NullableEnvironmentCondition       `json:"environment,omitempty"`
-	Apps              NullableAppsCondition              `json:"apps,omitempty"`
-	CloudProvider     NullableCloudProviderCondition     `json:"cloudProvider,omitempty"`
-	AccountId         NullableAccountIdCondition         `json:"accountId,omitempty"`
-	SourceRegion      NullableRegionCondition            `json:"sourceRegion,omitempty"`
-	Vpc               NullableVpcCondition               `json:"vpc,omitempty"`
-	Subnets           NullableSubnetsCondition           `json:"subnets,omitempty"`
+	Group NullableBackupPolicyGroupCondition `json:"group,omitempty"`
+	ResourceType NullableResourceTypeCondition `json:"resourceType,omitempty"`
+	DataClasses NullableDataClassesCondition `json:"dataClasses,omitempty"`
+	Environment NullableEnvironmentCondition `json:"environment,omitempty"`
+	Apps NullableAppsCondition `json:"apps,omitempty"`
+	CloudProvider NullableCloudProviderCondition `json:"cloudProvider,omitempty"`
+	AccountId NullableAccountIdCondition `json:"accountId,omitempty"`
+	SourceRegion NullableRegionCondition `json:"sourceRegion,omitempty"`
+	Vpc NullableVpcCondition `json:"vpc,omitempty"`
+	Subnets NullableSubnetsCondition `json:"subnets,omitempty"`
 	ResourceGroupName NullableResourceGroupNameCondition `json:"resourceGroupName,omitempty"`
-	ResourceName      NullableResourceNameCondition      `json:"resourceName,omitempty"`
-	ResourceId        NullableResourceIdCondition        `json:"resourceId,omitempty"`
-	TagKeys           NullableTagKeysCondition           `json:"tagKeys,omitempty"`
-	TagKeyValues      NullableTagKeyValuesCondition      `json:"tagKeyValues,omitempty"`
+	ResourceName NullableResourceNameCondition `json:"resourceName,omitempty"`
+	ResourceId NullableResourceIdCondition `json:"resourceId,omitempty"`
+	TagKeys NullableTagKeysCondition `json:"tagKeys,omitempty"`
+	TagKeyValues NullableTagKeyValuesCondition `json:"tagKeyValues,omitempty"`
 }
 
 // NewBackupPolicyExpression instantiates a new BackupPolicyExpression object
@@ -85,7 +85,6 @@ func (o *BackupPolicyExpression) HasGroup() bool {
 func (o *BackupPolicyExpression) SetGroup(v BackupPolicyGroupCondition) {
 	o.Group.Set(&v)
 }
-
 // SetGroupNil sets the value for Group to be an explicit nil
 func (o *BackupPolicyExpression) SetGroupNil() {
 	o.Group.Set(nil)
@@ -128,7 +127,6 @@ func (o *BackupPolicyExpression) HasResourceType() bool {
 func (o *BackupPolicyExpression) SetResourceType(v ResourceTypeCondition) {
 	o.ResourceType.Set(&v)
 }
-
 // SetResourceTypeNil sets the value for ResourceType to be an explicit nil
 func (o *BackupPolicyExpression) SetResourceTypeNil() {
 	o.ResourceType.Set(nil)
@@ -171,7 +169,6 @@ func (o *BackupPolicyExpression) HasDataClasses() bool {
 func (o *BackupPolicyExpression) SetDataClasses(v DataClassesCondition) {
 	o.DataClasses.Set(&v)
 }
-
 // SetDataClassesNil sets the value for DataClasses to be an explicit nil
 func (o *BackupPolicyExpression) SetDataClassesNil() {
 	o.DataClasses.Set(nil)
@@ -214,7 +211,6 @@ func (o *BackupPolicyExpression) HasEnvironment() bool {
 func (o *BackupPolicyExpression) SetEnvironment(v EnvironmentCondition) {
 	o.Environment.Set(&v)
 }
-
 // SetEnvironmentNil sets the value for Environment to be an explicit nil
 func (o *BackupPolicyExpression) SetEnvironmentNil() {
 	o.Environment.Set(nil)
@@ -257,7 +253,6 @@ func (o *BackupPolicyExpression) HasApps() bool {
 func (o *BackupPolicyExpression) SetApps(v AppsCondition) {
 	o.Apps.Set(&v)
 }
-
 // SetAppsNil sets the value for Apps to be an explicit nil
 func (o *BackupPolicyExpression) SetAppsNil() {
 	o.Apps.Set(nil)
@@ -300,7 +295,6 @@ func (o *BackupPolicyExpression) HasCloudProvider() bool {
 func (o *BackupPolicyExpression) SetCloudProvider(v CloudProviderCondition) {
 	o.CloudProvider.Set(&v)
 }
-
 // SetCloudProviderNil sets the value for CloudProvider to be an explicit nil
 func (o *BackupPolicyExpression) SetCloudProviderNil() {
 	o.CloudProvider.Set(nil)
@@ -343,7 +337,6 @@ func (o *BackupPolicyExpression) HasAccountId() bool {
 func (o *BackupPolicyExpression) SetAccountId(v AccountIdCondition) {
 	o.AccountId.Set(&v)
 }
-
 // SetAccountIdNil sets the value for AccountId to be an explicit nil
 func (o *BackupPolicyExpression) SetAccountIdNil() {
 	o.AccountId.Set(nil)
@@ -386,7 +379,6 @@ func (o *BackupPolicyExpression) HasSourceRegion() bool {
 func (o *BackupPolicyExpression) SetSourceRegion(v RegionCondition) {
 	o.SourceRegion.Set(&v)
 }
-
 // SetSourceRegionNil sets the value for SourceRegion to be an explicit nil
 func (o *BackupPolicyExpression) SetSourceRegionNil() {
 	o.SourceRegion.Set(nil)
@@ -429,7 +421,6 @@ func (o *BackupPolicyExpression) HasVpc() bool {
 func (o *BackupPolicyExpression) SetVpc(v VpcCondition) {
 	o.Vpc.Set(&v)
 }
-
 // SetVpcNil sets the value for Vpc to be an explicit nil
 func (o *BackupPolicyExpression) SetVpcNil() {
 	o.Vpc.Set(nil)
@@ -472,7 +463,6 @@ func (o *BackupPolicyExpression) HasSubnets() bool {
 func (o *BackupPolicyExpression) SetSubnets(v SubnetsCondition) {
 	o.Subnets.Set(&v)
 }
-
 // SetSubnetsNil sets the value for Subnets to be an explicit nil
 func (o *BackupPolicyExpression) SetSubnetsNil() {
 	o.Subnets.Set(nil)
@@ -515,7 +505,6 @@ func (o *BackupPolicyExpression) HasResourceGroupName() bool {
 func (o *BackupPolicyExpression) SetResourceGroupName(v ResourceGroupNameCondition) {
 	o.ResourceGroupName.Set(&v)
 }
-
 // SetResourceGroupNameNil sets the value for ResourceGroupName to be an explicit nil
 func (o *BackupPolicyExpression) SetResourceGroupNameNil() {
 	o.ResourceGroupName.Set(nil)
@@ -558,7 +547,6 @@ func (o *BackupPolicyExpression) HasResourceName() bool {
 func (o *BackupPolicyExpression) SetResourceName(v ResourceNameCondition) {
 	o.ResourceName.Set(&v)
 }
-
 // SetResourceNameNil sets the value for ResourceName to be an explicit nil
 func (o *BackupPolicyExpression) SetResourceNameNil() {
 	o.ResourceName.Set(nil)
@@ -601,7 +589,6 @@ func (o *BackupPolicyExpression) HasResourceId() bool {
 func (o *BackupPolicyExpression) SetResourceId(v ResourceIdCondition) {
 	o.ResourceId.Set(&v)
 }
-
 // SetResourceIdNil sets the value for ResourceId to be an explicit nil
 func (o *BackupPolicyExpression) SetResourceIdNil() {
 	o.ResourceId.Set(nil)
@@ -644,7 +631,6 @@ func (o *BackupPolicyExpression) HasTagKeys() bool {
 func (o *BackupPolicyExpression) SetTagKeys(v TagKeysCondition) {
 	o.TagKeys.Set(&v)
 }
-
 // SetTagKeysNil sets the value for TagKeys to be an explicit nil
 func (o *BackupPolicyExpression) SetTagKeysNil() {
 	o.TagKeys.Set(nil)
@@ -687,7 +673,6 @@ func (o *BackupPolicyExpression) HasTagKeyValues() bool {
 func (o *BackupPolicyExpression) SetTagKeyValues(v TagKeyValuesCondition) {
 	o.TagKeyValues.Set(&v)
 }
-
 // SetTagKeyValuesNil sets the value for TagKeyValues to be an explicit nil
 func (o *BackupPolicyExpression) SetTagKeyValuesNil() {
 	o.TagKeyValues.Set(nil)
@@ -699,7 +684,7 @@ func (o *BackupPolicyExpression) UnsetTagKeyValues() {
 }
 
 func (o BackupPolicyExpression) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -791,3 +776,5 @@ func (v *NullableBackupPolicyExpression) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

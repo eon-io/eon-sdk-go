@@ -19,12 +19,10 @@ var _ MappedNullable = &MonthlyConfig{}
 
 // MonthlyConfig struct for MonthlyConfig
 type MonthlyConfig struct {
-	// Days of the month to schedule backups.
-	DayOfMonth []int32 `json:"dayOfMonth,omitempty"`
-	// Whether to schedule backups on the last day of the month. Used only when `dayOfMonth` is not specified.
-	LastDayOfMonth *bool      `json:"lastDayOfMonth,omitempty"`
-	TimeOfDay      *TimeOfDay `json:"timeOfDay,omitempty"`
-	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours).
+	// Days of the month to schedule backups. 
+	DaysOfMonth []int32 `json:"daysOfMonth,omitempty"`
+	TimeOfDay *TimeOfDay `json:"timeOfDay,omitempty"`
+	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
 	StartWindowMinutes *int32 `json:"startWindowMinutes,omitempty"`
 }
 
@@ -49,68 +47,36 @@ func NewMonthlyConfigWithDefaults() *MonthlyConfig {
 	return &this
 }
 
-// GetDayOfMonth returns the DayOfMonth field value if set, zero value otherwise.
-func (o *MonthlyConfig) GetDayOfMonth() []int32 {
-	if o == nil || IsNil(o.DayOfMonth) {
+// GetDaysOfMonth returns the DaysOfMonth field value if set, zero value otherwise.
+func (o *MonthlyConfig) GetDaysOfMonth() []int32 {
+	if o == nil || IsNil(o.DaysOfMonth) {
 		var ret []int32
 		return ret
 	}
-	return o.DayOfMonth
+	return o.DaysOfMonth
 }
 
-// GetDayOfMonthOk returns a tuple with the DayOfMonth field value if set, nil otherwise
+// GetDaysOfMonthOk returns a tuple with the DaysOfMonth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MonthlyConfig) GetDayOfMonthOk() ([]int32, bool) {
-	if o == nil || IsNil(o.DayOfMonth) {
+func (o *MonthlyConfig) GetDaysOfMonthOk() ([]int32, bool) {
+	if o == nil || IsNil(o.DaysOfMonth) {
 		return nil, false
 	}
-	return o.DayOfMonth, true
+	return o.DaysOfMonth, true
 }
 
-// HasDayOfMonth returns a boolean if a field has been set.
-func (o *MonthlyConfig) HasDayOfMonth() bool {
-	if o != nil && !IsNil(o.DayOfMonth) {
+// HasDaysOfMonth returns a boolean if a field has been set.
+func (o *MonthlyConfig) HasDaysOfMonth() bool {
+	if o != nil && !IsNil(o.DaysOfMonth) {
 		return true
 	}
 
 	return false
 }
 
-// SetDayOfMonth gets a reference to the given []int32 and assigns it to the DayOfMonth field.
-func (o *MonthlyConfig) SetDayOfMonth(v []int32) {
-	o.DayOfMonth = v
-}
-
-// GetLastDayOfMonth returns the LastDayOfMonth field value if set, zero value otherwise.
-func (o *MonthlyConfig) GetLastDayOfMonth() bool {
-	if o == nil || IsNil(o.LastDayOfMonth) {
-		var ret bool
-		return ret
-	}
-	return *o.LastDayOfMonth
-}
-
-// GetLastDayOfMonthOk returns a tuple with the LastDayOfMonth field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MonthlyConfig) GetLastDayOfMonthOk() (*bool, bool) {
-	if o == nil || IsNil(o.LastDayOfMonth) {
-		return nil, false
-	}
-	return o.LastDayOfMonth, true
-}
-
-// HasLastDayOfMonth returns a boolean if a field has been set.
-func (o *MonthlyConfig) HasLastDayOfMonth() bool {
-	if o != nil && !IsNil(o.LastDayOfMonth) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastDayOfMonth gets a reference to the given bool and assigns it to the LastDayOfMonth field.
-func (o *MonthlyConfig) SetLastDayOfMonth(v bool) {
-	o.LastDayOfMonth = &v
+// SetDaysOfMonth gets a reference to the given []int32 and assigns it to the DaysOfMonth field.
+func (o *MonthlyConfig) SetDaysOfMonth(v []int32) {
+	o.DaysOfMonth = v
 }
 
 // GetTimeOfDay returns the TimeOfDay field value if set, zero value otherwise.
@@ -178,7 +144,7 @@ func (o *MonthlyConfig) SetStartWindowMinutes(v int32) {
 }
 
 func (o MonthlyConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -187,11 +153,8 @@ func (o MonthlyConfig) MarshalJSON() ([]byte, error) {
 
 func (o MonthlyConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DayOfMonth) {
-		toSerialize["dayOfMonth"] = o.DayOfMonth
-	}
-	if !IsNil(o.LastDayOfMonth) {
-		toSerialize["lastDayOfMonth"] = o.LastDayOfMonth
+	if !IsNil(o.DaysOfMonth) {
+		toSerialize["daysOfMonth"] = o.DaysOfMonth
 	}
 	if !IsNil(o.TimeOfDay) {
 		toSerialize["timeOfDay"] = o.TimeOfDay
@@ -237,3 +200,5 @@ func (v *NullableMonthlyConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

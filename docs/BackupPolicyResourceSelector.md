@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ResourceSelectionMode** | [**ResourceSelectorMode**](ResourceSelectorMode.md) |  | 
-**Expression** | Pointer to [**BackupPolicyExpression**](BackupPolicyExpression.md) |  | [optional] 
+**Expression** | Pointer to [**NullableBackupPolicyExpression**](BackupPolicyExpression.md) |  | [optional] 
 **ResourceInclusionOverride** | Pointer to **[]string** | List of cloud-provider-assigned resource IDs to include in the backup policy, regardless of whether they&#39;re excluded by &#x60;resourceSelectionMode&#x60; and &#x60;expression&#x60;.  | [optional] 
 **ResourceExclusionOverride** | Pointer to **[]string** | List of cloud-provider-assigned resource IDs to exclude from the backup policy, regardless of whether they&#39;re included by &#x60;resourceSelectionMode&#x60; and &#x60;expression&#x60;.  | [optional] 
 
@@ -73,6 +73,16 @@ SetExpression sets Expression field to given value.
 
 HasExpression returns a boolean if a field has been set.
 
+### SetExpressionNil
+
+`func (o *BackupPolicyResourceSelector) SetExpressionNil(b bool)`
+
+ SetExpressionNil sets the value for Expression to be an explicit nil
+
+### UnsetExpression
+`func (o *BackupPolicyResourceSelector) UnsetExpression()`
+
+UnsetExpression ensures that no value is present for Expression, not even an explicit nil
 ### GetResourceInclusionOverride
 
 `func (o *BackupPolicyResourceSelector) GetResourceInclusionOverride() []string`

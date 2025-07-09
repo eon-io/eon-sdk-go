@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// BackupPolicyType The type of the policy.
+// BackupPolicyType The type of the policy. 
 type BackupPolicyType string
 
 // List of BackupPolicyType
 const (
-	BACKUP_POLICY_TYPE_UNSPECIFIED    BackupPolicyType = "UNSPECIFIED"
-	BACKUP_POLICY_TYPE_STANDARD       BackupPolicyType = "STANDARD"
+	BACKUP_POLICY_TYPE_UNSPECIFIED BackupPolicyType = "UNSPECIFIED"
+	BACKUP_POLICY_TYPE_STANDARD BackupPolicyType = "STANDARD"
 	BACKUP_POLICY_TYPE_HIGH_FREQUENCY BackupPolicyType = "HIGH_FREQUENCY"
-	BACKUP_POLICY_TYPE_PITR           BackupPolicyType = "PITR"
+	BACKUP_POLICY_TYPE_PITR BackupPolicyType = "PITR"
 )
 
 // All allowed values of BackupPolicyType enum
@@ -112,3 +112,4 @@ func (v *NullableBackupPolicyType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

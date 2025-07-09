@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -22,8 +22,8 @@ var _ MappedNullable = &RestoreAccountConnectivityConfig{}
 // RestoreAccountConnectivityConfig struct for RestoreAccountConnectivityConfig
 type RestoreAccountConnectivityConfig struct {
 	// Eon-assigned ID of the restore account.
-	RestoreAccountId string                                   `json:"restoreAccountId"`
-	Config           ProviderRestoreAccountConnectivityConfig `json:"config"`
+	RestoreAccountId string `json:"restoreAccountId"`
+	Config ProviderRestoreAccountConnectivityConfig `json:"config"`
 }
 
 type _RestoreAccountConnectivityConfig RestoreAccountConnectivityConfig
@@ -96,7 +96,7 @@ func (o *RestoreAccountConnectivityConfig) SetConfig(v ProviderRestoreAccountCon
 }
 
 func (o RestoreAccountConnectivityConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -124,10 +124,10 @@ func (o *RestoreAccountConnectivityConfig) UnmarshalJSON(data []byte) (err error
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -183,3 +183,5 @@ func (v *NullableRestoreAccountConnectivityConfig) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

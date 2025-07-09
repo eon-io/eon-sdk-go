@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -22,11 +22,11 @@ var _ MappedNullable = &QueryDBStatusResponse{}
 // QueryDBStatusResponse struct for QueryDBStatusResponse
 type QueryDBStatusResponse struct {
 	// Time the query took to run, in milliseconds.
-	RunningTimeMs *int32        `json:"runningTimeMs,omitempty"`
-	Status        QueryDBStatus `json:"status"`
-	// Error message. Present only if the status is `FAILED`.
+	RunningTimeMs *int32 `json:"runningTimeMs,omitempty"`
+	Status QueryDBStatus `json:"status"`
+	// Error message. Present only if the status is `FAILED`. 
 	ErrorMessage NullableString `json:"errorMessage,omitempty"`
-	// Locations where the query results are saved to. This is set by `destination` in the [Run Query](./run-query) request body.
+	// Locations where the query results are saved to. This is set by `destination` in the [Run Query](./run-query) request body. 
 	OutputLocations []string `json:"outputLocations,omitempty"`
 }
 
@@ -138,7 +138,6 @@ func (o *QueryDBStatusResponse) HasErrorMessage() bool {
 func (o *QueryDBStatusResponse) SetErrorMessage(v string) {
 	o.ErrorMessage.Set(&v)
 }
-
 // SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
 func (o *QueryDBStatusResponse) SetErrorMessageNil() {
 	o.ErrorMessage.Set(nil)
@@ -182,7 +181,7 @@ func (o *QueryDBStatusResponse) SetOutputLocations(v []string) {
 }
 
 func (o QueryDBStatusResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,10 +216,10 @@ func (o *QueryDBStatusResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -276,3 +275,5 @@ func (v *NullableQueryDBStatusResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,20 +20,22 @@ type StandardBackupScheduleFrequency string
 
 // List of StandardBackupScheduleFrequency
 const (
-	STANDARD_BACKUP_SCHEDULE_HOURLY   StandardBackupScheduleFrequency = "HOURLY"
-	STANDARD_BACKUP_SCHEDULE_DAILY    StandardBackupScheduleFrequency = "DAILY"
-	STANDARD_BACKUP_SCHEDULE_WEEKLY   StandardBackupScheduleFrequency = "WEEKLY"
-	STANDARD_BACKUP_SCHEDULE_MONTHLY  StandardBackupScheduleFrequency = "MONTHLY"
+	STANDARD_BACKUP_SCHEDULE_INTERVAL StandardBackupScheduleFrequency = "INTERVAL"
+	STANDARD_BACKUP_SCHEDULE_DAILY StandardBackupScheduleFrequency = "DAILY"
+	STANDARD_BACKUP_SCHEDULE_WEEKLY StandardBackupScheduleFrequency = "WEEKLY"
+	STANDARD_BACKUP_SCHEDULE_MONTHLY StandardBackupScheduleFrequency = "MONTHLY"
 	STANDARD_BACKUP_SCHEDULE_ANNUALLY StandardBackupScheduleFrequency = "ANNUALLY"
+	STANDARD_BACKUP_SCHEDULE_UNSPECIFIED StandardBackupScheduleFrequency = "UNSPECIFIED"
 )
 
 // All allowed values of StandardBackupScheduleFrequency enum
 var AllowedStandardBackupScheduleFrequencyEnumValues = []StandardBackupScheduleFrequency{
-	"HOURLY",
+	"INTERVAL",
 	"DAILY",
 	"WEEKLY",
 	"MONTHLY",
 	"ANNUALLY",
+	"UNSPECIFIED",
 }
 
 func (v *StandardBackupScheduleFrequency) UnmarshalJSON(src []byte) error {
@@ -114,3 +116,4 @@ func (v *NullableStandardBackupScheduleFrequency) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

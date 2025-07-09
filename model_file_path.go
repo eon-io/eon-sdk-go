@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &FilePath{}
 type FilePath struct {
 	// Absolute path to the file or directory to restore.
 	Path string `json:"path"`
-	// Whether `path` is a directory. If `true`, Eon restores all files in all subdirectories under the path. If `false`, Eon restores only the file at the path.
+	// Whether `path` is a directory. If `true`, Eon restores all files in all subdirectories under the path. If `false`, Eon restores only the file at the path. 
 	IsDirectory bool `json:"isDirectory"`
 }
 
@@ -97,7 +97,7 @@ func (o *FilePath) SetIsDirectory(v bool) {
 }
 
 func (o FilePath) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -125,10 +125,10 @@ func (o *FilePath) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -184,3 +184,5 @@ func (v *NullableFilePath) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

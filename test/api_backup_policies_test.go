@@ -11,10 +11,10 @@ package eon
 
 import (
 	"context"
-	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
 )
 
 func Test_eon_BackupPoliciesAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 	t.Run("Test BackupPoliciesAPIService CreateBackupPolicy", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var projectId string
 
@@ -38,7 +38,7 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 	t.Run("Test BackupPoliciesAPIService DeleteBackupPolicy", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var backupPolicyId string
 		var projectId string
@@ -52,7 +52,7 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 	t.Run("Test BackupPoliciesAPIService GetBackupPolicy", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var backupPolicyId string
 		var projectId string
@@ -67,7 +67,7 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 	t.Run("Test BackupPoliciesAPIService ListBackupPolicies", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var projectId string
 
@@ -81,7 +81,7 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 	t.Run("Test BackupPoliciesAPIService UpdateBackupPolicy", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var backupPolicyId string
 		var projectId string

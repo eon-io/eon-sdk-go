@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -24,7 +24,7 @@ type TimeOfDay struct {
 	// Hour of the day.
 	Hour int32 `json:"hour"`
 	// Minute of the hour.
-	Minutes int32 `json:"minutes"`
+	Minute int32 `json:"minute"`
 }
 
 type _TimeOfDay TimeOfDay
@@ -33,10 +33,10 @@ type _TimeOfDay TimeOfDay
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeOfDay(hour int32, minutes int32) *TimeOfDay {
+func NewTimeOfDay(hour int32, minute int32) *TimeOfDay {
 	this := TimeOfDay{}
 	this.Hour = hour
-	this.Minutes = minutes
+	this.Minute = minute
 	return &this
 }
 
@@ -47,8 +47,8 @@ func NewTimeOfDayWithDefaults() *TimeOfDay {
 	this := TimeOfDay{}
 	var hour int32 = 0
 	this.Hour = hour
-	var minutes int32 = 0
-	this.Minutes = minutes
+	var minute int32 = 0
+	this.Minute = minute
 	return &this
 }
 
@@ -76,32 +76,32 @@ func (o *TimeOfDay) SetHour(v int32) {
 	o.Hour = v
 }
 
-// GetMinutes returns the Minutes field value
-func (o *TimeOfDay) GetMinutes() int32 {
+// GetMinute returns the Minute field value
+func (o *TimeOfDay) GetMinute() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.Minutes
+	return o.Minute
 }
 
-// GetMinutesOk returns a tuple with the Minutes field value
+// GetMinuteOk returns a tuple with the Minute field value
 // and a boolean to check if the value has been set.
-func (o *TimeOfDay) GetMinutesOk() (*int32, bool) {
+func (o *TimeOfDay) GetMinuteOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Minutes, true
+	return &o.Minute, true
 }
 
-// SetMinutes sets field value
-func (o *TimeOfDay) SetMinutes(v int32) {
-	o.Minutes = v
+// SetMinute sets field value
+func (o *TimeOfDay) SetMinute(v int32) {
+	o.Minute = v
 }
 
 func (o TimeOfDay) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -111,7 +111,7 @@ func (o TimeOfDay) MarshalJSON() ([]byte, error) {
 func (o TimeOfDay) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["hour"] = o.Hour
-	toSerialize["minutes"] = o.Minutes
+	toSerialize["minute"] = o.Minute
 	return toSerialize, nil
 }
 
@@ -121,7 +121,7 @@ func (o *TimeOfDay) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"hour",
-		"minutes",
+		"minute",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -129,10 +129,10 @@ func (o *TimeOfDay) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -188,3 +188,5 @@ func (v *NullableTimeOfDay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

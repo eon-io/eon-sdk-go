@@ -11,21 +11,21 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
 // checks if the S3RestoreTarget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &S3RestoreTarget{}
 
-// S3RestoreTarget Information about the S3 bucket where you want to restore the files. If you don't specify a target, the files are restored to the original bucket.
+// S3RestoreTarget Information about the S3 bucket where you want to restore the files. If you don't specify a target, the files are restored to the original bucket. 
 type S3RestoreTarget struct {
 	// Name of an existing bucket to restore the files to.
 	BucketName string `json:"bucketName"`
 	// ID of the key you want Eon to use for encrypting the restored files.
 	EncryptionKeyId *string `json:"encryptionKeyId,omitempty"`
-	// Prefix to add to the restore path. If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the bucket.
+	// Prefix to add to the restore path. If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the bucket. 
 	Prefix *string `json:"prefix,omitempty"`
 }
 
@@ -138,7 +138,7 @@ func (o *S3RestoreTarget) SetPrefix(v string) {
 }
 
 func (o S3RestoreTarget) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -170,10 +170,10 @@ func (o *S3RestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -229,3 +229,5 @@ func (v *NullableS3RestoreTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

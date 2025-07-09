@@ -20,7 +20,7 @@ var _ MappedNullable = &DailyConfig{}
 // DailyConfig struct for DailyConfig
 type DailyConfig struct {
 	TimeOfDay *TimeOfDay `json:"timeOfDay,omitempty"`
-	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours).
+	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
 	StartWindowMinutes *int32 `json:"startWindowMinutes,omitempty"`
 }
 
@@ -110,7 +110,7 @@ func (o *DailyConfig) SetStartWindowMinutes(v int32) {
 }
 
 func (o DailyConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -163,3 +163,5 @@ func (v *NullableDailyConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -19,9 +19,9 @@ var _ MappedNullable = &ResourceTypeToSecurityGroup{}
 
 // ResourceTypeToSecurityGroup struct for ResourceTypeToSecurityGroup
 type ResourceTypeToSecurityGroup struct {
-	// Security group to use for the restore server. If not specified, Eon attempts to use the default security group.  Currently, a single security group is supported.
+	// Security group to use for the restore server. If not specified, Eon attempts to use the default security group.  Currently, a single security group is supported. 
 	RestoreServer []string `json:"restoreServer,omitempty"`
-	// Security group to use for restored RDS instances. If not specified, Eon attempts to use the default security group.  Currently, a single security group is supported.
+	// Security group to use for restored RDS instances. If not specified, Eon attempts to use the default security group.  Currently, a single security group is supported. 
 	RestoredRdsInstance []string `json:"restoredRdsInstance,omitempty"`
 }
 
@@ -107,7 +107,7 @@ func (o *ResourceTypeToSecurityGroup) SetRestoredRdsInstance(v []string) {
 }
 
 func (o ResourceTypeToSecurityGroup) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,3 +160,5 @@ func (v *NullableResourceTypeToSecurityGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

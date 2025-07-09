@@ -12,6 +12,8 @@ package eon
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the WeeklyConfig type satisfies the MappedNullable interface at compile time
@@ -19,19 +21,23 @@ var _ MappedNullable = &WeeklyConfig{}
 
 // WeeklyConfig struct for WeeklyConfig
 type WeeklyConfig struct {
-	// Days of the week to schedule backups.
-	DaysOfWeek []string   `json:"daysOfWeek,omitempty"`
-	TimeOfDay  *TimeOfDay `json:"timeOfDay,omitempty"`
-	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours).
+	// Days of the week to schedule backups. 
+	DaysOfWeek []DayOfWeek `json:"daysOfWeek"`
+	TimeOfDay TimeOfDay `json:"timeOfDay"`
+	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
 	StartWindowMinutes *int32 `json:"startWindowMinutes,omitempty"`
 }
+
+type _WeeklyConfig WeeklyConfig
 
 // NewWeeklyConfig instantiates a new WeeklyConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWeeklyConfig() *WeeklyConfig {
+func NewWeeklyConfig(daysOfWeek []DayOfWeek, timeOfDay TimeOfDay) *WeeklyConfig {
 	this := WeeklyConfig{}
+	this.DaysOfWeek = daysOfWeek
+	this.TimeOfDay = timeOfDay
 	var startWindowMinutes int32 = 240
 	this.StartWindowMinutes = &startWindowMinutes
 	return &this
@@ -47,68 +53,52 @@ func NewWeeklyConfigWithDefaults() *WeeklyConfig {
 	return &this
 }
 
-// GetDaysOfWeek returns the DaysOfWeek field value if set, zero value otherwise.
-func (o *WeeklyConfig) GetDaysOfWeek() []string {
-	if o == nil || IsNil(o.DaysOfWeek) {
-		var ret []string
+// GetDaysOfWeek returns the DaysOfWeek field value
+func (o *WeeklyConfig) GetDaysOfWeek() []DayOfWeek {
+	if o == nil {
+		var ret []DayOfWeek
 		return ret
 	}
+
 	return o.DaysOfWeek
 }
 
-// GetDaysOfWeekOk returns a tuple with the DaysOfWeek field value if set, nil otherwise
+// GetDaysOfWeekOk returns a tuple with the DaysOfWeek field value
 // and a boolean to check if the value has been set.
-func (o *WeeklyConfig) GetDaysOfWeekOk() ([]string, bool) {
-	if o == nil || IsNil(o.DaysOfWeek) {
+func (o *WeeklyConfig) GetDaysOfWeekOk() ([]DayOfWeek, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return o.DaysOfWeek, true
 }
 
-// HasDaysOfWeek returns a boolean if a field has been set.
-func (o *WeeklyConfig) HasDaysOfWeek() bool {
-	if o != nil && !IsNil(o.DaysOfWeek) {
-		return true
-	}
-
-	return false
-}
-
-// SetDaysOfWeek gets a reference to the given []string and assigns it to the DaysOfWeek field.
-func (o *WeeklyConfig) SetDaysOfWeek(v []string) {
+// SetDaysOfWeek sets field value
+func (o *WeeklyConfig) SetDaysOfWeek(v []DayOfWeek) {
 	o.DaysOfWeek = v
 }
 
-// GetTimeOfDay returns the TimeOfDay field value if set, zero value otherwise.
+// GetTimeOfDay returns the TimeOfDay field value
 func (o *WeeklyConfig) GetTimeOfDay() TimeOfDay {
-	if o == nil || IsNil(o.TimeOfDay) {
+	if o == nil {
 		var ret TimeOfDay
 		return ret
 	}
-	return *o.TimeOfDay
+
+	return o.TimeOfDay
 }
 
-// GetTimeOfDayOk returns a tuple with the TimeOfDay field value if set, nil otherwise
+// GetTimeOfDayOk returns a tuple with the TimeOfDay field value
 // and a boolean to check if the value has been set.
 func (o *WeeklyConfig) GetTimeOfDayOk() (*TimeOfDay, bool) {
-	if o == nil || IsNil(o.TimeOfDay) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TimeOfDay, true
+	return &o.TimeOfDay, true
 }
 
-// HasTimeOfDay returns a boolean if a field has been set.
-func (o *WeeklyConfig) HasTimeOfDay() bool {
-	if o != nil && !IsNil(o.TimeOfDay) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeOfDay gets a reference to the given TimeOfDay and assigns it to the TimeOfDay field.
+// SetTimeOfDay sets field value
 func (o *WeeklyConfig) SetTimeOfDay(v TimeOfDay) {
-	o.TimeOfDay = &v
+	o.TimeOfDay = v
 }
 
 // GetStartWindowMinutes returns the StartWindowMinutes field value if set, zero value otherwise.
@@ -144,7 +134,7 @@ func (o *WeeklyConfig) SetStartWindowMinutes(v int32) {
 }
 
 func (o WeeklyConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,16 +143,50 @@ func (o WeeklyConfig) MarshalJSON() ([]byte, error) {
 
 func (o WeeklyConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DaysOfWeek) {
-		toSerialize["daysOfWeek"] = o.DaysOfWeek
-	}
-	if !IsNil(o.TimeOfDay) {
-		toSerialize["timeOfDay"] = o.TimeOfDay
-	}
+	toSerialize["daysOfWeek"] = o.DaysOfWeek
+	toSerialize["timeOfDay"] = o.TimeOfDay
 	if !IsNil(o.StartWindowMinutes) {
 		toSerialize["startWindowMinutes"] = o.StartWindowMinutes
 	}
 	return toSerialize, nil
+}
+
+func (o *WeeklyConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"daysOfWeek",
+		"timeOfDay",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWeeklyConfig := _WeeklyConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	//decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWeeklyConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WeeklyConfig(varWeeklyConfig)
+
+	return err
 }
 
 type NullableWeeklyConfig struct {
@@ -200,3 +224,5 @@ func (v *NullableWeeklyConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

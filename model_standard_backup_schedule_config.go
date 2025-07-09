@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,12 +21,12 @@ var _ MappedNullable = &StandardBackupScheduleConfig{}
 
 // StandardBackupScheduleConfig struct for StandardBackupScheduleConfig
 type StandardBackupScheduleConfig struct {
-	Frequency      StandardBackupScheduleFrequency `json:"frequency"`
-	HourlyConfig   NullableStandardHourlyConfig    `json:"hourlyConfig,omitempty"`
-	DailyConfig    NullableDailyConfig             `json:"dailyConfig,omitempty"`
-	WeeklyConfig   NullableWeeklyConfig            `json:"weeklyConfig,omitempty"`
-	MonthlyConfig  NullableMonthlyConfig           `json:"monthlyConfig,omitempty"`
-	AnnuallyConfig NullableAnnuallyConfig          `json:"annuallyConfig,omitempty"`
+	Frequency StandardBackupScheduleFrequency `json:"frequency"`
+	IntervalConfig NullableStandardIntervalConfig `json:"intervalConfig,omitempty"`
+	DailyConfig NullableDailyConfig `json:"dailyConfig,omitempty"`
+	WeeklyConfig NullableWeeklyConfig `json:"weeklyConfig,omitempty"`
+	MonthlyConfig NullableMonthlyConfig `json:"monthlyConfig,omitempty"`
+	AnnuallyConfig NullableAnnuallyConfig `json:"annuallyConfig,omitempty"`
 }
 
 type _StandardBackupScheduleConfig StandardBackupScheduleConfig
@@ -73,47 +73,46 @@ func (o *StandardBackupScheduleConfig) SetFrequency(v StandardBackupScheduleFreq
 	o.Frequency = v
 }
 
-// GetHourlyConfig returns the HourlyConfig field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StandardBackupScheduleConfig) GetHourlyConfig() StandardHourlyConfig {
-	if o == nil || IsNil(o.HourlyConfig.Get()) {
-		var ret StandardHourlyConfig
+// GetIntervalConfig returns the IntervalConfig field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StandardBackupScheduleConfig) GetIntervalConfig() StandardIntervalConfig {
+	if o == nil || IsNil(o.IntervalConfig.Get()) {
+		var ret StandardIntervalConfig
 		return ret
 	}
-	return *o.HourlyConfig.Get()
+	return *o.IntervalConfig.Get()
 }
 
-// GetHourlyConfigOk returns a tuple with the HourlyConfig field value if set, nil otherwise
+// GetIntervalConfigOk returns a tuple with the IntervalConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StandardBackupScheduleConfig) GetHourlyConfigOk() (*StandardHourlyConfig, bool) {
+func (o *StandardBackupScheduleConfig) GetIntervalConfigOk() (*StandardIntervalConfig, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.HourlyConfig.Get(), o.HourlyConfig.IsSet()
+	return o.IntervalConfig.Get(), o.IntervalConfig.IsSet()
 }
 
-// HasHourlyConfig returns a boolean if a field has been set.
-func (o *StandardBackupScheduleConfig) HasHourlyConfig() bool {
-	if o != nil && o.HourlyConfig.IsSet() {
+// HasIntervalConfig returns a boolean if a field has been set.
+func (o *StandardBackupScheduleConfig) HasIntervalConfig() bool {
+	if o != nil && o.IntervalConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHourlyConfig gets a reference to the given NullableStandardHourlyConfig and assigns it to the HourlyConfig field.
-func (o *StandardBackupScheduleConfig) SetHourlyConfig(v StandardHourlyConfig) {
-	o.HourlyConfig.Set(&v)
+// SetIntervalConfig gets a reference to the given NullableStandardIntervalConfig and assigns it to the IntervalConfig field.
+func (o *StandardBackupScheduleConfig) SetIntervalConfig(v StandardIntervalConfig) {
+	o.IntervalConfig.Set(&v)
+}
+// SetIntervalConfigNil sets the value for IntervalConfig to be an explicit nil
+func (o *StandardBackupScheduleConfig) SetIntervalConfigNil() {
+	o.IntervalConfig.Set(nil)
 }
 
-// SetHourlyConfigNil sets the value for HourlyConfig to be an explicit nil
-func (o *StandardBackupScheduleConfig) SetHourlyConfigNil() {
-	o.HourlyConfig.Set(nil)
-}
-
-// UnsetHourlyConfig ensures that no value is present for HourlyConfig, not even an explicit nil
-func (o *StandardBackupScheduleConfig) UnsetHourlyConfig() {
-	o.HourlyConfig.Unset()
+// UnsetIntervalConfig ensures that no value is present for IntervalConfig, not even an explicit nil
+func (o *StandardBackupScheduleConfig) UnsetIntervalConfig() {
+	o.IntervalConfig.Unset()
 }
 
 // GetDailyConfig returns the DailyConfig field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -148,7 +147,6 @@ func (o *StandardBackupScheduleConfig) HasDailyConfig() bool {
 func (o *StandardBackupScheduleConfig) SetDailyConfig(v DailyConfig) {
 	o.DailyConfig.Set(&v)
 }
-
 // SetDailyConfigNil sets the value for DailyConfig to be an explicit nil
 func (o *StandardBackupScheduleConfig) SetDailyConfigNil() {
 	o.DailyConfig.Set(nil)
@@ -191,7 +189,6 @@ func (o *StandardBackupScheduleConfig) HasWeeklyConfig() bool {
 func (o *StandardBackupScheduleConfig) SetWeeklyConfig(v WeeklyConfig) {
 	o.WeeklyConfig.Set(&v)
 }
-
 // SetWeeklyConfigNil sets the value for WeeklyConfig to be an explicit nil
 func (o *StandardBackupScheduleConfig) SetWeeklyConfigNil() {
 	o.WeeklyConfig.Set(nil)
@@ -234,7 +231,6 @@ func (o *StandardBackupScheduleConfig) HasMonthlyConfig() bool {
 func (o *StandardBackupScheduleConfig) SetMonthlyConfig(v MonthlyConfig) {
 	o.MonthlyConfig.Set(&v)
 }
-
 // SetMonthlyConfigNil sets the value for MonthlyConfig to be an explicit nil
 func (o *StandardBackupScheduleConfig) SetMonthlyConfigNil() {
 	o.MonthlyConfig.Set(nil)
@@ -277,7 +273,6 @@ func (o *StandardBackupScheduleConfig) HasAnnuallyConfig() bool {
 func (o *StandardBackupScheduleConfig) SetAnnuallyConfig(v AnnuallyConfig) {
 	o.AnnuallyConfig.Set(&v)
 }
-
 // SetAnnuallyConfigNil sets the value for AnnuallyConfig to be an explicit nil
 func (o *StandardBackupScheduleConfig) SetAnnuallyConfigNil() {
 	o.AnnuallyConfig.Set(nil)
@@ -289,7 +284,7 @@ func (o *StandardBackupScheduleConfig) UnsetAnnuallyConfig() {
 }
 
 func (o StandardBackupScheduleConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,8 +294,8 @@ func (o StandardBackupScheduleConfig) MarshalJSON() ([]byte, error) {
 func (o StandardBackupScheduleConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["frequency"] = o.Frequency
-	if o.HourlyConfig.IsSet() {
-		toSerialize["hourlyConfig"] = o.HourlyConfig.Get()
+	if o.IntervalConfig.IsSet() {
+		toSerialize["intervalConfig"] = o.IntervalConfig.Get()
 	}
 	if o.DailyConfig.IsSet() {
 		toSerialize["dailyConfig"] = o.DailyConfig.Get()
@@ -330,10 +325,10 @@ func (o *StandardBackupScheduleConfig) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -389,3 +384,5 @@ func (v *NullableStandardBackupScheduleConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

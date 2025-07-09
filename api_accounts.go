@@ -19,13 +19,14 @@ import (
 	"strings"
 )
 
+
 // AccountsAPIService AccountsAPI service
 type AccountsAPIService service
 
 type ApiConnectRestoreAccountRequest struct {
-	ctx                          context.Context
-	ApiService                   *AccountsAPIService
-	projectId                    string
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
 	connectRestoreAccountRequest *ConnectRestoreAccountRequest
 }
 
@@ -43,27 +44,27 @@ ConnectRestoreAccount Connect Restore Account
 
 Description: Connects a restore account to the given project.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiConnectRestoreAccountRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiConnectRestoreAccountRequest
 */
 func (a *AccountsAPIService) ConnectRestoreAccount(ctx context.Context, projectId string) ApiConnectRestoreAccountRequest {
 	return ApiConnectRestoreAccountRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
+		ctx: ctx,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ConnectRestoreAccountResponse
+//  @return ConnectRestoreAccountResponse
 func (a *AccountsAPIService) ConnectRestoreAccountExecute(r ApiConnectRestoreAccountRequest) (*ConnectRestoreAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ConnectRestoreAccountResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ConnectRestoreAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ConnectRestoreAccount")
@@ -129,8 +130,8 @@ func (a *AccountsAPIService) ConnectRestoreAccountExecute(r ApiConnectRestoreAcc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -140,8 +141,8 @@ func (a *AccountsAPIService) ConnectRestoreAccountExecute(r ApiConnectRestoreAcc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -159,9 +160,9 @@ func (a *AccountsAPIService) ConnectRestoreAccountExecute(r ApiConnectRestoreAcc
 }
 
 type ApiConnectSourceAccountRequest struct {
-	ctx                         context.Context
-	ApiService                  *AccountsAPIService
-	projectId                   string
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
 	connectSourceAccountRequest *ConnectSourceAccountRequest
 }
 
@@ -179,27 +180,26 @@ ConnectSourceAccount Connect Source Account
 
 Description: Connects a source cloud account to the given project.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiConnectSourceAccountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiConnectSourceAccountRequest
 */
 func (a *AccountsAPIService) ConnectSourceAccount(ctx context.Context, projectId string) ApiConnectSourceAccountRequest {
 	return ApiConnectSourceAccountRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
+		ctx: ctx,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ConnectSourceAccountResponse
+//  @return ConnectSourceAccountResponse
 func (a *AccountsAPIService) ConnectSourceAccountExecute(r ApiConnectSourceAccountRequest) (*ConnectSourceAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ConnectSourceAccountResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ConnectSourceAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ConnectSourceAccount")
@@ -265,8 +265,8 @@ func (a *AccountsAPIService) ConnectSourceAccountExecute(r ApiConnectSourceAccou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -276,8 +276,8 @@ func (a *AccountsAPIService) ConnectSourceAccountExecute(r ApiConnectSourceAccou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -295,10 +295,10 @@ func (a *AccountsAPIService) ConnectSourceAccountExecute(r ApiConnectSourceAccou
 }
 
 type ApiDeleteRestoreAccountConnectivityConfigRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId  string
-	projectId  string
+	accountId string
+	projectId string
 }
 
 func (r ApiDeleteRestoreAccountConnectivityConfigRequest) Execute() (*http.Response, error) {
@@ -310,26 +310,27 @@ DeleteRestoreAccountConnectivityConfig Delete Restore Account Connectivity Confi
 
 Description: Deletes the restore account connectivity configuration, reverting to the default settings.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param accountId Eon-assigned ID of the restore account.
-	@param projectId ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiDeleteRestoreAccountConnectivityConfigRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountId Eon-assigned ID of the restore account.
+ @param projectId ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiDeleteRestoreAccountConnectivityConfigRequest
 */
 func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiDeleteRestoreAccountConnectivityConfigRequest {
 	return ApiDeleteRestoreAccountConnectivityConfigRequest{
 		ApiService: a,
-		ctx:        ctx,
-		accountId:  accountId,
-		projectId:  projectId,
+		ctx: ctx,
+		accountId: accountId,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
 func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfigExecute(r ApiDeleteRestoreAccountConnectivityConfigRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.DeleteRestoreAccountConnectivityConfig")
@@ -391,8 +392,8 @@ func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfigExecute(r Api
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -402,8 +403,8 @@ func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfigExecute(r Api
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -412,10 +413,10 @@ func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfigExecute(r Api
 }
 
 type ApiDisconnectRestoreAccountRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AccountsAPIService
-	projectId  string
-	accountId  string
+	projectId string
+	accountId string
 }
 
 func (r ApiDisconnectRestoreAccountRequest) Execute() (*DisconnectRestoreAccountResponse, *http.Response, error) {
@@ -429,29 +430,29 @@ Description: Disconnects a restore account from the given project.
 
 After disconnecting, data and resources can no longer be restored to the restore account.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@param accountId Eon-assigned ID of the restore account to disconnect.
-	@return ApiDisconnectRestoreAccountRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param accountId Eon-assigned ID of the restore account to disconnect.
+ @return ApiDisconnectRestoreAccountRequest
 */
 func (a *AccountsAPIService) DisconnectRestoreAccount(ctx context.Context, projectId string, accountId string) ApiDisconnectRestoreAccountRequest {
 	return ApiDisconnectRestoreAccountRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
-		accountId:  accountId,
+		ctx: ctx,
+		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DisconnectRestoreAccountResponse
+//  @return DisconnectRestoreAccountResponse
 func (a *AccountsAPIService) DisconnectRestoreAccountExecute(r ApiDisconnectRestoreAccountRequest) (*DisconnectRestoreAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DisconnectRestoreAccountResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DisconnectRestoreAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.DisconnectRestoreAccount")
@@ -513,8 +514,8 @@ func (a *AccountsAPIService) DisconnectRestoreAccountExecute(r ApiDisconnectRest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -524,8 +525,8 @@ func (a *AccountsAPIService) DisconnectRestoreAccountExecute(r ApiDisconnectRest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -543,10 +544,10 @@ func (a *AccountsAPIService) DisconnectRestoreAccountExecute(r ApiDisconnectRest
 }
 
 type ApiDisconnectSourceAccountRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AccountsAPIService
-	projectId  string
-	accountId  string
+	projectId string
+	accountId string
 }
 
 func (r ApiDisconnectSourceAccountRequest) Execute() (*DisconnectSourceAccountResponse, *http.Response, error) {
@@ -562,29 +563,29 @@ After disconnecting, resources in the source account will no longer be backed up
 Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
 Resources with no remaining snapshots are removed from the inventory.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@param accountId Eon-assigned ID of the source account to disconnect.
-	@return ApiDisconnectSourceAccountRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param accountId Eon-assigned ID of the source account to disconnect.
+ @return ApiDisconnectSourceAccountRequest
 */
 func (a *AccountsAPIService) DisconnectSourceAccount(ctx context.Context, projectId string, accountId string) ApiDisconnectSourceAccountRequest {
 	return ApiDisconnectSourceAccountRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
-		accountId:  accountId,
+		ctx: ctx,
+		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DisconnectSourceAccountResponse
+//  @return DisconnectSourceAccountResponse
 func (a *AccountsAPIService) DisconnectSourceAccountExecute(r ApiDisconnectSourceAccountRequest) (*DisconnectSourceAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DisconnectSourceAccountResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DisconnectSourceAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.DisconnectSourceAccount")
@@ -646,8 +647,8 @@ func (a *AccountsAPIService) DisconnectSourceAccountExecute(r ApiDisconnectSourc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -657,8 +658,8 @@ func (a *AccountsAPIService) DisconnectSourceAccountExecute(r ApiDisconnectSourc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -676,10 +677,10 @@ func (a *AccountsAPIService) DisconnectSourceAccountExecute(r ApiDisconnectSourc
 }
 
 type ApiGetRestoreAccountConnectivityConfigRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId  string
-	projectId  string
+	accountId string
+	projectId string
 }
 
 func (r ApiGetRestoreAccountConnectivityConfigRequest) Execute() (*GetRestoreAccountConnectivityConfigResponse, *http.Response, error) {
@@ -691,29 +692,29 @@ GetRestoreAccountConnectivityConfig Get Restore Account Connectivity Configurati
 
 Description: Retrieves the connectivity configuration of the specified restore account.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param accountId Eon-assigned ID of the restore account.
-	@param projectId ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiGetRestoreAccountConnectivityConfigRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountId Eon-assigned ID of the restore account.
+ @param projectId ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiGetRestoreAccountConnectivityConfigRequest
 */
 func (a *AccountsAPIService) GetRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiGetRestoreAccountConnectivityConfigRequest {
 	return ApiGetRestoreAccountConnectivityConfigRequest{
 		ApiService: a,
-		ctx:        ctx,
-		accountId:  accountId,
-		projectId:  projectId,
+		ctx: ctx,
+		accountId: accountId,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRestoreAccountConnectivityConfigResponse
+//  @return GetRestoreAccountConnectivityConfigResponse
 func (a *AccountsAPIService) GetRestoreAccountConnectivityConfigExecute(r ApiGetRestoreAccountConnectivityConfigRequest) (*GetRestoreAccountConnectivityConfigResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetRestoreAccountConnectivityConfigResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetRestoreAccountConnectivityConfigResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.GetRestoreAccountConnectivityConfig")
@@ -775,8 +776,8 @@ func (a *AccountsAPIService) GetRestoreAccountConnectivityConfigExecute(r ApiGet
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -786,8 +787,8 @@ func (a *AccountsAPIService) GetRestoreAccountConnectivityConfigExecute(r ApiGet
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -805,15 +806,15 @@ func (a *AccountsAPIService) GetRestoreAccountConnectivityConfigExecute(r ApiGet
 }
 
 type ApiListRestoreAccountsRequest struct {
-	ctx                        context.Context
-	ApiService                 *AccountsAPIService
-	projectId                  string
-	pageToken                  *string
-	pageSize                   *int32
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
+	pageToken *string
+	pageSize *int32
 	listRestoreAccountsRequest *ListRestoreAccountsRequest
 }
 
-// Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+// Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
 func (r ApiListRestoreAccountsRequest) PageToken(pageToken string) ApiListRestoreAccountsRequest {
 	r.pageToken = &pageToken
 	return r
@@ -825,7 +826,7 @@ func (r ApiListRestoreAccountsRequest) PageSize(pageSize int32) ApiListRestoreAc
 	return r
 }
 
-// Filter options.
+// Filter options. 
 func (r ApiListRestoreAccountsRequest) ListRestoreAccountsRequest(listRestoreAccountsRequest ListRestoreAccountsRequest) ApiListRestoreAccountsRequest {
 	r.listRestoreAccountsRequest = &listRestoreAccountsRequest
 	return r
@@ -840,27 +841,26 @@ ListRestoreAccounts List Restore Accounts
 
 Description: Retrieves a list of restore accounts for the given project.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiListRestoreAccountsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiListRestoreAccountsRequest
 */
 func (a *AccountsAPIService) ListRestoreAccounts(ctx context.Context, projectId string) ApiListRestoreAccountsRequest {
 	return ApiListRestoreAccountsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
+		ctx: ctx,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListRestoreAccountsResponse
+//  @return ListRestoreAccountsResponse
 func (a *AccountsAPIService) ListRestoreAccountsExecute(r ApiListRestoreAccountsRequest) (*ListRestoreAccountsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListRestoreAccountsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListRestoreAccountsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ListRestoreAccounts")
@@ -929,8 +929,8 @@ func (a *AccountsAPIService) ListRestoreAccountsExecute(r ApiListRestoreAccounts
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -940,8 +940,8 @@ func (a *AccountsAPIService) ListRestoreAccountsExecute(r ApiListRestoreAccounts
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -959,15 +959,15 @@ func (a *AccountsAPIService) ListRestoreAccountsExecute(r ApiListRestoreAccounts
 }
 
 type ApiListSourceAccountsRequest struct {
-	ctx                       context.Context
-	ApiService                *AccountsAPIService
-	projectId                 string
-	pageToken                 *string
-	pageSize                  *int32
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
+	pageToken *string
+	pageSize *int32
 	listSourceAccountsRequest *ListSourceAccountsRequest
 }
 
-// Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+// Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
 func (r ApiListSourceAccountsRequest) PageToken(pageToken string) ApiListSourceAccountsRequest {
 	r.pageToken = &pageToken
 	return r
@@ -979,7 +979,7 @@ func (r ApiListSourceAccountsRequest) PageSize(pageSize int32) ApiListSourceAcco
 	return r
 }
 
-// Filter options.
+// Filter options. 
 func (r ApiListSourceAccountsRequest) ListSourceAccountsRequest(listSourceAccountsRequest ListSourceAccountsRequest) ApiListSourceAccountsRequest {
 	r.listSourceAccountsRequest = &listSourceAccountsRequest
 	return r
@@ -994,27 +994,26 @@ ListSourceAccounts List Source Accounts
 
 Description: Retrieves a list of source accounts for the given project.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiListSourceAccountsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiListSourceAccountsRequest
 */
 func (a *AccountsAPIService) ListSourceAccounts(ctx context.Context, projectId string) ApiListSourceAccountsRequest {
 	return ApiListSourceAccountsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
+		ctx: ctx,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListSourceAccountsResponse
+//  @return ListSourceAccountsResponse
 func (a *AccountsAPIService) ListSourceAccountsExecute(r ApiListSourceAccountsRequest) (*ListSourceAccountsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListSourceAccountsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListSourceAccountsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ListSourceAccounts")
@@ -1083,8 +1082,8 @@ func (a *AccountsAPIService) ListSourceAccountsExecute(r ApiListSourceAccountsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -1094,8 +1093,8 @@ func (a *AccountsAPIService) ListSourceAccountsExecute(r ApiListSourceAccountsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1113,10 +1112,10 @@ func (a *AccountsAPIService) ListSourceAccountsExecute(r ApiListSourceAccountsRe
 }
 
 type ApiReconnectRestoreAccountRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AccountsAPIService
-	projectId  string
-	accountId  string
+	projectId string
+	accountId string
 }
 
 func (r ApiReconnectRestoreAccountRequest) Execute() (*ReconnectRestoreAccountResponse, *http.Response, error) {
@@ -1128,29 +1127,29 @@ ReconnectRestoreAccount Reconnect Restore Account
 
 Description: Reconnects a restore account to the given project.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@param accountId Eon-assigned ID of the restore account to reconnect.
-	@return ApiReconnectRestoreAccountRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param accountId Eon-assigned ID of the restore account to reconnect.
+ @return ApiReconnectRestoreAccountRequest
 */
 func (a *AccountsAPIService) ReconnectRestoreAccount(ctx context.Context, projectId string, accountId string) ApiReconnectRestoreAccountRequest {
 	return ApiReconnectRestoreAccountRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
-		accountId:  accountId,
+		ctx: ctx,
+		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReconnectRestoreAccountResponse
+//  @return ReconnectRestoreAccountResponse
 func (a *AccountsAPIService) ReconnectRestoreAccountExecute(r ApiReconnectRestoreAccountRequest) (*ReconnectRestoreAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReconnectRestoreAccountResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReconnectRestoreAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ReconnectRestoreAccount")
@@ -1212,8 +1211,8 @@ func (a *AccountsAPIService) ReconnectRestoreAccountExecute(r ApiReconnectRestor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -1223,8 +1222,8 @@ func (a *AccountsAPIService) ReconnectRestoreAccountExecute(r ApiReconnectRestor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1242,10 +1241,10 @@ func (a *AccountsAPIService) ReconnectRestoreAccountExecute(r ApiReconnectRestor
 }
 
 type ApiReconnectSourceAccountRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AccountsAPIService
-	projectId  string
-	accountId  string
+	projectId string
+	accountId string
 }
 
 func (r ApiReconnectSourceAccountRequest) Execute() (*ReconnectSourceAccountResponse, *http.Response, error) {
@@ -1257,29 +1256,29 @@ ReconnectSourceAccount Reconnect Source Account
 
 Description: Reconnects a source account to the given project.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@param accountId Eon-assigned ID of the source account to reconnect.
-	@return ApiReconnectSourceAccountRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param accountId Eon-assigned ID of the source account to reconnect.
+ @return ApiReconnectSourceAccountRequest
 */
 func (a *AccountsAPIService) ReconnectSourceAccount(ctx context.Context, projectId string, accountId string) ApiReconnectSourceAccountRequest {
 	return ApiReconnectSourceAccountRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
-		accountId:  accountId,
+		ctx: ctx,
+		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReconnectSourceAccountResponse
+//  @return ReconnectSourceAccountResponse
 func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceAccountRequest) (*ReconnectSourceAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReconnectSourceAccountResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReconnectSourceAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ReconnectSourceAccount")
@@ -1341,8 +1340,8 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -1352,8 +1351,8 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1371,10 +1370,10 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 }
 
 type ApiUpdateRestoreAccountConnectivityConfigRequest struct {
-	ctx                                           context.Context
-	ApiService                                    *AccountsAPIService
-	accountId                                     string
-	projectId                                     string
+	ctx context.Context
+	ApiService *AccountsAPIService
+	accountId string
+	projectId string
 	updateRestoreAccountConnectivityConfigRequest *UpdateRestoreAccountConnectivityConfigRequest
 }
 
@@ -1392,29 +1391,29 @@ UpdateRestoreAccountConnectivityConfig Update Restore Account Connectivity Confi
 
 Description: Updates the connectivity configuration of the specified restore account.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param accountId ID of the restore account
-	@param projectId ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiUpdateRestoreAccountConnectivityConfigRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountId ID of the restore account
+ @param projectId ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiUpdateRestoreAccountConnectivityConfigRequest
 */
 func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiUpdateRestoreAccountConnectivityConfigRequest {
 	return ApiUpdateRestoreAccountConnectivityConfigRequest{
 		ApiService: a,
-		ctx:        ctx,
-		accountId:  accountId,
-		projectId:  projectId,
+		ctx: ctx,
+		accountId: accountId,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateRestoreAccountConnectivityConfigResponse
+//  @return UpdateRestoreAccountConnectivityConfigResponse
 func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfigExecute(r ApiUpdateRestoreAccountConnectivityConfigRequest) (*UpdateRestoreAccountConnectivityConfigResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateRestoreAccountConnectivityConfigResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateRestoreAccountConnectivityConfigResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.UpdateRestoreAccountConnectivityConfig")
@@ -1481,8 +1480,8 @@ func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfigExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -1492,8 +1491,8 @@ func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfigExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

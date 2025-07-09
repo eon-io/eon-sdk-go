@@ -20,7 +20,7 @@ var _ MappedNullable = &ListBackupPoliciesResponse{}
 // ListBackupPoliciesResponse struct for ListBackupPoliciesResponse
 type ListBackupPoliciesResponse struct {
 	BackupPolicies []BackupPolicy `json:"backupPolicies,omitempty"`
-	// Cursor that points to the first record of the next page of results. Pass this value in the next request.
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 	// Total number of backup jobs that matched the filter options.
 	TotalCount *int32 `json:"totalCount,omitempty"`
@@ -140,7 +140,7 @@ func (o *ListBackupPoliciesResponse) SetTotalCount(v int32) {
 }
 
 func (o ListBackupPoliciesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,5 @@ func (v *NullableListBackupPoliciesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -19,12 +19,12 @@ var _ MappedNullable = &HighFrequencyBackupScheduleConfig{}
 
 // HighFrequencyBackupScheduleConfig struct for HighFrequencyBackupScheduleConfig
 type HighFrequencyBackupScheduleConfig struct {
-	Frequency      *HighFrequencyBackupScheduleFrequency `json:"frequency,omitempty"`
-	IntervalConfig NullableHighFrequencyIntervalConfig   `json:"intervalConfig,omitempty"`
-	DailyConfig    NullableDailyConfig                   `json:"dailyConfig,omitempty"`
-	WeeklyConfig   NullableWeeklyConfig                  `json:"weeklyConfig,omitempty"`
-	MonthlyConfig  NullableMonthlyConfig                 `json:"monthlyConfig,omitempty"`
-	AnnuallyConfig NullableAnnuallyConfig                `json:"annuallyConfig,omitempty"`
+	Frequency *HighFrequencyBackupScheduleFrequency `json:"frequency,omitempty"`
+	IntervalConfig NullableHighFrequencyIntervalConfig `json:"intervalConfig,omitempty"`
+	DailyConfig NullableDailyConfig `json:"dailyConfig,omitempty"`
+	WeeklyConfig NullableWeeklyConfig `json:"weeklyConfig,omitempty"`
+	MonthlyConfig NullableMonthlyConfig `json:"monthlyConfig,omitempty"`
+	AnnuallyConfig NullableAnnuallyConfig `json:"annuallyConfig,omitempty"`
 }
 
 // NewHighFrequencyBackupScheduleConfig instantiates a new HighFrequencyBackupScheduleConfig object
@@ -108,7 +108,6 @@ func (o *HighFrequencyBackupScheduleConfig) HasIntervalConfig() bool {
 func (o *HighFrequencyBackupScheduleConfig) SetIntervalConfig(v HighFrequencyIntervalConfig) {
 	o.IntervalConfig.Set(&v)
 }
-
 // SetIntervalConfigNil sets the value for IntervalConfig to be an explicit nil
 func (o *HighFrequencyBackupScheduleConfig) SetIntervalConfigNil() {
 	o.IntervalConfig.Set(nil)
@@ -151,7 +150,6 @@ func (o *HighFrequencyBackupScheduleConfig) HasDailyConfig() bool {
 func (o *HighFrequencyBackupScheduleConfig) SetDailyConfig(v DailyConfig) {
 	o.DailyConfig.Set(&v)
 }
-
 // SetDailyConfigNil sets the value for DailyConfig to be an explicit nil
 func (o *HighFrequencyBackupScheduleConfig) SetDailyConfigNil() {
 	o.DailyConfig.Set(nil)
@@ -194,7 +192,6 @@ func (o *HighFrequencyBackupScheduleConfig) HasWeeklyConfig() bool {
 func (o *HighFrequencyBackupScheduleConfig) SetWeeklyConfig(v WeeklyConfig) {
 	o.WeeklyConfig.Set(&v)
 }
-
 // SetWeeklyConfigNil sets the value for WeeklyConfig to be an explicit nil
 func (o *HighFrequencyBackupScheduleConfig) SetWeeklyConfigNil() {
 	o.WeeklyConfig.Set(nil)
@@ -237,7 +234,6 @@ func (o *HighFrequencyBackupScheduleConfig) HasMonthlyConfig() bool {
 func (o *HighFrequencyBackupScheduleConfig) SetMonthlyConfig(v MonthlyConfig) {
 	o.MonthlyConfig.Set(&v)
 }
-
 // SetMonthlyConfigNil sets the value for MonthlyConfig to be an explicit nil
 func (o *HighFrequencyBackupScheduleConfig) SetMonthlyConfigNil() {
 	o.MonthlyConfig.Set(nil)
@@ -280,7 +276,6 @@ func (o *HighFrequencyBackupScheduleConfig) HasAnnuallyConfig() bool {
 func (o *HighFrequencyBackupScheduleConfig) SetAnnuallyConfig(v AnnuallyConfig) {
 	o.AnnuallyConfig.Set(&v)
 }
-
 // SetAnnuallyConfigNil sets the value for AnnuallyConfig to be an explicit nil
 func (o *HighFrequencyBackupScheduleConfig) SetAnnuallyConfigNil() {
 	o.AnnuallyConfig.Set(nil)
@@ -292,7 +287,7 @@ func (o *HighFrequencyBackupScheduleConfig) UnsetAnnuallyConfig() {
 }
 
 func (o HighFrequencyBackupScheduleConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -357,3 +352,5 @@ func (v *NullableHighFrequencyBackupScheduleConfig) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -11,15 +11,15 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
 // checks if the StorageAccountRestoreTarget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StorageAccountRestoreTarget{}
 
-// StorageAccountRestoreTarget Information about the storage account where you want to restore the files. If you don't specify a target, the files are restored to the original storage account.
+// StorageAccountRestoreTarget Information about the storage account where you want to restore the files. If you don't specify a target, the files are restored to the original storage account. 
 type StorageAccountRestoreTarget struct {
 	// Name of the storage account to restore the files to.
 	Name string `json:"name"`
@@ -27,7 +27,7 @@ type StorageAccountRestoreTarget struct {
 	ResourceGroup *string `json:"resourceGroup,omitempty"`
 	// Name of the container in the storage account to restore the files to.
 	Container string `json:"container"`
-	// Prefix to add to the restore path. If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the container.
+	// Prefix to add to the restore path. If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the container. 
 	Prefix *string `json:"prefix,omitempty"`
 }
 
@@ -165,7 +165,7 @@ func (o *StorageAccountRestoreTarget) SetPrefix(v string) {
 }
 
 func (o StorageAccountRestoreTarget) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,10 +199,10 @@ func (o *StorageAccountRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -258,3 +258,5 @@ func (v *NullableStorageAccountRestoreTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

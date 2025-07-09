@@ -11,10 +11,10 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Snapshot type satisfies the MappedNullable interface at compile time
@@ -26,7 +26,7 @@ type Snapshot struct {
 	Id string `json:"id"`
 	// ID of the snapshot's parent project.
 	ProjectId *string `json:"projectId,omitempty"`
-	// Date and time the snapshot creation was started. This doesn't represent the point in time the resource is backed up from, which is instead represented by the `pointInTime` property.
+	// Date and time the snapshot creation was started. This doesn't represent the point in time the resource is backed up from, which is instead represented by the `pointInTime` property. 
 	CreatedTime time.Time `json:"createdTime"`
 	// Date and time of the resource that's preserved by the snapshot.
 	PointInTime *time.Time `json:"pointInTime,omitempty"`
@@ -35,8 +35,8 @@ type Snapshot struct {
 	// Eon-assigned ID of the resource the snapshot is backing up.
 	ResourceId string `json:"resourceId"`
 	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
-	ExpirationTime *time.Time        `json:"expirationTime,omitempty"`
-	Resource       *ResourceSnapshot `json:"resource,omitempty"`
+	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
+	Resource *ResourceSnapshot `json:"resource,omitempty"`
 }
 
 type _Snapshot Snapshot
@@ -287,7 +287,7 @@ func (o *Snapshot) SetResource(v ResourceSnapshot) {
 }
 
 func (o Snapshot) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -331,10 +331,10 @@ func (o *Snapshot) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -390,3 +390,5 @@ func (v *NullableSnapshot) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

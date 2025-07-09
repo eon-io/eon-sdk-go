@@ -21,10 +21,11 @@ type HighFrequencyBackupScheduleFrequency string
 // List of HighFrequencyBackupScheduleFrequency
 const (
 	HIGH_FREQUENCY_BACKUP_SCHEDULE_INTERVAL HighFrequencyBackupScheduleFrequency = "INTERVAL"
-	HIGH_FREQUENCY_BACKUP_SCHEDULE_DAILY    HighFrequencyBackupScheduleFrequency = "DAILY"
-	HIGH_FREQUENCY_BACKUP_SCHEDULE_WEEKLY   HighFrequencyBackupScheduleFrequency = "WEEKLY"
-	HIGH_FREQUENCY_BACKUP_SCHEDULE_MONTHLY  HighFrequencyBackupScheduleFrequency = "MONTHLY"
+	HIGH_FREQUENCY_BACKUP_SCHEDULE_DAILY HighFrequencyBackupScheduleFrequency = "DAILY"
+	HIGH_FREQUENCY_BACKUP_SCHEDULE_WEEKLY HighFrequencyBackupScheduleFrequency = "WEEKLY"
+	HIGH_FREQUENCY_BACKUP_SCHEDULE_MONTHLY HighFrequencyBackupScheduleFrequency = "MONTHLY"
 	HIGH_FREQUENCY_BACKUP_SCHEDULE_ANNUALLY HighFrequencyBackupScheduleFrequency = "ANNUALLY"
+	HIGH_FREQUENCY_BACKUP_SCHEDULE_UNSPECIFIED HighFrequencyBackupScheduleFrequency = "UNSPECIFIED"
 )
 
 // All allowed values of HighFrequencyBackupScheduleFrequency enum
@@ -34,6 +35,7 @@ var AllowedHighFrequencyBackupScheduleFrequencyEnumValues = []HighFrequencyBacku
 	"WEEKLY",
 	"MONTHLY",
 	"ANNUALLY",
+	"UNSPECIFIED",
 }
 
 func (v *HighFrequencyBackupScheduleFrequency) UnmarshalJSON(src []byte) error {
@@ -114,3 +116,4 @@ func (v *NullableHighFrequencyBackupScheduleFrequency) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

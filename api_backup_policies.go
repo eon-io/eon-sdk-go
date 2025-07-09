@@ -19,13 +19,14 @@ import (
 	"strings"
 )
 
+
 // BackupPoliciesAPIService BackupPoliciesAPI service
 type BackupPoliciesAPIService service
 
 type ApiCreateBackupPolicyRequest struct {
-	ctx                       context.Context
-	ApiService                *BackupPoliciesAPIService
-	projectId                 string
+	ctx context.Context
+	ApiService *BackupPoliciesAPIService
+	projectId string
 	createBackupPolicyRequest *CreateBackupPolicyRequest
 }
 
@@ -43,27 +44,26 @@ CreateBackupPolicy Create Backup Policy
 
 Description: Creates a backup policy.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiCreateBackupPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiCreateBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) CreateBackupPolicy(ctx context.Context, projectId string) ApiCreateBackupPolicyRequest {
 	return ApiCreateBackupPolicyRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
+		ctx: ctx,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateBackupPolicyResponse
+//  @return CreateBackupPolicyResponse
 func (a *BackupPoliciesAPIService) CreateBackupPolicyExecute(r ApiCreateBackupPolicyRequest) (*CreateBackupPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateBackupPolicyResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateBackupPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupPoliciesAPIService.CreateBackupPolicy")
@@ -129,8 +129,8 @@ func (a *BackupPoliciesAPIService) CreateBackupPolicyExecute(r ApiCreateBackupPo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -140,8 +140,8 @@ func (a *BackupPoliciesAPIService) CreateBackupPolicyExecute(r ApiCreateBackupPo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -159,10 +159,10 @@ func (a *BackupPoliciesAPIService) CreateBackupPolicyExecute(r ApiCreateBackupPo
 }
 
 type ApiDeleteBackupPolicyRequest struct {
-	ctx            context.Context
-	ApiService     *BackupPoliciesAPIService
+	ctx context.Context
+	ApiService *BackupPoliciesAPIService
 	backupPolicyId string
-	projectId      string
+	projectId string
 }
 
 func (r ApiDeleteBackupPolicyRequest) Execute() (*http.Response, error) {
@@ -174,26 +174,26 @@ DeleteBackupPolicy Delete Backup Policy
 
 Description: Deletes a backup policy.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param backupPolicyId ID of the backup policy to delete
-	@param projectId ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiDeleteBackupPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param backupPolicyId ID of the backup policy to delete
+ @param projectId ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiDeleteBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) DeleteBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiDeleteBackupPolicyRequest {
 	return ApiDeleteBackupPolicyRequest{
-		ApiService:     a,
-		ctx:            ctx,
+		ApiService: a,
+		ctx: ctx,
 		backupPolicyId: backupPolicyId,
-		projectId:      projectId,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
 func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupPoliciesAPIService.DeleteBackupPolicy")
@@ -255,8 +255,8 @@ func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPo
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -266,8 +266,8 @@ func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPo
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -276,10 +276,10 @@ func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPo
 }
 
 type ApiGetBackupPolicyRequest struct {
-	ctx            context.Context
-	ApiService     *BackupPoliciesAPIService
+	ctx context.Context
+	ApiService *BackupPoliciesAPIService
 	backupPolicyId string
-	projectId      string
+	projectId string
 }
 
 func (r ApiGetBackupPolicyRequest) Execute() (*GetBackupPolicyResponse, *http.Response, error) {
@@ -291,29 +291,28 @@ GetBackupPolicy Get Backup Policy
 
 Description: Retrieves a backup policy.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param backupPolicyId ID of the backup policy to retrieve
-	@param projectId ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiGetBackupPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param backupPolicyId ID of the backup policy to retrieve
+ @param projectId ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiGetBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) GetBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiGetBackupPolicyRequest {
 	return ApiGetBackupPolicyRequest{
-		ApiService:     a,
-		ctx:            ctx,
+		ApiService: a,
+		ctx: ctx,
 		backupPolicyId: backupPolicyId,
-		projectId:      projectId,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetBackupPolicyResponse
+//  @return GetBackupPolicyResponse
 func (a *BackupPoliciesAPIService) GetBackupPolicyExecute(r ApiGetBackupPolicyRequest) (*GetBackupPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetBackupPolicyResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetBackupPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupPoliciesAPIService.GetBackupPolicy")
@@ -375,8 +374,8 @@ func (a *BackupPoliciesAPIService) GetBackupPolicyExecute(r ApiGetBackupPolicyRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -386,8 +385,8 @@ func (a *BackupPoliciesAPIService) GetBackupPolicyExecute(r ApiGetBackupPolicyRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -405,9 +404,9 @@ func (a *BackupPoliciesAPIService) GetBackupPolicyExecute(r ApiGetBackupPolicyRe
 }
 
 type ApiListBackupPoliciesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *BackupPoliciesAPIService
-	projectId  string
+	projectId string
 }
 
 func (r ApiListBackupPoliciesRequest) Execute() (*ListBackupPoliciesResponse, *http.Response, error) {
@@ -419,27 +418,27 @@ ListBackupPolicies List Backup Policies
 
 Description: Retrieves a list of backup policies in the specified project.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiListBackupPoliciesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiListBackupPoliciesRequest
 */
 func (a *BackupPoliciesAPIService) ListBackupPolicies(ctx context.Context, projectId string) ApiListBackupPoliciesRequest {
 	return ApiListBackupPoliciesRequest{
 		ApiService: a,
-		ctx:        ctx,
-		projectId:  projectId,
+		ctx: ctx,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListBackupPoliciesResponse
+//  @return ListBackupPoliciesResponse
 func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoliciesRequest) (*ListBackupPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListBackupPoliciesResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListBackupPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupPoliciesAPIService.ListBackupPolicies")
@@ -500,8 +499,8 @@ func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -511,8 +510,8 @@ func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -530,10 +529,10 @@ func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoli
 }
 
 type ApiUpdateBackupPolicyRequest struct {
-	ctx                       context.Context
-	ApiService                *BackupPoliciesAPIService
-	backupPolicyId            string
-	projectId                 string
+	ctx context.Context
+	ApiService *BackupPoliciesAPIService
+	backupPolicyId string
+	projectId string
 	updateBackupPolicyRequest *UpdateBackupPolicyRequest
 }
 
@@ -552,29 +551,28 @@ UpdateBackupPolicy Update Backup Policy
 
 Description: Updates a backup policy.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param backupPolicyId ID of the backup policy to update
-	@param projectId ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-	@return ApiUpdateBackupPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param backupPolicyId ID of the backup policy to update
+ @param projectId ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @return ApiUpdateBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) UpdateBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiUpdateBackupPolicyRequest {
 	return ApiUpdateBackupPolicyRequest{
-		ApiService:     a,
-		ctx:            ctx,
+		ApiService: a,
+		ctx: ctx,
 		backupPolicyId: backupPolicyId,
-		projectId:      projectId,
+		projectId: projectId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateBackupPolicyResponse
+//  @return UpdateBackupPolicyResponse
 func (a *BackupPoliciesAPIService) UpdateBackupPolicyExecute(r ApiUpdateBackupPolicyRequest) (*UpdateBackupPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateBackupPolicyResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateBackupPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupPoliciesAPIService.UpdateBackupPolicy")
@@ -641,8 +639,8 @@ func (a *BackupPoliciesAPIService) UpdateBackupPolicyExecute(r ApiUpdateBackupPo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
@@ -652,8 +650,8 @@ func (a *BackupPoliciesAPIService) UpdateBackupPolicyExecute(r ApiUpdateBackupPo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

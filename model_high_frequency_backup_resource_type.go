@@ -19,6 +19,7 @@ var _ MappedNullable = &HighFrequencyBackupResourceType{}
 
 // HighFrequencyBackupResourceType struct for HighFrequencyBackupResourceType
 type HighFrequencyBackupResourceType struct {
+	ResourceType *ResourceType `json:"resourceType,omitempty"`
 }
 
 // NewHighFrequencyBackupResourceType instantiates a new HighFrequencyBackupResourceType object
@@ -38,8 +39,40 @@ func NewHighFrequencyBackupResourceTypeWithDefaults() *HighFrequencyBackupResour
 	return &this
 }
 
+// GetResourceType returns the ResourceType field value if set, zero value otherwise.
+func (o *HighFrequencyBackupResourceType) GetResourceType() ResourceType {
+	if o == nil || IsNil(o.ResourceType) {
+		var ret ResourceType
+		return ret
+	}
+	return *o.ResourceType
+}
+
+// GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HighFrequencyBackupResourceType) GetResourceTypeOk() (*ResourceType, bool) {
+	if o == nil || IsNil(o.ResourceType) {
+		return nil, false
+	}
+	return o.ResourceType, true
+}
+
+// HasResourceType returns a boolean if a field has been set.
+func (o *HighFrequencyBackupResourceType) HasResourceType() bool {
+	if o != nil && !IsNil(o.ResourceType) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceType gets a reference to the given ResourceType and assigns it to the ResourceType field.
+func (o *HighFrequencyBackupResourceType) SetResourceType(v ResourceType) {
+	o.ResourceType = &v
+}
+
 func (o HighFrequencyBackupResourceType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -48,6 +81,9 @@ func (o HighFrequencyBackupResourceType) MarshalJSON() ([]byte, error) {
 
 func (o HighFrequencyBackupResourceType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ResourceType) {
+		toSerialize["resourceType"] = o.ResourceType
+	}
 	return toSerialize, nil
 }
 
@@ -86,3 +122,5 @@ func (v *NullableHighFrequencyBackupResourceType) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

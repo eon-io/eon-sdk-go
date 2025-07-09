@@ -11,42 +11,42 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
-// checks if the StandardHourlyConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &StandardHourlyConfig{}
+// checks if the StandardIntervalConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StandardIntervalConfig{}
 
-// StandardHourlyConfig struct for StandardHourlyConfig
-type StandardHourlyConfig struct {
-	// Backup frequency, in hours.
+// StandardIntervalConfig struct for StandardIntervalConfig
+type StandardIntervalConfig struct {
+	// Backup frequency, in hours. 
 	IntervalHours int32 `json:"intervalHours"`
 }
 
-type _StandardHourlyConfig StandardHourlyConfig
+type _StandardIntervalConfig StandardIntervalConfig
 
-// NewStandardHourlyConfig instantiates a new StandardHourlyConfig object
+// NewStandardIntervalConfig instantiates a new StandardIntervalConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStandardHourlyConfig(intervalHours int32) *StandardHourlyConfig {
-	this := StandardHourlyConfig{}
+func NewStandardIntervalConfig(intervalHours int32) *StandardIntervalConfig {
+	this := StandardIntervalConfig{}
 	this.IntervalHours = intervalHours
 	return &this
 }
 
-// NewStandardHourlyConfigWithDefaults instantiates a new StandardHourlyConfig object
+// NewStandardIntervalConfigWithDefaults instantiates a new StandardIntervalConfig object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewStandardHourlyConfigWithDefaults() *StandardHourlyConfig {
-	this := StandardHourlyConfig{}
+func NewStandardIntervalConfigWithDefaults() *StandardIntervalConfig {
+	this := StandardIntervalConfig{}
 	return &this
 }
 
 // GetIntervalHours returns the IntervalHours field value
-func (o *StandardHourlyConfig) GetIntervalHours() int32 {
+func (o *StandardIntervalConfig) GetIntervalHours() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -57,7 +57,7 @@ func (o *StandardHourlyConfig) GetIntervalHours() int32 {
 
 // GetIntervalHoursOk returns a tuple with the IntervalHours field value
 // and a boolean to check if the value has been set.
-func (o *StandardHourlyConfig) GetIntervalHoursOk() (*int32, bool) {
+func (o *StandardIntervalConfig) GetIntervalHoursOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,25 +65,25 @@ func (o *StandardHourlyConfig) GetIntervalHoursOk() (*int32, bool) {
 }
 
 // SetIntervalHours sets field value
-func (o *StandardHourlyConfig) SetIntervalHours(v int32) {
+func (o *StandardIntervalConfig) SetIntervalHours(v int32) {
 	o.IntervalHours = v
 }
 
-func (o StandardHourlyConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+func (o StandardIntervalConfig) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
 }
 
-func (o StandardHourlyConfig) ToMap() (map[string]interface{}, error) {
+func (o StandardIntervalConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["intervalHours"] = o.IntervalHours
 	return toSerialize, nil
 }
 
-func (o *StandardHourlyConfig) UnmarshalJSON(data []byte) (err error) {
+func (o *StandardIntervalConfig) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -96,62 +96,64 @@ func (o *StandardHourlyConfig) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
-	varStandardHourlyConfig := _StandardHourlyConfig{}
+	varStandardIntervalConfig := _StandardIntervalConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStandardHourlyConfig)
+	err = decoder.Decode(&varStandardIntervalConfig)
 
 	if err != nil {
 		return err
 	}
 
-	*o = StandardHourlyConfig(varStandardHourlyConfig)
+	*o = StandardIntervalConfig(varStandardIntervalConfig)
 
 	return err
 }
 
-type NullableStandardHourlyConfig struct {
-	value *StandardHourlyConfig
+type NullableStandardIntervalConfig struct {
+	value *StandardIntervalConfig
 	isSet bool
 }
 
-func (v NullableStandardHourlyConfig) Get() *StandardHourlyConfig {
+func (v NullableStandardIntervalConfig) Get() *StandardIntervalConfig {
 	return v.value
 }
 
-func (v *NullableStandardHourlyConfig) Set(val *StandardHourlyConfig) {
+func (v *NullableStandardIntervalConfig) Set(val *StandardIntervalConfig) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableStandardHourlyConfig) IsSet() bool {
+func (v NullableStandardIntervalConfig) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableStandardHourlyConfig) Unset() {
+func (v *NullableStandardIntervalConfig) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableStandardHourlyConfig(val *StandardHourlyConfig) *NullableStandardHourlyConfig {
-	return &NullableStandardHourlyConfig{value: val, isSet: true}
+func NewNullableStandardIntervalConfig(val *StandardIntervalConfig) *NullableStandardIntervalConfig {
+	return &NullableStandardIntervalConfig{value: val, isSet: true}
 }
 
-func (v NullableStandardHourlyConfig) MarshalJSON() ([]byte, error) {
+func (v NullableStandardIntervalConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableStandardHourlyConfig) UnmarshalJSON(src []byte) error {
+func (v *NullableStandardIntervalConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -11,8 +11,8 @@ API version: 1.0.0
 package eon
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -24,9 +24,9 @@ type CreateBackupPolicyRequest struct {
 	// Backup policy display name.
 	Name string `json:"name"`
 	// Whether the backup policy is enabled.
-	Enabled          *bool                        `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 	ResourceSelector BackupPolicyResourceSelector `json:"resourceSelector"`
-	BackupPlan       BackupPolicyPlan             `json:"backupPlan"`
+	BackupPlan BackupPolicyPlan `json:"backupPlan"`
 }
 
 type _CreateBackupPolicyRequest CreateBackupPolicyRequest
@@ -160,7 +160,7 @@ func (o *CreateBackupPolicyRequest) SetBackupPlan(v BackupPolicyPlan) {
 }
 
 func (o CreateBackupPolicyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -193,10 +193,10 @@ func (o *CreateBackupPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -252,3 +252,5 @@ func (v *NullableCreateBackupPolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+
