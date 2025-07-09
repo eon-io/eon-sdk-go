@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Month** | **int32** |  | 
-**DayOfMonth** | **int32** |  | 
+**Month** | **int32** |  | [default to 1]
+**DayOfMonth** | **int32** |  | [default to 1]
 
 ## Methods
 

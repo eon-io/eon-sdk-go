@@ -43,6 +43,10 @@ func NewTimeOfYear(month int32, dayOfMonth int32) *TimeOfYear {
 // but it doesn't guarantee that properties required by API are set
 func NewTimeOfYearWithDefaults() *TimeOfYear {
 	this := TimeOfYear{}
+	var month int32 = 1
+	this.Month = month
+	var dayOfMonth int32 = 1
+	this.DayOfMonth = dayOfMonth
 	return &this
 }
 

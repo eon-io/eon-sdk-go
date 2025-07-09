@@ -5797,11 +5797,13 @@ components:
         dayOfMonth: 14
       properties:
         month:
+          default: 1
           example: 5
           maximum: 12
           minimum: 1
           type: integer
         dayOfMonth:
+          default: 1
           example: 14
           maximum: 31
           minimum: 1
