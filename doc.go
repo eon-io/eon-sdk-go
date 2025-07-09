@@ -25,7 +25,7 @@ The SDK supports OAuth 2.0 client credentials flow for authentication:
 
 	authResp, _, err := client.AuthAPI.GetAccessToken(ctx).
 		ApiCredentials(eon.ApiCredentials{
-			ClientId:     "your-client-id",
+			ClientId:  "your-client-id",
 			ClientSecret: "your-client-secret",
 		}).Execute()
 
@@ -65,4 +65,4 @@ The client can be configured with custom HTTP clients, timeouts, and base URLs:
 
 For more examples and detailed documentation, see the README.md file.
 */
-package eon 
+package eon
