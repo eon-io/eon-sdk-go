@@ -6,8 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **JobId** | Pointer to [**JobIdFilters**](JobIdFilters.md) |  | [optional] 
 **SnapshotId** | Pointer to [**SnapshotIdFilters**](SnapshotIdFilters.md) |  | [optional] 
+**Status** | Pointer to [**JobStatusFilters**](JobStatusFilters.md) |  | [optional] 
 **ProviderResourceId** | Pointer to [**ResourceIdFilters**](ResourceIdFilters.md) |  | [optional] 
 **RestoreType** | Pointer to [**RestoreJobTypeFilters**](RestoreJobTypeFilters.md) |  | [optional] 
+**StartTime** | Pointer to [**StartTimeDateFilters**](StartTimeDateFilters.md) |  | [optional] 
+**EndTime** | Pointer to [**EndTimeDateFilters**](EndTimeDateFilters.md) |  | [optional] 
 
 ## Methods
 
@@ -78,6 +81,31 @@ SetSnapshotId sets SnapshotId field to given value.
 
 HasSnapshotId returns a boolean if a field has been set.
 
+### GetStatus
+
+`func (o *RestoreJobsFilterConditions) GetStatus() JobStatusFilters`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *RestoreJobsFilterConditions) GetStatusOk() (*JobStatusFilters, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *RestoreJobsFilterConditions) SetStatus(v JobStatusFilters)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *RestoreJobsFilterConditions) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
 ### GetProviderResourceId
 
 `func (o *RestoreJobsFilterConditions) GetProviderResourceId() ResourceIdFilters`
@@ -127,6 +155,56 @@ SetRestoreType sets RestoreType field to given value.
 `func (o *RestoreJobsFilterConditions) HasRestoreType() bool`
 
 HasRestoreType returns a boolean if a field has been set.
+
+### GetStartTime
+
+`func (o *RestoreJobsFilterConditions) GetStartTime() StartTimeDateFilters`
+
+GetStartTime returns the StartTime field if non-nil, zero value otherwise.
+
+### GetStartTimeOk
+
+`func (o *RestoreJobsFilterConditions) GetStartTimeOk() (*StartTimeDateFilters, bool)`
+
+GetStartTimeOk returns a tuple with the StartTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartTime
+
+`func (o *RestoreJobsFilterConditions) SetStartTime(v StartTimeDateFilters)`
+
+SetStartTime sets StartTime field to given value.
+
+### HasStartTime
+
+`func (o *RestoreJobsFilterConditions) HasStartTime() bool`
+
+HasStartTime returns a boolean if a field has been set.
+
+### GetEndTime
+
+`func (o *RestoreJobsFilterConditions) GetEndTime() EndTimeDateFilters`
+
+GetEndTime returns the EndTime field if non-nil, zero value otherwise.
+
+### GetEndTimeOk
+
+`func (o *RestoreJobsFilterConditions) GetEndTimeOk() (*EndTimeDateFilters, bool)`
+
+GetEndTimeOk returns a tuple with the EndTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndTime
+
+`func (o *RestoreJobsFilterConditions) SetEndTime(v EndTimeDateFilters)`
+
+SetEndTime sets EndTime field to given value.
+
+### HasEndTime
+
+`func (o *RestoreJobsFilterConditions) HasEndTime() bool`
+
+HasEndTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

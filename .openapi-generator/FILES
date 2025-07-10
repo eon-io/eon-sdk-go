@@ -80,6 +80,7 @@ docs/EbsSnapshotTarget.md
 docs/EbsTarget.md
 docs/Ec2InstanceRestoreDestination.md
 docs/Ec2InstanceRestoreTarget.md
+docs/EndTimeDateFilters.md
 docs/Environment.md
 docs/EnvironmentCondition.md
 docs/EnvironmentDetails.md
@@ -108,6 +109,7 @@ docs/JobExecutionDetails.md
 docs/JobIdFilters.md
 docs/JobSnapshotDetails.md
 docs/JobStatus.md
+docs/JobStatusFilters.md
 docs/JobsAPI.md
 docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
@@ -182,12 +184,14 @@ docs/Snapshot.md
 docs/SnapshotDateFilters.md
 docs/SnapshotFilterConditions.md
 docs/SnapshotIdFilters.md
+docs/SnapshotSortField.md
 docs/SnapshotStorage.md
 docs/SnapshotsAPI.md
 docs/SortBackupJobBy.md
 docs/SortOrder.md
 docs/SortResourceBy.md
 docs/SortRestoreJobBy.md
+docs/SortSnapshotsBy.md
 docs/SourceAccount.md
 docs/SourceStorage.md
 docs/StandardBackupPolicyPlan.md
@@ -195,6 +199,7 @@ docs/StandardBackupScheduleConfig.md
 docs/StandardBackupScheduleFrequency.md
 docs/StandardBackupSchedules.md
 docs/StandardIntervalConfig.md
+docs/StartTimeDateFilters.md
 docs/StorageAccountRestoreTarget.md
 docs/SubnetFilters.md
 docs/SubnetPerAvailabilityZone.md
@@ -278,6 +283,7 @@ model_ebs_snapshot_target.go
 model_ebs_target.go
 model_ec2_instance_restore_destination.go
 model_ec2_instance_restore_target.go
+model_end_time_date_filters.go
 model_environment.go
 model_environment_condition.go
 model_environment_details.go
@@ -306,6 +312,7 @@ model_job_execution_details.go
 model_job_id_filters.go
 model_job_snapshot_details.go
 model_job_status.go
+model_job_status_filters.go
 model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
 model_list_backup_policies_response.go
@@ -378,11 +385,13 @@ model_snapshot.go
 model_snapshot_date_filters.go
 model_snapshot_filter_conditions.go
 model_snapshot_id_filters.go
+model_snapshot_sort_field.go
 model_snapshot_storage.go
 model_sort_backup_job_by.go
 model_sort_order.go
 model_sort_resource_by.go
 model_sort_restore_job_by.go
+model_sort_snapshots_by.go
 model_source_account.go
 model_source_storage.go
 model_standard_backup_policy_plan.go
@@ -390,6 +399,7 @@ model_standard_backup_schedule_config.go
 model_standard_backup_schedule_frequency.go
 model_standard_backup_schedules.go
 model_standard_interval_config.go
+model_start_time_date_filters.go
 model_storage_account_restore_target.go
 model_subnet_filters.go
 model_subnet_per_availability_zone.go

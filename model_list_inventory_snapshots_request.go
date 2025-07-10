@@ -20,6 +20,8 @@ var _ MappedNullable = &ListInventorySnapshotsRequest{}
 // ListInventorySnapshotsRequest struct for ListInventorySnapshotsRequest
 type ListInventorySnapshotsRequest struct {
 	Filters *SnapshotFilterConditions `json:"filters,omitempty"`
+	// List of sorting options. Sorting is applied in the order passed in the list. 
+	Sorts []SortSnapshotsBy `json:"sorts,omitempty"`
 }
 
 // NewListInventorySnapshotsRequest instantiates a new ListInventorySnapshotsRequest object
@@ -71,6 +73,38 @@ func (o *ListInventorySnapshotsRequest) SetFilters(v SnapshotFilterConditions) {
 	o.Filters = &v
 }
 
+// GetSorts returns the Sorts field value if set, zero value otherwise.
+func (o *ListInventorySnapshotsRequest) GetSorts() []SortSnapshotsBy {
+	if o == nil || IsNil(o.Sorts) {
+		var ret []SortSnapshotsBy
+		return ret
+	}
+	return o.Sorts
+}
+
+// GetSortsOk returns a tuple with the Sorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListInventorySnapshotsRequest) GetSortsOk() ([]SortSnapshotsBy, bool) {
+	if o == nil || IsNil(o.Sorts) {
+		return nil, false
+	}
+	return o.Sorts, true
+}
+
+// HasSorts returns a boolean if a field has been set.
+func (o *ListInventorySnapshotsRequest) HasSorts() bool {
+	if o != nil && !IsNil(o.Sorts) {
+		return true
+	}
+
+	return false
+}
+
+// SetSorts gets a reference to the given []SortSnapshotsBy and assigns it to the Sorts field.
+func (o *ListInventorySnapshotsRequest) SetSorts(v []SortSnapshotsBy) {
+	o.Sorts = v
+}
+
 func (o ListInventorySnapshotsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -83,6 +117,9 @@ func (o ListInventorySnapshotsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
+	}
+	if !IsNil(o.Sorts) {
+		toSerialize["sorts"] = o.Sorts
 	}
 	return toSerialize, nil
 }

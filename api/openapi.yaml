@@ -4063,6 +4063,50 @@ components:
             type: string
           type: array
       type: object
+    JobStatus:
+      enum:
+      - JOB_UNSPECIFIED
+      - JOB_PENDING
+      - JOB_RUNNING
+      - JOB_COMPLETED
+      - JOB_FAILED
+      - JOB_PARTIAL
+      - JOB_CANCELLED
+      example: JOB_PENDING
+      type: string
+      x-enum-varnames:
+      - JOB_UNSPECIFIED
+      - JOB_PENDING
+      - JOB_RUNNING
+      - JOB_COMPLETED
+      - JOB_FAILED
+      - JOB_PARTIAL
+      - JOB_CANCELLED
+    JobStatusFilters:
+      additionalProperties: false
+      example:
+        in:
+        - JOB_COMPLETED
+        - JOB_FAILED
+        notIn:
+        - JOB_COMPLETED
+        - JOB_FAILED
+      properties:
+        in:
+          example:
+          - JOB_COMPLETED
+          - JOB_FAILED
+          items:
+            $ref: '#/components/schemas/JobStatus'
+          type: array
+        notIn:
+          example:
+          - JOB_COMPLETED
+          - JOB_FAILED
+          items:
+            $ref: '#/components/schemas/JobStatus'
+          type: array
+      type: object
     ResourceIdFilters:
       additionalProperties: false
       example:
@@ -4139,6 +4183,40 @@ components:
             $ref: '#/components/schemas/BackupJobType'
           type: array
       type: object
+    StartTimeDateFilters:
+      additionalProperties: false
+      example:
+        endDate: endDate
+        startDate: startDate
+      properties:
+        startDate:
+          description: |
+            Matches if `startTime` is on or later than this date.
+            Must be in ISO 8601 YYYY-MM-DD format.
+          type: string
+        endDate:
+          description: |
+            Matches if `startTime` is on or earlier than this date.
+            Must be in ISO 8601 YYYY-MM-DD format.
+          type: string
+      type: object
+    EndTimeDateFilters:
+      additionalProperties: false
+      example:
+        endDate: endDate
+        startDate: startDate
+      properties:
+        startDate:
+          description: |
+            Matches if `endTime` is on or later than this date.
+            Must be in ISO 8601 YYYY-MM-DD format.
+          type: string
+        endDate:
+          description: |
+            Matches if `endTime` is on or earlier than this date.
+            Must be in ISO 8601 YYYY-MM-DD format.
+          type: string
+      type: object
     BackupJobsFilterConditions:
       additionalProperties: false
       example:
@@ -4157,6 +4235,19 @@ components:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+        startTime:
+          endDate: endDate
+          startDate: startDate
+        endTime:
+          endDate: endDate
+          startDate: startDate
+        status:
+          in:
+          - JOB_COMPLETED
+          - JOB_FAILED
+          notIn:
+          - JOB_COMPLETED
+          - JOB_FAILED
         backupType:
           in:
           - AWS_EC2_BACKUP
@@ -4169,10 +4260,16 @@ components:
           $ref: '#/components/schemas/JobIdFilters'
         snapshotId:
           $ref: '#/components/schemas/SnapshotIdFilters'
+        status:
+          $ref: '#/components/schemas/JobStatusFilters'
         providerResourceId:
           $ref: '#/components/schemas/ResourceIdFilters'
         backupType:
           $ref: '#/components/schemas/BackupJobTypeFilters'
+        startTime:
+          $ref: '#/components/schemas/StartTimeDateFilters'
+        endTime:
+          $ref: '#/components/schemas/EndTimeDateFilters'
       type: object
     BackupJobSortField:
       description: Field to sort by.
@@ -4232,6 +4329,19 @@ components:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+          startTime:
+            endDate: endDate
+            startDate: startDate
+          endTime:
+            endDate: endDate
+            startDate: startDate
+          status:
+            in:
+            - JOB_COMPLETED
+            - JOB_FAILED
+            notIn:
+            - JOB_COMPLETED
+            - JOB_FAILED
           backupType:
             in:
             - AWS_EC2_BACKUP
@@ -4252,25 +4362,6 @@ components:
             $ref: '#/components/schemas/SortBackupJobBy'
           type: array
       type: object
-    JobStatus:
-      enum:
-      - JOB_UNSPECIFIED
-      - JOB_PENDING
-      - JOB_RUNNING
-      - JOB_COMPLETED
-      - JOB_FAILED
-      - JOB_PARTIAL
-      - JOB_CANCELLED
-      example: JOB_PENDING
-      type: string
-      x-enum-varnames:
-      - JOB_UNSPECIFIED
-      - JOB_PENDING
-      - JOB_RUNNING
-      - JOB_COMPLETED
-      - JOB_FAILED
-      - JOB_PARTIAL
-      - JOB_CANCELLED
     JobExecutionDetails:
       example:
         jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
@@ -4706,15 +4797,34 @@ components:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+        startTime:
+          endDate: endDate
+          startDate: startDate
+        endTime:
+          endDate: endDate
+          startDate: startDate
+        status:
+          in:
+          - JOB_COMPLETED
+          - JOB_FAILED
+          notIn:
+          - JOB_COMPLETED
+          - JOB_FAILED
       properties:
         jobId:
           $ref: '#/components/schemas/JobIdFilters'
         snapshotId:
           $ref: '#/components/schemas/SnapshotIdFilters'
+        status:
+          $ref: '#/components/schemas/JobStatusFilters'
         providerResourceId:
           $ref: '#/components/schemas/ResourceIdFilters'
         restoreType:
           $ref: '#/components/schemas/RestoreJobTypeFilters'
+        startTime:
+          $ref: '#/components/schemas/StartTimeDateFilters'
+        endTime:
+          $ref: '#/components/schemas/EndTimeDateFilters'
       type: object
     RestoreJobSortField:
       description: Field to sort by.
@@ -4771,6 +4881,19 @@ components:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+          startTime:
+            endDate: endDate
+            startDate: startDate
+          endTime:
+            endDate: endDate
+            startDate: startDate
+          status:
+            in:
+            - JOB_COMPLETED
+            - JOB_FAILED
+            notIn:
+            - JOB_COMPLETED
+            - JOB_FAILED
         sorts:
         - field: startTime
           order: ASC
@@ -11363,6 +11486,32 @@ components:
         pointInTime:
           $ref: '#/components/schemas/SnapshotDateFilters'
       type: object
+    SnapshotSortField:
+      description: Field to sort by.
+      enum:
+      - pointInTime
+      example: pointInTime
+      required:
+      - enum
+      type: string
+      x-enum-varnames:
+      - SNAPSHOT_SORT_POINT_IN_TIME
+    SortSnapshotsBy:
+      description: |
+        List of sorting options.
+        Sorting is applied in the order passed in the list.
+      example:
+        field: pointInTime
+        order: ASC
+      properties:
+        field:
+          $ref: '#/components/schemas/SnapshotSortField'
+        order:
+          $ref: '#/components/schemas/SortOrder'
+      required:
+      - field
+      - order
+      type: object
     ListInventorySnapshotsRequest:
       additionalProperties: false
       example:
@@ -11370,9 +11519,21 @@ components:
           pointInTime:
             endDate: endDate
             startDate: startDate
+        sorts:
+        - field: pointInTime
+          order: ASC
+        - field: pointInTime
+          order: ASC
       properties:
         filters:
           $ref: '#/components/schemas/SnapshotFilterConditions'
+        sorts:
+          description: |
+            List of sorting options.
+            Sorting is applied in the order passed in the list.
+          items:
+            $ref: '#/components/schemas/SortSnapshotsBy'
+          type: array
       type: object
     ListInventorySnapshotsResponse:
       example:

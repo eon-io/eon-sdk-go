@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Filters** | Pointer to [**SnapshotFilterConditions**](SnapshotFilterConditions.md) |  | [optional] 
+**Sorts** | Pointer to [**[]SortSnapshotsBy**](SortSnapshotsBy.md) | List of sorting options. Sorting is applied in the order passed in the list.  | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetFilters sets Filters field to given value.
 `func (o *ListInventorySnapshotsRequest) HasFilters() bool`
 
 HasFilters returns a boolean if a field has been set.
+
+### GetSorts
+
+`func (o *ListInventorySnapshotsRequest) GetSorts() []SortSnapshotsBy`
+
+GetSorts returns the Sorts field if non-nil, zero value otherwise.
+
+### GetSortsOk
+
+`func (o *ListInventorySnapshotsRequest) GetSortsOk() (*[]SortSnapshotsBy, bool)`
+
+GetSortsOk returns a tuple with the Sorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSorts
+
+`func (o *ListInventorySnapshotsRequest) SetSorts(v []SortSnapshotsBy)`
+
+SetSorts sets Sorts field to given value.
+
+### HasSorts
+
+`func (o *ListInventorySnapshotsRequest) HasSorts() bool`
+
+HasSorts returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -21,8 +21,11 @@ var _ MappedNullable = &BackupJobsFilterConditions{}
 type BackupJobsFilterConditions struct {
 	JobId *JobIdFilters `json:"jobId,omitempty"`
 	SnapshotId *SnapshotIdFilters `json:"snapshotId,omitempty"`
+	Status *JobStatusFilters `json:"status,omitempty"`
 	ProviderResourceId *ResourceIdFilters `json:"providerResourceId,omitempty"`
 	BackupType *BackupJobTypeFilters `json:"backupType,omitempty"`
+	StartTime *StartTimeDateFilters `json:"startTime,omitempty"`
+	EndTime *EndTimeDateFilters `json:"endTime,omitempty"`
 }
 
 // NewBackupJobsFilterConditions instantiates a new BackupJobsFilterConditions object
@@ -106,6 +109,38 @@ func (o *BackupJobsFilterConditions) SetSnapshotId(v SnapshotIdFilters) {
 	o.SnapshotId = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *BackupJobsFilterConditions) GetStatus() JobStatusFilters {
+	if o == nil || IsNil(o.Status) {
+		var ret JobStatusFilters
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupJobsFilterConditions) GetStatusOk() (*JobStatusFilters, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *BackupJobsFilterConditions) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given JobStatusFilters and assigns it to the Status field.
+func (o *BackupJobsFilterConditions) SetStatus(v JobStatusFilters) {
+	o.Status = &v
+}
+
 // GetProviderResourceId returns the ProviderResourceId field value if set, zero value otherwise.
 func (o *BackupJobsFilterConditions) GetProviderResourceId() ResourceIdFilters {
 	if o == nil || IsNil(o.ProviderResourceId) {
@@ -170,6 +205,70 @@ func (o *BackupJobsFilterConditions) SetBackupType(v BackupJobTypeFilters) {
 	o.BackupType = &v
 }
 
+// GetStartTime returns the StartTime field value if set, zero value otherwise.
+func (o *BackupJobsFilterConditions) GetStartTime() StartTimeDateFilters {
+	if o == nil || IsNil(o.StartTime) {
+		var ret StartTimeDateFilters
+		return ret
+	}
+	return *o.StartTime
+}
+
+// GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupJobsFilterConditions) GetStartTimeOk() (*StartTimeDateFilters, bool) {
+	if o == nil || IsNil(o.StartTime) {
+		return nil, false
+	}
+	return o.StartTime, true
+}
+
+// HasStartTime returns a boolean if a field has been set.
+func (o *BackupJobsFilterConditions) HasStartTime() bool {
+	if o != nil && !IsNil(o.StartTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTime gets a reference to the given StartTimeDateFilters and assigns it to the StartTime field.
+func (o *BackupJobsFilterConditions) SetStartTime(v StartTimeDateFilters) {
+	o.StartTime = &v
+}
+
+// GetEndTime returns the EndTime field value if set, zero value otherwise.
+func (o *BackupJobsFilterConditions) GetEndTime() EndTimeDateFilters {
+	if o == nil || IsNil(o.EndTime) {
+		var ret EndTimeDateFilters
+		return ret
+	}
+	return *o.EndTime
+}
+
+// GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupJobsFilterConditions) GetEndTimeOk() (*EndTimeDateFilters, bool) {
+	if o == nil || IsNil(o.EndTime) {
+		return nil, false
+	}
+	return o.EndTime, true
+}
+
+// HasEndTime returns a boolean if a field has been set.
+func (o *BackupJobsFilterConditions) HasEndTime() bool {
+	if o != nil && !IsNil(o.EndTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndTime gets a reference to the given EndTimeDateFilters and assigns it to the EndTime field.
+func (o *BackupJobsFilterConditions) SetEndTime(v EndTimeDateFilters) {
+	o.EndTime = &v
+}
+
 func (o BackupJobsFilterConditions) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -186,11 +285,20 @@ func (o BackupJobsFilterConditions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SnapshotId) {
 		toSerialize["snapshotId"] = o.SnapshotId
 	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
 	if !IsNil(o.ProviderResourceId) {
 		toSerialize["providerResourceId"] = o.ProviderResourceId
 	}
 	if !IsNil(o.BackupType) {
 		toSerialize["backupType"] = o.BackupType
+	}
+	if !IsNil(o.StartTime) {
+		toSerialize["startTime"] = o.StartTime
+	}
+	if !IsNil(o.EndTime) {
+		toSerialize["endTime"] = o.EndTime
 	}
 	return toSerialize, nil
 }
