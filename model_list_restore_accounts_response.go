@@ -26,7 +26,7 @@ type ListRestoreAccountsResponse struct {
 	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 	// Total number of restore accounts that matched the filter options.
-	TotalCount *int32 `json:"totalCount,omitempty"`
+	TotalCount int32 `json:"totalCount"`
 }
 
 type _ListRestoreAccountsResponse ListRestoreAccountsResponse
@@ -35,9 +35,10 @@ type _ListRestoreAccountsResponse ListRestoreAccountsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListRestoreAccountsResponse(accounts []RestoreAccount) *ListRestoreAccountsResponse {
+func NewListRestoreAccountsResponse(accounts []RestoreAccount, totalCount int32) *ListRestoreAccountsResponse {
 	this := ListRestoreAccountsResponse{}
 	this.Accounts = accounts
+	this.TotalCount = totalCount
 	return &this
 }
 
@@ -105,36 +106,28 @@ func (o *ListRestoreAccountsResponse) SetNextToken(v string) {
 	o.NextToken = &v
 }
 
-// GetTotalCount returns the TotalCount field value if set, zero value otherwise.
+// GetTotalCount returns the TotalCount field value
 func (o *ListRestoreAccountsResponse) GetTotalCount() int32 {
-	if o == nil || IsNil(o.TotalCount) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.TotalCount
+
+	return o.TotalCount
 }
 
-// GetTotalCountOk returns a tuple with the TotalCount field value if set, nil otherwise
+// GetTotalCountOk returns a tuple with the TotalCount field value
 // and a boolean to check if the value has been set.
 func (o *ListRestoreAccountsResponse) GetTotalCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.TotalCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TotalCount, true
+	return &o.TotalCount, true
 }
 
-// HasTotalCount returns a boolean if a field has been set.
-func (o *ListRestoreAccountsResponse) HasTotalCount() bool {
-	if o != nil && !IsNil(o.TotalCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalCount gets a reference to the given int32 and assigns it to the TotalCount field.
+// SetTotalCount sets field value
 func (o *ListRestoreAccountsResponse) SetTotalCount(v int32) {
-	o.TotalCount = &v
+	o.TotalCount = v
 }
 
 func (o ListRestoreAccountsResponse) MarshalJSON() ([]byte, error) {
@@ -151,9 +144,7 @@ func (o ListRestoreAccountsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NextToken) {
 		toSerialize["nextToken"] = o.NextToken
 	}
-	if !IsNil(o.TotalCount) {
-		toSerialize["totalCount"] = o.TotalCount
-	}
+	toSerialize["totalCount"] = o.TotalCount
 	return toSerialize, nil
 }
 
@@ -163,6 +154,7 @@ func (o *ListRestoreAccountsResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"accounts",
+		"totalCount",
 	}
 
 	allProperties := make(map[string]interface{})

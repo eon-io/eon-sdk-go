@@ -1,93 +1,93 @@
-# ListRestoreJobsResponse
+# ListBackupVaultResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Jobs** | [**[]RestoreJob**](RestoreJob.md) | List of retrieved restore jobs. | 
+**Vaults** | [**[]BackupVault**](BackupVault.md) |  | 
 **NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 **TotalCount** | **int32** | Total number of restore jobs that matched the filter options. | 
 
 ## Methods
 
-### NewListRestoreJobsResponse
+### NewListBackupVaultResponse
 
-`func NewListRestoreJobsResponse(jobs []RestoreJob, totalCount int32, ) *ListRestoreJobsResponse`
+`func NewListBackupVaultResponse(vaults []BackupVault, totalCount int32, ) *ListBackupVaultResponse`
 
-NewListRestoreJobsResponse instantiates a new ListRestoreJobsResponse object
+NewListBackupVaultResponse instantiates a new ListBackupVaultResponse object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewListRestoreJobsResponseWithDefaults
+### NewListBackupVaultResponseWithDefaults
 
-`func NewListRestoreJobsResponseWithDefaults() *ListRestoreJobsResponse`
+`func NewListBackupVaultResponseWithDefaults() *ListBackupVaultResponse`
 
-NewListRestoreJobsResponseWithDefaults instantiates a new ListRestoreJobsResponse object
+NewListBackupVaultResponseWithDefaults instantiates a new ListBackupVaultResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetJobs
+### GetVaults
 
-`func (o *ListRestoreJobsResponse) GetJobs() []RestoreJob`
+`func (o *ListBackupVaultResponse) GetVaults() []BackupVault`
 
-GetJobs returns the Jobs field if non-nil, zero value otherwise.
+GetVaults returns the Vaults field if non-nil, zero value otherwise.
 
-### GetJobsOk
+### GetVaultsOk
 
-`func (o *ListRestoreJobsResponse) GetJobsOk() (*[]RestoreJob, bool)`
+`func (o *ListBackupVaultResponse) GetVaultsOk() (*[]BackupVault, bool)`
 
-GetJobsOk returns a tuple with the Jobs field if it's non-nil, zero value otherwise
+GetVaultsOk returns a tuple with the Vaults field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetJobs
+### SetVaults
 
-`func (o *ListRestoreJobsResponse) SetJobs(v []RestoreJob)`
+`func (o *ListBackupVaultResponse) SetVaults(v []BackupVault)`
 
-SetJobs sets Jobs field to given value.
+SetVaults sets Vaults field to given value.
 
 
 ### GetNextToken
 
-`func (o *ListRestoreJobsResponse) GetNextToken() string`
+`func (o *ListBackupVaultResponse) GetNextToken() string`
 
 GetNextToken returns the NextToken field if non-nil, zero value otherwise.
 
 ### GetNextTokenOk
 
-`func (o *ListRestoreJobsResponse) GetNextTokenOk() (*string, bool)`
+`func (o *ListBackupVaultResponse) GetNextTokenOk() (*string, bool)`
 
 GetNextTokenOk returns a tuple with the NextToken field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNextToken
 
-`func (o *ListRestoreJobsResponse) SetNextToken(v string)`
+`func (o *ListBackupVaultResponse) SetNextToken(v string)`
 
 SetNextToken sets NextToken field to given value.
 
 ### HasNextToken
 
-`func (o *ListRestoreJobsResponse) HasNextToken() bool`
+`func (o *ListBackupVaultResponse) HasNextToken() bool`
 
 HasNextToken returns a boolean if a field has been set.
 
 ### GetTotalCount
 
-`func (o *ListRestoreJobsResponse) GetTotalCount() int32`
+`func (o *ListBackupVaultResponse) GetTotalCount() int32`
 
 GetTotalCount returns the TotalCount field if non-nil, zero value otherwise.
 
 ### GetTotalCountOk
 
-`func (o *ListRestoreJobsResponse) GetTotalCountOk() (*int32, bool)`
+`func (o *ListBackupVaultResponse) GetTotalCountOk() (*int32, bool)`
 
 GetTotalCountOk returns a tuple with the TotalCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalCount
 
-`func (o *ListRestoreJobsResponse) SetTotalCount(v int32)`
+`func (o *ListBackupVaultResponse) SetTotalCount(v int32)`
 
 SetTotalCount sets TotalCount field to given value.
 

@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Accounts** | [**[]SourceAccount**](SourceAccount.md) | List of source accounts. | 
 **NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
-**TotalCount** | Pointer to **int32** | Total number of source accounts that matched the filter options. | [optional] 
+**TotalCount** | **int32** | Total number of source accounts that matched the filter options. | 
 
 ## Methods
 
 ### NewListSourceAccountsResponse
 
-`func NewListSourceAccountsResponse(accounts []SourceAccount, ) *ListSourceAccountsResponse`
+`func NewListSourceAccountsResponse(accounts []SourceAccount, totalCount int32, ) *ListSourceAccountsResponse`
 
 NewListSourceAccountsResponse instantiates a new ListSourceAccountsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -91,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetTotalCount sets TotalCount field to given value.
 
-### HasTotalCount
-
-`func (o *ListSourceAccountsResponse) HasTotalCount() bool`
-
-HasTotalCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -28,6 +28,10 @@ tags:
     \ classification, and exclude resources from backup."
   name: resources
   x-displayName: Resources
+- description: "The Vaults API allows you to manage your vaults, which are where your\
+    \ Eon snapshots are stored when your resources are backed up."
+  name: vaults
+  x-displayName: Vaults
 - description: The Snapshots API allows you to retrieve and restore from Eon snapshots.
   name: snapshots
   x-displayName: Snapshots
@@ -1400,6 +1404,78 @@ paths:
         - entityType: backup_policy
           in: path
           key: backupPolicyId
+  /v1/projects/{projectId}/vaults/list:
+    post:
+      description: "Description: Retrieves a list of vaults in the specified project."
+      operationId: listVaults
+      parameters:
+      - description: |
+          ID of the project whose vaults you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+          To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+        example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBackupVaultResponse'
+          description: Vaults retrieved.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Vaults
+      tags:
+      - vaults
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:vaults
+      x-audit-log:
+        excluded: true
   /v1/token:
     post:
       description: |
@@ -3537,6 +3613,7 @@ components:
           type: integer
       required:
       - accounts
+      - totalCount
       type: object
     DisconnectSourceAccountResponse:
       example:
@@ -3687,6 +3764,7 @@ components:
           type: integer
       required:
       - accounts
+      - totalCount
       type: object
     DisconnectRestoreAccountResponse:
       example:
@@ -4524,10 +4602,39 @@ components:
       required:
       - pointInTime
       type: object
-    BackupVault:
+    AwsVaultConfig:
+      description: |
+        AWS-specific vault configuration.
+      example:
+        encryptionKey: encryptionKey
+      nullable: true
+      properties:
+        encryptionKey:
+          description: ARN of the KMS key used for encryption.
+          type: string
+      type: object
+    VaultProviderAttributes:
+      description: |
+        Cloud-provider-specific vault attributes.
       example:
         cloudProvider: AWS
+        aws:
+          encryptionKey: encryptionKey
+      properties:
+        cloudProvider:
+          $ref: '#/components/schemas/Provider'
+        aws:
+          $ref: '#/components/schemas/AwsVaultConfig'
+      required:
+      - cloudProvider
+      type: object
+    BackupVault:
+      example:
         name: AWS US East 1
+        vaultAttributes:
+          cloudProvider: AWS
+          aws:
+            encryptionKey: encryptionKey
         id: 37732835-d768-5990-ba93-a7c2d2e6d754
         region: us-east-1
       properties:
@@ -4539,18 +4646,18 @@ components:
           description: Vault display name.
           example: AWS US East 1
           type: string
-        cloudProvider:
-          $ref: '#/components/schemas/Provider'
         region:
           description: Region where the vault is located.
           example: us-east-1
           type: string
+        vaultAttributes:
+          $ref: '#/components/schemas/VaultProviderAttributes'
       required:
-      - cloudAccountId
-      - cloudProvider
       - id
       - name
       - region
+      - vaultAccountId
+      - vaultAttributes
       type: object
     BackupJob:
       example:
@@ -4576,8 +4683,11 @@ components:
           pointInTime: 2024-10-29T23:01:30Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
-          cloudProvider: AWS
           name: AWS US East 1
+          vaultAttributes:
+            cloudProvider: AWS
+            aws:
+              encryptionKey: encryptionKey
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           region: us-east-1
         backupType: AWS_EC2_BACKUP
@@ -4622,8 +4732,11 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
-            cloudProvider: AWS
             name: AWS US East 1
+            vaultAttributes:
+              cloudProvider: AWS
+              aws:
+                encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             region: us-east-1
           backupType: AWS_EC2_BACKUP
@@ -4649,8 +4762,11 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
-            cloudProvider: AWS
             name: AWS US East 1
+            vaultAttributes:
+              cloudProvider: AWS
+              aws:
+                encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             region: us-east-1
           backupType: AWS_EC2_BACKUP
@@ -4671,6 +4787,9 @@ components:
           description: Total number of backup jobs that matched the filter options.
           example: 2347
           type: integer
+      required:
+      - jobs
+      - totalCount
       type: object
     GetBackupJobResponse:
       example:
@@ -4697,8 +4816,11 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
-            cloudProvider: AWS
             name: AWS US East 1
+            vaultAttributes:
+              cloudProvider: AWS
+              aws:
+                encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             region: us-east-1
           backupType: AWS_EC2_BACKUP
@@ -4968,8 +5090,11 @@ components:
           pointInTime: 2024-10-29T23:01:30Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
-          cloudProvider: AWS
           name: AWS US East 1
+          vaultAttributes:
+            cloudProvider: AWS
+            aws:
+              encryptionKey: encryptionKey
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           region: us-east-1
       properties:
@@ -5022,8 +5147,11 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
-            cloudProvider: AWS
             name: AWS US East 1
+            vaultAttributes:
+              cloudProvider: AWS
+              aws:
+                encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             region: us-east-1
         - restoreType: AWS_EC2_INSTANCE_RESTORE
@@ -5054,8 +5182,11 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
-            cloudProvider: AWS
             name: AWS US East 1
+            vaultAttributes:
+              cloudProvider: AWS
+              aws:
+                encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             region: us-east-1
         totalCount: 188
@@ -5075,6 +5206,9 @@ components:
           description: Total number of restore jobs that matched the filter options.
           example: 188
           type: integer
+      required:
+      - jobs
+      - totalCount
       type: object
     GetRestoreJobResponse:
       example:
@@ -5107,8 +5241,11 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
-            cloudProvider: AWS
             name: AWS US East 1
+            vaultAttributes:
+              cloudProvider: AWS
+              aws:
+                encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             region: us-east-1
       properties:
@@ -8698,6 +8835,44 @@ components:
       required:
       - backupPolicy
       type: object
+    ListBackupVaultResponse:
+      example:
+        nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+        vaults:
+        - name: AWS US East 1
+          vaultAttributes:
+            cloudProvider: AWS
+            aws:
+              encryptionKey: encryptionKey
+          id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          region: us-east-1
+        - name: AWS US East 1
+          vaultAttributes:
+            cloudProvider: AWS
+            aws:
+              encryptionKey: encryptionKey
+          id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          region: us-east-1
+        totalCount: 188
+      properties:
+        vaults:
+          items:
+            $ref: '#/components/schemas/BackupVault'
+          type: array
+        nextToken:
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+          type: string
+        totalCount:
+          description: Total number of restore jobs that matched the filter options.
+          example: 188
+          type: integer
+      required:
+      - totalCount
+      - vaults
+      type: object
     ApiCredentials:
       additionalProperties: false
       example:
@@ -10085,6 +10260,7 @@ components:
           type: integer
       required:
       - resources
+      - totalCount
       type: object
     OverrideDataClassificationsRequest:
       example:
@@ -11650,6 +11826,7 @@ components:
           type: integer
       required:
       - snapshots
+      - totalCount
       type: object
   securitySchemes:
     ApiKeyAuth:

@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Snapshots** | [**[]Snapshot**](Snapshot.md) | List of Eon snapshots. | 
 **NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
-**TotalCount** | Pointer to **int32** | The total number of Eon snapshots. | [optional] 
+**TotalCount** | **int32** | The total number of Eon snapshots. | 
 
 ## Methods
 
 ### NewListInventorySnapshotsResponse
 
-`func NewListInventorySnapshotsResponse(snapshots []Snapshot, ) *ListInventorySnapshotsResponse`
+`func NewListInventorySnapshotsResponse(snapshots []Snapshot, totalCount int32, ) *ListInventorySnapshotsResponse`
 
 NewListInventorySnapshotsResponse instantiates a new ListInventorySnapshotsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -91,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetTotalCount sets TotalCount field to given value.
 
-### HasTotalCount
-
-`func (o *ListInventorySnapshotsResponse) HasTotalCount() bool`
-
-HasTotalCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

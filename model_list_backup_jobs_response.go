@@ -12,6 +12,8 @@ package eon
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ListBackupJobsResponse type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,23 @@ var _ MappedNullable = &ListBackupJobsResponse{}
 // ListBackupJobsResponse struct for ListBackupJobsResponse
 type ListBackupJobsResponse struct {
 	// List of retrieved backup jobs.
-	Jobs []BackupJob `json:"jobs,omitempty"`
+	Jobs []BackupJob `json:"jobs"`
 	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 	// Total number of backup jobs that matched the filter options.
-	TotalCount *int32 `json:"totalCount,omitempty"`
+	TotalCount int32 `json:"totalCount"`
 }
+
+type _ListBackupJobsResponse ListBackupJobsResponse
 
 // NewListBackupJobsResponse instantiates a new ListBackupJobsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListBackupJobsResponse() *ListBackupJobsResponse {
+func NewListBackupJobsResponse(jobs []BackupJob, totalCount int32) *ListBackupJobsResponse {
 	this := ListBackupJobsResponse{}
+	this.Jobs = jobs
+	this.TotalCount = totalCount
 	return &this
 }
 
@@ -44,34 +50,26 @@ func NewListBackupJobsResponseWithDefaults() *ListBackupJobsResponse {
 	return &this
 }
 
-// GetJobs returns the Jobs field value if set, zero value otherwise.
+// GetJobs returns the Jobs field value
 func (o *ListBackupJobsResponse) GetJobs() []BackupJob {
-	if o == nil || IsNil(o.Jobs) {
+	if o == nil {
 		var ret []BackupJob
 		return ret
 	}
+
 	return o.Jobs
 }
 
-// GetJobsOk returns a tuple with the Jobs field value if set, nil otherwise
+// GetJobsOk returns a tuple with the Jobs field value
 // and a boolean to check if the value has been set.
 func (o *ListBackupJobsResponse) GetJobsOk() ([]BackupJob, bool) {
-	if o == nil || IsNil(o.Jobs) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Jobs, true
 }
 
-// HasJobs returns a boolean if a field has been set.
-func (o *ListBackupJobsResponse) HasJobs() bool {
-	if o != nil && !IsNil(o.Jobs) {
-		return true
-	}
-
-	return false
-}
-
-// SetJobs gets a reference to the given []BackupJob and assigns it to the Jobs field.
+// SetJobs sets field value
 func (o *ListBackupJobsResponse) SetJobs(v []BackupJob) {
 	o.Jobs = v
 }
@@ -108,36 +106,28 @@ func (o *ListBackupJobsResponse) SetNextToken(v string) {
 	o.NextToken = &v
 }
 
-// GetTotalCount returns the TotalCount field value if set, zero value otherwise.
+// GetTotalCount returns the TotalCount field value
 func (o *ListBackupJobsResponse) GetTotalCount() int32 {
-	if o == nil || IsNil(o.TotalCount) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.TotalCount
+
+	return o.TotalCount
 }
 
-// GetTotalCountOk returns a tuple with the TotalCount field value if set, nil otherwise
+// GetTotalCountOk returns a tuple with the TotalCount field value
 // and a boolean to check if the value has been set.
 func (o *ListBackupJobsResponse) GetTotalCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.TotalCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TotalCount, true
+	return &o.TotalCount, true
 }
 
-// HasTotalCount returns a boolean if a field has been set.
-func (o *ListBackupJobsResponse) HasTotalCount() bool {
-	if o != nil && !IsNil(o.TotalCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalCount gets a reference to the given int32 and assigns it to the TotalCount field.
+// SetTotalCount sets field value
 func (o *ListBackupJobsResponse) SetTotalCount(v int32) {
-	o.TotalCount = &v
+	o.TotalCount = v
 }
 
 func (o ListBackupJobsResponse) MarshalJSON() ([]byte, error) {
@@ -150,16 +140,50 @@ func (o ListBackupJobsResponse) MarshalJSON() ([]byte, error) {
 
 func (o ListBackupJobsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Jobs) {
-		toSerialize["jobs"] = o.Jobs
-	}
+	toSerialize["jobs"] = o.Jobs
 	if !IsNil(o.NextToken) {
 		toSerialize["nextToken"] = o.NextToken
 	}
-	if !IsNil(o.TotalCount) {
-		toSerialize["totalCount"] = o.TotalCount
-	}
+	toSerialize["totalCount"] = o.TotalCount
 	return toSerialize, nil
+}
+
+func (o *ListBackupJobsResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"jobs",
+		"totalCount",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varListBackupJobsResponse := _ListBackupJobsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	//decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varListBackupJobsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListBackupJobsResponse(varListBackupJobsResponse)
+
+	return err
 }
 
 type NullableListBackupJobsResponse struct {

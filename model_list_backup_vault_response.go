@@ -16,66 +16,65 @@ import (
 	"fmt"
 )
 
-// checks if the ListRestoreJobsResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListRestoreJobsResponse{}
+// checks if the ListBackupVaultResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListBackupVaultResponse{}
 
-// ListRestoreJobsResponse struct for ListRestoreJobsResponse
-type ListRestoreJobsResponse struct {
-	// List of retrieved restore jobs.
-	Jobs []RestoreJob `json:"jobs"`
+// ListBackupVaultResponse struct for ListBackupVaultResponse
+type ListBackupVaultResponse struct {
+	Vaults []BackupVault `json:"vaults"`
 	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 	// Total number of restore jobs that matched the filter options.
 	TotalCount int32 `json:"totalCount"`
 }
 
-type _ListRestoreJobsResponse ListRestoreJobsResponse
+type _ListBackupVaultResponse ListBackupVaultResponse
 
-// NewListRestoreJobsResponse instantiates a new ListRestoreJobsResponse object
+// NewListBackupVaultResponse instantiates a new ListBackupVaultResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListRestoreJobsResponse(jobs []RestoreJob, totalCount int32) *ListRestoreJobsResponse {
-	this := ListRestoreJobsResponse{}
-	this.Jobs = jobs
+func NewListBackupVaultResponse(vaults []BackupVault, totalCount int32) *ListBackupVaultResponse {
+	this := ListBackupVaultResponse{}
+	this.Vaults = vaults
 	this.TotalCount = totalCount
 	return &this
 }
 
-// NewListRestoreJobsResponseWithDefaults instantiates a new ListRestoreJobsResponse object
+// NewListBackupVaultResponseWithDefaults instantiates a new ListBackupVaultResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListRestoreJobsResponseWithDefaults() *ListRestoreJobsResponse {
-	this := ListRestoreJobsResponse{}
+func NewListBackupVaultResponseWithDefaults() *ListBackupVaultResponse {
+	this := ListBackupVaultResponse{}
 	return &this
 }
 
-// GetJobs returns the Jobs field value
-func (o *ListRestoreJobsResponse) GetJobs() []RestoreJob {
+// GetVaults returns the Vaults field value
+func (o *ListBackupVaultResponse) GetVaults() []BackupVault {
 	if o == nil {
-		var ret []RestoreJob
+		var ret []BackupVault
 		return ret
 	}
 
-	return o.Jobs
+	return o.Vaults
 }
 
-// GetJobsOk returns a tuple with the Jobs field value
+// GetVaultsOk returns a tuple with the Vaults field value
 // and a boolean to check if the value has been set.
-func (o *ListRestoreJobsResponse) GetJobsOk() ([]RestoreJob, bool) {
+func (o *ListBackupVaultResponse) GetVaultsOk() ([]BackupVault, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Jobs, true
+	return o.Vaults, true
 }
 
-// SetJobs sets field value
-func (o *ListRestoreJobsResponse) SetJobs(v []RestoreJob) {
-	o.Jobs = v
+// SetVaults sets field value
+func (o *ListBackupVaultResponse) SetVaults(v []BackupVault) {
+	o.Vaults = v
 }
 
 // GetNextToken returns the NextToken field value if set, zero value otherwise.
-func (o *ListRestoreJobsResponse) GetNextToken() string {
+func (o *ListBackupVaultResponse) GetNextToken() string {
 	if o == nil || IsNil(o.NextToken) {
 		var ret string
 		return ret
@@ -85,7 +84,7 @@ func (o *ListRestoreJobsResponse) GetNextToken() string {
 
 // GetNextTokenOk returns a tuple with the NextToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListRestoreJobsResponse) GetNextTokenOk() (*string, bool) {
+func (o *ListBackupVaultResponse) GetNextTokenOk() (*string, bool) {
 	if o == nil || IsNil(o.NextToken) {
 		return nil, false
 	}
@@ -93,7 +92,7 @@ func (o *ListRestoreJobsResponse) GetNextTokenOk() (*string, bool) {
 }
 
 // HasNextToken returns a boolean if a field has been set.
-func (o *ListRestoreJobsResponse) HasNextToken() bool {
+func (o *ListBackupVaultResponse) HasNextToken() bool {
 	if o != nil && !IsNil(o.NextToken) {
 		return true
 	}
@@ -102,12 +101,12 @@ func (o *ListRestoreJobsResponse) HasNextToken() bool {
 }
 
 // SetNextToken gets a reference to the given string and assigns it to the NextToken field.
-func (o *ListRestoreJobsResponse) SetNextToken(v string) {
+func (o *ListBackupVaultResponse) SetNextToken(v string) {
 	o.NextToken = &v
 }
 
 // GetTotalCount returns the TotalCount field value
-func (o *ListRestoreJobsResponse) GetTotalCount() int32 {
+func (o *ListBackupVaultResponse) GetTotalCount() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -118,7 +117,7 @@ func (o *ListRestoreJobsResponse) GetTotalCount() int32 {
 
 // GetTotalCountOk returns a tuple with the TotalCount field value
 // and a boolean to check if the value has been set.
-func (o *ListRestoreJobsResponse) GetTotalCountOk() (*int32, bool) {
+func (o *ListBackupVaultResponse) GetTotalCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,11 +125,11 @@ func (o *ListRestoreJobsResponse) GetTotalCountOk() (*int32, bool) {
 }
 
 // SetTotalCount sets field value
-func (o *ListRestoreJobsResponse) SetTotalCount(v int32) {
+func (o *ListBackupVaultResponse) SetTotalCount(v int32) {
 	o.TotalCount = v
 }
 
-func (o ListRestoreJobsResponse) MarshalJSON() ([]byte, error) {
+func (o ListBackupVaultResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -138,9 +137,9 @@ func (o ListRestoreJobsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListRestoreJobsResponse) ToMap() (map[string]interface{}, error) {
+func (o ListBackupVaultResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["jobs"] = o.Jobs
+	toSerialize["vaults"] = o.Vaults
 	if !IsNil(o.NextToken) {
 		toSerialize["nextToken"] = o.NextToken
 	}
@@ -148,12 +147,12 @@ func (o ListRestoreJobsResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ListRestoreJobsResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *ListBackupVaultResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"jobs",
+		"vaults",
 		"totalCount",
 	}
 
@@ -171,53 +170,53 @@ func (o *ListRestoreJobsResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varListRestoreJobsResponse := _ListRestoreJobsResponse{}
+	varListBackupVaultResponse := _ListBackupVaultResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListRestoreJobsResponse)
+	err = decoder.Decode(&varListBackupVaultResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ListRestoreJobsResponse(varListRestoreJobsResponse)
+	*o = ListBackupVaultResponse(varListBackupVaultResponse)
 
 	return err
 }
 
-type NullableListRestoreJobsResponse struct {
-	value *ListRestoreJobsResponse
+type NullableListBackupVaultResponse struct {
+	value *ListBackupVaultResponse
 	isSet bool
 }
 
-func (v NullableListRestoreJobsResponse) Get() *ListRestoreJobsResponse {
+func (v NullableListBackupVaultResponse) Get() *ListBackupVaultResponse {
 	return v.value
 }
 
-func (v *NullableListRestoreJobsResponse) Set(val *ListRestoreJobsResponse) {
+func (v *NullableListBackupVaultResponse) Set(val *ListBackupVaultResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListRestoreJobsResponse) IsSet() bool {
+func (v NullableListBackupVaultResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListRestoreJobsResponse) Unset() {
+func (v *NullableListBackupVaultResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListRestoreJobsResponse(val *ListRestoreJobsResponse) *NullableListRestoreJobsResponse {
-	return &NullableListRestoreJobsResponse{value: val, isSet: true}
+func NewNullableListBackupVaultResponse(val *ListBackupVaultResponse) *NullableListBackupVaultResponse {
+	return &NullableListBackupVaultResponse{value: val, isSet: true}
 }
 
-func (v NullableListRestoreJobsResponse) MarshalJSON() ([]byte, error) {
+func (v NullableListBackupVaultResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListRestoreJobsResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableListBackupVaultResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

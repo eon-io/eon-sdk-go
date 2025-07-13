@@ -10,6 +10,7 @@ api_database_snapshots.go
 api_jobs.go
 api_resources.go
 api_snapshots.go
+api_vaults.go
 client.go
 configuration.go
 docs/AccountConfig.md
@@ -33,6 +34,7 @@ docs/AwsDynamoDBDestination.md
 docs/AwsEc2Resource.md
 docs/AwsEc2SnapshotProperties.md
 docs/AwsRestoreAccountConnectivityConfig.md
+docs/AwsVaultConfig.md
 docs/AwsVpcConnectivityConfig.md
 docs/BackupJob.md
 docs/BackupJobSortField.md
@@ -114,6 +116,7 @@ docs/JobsAPI.md
 docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
 docs/ListBackupPoliciesResponse.md
+docs/ListBackupVaultResponse.md
 docs/ListInventoryRequest.md
 docs/ListInventorySnapshotsRequest.md
 docs/ListInventorySnapshotsResponse.md
@@ -216,6 +219,8 @@ docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
 docs/UpdateRestoreAccountConnectivityConfigRequest.md
 docs/UpdateRestoreAccountConnectivityConfigResponse.md
+docs/VaultProviderAttributes.md
+docs/VaultsAPI.md
 docs/VolumeSettings.md
 docs/VpcCondition.md
 docs/WeeklyConfig.md
@@ -239,6 +244,7 @@ model_aws_dynamo_db_destination.go
 model_aws_ec2_resource.go
 model_aws_ec2_snapshot_properties.go
 model_aws_restore_account_connectivity_config.go
+model_aws_vault_config.go
 model_aws_vpc_connectivity_config.go
 model_backup_job.go
 model_backup_job_sort_field.go
@@ -316,6 +322,7 @@ model_job_status_filters.go
 model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
 model_list_backup_policies_response.go
+model_list_backup_vault_response.go
 model_list_inventory_request.go
 model_list_inventory_snapshots_request.go
 model_list_inventory_snapshots_response.go
@@ -416,6 +423,7 @@ model_update_backup_policy_request.go
 model_update_backup_policy_response.go
 model_update_restore_account_connectivity_config_request.go
 model_update_restore_account_connectivity_config_response.go
+model_vault_provider_attributes.go
 model_volume_settings.go
 model_vpc_condition.go
 model_weekly_config.go
@@ -428,4 +436,5 @@ test/api_database_snapshots_test.go
 test/api_jobs_test.go
 test/api_resources_test.go
 test/api_snapshots_test.go
+test/api_vaults_test.go
 utils.go

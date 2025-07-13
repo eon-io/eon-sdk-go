@@ -26,7 +26,7 @@ type ListResourcesResponse struct {
 	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 	// Total number of resources that matched the filter options.
-	TotalCount *int32 `json:"totalCount,omitempty"`
+	TotalCount int32 `json:"totalCount"`
 }
 
 type _ListResourcesResponse ListResourcesResponse
@@ -35,9 +35,10 @@ type _ListResourcesResponse ListResourcesResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListResourcesResponse(resources []InventoryResource) *ListResourcesResponse {
+func NewListResourcesResponse(resources []InventoryResource, totalCount int32) *ListResourcesResponse {
 	this := ListResourcesResponse{}
 	this.Resources = resources
+	this.TotalCount = totalCount
 	return &this
 }
 
@@ -105,36 +106,28 @@ func (o *ListResourcesResponse) SetNextToken(v string) {
 	o.NextToken = &v
 }
 
-// GetTotalCount returns the TotalCount field value if set, zero value otherwise.
+// GetTotalCount returns the TotalCount field value
 func (o *ListResourcesResponse) GetTotalCount() int32 {
-	if o == nil || IsNil(o.TotalCount) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.TotalCount
+
+	return o.TotalCount
 }
 
-// GetTotalCountOk returns a tuple with the TotalCount field value if set, nil otherwise
+// GetTotalCountOk returns a tuple with the TotalCount field value
 // and a boolean to check if the value has been set.
 func (o *ListResourcesResponse) GetTotalCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.TotalCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TotalCount, true
+	return &o.TotalCount, true
 }
 
-// HasTotalCount returns a boolean if a field has been set.
-func (o *ListResourcesResponse) HasTotalCount() bool {
-	if o != nil && !IsNil(o.TotalCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalCount gets a reference to the given int32 and assigns it to the TotalCount field.
+// SetTotalCount sets field value
 func (o *ListResourcesResponse) SetTotalCount(v int32) {
-	o.TotalCount = &v
+	o.TotalCount = v
 }
 
 func (o ListResourcesResponse) MarshalJSON() ([]byte, error) {
@@ -151,9 +144,7 @@ func (o ListResourcesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NextToken) {
 		toSerialize["nextToken"] = o.NextToken
 	}
-	if !IsNil(o.TotalCount) {
-		toSerialize["totalCount"] = o.TotalCount
-	}
+	toSerialize["totalCount"] = o.TotalCount
 	return toSerialize, nil
 }
 
@@ -163,6 +154,7 @@ func (o *ListResourcesResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"resources",
+		"totalCount",
 	}
 
 	allProperties := make(map[string]interface{})

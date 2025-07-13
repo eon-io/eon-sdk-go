@@ -25,9 +25,9 @@ type BackupVault struct {
 	Id string `json:"id"`
 	// Vault display name.
 	Name string `json:"name"`
-	CloudProvider Provider `json:"cloudProvider"`
 	// Region where the vault is located.
 	Region string `json:"region"`
+	VaultAttributes VaultProviderAttributes `json:"vaultAttributes"`
 }
 
 type _BackupVault BackupVault
@@ -36,12 +36,12 @@ type _BackupVault BackupVault
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupVault(id string, name string, cloudProvider Provider, region string) *BackupVault {
+func NewBackupVault(id string, name string, region string, vaultAttributes VaultProviderAttributes) *BackupVault {
 	this := BackupVault{}
 	this.Id = id
 	this.Name = name
-	this.CloudProvider = cloudProvider
 	this.Region = region
+	this.VaultAttributes = vaultAttributes
 	return &this
 }
 
@@ -101,30 +101,6 @@ func (o *BackupVault) SetName(v string) {
 	o.Name = v
 }
 
-// GetCloudProvider returns the CloudProvider field value
-func (o *BackupVault) GetCloudProvider() Provider {
-	if o == nil {
-		var ret Provider
-		return ret
-	}
-
-	return o.CloudProvider
-}
-
-// GetCloudProviderOk returns a tuple with the CloudProvider field value
-// and a boolean to check if the value has been set.
-func (o *BackupVault) GetCloudProviderOk() (*Provider, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CloudProvider, true
-}
-
-// SetCloudProvider sets field value
-func (o *BackupVault) SetCloudProvider(v Provider) {
-	o.CloudProvider = v
-}
-
 // GetRegion returns the Region field value
 func (o *BackupVault) GetRegion() string {
 	if o == nil {
@@ -149,6 +125,30 @@ func (o *BackupVault) SetRegion(v string) {
 	o.Region = v
 }
 
+// GetVaultAttributes returns the VaultAttributes field value
+func (o *BackupVault) GetVaultAttributes() VaultProviderAttributes {
+	if o == nil {
+		var ret VaultProviderAttributes
+		return ret
+	}
+
+	return o.VaultAttributes
+}
+
+// GetVaultAttributesOk returns a tuple with the VaultAttributes field value
+// and a boolean to check if the value has been set.
+func (o *BackupVault) GetVaultAttributesOk() (*VaultProviderAttributes, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VaultAttributes, true
+}
+
+// SetVaultAttributes sets field value
+func (o *BackupVault) SetVaultAttributes(v VaultProviderAttributes) {
+	o.VaultAttributes = v
+}
+
 func (o BackupVault) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -161,8 +161,8 @@ func (o BackupVault) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["cloudProvider"] = o.CloudProvider
 	toSerialize["region"] = o.Region
+	toSerialize["vaultAttributes"] = o.VaultAttributes
 	return toSerialize, nil
 }
 
@@ -173,8 +173,8 @@ func (o *BackupVault) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
-		"cloudProvider",
 		"region",
+		"vaultAttributes",
 	}
 
 	allProperties := make(map[string]interface{})

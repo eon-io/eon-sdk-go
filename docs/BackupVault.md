@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Vault ID. | 
 **Name** | **string** | Vault display name. | 
-**CloudProvider** | [**Provider**](Provider.md) |  | 
 **Region** | **string** | Region where the vault is located. | 
+**VaultAttributes** | [**VaultProviderAttributes**](VaultProviderAttributes.md) |  | 
 
 ## Methods
 
 ### NewBackupVault
 
-`func NewBackupVault(id string, name string, cloudProvider Provider, region string, ) *BackupVault`
+`func NewBackupVault(id string, name string, region string, vaultAttributes VaultProviderAttributes, ) *BackupVault`
 
 NewBackupVault instantiates a new BackupVault object
 This constructor will assign default values to properties that have it defined,
@@ -68,26 +68,6 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetCloudProvider
-
-`func (o *BackupVault) GetCloudProvider() Provider`
-
-GetCloudProvider returns the CloudProvider field if non-nil, zero value otherwise.
-
-### GetCloudProviderOk
-
-`func (o *BackupVault) GetCloudProviderOk() (*Provider, bool)`
-
-GetCloudProviderOk returns a tuple with the CloudProvider field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCloudProvider
-
-`func (o *BackupVault) SetCloudProvider(v Provider)`
-
-SetCloudProvider sets CloudProvider field to given value.
-
-
 ### GetRegion
 
 `func (o *BackupVault) GetRegion() string`
@@ -106,6 +86,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupVault) SetRegion(v string)`
 
 SetRegion sets Region field to given value.
+
+
+### GetVaultAttributes
+
+`func (o *BackupVault) GetVaultAttributes() VaultProviderAttributes`
+
+GetVaultAttributes returns the VaultAttributes field if non-nil, zero value otherwise.
+
+### GetVaultAttributesOk
+
+`func (o *BackupVault) GetVaultAttributesOk() (*VaultProviderAttributes, bool)`
+
+GetVaultAttributesOk returns a tuple with the VaultAttributes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVaultAttributes
+
+`func (o *BackupVault) SetVaultAttributes(v VaultProviderAttributes)`
+
+SetVaultAttributes sets VaultAttributes field to given value.
 
 
 
