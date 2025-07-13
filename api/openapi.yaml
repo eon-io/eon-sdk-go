@@ -4186,35 +4186,39 @@ components:
     StartTimeDateFilters:
       additionalProperties: false
       example:
-        endDate: endDate
-        startDate: startDate
+        endDate: 2025-07-10
+        startDate: 2025-07-01
       properties:
         startDate:
           description: |
             Matches if `startTime` is on or later than this date.
             Must be in ISO 8601 YYYY-MM-DD format.
+          example: 2025-07-01
           type: string
         endDate:
           description: |
             Matches if `startTime` is on or earlier than this date.
             Must be in ISO 8601 YYYY-MM-DD format.
+          example: 2025-07-10
           type: string
       type: object
     EndTimeDateFilters:
       additionalProperties: false
       example:
-        endDate: endDate
-        startDate: startDate
+        endDate: 2025-12-31
+        startDate: 2025-01-01
       properties:
         startDate:
           description: |
             Matches if `endTime` is on or later than this date.
             Must be in ISO 8601 YYYY-MM-DD format.
+          example: 2025-01-01
           type: string
         endDate:
           description: |
             Matches if `endTime` is on or earlier than this date.
             Must be in ISO 8601 YYYY-MM-DD format.
+          example: 2025-12-31
           type: string
       type: object
     BackupJobsFilterConditions:
@@ -4236,11 +4240,11 @@ components:
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
         startTime:
-          endDate: endDate
-          startDate: startDate
+          endDate: 2025-07-10
+          startDate: 2025-07-01
         endTime:
-          endDate: endDate
-          startDate: startDate
+          endDate: 2025-12-31
+          startDate: 2025-01-01
         status:
           in:
           - JOB_COMPLETED
@@ -4330,11 +4334,11 @@ components:
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
           startTime:
-            endDate: endDate
-            startDate: startDate
+            endDate: 2025-07-10
+            startDate: 2025-07-01
           endTime:
-            endDate: endDate
-            startDate: startDate
+            endDate: 2025-12-31
+            startDate: 2025-01-01
           status:
             in:
             - JOB_COMPLETED
@@ -4798,11 +4802,11 @@ components:
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
         startTime:
-          endDate: endDate
-          startDate: startDate
+          endDate: 2025-07-10
+          startDate: 2025-07-01
         endTime:
-          endDate: endDate
-          startDate: startDate
+          endDate: 2025-12-31
+          startDate: 2025-01-01
         status:
           in:
           - JOB_COMPLETED
@@ -4882,11 +4886,11 @@ components:
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
           startTime:
-            endDate: endDate
-            startDate: startDate
+            endDate: 2025-07-10
+            startDate: 2025-07-01
           endTime:
-            endDate: endDate
-            startDate: startDate
+            endDate: 2025-12-31
+            startDate: 2025-01-01
           status:
             in:
             - JOB_COMPLETED
@@ -5138,6 +5142,13 @@ components:
       - OR_OPERATOR
       - LOGICAL_OPERATOR_UNSPECIFIED
     BackupPolicyExpression:
+      description: |
+        Conditional expression to evaulate to determine which resources are to included in the backup policy.
+        Used only when `resourceSelectionMode` is `CONDITIONAL`.
+
+        Only one of the expressions below can be used.
+        For multiple conditions using `AND` or `OR` logic, group expressions with `group`.
+        You can nest multiple groups to create more complex expressions.
       example:
         resourceId:
           operator: IN
@@ -5258,6 +5269,9 @@ components:
           $ref: '#/components/schemas/TagKeyValuesCondition'
       type: object
     BackupPolicyGroupCondition:
+      description: |
+        Group of expressions to evaluate using the logical operator specified in `operator`.
+        Each item in the `operands` list can be either a single expression or a nested `group` expression.
       example:
         operands:
         - resourceType:
@@ -5278,7 +5292,7 @@ components:
         operands:
           description: |
             List of expressions to evaluate using the logical operator specified in `operator`.
-            Each item in the list can be either a grouped expression of type `BackupPolicyLogicalExpression` or a basic selector of type `BackupPolicyBasicSelector`.
+            Each item in the list can be either a single expression or a nested `group` expression.
 
             Must contain at least 2 items.
           example:

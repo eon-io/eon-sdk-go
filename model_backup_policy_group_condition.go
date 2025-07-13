@@ -19,10 +19,10 @@ import (
 // checks if the BackupPolicyGroupCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupPolicyGroupCondition{}
 
-// BackupPolicyGroupCondition struct for BackupPolicyGroupCondition
+// BackupPolicyGroupCondition Group of expressions to evaluate using the logical operator specified in `operator`. Each item in the `operands` list can be either a single expression or a nested `group` expression. 
 type BackupPolicyGroupCondition struct {
 	Operator LogicalOperator `json:"operator"`
-	// List of expressions to evaluate using the logical operator specified in `operator`. Each item in the list can be either a grouped expression of type `BackupPolicyLogicalExpression` or a basic selector of type `BackupPolicyBasicSelector`.  Must contain at least 2 items. 
+	// List of expressions to evaluate using the logical operator specified in `operator`. Each item in the list can be either a single expression or a nested `group` expression.  Must contain at least 2 items. 
 	Operands []BackupPolicyExpression `json:"operands"`
 }
 

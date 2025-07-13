@@ -17,7 +17,7 @@ import (
 // checks if the BackupPolicyExpression type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupPolicyExpression{}
 
-// BackupPolicyExpression struct for BackupPolicyExpression
+// BackupPolicyExpression Conditional expression to evaulate to determine which resources are to included in the backup policy. Used only when `resourceSelectionMode` is `CONDITIONAL`.  Only one of the expressions below can be used. For multiple conditions using `AND` or `OR` logic, group expressions with `group`. You can nest multiple groups to create more complex expressions. 
 type BackupPolicyExpression struct {
 	Group NullableBackupPolicyGroupCondition `json:"group,omitempty"`
 	ResourceType NullableResourceTypeCondition `json:"resourceType,omitempty"`

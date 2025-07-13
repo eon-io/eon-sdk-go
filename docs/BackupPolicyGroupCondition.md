@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**LogicalOperator**](LogicalOperator.md) |  | 
-**Operands** | [**[]BackupPolicyExpression**](BackupPolicyExpression.md) | List of expressions to evaluate using the logical operator specified in &#x60;operator&#x60;. Each item in the list can be either a grouped expression of type &#x60;BackupPolicyLogicalExpression&#x60; or a basic selector of type &#x60;BackupPolicyBasicSelector&#x60;.  Must contain at least 2 items.  | 
+**Operands** | [**[]BackupPolicyExpression**](BackupPolicyExpression.md) | List of expressions to evaluate using the logical operator specified in &#x60;operator&#x60;. Each item in the list can be either a single expression or a nested &#x60;group&#x60; expression.  Must contain at least 2 items.  | 
 
 ## Methods
 
