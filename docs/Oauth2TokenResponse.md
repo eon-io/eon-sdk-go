@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccessToken** | Pointer to **string** | Access token, which you pass in the &#x60;Authorization&#x60; header when calling API methods. | [optional] 
 **TokenType** | Pointer to **string** | Type of the token, which is always &#x60;Bearer&#x60;. | [optional] 
+**RefreshToken** | Pointer to **string** | Token used to obtain a new access token when the current one expires. Required if &#x60;grant_type&#x60; is &#x60;refresh_token&#x60;.  | [optional] 
 **ExpiresIn** | Pointer to **int32** | Length of time until the token expires, in seconds. Default: &#x60;43200&#x60; (12 hours).  | [optional] 
 
 ## Methods
@@ -76,6 +77,31 @@ SetTokenType sets TokenType field to given value.
 `func (o *Oauth2TokenResponse) HasTokenType() bool`
 
 HasTokenType returns a boolean if a field has been set.
+
+### GetRefreshToken
+
+`func (o *Oauth2TokenResponse) GetRefreshToken() string`
+
+GetRefreshToken returns the RefreshToken field if non-nil, zero value otherwise.
+
+### GetRefreshTokenOk
+
+`func (o *Oauth2TokenResponse) GetRefreshTokenOk() (*string, bool)`
+
+GetRefreshTokenOk returns a tuple with the RefreshToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRefreshToken
+
+`func (o *Oauth2TokenResponse) SetRefreshToken(v string)`
+
+SetRefreshToken sets RefreshToken field to given value.
+
+### HasRefreshToken
+
+`func (o *Oauth2TokenResponse) HasRefreshToken() bool`
+
+HasRefreshToken returns a boolean if a field has been set.
 
 ### GetExpiresIn
 
