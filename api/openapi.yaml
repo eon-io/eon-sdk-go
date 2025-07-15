@@ -5739,7 +5739,6 @@ components:
           type: string
       required:
       - key
-      - value
       type: object
     TagKeyValuesCondition:
       example:
@@ -6205,6 +6204,7 @@ components:
         vaultId:
           description: Vault ID.
           example: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          format: uuid
           type: string
         scheduleConfig:
           $ref: '#/components/schemas/StandardBackupScheduleConfig'
@@ -6300,7 +6300,6 @@ components:
             Each schedule specifies a backup frequency, retention period, and vault.
           items:
             $ref: '#/components/schemas/StandardBackupSchedules'
-          minItems: 1
           type: array
       required:
       - backupSchedules
@@ -6447,6 +6446,7 @@ components:
         vaultId:
           description: Vault ID.
           example: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          format: uuid
           type: string
         scheduleConfig:
           $ref: '#/components/schemas/HighFrequencyBackupScheduleConfig'
@@ -6543,7 +6543,6 @@ components:
           description: Resource types to backup.
           items:
             $ref: '#/components/schemas/HighFrequencyBackupResourceType'
-          minItems: 1
           type: array
         backupSchedules:
           description: |
@@ -6551,7 +6550,6 @@ components:
             Each schedule specifies a backup frequency, retention period, and vault.
           items:
             $ref: '#/components/schemas/HighFrequencyBackupSchedules'
-          minItems: 1
           type: array
       required:
       - backupSchedules
