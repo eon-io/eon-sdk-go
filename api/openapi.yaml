@@ -344,6 +344,198 @@ paths:
         - entityType: account
           in: path
           key: accountId
+  /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config:
+    delete:
+      description: |
+        Description: Disables the source account metrics configuration.
+      operationId: disableSourceAccountMetricsConfig
+      parameters:
+      - description: Eon-assigned ID of the source account.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose source account metrics configuration you want to disable.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Source account metrics configuration disable.
+        "404":
+          description: Source account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Disable Source Account Metrics Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:source_accounts
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: source_cloud_account
+          in: path
+          key: accountId
+    get:
+      description: |
+        Description: Retrieves the metrics configuration of the specified source account.
+      operationId: getSourceAccountMetricsConfig
+      parameters:
+      - description: Eon-assigned ID of the source account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose source account metrics configuration you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSourceAccountMetricsConfigResponse'
+          description: Source account metrics configuration retrieved.
+        "404":
+          description: Source account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Source Account Metrics Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:source_accounts
+      x-audit-log:
+        excluded: true
+    put:
+      description: |
+        Description: Enables or updates the metrics configuration of the specified source account.
+      operationId: enableSourceAccountMetricsConfig
+      parameters:
+      - description: ID of the source account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose source account metrics configuration you want to enable/update.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableSourceAccountMetricsConfigRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableSourceAccountMetricsConfigResponse'
+          description: Source account metrics configuration enabled/updated.
+        "404":
+          description: Source account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Enable or update Source Account Metrics Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:source_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: source_cloud_account
+          in: path
+          key: accountId
   /v1/projects/{projectId}/restore-accounts:
     post:
       description: |
@@ -796,6 +988,198 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
       summary: Update Restore Account Connectivity Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:restore_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: restore_cloud_account
+          in: path
+          key: accountId
+  /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config:
+    delete:
+      description: |
+        Description: Disables the restore account metrics configuration.
+      operationId: disableRestoreAccountMetricsConfig
+      parameters:
+      - description: Eon-assigned ID of the restore account.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose restore account metrics configuration you want to disable.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Restore account metrics configuration disable.
+        "404":
+          description: Restore account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Disable Restore Account Metrics Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:restore_accounts
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: restore_cloud_account
+          in: path
+          key: accountId
+    get:
+      description: |
+        Description: Retrieves the metrics configuration of the specified restore account.
+      operationId: getRestoreAccountMetricsConfig
+      parameters:
+      - description: Eon-assigned ID of the restore account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose restore account metrics configuration you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRestoreAccountMetricsConfigResponse'
+          description: Restore account metrics configuration retrieved.
+        "404":
+          description: Restore account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Restore Account Metrics Configuration
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore_accounts
+      x-audit-log:
+        excluded: true
+    put:
+      description: |
+        Description: Enables or updates the metrics configuration of the specified restore account.
+      operationId: enableRestoreAccountMetricsConfig
+      parameters:
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project whose restore account metrics configuration you want to enable/update.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableRestoreAccountMetricsConfigRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableRestoreAccountMetricsConfigResponse'
+          description: Restore account metrics configuration enabled/updated.
+        "404":
+          description: Restore account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Enable or update Restore Account Metrics Configuration
       tags:
       - accounts
       x-internal: false
@@ -3649,6 +4033,85 @@ components:
       required:
       - sourceAccount
       type: object
+    AwsAccountMetricsDestination:
+      example:
+        region: us-east-1
+      nullable: true
+      properties:
+        region:
+          description: The CloudWatch region to use for publishing metrics.
+          example: us-east-1
+          type: string
+      type: object
+    AccountMetricsDestination:
+      example:
+        aws:
+          region: us-east-1
+      properties:
+        aws:
+          $ref: '#/components/schemas/AwsAccountMetricsDestination'
+      type: object
+    SourceAccountMetricsConfig:
+      example:
+        sourceAccountId: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+        destination:
+          aws:
+            region: us-east-1
+        enabled: true
+      properties:
+        sourceAccountId:
+          description: Eon-assigned source account ID.
+          example: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          type: string
+        enabled:
+          description: |
+            Indicates whether job metrics are enabled for the source account.
+            If `true`, job metrics are collected and can be queried.
+          example: true
+          type: boolean
+        destination:
+          $ref: '#/components/schemas/AccountMetricsDestination'
+      required:
+      - destination
+      - enabled
+      - sourceAccountId
+      type: object
+    GetSourceAccountMetricsConfigResponse:
+      example:
+        sourceAccountConfig:
+          sourceAccountId: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          destination:
+            aws:
+              region: us-east-1
+          enabled: true
+      properties:
+        sourceAccountConfig:
+          $ref: '#/components/schemas/SourceAccountMetricsConfig'
+      required:
+      - sourceAccountConfig
+      type: object
+    EnableSourceAccountMetricsConfigRequest:
+      example:
+        aws:
+          region: us-east-1
+      properties:
+        aws:
+          $ref: '#/components/schemas/AwsAccountMetricsDestination'
+      type: object
+    EnableSourceAccountMetricsConfigResponse:
+      example:
+        sourceAccountConfig:
+          sourceAccountId: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          destination:
+            aws:
+              region: us-east-1
+          enabled: true
+      properties:
+        sourceAccountConfig:
+          $ref: '#/components/schemas/SourceAccountMetricsConfig'
+      required:
+      - sourceAccountConfig
+      type: object
     ConnectRestoreAccountRequest:
       example:
         restoreAccountAttributes:
@@ -4092,6 +4555,67 @@ components:
       properties:
         restoreAccountConfig:
           $ref: '#/components/schemas/RestoreAccountConnectivityConfig'
+      required:
+      - restoreAccountConfig
+      type: object
+    RestoreAccountMetricsConfig:
+      example:
+        restoreAccountId: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+        destination:
+          aws:
+            region: us-east-1
+        enabled: true
+      properties:
+        restoreAccountId:
+          description: Eon-assigned restore account ID.
+          example: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          type: string
+        enabled:
+          description: |
+            Indicates whether job metrics are enabled for the restore account.
+            If `true`, job metrics are collected and can be queried.
+          example: true
+          type: boolean
+        destination:
+          $ref: '#/components/schemas/AccountMetricsDestination'
+      required:
+      - destination
+      - enabled
+      - restoreAccountId
+      type: object
+    GetRestoreAccountMetricsConfigResponse:
+      example:
+        restoreAccountConfig:
+          restoreAccountId: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          destination:
+            aws:
+              region: us-east-1
+          enabled: true
+      properties:
+        restoreAccountConfig:
+          $ref: '#/components/schemas/RestoreAccountMetricsConfig'
+      required:
+      - restoreAccountConfig
+      type: object
+    EnableRestoreAccountMetricsConfigRequest:
+      example:
+        aws:
+          region: us-east-1
+      properties:
+        aws:
+          $ref: '#/components/schemas/AwsAccountMetricsDestination'
+      type: object
+    EnableRestoreAccountMetricsConfigResponse:
+      example:
+        restoreAccountConfig:
+          restoreAccountId: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          destination:
+            aws:
+              region: us-east-1
+          enabled: true
+      properties:
+        restoreAccountConfig:
+          $ref: '#/components/schemas/RestoreAccountMetricsConfig'
       required:
       - restoreAccountConfig
       type: object

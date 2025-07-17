@@ -64,6 +64,34 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService DisableRestoreAccountMetricsConfig", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+		var projectId string
+
+		httpRes, err := apiClient.AccountsAPI.DisableRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountsAPIService DisableSourceAccountMetricsConfig", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+		var projectId string
+
+		httpRes, err := apiClient.AccountsAPI.DisableSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService DisconnectRestoreAccount", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -94,6 +122,36 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService EnableRestoreAccountMetricsConfig", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.EnableRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountsAPIService EnableSourceAccountMetricsConfig", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.EnableSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService GetRestoreAccountConnectivityConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -102,6 +160,36 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 		var projectId string
 
 		resp, httpRes, err := apiClient.AccountsAPI.GetRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountsAPIService GetRestoreAccountMetricsConfig", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.GetRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountsAPIService GetSourceAccountMetricsConfig", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.GetSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
