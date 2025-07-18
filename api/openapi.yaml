@@ -9679,16 +9679,16 @@ components:
     SubnetFilters:
       additionalProperties: false
       example:
-        ContainsNoneOf:
-        - subnet-9b5118b1
-        ContainsAllOf:
+        containsAllOf:
         - subnet-57c92df5
         - subnet-ef0fd42f
-        ContainsAnyOf:
+        containsNoneOf:
+        - subnet-9b5118b1
+        containsAnyOf:
         - subnet-aa2c166e
         - subnet-eb71c3a2
       properties:
-        ContainsAnyOf:
+        containsAnyOf:
           description: Matches if any value in this list is in the `subnets` list.
           example:
           - subnet-aa2c166e
@@ -9696,7 +9696,7 @@ components:
           items:
             type: string
           type: array
-        ContainsNoneOf:
+        containsNoneOf:
           description: Matches if none of the values in this list are in the `subnets`
             list.
           example:
@@ -9704,7 +9704,7 @@ components:
           items:
             type: string
           type: array
-        ContainsAllOf:
+        containsAllOf:
           description: Matches if all values in this list are in the `subnets` list.
           example:
           - subnet-57c92df5
@@ -9799,17 +9799,17 @@ components:
     TagKeysFilters:
       additionalProperties: false
       example:
-        ContainsNoneOf:
+        containsAllOf:
         - environment
         - app
-        ContainsAllOf:
+        containsNoneOf:
         - environment
         - app
-        ContainsAnyOf:
+        containsAnyOf:
         - environment
         - app
       properties:
-        ContainsAllOf:
+        containsAllOf:
           description: Matches if any key in this list is in the `tags` keys list.
           example:
           - environment
@@ -9817,7 +9817,7 @@ components:
           items:
             type: string
           type: array
-        ContainsAnyOf:
+        containsAnyOf:
           description: Matches if none of the keys in this list are in the `tags`
             keys list.
           example:
@@ -9826,7 +9826,7 @@ components:
           items:
             type: string
           type: array
-        ContainsNoneOf:
+        containsNoneOf:
           description: Matches if all keys in this list are in the `tags` keys list.
           example:
           - environment
@@ -9838,17 +9838,17 @@ components:
     TagKeyValuesFilters:
       additionalProperties: false
       example:
-        ContainsNoneOf:
+        containsAllOf:
         - environment=staging
         - app=web
-        ContainsAllOf:
+        containsNoneOf:
         - environment=staging
         - app=web
-        ContainsAnyOf:
+        containsAnyOf:
         - environment=production
         - app=web
       properties:
-        ContainsAllOf:
+        containsAllOf:
           description: "Matches if any `{key}={value}` pair in this list is in the\
             \ `tags` list."
           example:
@@ -9857,7 +9857,7 @@ components:
           items:
             type: string
           type: array
-        ContainsAnyOf:
+        containsAnyOf:
           description: "Matches if none of the `{key}={value}` pairs in this list\
             \ are in the `tags` list."
           example:
@@ -9866,7 +9866,7 @@ components:
           items:
             type: string
           type: array
-        ContainsNoneOf:
+        containsNoneOf:
           description: "Matches if all `{key}={value}` pairs in this list are in the\
             \ `tags` list."
           example:
@@ -9903,23 +9903,23 @@ components:
           - TERMINATED
           - DISCONNECTED
         tagKeyValues:
-          ContainsNoneOf:
+          containsAllOf:
           - environment=staging
           - app=web
-          ContainsAllOf:
+          containsNoneOf:
           - environment=staging
           - app=web
-          ContainsAnyOf:
+          containsAnyOf:
           - environment=production
           - app=web
         tagKeys:
-          ContainsNoneOf:
+          containsAllOf:
           - environment
           - app
-          ContainsAllOf:
+          containsNoneOf:
           - environment
           - app
-          ContainsAnyOf:
+          containsAnyOf:
           - environment
           - app
         resourceName:
@@ -9932,12 +9932,12 @@ components:
           notIn:
           - customers
         subnets:
-          ContainsNoneOf:
-          - subnet-9b5118b1
-          ContainsAllOf:
+          containsAllOf:
           - subnet-57c92df5
           - subnet-ef0fd42f
-          ContainsAnyOf:
+          containsNoneOf:
+          - subnet-9b5118b1
+          containsAnyOf:
           - subnet-aa2c166e
           - subnet-eb71c3a2
         id:
@@ -10024,23 +10024,23 @@ components:
             - TERMINATED
             - DISCONNECTED
           tagKeyValues:
-            ContainsNoneOf:
+            containsAllOf:
             - environment=staging
             - app=web
-            ContainsAllOf:
+            containsNoneOf:
             - environment=staging
             - app=web
-            ContainsAnyOf:
+            containsAnyOf:
             - environment=production
             - app=web
           tagKeys:
-            ContainsNoneOf:
+            containsAllOf:
             - environment
             - app
-            ContainsAllOf:
+            containsNoneOf:
             - environment
             - app
-            ContainsAnyOf:
+            containsAnyOf:
             - environment
             - app
           resourceName:
@@ -10053,12 +10053,12 @@ components:
             notIn:
             - customers
           subnets:
-            ContainsNoneOf:
-            - subnet-9b5118b1
-            ContainsAllOf:
+            containsAllOf:
             - subnet-57c92df5
             - subnet-ef0fd42f
-            ContainsAnyOf:
+            containsNoneOf:
+            - subnet-9b5118b1
+            containsAnyOf:
             - subnet-aa2c166e
             - subnet-eb71c3a2
           id:

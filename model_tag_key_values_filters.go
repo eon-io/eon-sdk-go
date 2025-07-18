@@ -20,11 +20,11 @@ var _ MappedNullable = &TagKeyValuesFilters{}
 // TagKeyValuesFilters struct for TagKeyValuesFilters
 type TagKeyValuesFilters struct {
 	// Matches if any `{key}={value}` pair in this list is in the `tags` list.
-	ContainsAllOf []string `json:"ContainsAllOf,omitempty"`
+	ContainsAllOf []string `json:"containsAllOf,omitempty"`
 	// Matches if none of the `{key}={value}` pairs in this list are in the `tags` list.
-	ContainsAnyOf []string `json:"ContainsAnyOf,omitempty"`
+	ContainsAnyOf []string `json:"containsAnyOf,omitempty"`
 	// Matches if all `{key}={value}` pairs in this list are in the `tags` list.
-	ContainsNoneOf []string `json:"ContainsNoneOf,omitempty"`
+	ContainsNoneOf []string `json:"containsNoneOf,omitempty"`
 }
 
 // NewTagKeyValuesFilters instantiates a new TagKeyValuesFilters object
@@ -151,13 +151,13 @@ func (o TagKeyValuesFilters) MarshalJSON() ([]byte, error) {
 func (o TagKeyValuesFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ContainsAllOf) {
-		toSerialize["ContainsAllOf"] = o.ContainsAllOf
+		toSerialize["containsAllOf"] = o.ContainsAllOf
 	}
 	if !IsNil(o.ContainsAnyOf) {
-		toSerialize["ContainsAnyOf"] = o.ContainsAnyOf
+		toSerialize["containsAnyOf"] = o.ContainsAnyOf
 	}
 	if !IsNil(o.ContainsNoneOf) {
-		toSerialize["ContainsNoneOf"] = o.ContainsNoneOf
+		toSerialize["containsNoneOf"] = o.ContainsNoneOf
 	}
 	return toSerialize, nil
 }

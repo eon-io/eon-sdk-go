@@ -20,11 +20,11 @@ var _ MappedNullable = &SubnetFilters{}
 // SubnetFilters struct for SubnetFilters
 type SubnetFilters struct {
 	// Matches if any value in this list is in the `subnets` list.
-	ContainsAnyOf []string `json:"ContainsAnyOf,omitempty"`
+	ContainsAnyOf []string `json:"containsAnyOf,omitempty"`
 	// Matches if none of the values in this list are in the `subnets` list.
-	ContainsNoneOf []string `json:"ContainsNoneOf,omitempty"`
+	ContainsNoneOf []string `json:"containsNoneOf,omitempty"`
 	// Matches if all values in this list are in the `subnets` list.
-	ContainsAllOf []string `json:"ContainsAllOf,omitempty"`
+	ContainsAllOf []string `json:"containsAllOf,omitempty"`
 }
 
 // NewSubnetFilters instantiates a new SubnetFilters object
@@ -151,13 +151,13 @@ func (o SubnetFilters) MarshalJSON() ([]byte, error) {
 func (o SubnetFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ContainsAnyOf) {
-		toSerialize["ContainsAnyOf"] = o.ContainsAnyOf
+		toSerialize["containsAnyOf"] = o.ContainsAnyOf
 	}
 	if !IsNil(o.ContainsNoneOf) {
-		toSerialize["ContainsNoneOf"] = o.ContainsNoneOf
+		toSerialize["containsNoneOf"] = o.ContainsNoneOf
 	}
 	if !IsNil(o.ContainsAllOf) {
-		toSerialize["ContainsAllOf"] = o.ContainsAllOf
+		toSerialize["containsAllOf"] = o.ContainsAllOf
 	}
 	return toSerialize, nil
 }
