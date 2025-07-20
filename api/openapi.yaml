@@ -5557,11 +5557,72 @@ components:
             $ref: '#/components/schemas/SortRestoreJobBy'
           type: array
       type: object
+    AwsEc2InstanceRestoreResult:
+      example:
+        instanceId: i-1234567890abcdef0
+      nullable: true
+      properties:
+        instanceId:
+          description: The ID of the restored EC2 instance.
+          example: i-1234567890abcdef0
+          type: string
+      required:
+      - instanceId
+      - volumeId
+      type: object
+    AwsEbsVolumeRestoreResult:
+      example:
+        volumeId: vol-1234567890abcdef0
+      nullable: true
+      properties:
+        volumeId:
+          description: The ID of the restored EBS volume.
+          example: vol-1234567890abcdef0
+          type: string
+      required:
+      - volumeId
+      type: object
+    AzureDiskRestoreResult:
+      example:
+        diskId: i-1234567890abcdef0
+      nullable: true
+      properties:
+        diskId:
+          description: The ID of the restored Azure disk.
+          example: i-1234567890abcdef0
+          type: string
+      required:
+      - diskId
+      type: object
+    RestoreResult:
+      example:
+        azureDisk:
+          diskId: i-1234567890abcdef0
+        awsEc2Instance:
+          instanceId: i-1234567890abcdef0
+        awsEbsVolume:
+          volumeId: vol-1234567890abcdef0
+      nullable: true
+      properties:
+        awsEc2Instance:
+          $ref: '#/components/schemas/AwsEc2InstanceRestoreResult'
+        awsEbsVolume:
+          $ref: '#/components/schemas/AwsEbsVolumeRestoreResult'
+        azureDisk:
+          $ref: '#/components/schemas/AzureDiskRestoreResult'
+      type: object
     DestinationDetails:
       example:
         restoreAccountId: 146586e8-f69a-5148-9d7b-7c3a6b006048
         providerAccountId: "836638811603"
         cloudProvider: AWS
+        restoreResult:
+          azureDisk:
+            diskId: i-1234567890abcdef0
+          awsEc2Instance:
+            instanceId: i-1234567890abcdef0
+          awsEbsVolume:
+            volumeId: vol-1234567890abcdef0
         region: us-east-1
       properties:
         restoreAccountId:
@@ -5578,6 +5639,8 @@ components:
           description: Region the data is restored to.
           example: us-east-1
           type: string
+        restoreResult:
+          $ref: '#/components/schemas/RestoreResult'
       required:
       - cloudProvider
       - providerAccountId
@@ -5591,6 +5654,13 @@ components:
           restoreAccountId: 146586e8-f69a-5148-9d7b-7c3a6b006048
           providerAccountId: "836638811603"
           cloudProvider: AWS
+          restoreResult:
+            azureDisk:
+              diskId: i-1234567890abcdef0
+            awsEc2Instance:
+              instanceId: i-1234567890abcdef0
+            awsEbsVolume:
+              volumeId: vol-1234567890abcdef0
           region: us-east-1
         resourceDetails:
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
@@ -5648,6 +5718,13 @@ components:
             restoreAccountId: 146586e8-f69a-5148-9d7b-7c3a6b006048
             providerAccountId: "836638811603"
             cloudProvider: AWS
+            restoreResult:
+              azureDisk:
+                diskId: i-1234567890abcdef0
+              awsEc2Instance:
+                instanceId: i-1234567890abcdef0
+              awsEbsVolume:
+                volumeId: vol-1234567890abcdef0
             region: us-east-1
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
@@ -5683,6 +5760,13 @@ components:
             restoreAccountId: 146586e8-f69a-5148-9d7b-7c3a6b006048
             providerAccountId: "836638811603"
             cloudProvider: AWS
+            restoreResult:
+              azureDisk:
+                diskId: i-1234567890abcdef0
+              awsEc2Instance:
+                instanceId: i-1234567890abcdef0
+              awsEbsVolume:
+                volumeId: vol-1234567890abcdef0
             region: us-east-1
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
@@ -5742,6 +5826,13 @@ components:
             restoreAccountId: 146586e8-f69a-5148-9d7b-7c3a6b006048
             providerAccountId: "836638811603"
             cloudProvider: AWS
+            restoreResult:
+              azureDisk:
+                diskId: i-1234567890abcdef0
+              awsEc2Instance:
+                instanceId: i-1234567890abcdef0
+              awsEbsVolume:
+                volumeId: vol-1234567890abcdef0
             region: us-east-1
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU

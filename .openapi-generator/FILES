@@ -33,11 +33,14 @@ docs/AwsAccountConfigInput.md
 docs/AwsAccountMetricsDestination.md
 docs/AwsDatabaseDestination.md
 docs/AwsDynamoDBDestination.md
+docs/AwsEbsVolumeRestoreResult.md
+docs/AwsEc2InstanceRestoreResult.md
 docs/AwsEc2Resource.md
 docs/AwsEc2SnapshotProperties.md
 docs/AwsRestoreAccountConnectivityConfig.md
 docs/AwsVaultConfig.md
 docs/AwsVpcConnectivityConfig.md
+docs/AzureDiskRestoreResult.md
 docs/BackupJob.md
 docs/BackupJobSortField.md
 docs/BackupJobType.md
@@ -187,6 +190,7 @@ docs/RestoreJobSortField.md
 docs/RestoreJobType.md
 docs/RestoreJobTypeFilters.md
 docs/RestoreJobsFilterConditions.md
+docs/RestoreResult.md
 docs/RestoreVolumeToEbsRequest.md
 docs/RestoreVolumeToEbsSnapshotRequest.md
 docs/S3RestoreDestination.md
@@ -253,11 +257,14 @@ model_aws_account_config_input.go
 model_aws_account_metrics_destination.go
 model_aws_database_destination.go
 model_aws_dynamo_db_destination.go
+model_aws_ebs_volume_restore_result.go
+model_aws_ec2_instance_restore_result.go
 model_aws_ec2_resource.go
 model_aws_ec2_snapshot_properties.go
 model_aws_restore_account_connectivity_config.go
 model_aws_vault_config.go
 model_aws_vpc_connectivity_config.go
+model_azure_disk_restore_result.go
 model_backup_job.go
 model_backup_job_sort_field.go
 model_backup_job_type.go
@@ -402,6 +409,7 @@ model_restore_job_sort_field.go
 model_restore_job_type.go
 model_restore_job_type_filters.go
 model_restore_jobs_filter_conditions.go
+model_restore_result.go
 model_restore_volume_to_ebs_request.go
 model_restore_volume_to_ebs_snapshot_request.go
 model_s3_restore_destination.go

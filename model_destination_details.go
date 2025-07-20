@@ -28,6 +28,7 @@ type DestinationDetails struct {
 	CloudProvider Provider `json:"cloudProvider"`
 	// Region the data is restored to.
 	Region string `json:"region"`
+	RestoreResult NullableRestoreResult `json:"restoreResult,omitempty"`
 }
 
 type _DestinationDetails DestinationDetails
@@ -149,6 +150,48 @@ func (o *DestinationDetails) SetRegion(v string) {
 	o.Region = v
 }
 
+// GetRestoreResult returns the RestoreResult field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DestinationDetails) GetRestoreResult() RestoreResult {
+	if o == nil || IsNil(o.RestoreResult.Get()) {
+		var ret RestoreResult
+		return ret
+	}
+	return *o.RestoreResult.Get()
+}
+
+// GetRestoreResultOk returns a tuple with the RestoreResult field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DestinationDetails) GetRestoreResultOk() (*RestoreResult, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RestoreResult.Get(), o.RestoreResult.IsSet()
+}
+
+// HasRestoreResult returns a boolean if a field has been set.
+func (o *DestinationDetails) HasRestoreResult() bool {
+	if o != nil && o.RestoreResult.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreResult gets a reference to the given NullableRestoreResult and assigns it to the RestoreResult field.
+func (o *DestinationDetails) SetRestoreResult(v RestoreResult) {
+	o.RestoreResult.Set(&v)
+}
+// SetRestoreResultNil sets the value for RestoreResult to be an explicit nil
+func (o *DestinationDetails) SetRestoreResultNil() {
+	o.RestoreResult.Set(nil)
+}
+
+// UnsetRestoreResult ensures that no value is present for RestoreResult, not even an explicit nil
+func (o *DestinationDetails) UnsetRestoreResult() {
+	o.RestoreResult.Unset()
+}
+
 func (o DestinationDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -163,6 +206,9 @@ func (o DestinationDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["providerAccountId"] = o.ProviderAccountId
 	toSerialize["cloudProvider"] = o.CloudProvider
 	toSerialize["region"] = o.Region
+	if o.RestoreResult.IsSet() {
+		toSerialize["restoreResult"] = o.RestoreResult.Get()
+	}
 	return toSerialize, nil
 }
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ProviderAccountId** | **string** | Cloud-provider-assigned restore account ID. | 
 **CloudProvider** | [**Provider**](Provider.md) |  | 
 **Region** | **string** | Region the data is restored to. | 
+**RestoreResult** | Pointer to [**NullableRestoreResult**](RestoreResult.md) |  | [optional] 
 
 ## Methods
 
@@ -108,6 +109,41 @@ and a boolean to check if the value has been set.
 SetRegion sets Region field to given value.
 
 
+### GetRestoreResult
+
+`func (o *DestinationDetails) GetRestoreResult() RestoreResult`
+
+GetRestoreResult returns the RestoreResult field if non-nil, zero value otherwise.
+
+### GetRestoreResultOk
+
+`func (o *DestinationDetails) GetRestoreResultOk() (*RestoreResult, bool)`
+
+GetRestoreResultOk returns a tuple with the RestoreResult field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreResult
+
+`func (o *DestinationDetails) SetRestoreResult(v RestoreResult)`
+
+SetRestoreResult sets RestoreResult field to given value.
+
+### HasRestoreResult
+
+`func (o *DestinationDetails) HasRestoreResult() bool`
+
+HasRestoreResult returns a boolean if a field has been set.
+
+### SetRestoreResultNil
+
+`func (o *DestinationDetails) SetRestoreResultNil(b bool)`
+
+ SetRestoreResultNil sets the value for RestoreResult to be an explicit nil
+
+### UnsetRestoreResult
+`func (o *DestinationDetails) UnsetRestoreResult()`
+
+UnsetRestoreResult ensures that no value is present for RestoreResult, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
