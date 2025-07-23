@@ -9858,6 +9858,7 @@ components:
       - TERMINATED
       - UNSUPPORTED
       - DISCONNECTED
+      - ACTION_REQUIRED
       example: VIOLATIONS_DETECTED
       type: string
     BackupStatusFilters:

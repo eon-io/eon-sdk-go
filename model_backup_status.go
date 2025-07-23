@@ -31,6 +31,7 @@ const (
 	TERMINATED BackupStatus = "TERMINATED"
 	UNSUPPORTED BackupStatus = "UNSUPPORTED"
 	DISCONNECTED BackupStatus = "DISCONNECTED"
+	ACTION_REQUIRED BackupStatus = "ACTION_REQUIRED"
 )
 
 // All allowed values of BackupStatus enum
@@ -46,6 +47,7 @@ var AllowedBackupStatusEnumValues = []BackupStatus{
 	"TERMINATED",
 	"UNSUPPORTED",
 	"DISCONNECTED",
+	"ACTION_REQUIRED",
 }
 
 func (v *BackupStatus) UnmarshalJSON(src []byte) error {
