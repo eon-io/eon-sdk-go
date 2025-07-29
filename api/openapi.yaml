@@ -3730,6 +3730,99 @@ paths:
       - read:inventory
       x-audit-log:
         excluded: true
+  /v1/cost-data:
+    post:
+      description: "Description: Query cost data with support for filtering, grouping,\
+        \ and time period selection. Supports various granularities and dimensions\
+        \ for cost analysis and chargeback reporting."
+      operationId: queryCostData
+      parameters:
+      - description: Maximum number of records to return
+        example: 100
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+        style: form
+      - allowEmptyValue: true
+        description: Token for retrieving next page of results (returned from previous
+          request)
+        example: eyJwYWdlIjoxfQ==
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryCostDataRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryCostDataResponse'
+          description: Successfully retrieved cost data
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/queryCostData_400_response'
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized - Invalid authentication
+        "403":
+          description: Forbidden - Insufficient permissions
+        "404":
+          description: Not found - Project or resource not found
+        "500":
+          description: Internal server error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/queryCostData_501_response'
+          description: Not implemented (production environment protection)
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Query cost data
+      tags:
+      - billing
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:cost_data
+      x-audit-log:
+        action: read
+        entityRefs:
+        - entityType: account
+          in: reqBody
+          key: filters.accountId
+        - entityType: project
+          in: reqBody
+          key: filters.projectId
 components:
   schemas:
     Provider:
@@ -12456,6 +12549,540 @@ components:
       required:
       - snapshots
       - totalCount
+      type: object
+    TimePeriod:
+      example:
+        endDate: 2025-05-24T00:00:00Z
+        startDate: 2025-05-20T00:00:00Z
+      properties:
+        startDate:
+          description: Start date (inclusive) for cost data (ISO 8601 format)
+          example: 2025-05-20T00:00:00Z
+          format: date-time
+          type: string
+        endDate:
+          description: End date (exclusive) for cost data (ISO 8601 format)
+          example: 2025-05-24T00:00:00Z
+          format: date-time
+          type: string
+      required:
+      - endDate
+      - startDate
+      type: object
+    CloudAccountIdFilters:
+      additionalProperties: false
+      example:
+        in:
+        - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
+        - d074d08d-e433-41de-b25f-7643f1ed6b8e
+        notIn:
+        - 2495625d-199a-4c36-807a-b96490204ad0
+      properties:
+        in:
+          description: Matches if any value in this list equals the account ID.
+          example:
+          - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
+          - d074d08d-e433-41de-b25f-7643f1ed6b8e
+          items:
+            format: uuid
+            type: string
+          type: array
+        notIn:
+          description: Matches if none of the values in this list equal the account
+            ID.
+          example:
+          - 2495625d-199a-4c36-807a-b96490204ad0
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
+    CloudProviderFilters:
+      additionalProperties: false
+      example:
+        in:
+        - AWS
+        - AZURE
+        notIn:
+        - GCP
+      properties:
+        in:
+          description: Matches if any value in this list equals the cloud provider.
+          example:
+          - AWS
+          - AZURE
+          items:
+            $ref: '#/components/schemas/Provider'
+          type: array
+        notIn:
+          description: Matches if none of the values in this list equal the cloud
+            provider.
+          example:
+          - GCP
+          items:
+            $ref: '#/components/schemas/Provider'
+          type: array
+      type: object
+    CostDataResourceTypeFilters:
+      additionalProperties: false
+      example:
+        in:
+        - AWS_EC2
+        - AZURE_VIRTUAL_MACHINE
+        notIn:
+        - GCP_BIG_QUERY
+      properties:
+        in:
+          description: Matches if any value in this list equals the resource type.
+          example:
+          - AWS_EC2
+          - AZURE_VIRTUAL_MACHINE
+          items:
+            $ref: '#/components/schemas/ResourceType'
+          type: array
+        notIn:
+          description: Matches if none of the values in this list equal the resource
+            type.
+          example:
+          - GCP_BIG_QUERY
+          items:
+            $ref: '#/components/schemas/ResourceType'
+          type: array
+      type: object
+    CostDataFilters:
+      additionalProperties: false
+      example:
+        accountId:
+          in:
+          - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
+          - d074d08d-e433-41de-b25f-7643f1ed6b8e
+          notIn:
+          - 2495625d-199a-4c36-807a-b96490204ad0
+        resourceId:
+          in:
+          - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          notIn:
+          - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+        cloudProvider:
+          in:
+          - AWS
+          - AZURE
+          notIn:
+          - GCP
+        sourceAccountProviderId:
+          in:
+          - "836638811603"
+          notIn:
+          - "529569125077"
+        resourceType:
+          in:
+          - AWS_EC2
+          - AZURE_VIRTUAL_MACHINE
+          notIn:
+          - GCP_BIG_QUERY
+      properties:
+        accountId:
+          $ref: '#/components/schemas/CloudAccountIdFilters'
+        sourceAccountProviderId:
+          $ref: '#/components/schemas/ProviderAccountIdFilters'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderFilters'
+        resourceType:
+          $ref: '#/components/schemas/CostDataResourceTypeFilters'
+        resourceId:
+          $ref: '#/components/schemas/IdFilters'
+      type: object
+    QueryCostDataRequest:
+      example:
+        granularity: MONTHLY
+        timePeriod:
+          endDate: 2025-05-24T00:00:00Z
+          startDate: 2025-05-20T00:00:00Z
+        filters:
+          accountId:
+            in:
+            - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
+            - d074d08d-e433-41de-b25f-7643f1ed6b8e
+            notIn:
+            - 2495625d-199a-4c36-807a-b96490204ad0
+          resourceId:
+            in:
+            - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+            notIn:
+            - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+          cloudProvider:
+            in:
+            - AWS
+            - AZURE
+            notIn:
+            - GCP
+          sourceAccountProviderId:
+            in:
+            - "836638811603"
+            notIn:
+            - "529569125077"
+          resourceType:
+            in:
+            - AWS_EC2
+            - AZURE_VIRTUAL_MACHINE
+            notIn:
+            - GCP_BIG_QUERY
+        groupBy: SOURCE_ACCOUNT
+      properties:
+        timePeriod:
+          $ref: '#/components/schemas/TimePeriod'
+        granularity:
+          default: MONTHLY
+          description: Granularity for cost aggregation
+          enum:
+          - HOURLY
+          - DAILY
+          - MONTHLY
+          - TOTAL
+          type: string
+        filters:
+          $ref: '#/components/schemas/CostDataFilters'
+        groupBy:
+          description: Group results by specified dimensions
+          enum:
+          - SOURCE_ACCOUNT
+          - CLOUD_PROVIDER
+          - RESOURCE_TYPE
+          - RESOURCE_ID
+          example: SOURCE_ACCOUNT
+          type: string
+      required:
+      - timePeriod
+      type: object
+    MeteringDimension:
+      description: Metering dimensions for cost analysis across different cloud providers
+        and resource types
+      enum:
+      - AWS_EC2_METERING_DIMENSION
+      - AWS_RDS_METERING_DIMENSION
+      - AWS_S3_METERING_DIMENSION
+      - AWS_DYNAMO_DB_METERING_DIMENSION
+      - AWS_EKS_METERING_DIMENSION
+      - AZURE_VIRTUAL_MACHINE_METERING_DIMENSION
+      - AZURE_STORAGE_ACCOUNT_METERING_DIMENSION
+      - AZURE_SQL_VIRTUAL_MACHINE_METERING_DIMENSION
+      - GCP_VM_INSTANCE_METERING_DIMENSION
+      - GCP_CLOUD_STORAGE_METERING_DIMENSION
+      - GCP_CLOUD_SQL_POSTGRES_SQL_METERING_DIMENSION
+      - GCP_CLOUD_SQL_MYSQL_METERING_DIMENSION
+      - GCP_CLOUD_SQL_SQL_SERVER_METERING_DIMENSION
+      - DATA_TRANSFER_METERING_DIMENSION
+      - CROSS_CLOUD_DATA_TRANSFER_METERING_DIMENSION
+      - AWS_EC2_TO_AZURE_VAULT_METERING_DIMENSION
+      - AWS_S3_TO_AZURE_VAULT_METERING_DIMENSION
+      - AWS_RDS_TO_AZURE_VAULT_METERING_DIMENSION
+      - AWS_DYNAMO_DB_TO_AZURE_VAULT_METERING_DIMENSION
+      - AWS_EKS_TO_AZURE_VAULT_METERING_DIMENSION
+      - AZURE_VIRTUAL_MACHINE_TO_AWS_VAULT_METERING_DIMENSION
+      - AZURE_STORAGE_ACCOUNT_TO_AWS_VAULT_METERING_DIMENSION
+      - AZURE_SQL_VIRTUAL_MACHINE_TO_AWS_VAULT_METERING_DIMENSION
+      - RANSOMWARE_PROTECTED_STORAGE_METERING_DIMENSION
+      example: AWS_EC2_METERING_DIMENSION
+      type: string
+    QueryCostDataResponse:
+      example:
+        totalUniqueResources: 1000
+        records:
+        - costs:
+          - cost:
+              amount: 15075
+              unit: CREDITS
+            usage:
+              amount: 1000
+              unit: GB-Month
+            meteringDimension: AWS_EC2_METERING_DIMENSION
+          - cost:
+              amount: 15075
+              unit: CREDITS
+            usage:
+              amount: 1000
+              unit: GB-Month
+            meteringDimension: AWS_EC2_METERING_DIMENSION
+          totalUniqueResources: 10
+          timePeriod:
+            endDate: 2025-05-24T00:00:00Z
+            startDate: 2025-05-20T00:00:00Z
+          dimensions:
+            providerResourceId: i-1234567890abcdef0
+            sourceStorageSize: 1073741824
+            resourceTags:
+              Environment: Production
+              Project: MyProject
+            resourceId: 123e4567-e89b-12d3-a456-426614174000
+            sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
+            cloudProvider: AWS
+            resourceName: MyEC2Instance
+            sourceAccountProviderId: "12345678"
+            resourceSourceRegion: us-east-1
+            resourceType: AWS_EC2
+            sourceAccountName: My Account
+        - costs:
+          - cost:
+              amount: 15075
+              unit: CREDITS
+            usage:
+              amount: 1000
+              unit: GB-Month
+            meteringDimension: AWS_EC2_METERING_DIMENSION
+          - cost:
+              amount: 15075
+              unit: CREDITS
+            usage:
+              amount: 1000
+              unit: GB-Month
+            meteringDimension: AWS_EC2_METERING_DIMENSION
+          totalUniqueResources: 10
+          timePeriod:
+            endDate: 2025-05-24T00:00:00Z
+            startDate: 2025-05-20T00:00:00Z
+          dimensions:
+            providerResourceId: i-1234567890abcdef0
+            sourceStorageSize: 1073741824
+            resourceTags:
+              Environment: Production
+              Project: MyProject
+            resourceId: 123e4567-e89b-12d3-a456-426614174000
+            sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
+            cloudProvider: AWS
+            resourceName: MyEC2Instance
+            sourceAccountProviderId: "12345678"
+            resourceSourceRegion: us-east-1
+            resourceType: AWS_EC2
+            sourceAccountName: My Account
+        nextToken: nextToken
+        filteredUniqueResources: 2000
+        totalCount: 1543
+      properties:
+        records:
+          description: Array of cost records based on requested filters and grouping
+          items:
+            $ref: '#/components/schemas/QueryCostDataResponse_records_inner'
+          type: array
+        totalCount:
+          description: Total number of records available
+          example: 1543
+          minimum: 0
+          type: integer
+        totalUniqueResources:
+          description: Total number of unique resources in time range
+          example: 1000
+          minimum: 0
+          type: integer
+        filteredUniqueResources:
+          description: Number of unique resources after applying filters in time range
+          example: 2000
+          minimum: 0
+          type: integer
+        nextToken:
+          description: Token for retrieving next page of results
+          type: string
+      required:
+      - filteredUniqueResources
+      - records
+      - totalCount
+      - totalUniqueResources
+      type: object
+    queryCostData_400_response:
+      example:
+        error: Invalid date format or missing required parameters
+      properties:
+        error:
+          example: Invalid date format or missing required parameters
+          type: string
+      type: object
+    queryCostData_501_response:
+      example:
+        error: Cost Explorer API not yet available in production
+      properties:
+        error:
+          example: Cost Explorer API not yet available in production
+          type: string
+      type: object
+    QueryCostDataResponse_records_inner_dimensions:
+      description: "Grouping dimensions (e.g. cloudProvider, meteringDimension, etc.)"
+      example:
+        providerResourceId: i-1234567890abcdef0
+        sourceStorageSize: 1073741824
+        resourceTags:
+          Environment: Production
+          Project: MyProject
+        resourceId: 123e4567-e89b-12d3-a456-426614174000
+        sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
+        cloudProvider: AWS
+        resourceName: MyEC2Instance
+        sourceAccountProviderId: "12345678"
+        resourceSourceRegion: us-east-1
+        resourceType: AWS_EC2
+        sourceAccountName: My Account
+      properties:
+        cloudProvider:
+          $ref: '#/components/schemas/Provider'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        resourceId:
+          description: Eon-assigned resource ID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+        sourceAccountId:
+          description: Eon-assigned source account ID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+        sourceAccountProviderId:
+          description: Source account provider id
+          example: "12345678"
+          type: string
+        sourceAccountName:
+          description: Source account alias
+          example: My Account
+          type: string
+        sourceStorageSize:
+          description: Source storage size in bytes
+          example: 1073741824
+          format: int64
+          type: integer
+        providerResourceId:
+          description: Cloud provider resource ID
+          example: i-1234567890abcdef0
+          type: string
+        resourceName:
+          description: Cloud provider resource name
+          example: MyEC2Instance
+          type: string
+        resourceTags:
+          additionalProperties:
+            type: string
+          description: Cloud provider resource tags
+          example:
+            Environment: Production
+            Project: MyProject
+          type: object
+        resourceSourceRegion:
+          description: Cloud provider resource region
+          example: us-east-1
+          type: string
+      type: object
+    QueryCostDataResponse_records_inner_costs_inner_cost:
+      description: Cost information with amount in cents and currency
+      example:
+        amount: 15075
+        unit: CREDITS
+      properties:
+        amount:
+          description: Cost amount
+          example: 15075
+          format: double
+          minimum: 0
+          type: number
+        unit:
+          default: CREDITS
+          description: Cost unit
+          example: CREDITS
+          type: string
+      required:
+      - amount
+      - unit
+      type: object
+    QueryCostDataResponse_records_inner_costs_inner_usage:
+      description: Resource usage information
+      example:
+        amount: 1000
+        unit: GB-Month
+      properties:
+        amount:
+          description: Raw usage amount for the resource
+          example: 1000
+          format: double
+          minimum: 0
+          type: number
+        unit:
+          description: Unit of measurement for usage
+          example: GB-Month
+          type: string
+      required:
+      - amount
+      - unit
+      type: object
+    QueryCostDataResponse_records_inner_costs_inner:
+      example:
+        cost:
+          amount: 15075
+          unit: CREDITS
+        usage:
+          amount: 1000
+          unit: GB-Month
+        meteringDimension: AWS_EC2_METERING_DIMENSION
+      properties:
+        meteringDimension:
+          $ref: '#/components/schemas/MeteringDimension'
+        cost:
+          $ref: '#/components/schemas/QueryCostDataResponse_records_inner_costs_inner_cost'
+        usage:
+          $ref: '#/components/schemas/QueryCostDataResponse_records_inner_costs_inner_usage'
+      required:
+      - cost
+      - meteringDimension
+      - usage
+      type: object
+    QueryCostDataResponse_records_inner:
+      example:
+        costs:
+        - cost:
+            amount: 15075
+            unit: CREDITS
+          usage:
+            amount: 1000
+            unit: GB-Month
+          meteringDimension: AWS_EC2_METERING_DIMENSION
+        - cost:
+            amount: 15075
+            unit: CREDITS
+          usage:
+            amount: 1000
+            unit: GB-Month
+          meteringDimension: AWS_EC2_METERING_DIMENSION
+        totalUniqueResources: 10
+        timePeriod:
+          endDate: 2025-05-24T00:00:00Z
+          startDate: 2025-05-20T00:00:00Z
+        dimensions:
+          providerResourceId: i-1234567890abcdef0
+          sourceStorageSize: 1073741824
+          resourceTags:
+            Environment: Production
+            Project: MyProject
+          resourceId: 123e4567-e89b-12d3-a456-426614174000
+          sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
+          cloudProvider: AWS
+          resourceName: MyEC2Instance
+          sourceAccountProviderId: "12345678"
+          resourceSourceRegion: us-east-1
+          resourceType: AWS_EC2
+          sourceAccountName: My Account
+      properties:
+        timePeriod:
+          $ref: '#/components/schemas/TimePeriod'
+        totalUniqueResources:
+          description: Total number of unique resources in the record
+          example: 10
+          minimum: 0
+          type: integer
+        dimensions:
+          $ref: '#/components/schemas/QueryCostDataResponse_records_inner_dimensions'
+        costs:
+          description: Cost breakdown by metering dimension
+          items:
+            $ref: '#/components/schemas/QueryCostDataResponse_records_inner_costs_inner'
+          type: array
+      required:
+      - costs
+      - timePeriod
       type: object
   securitySchemes:
     ApiKeyAuth:
