@@ -4977,8 +4977,6 @@ components:
       - startTime
       - endTime
       example: startTime
-      required:
-      - enum
       type: string
       x-enum-varnames:
       - BACKUP_JOB_SORT_CREATED_TIME
@@ -4991,8 +4989,6 @@ components:
       - ASC
       - DESC
       example: ASC
-      required:
-      - enum
       type: string
     SortBackupJobBy:
       description: |
@@ -5576,8 +5572,6 @@ components:
       - startTime
       - endTime
       example: startTime
-      required:
-      - enum
       type: string
       x-enum-varnames:
       - RESTORE_JOB_SORT_CREATED_TIME
@@ -9688,8 +9682,6 @@ components:
       - latestSnapshotTime
       - oldestSnapshotTime
       example: latestSnapshotTime
-      required:
-      - enum
       type: string
     SortResourceBy:
       description: |
@@ -12403,8 +12395,6 @@ components:
       enum:
       - pointInTime
       example: pointInTime
-      required:
-      - enum
       type: string
       x-enum-varnames:
       - SNAPSHOT_SORT_POINT_IN_TIME
