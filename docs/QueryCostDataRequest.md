@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CostUnit** | Pointer to [**CostUnit**](CostUnit.md) |  | [optional] [default to CREDITS]
 **TimePeriod** | [**TimePeriod**](TimePeriod.md) |  | 
 **Granularity** | Pointer to **string** | Granularity for cost aggregation | [optional] [default to "MONTHLY"]
 **Filters** | Pointer to [**CostDataFilters**](CostDataFilters.md) |  | [optional] 
@@ -27,6 +28,31 @@ will change when the set of required properties is changed
 NewQueryCostDataRequestWithDefaults instantiates a new QueryCostDataRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCostUnit
+
+`func (o *QueryCostDataRequest) GetCostUnit() CostUnit`
+
+GetCostUnit returns the CostUnit field if non-nil, zero value otherwise.
+
+### GetCostUnitOk
+
+`func (o *QueryCostDataRequest) GetCostUnitOk() (*CostUnit, bool)`
+
+GetCostUnitOk returns a tuple with the CostUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCostUnit
+
+`func (o *QueryCostDataRequest) SetCostUnit(v CostUnit)`
+
+SetCostUnit sets CostUnit field to given value.
+
+### HasCostUnit
+
+`func (o *QueryCostDataRequest) HasCostUnit() bool`
+
+HasCostUnit returns a boolean if a field has been set.
 
 ### GetTimePeriod
 

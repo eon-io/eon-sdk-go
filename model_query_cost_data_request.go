@@ -21,6 +21,7 @@ var _ MappedNullable = &QueryCostDataRequest{}
 
 // QueryCostDataRequest struct for QueryCostDataRequest
 type QueryCostDataRequest struct {
+	CostUnit *CostUnit `json:"costUnit,omitempty"`
 	TimePeriod TimePeriod `json:"timePeriod"`
 	// Granularity for cost aggregation
 	Granularity *string `json:"granularity,omitempty"`
@@ -37,6 +38,8 @@ type _QueryCostDataRequest QueryCostDataRequest
 // will change when the set of required properties is changed
 func NewQueryCostDataRequest(timePeriod TimePeriod) *QueryCostDataRequest {
 	this := QueryCostDataRequest{}
+	var costUnit CostUnit = CREDITS
+	this.CostUnit = &costUnit
 	this.TimePeriod = timePeriod
 	var granularity string = "MONTHLY"
 	this.Granularity = &granularity
@@ -48,9 +51,43 @@ func NewQueryCostDataRequest(timePeriod TimePeriod) *QueryCostDataRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewQueryCostDataRequestWithDefaults() *QueryCostDataRequest {
 	this := QueryCostDataRequest{}
+	var costUnit CostUnit = CREDITS
+	this.CostUnit = &costUnit
 	var granularity string = "MONTHLY"
 	this.Granularity = &granularity
 	return &this
+}
+
+// GetCostUnit returns the CostUnit field value if set, zero value otherwise.
+func (o *QueryCostDataRequest) GetCostUnit() CostUnit {
+	if o == nil || IsNil(o.CostUnit) {
+		var ret CostUnit
+		return ret
+	}
+	return *o.CostUnit
+}
+
+// GetCostUnitOk returns a tuple with the CostUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryCostDataRequest) GetCostUnitOk() (*CostUnit, bool) {
+	if o == nil || IsNil(o.CostUnit) {
+		return nil, false
+	}
+	return o.CostUnit, true
+}
+
+// HasCostUnit returns a boolean if a field has been set.
+func (o *QueryCostDataRequest) HasCostUnit() bool {
+	if o != nil && !IsNil(o.CostUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetCostUnit gets a reference to the given CostUnit and assigns it to the CostUnit field.
+func (o *QueryCostDataRequest) SetCostUnit(v CostUnit) {
+	o.CostUnit = &v
 }
 
 // GetTimePeriod returns the TimePeriod field value
@@ -183,6 +220,9 @@ func (o QueryCostDataRequest) MarshalJSON() ([]byte, error) {
 
 func (o QueryCostDataRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CostUnit) {
+		toSerialize["costUnit"] = o.CostUnit
+	}
 	toSerialize["timePeriod"] = o.TimePeriod
 	if !IsNil(o.Granularity) {
 		toSerialize["granularity"] = o.Granularity

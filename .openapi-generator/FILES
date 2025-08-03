@@ -70,6 +70,7 @@ docs/ConnectSourceAccountResponse.md
 docs/ControlViolations.md
 docs/CostDataFilters.md
 docs/CostDataResourceTypeFilters.md
+docs/CostUnit.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
 docs/DailyConfig.md
@@ -308,6 +309,7 @@ model_connect_source_account_response.go
 model_control_violations.go
 model_cost_data_filters.go
 model_cost_data_resource_type_filters.go
+model_cost_unit.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
 model_daily_config.go

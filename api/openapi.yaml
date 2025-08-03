@@ -12540,6 +12540,14 @@ components:
       - snapshots
       - totalCount
       type: object
+    CostUnit:
+      default: CREDITS
+      description: Unit of measurement for cost
+      enum:
+      - CREDITS
+      - USD
+      example: CREDITS
+      type: string
     TimePeriod:
       example:
         endDate: 2025-05-24T00:00:00Z
@@ -12684,6 +12692,7 @@ components:
       type: object
     QueryCostDataRequest:
       example:
+        costUnit: CREDITS
         granularity: MONTHLY
         timePeriod:
           endDate: 2025-05-24T00:00:00Z
@@ -12719,6 +12728,8 @@ components:
             - GCP_BIG_QUERY
         groupBy: SOURCE_ACCOUNT
       properties:
+        costUnit:
+          $ref: '#/components/schemas/CostUnit'
         timePeriod:
           $ref: '#/components/schemas/TimePeriod'
         granularity:
