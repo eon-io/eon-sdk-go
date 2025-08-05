@@ -5149,6 +5149,7 @@ components:
       example:
         providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
         sourceStorageSizeBytes: 561566973952
+        accountDisplayName: My AWS Account
         providerAccountId: "123456789012"
         cloudProvider: AWS
         resourceName: customers db
@@ -5175,6 +5176,10 @@ components:
           description: Cloud-provider-assigned account ID.
           example: "123456789012"
           type: string
+        accountDisplayName:
+          description: The display name of the account in Eon.
+          example: My AWS Account
+          type: string
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         region:
@@ -5187,6 +5192,7 @@ components:
           format: int64
           type: integer
       required:
+      - accountDisplayName
       - cloudProvider
       - id
       - providerAccountId
@@ -5277,6 +5283,7 @@ components:
         resourceDetails:
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           sourceStorageSizeBytes: 561566973952
+          accountDisplayName: My AWS Account
           providerAccountId: "123456789012"
           cloudProvider: AWS
           resourceName: customers db
@@ -5326,6 +5333,7 @@ components:
         - resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
+            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -5356,6 +5364,7 @@ components:
         - resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
+            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -5410,6 +5419,7 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
+            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -5752,6 +5762,7 @@ components:
         resourceDetails:
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           sourceStorageSizeBytes: 561566973952
+          accountDisplayName: My AWS Account
           providerAccountId: "123456789012"
           cloudProvider: AWS
           resourceName: customers db
@@ -5816,6 +5827,7 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
+            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -5858,6 +5870,7 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
+            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -5924,6 +5937,7 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
+            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -10624,6 +10638,7 @@ components:
       type: object
     InventoryResource:
       example:
+        accountDisplayName: My AWS Account
         resourceProperties:
           awsEc2:
             volumes:
@@ -10742,6 +10757,10 @@ components:
           description: Cloud-provider-assigned account ID.
           example: "836638811603"
           type: string
+        accountDisplayName:
+          description: The display name of the account in Eon.
+          example: My AWS Account
+          type: string
         snapshotStorage:
           $ref: '#/components/schemas/SnapshotStorage'
         sourceStorage:
@@ -10784,6 +10803,7 @@ components:
         resourceProperties:
           $ref: '#/components/schemas/ResourceProperties'
       required:
+      - accountDisplayName
       - backupPolicies
       - backupStatus
       - cloudProvider
@@ -10803,7 +10823,8 @@ components:
       example:
         nextToken: nextToken
         resources:
-        - resourceProperties:
+        - accountDisplayName: My AWS Account
+          resourceProperties:
             awsEc2:
               volumes:
               - path: /dev/xvda
@@ -10880,7 +10901,8 @@ components:
             nonEonSnapshotCount: 26
             sizeBytes: 1340000000000
           resourceType: AWS_EC2
-        - resourceProperties:
+        - accountDisplayName: My AWS Account
+          resourceProperties:
             awsEc2:
               volumes:
               - path: /dev/xvda
@@ -11019,6 +11041,7 @@ components:
     GetResourceResponse:
       example:
         resource:
+          accountDisplayName: My AWS Account
           resourceProperties:
             awsEc2:
               volumes:

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ResourceName** | **string** | Resource display name. | 
 **ResourceType** | [**ResourceType**](ResourceType.md) |  | 
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
+**AccountDisplayName** | **string** | The display name of the account in Eon. | 
 **CloudProvider** | [**Provider**](Provider.md) |  | 
 **Region** | **string** | Region the resource is hosted in. | 
 **SourceStorageSizeBytes** | **int64** | Total storage size at the source, in bytes. | 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewResourceDetails
 
-`func NewResourceDetails(id string, providerResourceId string, resourceName string, resourceType ResourceType, providerAccountId string, cloudProvider Provider, region string, sourceStorageSizeBytes int64, ) *ResourceDetails`
+`func NewResourceDetails(id string, providerResourceId string, resourceName string, resourceType ResourceType, providerAccountId string, accountDisplayName string, cloudProvider Provider, region string, sourceStorageSizeBytes int64, ) *ResourceDetails`
 
 NewResourceDetails instantiates a new ResourceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -130,6 +131,26 @@ and a boolean to check if the value has been set.
 `func (o *ResourceDetails) SetProviderAccountId(v string)`
 
 SetProviderAccountId sets ProviderAccountId field to given value.
+
+
+### GetAccountDisplayName
+
+`func (o *ResourceDetails) GetAccountDisplayName() string`
+
+GetAccountDisplayName returns the AccountDisplayName field if non-nil, zero value otherwise.
+
+### GetAccountDisplayNameOk
+
+`func (o *ResourceDetails) GetAccountDisplayNameOk() (*string, bool)`
+
+GetAccountDisplayNameOk returns a tuple with the AccountDisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountDisplayName
+
+`func (o *ResourceDetails) SetAccountDisplayName(v string)`
+
+SetAccountDisplayName sets AccountDisplayName field to given value.
 
 
 ### GetCloudProvider
