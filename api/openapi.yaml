@@ -9648,6 +9648,7 @@ components:
           type: string
         refresh_token:
           description: (required if grant_type=refresh_token)
+          nullable: true
           type: string
       required:
       - client_id
