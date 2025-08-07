@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **ResourceName** | **string** | Resource display name. | 
 **Classifications** | Pointer to [**Classifications**](Classifications.md) |  | [optional] 
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
-**AccountDisplayName** | **string** | The display name of the account in Eon. | 
 **SnapshotStorage** | [**SnapshotStorage**](SnapshotStorage.md) |  | 
 **SourceStorage** | [**SourceStorage**](SourceStorage.md) |  | 
 **ControlViolationCounts** | Pointer to [**ControlViolations**](ControlViolations.md) |  | [optional] 
@@ -30,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewInventoryResource
 
-`func NewInventoryResource(id string, backupStatus BackupStatus, providerResourceId string, resourceName string, providerAccountId string, accountDisplayName string, snapshotStorage SnapshotStorage, sourceStorage SourceStorage, tags map[string]string, cloudProvider Provider, resourceType ResourceType, region string, ) *InventoryResource`
+`func NewInventoryResource(id string, backupStatus BackupStatus, providerResourceId string, resourceName string, providerAccountId string, snapshotStorage SnapshotStorage, sourceStorage SourceStorage, tags map[string]string, cloudProvider Provider, resourceType ResourceType, region string, ) *InventoryResource`
 
 NewInventoryResource instantiates a new InventoryResource object
 This constructor will assign default values to properties that have it defined,
@@ -268,26 +267,6 @@ and a boolean to check if the value has been set.
 `func (o *InventoryResource) SetProviderAccountId(v string)`
 
 SetProviderAccountId sets ProviderAccountId field to given value.
-
-
-### GetAccountDisplayName
-
-`func (o *InventoryResource) GetAccountDisplayName() string`
-
-GetAccountDisplayName returns the AccountDisplayName field if non-nil, zero value otherwise.
-
-### GetAccountDisplayNameOk
-
-`func (o *InventoryResource) GetAccountDisplayNameOk() (*string, bool)`
-
-GetAccountDisplayNameOk returns a tuple with the AccountDisplayName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccountDisplayName
-
-`func (o *InventoryResource) SetAccountDisplayName(v string)`
-
-SetAccountDisplayName sets AccountDisplayName field to given value.
 
 
 ### GetSnapshotStorage

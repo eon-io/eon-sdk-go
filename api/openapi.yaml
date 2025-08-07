@@ -6605,6 +6605,7 @@ components:
       - STANDARD
       - HIGH_FREQUENCY
       - PITR
+      - DLSG
       example: STANDARD
       type: string
       x-enum-varnames:
@@ -6612,6 +6613,7 @@ components:
       - BACKUP_POLICY_TYPE_STANDARD
       - BACKUP_POLICY_TYPE_HIGH_FREQUENCY
       - BACKUP_POLICY_TYPE_PITR
+      - BACKUP_POLICY_TYPE_DLSG
     StandardBackupScheduleFrequency:
       enum:
       - INTERVAL
@@ -10639,7 +10641,6 @@ components:
       type: object
     InventoryResource:
       example:
-        accountDisplayName: My AWS Account
         resourceProperties:
           awsEc2:
             volumes:
@@ -10758,10 +10759,6 @@ components:
           description: Cloud-provider-assigned account ID.
           example: "836638811603"
           type: string
-        accountDisplayName:
-          description: The display name of the account in Eon.
-          example: My AWS Account
-          type: string
         snapshotStorage:
           $ref: '#/components/schemas/SnapshotStorage'
         sourceStorage:
@@ -10824,8 +10821,7 @@ components:
       example:
         nextToken: nextToken
         resources:
-        - accountDisplayName: My AWS Account
-          resourceProperties:
+        - resourceProperties:
             awsEc2:
               volumes:
               - path: /dev/xvda
@@ -10902,8 +10898,7 @@ components:
             nonEonSnapshotCount: 26
             sizeBytes: 1340000000000
           resourceType: AWS_EC2
-        - accountDisplayName: My AWS Account
-          resourceProperties:
+        - resourceProperties:
             awsEc2:
               volumes:
               - path: /dev/xvda
@@ -11042,7 +11037,6 @@ components:
     GetResourceResponse:
       example:
         resource:
-          accountDisplayName: My AWS Account
           resourceProperties:
             awsEc2:
               volumes:

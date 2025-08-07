@@ -40,8 +40,6 @@ type InventoryResource struct {
 	Classifications *Classifications `json:"classifications,omitempty"`
 	// Cloud-provider-assigned account ID.
 	ProviderAccountId string `json:"providerAccountId"`
-	// The display name of the account in Eon.
-	AccountDisplayName string `json:"accountDisplayName"`
 	SnapshotStorage SnapshotStorage `json:"snapshotStorage"`
 	SourceStorage SourceStorage `json:"sourceStorage"`
 	ControlViolationCounts *ControlViolations `json:"controlViolationCounts,omitempty"`
@@ -64,14 +62,13 @@ type _InventoryResource InventoryResource
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInventoryResource(id string, backupStatus BackupStatus, providerResourceId string, resourceName string, providerAccountId string, accountDisplayName string, snapshotStorage SnapshotStorage, sourceStorage SourceStorage, tags map[string]string, cloudProvider Provider, resourceType ResourceType, region string) *InventoryResource {
+func NewInventoryResource(id string, backupStatus BackupStatus, providerResourceId string, resourceName string, providerAccountId string, snapshotStorage SnapshotStorage, sourceStorage SourceStorage, tags map[string]string, cloudProvider Provider, resourceType ResourceType, region string) *InventoryResource {
 	this := InventoryResource{}
 	this.Id = id
 	this.BackupStatus = backupStatus
 	this.ProviderResourceId = providerResourceId
 	this.ResourceName = resourceName
 	this.ProviderAccountId = providerAccountId
-	this.AccountDisplayName = accountDisplayName
 	this.SnapshotStorage = snapshotStorage
 	this.SourceStorage = sourceStorage
 	this.Tags = tags
@@ -367,30 +364,6 @@ func (o *InventoryResource) GetProviderAccountIdOk() (*string, bool) {
 // SetProviderAccountId sets field value
 func (o *InventoryResource) SetProviderAccountId(v string) {
 	o.ProviderAccountId = v
-}
-
-// GetAccountDisplayName returns the AccountDisplayName field value
-func (o *InventoryResource) GetAccountDisplayName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AccountDisplayName
-}
-
-// GetAccountDisplayNameOk returns a tuple with the AccountDisplayName field value
-// and a boolean to check if the value has been set.
-func (o *InventoryResource) GetAccountDisplayNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AccountDisplayName, true
-}
-
-// SetAccountDisplayName sets field value
-func (o *InventoryResource) SetAccountDisplayName(v string) {
-	o.AccountDisplayName = v
 }
 
 // GetSnapshotStorage returns the SnapshotStorage field value
@@ -705,7 +678,6 @@ func (o InventoryResource) ToMap() (map[string]interface{}, error) {
 		toSerialize["classifications"] = o.Classifications
 	}
 	toSerialize["providerAccountId"] = o.ProviderAccountId
-	toSerialize["accountDisplayName"] = o.AccountDisplayName
 	toSerialize["snapshotStorage"] = o.SnapshotStorage
 	toSerialize["sourceStorage"] = o.SourceStorage
 	if !IsNil(o.ControlViolationCounts) {
@@ -737,7 +709,6 @@ func (o *InventoryResource) UnmarshalJSON(data []byte) (err error) {
 		"providerResourceId",
 		"resourceName",
 		"providerAccountId",
-		"accountDisplayName",
 		"snapshotStorage",
 		"sourceStorage",
 		"tags",

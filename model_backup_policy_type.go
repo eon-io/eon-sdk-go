@@ -24,6 +24,7 @@ const (
 	BACKUP_POLICY_TYPE_STANDARD BackupPolicyType = "STANDARD"
 	BACKUP_POLICY_TYPE_HIGH_FREQUENCY BackupPolicyType = "HIGH_FREQUENCY"
 	BACKUP_POLICY_TYPE_PITR BackupPolicyType = "PITR"
+	BACKUP_POLICY_TYPE_DLSG BackupPolicyType = "DLSG"
 )
 
 // All allowed values of BackupPolicyType enum
@@ -32,6 +33,7 @@ var AllowedBackupPolicyTypeEnumValues = []BackupPolicyType{
 	"STANDARD",
 	"HIGH_FREQUENCY",
 	"PITR",
+	"DLSG",
 }
 
 func (v *BackupPolicyType) UnmarshalJSON(src []byte) error {
