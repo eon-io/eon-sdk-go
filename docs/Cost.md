@@ -1,67 +1,67 @@
-# QueryCostDataResponseRecordsInnerCostsInnerCost
+# Cost
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **float64** | Cost amount | 
-**Unit** | **string** | Cost unit | [default to "CREDITS"]
+**Unit** | [**CostUnit**](CostUnit.md) |  | [default to COST_UNIT_CREDITS]
 
 ## Methods
 
-### NewQueryCostDataResponseRecordsInnerCostsInnerCost
+### NewCost
 
-`func NewQueryCostDataResponseRecordsInnerCostsInnerCost(amount float64, unit string, ) *QueryCostDataResponseRecordsInnerCostsInnerCost`
+`func NewCost(amount float64, unit CostUnit, ) *Cost`
 
-NewQueryCostDataResponseRecordsInnerCostsInnerCost instantiates a new QueryCostDataResponseRecordsInnerCostsInnerCost object
+NewCost instantiates a new Cost object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewQueryCostDataResponseRecordsInnerCostsInnerCostWithDefaults
+### NewCostWithDefaults
 
-`func NewQueryCostDataResponseRecordsInnerCostsInnerCostWithDefaults() *QueryCostDataResponseRecordsInnerCostsInnerCost`
+`func NewCostWithDefaults() *Cost`
 
-NewQueryCostDataResponseRecordsInnerCostsInnerCostWithDefaults instantiates a new QueryCostDataResponseRecordsInnerCostsInnerCost object
+NewCostWithDefaults instantiates a new Cost object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAmount
 
-`func (o *QueryCostDataResponseRecordsInnerCostsInnerCost) GetAmount() float64`
+`func (o *Cost) GetAmount() float64`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *QueryCostDataResponseRecordsInnerCostsInnerCost) GetAmountOk() (*float64, bool)`
+`func (o *Cost) GetAmountOk() (*float64, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *QueryCostDataResponseRecordsInnerCostsInnerCost) SetAmount(v float64)`
+`func (o *Cost) SetAmount(v float64)`
 
 SetAmount sets Amount field to given value.
 
 
 ### GetUnit
 
-`func (o *QueryCostDataResponseRecordsInnerCostsInnerCost) GetUnit() string`
+`func (o *Cost) GetUnit() CostUnit`
 
 GetUnit returns the Unit field if non-nil, zero value otherwise.
 
 ### GetUnitOk
 
-`func (o *QueryCostDataResponseRecordsInnerCostsInnerCost) GetUnitOk() (*string, bool)`
+`func (o *Cost) GetUnitOk() (*CostUnit, bool)`
 
 GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnit
 
-`func (o *QueryCostDataResponseRecordsInnerCostsInnerCost) SetUnit(v string)`
+`func (o *Cost) SetUnit(v CostUnit)`
 
 SetUnit sets Unit field to given value.
 

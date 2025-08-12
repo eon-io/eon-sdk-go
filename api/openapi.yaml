@@ -12564,52 +12564,67 @@ components:
       enum:
       - CREDITS
       - USD
+      - UNSPECIFIED
       example: CREDITS
       type: string
-    TimePeriod:
+      x-enum-varnames:
+      - COST_UNIT_CREDITS
+      - COST_UNIT_USD
+      - COST_UNIT_UNSPECIFIED
+    TimeFrame:
       example:
-        endDate: 2025-05-24T00:00:00Z
-        startDate: 2025-05-20T00:00:00Z
+        startTime: 2025-05-20T00:00:00Z
+        endTime: 2025-05-24T00:00:00Z
       properties:
-        startDate:
-          description: Start date (inclusive) for cost data (ISO 8601 format)
+        startTime:
+          description: Start time for cost data (ISO 8601 format)
           example: 2025-05-20T00:00:00Z
           format: date-time
           type: string
-        endDate:
-          description: End date (exclusive) for cost data (ISO 8601 format)
+        endTime:
+          description: End time for cost data (ISO 8601 format)
           example: 2025-05-24T00:00:00Z
           format: date-time
           type: string
       required:
-      - endDate
-      - startDate
+      - endTime
+      - startTime
       type: object
-    CloudAccountIdFilters:
+    CostGranularity:
+      default: MONTHLY
+      description: Granularity for cost aggregation
+      enum:
+      - HOURLY
+      - DAILY
+      - MONTHLY
+      - TOTAL
+      example: MONTHLY
+      type: string
+      x-enum-varnames:
+      - COST_GRANULARITY_HOURLY
+      - COST_GRANULARITY_DAILY
+      - COST_GRANULARITY_MONTHLY
+      - COST_GRANULARITY_TOTAL
+    SourceAccountProviderIdFilters:
       additionalProperties: false
       example:
         in:
-        - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
-        - d074d08d-e433-41de-b25f-7643f1ed6b8e
+        - "836638811603"
         notIn:
-        - 2495625d-199a-4c36-807a-b96490204ad0
+        - "529569125077"
       properties:
         in:
-          description: Matches if any value in this list equals the account ID.
+          description: Matches if any value in this list equals `sourceAccountProviderId`.
           example:
-          - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
-          - d074d08d-e433-41de-b25f-7643f1ed6b8e
+          - "836638811603"
           items:
-            format: uuid
             type: string
           type: array
         notIn:
-          description: Matches if none of the values in this list equal the account
-            ID.
+          description: Matches if none of the values in this list equal `sourceAccountProviderId`.
           example:
-          - 2495625d-199a-4c36-807a-b96490204ad0
+          - "529569125077"
           items:
-            format: uuid
             type: string
           type: array
       type: object
@@ -12639,41 +12654,9 @@ components:
             $ref: '#/components/schemas/Provider'
           type: array
       type: object
-    CostDataResourceTypeFilters:
-      additionalProperties: false
-      example:
-        in:
-        - AWS_EC2
-        - AZURE_VIRTUAL_MACHINE
-        notIn:
-        - GCP_BIG_QUERY
-      properties:
-        in:
-          description: Matches if any value in this list equals the resource type.
-          example:
-          - AWS_EC2
-          - AZURE_VIRTUAL_MACHINE
-          items:
-            $ref: '#/components/schemas/ResourceType'
-          type: array
-        notIn:
-          description: Matches if none of the values in this list equal the resource
-            type.
-          example:
-          - GCP_BIG_QUERY
-          items:
-            $ref: '#/components/schemas/ResourceType'
-          type: array
-      type: object
     CostDataFilters:
       additionalProperties: false
       example:
-        accountId:
-          in:
-          - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
-          - d074d08d-e433-41de-b25f-7643f1ed6b8e
-          notIn:
-          - 2495625d-199a-4c36-807a-b96490204ad0
         resourceId:
           in:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -12693,35 +12676,38 @@ components:
         resourceType:
           in:
           - AWS_EC2
-          - AZURE_VIRTUAL_MACHINE
           notIn:
-          - GCP_BIG_QUERY
+          - AWS_RDS
       properties:
-        accountId:
-          $ref: '#/components/schemas/CloudAccountIdFilters'
         sourceAccountProviderId:
-          $ref: '#/components/schemas/ProviderAccountIdFilters'
+          $ref: '#/components/schemas/SourceAccountProviderIdFilters'
         cloudProvider:
           $ref: '#/components/schemas/CloudProviderFilters'
         resourceType:
-          $ref: '#/components/schemas/CostDataResourceTypeFilters'
+          $ref: '#/components/schemas/ResourceTypeFilters'
         resourceId:
           $ref: '#/components/schemas/IdFilters'
       type: object
+    CostDataGroupBy:
+      default: SOURCE_ACCOUNT
+      description: Group results by specified dimensions
+      enum:
+      - SOURCE_ACCOUNT
+      - CLOUD_PROVIDER
+      - RESOURCE_TYPE
+      - RESOURCE
+      example: SOURCE_ACCOUNT
+      type: string
+      x-enum-varnames:
+      - COST_GROUP_BY_SOURCE_ACCOUNT
+      - COST_GROUP_BY_CLOUD_PROVIDER
+      - COST_GROUP_BY_RESOURCE_TYPE
+      - COST_GROUP_BY_RESOURCE
     QueryCostDataRequest:
       example:
         costUnit: CREDITS
         granularity: MONTHLY
-        timePeriod:
-          endDate: 2025-05-24T00:00:00Z
-          startDate: 2025-05-20T00:00:00Z
         filters:
-          accountId:
-            in:
-            - c1fb43cb-4408-447b-bc8e-9cd0ce3a4eb8
-            - d074d08d-e433-41de-b25f-7643f1ed6b8e
-            notIn:
-            - 2495625d-199a-4c36-807a-b96490204ad0
           resourceId:
             in:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -12741,37 +12727,47 @@ components:
           resourceType:
             in:
             - AWS_EC2
-            - AZURE_VIRTUAL_MACHINE
             notIn:
-            - GCP_BIG_QUERY
+            - AWS_RDS
         groupBy: SOURCE_ACCOUNT
+        timeFrame:
+          startTime: 2025-05-20T00:00:00Z
+          endTime: 2025-05-24T00:00:00Z
       properties:
         costUnit:
           $ref: '#/components/schemas/CostUnit'
-        timePeriod:
-          $ref: '#/components/schemas/TimePeriod'
+        timeFrame:
+          $ref: '#/components/schemas/TimeFrame'
         granularity:
-          default: MONTHLY
-          description: Granularity for cost aggregation
-          enum:
-          - HOURLY
-          - DAILY
-          - MONTHLY
-          - TOTAL
-          type: string
+          $ref: '#/components/schemas/CostGranularity'
         filters:
           $ref: '#/components/schemas/CostDataFilters'
         groupBy:
-          description: Group results by specified dimensions
-          enum:
-          - SOURCE_ACCOUNT
-          - CLOUD_PROVIDER
-          - RESOURCE_TYPE
-          - RESOURCE_ID
-          example: SOURCE_ACCOUNT
-          type: string
+          $ref: '#/components/schemas/CostDataGroupBy'
       required:
-      - timePeriod
+      - timeFrame
+      type: object
+    CostDataRecordDimensions:
+      description: "Grouping dimensions (e.g. cloudProvider, meteringDimension, etc.)"
+      example:
+        resourceId: 123e4567-e89b-12d3-a456-426614174000
+        cloudProvider: AWS
+        sourceAccountProviderId: "12345678"
+        resourceType: AWS_EC2
+      properties:
+        cloudProvider:
+          $ref: '#/components/schemas/Provider'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        resourceId:
+          description: Eon-assigned resource ID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+        sourceAccountProviderId:
+          description: Source account provider id
+          example: "12345678"
+          type: string
       type: object
     MeteringDimension:
       description: Metering dimensions for cost analysis across different cloud providers
@@ -12803,9 +12799,123 @@ components:
       - RANSOMWARE_PROTECTED_STORAGE_METERING_DIMENSION
       example: AWS_EC2_METERING_DIMENSION
       type: string
+    Cost:
+      description: Cost information with amount in cents and currency
+      example:
+        amount: 15075
+        unit: CREDITS
+      properties:
+        amount:
+          description: Cost amount
+          example: 15075
+          format: double
+          minimum: 0
+          type: number
+        unit:
+          $ref: '#/components/schemas/CostUnit'
+      required:
+      - amount
+      - unit
+      type: object
+    UsageUnit:
+      description: Unit of measurement for usage
+      enum:
+      - BYTE_MONTHS
+      - BYTES
+      - UNSPECIFIED
+      example: BYTE_MONTHS
+      type: string
+      x-enum-varnames:
+      - USAGE_UNIT_BYTE_MONTHS
+      - USAGE_UNIT_BYTES
+      - USAGE_UNIT_UNSPECIFIED
+    Usage:
+      description: Resource usage information
+      example:
+        amount: 1000
+        unit: BYTE_MONTHS
+      properties:
+        amount:
+          description: Raw usage amount for the resource
+          example: 1000
+          format: double
+          minimum: 0
+          type: number
+        unit:
+          $ref: '#/components/schemas/UsageUnit'
+      required:
+      - amount
+      - unit
+      type: object
+    CostDataRecordCost:
+      description: Cost breakdown by metering dimension
+      example:
+        cost:
+          amount: 15075
+          unit: CREDITS
+        usage:
+          amount: 1000
+          unit: BYTE_MONTHS
+        meteringDimension: AWS_EC2_METERING_DIMENSION
+      properties:
+        meteringDimension:
+          $ref: '#/components/schemas/MeteringDimension'
+        cost:
+          $ref: '#/components/schemas/Cost'
+        usage:
+          $ref: '#/components/schemas/Usage'
+      required:
+      - cost
+      - meteringDimension
+      - usage
+      type: object
+    CostDataRecord:
+      description: Array of cost records based on requested filters and grouping
+      example:
+        costs:
+        - cost:
+            amount: 15075
+            unit: CREDITS
+          usage:
+            amount: 1000
+            unit: BYTE_MONTHS
+          meteringDimension: AWS_EC2_METERING_DIMENSION
+        - cost:
+            amount: 15075
+            unit: CREDITS
+          usage:
+            amount: 1000
+            unit: BYTE_MONTHS
+          meteringDimension: AWS_EC2_METERING_DIMENSION
+        resourceCount: 10
+        recordTimeFrame:
+          startTime: 2025-05-20T00:00:00Z
+          endTime: 2025-05-24T00:00:00Z
+        dimensions:
+          resourceId: 123e4567-e89b-12d3-a456-426614174000
+          cloudProvider: AWS
+          sourceAccountProviderId: "12345678"
+          resourceType: AWS_EC2
+      properties:
+        recordTimeFrame:
+          $ref: '#/components/schemas/TimeFrame'
+        resourceCount:
+          description: Total number of unique resources in the record
+          example: 10
+          minimum: 0
+          type: integer
+        dimensions:
+          $ref: '#/components/schemas/CostDataRecordDimensions'
+        costs:
+          items:
+            $ref: '#/components/schemas/CostDataRecordCost'
+          type: array
+      required:
+      - costs
+      - recordTimeFrame
+      type: object
     QueryCostDataResponse:
       example:
-        totalUniqueResources: 1000
         records:
         - costs:
           - cost:
@@ -12813,87 +12923,63 @@ components:
               unit: CREDITS
             usage:
               amount: 1000
-              unit: GB-Month
+              unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
           - cost:
               amount: 15075
               unit: CREDITS
             usage:
               amount: 1000
-              unit: GB-Month
+              unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
-          totalUniqueResources: 10
-          timePeriod:
-            endDate: 2025-05-24T00:00:00Z
-            startDate: 2025-05-20T00:00:00Z
+          resourceCount: 10
+          recordTimeFrame:
+            startTime: 2025-05-20T00:00:00Z
+            endTime: 2025-05-24T00:00:00Z
           dimensions:
-            providerResourceId: i-1234567890abcdef0
-            sourceStorageSize: 1073741824
-            resourceTags:
-              Environment: Production
-              Project: MyProject
             resourceId: 123e4567-e89b-12d3-a456-426614174000
-            sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
             cloudProvider: AWS
-            resourceName: MyEC2Instance
             sourceAccountProviderId: "12345678"
-            resourceSourceRegion: us-east-1
             resourceType: AWS_EC2
-            sourceAccountName: My Account
         - costs:
           - cost:
               amount: 15075
               unit: CREDITS
             usage:
               amount: 1000
-              unit: GB-Month
+              unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
           - cost:
               amount: 15075
               unit: CREDITS
             usage:
               amount: 1000
-              unit: GB-Month
+              unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
-          totalUniqueResources: 10
-          timePeriod:
-            endDate: 2025-05-24T00:00:00Z
-            startDate: 2025-05-20T00:00:00Z
+          resourceCount: 10
+          recordTimeFrame:
+            startTime: 2025-05-20T00:00:00Z
+            endTime: 2025-05-24T00:00:00Z
           dimensions:
-            providerResourceId: i-1234567890abcdef0
-            sourceStorageSize: 1073741824
-            resourceTags:
-              Environment: Production
-              Project: MyProject
             resourceId: 123e4567-e89b-12d3-a456-426614174000
-            sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
             cloudProvider: AWS
-            resourceName: MyEC2Instance
             sourceAccountProviderId: "12345678"
-            resourceSourceRegion: us-east-1
             resourceType: AWS_EC2
-            sourceAccountName: My Account
         nextToken: nextToken
-        filteredUniqueResources: 2000
+        resourceCount: 2000
         totalCount: 1543
       properties:
         records:
-          description: Array of cost records based on requested filters and grouping
           items:
-            $ref: '#/components/schemas/QueryCostDataResponse_records_inner'
+            $ref: '#/components/schemas/CostDataRecord'
           type: array
         totalCount:
           description: Total number of records available
           example: 1543
           minimum: 0
           type: integer
-        totalUniqueResources:
-          description: Total number of unique resources in time range
-          example: 1000
-          minimum: 0
-          type: integer
-        filteredUniqueResources:
-          description: Number of unique resources after applying filters in time range
+        resourceCount:
+          description: Number of unique resources in time frame
           example: 2000
           minimum: 0
           type: integer
@@ -12901,8 +12987,8 @@ components:
           description: Token for retrieving next page of results
           type: string
       required:
-      - filteredUniqueResources
       - records
+      - resourceCount
       - totalCount
       - totalUniqueResources
       type: object
@@ -12921,187 +13007,6 @@ components:
         error:
           example: Cost Explorer API not yet available in production
           type: string
-      type: object
-    QueryCostDataResponse_records_inner_dimensions:
-      description: "Grouping dimensions (e.g. cloudProvider, meteringDimension, etc.)"
-      example:
-        providerResourceId: i-1234567890abcdef0
-        sourceStorageSize: 1073741824
-        resourceTags:
-          Environment: Production
-          Project: MyProject
-        resourceId: 123e4567-e89b-12d3-a456-426614174000
-        sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
-        cloudProvider: AWS
-        resourceName: MyEC2Instance
-        sourceAccountProviderId: "12345678"
-        resourceSourceRegion: us-east-1
-        resourceType: AWS_EC2
-        sourceAccountName: My Account
-      properties:
-        cloudProvider:
-          $ref: '#/components/schemas/Provider'
-        resourceType:
-          $ref: '#/components/schemas/ResourceType'
-        resourceId:
-          description: Eon-assigned resource ID
-          example: 123e4567-e89b-12d3-a456-426614174000
-          format: uuid
-          type: string
-        sourceAccountId:
-          description: Eon-assigned source account ID
-          example: 123e4567-e89b-12d3-a456-426614174000
-          format: uuid
-          type: string
-        sourceAccountProviderId:
-          description: Source account provider id
-          example: "12345678"
-          type: string
-        sourceAccountName:
-          description: Source account alias
-          example: My Account
-          type: string
-        sourceStorageSize:
-          description: Source storage size in bytes
-          example: 1073741824
-          format: int64
-          type: integer
-        providerResourceId:
-          description: Cloud provider resource ID
-          example: i-1234567890abcdef0
-          type: string
-        resourceName:
-          description: Cloud provider resource name
-          example: MyEC2Instance
-          type: string
-        resourceTags:
-          additionalProperties:
-            type: string
-          description: Cloud provider resource tags
-          example:
-            Environment: Production
-            Project: MyProject
-          type: object
-        resourceSourceRegion:
-          description: Cloud provider resource region
-          example: us-east-1
-          type: string
-      type: object
-    QueryCostDataResponse_records_inner_costs_inner_cost:
-      description: Cost information with amount in cents and currency
-      example:
-        amount: 15075
-        unit: CREDITS
-      properties:
-        amount:
-          description: Cost amount
-          example: 15075
-          format: double
-          minimum: 0
-          type: number
-        unit:
-          default: CREDITS
-          description: Cost unit
-          example: CREDITS
-          type: string
-      required:
-      - amount
-      - unit
-      type: object
-    QueryCostDataResponse_records_inner_costs_inner_usage:
-      description: Resource usage information
-      example:
-        amount: 1000
-        unit: GB-Month
-      properties:
-        amount:
-          description: Raw usage amount for the resource
-          example: 1000
-          format: double
-          minimum: 0
-          type: number
-        unit:
-          description: Unit of measurement for usage
-          example: GB-Month
-          type: string
-      required:
-      - amount
-      - unit
-      type: object
-    QueryCostDataResponse_records_inner_costs_inner:
-      example:
-        cost:
-          amount: 15075
-          unit: CREDITS
-        usage:
-          amount: 1000
-          unit: GB-Month
-        meteringDimension: AWS_EC2_METERING_DIMENSION
-      properties:
-        meteringDimension:
-          $ref: '#/components/schemas/MeteringDimension'
-        cost:
-          $ref: '#/components/schemas/QueryCostDataResponse_records_inner_costs_inner_cost'
-        usage:
-          $ref: '#/components/schemas/QueryCostDataResponse_records_inner_costs_inner_usage'
-      required:
-      - cost
-      - meteringDimension
-      - usage
-      type: object
-    QueryCostDataResponse_records_inner:
-      example:
-        costs:
-        - cost:
-            amount: 15075
-            unit: CREDITS
-          usage:
-            amount: 1000
-            unit: GB-Month
-          meteringDimension: AWS_EC2_METERING_DIMENSION
-        - cost:
-            amount: 15075
-            unit: CREDITS
-          usage:
-            amount: 1000
-            unit: GB-Month
-          meteringDimension: AWS_EC2_METERING_DIMENSION
-        totalUniqueResources: 10
-        timePeriod:
-          endDate: 2025-05-24T00:00:00Z
-          startDate: 2025-05-20T00:00:00Z
-        dimensions:
-          providerResourceId: i-1234567890abcdef0
-          sourceStorageSize: 1073741824
-          resourceTags:
-            Environment: Production
-            Project: MyProject
-          resourceId: 123e4567-e89b-12d3-a456-426614174000
-          sourceAccountId: 123e4567-e89b-12d3-a456-426614174000
-          cloudProvider: AWS
-          resourceName: MyEC2Instance
-          sourceAccountProviderId: "12345678"
-          resourceSourceRegion: us-east-1
-          resourceType: AWS_EC2
-          sourceAccountName: My Account
-      properties:
-        timePeriod:
-          $ref: '#/components/schemas/TimePeriod'
-        totalUniqueResources:
-          description: Total number of unique resources in the record
-          example: 10
-          minimum: 0
-          type: integer
-        dimensions:
-          $ref: '#/components/schemas/QueryCostDataResponse_records_inner_dimensions'
-        costs:
-          description: Cost breakdown by metering dimension
-          items:
-            $ref: '#/components/schemas/QueryCostDataResponse_records_inner_costs_inner'
-          type: array
-      required:
-      - costs
-      - timePeriod
       type: object
   securitySchemes:
     ApiKeyAuth:

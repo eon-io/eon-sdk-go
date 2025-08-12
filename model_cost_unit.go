@@ -20,14 +20,16 @@ type CostUnit string
 
 // List of CostUnit
 const (
-	CREDITS CostUnit = "CREDITS"
-	USD CostUnit = "USD"
+	COST_UNIT_CREDITS CostUnit = "CREDITS"
+	COST_UNIT_USD CostUnit = "USD"
+	COST_UNIT_UNSPECIFIED CostUnit = "UNSPECIFIED"
 )
 
 // All allowed values of CostUnit enum
 var AllowedCostUnitEnumValues = []CostUnit{
 	"CREDITS",
 	"USD",
+	"UNSPECIFIED",
 }
 
 func (v *CostUnit) UnmarshalJSON(src []byte) error {

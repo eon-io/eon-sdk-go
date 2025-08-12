@@ -19,10 +19,9 @@ var _ MappedNullable = &CostDataFilters{}
 
 // CostDataFilters struct for CostDataFilters
 type CostDataFilters struct {
-	AccountId *CloudAccountIdFilters `json:"accountId,omitempty"`
-	SourceAccountProviderId *ProviderAccountIdFilters `json:"sourceAccountProviderId,omitempty"`
+	SourceAccountProviderId *SourceAccountProviderIdFilters `json:"sourceAccountProviderId,omitempty"`
 	CloudProvider *CloudProviderFilters `json:"cloudProvider,omitempty"`
-	ResourceType *CostDataResourceTypeFilters `json:"resourceType,omitempty"`
+	ResourceType *ResourceTypeFilters `json:"resourceType,omitempty"`
 	ResourceId *IdFilters `json:"resourceId,omitempty"`
 }
 
@@ -43,42 +42,10 @@ func NewCostDataFiltersWithDefaults() *CostDataFilters {
 	return &this
 }
 
-// GetAccountId returns the AccountId field value if set, zero value otherwise.
-func (o *CostDataFilters) GetAccountId() CloudAccountIdFilters {
-	if o == nil || IsNil(o.AccountId) {
-		var ret CloudAccountIdFilters
-		return ret
-	}
-	return *o.AccountId
-}
-
-// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CostDataFilters) GetAccountIdOk() (*CloudAccountIdFilters, bool) {
-	if o == nil || IsNil(o.AccountId) {
-		return nil, false
-	}
-	return o.AccountId, true
-}
-
-// HasAccountId returns a boolean if a field has been set.
-func (o *CostDataFilters) HasAccountId() bool {
-	if o != nil && !IsNil(o.AccountId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAccountId gets a reference to the given CloudAccountIdFilters and assigns it to the AccountId field.
-func (o *CostDataFilters) SetAccountId(v CloudAccountIdFilters) {
-	o.AccountId = &v
-}
-
 // GetSourceAccountProviderId returns the SourceAccountProviderId field value if set, zero value otherwise.
-func (o *CostDataFilters) GetSourceAccountProviderId() ProviderAccountIdFilters {
+func (o *CostDataFilters) GetSourceAccountProviderId() SourceAccountProviderIdFilters {
 	if o == nil || IsNil(o.SourceAccountProviderId) {
-		var ret ProviderAccountIdFilters
+		var ret SourceAccountProviderIdFilters
 		return ret
 	}
 	return *o.SourceAccountProviderId
@@ -86,7 +53,7 @@ func (o *CostDataFilters) GetSourceAccountProviderId() ProviderAccountIdFilters 
 
 // GetSourceAccountProviderIdOk returns a tuple with the SourceAccountProviderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CostDataFilters) GetSourceAccountProviderIdOk() (*ProviderAccountIdFilters, bool) {
+func (o *CostDataFilters) GetSourceAccountProviderIdOk() (*SourceAccountProviderIdFilters, bool) {
 	if o == nil || IsNil(o.SourceAccountProviderId) {
 		return nil, false
 	}
@@ -102,8 +69,8 @@ func (o *CostDataFilters) HasSourceAccountProviderId() bool {
 	return false
 }
 
-// SetSourceAccountProviderId gets a reference to the given ProviderAccountIdFilters and assigns it to the SourceAccountProviderId field.
-func (o *CostDataFilters) SetSourceAccountProviderId(v ProviderAccountIdFilters) {
+// SetSourceAccountProviderId gets a reference to the given SourceAccountProviderIdFilters and assigns it to the SourceAccountProviderId field.
+func (o *CostDataFilters) SetSourceAccountProviderId(v SourceAccountProviderIdFilters) {
 	o.SourceAccountProviderId = &v
 }
 
@@ -140,9 +107,9 @@ func (o *CostDataFilters) SetCloudProvider(v CloudProviderFilters) {
 }
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
-func (o *CostDataFilters) GetResourceType() CostDataResourceTypeFilters {
+func (o *CostDataFilters) GetResourceType() ResourceTypeFilters {
 	if o == nil || IsNil(o.ResourceType) {
-		var ret CostDataResourceTypeFilters
+		var ret ResourceTypeFilters
 		return ret
 	}
 	return *o.ResourceType
@@ -150,7 +117,7 @@ func (o *CostDataFilters) GetResourceType() CostDataResourceTypeFilters {
 
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CostDataFilters) GetResourceTypeOk() (*CostDataResourceTypeFilters, bool) {
+func (o *CostDataFilters) GetResourceTypeOk() (*ResourceTypeFilters, bool) {
 	if o == nil || IsNil(o.ResourceType) {
 		return nil, false
 	}
@@ -166,8 +133,8 @@ func (o *CostDataFilters) HasResourceType() bool {
 	return false
 }
 
-// SetResourceType gets a reference to the given CostDataResourceTypeFilters and assigns it to the ResourceType field.
-func (o *CostDataFilters) SetResourceType(v CostDataResourceTypeFilters) {
+// SetResourceType gets a reference to the given ResourceTypeFilters and assigns it to the ResourceType field.
+func (o *CostDataFilters) SetResourceType(v ResourceTypeFilters) {
 	o.ResourceType = &v
 }
 
@@ -213,9 +180,6 @@ func (o CostDataFilters) MarshalJSON() ([]byte, error) {
 
 func (o CostDataFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AccountId) {
-		toSerialize["accountId"] = o.AccountId
-	}
 	if !IsNil(o.SourceAccountProviderId) {
 		toSerialize["sourceAccountProviderId"] = o.SourceAccountProviderId
 	}

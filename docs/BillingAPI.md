@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	queryCostDataRequest := *openapiclient.NewQueryCostDataRequest(*openapiclient.NewTimePeriod(time.Now(), time.Now())) // QueryCostDataRequest | 
+	queryCostDataRequest := *openapiclient.NewQueryCostDataRequest(*openapiclient.NewTimeFrame(time.Now(), time.Now())) // QueryCostDataRequest | 
 	pageSize := int32(100) // int32 | Maximum number of records to return (optional)
 	pageToken := "eyJwYWdlIjoxfQ==" // string | Token for retrieving next page of results (returned from previous request) (optional)
 

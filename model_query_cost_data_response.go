@@ -21,14 +21,11 @@ var _ MappedNullable = &QueryCostDataResponse{}
 
 // QueryCostDataResponse struct for QueryCostDataResponse
 type QueryCostDataResponse struct {
-	// Array of cost records based on requested filters and grouping
-	Records []QueryCostDataResponseRecordsInner `json:"records"`
+	Records []CostDataRecord `json:"records"`
 	// Total number of records available
 	TotalCount int32 `json:"totalCount"`
-	// Total number of unique resources in time range
-	TotalUniqueResources int32 `json:"totalUniqueResources"`
-	// Number of unique resources after applying filters in time range
-	FilteredUniqueResources int32 `json:"filteredUniqueResources"`
+	// Number of unique resources in time frame
+	ResourceCount int32 `json:"resourceCount"`
 	// Token for retrieving next page of results
 	NextToken *string `json:"nextToken,omitempty"`
 }
@@ -39,12 +36,11 @@ type _QueryCostDataResponse QueryCostDataResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQueryCostDataResponse(records []QueryCostDataResponseRecordsInner, totalCount int32, totalUniqueResources int32, filteredUniqueResources int32) *QueryCostDataResponse {
+func NewQueryCostDataResponse(records []CostDataRecord, totalCount int32, resourceCount int32) *QueryCostDataResponse {
 	this := QueryCostDataResponse{}
 	this.Records = records
 	this.TotalCount = totalCount
-	this.TotalUniqueResources = totalUniqueResources
-	this.FilteredUniqueResources = filteredUniqueResources
+	this.ResourceCount = resourceCount
 	return &this
 }
 
@@ -57,9 +53,9 @@ func NewQueryCostDataResponseWithDefaults() *QueryCostDataResponse {
 }
 
 // GetRecords returns the Records field value
-func (o *QueryCostDataResponse) GetRecords() []QueryCostDataResponseRecordsInner {
+func (o *QueryCostDataResponse) GetRecords() []CostDataRecord {
 	if o == nil {
-		var ret []QueryCostDataResponseRecordsInner
+		var ret []CostDataRecord
 		return ret
 	}
 
@@ -68,7 +64,7 @@ func (o *QueryCostDataResponse) GetRecords() []QueryCostDataResponseRecordsInner
 
 // GetRecordsOk returns a tuple with the Records field value
 // and a boolean to check if the value has been set.
-func (o *QueryCostDataResponse) GetRecordsOk() ([]QueryCostDataResponseRecordsInner, bool) {
+func (o *QueryCostDataResponse) GetRecordsOk() ([]CostDataRecord, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,7 +72,7 @@ func (o *QueryCostDataResponse) GetRecordsOk() ([]QueryCostDataResponseRecordsIn
 }
 
 // SetRecords sets field value
-func (o *QueryCostDataResponse) SetRecords(v []QueryCostDataResponseRecordsInner) {
+func (o *QueryCostDataResponse) SetRecords(v []CostDataRecord) {
 	o.Records = v
 }
 
@@ -104,52 +100,28 @@ func (o *QueryCostDataResponse) SetTotalCount(v int32) {
 	o.TotalCount = v
 }
 
-// GetTotalUniqueResources returns the TotalUniqueResources field value
-func (o *QueryCostDataResponse) GetTotalUniqueResources() int32 {
+// GetResourceCount returns the ResourceCount field value
+func (o *QueryCostDataResponse) GetResourceCount() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.TotalUniqueResources
+	return o.ResourceCount
 }
 
-// GetTotalUniqueResourcesOk returns a tuple with the TotalUniqueResources field value
+// GetResourceCountOk returns a tuple with the ResourceCount field value
 // and a boolean to check if the value has been set.
-func (o *QueryCostDataResponse) GetTotalUniqueResourcesOk() (*int32, bool) {
+func (o *QueryCostDataResponse) GetResourceCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TotalUniqueResources, true
+	return &o.ResourceCount, true
 }
 
-// SetTotalUniqueResources sets field value
-func (o *QueryCostDataResponse) SetTotalUniqueResources(v int32) {
-	o.TotalUniqueResources = v
-}
-
-// GetFilteredUniqueResources returns the FilteredUniqueResources field value
-func (o *QueryCostDataResponse) GetFilteredUniqueResources() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.FilteredUniqueResources
-}
-
-// GetFilteredUniqueResourcesOk returns a tuple with the FilteredUniqueResources field value
-// and a boolean to check if the value has been set.
-func (o *QueryCostDataResponse) GetFilteredUniqueResourcesOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.FilteredUniqueResources, true
-}
-
-// SetFilteredUniqueResources sets field value
-func (o *QueryCostDataResponse) SetFilteredUniqueResources(v int32) {
-	o.FilteredUniqueResources = v
+// SetResourceCount sets field value
+func (o *QueryCostDataResponse) SetResourceCount(v int32) {
+	o.ResourceCount = v
 }
 
 // GetNextToken returns the NextToken field value if set, zero value otherwise.
@@ -196,8 +168,7 @@ func (o QueryCostDataResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["records"] = o.Records
 	toSerialize["totalCount"] = o.TotalCount
-	toSerialize["totalUniqueResources"] = o.TotalUniqueResources
-	toSerialize["filteredUniqueResources"] = o.FilteredUniqueResources
+	toSerialize["resourceCount"] = o.ResourceCount
 	if !IsNil(o.NextToken) {
 		toSerialize["nextToken"] = o.NextToken
 	}
@@ -211,8 +182,7 @@ func (o *QueryCostDataResponse) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"records",
 		"totalCount",
-		"totalUniqueResources",
-		"filteredUniqueResources",
+		"resourceCount",
 	}
 
 	allProperties := make(map[string]interface{})

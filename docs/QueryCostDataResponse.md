@@ -4,17 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Records** | [**[]QueryCostDataResponseRecordsInner**](QueryCostDataResponseRecordsInner.md) | Array of cost records based on requested filters and grouping | 
+**Records** | [**[]CostDataRecord**](CostDataRecord.md) |  | 
 **TotalCount** | **int32** | Total number of records available | 
-**TotalUniqueResources** | **int32** | Total number of unique resources in time range | 
-**FilteredUniqueResources** | **int32** | Number of unique resources after applying filters in time range | 
+**ResourceCount** | **int32** | Number of unique resources in time frame | 
 **NextToken** | Pointer to **string** | Token for retrieving next page of results | [optional] 
 
 ## Methods
 
 ### NewQueryCostDataResponse
 
-`func NewQueryCostDataResponse(records []QueryCostDataResponseRecordsInner, totalCount int32, totalUniqueResources int32, filteredUniqueResources int32, ) *QueryCostDataResponse`
+`func NewQueryCostDataResponse(records []CostDataRecord, totalCount int32, resourceCount int32, ) *QueryCostDataResponse`
 
 NewQueryCostDataResponse instantiates a new QueryCostDataResponse object
 This constructor will assign default values to properties that have it defined,
@@ -31,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetRecords
 
-`func (o *QueryCostDataResponse) GetRecords() []QueryCostDataResponseRecordsInner`
+`func (o *QueryCostDataResponse) GetRecords() []CostDataRecord`
 
 GetRecords returns the Records field if non-nil, zero value otherwise.
 
 ### GetRecordsOk
 
-`func (o *QueryCostDataResponse) GetRecordsOk() (*[]QueryCostDataResponseRecordsInner, bool)`
+`func (o *QueryCostDataResponse) GetRecordsOk() (*[]CostDataRecord, bool)`
 
 GetRecordsOk returns a tuple with the Records field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRecords
 
-`func (o *QueryCostDataResponse) SetRecords(v []QueryCostDataResponseRecordsInner)`
+`func (o *QueryCostDataResponse) SetRecords(v []CostDataRecord)`
 
 SetRecords sets Records field to given value.
 
@@ -69,44 +68,24 @@ and a boolean to check if the value has been set.
 SetTotalCount sets TotalCount field to given value.
 
 
-### GetTotalUniqueResources
+### GetResourceCount
 
-`func (o *QueryCostDataResponse) GetTotalUniqueResources() int32`
+`func (o *QueryCostDataResponse) GetResourceCount() int32`
 
-GetTotalUniqueResources returns the TotalUniqueResources field if non-nil, zero value otherwise.
+GetResourceCount returns the ResourceCount field if non-nil, zero value otherwise.
 
-### GetTotalUniqueResourcesOk
+### GetResourceCountOk
 
-`func (o *QueryCostDataResponse) GetTotalUniqueResourcesOk() (*int32, bool)`
+`func (o *QueryCostDataResponse) GetResourceCountOk() (*int32, bool)`
 
-GetTotalUniqueResourcesOk returns a tuple with the TotalUniqueResources field if it's non-nil, zero value otherwise
+GetResourceCountOk returns a tuple with the ResourceCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTotalUniqueResources
+### SetResourceCount
 
-`func (o *QueryCostDataResponse) SetTotalUniqueResources(v int32)`
+`func (o *QueryCostDataResponse) SetResourceCount(v int32)`
 
-SetTotalUniqueResources sets TotalUniqueResources field to given value.
-
-
-### GetFilteredUniqueResources
-
-`func (o *QueryCostDataResponse) GetFilteredUniqueResources() int32`
-
-GetFilteredUniqueResources returns the FilteredUniqueResources field if non-nil, zero value otherwise.
-
-### GetFilteredUniqueResourcesOk
-
-`func (o *QueryCostDataResponse) GetFilteredUniqueResourcesOk() (*int32, bool)`
-
-GetFilteredUniqueResourcesOk returns a tuple with the FilteredUniqueResources field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFilteredUniqueResources
-
-`func (o *QueryCostDataResponse) SetFilteredUniqueResources(v int32)`
-
-SetFilteredUniqueResources sets FilteredUniqueResources field to given value.
+SetResourceCount sets ResourceCount field to given value.
 
 
 ### GetNextToken

@@ -4,10 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | Pointer to [**CloudAccountIdFilters**](CloudAccountIdFilters.md) |  | [optional] 
-**SourceAccountProviderId** | Pointer to [**ProviderAccountIdFilters**](ProviderAccountIdFilters.md) |  | [optional] 
+**SourceAccountProviderId** | Pointer to [**SourceAccountProviderIdFilters**](SourceAccountProviderIdFilters.md) |  | [optional] 
 **CloudProvider** | Pointer to [**CloudProviderFilters**](CloudProviderFilters.md) |  | [optional] 
-**ResourceType** | Pointer to [**CostDataResourceTypeFilters**](CostDataResourceTypeFilters.md) |  | [optional] 
+**ResourceType** | Pointer to [**ResourceTypeFilters**](ResourceTypeFilters.md) |  | [optional] 
 **ResourceId** | Pointer to [**IdFilters**](IdFilters.md) |  | [optional] 
 
 ## Methods
@@ -29,47 +28,22 @@ NewCostDataFiltersWithDefaults instantiates a new CostDataFilters object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAccountId
-
-`func (o *CostDataFilters) GetAccountId() CloudAccountIdFilters`
-
-GetAccountId returns the AccountId field if non-nil, zero value otherwise.
-
-### GetAccountIdOk
-
-`func (o *CostDataFilters) GetAccountIdOk() (*CloudAccountIdFilters, bool)`
-
-GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccountId
-
-`func (o *CostDataFilters) SetAccountId(v CloudAccountIdFilters)`
-
-SetAccountId sets AccountId field to given value.
-
-### HasAccountId
-
-`func (o *CostDataFilters) HasAccountId() bool`
-
-HasAccountId returns a boolean if a field has been set.
-
 ### GetSourceAccountProviderId
 
-`func (o *CostDataFilters) GetSourceAccountProviderId() ProviderAccountIdFilters`
+`func (o *CostDataFilters) GetSourceAccountProviderId() SourceAccountProviderIdFilters`
 
 GetSourceAccountProviderId returns the SourceAccountProviderId field if non-nil, zero value otherwise.
 
 ### GetSourceAccountProviderIdOk
 
-`func (o *CostDataFilters) GetSourceAccountProviderIdOk() (*ProviderAccountIdFilters, bool)`
+`func (o *CostDataFilters) GetSourceAccountProviderIdOk() (*SourceAccountProviderIdFilters, bool)`
 
 GetSourceAccountProviderIdOk returns a tuple with the SourceAccountProviderId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceAccountProviderId
 
-`func (o *CostDataFilters) SetSourceAccountProviderId(v ProviderAccountIdFilters)`
+`func (o *CostDataFilters) SetSourceAccountProviderId(v SourceAccountProviderIdFilters)`
 
 SetSourceAccountProviderId sets SourceAccountProviderId field to given value.
 
@@ -106,20 +80,20 @@ HasCloudProvider returns a boolean if a field has been set.
 
 ### GetResourceType
 
-`func (o *CostDataFilters) GetResourceType() CostDataResourceTypeFilters`
+`func (o *CostDataFilters) GetResourceType() ResourceTypeFilters`
 
 GetResourceType returns the ResourceType field if non-nil, zero value otherwise.
 
 ### GetResourceTypeOk
 
-`func (o *CostDataFilters) GetResourceTypeOk() (*CostDataResourceTypeFilters, bool)`
+`func (o *CostDataFilters) GetResourceTypeOk() (*ResourceTypeFilters, bool)`
 
 GetResourceTypeOk returns a tuple with the ResourceType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResourceType
 
-`func (o *CostDataFilters) SetResourceType(v CostDataResourceTypeFilters)`
+`func (o *CostDataFilters) SetResourceType(v ResourceTypeFilters)`
 
 SetResourceType sets ResourceType field to given value.
 

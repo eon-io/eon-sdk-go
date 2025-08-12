@@ -1,13 +1,13 @@
-# CostUnit
+# UsageUnit
 
 ## Enum
 
 
-* `COST_UNIT_CREDITS` (value: `"CREDITS"`)
+* `USAGE_UNIT_BYTE_MONTHS` (value: `"BYTE_MONTHS"`)
 
-* `COST_UNIT_USD` (value: `"USD"`)
+* `USAGE_UNIT_BYTES` (value: `"BYTES"`)
 
-* `COST_UNIT_UNSPECIFIED` (value: `"UNSPECIFIED"`)
+* `USAGE_UNIT_UNSPECIFIED` (value: `"UNSPECIFIED"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

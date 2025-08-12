@@ -14,36 +14,36 @@ import (
 	"encoding/json"
 )
 
-// checks if the CloudAccountIdFilters type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CloudAccountIdFilters{}
+// checks if the SourceAccountProviderIdFilters type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SourceAccountProviderIdFilters{}
 
-// CloudAccountIdFilters struct for CloudAccountIdFilters
-type CloudAccountIdFilters struct {
-	// Matches if any value in this list equals the account ID.
+// SourceAccountProviderIdFilters struct for SourceAccountProviderIdFilters
+type SourceAccountProviderIdFilters struct {
+	// Matches if any value in this list equals `sourceAccountProviderId`.
 	In []string `json:"in,omitempty"`
-	// Matches if none of the values in this list equal the account ID.
+	// Matches if none of the values in this list equal `sourceAccountProviderId`.
 	NotIn []string `json:"notIn,omitempty"`
 }
 
-// NewCloudAccountIdFilters instantiates a new CloudAccountIdFilters object
+// NewSourceAccountProviderIdFilters instantiates a new SourceAccountProviderIdFilters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCloudAccountIdFilters() *CloudAccountIdFilters {
-	this := CloudAccountIdFilters{}
+func NewSourceAccountProviderIdFilters() *SourceAccountProviderIdFilters {
+	this := SourceAccountProviderIdFilters{}
 	return &this
 }
 
-// NewCloudAccountIdFiltersWithDefaults instantiates a new CloudAccountIdFilters object
+// NewSourceAccountProviderIdFiltersWithDefaults instantiates a new SourceAccountProviderIdFilters object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCloudAccountIdFiltersWithDefaults() *CloudAccountIdFilters {
-	this := CloudAccountIdFilters{}
+func NewSourceAccountProviderIdFiltersWithDefaults() *SourceAccountProviderIdFilters {
+	this := SourceAccountProviderIdFilters{}
 	return &this
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
-func (o *CloudAccountIdFilters) GetIn() []string {
+func (o *SourceAccountProviderIdFilters) GetIn() []string {
 	if o == nil || IsNil(o.In) {
 		var ret []string
 		return ret
@@ -53,7 +53,7 @@ func (o *CloudAccountIdFilters) GetIn() []string {
 
 // GetInOk returns a tuple with the In field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CloudAccountIdFilters) GetInOk() ([]string, bool) {
+func (o *SourceAccountProviderIdFilters) GetInOk() ([]string, bool) {
 	if o == nil || IsNil(o.In) {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *CloudAccountIdFilters) GetInOk() ([]string, bool) {
 }
 
 // HasIn returns a boolean if a field has been set.
-func (o *CloudAccountIdFilters) HasIn() bool {
+func (o *SourceAccountProviderIdFilters) HasIn() bool {
 	if o != nil && !IsNil(o.In) {
 		return true
 	}
@@ -70,12 +70,12 @@ func (o *CloudAccountIdFilters) HasIn() bool {
 }
 
 // SetIn gets a reference to the given []string and assigns it to the In field.
-func (o *CloudAccountIdFilters) SetIn(v []string) {
+func (o *SourceAccountProviderIdFilters) SetIn(v []string) {
 	o.In = v
 }
 
 // GetNotIn returns the NotIn field value if set, zero value otherwise.
-func (o *CloudAccountIdFilters) GetNotIn() []string {
+func (o *SourceAccountProviderIdFilters) GetNotIn() []string {
 	if o == nil || IsNil(o.NotIn) {
 		var ret []string
 		return ret
@@ -85,7 +85,7 @@ func (o *CloudAccountIdFilters) GetNotIn() []string {
 
 // GetNotInOk returns a tuple with the NotIn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CloudAccountIdFilters) GetNotInOk() ([]string, bool) {
+func (o *SourceAccountProviderIdFilters) GetNotInOk() ([]string, bool) {
 	if o == nil || IsNil(o.NotIn) {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *CloudAccountIdFilters) GetNotInOk() ([]string, bool) {
 }
 
 // HasNotIn returns a boolean if a field has been set.
-func (o *CloudAccountIdFilters) HasNotIn() bool {
+func (o *SourceAccountProviderIdFilters) HasNotIn() bool {
 	if o != nil && !IsNil(o.NotIn) {
 		return true
 	}
@@ -102,11 +102,11 @@ func (o *CloudAccountIdFilters) HasNotIn() bool {
 }
 
 // SetNotIn gets a reference to the given []string and assigns it to the NotIn field.
-func (o *CloudAccountIdFilters) SetNotIn(v []string) {
+func (o *SourceAccountProviderIdFilters) SetNotIn(v []string) {
 	o.NotIn = v
 }
 
-func (o CloudAccountIdFilters) MarshalJSON() ([]byte, error) {
+func (o SourceAccountProviderIdFilters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -114,7 +114,7 @@ func (o CloudAccountIdFilters) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CloudAccountIdFilters) ToMap() (map[string]interface{}, error) {
+func (o SourceAccountProviderIdFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.In) {
 		toSerialize["in"] = o.In
@@ -125,38 +125,38 @@ func (o CloudAccountIdFilters) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCloudAccountIdFilters struct {
-	value *CloudAccountIdFilters
+type NullableSourceAccountProviderIdFilters struct {
+	value *SourceAccountProviderIdFilters
 	isSet bool
 }
 
-func (v NullableCloudAccountIdFilters) Get() *CloudAccountIdFilters {
+func (v NullableSourceAccountProviderIdFilters) Get() *SourceAccountProviderIdFilters {
 	return v.value
 }
 
-func (v *NullableCloudAccountIdFilters) Set(val *CloudAccountIdFilters) {
+func (v *NullableSourceAccountProviderIdFilters) Set(val *SourceAccountProviderIdFilters) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCloudAccountIdFilters) IsSet() bool {
+func (v NullableSourceAccountProviderIdFilters) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCloudAccountIdFilters) Unset() {
+func (v *NullableSourceAccountProviderIdFilters) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCloudAccountIdFilters(val *CloudAccountIdFilters) *NullableCloudAccountIdFilters {
-	return &NullableCloudAccountIdFilters{value: val, isSet: true}
+func NewNullableSourceAccountProviderIdFilters(val *SourceAccountProviderIdFilters) *NullableSourceAccountProviderIdFilters {
+	return &NullableSourceAccountProviderIdFilters{value: val, isSet: true}
 }
 
-func (v NullableCloudAccountIdFilters) MarshalJSON() ([]byte, error) {
+func (v NullableSourceAccountProviderIdFilters) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCloudAccountIdFilters) UnmarshalJSON(src []byte) error {
+func (v *NullableSourceAccountProviderIdFilters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

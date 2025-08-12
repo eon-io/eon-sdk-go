@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CostUnit** | Pointer to [**CostUnit**](CostUnit.md) |  | [optional] [default to CREDITS]
-**TimePeriod** | [**TimePeriod**](TimePeriod.md) |  | 
-**Granularity** | Pointer to **string** | Granularity for cost aggregation | [optional] [default to "MONTHLY"]
+**CostUnit** | Pointer to [**CostUnit**](CostUnit.md) |  | [optional] [default to COST_UNIT_CREDITS]
+**TimeFrame** | [**TimeFrame**](TimeFrame.md) |  | 
+**Granularity** | Pointer to [**CostGranularity**](CostGranularity.md) |  | [optional] [default to COST_GRANULARITY_MONTHLY]
 **Filters** | Pointer to [**CostDataFilters**](CostDataFilters.md) |  | [optional] 
-**GroupBy** | Pointer to **string** | Group results by specified dimensions | [optional] 
+**GroupBy** | Pointer to [**CostDataGroupBy**](CostDataGroupBy.md) |  | [optional] [default to COST_GROUP_BY_SOURCE_ACCOUNT]
 
 ## Methods
 
 ### NewQueryCostDataRequest
 
-`func NewQueryCostDataRequest(timePeriod TimePeriod, ) *QueryCostDataRequest`
+`func NewQueryCostDataRequest(timeFrame TimeFrame, ) *QueryCostDataRequest`
 
 NewQueryCostDataRequest instantiates a new QueryCostDataRequest object
 This constructor will assign default values to properties that have it defined,
@@ -54,42 +54,42 @@ SetCostUnit sets CostUnit field to given value.
 
 HasCostUnit returns a boolean if a field has been set.
 
-### GetTimePeriod
+### GetTimeFrame
 
-`func (o *QueryCostDataRequest) GetTimePeriod() TimePeriod`
+`func (o *QueryCostDataRequest) GetTimeFrame() TimeFrame`
 
-GetTimePeriod returns the TimePeriod field if non-nil, zero value otherwise.
+GetTimeFrame returns the TimeFrame field if non-nil, zero value otherwise.
 
-### GetTimePeriodOk
+### GetTimeFrameOk
 
-`func (o *QueryCostDataRequest) GetTimePeriodOk() (*TimePeriod, bool)`
+`func (o *QueryCostDataRequest) GetTimeFrameOk() (*TimeFrame, bool)`
 
-GetTimePeriodOk returns a tuple with the TimePeriod field if it's non-nil, zero value otherwise
+GetTimeFrameOk returns a tuple with the TimeFrame field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTimePeriod
+### SetTimeFrame
 
-`func (o *QueryCostDataRequest) SetTimePeriod(v TimePeriod)`
+`func (o *QueryCostDataRequest) SetTimeFrame(v TimeFrame)`
 
-SetTimePeriod sets TimePeriod field to given value.
+SetTimeFrame sets TimeFrame field to given value.
 
 
 ### GetGranularity
 
-`func (o *QueryCostDataRequest) GetGranularity() string`
+`func (o *QueryCostDataRequest) GetGranularity() CostGranularity`
 
 GetGranularity returns the Granularity field if non-nil, zero value otherwise.
 
 ### GetGranularityOk
 
-`func (o *QueryCostDataRequest) GetGranularityOk() (*string, bool)`
+`func (o *QueryCostDataRequest) GetGranularityOk() (*CostGranularity, bool)`
 
 GetGranularityOk returns a tuple with the Granularity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGranularity
 
-`func (o *QueryCostDataRequest) SetGranularity(v string)`
+`func (o *QueryCostDataRequest) SetGranularity(v CostGranularity)`
 
 SetGranularity sets Granularity field to given value.
 
@@ -126,20 +126,20 @@ HasFilters returns a boolean if a field has been set.
 
 ### GetGroupBy
 
-`func (o *QueryCostDataRequest) GetGroupBy() string`
+`func (o *QueryCostDataRequest) GetGroupBy() CostDataGroupBy`
 
 GetGroupBy returns the GroupBy field if non-nil, zero value otherwise.
 
 ### GetGroupByOk
 
-`func (o *QueryCostDataRequest) GetGroupByOk() (*string, bool)`
+`func (o *QueryCostDataRequest) GetGroupByOk() (*CostDataGroupBy, bool)`
 
 GetGroupByOk returns a tuple with the GroupBy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGroupBy
 
-`func (o *QueryCostDataRequest) SetGroupBy(v string)`
+`func (o *QueryCostDataRequest) SetGroupBy(v CostDataGroupBy)`
 
 SetGroupBy sets GroupBy field to given value.
 

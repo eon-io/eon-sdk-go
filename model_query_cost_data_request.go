@@ -22,12 +22,10 @@ var _ MappedNullable = &QueryCostDataRequest{}
 // QueryCostDataRequest struct for QueryCostDataRequest
 type QueryCostDataRequest struct {
 	CostUnit *CostUnit `json:"costUnit,omitempty"`
-	TimePeriod TimePeriod `json:"timePeriod"`
-	// Granularity for cost aggregation
-	Granularity *string `json:"granularity,omitempty"`
+	TimeFrame TimeFrame `json:"timeFrame"`
+	Granularity *CostGranularity `json:"granularity,omitempty"`
 	Filters *CostDataFilters `json:"filters,omitempty"`
-	// Group results by specified dimensions
-	GroupBy *string `json:"groupBy,omitempty"`
+	GroupBy *CostDataGroupBy `json:"groupBy,omitempty"`
 }
 
 type _QueryCostDataRequest QueryCostDataRequest
@@ -36,13 +34,15 @@ type _QueryCostDataRequest QueryCostDataRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQueryCostDataRequest(timePeriod TimePeriod) *QueryCostDataRequest {
+func NewQueryCostDataRequest(timeFrame TimeFrame) *QueryCostDataRequest {
 	this := QueryCostDataRequest{}
-	var costUnit CostUnit = CREDITS
+	var costUnit CostUnit = COST_UNIT_CREDITS
 	this.CostUnit = &costUnit
-	this.TimePeriod = timePeriod
-	var granularity string = "MONTHLY"
+	this.TimeFrame = timeFrame
+	var granularity CostGranularity = COST_GRANULARITY_MONTHLY
 	this.Granularity = &granularity
+	var groupBy CostDataGroupBy = COST_GROUP_BY_SOURCE_ACCOUNT
+	this.GroupBy = &groupBy
 	return &this
 }
 
@@ -51,10 +51,12 @@ func NewQueryCostDataRequest(timePeriod TimePeriod) *QueryCostDataRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewQueryCostDataRequestWithDefaults() *QueryCostDataRequest {
 	this := QueryCostDataRequest{}
-	var costUnit CostUnit = CREDITS
+	var costUnit CostUnit = COST_UNIT_CREDITS
 	this.CostUnit = &costUnit
-	var granularity string = "MONTHLY"
+	var granularity CostGranularity = COST_GRANULARITY_MONTHLY
 	this.Granularity = &granularity
+	var groupBy CostDataGroupBy = COST_GROUP_BY_SOURCE_ACCOUNT
+	this.GroupBy = &groupBy
 	return &this
 }
 
@@ -90,34 +92,34 @@ func (o *QueryCostDataRequest) SetCostUnit(v CostUnit) {
 	o.CostUnit = &v
 }
 
-// GetTimePeriod returns the TimePeriod field value
-func (o *QueryCostDataRequest) GetTimePeriod() TimePeriod {
+// GetTimeFrame returns the TimeFrame field value
+func (o *QueryCostDataRequest) GetTimeFrame() TimeFrame {
 	if o == nil {
-		var ret TimePeriod
+		var ret TimeFrame
 		return ret
 	}
 
-	return o.TimePeriod
+	return o.TimeFrame
 }
 
-// GetTimePeriodOk returns a tuple with the TimePeriod field value
+// GetTimeFrameOk returns a tuple with the TimeFrame field value
 // and a boolean to check if the value has been set.
-func (o *QueryCostDataRequest) GetTimePeriodOk() (*TimePeriod, bool) {
+func (o *QueryCostDataRequest) GetTimeFrameOk() (*TimeFrame, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TimePeriod, true
+	return &o.TimeFrame, true
 }
 
-// SetTimePeriod sets field value
-func (o *QueryCostDataRequest) SetTimePeriod(v TimePeriod) {
-	o.TimePeriod = v
+// SetTimeFrame sets field value
+func (o *QueryCostDataRequest) SetTimeFrame(v TimeFrame) {
+	o.TimeFrame = v
 }
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
-func (o *QueryCostDataRequest) GetGranularity() string {
+func (o *QueryCostDataRequest) GetGranularity() CostGranularity {
 	if o == nil || IsNil(o.Granularity) {
-		var ret string
+		var ret CostGranularity
 		return ret
 	}
 	return *o.Granularity
@@ -125,7 +127,7 @@ func (o *QueryCostDataRequest) GetGranularity() string {
 
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryCostDataRequest) GetGranularityOk() (*string, bool) {
+func (o *QueryCostDataRequest) GetGranularityOk() (*CostGranularity, bool) {
 	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
@@ -141,8 +143,8 @@ func (o *QueryCostDataRequest) HasGranularity() bool {
 	return false
 }
 
-// SetGranularity gets a reference to the given string and assigns it to the Granularity field.
-func (o *QueryCostDataRequest) SetGranularity(v string) {
+// SetGranularity gets a reference to the given CostGranularity and assigns it to the Granularity field.
+func (o *QueryCostDataRequest) SetGranularity(v CostGranularity) {
 	o.Granularity = &v
 }
 
@@ -179,9 +181,9 @@ func (o *QueryCostDataRequest) SetFilters(v CostDataFilters) {
 }
 
 // GetGroupBy returns the GroupBy field value if set, zero value otherwise.
-func (o *QueryCostDataRequest) GetGroupBy() string {
+func (o *QueryCostDataRequest) GetGroupBy() CostDataGroupBy {
 	if o == nil || IsNil(o.GroupBy) {
-		var ret string
+		var ret CostDataGroupBy
 		return ret
 	}
 	return *o.GroupBy
@@ -189,7 +191,7 @@ func (o *QueryCostDataRequest) GetGroupBy() string {
 
 // GetGroupByOk returns a tuple with the GroupBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryCostDataRequest) GetGroupByOk() (*string, bool) {
+func (o *QueryCostDataRequest) GetGroupByOk() (*CostDataGroupBy, bool) {
 	if o == nil || IsNil(o.GroupBy) {
 		return nil, false
 	}
@@ -205,8 +207,8 @@ func (o *QueryCostDataRequest) HasGroupBy() bool {
 	return false
 }
 
-// SetGroupBy gets a reference to the given string and assigns it to the GroupBy field.
-func (o *QueryCostDataRequest) SetGroupBy(v string) {
+// SetGroupBy gets a reference to the given CostDataGroupBy and assigns it to the GroupBy field.
+func (o *QueryCostDataRequest) SetGroupBy(v CostDataGroupBy) {
 	o.GroupBy = &v
 }
 
@@ -223,7 +225,7 @@ func (o QueryCostDataRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CostUnit) {
 		toSerialize["costUnit"] = o.CostUnit
 	}
-	toSerialize["timePeriod"] = o.TimePeriod
+	toSerialize["timeFrame"] = o.TimeFrame
 	if !IsNil(o.Granularity) {
 		toSerialize["granularity"] = o.Granularity
 	}
@@ -241,7 +243,7 @@ func (o *QueryCostDataRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"timePeriod",
+		"timeFrame",
 	}
 
 	allProperties := make(map[string]interface{})
