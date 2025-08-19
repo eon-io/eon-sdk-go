@@ -27,6 +27,8 @@
 
 * `ACTION_REQUIRED` (value: `"ACTION_REQUIRED"`)
 
+* `DLSG` (value: `"DLSG"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

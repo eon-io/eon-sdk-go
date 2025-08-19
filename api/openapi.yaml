@@ -3875,7 +3875,6 @@ components:
         sourceAccountAttributes:
           $ref: '#/components/schemas/AccountConfigInput'
       required:
-      - name
       - sourceAccountAttributes
       type: object
     AccountState:
@@ -3893,8 +3892,42 @@ components:
       - ACCOUNT_STATE_DISCONNECTED
       - ACCOUNT_STATE_INSUFFICIENT_PERMISSIONS
       - ACCOUNT_STATE_UNSPECIFIED
+    AccountInstallationMethod:
+      default: UNSPECIFIED
+      description: The method used to install the cloud role
+      enum:
+      - UNSPECIFIED
+      - CLOUDFORMATION
+      - TERRAFORM
+      - BASH_SCRIPT
+      example: TERRAFORM
+      type: string
+      x-enum-varnames:
+      - ACCOUNT_INSTALLATION_METHOD_UNSPECIFIED
+      - ACCOUNT_INSTALLATION_METHOD_CLOUDFORMATION
+      - ACCOUNT_INSTALLATION_METHOD_TERRAFORM
+      - ACCOUNT_INSTALLATION_METHOD_BASH_SCRIPT
+    AccountVersion:
+      example:
+        installed: 1.0.0
+        installationMethod: TERRAFORM
+        latest: latest
+      properties:
+        installed:
+          description: The version of the account that is installed.
+          example: 1.0.0
+          type: string
+        installationMethod:
+          $ref: '#/components/schemas/AccountInstallationMethod'
+        latest:
+          description: The latest version of the role available for the account
+          type: string
+      required:
+      - installed
+      type: object
     AwsAccountConfig:
       example:
+        organizationId: o-1234567890
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
       properties:
@@ -3902,19 +3935,60 @@ components:
           description: ARN of the role Eon assumes to access the account in AWS.
           example: arn:aws:iam::123412341234:role/EonSourceAccountRole
           type: string
+        organizationId:
+          description: Cloud-provider-assigned ID of the AWS organization the account
+            belongs to.
+          example: o-1234567890
+          type: string
       required:
       - roleArn
       type: object
+    GcpAccountConfig:
+      example:
+        serviceAccount: serviceAccount
+      nullable: true
+      properties:
+        serviceAccount:
+          type: string
+      required:
+      - serviceAccount
+      type: object
+    AzureAccountConfig:
+      example:
+        resourceGroupName: my-resource-group
+        tenantId: tenantId
+      nullable: true
+      properties:
+        tenantId:
+          description: The tenant ID
+          type: string
+        resourceGroupName:
+          description: The resource group name
+          example: my-resource-group
+          type: string
+      required:
+      - tenantId
+      type: object
     AccountConfig:
       example:
+        gcp:
+          serviceAccount: serviceAccount
         cloudProvider: AWS
         aws:
+          organizationId: o-1234567890
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+        azure:
+          resourceGroupName: my-resource-group
+          tenantId: tenantId
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         aws:
           $ref: '#/components/schemas/AwsAccountConfig'
+        gcp:
+          $ref: '#/components/schemas/GcpAccountConfig'
+        azure:
+          $ref: '#/components/schemas/AzureAccountConfig'
       type: object
     SourceAccount:
       example:
@@ -3922,25 +3996,47 @@ components:
         name: prod-eu
         id: fc495499-9796-5fc9-ade7-1ba924cbcc42
         sourceAccountAttributes:
+          gcp:
+            serviceAccount: serviceAccount
           cloudProvider: AWS
           aws:
+            organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          azure:
+            resourceGroupName: my-resource-group
+            tenantId: tenantId
+        providerAccountName: providerAccountName
+        version:
+          installed: 1.0.0
+          installationMethod: TERRAFORM
+          latest: latest
+        connectionTime: 2024-08-29T13:24:03Z
         status: CONNECTED
       properties:
         id:
-          description: Eon-assigned account ID.
+          description: Eon-assigned source account ID.
           example: fc495499-9796-5fc9-ade7-1ba924cbcc42
-          type: string
-        name:
-          description: Account display name in Eon.
-          example: prod-eu
           type: string
         providerAccountId:
           description: Cloud-provider-assigned account ID.
           example: "123412341234"
           type: string
+        name:
+          description: Account display name in Eon.
+          example: prod-eu
+          type: string
+        providerAccountName:
+          description: The display name of the account from the cloud provider
+          type: string
         status:
           $ref: '#/components/schemas/AccountState'
+        version:
+          $ref: '#/components/schemas/AccountVersion'
+        connectionTime:
+          description: The date and time the account was connected to Eon
+          example: 2024-08-29T13:24:03Z
+          format: date-time
+          type: string
         sourceAccountAttributes:
           $ref: '#/components/schemas/AccountConfig'
       required:
@@ -3956,9 +4052,21 @@ components:
           name: prod-eu
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4059,17 +4167,41 @@ components:
           name: prod-eu
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         - providerAccountId: "123412341234"
           name: prod-eu
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         totalCount: 13
       properties:
@@ -4099,9 +4231,21 @@ components:
           name: prod-eu
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4116,9 +4260,21 @@ components:
           name: prod-eu
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4220,17 +4376,29 @@ components:
         restoreAccountAttributes:
           $ref: '#/components/schemas/AccountConfigInput'
       required:
-      - name
       - restoreAccountAttributes
       type: object
     RestoreAccount:
       example:
         restoreAccountAttributes:
+          gcp:
+            serviceAccount: serviceAccount
           cloudProvider: AWS
           aws:
+            organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          azure:
+            resourceGroupName: my-resource-group
+            tenantId: tenantId
         providerAccountId: "123412341234"
+        name: prod-eu
         id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+        providerAccountName: providerAccountName
+        version:
+          installed: 1.0.0
+          installationMethod: TERRAFORM
+          latest: latest
+        connectionTime: 2024-08-29T13:24:03Z
         status: CONNECTED
       properties:
         id:
@@ -4241,12 +4409,27 @@ components:
           description: Cloud-provider-assigned account ID.
           example: "123412341234"
           type: string
+        name:
+          description: Account display name in Eon.
+          example: prod-eu
+          type: string
+        providerAccountName:
+          description: The display name of the account from the cloud provider
+          type: string
         status:
           $ref: '#/components/schemas/AccountState'
+        version:
+          $ref: '#/components/schemas/AccountVersion'
+        connectionTime:
+          description: The date and time the account was connected to Eon
+          example: 2024-08-29T13:24:03Z
+          format: date-time
+          type: string
         restoreAccountAttributes:
           $ref: '#/components/schemas/AccountConfig'
       required:
       - id
+      - name
       - providerAccountId
       - status
       type: object
@@ -4254,11 +4437,24 @@ components:
       example:
         restoreAccount:
           restoreAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
           providerAccountId: "123412341234"
+          name: prod-eu
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         restoreAccount:
@@ -4288,18 +4484,44 @@ components:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         accounts:
         - restoreAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
           providerAccountId: "123412341234"
+          name: prod-eu
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         - restoreAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
           providerAccountId: "123412341234"
+          name: prod-eu
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         totalCount: 13
       properties:
@@ -4326,11 +4548,24 @@ components:
       example:
         restoreAccount:
           restoreAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
           providerAccountId: "123412341234"
+          name: prod-eu
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         restoreAccount:
@@ -4342,11 +4577,24 @@ components:
       example:
         restoreAccount:
           restoreAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
             cloudProvider: AWS
             aws:
+              organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              resourceGroupName: my-resource-group
+              tenantId: tenantId
           providerAccountId: "123412341234"
+          name: prod-eu
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: latest
+          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         restoreAccount:
@@ -4766,7 +5014,7 @@ components:
       - JOB_COMPLETED
       - JOB_FAILED
       - JOB_PARTIAL
-      - JOB_CANCELLED
+      - JOB_CANCELED
       example: JOB_PENDING
       type: string
       x-enum-varnames:
@@ -4776,7 +5024,7 @@ components:
       - JOB_COMPLETED
       - JOB_FAILED
       - JOB_PARTIAL
-      - JOB_CANCELLED
+      - JOB_CANCELED
     JobStatusFilters:
       additionalProperties: false
       example:
@@ -5180,6 +5428,7 @@ components:
           description: The display name of the account in Eon.
           example: My AWS Account
           type: string
+          x-intenral: true
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         region:
@@ -6605,7 +6854,6 @@ components:
       - STANDARD
       - HIGH_FREQUENCY
       - PITR
-      - DLSG
       example: STANDARD
       type: string
       x-enum-varnames:
@@ -6613,7 +6861,6 @@ components:
       - BACKUP_POLICY_TYPE_STANDARD
       - BACKUP_POLICY_TYPE_HIGH_FREQUENCY
       - BACKUP_POLICY_TYPE_PITR
-      - BACKUP_POLICY_TYPE_DLSG
     StandardBackupScheduleFrequency:
       enum:
       - INTERVAL
@@ -9961,6 +10208,7 @@ components:
       - UNSUPPORTED
       - DISCONNECTED
       - ACTION_REQUIRED
+      - DLSG
       example: VIOLATIONS_DETECTED
       type: string
     BackupStatusFilters:

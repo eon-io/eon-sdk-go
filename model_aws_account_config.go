@@ -23,6 +23,8 @@ var _ MappedNullable = &AwsAccountConfig{}
 type AwsAccountConfig struct {
 	// ARN of the role Eon assumes to access the account in AWS.
 	RoleArn string `json:"roleArn"`
+	// Cloud-provider-assigned ID of the AWS organization the account belongs to.
+	OrganizationId *string `json:"organizationId,omitempty"`
 }
 
 type _AwsAccountConfig AwsAccountConfig
@@ -69,6 +71,38 @@ func (o *AwsAccountConfig) SetRoleArn(v string) {
 	o.RoleArn = v
 }
 
+// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
+func (o *AwsAccountConfig) GetOrganizationId() string {
+	if o == nil || IsNil(o.OrganizationId) {
+		var ret string
+		return ret
+	}
+	return *o.OrganizationId
+}
+
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsAccountConfig) GetOrganizationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OrganizationId) {
+		return nil, false
+	}
+	return o.OrganizationId, true
+}
+
+// HasOrganizationId returns a boolean if a field has been set.
+func (o *AwsAccountConfig) HasOrganizationId() bool {
+	if o != nil && !IsNil(o.OrganizationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
+func (o *AwsAccountConfig) SetOrganizationId(v string) {
+	o.OrganizationId = &v
+}
+
 func (o AwsAccountConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +114,9 @@ func (o AwsAccountConfig) MarshalJSON() ([]byte, error) {
 func (o AwsAccountConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["roleArn"] = o.RoleArn
+	if !IsNil(o.OrganizationId) {
+		toSerialize["organizationId"] = o.OrganizationId
+	}
 	return toSerialize, nil
 }
 

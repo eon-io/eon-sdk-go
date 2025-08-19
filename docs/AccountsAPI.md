@@ -46,7 +46,7 @@ import (
 
 func main() {
 	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
-	connectRestoreAccountRequest := *openapiclient.NewConnectRestoreAccountRequest("restore-sandbox", *openapiclient.NewAccountConfigInput(openapiclient.Provider("AWS"))) // ConnectRestoreAccountRequest | 
+	connectRestoreAccountRequest := *openapiclient.NewConnectRestoreAccountRequest(*openapiclient.NewAccountConfigInput(openapiclient.Provider("AWS"))) // ConnectRestoreAccountRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -118,7 +118,7 @@ import (
 
 func main() {
 	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
-	connectSourceAccountRequest := *openapiclient.NewConnectSourceAccountRequest("prod-eu", *openapiclient.NewAccountConfigInput(openapiclient.Provider("AWS"))) // ConnectSourceAccountRequest | 
+	connectSourceAccountRequest := *openapiclient.NewConnectSourceAccountRequest(*openapiclient.NewAccountConfigInput(openapiclient.Provider("AWS"))) // ConnectSourceAccountRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

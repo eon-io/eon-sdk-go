@@ -12,6 +12,7 @@ package eon
 
 import (
 	"encoding/json"
+	"time"
 	"bytes"
 	"fmt"
 )
@@ -25,7 +26,14 @@ type RestoreAccount struct {
 	Id string `json:"id"`
 	// Cloud-provider-assigned account ID.
 	ProviderAccountId string `json:"providerAccountId"`
+	// Account display name in Eon.
+	Name string `json:"name"`
+	// The display name of the account from the cloud provider
+	ProviderAccountName *string `json:"providerAccountName,omitempty"`
 	Status AccountState `json:"status"`
+	Version *AccountVersion `json:"version,omitempty"`
+	// The date and time the account was connected to Eon
+	ConnectionTime *time.Time `json:"connectionTime,omitempty"`
 	RestoreAccountAttributes *AccountConfig `json:"restoreAccountAttributes,omitempty"`
 }
 
@@ -35,10 +43,11 @@ type _RestoreAccount RestoreAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreAccount(id string, providerAccountId string, status AccountState) *RestoreAccount {
+func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState) *RestoreAccount {
 	this := RestoreAccount{}
 	this.Id = id
 	this.ProviderAccountId = providerAccountId
+	this.Name = name
 	this.Status = status
 	return &this
 }
@@ -99,6 +108,62 @@ func (o *RestoreAccount) SetProviderAccountId(v string) {
 	o.ProviderAccountId = v
 }
 
+// GetName returns the Name field value
+func (o *RestoreAccount) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *RestoreAccount) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *RestoreAccount) SetName(v string) {
+	o.Name = v
+}
+
+// GetProviderAccountName returns the ProviderAccountName field value if set, zero value otherwise.
+func (o *RestoreAccount) GetProviderAccountName() string {
+	if o == nil || IsNil(o.ProviderAccountName) {
+		var ret string
+		return ret
+	}
+	return *o.ProviderAccountName
+}
+
+// GetProviderAccountNameOk returns a tuple with the ProviderAccountName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreAccount) GetProviderAccountNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ProviderAccountName) {
+		return nil, false
+	}
+	return o.ProviderAccountName, true
+}
+
+// HasProviderAccountName returns a boolean if a field has been set.
+func (o *RestoreAccount) HasProviderAccountName() bool {
+	if o != nil && !IsNil(o.ProviderAccountName) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderAccountName gets a reference to the given string and assigns it to the ProviderAccountName field.
+func (o *RestoreAccount) SetProviderAccountName(v string) {
+	o.ProviderAccountName = &v
+}
+
 // GetStatus returns the Status field value
 func (o *RestoreAccount) GetStatus() AccountState {
 	if o == nil {
@@ -121,6 +186,70 @@ func (o *RestoreAccount) GetStatusOk() (*AccountState, bool) {
 // SetStatus sets field value
 func (o *RestoreAccount) SetStatus(v AccountState) {
 	o.Status = v
+}
+
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *RestoreAccount) GetVersion() AccountVersion {
+	if o == nil || IsNil(o.Version) {
+		var ret AccountVersion
+		return ret
+	}
+	return *o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreAccount) GetVersionOk() (*AccountVersion, bool) {
+	if o == nil || IsNil(o.Version) {
+		return nil, false
+	}
+	return o.Version, true
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *RestoreAccount) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given AccountVersion and assigns it to the Version field.
+func (o *RestoreAccount) SetVersion(v AccountVersion) {
+	o.Version = &v
+}
+
+// GetConnectionTime returns the ConnectionTime field value if set, zero value otherwise.
+func (o *RestoreAccount) GetConnectionTime() time.Time {
+	if o == nil || IsNil(o.ConnectionTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ConnectionTime
+}
+
+// GetConnectionTimeOk returns a tuple with the ConnectionTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreAccount) GetConnectionTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ConnectionTime) {
+		return nil, false
+	}
+	return o.ConnectionTime, true
+}
+
+// HasConnectionTime returns a boolean if a field has been set.
+func (o *RestoreAccount) HasConnectionTime() bool {
+	if o != nil && !IsNil(o.ConnectionTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionTime gets a reference to the given time.Time and assigns it to the ConnectionTime field.
+func (o *RestoreAccount) SetConnectionTime(v time.Time) {
+	o.ConnectionTime = &v
 }
 
 // GetRestoreAccountAttributes returns the RestoreAccountAttributes field value if set, zero value otherwise.
@@ -167,7 +296,17 @@ func (o RestoreAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["providerAccountId"] = o.ProviderAccountId
+	toSerialize["name"] = o.Name
+	if !IsNil(o.ProviderAccountName) {
+		toSerialize["providerAccountName"] = o.ProviderAccountName
+	}
 	toSerialize["status"] = o.Status
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
+	if !IsNil(o.ConnectionTime) {
+		toSerialize["connectionTime"] = o.ConnectionTime
+	}
 	if !IsNil(o.RestoreAccountAttributes) {
 		toSerialize["restoreAccountAttributes"] = o.RestoreAccountAttributes
 	}
@@ -181,6 +320,7 @@ func (o *RestoreAccount) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"providerAccountId",
+		"name",
 		"status",
 	}
 

@@ -6,14 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Eon-assigned restore account ID. | 
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
+**Name** | **string** | Account display name in Eon. | 
+**ProviderAccountName** | Pointer to **string** | The display name of the account from the cloud provider | [optional] 
 **Status** | [**AccountState**](AccountState.md) |  | 
+**Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
+**ConnectionTime** | Pointer to **time.Time** | The date and time the account was connected to Eon | [optional] 
 **RestoreAccountAttributes** | Pointer to [**AccountConfig**](AccountConfig.md) |  | [optional] 
 
 ## Methods
 
 ### NewRestoreAccount
 
-`func NewRestoreAccount(id string, providerAccountId string, status AccountState, ) *RestoreAccount`
+`func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, ) *RestoreAccount`
 
 NewRestoreAccount instantiates a new RestoreAccount object
 This constructor will assign default values to properties that have it defined,
@@ -68,6 +72,51 @@ and a boolean to check if the value has been set.
 SetProviderAccountId sets ProviderAccountId field to given value.
 
 
+### GetName
+
+`func (o *RestoreAccount) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *RestoreAccount) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *RestoreAccount) SetName(v string)`
+
+SetName sets Name field to given value.
+
+
+### GetProviderAccountName
+
+`func (o *RestoreAccount) GetProviderAccountName() string`
+
+GetProviderAccountName returns the ProviderAccountName field if non-nil, zero value otherwise.
+
+### GetProviderAccountNameOk
+
+`func (o *RestoreAccount) GetProviderAccountNameOk() (*string, bool)`
+
+GetProviderAccountNameOk returns a tuple with the ProviderAccountName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderAccountName
+
+`func (o *RestoreAccount) SetProviderAccountName(v string)`
+
+SetProviderAccountName sets ProviderAccountName field to given value.
+
+### HasProviderAccountName
+
+`func (o *RestoreAccount) HasProviderAccountName() bool`
+
+HasProviderAccountName returns a boolean if a field has been set.
+
 ### GetStatus
 
 `func (o *RestoreAccount) GetStatus() AccountState`
@@ -87,6 +136,56 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
+
+### GetVersion
+
+`func (o *RestoreAccount) GetVersion() AccountVersion`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *RestoreAccount) GetVersionOk() (*AccountVersion, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *RestoreAccount) SetVersion(v AccountVersion)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *RestoreAccount) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
+
+### GetConnectionTime
+
+`func (o *RestoreAccount) GetConnectionTime() time.Time`
+
+GetConnectionTime returns the ConnectionTime field if non-nil, zero value otherwise.
+
+### GetConnectionTimeOk
+
+`func (o *RestoreAccount) GetConnectionTimeOk() (*time.Time, bool)`
+
+GetConnectionTimeOk returns a tuple with the ConnectionTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionTime
+
+`func (o *RestoreAccount) SetConnectionTime(v time.Time)`
+
+SetConnectionTime sets ConnectionTime field to given value.
+
+### HasConnectionTime
+
+`func (o *RestoreAccount) HasConnectionTime() bool`
+
+HasConnectionTime returns a boolean if a field has been set.
 
 ### GetRestoreAccountAttributes
 

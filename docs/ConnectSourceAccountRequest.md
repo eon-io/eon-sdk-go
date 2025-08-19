@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Account display name in Eon. | 
+**Name** | Pointer to **string** | Account display name in Eon. | [optional] 
 **SourceAccountAttributes** | [**AccountConfigInput**](AccountConfigInput.md) |  | 
 
 ## Methods
 
 ### NewConnectSourceAccountRequest
 
-`func NewConnectSourceAccountRequest(name string, sourceAccountAttributes AccountConfigInput, ) *ConnectSourceAccountRequest`
+`func NewConnectSourceAccountRequest(sourceAccountAttributes AccountConfigInput, ) *ConnectSourceAccountRequest`
 
 NewConnectSourceAccountRequest instantiates a new ConnectSourceAccountRequest object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *ConnectSourceAccountRequest) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetSourceAccountAttributes
 

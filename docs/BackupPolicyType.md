@@ -11,8 +11,6 @@
 
 * `BACKUP_POLICY_TYPE_PITR` (value: `"PITR"`)
 
-* `BACKUP_POLICY_TYPE_DLSG` (value: `"DLSG"`)
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

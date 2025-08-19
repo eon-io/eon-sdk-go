@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Account display name in Eon. | 
+**Name** | Pointer to **string** | Account display name in Eon. | [optional] 
 **RestoreAccountAttributes** | [**AccountConfigInput**](AccountConfigInput.md) |  | 
 
 ## Methods
 
 ### NewConnectRestoreAccountRequest
 
-`func NewConnectRestoreAccountRequest(name string, restoreAccountAttributes AccountConfigInput, ) *ConnectRestoreAccountRequest`
+`func NewConnectRestoreAccountRequest(restoreAccountAttributes AccountConfigInput, ) *ConnectRestoreAccountRequest`
 
 NewConnectRestoreAccountRequest instantiates a new ConnectRestoreAccountRequest object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *ConnectRestoreAccountRequest) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetRestoreAccountAttributes
 

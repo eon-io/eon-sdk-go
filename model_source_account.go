@@ -12,6 +12,7 @@ package eon
 
 import (
 	"encoding/json"
+	"time"
 	"bytes"
 	"fmt"
 )
@@ -21,13 +22,18 @@ var _ MappedNullable = &SourceAccount{}
 
 // SourceAccount struct for SourceAccount
 type SourceAccount struct {
-	// Eon-assigned account ID.
+	// Eon-assigned source account ID.
 	Id string `json:"id"`
-	// Account display name in Eon.
-	Name string `json:"name"`
 	// Cloud-provider-assigned account ID.
 	ProviderAccountId string `json:"providerAccountId"`
+	// Account display name in Eon.
+	Name string `json:"name"`
+	// The display name of the account from the cloud provider
+	ProviderAccountName *string `json:"providerAccountName,omitempty"`
 	Status AccountState `json:"status"`
+	Version *AccountVersion `json:"version,omitempty"`
+	// The date and time the account was connected to Eon
+	ConnectionTime *time.Time `json:"connectionTime,omitempty"`
 	SourceAccountAttributes *AccountConfig `json:"sourceAccountAttributes,omitempty"`
 }
 
@@ -37,11 +43,11 @@ type _SourceAccount SourceAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSourceAccount(id string, name string, providerAccountId string, status AccountState) *SourceAccount {
+func NewSourceAccount(id string, providerAccountId string, name string, status AccountState) *SourceAccount {
 	this := SourceAccount{}
 	this.Id = id
-	this.Name = name
 	this.ProviderAccountId = providerAccountId
+	this.Name = name
 	this.Status = status
 	return &this
 }
@@ -78,30 +84,6 @@ func (o *SourceAccount) SetId(v string) {
 	o.Id = v
 }
 
-// GetName returns the Name field value
-func (o *SourceAccount) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *SourceAccount) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *SourceAccount) SetName(v string) {
-	o.Name = v
-}
-
 // GetProviderAccountId returns the ProviderAccountId field value
 func (o *SourceAccount) GetProviderAccountId() string {
 	if o == nil {
@@ -126,6 +108,62 @@ func (o *SourceAccount) SetProviderAccountId(v string) {
 	o.ProviderAccountId = v
 }
 
+// GetName returns the Name field value
+func (o *SourceAccount) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *SourceAccount) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *SourceAccount) SetName(v string) {
+	o.Name = v
+}
+
+// GetProviderAccountName returns the ProviderAccountName field value if set, zero value otherwise.
+func (o *SourceAccount) GetProviderAccountName() string {
+	if o == nil || IsNil(o.ProviderAccountName) {
+		var ret string
+		return ret
+	}
+	return *o.ProviderAccountName
+}
+
+// GetProviderAccountNameOk returns a tuple with the ProviderAccountName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceAccount) GetProviderAccountNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ProviderAccountName) {
+		return nil, false
+	}
+	return o.ProviderAccountName, true
+}
+
+// HasProviderAccountName returns a boolean if a field has been set.
+func (o *SourceAccount) HasProviderAccountName() bool {
+	if o != nil && !IsNil(o.ProviderAccountName) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderAccountName gets a reference to the given string and assigns it to the ProviderAccountName field.
+func (o *SourceAccount) SetProviderAccountName(v string) {
+	o.ProviderAccountName = &v
+}
+
 // GetStatus returns the Status field value
 func (o *SourceAccount) GetStatus() AccountState {
 	if o == nil {
@@ -148,6 +186,70 @@ func (o *SourceAccount) GetStatusOk() (*AccountState, bool) {
 // SetStatus sets field value
 func (o *SourceAccount) SetStatus(v AccountState) {
 	o.Status = v
+}
+
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *SourceAccount) GetVersion() AccountVersion {
+	if o == nil || IsNil(o.Version) {
+		var ret AccountVersion
+		return ret
+	}
+	return *o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceAccount) GetVersionOk() (*AccountVersion, bool) {
+	if o == nil || IsNil(o.Version) {
+		return nil, false
+	}
+	return o.Version, true
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *SourceAccount) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given AccountVersion and assigns it to the Version field.
+func (o *SourceAccount) SetVersion(v AccountVersion) {
+	o.Version = &v
+}
+
+// GetConnectionTime returns the ConnectionTime field value if set, zero value otherwise.
+func (o *SourceAccount) GetConnectionTime() time.Time {
+	if o == nil || IsNil(o.ConnectionTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ConnectionTime
+}
+
+// GetConnectionTimeOk returns a tuple with the ConnectionTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceAccount) GetConnectionTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ConnectionTime) {
+		return nil, false
+	}
+	return o.ConnectionTime, true
+}
+
+// HasConnectionTime returns a boolean if a field has been set.
+func (o *SourceAccount) HasConnectionTime() bool {
+	if o != nil && !IsNil(o.ConnectionTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionTime gets a reference to the given time.Time and assigns it to the ConnectionTime field.
+func (o *SourceAccount) SetConnectionTime(v time.Time) {
+	o.ConnectionTime = &v
 }
 
 // GetSourceAccountAttributes returns the SourceAccountAttributes field value if set, zero value otherwise.
@@ -193,9 +295,18 @@ func (o SourceAccount) MarshalJSON() ([]byte, error) {
 func (o SourceAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
 	toSerialize["providerAccountId"] = o.ProviderAccountId
+	toSerialize["name"] = o.Name
+	if !IsNil(o.ProviderAccountName) {
+		toSerialize["providerAccountName"] = o.ProviderAccountName
+	}
 	toSerialize["status"] = o.Status
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
+	if !IsNil(o.ConnectionTime) {
+		toSerialize["connectionTime"] = o.ConnectionTime
+	}
 	if !IsNil(o.SourceAccountAttributes) {
 		toSerialize["sourceAccountAttributes"] = o.SourceAccountAttributes
 	}
@@ -208,8 +319,8 @@ func (o *SourceAccount) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
-		"name",
 		"providerAccountId",
+		"name",
 		"status",
 	}
 

@@ -18,8 +18,10 @@ docs/AccountConfig.md
 docs/AccountConfigInput.md
 docs/AccountIdCondition.md
 docs/AccountIdFilters.md
+docs/AccountInstallationMethod.md
 docs/AccountMetricsDestination.md
 docs/AccountState.md
+docs/AccountVersion.md
 docs/AccountsAPI.md
 docs/AccountsFilterConditions.md
 docs/AnnuallyConfig.md
@@ -41,6 +43,7 @@ docs/AwsEc2SnapshotProperties.md
 docs/AwsRestoreAccountConnectivityConfig.md
 docs/AwsVaultConfig.md
 docs/AwsVpcConnectivityConfig.md
+docs/AzureAccountConfig.md
 docs/AzureDiskRestoreResult.md
 docs/BackupJob.md
 docs/BackupJobSortField.md
@@ -110,6 +113,7 @@ docs/EnvironmentFilters.md
 docs/Error.md
 docs/ExcludeFromBackupResponse.md
 docs/FilePath.md
+docs/GcpAccountConfig.md
 docs/GetBackupJobResponse.md
 docs/GetBackupPolicyResponse.md
 docs/GetResourceResponse.md
@@ -263,8 +267,10 @@ model_account_config.go
 model_account_config_input.go
 model_account_id_condition.go
 model_account_id_filters.go
+model_account_installation_method.go
 model_account_metrics_destination.go
 model_account_state.go
+model_account_version.go
 model_accounts_filter_conditions.go
 model_annually_config.go
 model_api_credentials.go
@@ -284,6 +290,7 @@ model_aws_ec2_snapshot_properties.go
 model_aws_restore_account_connectivity_config.go
 model_aws_vault_config.go
 model_aws_vpc_connectivity_config.go
+model_azure_account_config.go
 model_azure_disk_restore_result.go
 model_backup_job.go
 model_backup_job_sort_field.go
@@ -349,6 +356,7 @@ model_environment_filters.go
 model_error.go
 model_exclude_from_backup_response.go
 model_file_path.go
+model_gcp_account_config.go
 model_get_backup_job_response.go
 model_get_backup_policy_response.go
 model_get_resource_response.go

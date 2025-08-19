@@ -21,6 +21,8 @@ var _ MappedNullable = &AccountConfig{}
 type AccountConfig struct {
 	CloudProvider *Provider `json:"cloudProvider,omitempty"`
 	Aws NullableAwsAccountConfig `json:"aws,omitempty"`
+	Gcp NullableGcpAccountConfig `json:"gcp,omitempty"`
+	Azure NullableAzureAccountConfig `json:"azure,omitempty"`
 }
 
 // NewAccountConfig instantiates a new AccountConfig object
@@ -114,6 +116,90 @@ func (o *AccountConfig) UnsetAws() {
 	o.Aws.Unset()
 }
 
+// GetGcp returns the Gcp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountConfig) GetGcp() GcpAccountConfig {
+	if o == nil || IsNil(o.Gcp.Get()) {
+		var ret GcpAccountConfig
+		return ret
+	}
+	return *o.Gcp.Get()
+}
+
+// GetGcpOk returns a tuple with the Gcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountConfig) GetGcpOk() (*GcpAccountConfig, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gcp.Get(), o.Gcp.IsSet()
+}
+
+// HasGcp returns a boolean if a field has been set.
+func (o *AccountConfig) HasGcp() bool {
+	if o != nil && o.Gcp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGcp gets a reference to the given NullableGcpAccountConfig and assigns it to the Gcp field.
+func (o *AccountConfig) SetGcp(v GcpAccountConfig) {
+	o.Gcp.Set(&v)
+}
+// SetGcpNil sets the value for Gcp to be an explicit nil
+func (o *AccountConfig) SetGcpNil() {
+	o.Gcp.Set(nil)
+}
+
+// UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
+func (o *AccountConfig) UnsetGcp() {
+	o.Gcp.Unset()
+}
+
+// GetAzure returns the Azure field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountConfig) GetAzure() AzureAccountConfig {
+	if o == nil || IsNil(o.Azure.Get()) {
+		var ret AzureAccountConfig
+		return ret
+	}
+	return *o.Azure.Get()
+}
+
+// GetAzureOk returns a tuple with the Azure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountConfig) GetAzureOk() (*AzureAccountConfig, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Azure.Get(), o.Azure.IsSet()
+}
+
+// HasAzure returns a boolean if a field has been set.
+func (o *AccountConfig) HasAzure() bool {
+	if o != nil && o.Azure.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAzure gets a reference to the given NullableAzureAccountConfig and assigns it to the Azure field.
+func (o *AccountConfig) SetAzure(v AzureAccountConfig) {
+	o.Azure.Set(&v)
+}
+// SetAzureNil sets the value for Azure to be an explicit nil
+func (o *AccountConfig) SetAzureNil() {
+	o.Azure.Set(nil)
+}
+
+// UnsetAzure ensures that no value is present for Azure, not even an explicit nil
+func (o *AccountConfig) UnsetAzure() {
+	o.Azure.Unset()
+}
+
 func (o AccountConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -129,6 +215,12 @@ func (o AccountConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Aws.IsSet() {
 		toSerialize["aws"] = o.Aws.Get()
+	}
+	if o.Gcp.IsSet() {
+		toSerialize["gcp"] = o.Gcp.Get()
+	}
+	if o.Azure.IsSet() {
+		toSerialize["azure"] = o.Azure.Get()
 	}
 	return toSerialize, nil
 }

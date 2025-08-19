@@ -26,7 +26,7 @@ const (
 	JOB_COMPLETED JobStatus = "JOB_COMPLETED"
 	JOB_FAILED JobStatus = "JOB_FAILED"
 	JOB_PARTIAL JobStatus = "JOB_PARTIAL"
-	JOB_CANCELLED JobStatus = "JOB_CANCELLED"
+	JOB_CANCELED JobStatus = "JOB_CANCELED"
 )
 
 // All allowed values of JobStatus enum
@@ -37,7 +37,7 @@ var AllowedJobStatusEnumValues = []JobStatus{
 	"JOB_COMPLETED",
 	"JOB_FAILED",
 	"JOB_PARTIAL",
-	"JOB_CANCELLED",
+	"JOB_CANCELED",
 }
 
 func (v *JobStatus) UnmarshalJSON(src []byte) error {
