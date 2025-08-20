@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ProviderAccountName** | Pointer to **string** | The display name of the account from the cloud provider | [optional] 
 **Status** | [**AccountState**](AccountState.md) |  | 
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
-**ConnectionTime** | Pointer to **time.Time** | The date and time the account was connected to Eon | [optional] 
+**ConnectedTime** | Pointer to **time.Time** | The date and time the account was connected to Eon | [optional] 
 **SourceAccountAttributes** | Pointer to [**AccountConfig**](AccountConfig.md) |  | [optional] 
 
 ## Methods
@@ -162,30 +162,30 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
-### GetConnectionTime
+### GetConnectedTime
 
-`func (o *SourceAccount) GetConnectionTime() time.Time`
+`func (o *SourceAccount) GetConnectedTime() time.Time`
 
-GetConnectionTime returns the ConnectionTime field if non-nil, zero value otherwise.
+GetConnectedTime returns the ConnectedTime field if non-nil, zero value otherwise.
 
-### GetConnectionTimeOk
+### GetConnectedTimeOk
 
-`func (o *SourceAccount) GetConnectionTimeOk() (*time.Time, bool)`
+`func (o *SourceAccount) GetConnectedTimeOk() (*time.Time, bool)`
 
-GetConnectionTimeOk returns a tuple with the ConnectionTime field if it's non-nil, zero value otherwise
+GetConnectedTimeOk returns a tuple with the ConnectedTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConnectionTime
+### SetConnectedTime
 
-`func (o *SourceAccount) SetConnectionTime(v time.Time)`
+`func (o *SourceAccount) SetConnectedTime(v time.Time)`
 
-SetConnectionTime sets ConnectionTime field to given value.
+SetConnectedTime sets ConnectedTime field to given value.
 
-### HasConnectionTime
+### HasConnectedTime
 
-`func (o *SourceAccount) HasConnectionTime() bool`
+`func (o *SourceAccount) HasConnectedTime() bool`
 
-HasConnectionTime returns a boolean if a field has been set.
+HasConnectedTime returns a boolean if a field has been set.
 
 ### GetSourceAccountAttributes
 

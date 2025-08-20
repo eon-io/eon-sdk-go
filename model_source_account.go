@@ -33,7 +33,7 @@ type SourceAccount struct {
 	Status AccountState `json:"status"`
 	Version *AccountVersion `json:"version,omitempty"`
 	// The date and time the account was connected to Eon
-	ConnectionTime *time.Time `json:"connectionTime,omitempty"`
+	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
 	SourceAccountAttributes *AccountConfig `json:"sourceAccountAttributes,omitempty"`
 }
 
@@ -220,36 +220,36 @@ func (o *SourceAccount) SetVersion(v AccountVersion) {
 	o.Version = &v
 }
 
-// GetConnectionTime returns the ConnectionTime field value if set, zero value otherwise.
-func (o *SourceAccount) GetConnectionTime() time.Time {
-	if o == nil || IsNil(o.ConnectionTime) {
+// GetConnectedTime returns the ConnectedTime field value if set, zero value otherwise.
+func (o *SourceAccount) GetConnectedTime() time.Time {
+	if o == nil || IsNil(o.ConnectedTime) {
 		var ret time.Time
 		return ret
 	}
-	return *o.ConnectionTime
+	return *o.ConnectedTime
 }
 
-// GetConnectionTimeOk returns a tuple with the ConnectionTime field value if set, nil otherwise
+// GetConnectedTimeOk returns a tuple with the ConnectedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceAccount) GetConnectionTimeOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ConnectionTime) {
+func (o *SourceAccount) GetConnectedTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ConnectedTime) {
 		return nil, false
 	}
-	return o.ConnectionTime, true
+	return o.ConnectedTime, true
 }
 
-// HasConnectionTime returns a boolean if a field has been set.
-func (o *SourceAccount) HasConnectionTime() bool {
-	if o != nil && !IsNil(o.ConnectionTime) {
+// HasConnectedTime returns a boolean if a field has been set.
+func (o *SourceAccount) HasConnectedTime() bool {
+	if o != nil && !IsNil(o.ConnectedTime) {
 		return true
 	}
 
 	return false
 }
 
-// SetConnectionTime gets a reference to the given time.Time and assigns it to the ConnectionTime field.
-func (o *SourceAccount) SetConnectionTime(v time.Time) {
-	o.ConnectionTime = &v
+// SetConnectedTime gets a reference to the given time.Time and assigns it to the ConnectedTime field.
+func (o *SourceAccount) SetConnectedTime(v time.Time) {
+	o.ConnectedTime = &v
 }
 
 // GetSourceAccountAttributes returns the SourceAccountAttributes field value if set, zero value otherwise.
@@ -304,8 +304,8 @@ func (o SourceAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
-	if !IsNil(o.ConnectionTime) {
-		toSerialize["connectionTime"] = o.ConnectionTime
+	if !IsNil(o.ConnectedTime) {
+		toSerialize["connectedTime"] = o.ConnectedTime
 	}
 	if !IsNil(o.SourceAccountAttributes) {
 		toSerialize["sourceAccountAttributes"] = o.SourceAccountAttributes

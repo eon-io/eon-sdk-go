@@ -3994,6 +3994,7 @@ components:
       example:
         providerAccountId: "123412341234"
         name: prod-eu
+        connectedTime: 2024-08-29T13:24:03Z
         id: fc495499-9796-5fc9-ade7-1ba924cbcc42
         sourceAccountAttributes:
           gcp:
@@ -4010,7 +4011,6 @@ components:
           installed: 1.0.0
           installationMethod: TERRAFORM
           latest: latest
-        connectionTime: 2024-08-29T13:24:03Z
         status: CONNECTED
       properties:
         id:
@@ -4032,7 +4032,7 @@ components:
           $ref: '#/components/schemas/AccountState'
         version:
           $ref: '#/components/schemas/AccountVersion'
-        connectionTime:
+        connectedTime:
           description: The date and time the account was connected to Eon
           example: 2024-08-29T13:24:03Z
           format: date-time
@@ -4050,6 +4050,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
@@ -4066,7 +4067,6 @@ components:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4120,17 +4120,130 @@ components:
             type: string
           type: array
       type: object
-    AccountsFilterConditions:
+    AccountStatusFilters:
+      additionalProperties: false
+      example:
+        in:
+        - CONNECTED
+        - DISCONNECTED
+        notIn:
+        - CONNECTED
+        - DISCONNECTED
+      properties:
+        in:
+          example:
+          - CONNECTED
+          - DISCONNECTED
+          items:
+            $ref: '#/components/schemas/AccountState'
+          type: array
+        notIn:
+          example:
+          - CONNECTED
+          - DISCONNECTED
+          items:
+            $ref: '#/components/schemas/AccountState'
+          type: array
+      type: object
+    CloudProviderFilters:
+      additionalProperties: false
+      example:
+        in:
+        - AWS
+        - AZURE
+        notIn:
+        - GCP
+      properties:
+        in:
+          description: Matches if any value in this list equals `cloudProvider`.
+          example:
+          - AWS
+          - AZURE
+          items:
+            $ref: '#/components/schemas/Provider'
+          type: array
+        notIn:
+          description: Matches if none of the values in this list equal `cloudProvider`.
+          example:
+          - GCP
+          items:
+            $ref: '#/components/schemas/Provider'
+          type: array
+      type: object
+    AccountNameFilters:
+      additionalProperties: false
+      example:
+        contains:
+        - contains
+        - contains
+        in:
+        - in
+        - in
+        notContains:
+        - notContains
+        - notContains
+        notIn:
+        - notIn
+        - notIn
+      properties:
+        in:
+          description: Matches if any string in this list equals `accountName`.
+          items:
+            type: string
+          type: array
+        notIn:
+          description: Matches if no string in this list equals `accountName`.
+          items:
+            type: string
+          type: array
+        contains:
+          description: Matches if any string in this list is a substring of `accountName`.
+          items:
+            type: string
+          type: array
+        notContains:
+          description: Matches if no string in this list is a substring of `accountName`.
+          items:
+            type: string
+          type: array
+      type: object
+    SourceAccountsFilterConditions:
       additionalProperties: false
       description: |
         Filter conditions.
         If omitted, no filtering is applied.
       example:
+        accountStatus:
+          in:
+          - CONNECTED
+          - DISCONNECTED
+          notIn:
+          - CONNECTED
+          - DISCONNECTED
+        accountName:
+          contains:
+          - contains
+          - contains
+          in:
+          - in
+          - in
+          notContains:
+          - notContains
+          - notContains
+          notIn:
+          - notIn
+          - notIn
         providerAccountId:
           in:
           - "836638811603"
           notIn:
           - "529569125077"
+        cloudProvider:
+          in:
+          - AWS
+          - AZURE
+          notIn:
+          - GCP
         id:
           in:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -4141,23 +4254,96 @@ components:
           $ref: '#/components/schemas/IdFilters'
         providerAccountId:
           $ref: '#/components/schemas/ProviderAccountIdFilters'
+        accountStatus:
+          $ref: '#/components/schemas/AccountStatusFilters'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderFilters'
+        accountName:
+          $ref: '#/components/schemas/AccountNameFilters'
+      type: object
+    SourceAccountSortField:
+      description: Field to sort by.
+      enum:
+      - accountName
+      example: accountName
+      type: string
+      x-enum-varnames:
+      - SOURCE_ACCOUNT_SORT_ACCOUNT_NAME
+    SortOrder:
+      description: Sort order. Use `ASC` for ascending order and `DESC` for descending
+        order.
+      enum:
+      - ASC
+      - DESC
+      example: ASC
+      type: string
+    SortSourceAccountsBy:
+      description: |
+        List of sorting options.
+        Sorting is applied in the order passed in the list.
+      example:
+        field: accountName
+        order: ASC
+      properties:
+        field:
+          $ref: '#/components/schemas/SourceAccountSortField'
+        order:
+          $ref: '#/components/schemas/SortOrder'
+      required:
+      - field
+      - order
       type: object
     ListSourceAccountsRequest:
       example:
         filters:
+          accountStatus:
+            in:
+            - CONNECTED
+            - DISCONNECTED
+            notIn:
+            - CONNECTED
+            - DISCONNECTED
+          accountName:
+            contains:
+            - contains
+            - contains
+            in:
+            - in
+            - in
+            notContains:
+            - notContains
+            - notContains
+            notIn:
+            - notIn
+            - notIn
           providerAccountId:
             in:
             - "836638811603"
             notIn:
             - "529569125077"
+          cloudProvider:
+            in:
+            - AWS
+            - AZURE
+            notIn:
+            - GCP
           id:
             in:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+        sorts:
+        - field: accountName
+          order: ASC
+        - field: accountName
+          order: ASC
       properties:
         filters:
-          $ref: '#/components/schemas/AccountsFilterConditions'
+          $ref: '#/components/schemas/SourceAccountsFilterConditions'
+        sorts:
+          items:
+            $ref: '#/components/schemas/SortSourceAccountsBy'
+          type: array
       type: object
     ListSourceAccountsResponse:
       example:
@@ -4165,6 +4351,7 @@ components:
         accounts:
         - providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
@@ -4181,10 +4368,10 @@ components:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         - providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
@@ -4201,7 +4388,6 @@ components:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         totalCount: 13
       properties:
@@ -4229,6 +4415,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
@@ -4245,7 +4432,6 @@ components:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4258,6 +4444,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
@@ -4274,7 +4461,6 @@ components:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4392,13 +4578,13 @@ components:
             tenantId: tenantId
         providerAccountId: "123412341234"
         name: prod-eu
+        connectedTime: 2024-08-29T13:24:03Z
         id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
         providerAccountName: providerAccountName
         version:
           installed: 1.0.0
           installationMethod: TERRAFORM
           latest: latest
-        connectionTime: 2024-08-29T13:24:03Z
         status: CONNECTED
       properties:
         id:
@@ -4420,7 +4606,7 @@ components:
           $ref: '#/components/schemas/AccountState'
         version:
           $ref: '#/components/schemas/AccountVersion'
-        connectionTime:
+        connectedTime:
           description: The date and time the account was connected to Eon
           example: 2024-08-29T13:24:03Z
           format: date-time
@@ -4448,13 +4634,13 @@ components:
               tenantId: tenantId
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         restoreAccount:
@@ -4462,22 +4648,135 @@ components:
       required:
       - restoreAccount
       type: object
+    RestoreAccountsFilterConditions:
+      additionalProperties: false
+      description: |
+        Filter conditions.
+        If omitted, no filtering is applied.
+      example:
+        accountStatus:
+          in:
+          - CONNECTED
+          - DISCONNECTED
+          notIn:
+          - CONNECTED
+          - DISCONNECTED
+        accountName:
+          contains:
+          - contains
+          - contains
+          in:
+          - in
+          - in
+          notContains:
+          - notContains
+          - notContains
+          notIn:
+          - notIn
+          - notIn
+        providerAccountId:
+          in:
+          - "836638811603"
+          notIn:
+          - "529569125077"
+        cloudProvider:
+          in:
+          - AWS
+          - AZURE
+          notIn:
+          - GCP
+        id:
+          in:
+          - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          notIn:
+          - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+      properties:
+        id:
+          $ref: '#/components/schemas/IdFilters'
+        providerAccountId:
+          $ref: '#/components/schemas/ProviderAccountIdFilters'
+        accountStatus:
+          $ref: '#/components/schemas/AccountStatusFilters'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderFilters'
+        accountName:
+          $ref: '#/components/schemas/AccountNameFilters'
+      type: object
+    RestoreAccountSortField:
+      description: Field to sort by.
+      enum:
+      - accountName
+      example: accountName
+      type: string
+      x-enum-varnames:
+      - RESTORE_ACCOUNT_SORT_ACCOUNT_NAME
+    SortRestoreAccountsBy:
+      description: |
+        List of sorting options.
+        Sorting is applied in the order passed in the list.
+      example:
+        field: accountName
+        order: ASC
+      properties:
+        field:
+          $ref: '#/components/schemas/RestoreAccountSortField'
+        order:
+          $ref: '#/components/schemas/SortOrder'
+      required:
+      - field
+      - order
+      type: object
     ListRestoreAccountsRequest:
       example:
         filters:
+          accountStatus:
+            in:
+            - CONNECTED
+            - DISCONNECTED
+            notIn:
+            - CONNECTED
+            - DISCONNECTED
+          accountName:
+            contains:
+            - contains
+            - contains
+            in:
+            - in
+            - in
+            notContains:
+            - notContains
+            - notContains
+            notIn:
+            - notIn
+            - notIn
           providerAccountId:
             in:
             - "836638811603"
             notIn:
             - "529569125077"
+          cloudProvider:
+            in:
+            - AWS
+            - AZURE
+            notIn:
+            - GCP
           id:
             in:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+        sorts:
+        - field: accountName
+          order: ASC
+        - field: accountName
+          order: ASC
       properties:
         filters:
-          $ref: '#/components/schemas/AccountsFilterConditions'
+          $ref: '#/components/schemas/RestoreAccountsFilterConditions'
+        sorts:
+          items:
+            $ref: '#/components/schemas/SortRestoreAccountsBy'
+          type: array
       type: object
     ListRestoreAccountsResponse:
       example:
@@ -4495,13 +4794,13 @@ components:
               tenantId: tenantId
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         - restoreAccountAttributes:
             gcp:
@@ -4515,13 +4814,13 @@ components:
               tenantId: tenantId
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
         totalCount: 13
       properties:
@@ -4559,13 +4858,13 @@ components:
               tenantId: tenantId
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         restoreAccount:
@@ -4588,13 +4887,13 @@ components:
               tenantId: tenantId
           providerAccountId: "123412341234"
           name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
             latest: latest
-          connectionTime: 2024-08-29T13:24:03Z
           status: CONNECTED
       properties:
         restoreAccount:
@@ -5230,14 +5529,6 @@ components:
       - BACKUP_JOB_SORT_CREATED_TIME
       - BACKUP_JOB_SORT_START_TIME
       - BACKUP_JOB_SORT_END_TIME
-    SortOrder:
-      description: Sort order. Use `ASC` for ascending order and `DESC` for descending
-        order.
-      enum:
-      - ASC
-      - DESC
-      example: ASC
-      type: string
     SortBackupJobBy:
       description: |
         List of sorting options.
@@ -7184,6 +7475,9 @@ components:
       type: object
     StandardBackupPolicyPlan:
       example:
+        resourceTypes:
+        - AWS_EC2
+        - AWS_EC2
         backupSchedules:
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           scheduleConfig:
@@ -7259,6 +7553,11 @@ components:
           backupRetentionDays: 30
       nullable: true
       properties:
+        resourceTypes:
+          description: Resource types to backup.
+          items:
+            $ref: '#/components/schemas/ResourceType'
+          type: array
         backupSchedules:
           description: |
             List of backup schedules.
@@ -7601,6 +7900,9 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
         standardPlan:
+          resourceTypes:
+          - AWS_EC2
+          - AWS_EC2
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             scheduleConfig:
@@ -7767,6 +8069,9 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -8037,6 +8342,9 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -8314,6 +8622,9 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -8574,6 +8885,9 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -8824,6 +9138,9 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -9094,6 +9411,9 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -9352,6 +9672,9 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -9623,6 +9946,9 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -12874,32 +13200,6 @@ components:
           - "529569125077"
           items:
             type: string
-          type: array
-      type: object
-    CloudProviderFilters:
-      additionalProperties: false
-      example:
-        in:
-        - AWS
-        - AZURE
-        notIn:
-        - GCP
-      properties:
-        in:
-          description: Matches if any value in this list equals the cloud provider.
-          example:
-          - AWS
-          - AZURE
-          items:
-            $ref: '#/components/schemas/Provider'
-          type: array
-        notIn:
-          description: Matches if none of the values in this list equal the cloud
-            provider.
-          example:
-          - GCP
-          items:
-            $ref: '#/components/schemas/Provider'
           type: array
       type: object
     CostDataFilters:

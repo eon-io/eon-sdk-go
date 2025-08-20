@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ResourceTypes** | Pointer to [**[]ResourceType**](ResourceType.md) | Resource types to backup. | [optional] 
 **BackupSchedules** | [**[]StandardBackupSchedules**](StandardBackupSchedules.md) | List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault.  | 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewStandardBackupPolicyPlanWithDefaults instantiates a new StandardBackupPolicyPlan object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetResourceTypes
+
+`func (o *StandardBackupPolicyPlan) GetResourceTypes() []ResourceType`
+
+GetResourceTypes returns the ResourceTypes field if non-nil, zero value otherwise.
+
+### GetResourceTypesOk
+
+`func (o *StandardBackupPolicyPlan) GetResourceTypesOk() (*[]ResourceType, bool)`
+
+GetResourceTypesOk returns a tuple with the ResourceTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceTypes
+
+`func (o *StandardBackupPolicyPlan) SetResourceTypes(v []ResourceType)`
+
+SetResourceTypes sets ResourceTypes field to given value.
+
+### HasResourceTypes
+
+`func (o *StandardBackupPolicyPlan) HasResourceTypes() bool`
+
+HasResourceTypes returns a boolean if a field has been set.
 
 ### GetBackupSchedules
 

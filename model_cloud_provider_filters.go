@@ -19,9 +19,9 @@ var _ MappedNullable = &CloudProviderFilters{}
 
 // CloudProviderFilters struct for CloudProviderFilters
 type CloudProviderFilters struct {
-	// Matches if any value in this list equals the cloud provider.
+	// Matches if any value in this list equals `cloudProvider`.
 	In []Provider `json:"in,omitempty"`
-	// Matches if none of the values in this list equal the cloud provider.
+	// Matches if none of the values in this list equal `cloudProvider`.
 	NotIn []Provider `json:"notIn,omitempty"`
 }
 

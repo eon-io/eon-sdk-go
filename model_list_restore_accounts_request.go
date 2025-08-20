@@ -19,7 +19,8 @@ var _ MappedNullable = &ListRestoreAccountsRequest{}
 
 // ListRestoreAccountsRequest struct for ListRestoreAccountsRequest
 type ListRestoreAccountsRequest struct {
-	Filters *AccountsFilterConditions `json:"filters,omitempty"`
+	Filters *RestoreAccountsFilterConditions `json:"filters,omitempty"`
+	Sorts []SortRestoreAccountsBy `json:"sorts,omitempty"`
 }
 
 // NewListRestoreAccountsRequest instantiates a new ListRestoreAccountsRequest object
@@ -40,9 +41,9 @@ func NewListRestoreAccountsRequestWithDefaults() *ListRestoreAccountsRequest {
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise.
-func (o *ListRestoreAccountsRequest) GetFilters() AccountsFilterConditions {
+func (o *ListRestoreAccountsRequest) GetFilters() RestoreAccountsFilterConditions {
 	if o == nil || IsNil(o.Filters) {
-		var ret AccountsFilterConditions
+		var ret RestoreAccountsFilterConditions
 		return ret
 	}
 	return *o.Filters
@@ -50,7 +51,7 @@ func (o *ListRestoreAccountsRequest) GetFilters() AccountsFilterConditions {
 
 // GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListRestoreAccountsRequest) GetFiltersOk() (*AccountsFilterConditions, bool) {
+func (o *ListRestoreAccountsRequest) GetFiltersOk() (*RestoreAccountsFilterConditions, bool) {
 	if o == nil || IsNil(o.Filters) {
 		return nil, false
 	}
@@ -66,9 +67,41 @@ func (o *ListRestoreAccountsRequest) HasFilters() bool {
 	return false
 }
 
-// SetFilters gets a reference to the given AccountsFilterConditions and assigns it to the Filters field.
-func (o *ListRestoreAccountsRequest) SetFilters(v AccountsFilterConditions) {
+// SetFilters gets a reference to the given RestoreAccountsFilterConditions and assigns it to the Filters field.
+func (o *ListRestoreAccountsRequest) SetFilters(v RestoreAccountsFilterConditions) {
 	o.Filters = &v
+}
+
+// GetSorts returns the Sorts field value if set, zero value otherwise.
+func (o *ListRestoreAccountsRequest) GetSorts() []SortRestoreAccountsBy {
+	if o == nil || IsNil(o.Sorts) {
+		var ret []SortRestoreAccountsBy
+		return ret
+	}
+	return o.Sorts
+}
+
+// GetSortsOk returns a tuple with the Sorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListRestoreAccountsRequest) GetSortsOk() ([]SortRestoreAccountsBy, bool) {
+	if o == nil || IsNil(o.Sorts) {
+		return nil, false
+	}
+	return o.Sorts, true
+}
+
+// HasSorts returns a boolean if a field has been set.
+func (o *ListRestoreAccountsRequest) HasSorts() bool {
+	if o != nil && !IsNil(o.Sorts) {
+		return true
+	}
+
+	return false
+}
+
+// SetSorts gets a reference to the given []SortRestoreAccountsBy and assigns it to the Sorts field.
+func (o *ListRestoreAccountsRequest) SetSorts(v []SortRestoreAccountsBy) {
+	o.Sorts = v
 }
 
 func (o ListRestoreAccountsRequest) MarshalJSON() ([]byte, error) {
@@ -83,6 +116,9 @@ func (o ListRestoreAccountsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
+	}
+	if !IsNil(o.Sorts) {
+		toSerialize["sorts"] = o.Sorts
 	}
 	return toSerialize, nil
 }

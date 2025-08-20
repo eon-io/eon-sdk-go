@@ -1,78 +1,78 @@
-# CloudProviderFilters
+# AccountStatusFilters
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**In** | Pointer to [**[]Provider**](Provider.md) | Matches if any value in this list equals &#x60;cloudProvider&#x60;. | [optional] 
-**NotIn** | Pointer to [**[]Provider**](Provider.md) | Matches if none of the values in this list equal &#x60;cloudProvider&#x60;. | [optional] 
+**In** | Pointer to [**[]AccountState**](AccountState.md) |  | [optional] 
+**NotIn** | Pointer to [**[]AccountState**](AccountState.md) |  | [optional] 
 
 ## Methods
 
-### NewCloudProviderFilters
+### NewAccountStatusFilters
 
-`func NewCloudProviderFilters() *CloudProviderFilters`
+`func NewAccountStatusFilters() *AccountStatusFilters`
 
-NewCloudProviderFilters instantiates a new CloudProviderFilters object
+NewAccountStatusFilters instantiates a new AccountStatusFilters object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCloudProviderFiltersWithDefaults
+### NewAccountStatusFiltersWithDefaults
 
-`func NewCloudProviderFiltersWithDefaults() *CloudProviderFilters`
+`func NewAccountStatusFiltersWithDefaults() *AccountStatusFilters`
 
-NewCloudProviderFiltersWithDefaults instantiates a new CloudProviderFilters object
+NewAccountStatusFiltersWithDefaults instantiates a new AccountStatusFilters object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetIn
 
-`func (o *CloudProviderFilters) GetIn() []Provider`
+`func (o *AccountStatusFilters) GetIn() []AccountState`
 
 GetIn returns the In field if non-nil, zero value otherwise.
 
 ### GetInOk
 
-`func (o *CloudProviderFilters) GetInOk() (*[]Provider, bool)`
+`func (o *AccountStatusFilters) GetInOk() (*[]AccountState, bool)`
 
 GetInOk returns a tuple with the In field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIn
 
-`func (o *CloudProviderFilters) SetIn(v []Provider)`
+`func (o *AccountStatusFilters) SetIn(v []AccountState)`
 
 SetIn sets In field to given value.
 
 ### HasIn
 
-`func (o *CloudProviderFilters) HasIn() bool`
+`func (o *AccountStatusFilters) HasIn() bool`
 
 HasIn returns a boolean if a field has been set.
 
 ### GetNotIn
 
-`func (o *CloudProviderFilters) GetNotIn() []Provider`
+`func (o *AccountStatusFilters) GetNotIn() []AccountState`
 
 GetNotIn returns the NotIn field if non-nil, zero value otherwise.
 
 ### GetNotInOk
 
-`func (o *CloudProviderFilters) GetNotInOk() (*[]Provider, bool)`
+`func (o *AccountStatusFilters) GetNotInOk() (*[]AccountState, bool)`
 
 GetNotInOk returns a tuple with the NotIn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotIn
 
-`func (o *CloudProviderFilters) SetNotIn(v []Provider)`
+`func (o *AccountStatusFilters) SetNotIn(v []AccountState)`
 
 SetNotIn sets NotIn field to given value.
 
 ### HasNotIn
 
-`func (o *CloudProviderFilters) HasNotIn() bool`
+`func (o *AccountStatusFilters) HasNotIn() bool`
 
 HasNotIn returns a boolean if a field has been set.
 
