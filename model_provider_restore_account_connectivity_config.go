@@ -20,6 +20,7 @@ var _ MappedNullable = &ProviderRestoreAccountConnectivityConfig{}
 // ProviderRestoreAccountConnectivityConfig struct for ProviderRestoreAccountConnectivityConfig
 type ProviderRestoreAccountConnectivityConfig struct {
 	Aws NullableAwsRestoreAccountConnectivityConfig `json:"aws,omitempty"`
+	Gcp NullableGcpRestoreAccountConnectivityConfig `json:"gcp,omitempty"`
 }
 
 // NewProviderRestoreAccountConnectivityConfig instantiates a new ProviderRestoreAccountConnectivityConfig object
@@ -81,6 +82,48 @@ func (o *ProviderRestoreAccountConnectivityConfig) UnsetAws() {
 	o.Aws.Unset()
 }
 
+// GetGcp returns the Gcp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProviderRestoreAccountConnectivityConfig) GetGcp() GcpRestoreAccountConnectivityConfig {
+	if o == nil || IsNil(o.Gcp.Get()) {
+		var ret GcpRestoreAccountConnectivityConfig
+		return ret
+	}
+	return *o.Gcp.Get()
+}
+
+// GetGcpOk returns a tuple with the Gcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProviderRestoreAccountConnectivityConfig) GetGcpOk() (*GcpRestoreAccountConnectivityConfig, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gcp.Get(), o.Gcp.IsSet()
+}
+
+// HasGcp returns a boolean if a field has been set.
+func (o *ProviderRestoreAccountConnectivityConfig) HasGcp() bool {
+	if o != nil && o.Gcp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGcp gets a reference to the given NullableGcpRestoreAccountConnectivityConfig and assigns it to the Gcp field.
+func (o *ProviderRestoreAccountConnectivityConfig) SetGcp(v GcpRestoreAccountConnectivityConfig) {
+	o.Gcp.Set(&v)
+}
+// SetGcpNil sets the value for Gcp to be an explicit nil
+func (o *ProviderRestoreAccountConnectivityConfig) SetGcpNil() {
+	o.Gcp.Set(nil)
+}
+
+// UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
+func (o *ProviderRestoreAccountConnectivityConfig) UnsetGcp() {
+	o.Gcp.Unset()
+}
+
 func (o ProviderRestoreAccountConnectivityConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -93,6 +136,9 @@ func (o ProviderRestoreAccountConnectivityConfig) ToMap() (map[string]interface{
 	toSerialize := map[string]interface{}{}
 	if o.Aws.IsSet() {
 		toSerialize["aws"] = o.Aws.Get()
+	}
+	if o.Gcp.IsSet() {
+		toSerialize["gcp"] = o.Gcp.Get()
 	}
 	return toSerialize, nil
 }

@@ -115,6 +115,9 @@ docs/Error.md
 docs/ExcludeFromBackupResponse.md
 docs/FilePath.md
 docs/GcpAccountConfig.md
+docs/GcpNetworkConnectivityConfig.md
+docs/GcpRestoreAccountConnectivityConfig.md
+docs/GcpSubnetPerRegion.md
 docs/GetBackupJobResponse.md
 docs/GetBackupPolicyResponse.md
 docs/GetResourceResponse.md
@@ -365,6 +368,9 @@ model_error.go
 model_exclude_from_backup_response.go
 model_file_path.go
 model_gcp_account_config.go
+model_gcp_network_connectivity_config.go
+model_gcp_restore_account_connectivity_config.go
+model_gcp_subnet_per_region.go
 model_get_backup_job_response.go
 model_get_backup_policy_response.go
 model_get_resource_response.go

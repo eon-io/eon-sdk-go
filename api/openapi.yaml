@@ -5019,8 +5019,85 @@ components:
             $ref: '#/components/schemas/AwsVpcConnectivityConfig'
           type: array
       type: object
+    GcpSubnetPerRegion:
+      example:
+        region: us-east1
+        subnetName: subnet-01234567890123456
+      properties:
+        region:
+          description: Region.
+          example: us-east1
+          type: string
+        subnetName:
+          description: Subnet Name.
+          example: subnet-01234567890123456
+          type: string
+      required:
+      - region
+      - subnetName
+      type: object
+    GcpNetworkConnectivityConfig:
+      example:
+        network: network-01234567890123456
+        subnetsPerRegion:
+        - region: us-east1
+          subnetName: subnet-01234567890123456
+        - region: us-east1
+          subnetName: subnet-01234567890123456
+      properties:
+        network:
+          description: Network Name.
+          example: network-01234567890123456
+          type: string
+        subnetsPerRegion:
+          description: |
+            Subnets to configure for regions in the network.
+            For regions not specified in this list, Eon attempts to use the default subnet.
+          items:
+            $ref: '#/components/schemas/GcpSubnetPerRegion'
+          type: array
+      required:
+      - network
+      type: object
+    GcpRestoreAccountConnectivityConfig:
+      example:
+        networkConfigs:
+        - network: network-01234567890123456
+          subnetsPerRegion:
+          - region: us-east1
+            subnetName: subnet-01234567890123456
+          - region: us-east1
+            subnetName: subnet-01234567890123456
+        - network: network-01234567890123456
+          subnetsPerRegion:
+          - region: us-east1
+            subnetName: subnet-01234567890123456
+          - region: us-east1
+            subnetName: subnet-01234567890123456
+      nullable: true
+      properties:
+        networkConfigs:
+          description: Networks to configure.
+          items:
+            $ref: '#/components/schemas/GcpNetworkConnectivityConfig'
+          type: array
+      type: object
     ProviderRestoreAccountConnectivityConfig:
       example:
+        gcp:
+          networkConfigs:
+          - network: network-01234567890123456
+            subnetsPerRegion:
+            - region: us-east1
+              subnetName: subnet-01234567890123456
+            - region: us-east1
+              subnetName: subnet-01234567890123456
+          - network: network-01234567890123456
+            subnetsPerRegion:
+            - region: us-east1
+              subnetName: subnet-01234567890123456
+            - region: us-east1
+              subnetName: subnet-01234567890123456
         aws:
           vpcConfigs:
           - vpc: vpc-01234567890123456
@@ -5050,11 +5127,27 @@ components:
       properties:
         aws:
           $ref: '#/components/schemas/AwsRestoreAccountConnectivityConfig'
+        gcp:
+          $ref: '#/components/schemas/GcpRestoreAccountConnectivityConfig'
       type: object
     RestoreAccountConnectivityConfig:
       example:
         restoreAccountId: 7fb4bfae-853e-5e4f-9d35-ad8a1d2a0ad6
         config:
+          gcp:
+            networkConfigs:
+            - network: network-01234567890123456
+              subnetsPerRegion:
+              - region: us-east1
+                subnetName: subnet-01234567890123456
+              - region: us-east1
+                subnetName: subnet-01234567890123456
+            - network: network-01234567890123456
+              subnetsPerRegion:
+              - region: us-east1
+                subnetName: subnet-01234567890123456
+              - region: us-east1
+                subnetName: subnet-01234567890123456
           aws:
             vpcConfigs:
             - vpc: vpc-01234567890123456
@@ -5097,6 +5190,20 @@ components:
         restoreAccountConfig:
           restoreAccountId: 7fb4bfae-853e-5e4f-9d35-ad8a1d2a0ad6
           config:
+            gcp:
+              networkConfigs:
+              - network: network-01234567890123456
+                subnetsPerRegion:
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
+              - network: network-01234567890123456
+                subnetsPerRegion:
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
             aws:
               vpcConfigs:
               - vpc: vpc-01234567890123456
@@ -5131,6 +5238,20 @@ components:
       type: object
     UpdateRestoreAccountConnectivityConfigRequest:
       example:
+        gcp:
+          networkConfigs:
+          - network: network-01234567890123456
+            subnetsPerRegion:
+            - region: us-east1
+              subnetName: subnet-01234567890123456
+            - region: us-east1
+              subnetName: subnet-01234567890123456
+          - network: network-01234567890123456
+            subnetsPerRegion:
+            - region: us-east1
+              subnetName: subnet-01234567890123456
+            - region: us-east1
+              subnetName: subnet-01234567890123456
         aws:
           vpcConfigs:
           - vpc: vpc-01234567890123456
@@ -5160,12 +5281,28 @@ components:
       properties:
         aws:
           $ref: '#/components/schemas/AwsRestoreAccountConnectivityConfig'
+        gcp:
+          $ref: '#/components/schemas/GcpRestoreAccountConnectivityConfig'
       type: object
     UpdateRestoreAccountConnectivityConfigResponse:
       example:
         restoreAccountConfig:
           restoreAccountId: 7fb4bfae-853e-5e4f-9d35-ad8a1d2a0ad6
           config:
+            gcp:
+              networkConfigs:
+              - network: network-01234567890123456
+                subnetsPerRegion:
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
+              - network: network-01234567890123456
+                subnetsPerRegion:
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
+                - region: us-east1
+                  subnetName: subnet-01234567890123456
             aws:
               vpcConfigs:
               - vpc: vpc-01234567890123456

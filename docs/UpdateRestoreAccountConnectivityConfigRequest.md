@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Aws** | Pointer to [**NullableAwsRestoreAccountConnectivityConfig**](AwsRestoreAccountConnectivityConfig.md) |  | [optional] 
+**Gcp** | Pointer to [**NullableGcpRestoreAccountConnectivityConfig**](GcpRestoreAccountConnectivityConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -60,6 +61,41 @@ HasAws returns a boolean if a field has been set.
 `func (o *UpdateRestoreAccountConnectivityConfigRequest) UnsetAws()`
 
 UnsetAws ensures that no value is present for Aws, not even an explicit nil
+### GetGcp
+
+`func (o *UpdateRestoreAccountConnectivityConfigRequest) GetGcp() GcpRestoreAccountConnectivityConfig`
+
+GetGcp returns the Gcp field if non-nil, zero value otherwise.
+
+### GetGcpOk
+
+`func (o *UpdateRestoreAccountConnectivityConfigRequest) GetGcpOk() (*GcpRestoreAccountConnectivityConfig, bool)`
+
+GetGcpOk returns a tuple with the Gcp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcp
+
+`func (o *UpdateRestoreAccountConnectivityConfigRequest) SetGcp(v GcpRestoreAccountConnectivityConfig)`
+
+SetGcp sets Gcp field to given value.
+
+### HasGcp
+
+`func (o *UpdateRestoreAccountConnectivityConfigRequest) HasGcp() bool`
+
+HasGcp returns a boolean if a field has been set.
+
+### SetGcpNil
+
+`func (o *UpdateRestoreAccountConnectivityConfigRequest) SetGcpNil(b bool)`
+
+ SetGcpNil sets the value for Gcp to be an explicit nil
+
+### UnsetGcp
+`func (o *UpdateRestoreAccountConnectivityConfigRequest) UnsetGcp()`
+
+UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
