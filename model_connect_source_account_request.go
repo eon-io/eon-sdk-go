@@ -23,7 +23,7 @@ var _ MappedNullable = &ConnectSourceAccountRequest{}
 type ConnectSourceAccountRequest struct {
 	// Account display name in Eon.
 	Name *string `json:"name,omitempty"`
-	SourceAccountAttributes AccountConfigInput `json:"sourceAccountAttributes"`
+	SourceAccountAttributes SourceAccountConfigInput `json:"sourceAccountAttributes"`
 }
 
 type _ConnectSourceAccountRequest ConnectSourceAccountRequest
@@ -32,7 +32,7 @@ type _ConnectSourceAccountRequest ConnectSourceAccountRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectSourceAccountRequest(sourceAccountAttributes AccountConfigInput) *ConnectSourceAccountRequest {
+func NewConnectSourceAccountRequest(sourceAccountAttributes SourceAccountConfigInput) *ConnectSourceAccountRequest {
 	this := ConnectSourceAccountRequest{}
 	this.SourceAccountAttributes = sourceAccountAttributes
 	return &this
@@ -79,9 +79,9 @@ func (o *ConnectSourceAccountRequest) SetName(v string) {
 }
 
 // GetSourceAccountAttributes returns the SourceAccountAttributes field value
-func (o *ConnectSourceAccountRequest) GetSourceAccountAttributes() AccountConfigInput {
+func (o *ConnectSourceAccountRequest) GetSourceAccountAttributes() SourceAccountConfigInput {
 	if o == nil {
-		var ret AccountConfigInput
+		var ret SourceAccountConfigInput
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *ConnectSourceAccountRequest) GetSourceAccountAttributes() AccountConfig
 
 // GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field value
 // and a boolean to check if the value has been set.
-func (o *ConnectSourceAccountRequest) GetSourceAccountAttributesOk() (*AccountConfigInput, bool) {
+func (o *ConnectSourceAccountRequest) GetSourceAccountAttributesOk() (*SourceAccountConfigInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *ConnectSourceAccountRequest) GetSourceAccountAttributesOk() (*AccountCo
 }
 
 // SetSourceAccountAttributes sets field value
-func (o *ConnectSourceAccountRequest) SetSourceAccountAttributes(v AccountConfigInput) {
+func (o *ConnectSourceAccountRequest) SetSourceAccountAttributes(v SourceAccountConfigInput) {
 	o.SourceAccountAttributes = v
 }
 

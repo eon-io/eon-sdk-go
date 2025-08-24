@@ -1,4 +1,4 @@
-# AwsAccountConfigInput
+# AwsRestoreAccountConfigInput
 
 ## Properties
 
@@ -8,39 +8,39 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAwsAccountConfigInput
+### NewAwsRestoreAccountConfigInput
 
-`func NewAwsAccountConfigInput(roleArn string, ) *AwsAccountConfigInput`
+`func NewAwsRestoreAccountConfigInput(roleArn string, ) *AwsRestoreAccountConfigInput`
 
-NewAwsAccountConfigInput instantiates a new AwsAccountConfigInput object
+NewAwsRestoreAccountConfigInput instantiates a new AwsRestoreAccountConfigInput object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAwsAccountConfigInputWithDefaults
+### NewAwsRestoreAccountConfigInputWithDefaults
 
-`func NewAwsAccountConfigInputWithDefaults() *AwsAccountConfigInput`
+`func NewAwsRestoreAccountConfigInputWithDefaults() *AwsRestoreAccountConfigInput`
 
-NewAwsAccountConfigInputWithDefaults instantiates a new AwsAccountConfigInput object
+NewAwsRestoreAccountConfigInputWithDefaults instantiates a new AwsRestoreAccountConfigInput object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetRoleArn
 
-`func (o *AwsAccountConfigInput) GetRoleArn() string`
+`func (o *AwsRestoreAccountConfigInput) GetRoleArn() string`
 
 GetRoleArn returns the RoleArn field if non-nil, zero value otherwise.
 
 ### GetRoleArnOk
 
-`func (o *AwsAccountConfigInput) GetRoleArnOk() (*string, bool)`
+`func (o *AwsRestoreAccountConfigInput) GetRoleArnOk() (*string, bool)`
 
 GetRoleArnOk returns a tuple with the RoleArn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRoleArn
 
-`func (o *AwsAccountConfigInput) SetRoleArn(v string)`
+`func (o *AwsRestoreAccountConfigInput) SetRoleArn(v string)`
 
 SetRoleArn sets RoleArn field to given value.
 

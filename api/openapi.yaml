@@ -3835,7 +3835,7 @@ components:
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string
-    AwsAccountConfigInput:
+    AwsSourceAccountConfigInput:
       example:
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
@@ -3847,7 +3847,7 @@ components:
       required:
       - roleArn
       type: object
-    AccountConfigInput:
+    SourceAccountConfigInput:
       example:
         cloudProvider: AWS
         aws:
@@ -3856,7 +3856,7 @@ components:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         aws:
-          $ref: '#/components/schemas/AwsAccountConfigInput'
+          $ref: '#/components/schemas/AwsSourceAccountConfigInput'
       required:
       - cloudProvider
       type: object
@@ -3873,7 +3873,7 @@ components:
           example: prod-eu
           type: string
         sourceAccountAttributes:
-          $ref: '#/components/schemas/AccountConfigInput'
+          $ref: '#/components/schemas/SourceAccountConfigInput'
       required:
       - sourceAccountAttributes
       type: object
@@ -4547,6 +4547,31 @@ components:
       required:
       - sourceAccountConfig
       type: object
+    AwsRestoreAccountConfigInput:
+      example:
+        roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+      nullable: true
+      properties:
+        roleArn:
+          description: ARN of the role Eon assumes to access the account in AWS.
+          example: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          type: string
+      required:
+      - roleArn
+      type: object
+    RestoreAccountConfigInput:
+      example:
+        cloudProvider: AWS
+        aws:
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+      properties:
+        cloudProvider:
+          $ref: '#/components/schemas/Provider'
+        aws:
+          $ref: '#/components/schemas/AwsRestoreAccountConfigInput'
+      required:
+      - cloudProvider
+      type: object
     ConnectRestoreAccountRequest:
       example:
         restoreAccountAttributes:
@@ -4560,7 +4585,7 @@ components:
           example: restore-sandbox
           type: string
         restoreAccountAttributes:
-          $ref: '#/components/schemas/AccountConfigInput'
+          $ref: '#/components/schemas/RestoreAccountConfigInput'
       required:
       - restoreAccountAttributes
       type: object

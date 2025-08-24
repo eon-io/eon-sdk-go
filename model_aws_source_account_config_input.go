@@ -16,37 +16,37 @@ import (
 	"fmt"
 )
 
-// checks if the AwsAccountConfigInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AwsAccountConfigInput{}
+// checks if the AwsSourceAccountConfigInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AwsSourceAccountConfigInput{}
 
-// AwsAccountConfigInput struct for AwsAccountConfigInput
-type AwsAccountConfigInput struct {
+// AwsSourceAccountConfigInput struct for AwsSourceAccountConfigInput
+type AwsSourceAccountConfigInput struct {
 	// ARN of the role Eon assumes to access the account in AWS.
 	RoleArn string `json:"roleArn"`
 }
 
-type _AwsAccountConfigInput AwsAccountConfigInput
+type _AwsSourceAccountConfigInput AwsSourceAccountConfigInput
 
-// NewAwsAccountConfigInput instantiates a new AwsAccountConfigInput object
+// NewAwsSourceAccountConfigInput instantiates a new AwsSourceAccountConfigInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAwsAccountConfigInput(roleArn string) *AwsAccountConfigInput {
-	this := AwsAccountConfigInput{}
+func NewAwsSourceAccountConfigInput(roleArn string) *AwsSourceAccountConfigInput {
+	this := AwsSourceAccountConfigInput{}
 	this.RoleArn = roleArn
 	return &this
 }
 
-// NewAwsAccountConfigInputWithDefaults instantiates a new AwsAccountConfigInput object
+// NewAwsSourceAccountConfigInputWithDefaults instantiates a new AwsSourceAccountConfigInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAwsAccountConfigInputWithDefaults() *AwsAccountConfigInput {
-	this := AwsAccountConfigInput{}
+func NewAwsSourceAccountConfigInputWithDefaults() *AwsSourceAccountConfigInput {
+	this := AwsSourceAccountConfigInput{}
 	return &this
 }
 
 // GetRoleArn returns the RoleArn field value
-func (o *AwsAccountConfigInput) GetRoleArn() string {
+func (o *AwsSourceAccountConfigInput) GetRoleArn() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -57,7 +57,7 @@ func (o *AwsAccountConfigInput) GetRoleArn() string {
 
 // GetRoleArnOk returns a tuple with the RoleArn field value
 // and a boolean to check if the value has been set.
-func (o *AwsAccountConfigInput) GetRoleArnOk() (*string, bool) {
+func (o *AwsSourceAccountConfigInput) GetRoleArnOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,11 +65,11 @@ func (o *AwsAccountConfigInput) GetRoleArnOk() (*string, bool) {
 }
 
 // SetRoleArn sets field value
-func (o *AwsAccountConfigInput) SetRoleArn(v string) {
+func (o *AwsSourceAccountConfigInput) SetRoleArn(v string) {
 	o.RoleArn = v
 }
 
-func (o AwsAccountConfigInput) MarshalJSON() ([]byte, error) {
+func (o AwsSourceAccountConfigInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -77,13 +77,13 @@ func (o AwsAccountConfigInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AwsAccountConfigInput) ToMap() (map[string]interface{}, error) {
+func (o AwsSourceAccountConfigInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["roleArn"] = o.RoleArn
 	return toSerialize, nil
 }
 
-func (o *AwsAccountConfigInput) UnmarshalJSON(data []byte) (err error) {
+func (o *AwsSourceAccountConfigInput) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -105,53 +105,53 @@ func (o *AwsAccountConfigInput) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAwsAccountConfigInput := _AwsAccountConfigInput{}
+	varAwsSourceAccountConfigInput := _AwsSourceAccountConfigInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAwsAccountConfigInput)
+	err = decoder.Decode(&varAwsSourceAccountConfigInput)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AwsAccountConfigInput(varAwsAccountConfigInput)
+	*o = AwsSourceAccountConfigInput(varAwsSourceAccountConfigInput)
 
 	return err
 }
 
-type NullableAwsAccountConfigInput struct {
-	value *AwsAccountConfigInput
+type NullableAwsSourceAccountConfigInput struct {
+	value *AwsSourceAccountConfigInput
 	isSet bool
 }
 
-func (v NullableAwsAccountConfigInput) Get() *AwsAccountConfigInput {
+func (v NullableAwsSourceAccountConfigInput) Get() *AwsSourceAccountConfigInput {
 	return v.value
 }
 
-func (v *NullableAwsAccountConfigInput) Set(val *AwsAccountConfigInput) {
+func (v *NullableAwsSourceAccountConfigInput) Set(val *AwsSourceAccountConfigInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAwsAccountConfigInput) IsSet() bool {
+func (v NullableAwsSourceAccountConfigInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAwsAccountConfigInput) Unset() {
+func (v *NullableAwsSourceAccountConfigInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAwsAccountConfigInput(val *AwsAccountConfigInput) *NullableAwsAccountConfigInput {
-	return &NullableAwsAccountConfigInput{value: val, isSet: true}
+func NewNullableAwsSourceAccountConfigInput(val *AwsSourceAccountConfigInput) *NullableAwsSourceAccountConfigInput {
+	return &NullableAwsSourceAccountConfigInput{value: val, isSet: true}
 }
 
-func (v NullableAwsAccountConfigInput) MarshalJSON() ([]byte, error) {
+func (v NullableAwsSourceAccountConfigInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAwsAccountConfigInput) UnmarshalJSON(src []byte) error {
+func (v *NullableAwsSourceAccountConfigInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -15,7 +15,6 @@ api_vaults.go
 client.go
 configuration.go
 docs/AccountConfig.md
-docs/AccountConfigInput.md
 docs/AccountIdCondition.md
 docs/AccountIdFilters.md
 docs/AccountInstallationMethod.md
@@ -33,7 +32,6 @@ docs/AppsCondition.md
 docs/AppsDetails.md
 docs/AuthAPI.md
 docs/AwsAccountConfig.md
-docs/AwsAccountConfigInput.md
 docs/AwsAccountMetricsDestination.md
 docs/AwsDatabaseDestination.md
 docs/AwsDynamoDBDestination.md
@@ -41,7 +39,9 @@ docs/AwsEbsVolumeRestoreResult.md
 docs/AwsEc2InstanceRestoreResult.md
 docs/AwsEc2Resource.md
 docs/AwsEc2SnapshotProperties.md
+docs/AwsRestoreAccountConfigInput.md
 docs/AwsRestoreAccountConnectivityConfig.md
+docs/AwsSourceAccountConfigInput.md
 docs/AwsVaultConfig.md
 docs/AwsVpcConnectivityConfig.md
 docs/AzureAccountConfig.md
@@ -200,6 +200,7 @@ docs/ResourceTypeFilters.md
 docs/ResourceTypeToSecurityGroup.md
 docs/ResourcesAPI.md
 docs/RestoreAccount.md
+docs/RestoreAccountConfigInput.md
 docs/RestoreAccountConnectivityConfig.md
 docs/RestoreAccountMetricsConfig.md
 docs/RestoreAccountSortField.md
@@ -237,6 +238,7 @@ docs/SortRestoreJobBy.md
 docs/SortSnapshotsBy.md
 docs/SortSourceAccountsBy.md
 docs/SourceAccount.md
+docs/SourceAccountConfigInput.md
 docs/SourceAccountMetricsConfig.md
 docs/SourceAccountProviderIdFilters.md
 docs/SourceAccountSortField.md
@@ -274,7 +276,6 @@ docs/VpcCondition.md
 docs/WeeklyConfig.md
 git_push.sh
 model_account_config.go
-model_account_config_input.go
 model_account_id_condition.go
 model_account_id_filters.go
 model_account_installation_method.go
@@ -290,7 +291,6 @@ model_app_filters.go
 model_apps_condition.go
 model_apps_details.go
 model_aws_account_config.go
-model_aws_account_config_input.go
 model_aws_account_metrics_destination.go
 model_aws_database_destination.go
 model_aws_dynamo_db_destination.go
@@ -298,7 +298,9 @@ model_aws_ebs_volume_restore_result.go
 model_aws_ec2_instance_restore_result.go
 model_aws_ec2_resource.go
 model_aws_ec2_snapshot_properties.go
+model_aws_restore_account_config_input.go
 model_aws_restore_account_connectivity_config.go
+model_aws_source_account_config_input.go
 model_aws_vault_config.go
 model_aws_vpc_connectivity_config.go
 model_azure_account_config.go
@@ -451,6 +453,7 @@ model_resource_type_condition.go
 model_resource_type_filters.go
 model_resource_type_to_security_group.go
 model_restore_account.go
+model_restore_account_config_input.go
 model_restore_account_connectivity_config.go
 model_restore_account_metrics_config.go
 model_restore_account_sort_field.go
@@ -487,6 +490,7 @@ model_sort_restore_job_by.go
 model_sort_snapshots_by.go
 model_sort_source_accounts_by.go
 model_source_account.go
+model_source_account_config_input.go
 model_source_account_metrics_config.go
 model_source_account_provider_id_filters.go
 model_source_account_sort_field.go
