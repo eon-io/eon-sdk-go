@@ -16,37 +16,37 @@ import (
 	"fmt"
 )
 
-// checks if the SourceAccountConfigInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SourceAccountConfigInput{}
+// checks if the RestoreAccountAttributesInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RestoreAccountAttributesInput{}
 
-// SourceAccountConfigInput struct for SourceAccountConfigInput
-type SourceAccountConfigInput struct {
+// RestoreAccountAttributesInput struct for RestoreAccountAttributesInput
+type RestoreAccountAttributesInput struct {
 	CloudProvider Provider `json:"cloudProvider"`
-	Aws NullableAwsSourceAccountConfigInput `json:"aws,omitempty"`
+	Aws NullableAwsRestoreAccountAttributesInput `json:"aws,omitempty"`
 }
 
-type _SourceAccountConfigInput SourceAccountConfigInput
+type _RestoreAccountAttributesInput RestoreAccountAttributesInput
 
-// NewSourceAccountConfigInput instantiates a new SourceAccountConfigInput object
+// NewRestoreAccountAttributesInput instantiates a new RestoreAccountAttributesInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSourceAccountConfigInput(cloudProvider Provider) *SourceAccountConfigInput {
-	this := SourceAccountConfigInput{}
+func NewRestoreAccountAttributesInput(cloudProvider Provider) *RestoreAccountAttributesInput {
+	this := RestoreAccountAttributesInput{}
 	this.CloudProvider = cloudProvider
 	return &this
 }
 
-// NewSourceAccountConfigInputWithDefaults instantiates a new SourceAccountConfigInput object
+// NewRestoreAccountAttributesInputWithDefaults instantiates a new RestoreAccountAttributesInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSourceAccountConfigInputWithDefaults() *SourceAccountConfigInput {
-	this := SourceAccountConfigInput{}
+func NewRestoreAccountAttributesInputWithDefaults() *RestoreAccountAttributesInput {
+	this := RestoreAccountAttributesInput{}
 	return &this
 }
 
 // GetCloudProvider returns the CloudProvider field value
-func (o *SourceAccountConfigInput) GetCloudProvider() Provider {
+func (o *RestoreAccountAttributesInput) GetCloudProvider() Provider {
 	if o == nil {
 		var ret Provider
 		return ret
@@ -57,7 +57,7 @@ func (o *SourceAccountConfigInput) GetCloudProvider() Provider {
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value
 // and a boolean to check if the value has been set.
-func (o *SourceAccountConfigInput) GetCloudProviderOk() (*Provider, bool) {
+func (o *RestoreAccountAttributesInput) GetCloudProviderOk() (*Provider, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,14 +65,14 @@ func (o *SourceAccountConfigInput) GetCloudProviderOk() (*Provider, bool) {
 }
 
 // SetCloudProvider sets field value
-func (o *SourceAccountConfigInput) SetCloudProvider(v Provider) {
+func (o *RestoreAccountAttributesInput) SetCloudProvider(v Provider) {
 	o.CloudProvider = v
 }
 
 // GetAws returns the Aws field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SourceAccountConfigInput) GetAws() AwsSourceAccountConfigInput {
+func (o *RestoreAccountAttributesInput) GetAws() AwsRestoreAccountAttributesInput {
 	if o == nil || IsNil(o.Aws.Get()) {
-		var ret AwsSourceAccountConfigInput
+		var ret AwsRestoreAccountAttributesInput
 		return ret
 	}
 	return *o.Aws.Get()
@@ -81,7 +81,7 @@ func (o *SourceAccountConfigInput) GetAws() AwsSourceAccountConfigInput {
 // GetAwsOk returns a tuple with the Aws field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SourceAccountConfigInput) GetAwsOk() (*AwsSourceAccountConfigInput, bool) {
+func (o *RestoreAccountAttributesInput) GetAwsOk() (*AwsRestoreAccountAttributesInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -89,7 +89,7 @@ func (o *SourceAccountConfigInput) GetAwsOk() (*AwsSourceAccountConfigInput, boo
 }
 
 // HasAws returns a boolean if a field has been set.
-func (o *SourceAccountConfigInput) HasAws() bool {
+func (o *RestoreAccountAttributesInput) HasAws() bool {
 	if o != nil && o.Aws.IsSet() {
 		return true
 	}
@@ -97,21 +97,21 @@ func (o *SourceAccountConfigInput) HasAws() bool {
 	return false
 }
 
-// SetAws gets a reference to the given NullableAwsSourceAccountConfigInput and assigns it to the Aws field.
-func (o *SourceAccountConfigInput) SetAws(v AwsSourceAccountConfigInput) {
+// SetAws gets a reference to the given NullableAwsRestoreAccountAttributesInput and assigns it to the Aws field.
+func (o *RestoreAccountAttributesInput) SetAws(v AwsRestoreAccountAttributesInput) {
 	o.Aws.Set(&v)
 }
 // SetAwsNil sets the value for Aws to be an explicit nil
-func (o *SourceAccountConfigInput) SetAwsNil() {
+func (o *RestoreAccountAttributesInput) SetAwsNil() {
 	o.Aws.Set(nil)
 }
 
 // UnsetAws ensures that no value is present for Aws, not even an explicit nil
-func (o *SourceAccountConfigInput) UnsetAws() {
+func (o *RestoreAccountAttributesInput) UnsetAws() {
 	o.Aws.Unset()
 }
 
-func (o SourceAccountConfigInput) MarshalJSON() ([]byte, error) {
+func (o RestoreAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -119,7 +119,7 @@ func (o SourceAccountConfigInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SourceAccountConfigInput) ToMap() (map[string]interface{}, error) {
+func (o RestoreAccountAttributesInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cloudProvider"] = o.CloudProvider
 	if o.Aws.IsSet() {
@@ -128,7 +128,7 @@ func (o SourceAccountConfigInput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *SourceAccountConfigInput) UnmarshalJSON(data []byte) (err error) {
+func (o *RestoreAccountAttributesInput) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -150,53 +150,53 @@ func (o *SourceAccountConfigInput) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varSourceAccountConfigInput := _SourceAccountConfigInput{}
+	varRestoreAccountAttributesInput := _RestoreAccountAttributesInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSourceAccountConfigInput)
+	err = decoder.Decode(&varRestoreAccountAttributesInput)
 
 	if err != nil {
 		return err
 	}
 
-	*o = SourceAccountConfigInput(varSourceAccountConfigInput)
+	*o = RestoreAccountAttributesInput(varRestoreAccountAttributesInput)
 
 	return err
 }
 
-type NullableSourceAccountConfigInput struct {
-	value *SourceAccountConfigInput
+type NullableRestoreAccountAttributesInput struct {
+	value *RestoreAccountAttributesInput
 	isSet bool
 }
 
-func (v NullableSourceAccountConfigInput) Get() *SourceAccountConfigInput {
+func (v NullableRestoreAccountAttributesInput) Get() *RestoreAccountAttributesInput {
 	return v.value
 }
 
-func (v *NullableSourceAccountConfigInput) Set(val *SourceAccountConfigInput) {
+func (v *NullableRestoreAccountAttributesInput) Set(val *RestoreAccountAttributesInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSourceAccountConfigInput) IsSet() bool {
+func (v NullableRestoreAccountAttributesInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSourceAccountConfigInput) Unset() {
+func (v *NullableRestoreAccountAttributesInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSourceAccountConfigInput(val *SourceAccountConfigInput) *NullableSourceAccountConfigInput {
-	return &NullableSourceAccountConfigInput{value: val, isSet: true}
+func NewNullableRestoreAccountAttributesInput(val *RestoreAccountAttributesInput) *NullableRestoreAccountAttributesInput {
+	return &NullableRestoreAccountAttributesInput{value: val, isSet: true}
 }
 
-func (v NullableSourceAccountConfigInput) MarshalJSON() ([]byte, error) {
+func (v NullableRestoreAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSourceAccountConfigInput) UnmarshalJSON(src []byte) error {
+func (v *NullableRestoreAccountAttributesInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

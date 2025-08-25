@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Status** | [**AccountState**](AccountState.md) |  | 
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
 **ConnectedTime** | Pointer to **time.Time** | The date and time the account was connected to Eon | [optional] 
-**SourceAccountAttributes** | Pointer to [**AccountConfig**](AccountConfig.md) |  | [optional] 
+**SourceAccountAttributes** | Pointer to [**SourceAccountCloudAttributes**](SourceAccountCloudAttributes.md) |  | [optional] 
 
 ## Methods
 
@@ -189,20 +189,20 @@ HasConnectedTime returns a boolean if a field has been set.
 
 ### GetSourceAccountAttributes
 
-`func (o *SourceAccount) GetSourceAccountAttributes() AccountConfig`
+`func (o *SourceAccount) GetSourceAccountAttributes() SourceAccountCloudAttributes`
 
 GetSourceAccountAttributes returns the SourceAccountAttributes field if non-nil, zero value otherwise.
 
 ### GetSourceAccountAttributesOk
 
-`func (o *SourceAccount) GetSourceAccountAttributesOk() (*AccountConfig, bool)`
+`func (o *SourceAccount) GetSourceAccountAttributesOk() (*SourceAccountCloudAttributes, bool)`
 
 GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceAccountAttributes
 
-`func (o *SourceAccount) SetSourceAccountAttributes(v AccountConfig)`
+`func (o *SourceAccount) SetSourceAccountAttributes(v SourceAccountCloudAttributes)`
 
 SetSourceAccountAttributes sets SourceAccountAttributes field to given value.
 

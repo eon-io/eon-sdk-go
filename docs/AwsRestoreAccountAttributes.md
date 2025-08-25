@@ -1,4 +1,4 @@
-# AwsAccountConfig
+# AwsRestoreAccountAttributes
 
 ## Properties
 
@@ -9,65 +9,65 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAwsAccountConfig
+### NewAwsRestoreAccountAttributes
 
-`func NewAwsAccountConfig(roleArn string, ) *AwsAccountConfig`
+`func NewAwsRestoreAccountAttributes(roleArn string, ) *AwsRestoreAccountAttributes`
 
-NewAwsAccountConfig instantiates a new AwsAccountConfig object
+NewAwsRestoreAccountAttributes instantiates a new AwsRestoreAccountAttributes object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAwsAccountConfigWithDefaults
+### NewAwsRestoreAccountAttributesWithDefaults
 
-`func NewAwsAccountConfigWithDefaults() *AwsAccountConfig`
+`func NewAwsRestoreAccountAttributesWithDefaults() *AwsRestoreAccountAttributes`
 
-NewAwsAccountConfigWithDefaults instantiates a new AwsAccountConfig object
+NewAwsRestoreAccountAttributesWithDefaults instantiates a new AwsRestoreAccountAttributes object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetRoleArn
 
-`func (o *AwsAccountConfig) GetRoleArn() string`
+`func (o *AwsRestoreAccountAttributes) GetRoleArn() string`
 
 GetRoleArn returns the RoleArn field if non-nil, zero value otherwise.
 
 ### GetRoleArnOk
 
-`func (o *AwsAccountConfig) GetRoleArnOk() (*string, bool)`
+`func (o *AwsRestoreAccountAttributes) GetRoleArnOk() (*string, bool)`
 
 GetRoleArnOk returns a tuple with the RoleArn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRoleArn
 
-`func (o *AwsAccountConfig) SetRoleArn(v string)`
+`func (o *AwsRestoreAccountAttributes) SetRoleArn(v string)`
 
 SetRoleArn sets RoleArn field to given value.
 
 
 ### GetOrganizationId
 
-`func (o *AwsAccountConfig) GetOrganizationId() string`
+`func (o *AwsRestoreAccountAttributes) GetOrganizationId() string`
 
 GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
 
 ### GetOrganizationIdOk
 
-`func (o *AwsAccountConfig) GetOrganizationIdOk() (*string, bool)`
+`func (o *AwsRestoreAccountAttributes) GetOrganizationIdOk() (*string, bool)`
 
 GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrganizationId
 
-`func (o *AwsAccountConfig) SetOrganizationId(v string)`
+`func (o *AwsRestoreAccountAttributes) SetOrganizationId(v string)`
 
 SetOrganizationId sets OrganizationId field to given value.
 
 ### HasOrganizationId
 
-`func (o *AwsAccountConfig) HasOrganizationId() bool`
+`func (o *AwsRestoreAccountAttributes) HasOrganizationId() bool`
 
 HasOrganizationId returns a boolean if a field has been set.
 

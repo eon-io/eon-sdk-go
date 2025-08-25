@@ -1,161 +1,161 @@
-# AccountConfig
+# SourceAccountCloudAttributes
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CloudProvider** | Pointer to [**Provider**](Provider.md) |  | [optional] 
-**Aws** | Pointer to [**NullableAwsAccountConfig**](AwsAccountConfig.md) |  | [optional] 
-**Gcp** | Pointer to [**NullableGcpAccountConfig**](GcpAccountConfig.md) |  | [optional] 
-**Azure** | Pointer to [**NullableAzureAccountConfig**](AzureAccountConfig.md) |  | [optional] 
+**Aws** | Pointer to [**NullableAwsSourceAccountAttributes**](AwsSourceAccountAttributes.md) |  | [optional] 
+**Gcp** | Pointer to [**NullableGcpSourceAccountAttributes**](GcpSourceAccountAttributes.md) |  | [optional] 
+**Azure** | Pointer to [**NullableAzureSourceAccountAttributes**](AzureSourceAccountAttributes.md) |  | [optional] 
 
 ## Methods
 
-### NewAccountConfig
+### NewSourceAccountCloudAttributes
 
-`func NewAccountConfig() *AccountConfig`
+`func NewSourceAccountCloudAttributes() *SourceAccountCloudAttributes`
 
-NewAccountConfig instantiates a new AccountConfig object
+NewSourceAccountCloudAttributes instantiates a new SourceAccountCloudAttributes object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAccountConfigWithDefaults
+### NewSourceAccountCloudAttributesWithDefaults
 
-`func NewAccountConfigWithDefaults() *AccountConfig`
+`func NewSourceAccountCloudAttributesWithDefaults() *SourceAccountCloudAttributes`
 
-NewAccountConfigWithDefaults instantiates a new AccountConfig object
+NewSourceAccountCloudAttributesWithDefaults instantiates a new SourceAccountCloudAttributes object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCloudProvider
 
-`func (o *AccountConfig) GetCloudProvider() Provider`
+`func (o *SourceAccountCloudAttributes) GetCloudProvider() Provider`
 
 GetCloudProvider returns the CloudProvider field if non-nil, zero value otherwise.
 
 ### GetCloudProviderOk
 
-`func (o *AccountConfig) GetCloudProviderOk() (*Provider, bool)`
+`func (o *SourceAccountCloudAttributes) GetCloudProviderOk() (*Provider, bool)`
 
 GetCloudProviderOk returns a tuple with the CloudProvider field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCloudProvider
 
-`func (o *AccountConfig) SetCloudProvider(v Provider)`
+`func (o *SourceAccountCloudAttributes) SetCloudProvider(v Provider)`
 
 SetCloudProvider sets CloudProvider field to given value.
 
 ### HasCloudProvider
 
-`func (o *AccountConfig) HasCloudProvider() bool`
+`func (o *SourceAccountCloudAttributes) HasCloudProvider() bool`
 
 HasCloudProvider returns a boolean if a field has been set.
 
 ### GetAws
 
-`func (o *AccountConfig) GetAws() AwsAccountConfig`
+`func (o *SourceAccountCloudAttributes) GetAws() AwsSourceAccountAttributes`
 
 GetAws returns the Aws field if non-nil, zero value otherwise.
 
 ### GetAwsOk
 
-`func (o *AccountConfig) GetAwsOk() (*AwsAccountConfig, bool)`
+`func (o *SourceAccountCloudAttributes) GetAwsOk() (*AwsSourceAccountAttributes, bool)`
 
 GetAwsOk returns a tuple with the Aws field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAws
 
-`func (o *AccountConfig) SetAws(v AwsAccountConfig)`
+`func (o *SourceAccountCloudAttributes) SetAws(v AwsSourceAccountAttributes)`
 
 SetAws sets Aws field to given value.
 
 ### HasAws
 
-`func (o *AccountConfig) HasAws() bool`
+`func (o *SourceAccountCloudAttributes) HasAws() bool`
 
 HasAws returns a boolean if a field has been set.
 
 ### SetAwsNil
 
-`func (o *AccountConfig) SetAwsNil(b bool)`
+`func (o *SourceAccountCloudAttributes) SetAwsNil(b bool)`
 
  SetAwsNil sets the value for Aws to be an explicit nil
 
 ### UnsetAws
-`func (o *AccountConfig) UnsetAws()`
+`func (o *SourceAccountCloudAttributes) UnsetAws()`
 
 UnsetAws ensures that no value is present for Aws, not even an explicit nil
 ### GetGcp
 
-`func (o *AccountConfig) GetGcp() GcpAccountConfig`
+`func (o *SourceAccountCloudAttributes) GetGcp() GcpSourceAccountAttributes`
 
 GetGcp returns the Gcp field if non-nil, zero value otherwise.
 
 ### GetGcpOk
 
-`func (o *AccountConfig) GetGcpOk() (*GcpAccountConfig, bool)`
+`func (o *SourceAccountCloudAttributes) GetGcpOk() (*GcpSourceAccountAttributes, bool)`
 
 GetGcpOk returns a tuple with the Gcp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGcp
 
-`func (o *AccountConfig) SetGcp(v GcpAccountConfig)`
+`func (o *SourceAccountCloudAttributes) SetGcp(v GcpSourceAccountAttributes)`
 
 SetGcp sets Gcp field to given value.
 
 ### HasGcp
 
-`func (o *AccountConfig) HasGcp() bool`
+`func (o *SourceAccountCloudAttributes) HasGcp() bool`
 
 HasGcp returns a boolean if a field has been set.
 
 ### SetGcpNil
 
-`func (o *AccountConfig) SetGcpNil(b bool)`
+`func (o *SourceAccountCloudAttributes) SetGcpNil(b bool)`
 
  SetGcpNil sets the value for Gcp to be an explicit nil
 
 ### UnsetGcp
-`func (o *AccountConfig) UnsetGcp()`
+`func (o *SourceAccountCloudAttributes) UnsetGcp()`
 
 UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
 ### GetAzure
 
-`func (o *AccountConfig) GetAzure() AzureAccountConfig`
+`func (o *SourceAccountCloudAttributes) GetAzure() AzureSourceAccountAttributes`
 
 GetAzure returns the Azure field if non-nil, zero value otherwise.
 
 ### GetAzureOk
 
-`func (o *AccountConfig) GetAzureOk() (*AzureAccountConfig, bool)`
+`func (o *SourceAccountCloudAttributes) GetAzureOk() (*AzureSourceAccountAttributes, bool)`
 
 GetAzureOk returns a tuple with the Azure field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAzure
 
-`func (o *AccountConfig) SetAzure(v AzureAccountConfig)`
+`func (o *SourceAccountCloudAttributes) SetAzure(v AzureSourceAccountAttributes)`
 
 SetAzure sets Azure field to given value.
 
 ### HasAzure
 
-`func (o *AccountConfig) HasAzure() bool`
+`func (o *SourceAccountCloudAttributes) HasAzure() bool`
 
 HasAzure returns a boolean if a field has been set.
 
 ### SetAzureNil
 
-`func (o *AccountConfig) SetAzureNil(b bool)`
+`func (o *SourceAccountCloudAttributes) SetAzureNil(b bool)`
 
  SetAzureNil sets the value for Azure to be an explicit nil
 
 ### UnsetAzure
-`func (o *AccountConfig) UnsetAzure()`
+`func (o *SourceAccountCloudAttributes) UnsetAzure()`
 
 UnsetAzure ensures that no value is present for Azure, not even an explicit nil
 

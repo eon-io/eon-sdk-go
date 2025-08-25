@@ -23,7 +23,7 @@ var _ MappedNullable = &ConnectRestoreAccountRequest{}
 type ConnectRestoreAccountRequest struct {
 	// Account display name in Eon.
 	Name *string `json:"name,omitempty"`
-	RestoreAccountAttributes RestoreAccountConfigInput `json:"restoreAccountAttributes"`
+	RestoreAccountAttributes RestoreAccountAttributesInput `json:"restoreAccountAttributes"`
 }
 
 type _ConnectRestoreAccountRequest ConnectRestoreAccountRequest
@@ -32,7 +32,7 @@ type _ConnectRestoreAccountRequest ConnectRestoreAccountRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectRestoreAccountRequest(restoreAccountAttributes RestoreAccountConfigInput) *ConnectRestoreAccountRequest {
+func NewConnectRestoreAccountRequest(restoreAccountAttributes RestoreAccountAttributesInput) *ConnectRestoreAccountRequest {
 	this := ConnectRestoreAccountRequest{}
 	this.RestoreAccountAttributes = restoreAccountAttributes
 	return &this
@@ -79,9 +79,9 @@ func (o *ConnectRestoreAccountRequest) SetName(v string) {
 }
 
 // GetRestoreAccountAttributes returns the RestoreAccountAttributes field value
-func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributes() RestoreAccountConfigInput {
+func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributes() RestoreAccountAttributesInput {
 	if o == nil {
-		var ret RestoreAccountConfigInput
+		var ret RestoreAccountAttributesInput
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributes() RestoreAcco
 
 // GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field value
 // and a boolean to check if the value has been set.
-func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributesOk() (*RestoreAccountConfigInput, bool) {
+func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributesOk() (*RestoreAccountAttributesInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *ConnectRestoreAccountRequest) GetRestoreAccountAttributesOk() (*Restore
 }
 
 // SetRestoreAccountAttributes sets field value
-func (o *ConnectRestoreAccountRequest) SetRestoreAccountAttributes(v RestoreAccountConfigInput) {
+func (o *ConnectRestoreAccountRequest) SetRestoreAccountAttributes(v RestoreAccountAttributesInput) {
 	o.RestoreAccountAttributes = v
 }
 

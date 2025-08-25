@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Account display name in Eon. | [optional] 
-**SourceAccountAttributes** | [**SourceAccountConfigInput**](SourceAccountConfigInput.md) |  | 
+**SourceAccountAttributes** | [**SourceAccountAttributesInput**](SourceAccountAttributesInput.md) |  | 
 
 ## Methods
 
 ### NewConnectSourceAccountRequest
 
-`func NewConnectSourceAccountRequest(sourceAccountAttributes SourceAccountConfigInput, ) *ConnectSourceAccountRequest`
+`func NewConnectSourceAccountRequest(sourceAccountAttributes SourceAccountAttributesInput, ) *ConnectSourceAccountRequest`
 
 NewConnectSourceAccountRequest instantiates a new ConnectSourceAccountRequest object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ HasName returns a boolean if a field has been set.
 
 ### GetSourceAccountAttributes
 
-`func (o *ConnectSourceAccountRequest) GetSourceAccountAttributes() SourceAccountConfigInput`
+`func (o *ConnectSourceAccountRequest) GetSourceAccountAttributes() SourceAccountAttributesInput`
 
 GetSourceAccountAttributes returns the SourceAccountAttributes field if non-nil, zero value otherwise.
 
 ### GetSourceAccountAttributesOk
 
-`func (o *ConnectSourceAccountRequest) GetSourceAccountAttributesOk() (*SourceAccountConfigInput, bool)`
+`func (o *ConnectSourceAccountRequest) GetSourceAccountAttributesOk() (*SourceAccountAttributesInput, bool)`
 
 GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceAccountAttributes
 
-`func (o *ConnectSourceAccountRequest) SetSourceAccountAttributes(v SourceAccountConfigInput)`
+`func (o *ConnectSourceAccountRequest) SetSourceAccountAttributes(v SourceAccountAttributesInput)`
 
 SetSourceAccountAttributes sets SourceAccountAttributes field to given value.
 

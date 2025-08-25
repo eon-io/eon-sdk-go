@@ -34,7 +34,7 @@ type SourceAccount struct {
 	Version *AccountVersion `json:"version,omitempty"`
 	// The date and time the account was connected to Eon
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
-	SourceAccountAttributes *AccountConfig `json:"sourceAccountAttributes,omitempty"`
+	SourceAccountAttributes *SourceAccountCloudAttributes `json:"sourceAccountAttributes,omitempty"`
 }
 
 type _SourceAccount SourceAccount
@@ -253,9 +253,9 @@ func (o *SourceAccount) SetConnectedTime(v time.Time) {
 }
 
 // GetSourceAccountAttributes returns the SourceAccountAttributes field value if set, zero value otherwise.
-func (o *SourceAccount) GetSourceAccountAttributes() AccountConfig {
+func (o *SourceAccount) GetSourceAccountAttributes() SourceAccountCloudAttributes {
 	if o == nil || IsNil(o.SourceAccountAttributes) {
-		var ret AccountConfig
+		var ret SourceAccountCloudAttributes
 		return ret
 	}
 	return *o.SourceAccountAttributes
@@ -263,7 +263,7 @@ func (o *SourceAccount) GetSourceAccountAttributes() AccountConfig {
 
 // GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceAccount) GetSourceAccountAttributesOk() (*AccountConfig, bool) {
+func (o *SourceAccount) GetSourceAccountAttributesOk() (*SourceAccountCloudAttributes, bool) {
 	if o == nil || IsNil(o.SourceAccountAttributes) {
 		return nil, false
 	}
@@ -279,8 +279,8 @@ func (o *SourceAccount) HasSourceAccountAttributes() bool {
 	return false
 }
 
-// SetSourceAccountAttributes gets a reference to the given AccountConfig and assigns it to the SourceAccountAttributes field.
-func (o *SourceAccount) SetSourceAccountAttributes(v AccountConfig) {
+// SetSourceAccountAttributes gets a reference to the given SourceAccountCloudAttributes and assigns it to the SourceAccountAttributes field.
+func (o *SourceAccount) SetSourceAccountAttributes(v SourceAccountCloudAttributes) {
 	o.SourceAccountAttributes = &v
 }
 

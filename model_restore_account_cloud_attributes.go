@@ -14,36 +14,36 @@ import (
 	"encoding/json"
 )
 
-// checks if the AccountConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AccountConfig{}
+// checks if the RestoreAccountCloudAttributes type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RestoreAccountCloudAttributes{}
 
-// AccountConfig struct for AccountConfig
-type AccountConfig struct {
+// RestoreAccountCloudAttributes struct for RestoreAccountCloudAttributes
+type RestoreAccountCloudAttributes struct {
 	CloudProvider *Provider `json:"cloudProvider,omitempty"`
-	Aws NullableAwsAccountConfig `json:"aws,omitempty"`
-	Gcp NullableGcpAccountConfig `json:"gcp,omitempty"`
-	Azure NullableAzureAccountConfig `json:"azure,omitempty"`
+	Aws NullableAwsRestoreAccountAttributes `json:"aws,omitempty"`
+	Gcp NullableGcpRestoreAccountAttributes `json:"gcp,omitempty"`
+	Azure NullableAzureRestoreAccountAttributes `json:"azure,omitempty"`
 }
 
-// NewAccountConfig instantiates a new AccountConfig object
+// NewRestoreAccountCloudAttributes instantiates a new RestoreAccountCloudAttributes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountConfig() *AccountConfig {
-	this := AccountConfig{}
+func NewRestoreAccountCloudAttributes() *RestoreAccountCloudAttributes {
+	this := RestoreAccountCloudAttributes{}
 	return &this
 }
 
-// NewAccountConfigWithDefaults instantiates a new AccountConfig object
+// NewRestoreAccountCloudAttributesWithDefaults instantiates a new RestoreAccountCloudAttributes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountConfigWithDefaults() *AccountConfig {
-	this := AccountConfig{}
+func NewRestoreAccountCloudAttributesWithDefaults() *RestoreAccountCloudAttributes {
+	this := RestoreAccountCloudAttributes{}
 	return &this
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
-func (o *AccountConfig) GetCloudProvider() Provider {
+func (o *RestoreAccountCloudAttributes) GetCloudProvider() Provider {
 	if o == nil || IsNil(o.CloudProvider) {
 		var ret Provider
 		return ret
@@ -53,7 +53,7 @@ func (o *AccountConfig) GetCloudProvider() Provider {
 
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountConfig) GetCloudProviderOk() (*Provider, bool) {
+func (o *RestoreAccountCloudAttributes) GetCloudProviderOk() (*Provider, bool) {
 	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *AccountConfig) GetCloudProviderOk() (*Provider, bool) {
 }
 
 // HasCloudProvider returns a boolean if a field has been set.
-func (o *AccountConfig) HasCloudProvider() bool {
+func (o *RestoreAccountCloudAttributes) HasCloudProvider() bool {
 	if o != nil && !IsNil(o.CloudProvider) {
 		return true
 	}
@@ -70,14 +70,14 @@ func (o *AccountConfig) HasCloudProvider() bool {
 }
 
 // SetCloudProvider gets a reference to the given Provider and assigns it to the CloudProvider field.
-func (o *AccountConfig) SetCloudProvider(v Provider) {
+func (o *RestoreAccountCloudAttributes) SetCloudProvider(v Provider) {
 	o.CloudProvider = &v
 }
 
 // GetAws returns the Aws field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountConfig) GetAws() AwsAccountConfig {
+func (o *RestoreAccountCloudAttributes) GetAws() AwsRestoreAccountAttributes {
 	if o == nil || IsNil(o.Aws.Get()) {
-		var ret AwsAccountConfig
+		var ret AwsRestoreAccountAttributes
 		return ret
 	}
 	return *o.Aws.Get()
@@ -86,7 +86,7 @@ func (o *AccountConfig) GetAws() AwsAccountConfig {
 // GetAwsOk returns a tuple with the Aws field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountConfig) GetAwsOk() (*AwsAccountConfig, bool) {
+func (o *RestoreAccountCloudAttributes) GetAwsOk() (*AwsRestoreAccountAttributes, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *AccountConfig) GetAwsOk() (*AwsAccountConfig, bool) {
 }
 
 // HasAws returns a boolean if a field has been set.
-func (o *AccountConfig) HasAws() bool {
+func (o *RestoreAccountCloudAttributes) HasAws() bool {
 	if o != nil && o.Aws.IsSet() {
 		return true
 	}
@@ -102,24 +102,24 @@ func (o *AccountConfig) HasAws() bool {
 	return false
 }
 
-// SetAws gets a reference to the given NullableAwsAccountConfig and assigns it to the Aws field.
-func (o *AccountConfig) SetAws(v AwsAccountConfig) {
+// SetAws gets a reference to the given NullableAwsRestoreAccountAttributes and assigns it to the Aws field.
+func (o *RestoreAccountCloudAttributes) SetAws(v AwsRestoreAccountAttributes) {
 	o.Aws.Set(&v)
 }
 // SetAwsNil sets the value for Aws to be an explicit nil
-func (o *AccountConfig) SetAwsNil() {
+func (o *RestoreAccountCloudAttributes) SetAwsNil() {
 	o.Aws.Set(nil)
 }
 
 // UnsetAws ensures that no value is present for Aws, not even an explicit nil
-func (o *AccountConfig) UnsetAws() {
+func (o *RestoreAccountCloudAttributes) UnsetAws() {
 	o.Aws.Unset()
 }
 
 // GetGcp returns the Gcp field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountConfig) GetGcp() GcpAccountConfig {
+func (o *RestoreAccountCloudAttributes) GetGcp() GcpRestoreAccountAttributes {
 	if o == nil || IsNil(o.Gcp.Get()) {
-		var ret GcpAccountConfig
+		var ret GcpRestoreAccountAttributes
 		return ret
 	}
 	return *o.Gcp.Get()
@@ -128,7 +128,7 @@ func (o *AccountConfig) GetGcp() GcpAccountConfig {
 // GetGcpOk returns a tuple with the Gcp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountConfig) GetGcpOk() (*GcpAccountConfig, bool) {
+func (o *RestoreAccountCloudAttributes) GetGcpOk() (*GcpRestoreAccountAttributes, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -136,7 +136,7 @@ func (o *AccountConfig) GetGcpOk() (*GcpAccountConfig, bool) {
 }
 
 // HasGcp returns a boolean if a field has been set.
-func (o *AccountConfig) HasGcp() bool {
+func (o *RestoreAccountCloudAttributes) HasGcp() bool {
 	if o != nil && o.Gcp.IsSet() {
 		return true
 	}
@@ -144,24 +144,24 @@ func (o *AccountConfig) HasGcp() bool {
 	return false
 }
 
-// SetGcp gets a reference to the given NullableGcpAccountConfig and assigns it to the Gcp field.
-func (o *AccountConfig) SetGcp(v GcpAccountConfig) {
+// SetGcp gets a reference to the given NullableGcpRestoreAccountAttributes and assigns it to the Gcp field.
+func (o *RestoreAccountCloudAttributes) SetGcp(v GcpRestoreAccountAttributes) {
 	o.Gcp.Set(&v)
 }
 // SetGcpNil sets the value for Gcp to be an explicit nil
-func (o *AccountConfig) SetGcpNil() {
+func (o *RestoreAccountCloudAttributes) SetGcpNil() {
 	o.Gcp.Set(nil)
 }
 
 // UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
-func (o *AccountConfig) UnsetGcp() {
+func (o *RestoreAccountCloudAttributes) UnsetGcp() {
 	o.Gcp.Unset()
 }
 
 // GetAzure returns the Azure field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountConfig) GetAzure() AzureAccountConfig {
+func (o *RestoreAccountCloudAttributes) GetAzure() AzureRestoreAccountAttributes {
 	if o == nil || IsNil(o.Azure.Get()) {
-		var ret AzureAccountConfig
+		var ret AzureRestoreAccountAttributes
 		return ret
 	}
 	return *o.Azure.Get()
@@ -170,7 +170,7 @@ func (o *AccountConfig) GetAzure() AzureAccountConfig {
 // GetAzureOk returns a tuple with the Azure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountConfig) GetAzureOk() (*AzureAccountConfig, bool) {
+func (o *RestoreAccountCloudAttributes) GetAzureOk() (*AzureRestoreAccountAttributes, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -178,7 +178,7 @@ func (o *AccountConfig) GetAzureOk() (*AzureAccountConfig, bool) {
 }
 
 // HasAzure returns a boolean if a field has been set.
-func (o *AccountConfig) HasAzure() bool {
+func (o *RestoreAccountCloudAttributes) HasAzure() bool {
 	if o != nil && o.Azure.IsSet() {
 		return true
 	}
@@ -186,21 +186,21 @@ func (o *AccountConfig) HasAzure() bool {
 	return false
 }
 
-// SetAzure gets a reference to the given NullableAzureAccountConfig and assigns it to the Azure field.
-func (o *AccountConfig) SetAzure(v AzureAccountConfig) {
+// SetAzure gets a reference to the given NullableAzureRestoreAccountAttributes and assigns it to the Azure field.
+func (o *RestoreAccountCloudAttributes) SetAzure(v AzureRestoreAccountAttributes) {
 	o.Azure.Set(&v)
 }
 // SetAzureNil sets the value for Azure to be an explicit nil
-func (o *AccountConfig) SetAzureNil() {
+func (o *RestoreAccountCloudAttributes) SetAzureNil() {
 	o.Azure.Set(nil)
 }
 
 // UnsetAzure ensures that no value is present for Azure, not even an explicit nil
-func (o *AccountConfig) UnsetAzure() {
+func (o *RestoreAccountCloudAttributes) UnsetAzure() {
 	o.Azure.Unset()
 }
 
-func (o AccountConfig) MarshalJSON() ([]byte, error) {
+func (o RestoreAccountCloudAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -208,7 +208,7 @@ func (o AccountConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountConfig) ToMap() (map[string]interface{}, error) {
+func (o RestoreAccountCloudAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CloudProvider) {
 		toSerialize["cloudProvider"] = o.CloudProvider
@@ -225,38 +225,38 @@ func (o AccountConfig) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableAccountConfig struct {
-	value *AccountConfig
+type NullableRestoreAccountCloudAttributes struct {
+	value *RestoreAccountCloudAttributes
 	isSet bool
 }
 
-func (v NullableAccountConfig) Get() *AccountConfig {
+func (v NullableRestoreAccountCloudAttributes) Get() *RestoreAccountCloudAttributes {
 	return v.value
 }
 
-func (v *NullableAccountConfig) Set(val *AccountConfig) {
+func (v *NullableRestoreAccountCloudAttributes) Set(val *RestoreAccountCloudAttributes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountConfig) IsSet() bool {
+func (v NullableRestoreAccountCloudAttributes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountConfig) Unset() {
+func (v *NullableRestoreAccountCloudAttributes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountConfig(val *AccountConfig) *NullableAccountConfig {
-	return &NullableAccountConfig{value: val, isSet: true}
+func NewNullableRestoreAccountCloudAttributes(val *RestoreAccountCloudAttributes) *NullableRestoreAccountCloudAttributes {
+	return &NullableRestoreAccountCloudAttributes{value: val, isSet: true}
 }
 
-func (v NullableAccountConfig) MarshalJSON() ([]byte, error) {
+func (v NullableRestoreAccountCloudAttributes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountConfig) UnmarshalJSON(src []byte) error {
+func (v *NullableRestoreAccountCloudAttributes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

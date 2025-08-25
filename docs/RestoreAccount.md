@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Status** | [**AccountState**](AccountState.md) |  | 
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
 **ConnectedTime** | Pointer to **time.Time** | The date and time the account was connected to Eon | [optional] 
-**RestoreAccountAttributes** | Pointer to [**AccountConfig**](AccountConfig.md) |  | [optional] 
+**RestoreAccountAttributes** | Pointer to [**RestoreAccountCloudAttributes**](RestoreAccountCloudAttributes.md) |  | [optional] 
 
 ## Methods
 
@@ -189,20 +189,20 @@ HasConnectedTime returns a boolean if a field has been set.
 
 ### GetRestoreAccountAttributes
 
-`func (o *RestoreAccount) GetRestoreAccountAttributes() AccountConfig`
+`func (o *RestoreAccount) GetRestoreAccountAttributes() RestoreAccountCloudAttributes`
 
 GetRestoreAccountAttributes returns the RestoreAccountAttributes field if non-nil, zero value otherwise.
 
 ### GetRestoreAccountAttributesOk
 
-`func (o *RestoreAccount) GetRestoreAccountAttributesOk() (*AccountConfig, bool)`
+`func (o *RestoreAccount) GetRestoreAccountAttributesOk() (*RestoreAccountCloudAttributes, bool)`
 
 GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRestoreAccountAttributes
 
-`func (o *RestoreAccount) SetRestoreAccountAttributes(v AccountConfig)`
+`func (o *RestoreAccount) SetRestoreAccountAttributes(v RestoreAccountCloudAttributes)`
 
 SetRestoreAccountAttributes sets RestoreAccountAttributes field to given value.
 

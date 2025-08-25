@@ -16,36 +16,36 @@ import (
 	"fmt"
 )
 
-// checks if the GcpAccountConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GcpAccountConfig{}
+// checks if the GcpRestoreAccountAttributes type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GcpRestoreAccountAttributes{}
 
-// GcpAccountConfig struct for GcpAccountConfig
-type GcpAccountConfig struct {
+// GcpRestoreAccountAttributes struct for GcpRestoreAccountAttributes
+type GcpRestoreAccountAttributes struct {
 	ServiceAccount string `json:"serviceAccount"`
 }
 
-type _GcpAccountConfig GcpAccountConfig
+type _GcpRestoreAccountAttributes GcpRestoreAccountAttributes
 
-// NewGcpAccountConfig instantiates a new GcpAccountConfig object
+// NewGcpRestoreAccountAttributes instantiates a new GcpRestoreAccountAttributes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGcpAccountConfig(serviceAccount string) *GcpAccountConfig {
-	this := GcpAccountConfig{}
+func NewGcpRestoreAccountAttributes(serviceAccount string) *GcpRestoreAccountAttributes {
+	this := GcpRestoreAccountAttributes{}
 	this.ServiceAccount = serviceAccount
 	return &this
 }
 
-// NewGcpAccountConfigWithDefaults instantiates a new GcpAccountConfig object
+// NewGcpRestoreAccountAttributesWithDefaults instantiates a new GcpRestoreAccountAttributes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGcpAccountConfigWithDefaults() *GcpAccountConfig {
-	this := GcpAccountConfig{}
+func NewGcpRestoreAccountAttributesWithDefaults() *GcpRestoreAccountAttributes {
+	this := GcpRestoreAccountAttributes{}
 	return &this
 }
 
 // GetServiceAccount returns the ServiceAccount field value
-func (o *GcpAccountConfig) GetServiceAccount() string {
+func (o *GcpRestoreAccountAttributes) GetServiceAccount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *GcpAccountConfig) GetServiceAccount() string {
 
 // GetServiceAccountOk returns a tuple with the ServiceAccount field value
 // and a boolean to check if the value has been set.
-func (o *GcpAccountConfig) GetServiceAccountOk() (*string, bool) {
+func (o *GcpRestoreAccountAttributes) GetServiceAccountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *GcpAccountConfig) GetServiceAccountOk() (*string, bool) {
 }
 
 // SetServiceAccount sets field value
-func (o *GcpAccountConfig) SetServiceAccount(v string) {
+func (o *GcpRestoreAccountAttributes) SetServiceAccount(v string) {
 	o.ServiceAccount = v
 }
 
-func (o GcpAccountConfig) MarshalJSON() ([]byte, error) {
+func (o GcpRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,13 +76,13 @@ func (o GcpAccountConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GcpAccountConfig) ToMap() (map[string]interface{}, error) {
+func (o GcpRestoreAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["serviceAccount"] = o.ServiceAccount
 	return toSerialize, nil
 }
 
-func (o *GcpAccountConfig) UnmarshalJSON(data []byte) (err error) {
+func (o *GcpRestoreAccountAttributes) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -104,53 +104,53 @@ func (o *GcpAccountConfig) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGcpAccountConfig := _GcpAccountConfig{}
+	varGcpRestoreAccountAttributes := _GcpRestoreAccountAttributes{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGcpAccountConfig)
+	err = decoder.Decode(&varGcpRestoreAccountAttributes)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GcpAccountConfig(varGcpAccountConfig)
+	*o = GcpRestoreAccountAttributes(varGcpRestoreAccountAttributes)
 
 	return err
 }
 
-type NullableGcpAccountConfig struct {
-	value *GcpAccountConfig
+type NullableGcpRestoreAccountAttributes struct {
+	value *GcpRestoreAccountAttributes
 	isSet bool
 }
 
-func (v NullableGcpAccountConfig) Get() *GcpAccountConfig {
+func (v NullableGcpRestoreAccountAttributes) Get() *GcpRestoreAccountAttributes {
 	return v.value
 }
 
-func (v *NullableGcpAccountConfig) Set(val *GcpAccountConfig) {
+func (v *NullableGcpRestoreAccountAttributes) Set(val *GcpRestoreAccountAttributes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGcpAccountConfig) IsSet() bool {
+func (v NullableGcpRestoreAccountAttributes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGcpAccountConfig) Unset() {
+func (v *NullableGcpRestoreAccountAttributes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGcpAccountConfig(val *GcpAccountConfig) *NullableGcpAccountConfig {
-	return &NullableGcpAccountConfig{value: val, isSet: true}
+func NewNullableGcpRestoreAccountAttributes(val *GcpRestoreAccountAttributes) *NullableGcpRestoreAccountAttributes {
+	return &NullableGcpRestoreAccountAttributes{value: val, isSet: true}
 }
 
-func (v NullableGcpAccountConfig) MarshalJSON() ([]byte, error) {
+func (v NullableGcpRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGcpAccountConfig) UnmarshalJSON(src []byte) error {
+func (v *NullableGcpRestoreAccountAttributes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

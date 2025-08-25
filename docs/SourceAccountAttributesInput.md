@@ -1,84 +1,84 @@
-# RestoreAccountConfigInput
+# SourceAccountAttributesInput
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CloudProvider** | [**Provider**](Provider.md) |  | 
-**Aws** | Pointer to [**NullableAwsRestoreAccountConfigInput**](AwsRestoreAccountConfigInput.md) |  | [optional] 
+**Aws** | Pointer to [**NullableAwsSourceAccountAttributesInput**](AwsSourceAccountAttributesInput.md) |  | [optional] 
 
 ## Methods
 
-### NewRestoreAccountConfigInput
+### NewSourceAccountAttributesInput
 
-`func NewRestoreAccountConfigInput(cloudProvider Provider, ) *RestoreAccountConfigInput`
+`func NewSourceAccountAttributesInput(cloudProvider Provider, ) *SourceAccountAttributesInput`
 
-NewRestoreAccountConfigInput instantiates a new RestoreAccountConfigInput object
+NewSourceAccountAttributesInput instantiates a new SourceAccountAttributesInput object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRestoreAccountConfigInputWithDefaults
+### NewSourceAccountAttributesInputWithDefaults
 
-`func NewRestoreAccountConfigInputWithDefaults() *RestoreAccountConfigInput`
+`func NewSourceAccountAttributesInputWithDefaults() *SourceAccountAttributesInput`
 
-NewRestoreAccountConfigInputWithDefaults instantiates a new RestoreAccountConfigInput object
+NewSourceAccountAttributesInputWithDefaults instantiates a new SourceAccountAttributesInput object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCloudProvider
 
-`func (o *RestoreAccountConfigInput) GetCloudProvider() Provider`
+`func (o *SourceAccountAttributesInput) GetCloudProvider() Provider`
 
 GetCloudProvider returns the CloudProvider field if non-nil, zero value otherwise.
 
 ### GetCloudProviderOk
 
-`func (o *RestoreAccountConfigInput) GetCloudProviderOk() (*Provider, bool)`
+`func (o *SourceAccountAttributesInput) GetCloudProviderOk() (*Provider, bool)`
 
 GetCloudProviderOk returns a tuple with the CloudProvider field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCloudProvider
 
-`func (o *RestoreAccountConfigInput) SetCloudProvider(v Provider)`
+`func (o *SourceAccountAttributesInput) SetCloudProvider(v Provider)`
 
 SetCloudProvider sets CloudProvider field to given value.
 
 
 ### GetAws
 
-`func (o *RestoreAccountConfigInput) GetAws() AwsRestoreAccountConfigInput`
+`func (o *SourceAccountAttributesInput) GetAws() AwsSourceAccountAttributesInput`
 
 GetAws returns the Aws field if non-nil, zero value otherwise.
 
 ### GetAwsOk
 
-`func (o *RestoreAccountConfigInput) GetAwsOk() (*AwsRestoreAccountConfigInput, bool)`
+`func (o *SourceAccountAttributesInput) GetAwsOk() (*AwsSourceAccountAttributesInput, bool)`
 
 GetAwsOk returns a tuple with the Aws field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAws
 
-`func (o *RestoreAccountConfigInput) SetAws(v AwsRestoreAccountConfigInput)`
+`func (o *SourceAccountAttributesInput) SetAws(v AwsSourceAccountAttributesInput)`
 
 SetAws sets Aws field to given value.
 
 ### HasAws
 
-`func (o *RestoreAccountConfigInput) HasAws() bool`
+`func (o *SourceAccountAttributesInput) HasAws() bool`
 
 HasAws returns a boolean if a field has been set.
 
 ### SetAwsNil
 
-`func (o *RestoreAccountConfigInput) SetAwsNil(b bool)`
+`func (o *SourceAccountAttributesInput) SetAwsNil(b bool)`
 
  SetAwsNil sets the value for Aws to be an explicit nil
 
 ### UnsetAws
-`func (o *RestoreAccountConfigInput) UnsetAws()`
+`func (o *SourceAccountAttributesInput) UnsetAws()`
 
 UnsetAws ensures that no value is present for Aws, not even an explicit nil
 

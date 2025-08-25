@@ -16,39 +16,39 @@ import (
 	"fmt"
 )
 
-// checks if the AzureAccountConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AzureAccountConfig{}
+// checks if the AzureRestoreAccountAttributes type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AzureRestoreAccountAttributes{}
 
-// AzureAccountConfig struct for AzureAccountConfig
-type AzureAccountConfig struct {
+// AzureRestoreAccountAttributes struct for AzureRestoreAccountAttributes
+type AzureRestoreAccountAttributes struct {
 	// The tenant ID
 	TenantId string `json:"tenantId"`
 	// The resource group name
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
 }
 
-type _AzureAccountConfig AzureAccountConfig
+type _AzureRestoreAccountAttributes AzureRestoreAccountAttributes
 
-// NewAzureAccountConfig instantiates a new AzureAccountConfig object
+// NewAzureRestoreAccountAttributes instantiates a new AzureRestoreAccountAttributes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAzureAccountConfig(tenantId string) *AzureAccountConfig {
-	this := AzureAccountConfig{}
+func NewAzureRestoreAccountAttributes(tenantId string) *AzureRestoreAccountAttributes {
+	this := AzureRestoreAccountAttributes{}
 	this.TenantId = tenantId
 	return &this
 }
 
-// NewAzureAccountConfigWithDefaults instantiates a new AzureAccountConfig object
+// NewAzureRestoreAccountAttributesWithDefaults instantiates a new AzureRestoreAccountAttributes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAzureAccountConfigWithDefaults() *AzureAccountConfig {
-	this := AzureAccountConfig{}
+func NewAzureRestoreAccountAttributesWithDefaults() *AzureRestoreAccountAttributes {
+	this := AzureRestoreAccountAttributes{}
 	return &this
 }
 
 // GetTenantId returns the TenantId field value
-func (o *AzureAccountConfig) GetTenantId() string {
+func (o *AzureRestoreAccountAttributes) GetTenantId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *AzureAccountConfig) GetTenantId() string {
 
 // GetTenantIdOk returns a tuple with the TenantId field value
 // and a boolean to check if the value has been set.
-func (o *AzureAccountConfig) GetTenantIdOk() (*string, bool) {
+func (o *AzureRestoreAccountAttributes) GetTenantIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,12 +67,12 @@ func (o *AzureAccountConfig) GetTenantIdOk() (*string, bool) {
 }
 
 // SetTenantId sets field value
-func (o *AzureAccountConfig) SetTenantId(v string) {
+func (o *AzureRestoreAccountAttributes) SetTenantId(v string) {
 	o.TenantId = v
 }
 
 // GetResourceGroupName returns the ResourceGroupName field value if set, zero value otherwise.
-func (o *AzureAccountConfig) GetResourceGroupName() string {
+func (o *AzureRestoreAccountAttributes) GetResourceGroupName() string {
 	if o == nil || IsNil(o.ResourceGroupName) {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *AzureAccountConfig) GetResourceGroupName() string {
 
 // GetResourceGroupNameOk returns a tuple with the ResourceGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AzureAccountConfig) GetResourceGroupNameOk() (*string, bool) {
+func (o *AzureRestoreAccountAttributes) GetResourceGroupNameOk() (*string, bool) {
 	if o == nil || IsNil(o.ResourceGroupName) {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *AzureAccountConfig) GetResourceGroupNameOk() (*string, bool) {
 }
 
 // HasResourceGroupName returns a boolean if a field has been set.
-func (o *AzureAccountConfig) HasResourceGroupName() bool {
+func (o *AzureRestoreAccountAttributes) HasResourceGroupName() bool {
 	if o != nil && !IsNil(o.ResourceGroupName) {
 		return true
 	}
@@ -99,11 +99,11 @@ func (o *AzureAccountConfig) HasResourceGroupName() bool {
 }
 
 // SetResourceGroupName gets a reference to the given string and assigns it to the ResourceGroupName field.
-func (o *AzureAccountConfig) SetResourceGroupName(v string) {
+func (o *AzureRestoreAccountAttributes) SetResourceGroupName(v string) {
 	o.ResourceGroupName = &v
 }
 
-func (o AzureAccountConfig) MarshalJSON() ([]byte, error) {
+func (o AzureRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -111,7 +111,7 @@ func (o AzureAccountConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AzureAccountConfig) ToMap() (map[string]interface{}, error) {
+func (o AzureRestoreAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tenantId"] = o.TenantId
 	if !IsNil(o.ResourceGroupName) {
@@ -120,7 +120,7 @@ func (o AzureAccountConfig) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AzureAccountConfig) UnmarshalJSON(data []byte) (err error) {
+func (o *AzureRestoreAccountAttributes) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -142,53 +142,53 @@ func (o *AzureAccountConfig) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAzureAccountConfig := _AzureAccountConfig{}
+	varAzureRestoreAccountAttributes := _AzureRestoreAccountAttributes{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAzureAccountConfig)
+	err = decoder.Decode(&varAzureRestoreAccountAttributes)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AzureAccountConfig(varAzureAccountConfig)
+	*o = AzureRestoreAccountAttributes(varAzureRestoreAccountAttributes)
 
 	return err
 }
 
-type NullableAzureAccountConfig struct {
-	value *AzureAccountConfig
+type NullableAzureRestoreAccountAttributes struct {
+	value *AzureRestoreAccountAttributes
 	isSet bool
 }
 
-func (v NullableAzureAccountConfig) Get() *AzureAccountConfig {
+func (v NullableAzureRestoreAccountAttributes) Get() *AzureRestoreAccountAttributes {
 	return v.value
 }
 
-func (v *NullableAzureAccountConfig) Set(val *AzureAccountConfig) {
+func (v *NullableAzureRestoreAccountAttributes) Set(val *AzureRestoreAccountAttributes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAzureAccountConfig) IsSet() bool {
+func (v NullableAzureRestoreAccountAttributes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAzureAccountConfig) Unset() {
+func (v *NullableAzureRestoreAccountAttributes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAzureAccountConfig(val *AzureAccountConfig) *NullableAzureAccountConfig {
-	return &NullableAzureAccountConfig{value: val, isSet: true}
+func NewNullableAzureRestoreAccountAttributes(val *AzureRestoreAccountAttributes) *NullableAzureRestoreAccountAttributes {
+	return &NullableAzureRestoreAccountAttributes{value: val, isSet: true}
 }
 
-func (v NullableAzureAccountConfig) MarshalJSON() ([]byte, error) {
+func (v NullableAzureRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAzureAccountConfig) UnmarshalJSON(src []byte) error {
+func (v *NullableAzureRestoreAccountAttributes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

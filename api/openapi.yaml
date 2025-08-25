@@ -3835,7 +3835,7 @@ components:
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string
-    AwsSourceAccountConfigInput:
+    AwsSourceAccountAttributesInput:
       example:
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
@@ -3847,7 +3847,7 @@ components:
       required:
       - roleArn
       type: object
-    SourceAccountConfigInput:
+    SourceAccountAttributesInput:
       example:
         cloudProvider: AWS
         aws:
@@ -3856,7 +3856,7 @@ components:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         aws:
-          $ref: '#/components/schemas/AwsSourceAccountConfigInput'
+          $ref: '#/components/schemas/AwsSourceAccountAttributesInput'
       required:
       - cloudProvider
       type: object
@@ -3873,7 +3873,7 @@ components:
           example: prod-eu
           type: string
         sourceAccountAttributes:
-          $ref: '#/components/schemas/SourceAccountConfigInput'
+          $ref: '#/components/schemas/SourceAccountAttributesInput'
       required:
       - sourceAccountAttributes
       type: object
@@ -3925,7 +3925,7 @@ components:
       required:
       - installed
       type: object
-    AwsAccountConfig:
+    AwsSourceAccountAttributes:
       example:
         organizationId: o-1234567890
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -3943,7 +3943,7 @@ components:
       required:
       - roleArn
       type: object
-    GcpAccountConfig:
+    GcpSourceAccountAttributes:
       example:
         serviceAccount: serviceAccount
       nullable: true
@@ -3953,23 +3953,18 @@ components:
       required:
       - serviceAccount
       type: object
-    AzureAccountConfig:
+    AzureSourceAccountAttributes:
       example:
-        resourceGroupName: my-resource-group
         tenantId: tenantId
       nullable: true
       properties:
         tenantId:
           description: The tenant ID
           type: string
-        resourceGroupName:
-          description: The resource group name
-          example: my-resource-group
-          type: string
       required:
       - tenantId
       type: object
-    AccountConfig:
+    SourceAccountCloudAttributes:
       example:
         gcp:
           serviceAccount: serviceAccount
@@ -3978,17 +3973,16 @@ components:
           organizationId: o-1234567890
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
-          resourceGroupName: my-resource-group
           tenantId: tenantId
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         aws:
-          $ref: '#/components/schemas/AwsAccountConfig'
+          $ref: '#/components/schemas/AwsSourceAccountAttributes'
         gcp:
-          $ref: '#/components/schemas/GcpAccountConfig'
+          $ref: '#/components/schemas/GcpSourceAccountAttributes'
         azure:
-          $ref: '#/components/schemas/AzureAccountConfig'
+          $ref: '#/components/schemas/AzureSourceAccountAttributes'
       type: object
     SourceAccount:
       example:
@@ -4004,7 +3998,6 @@ components:
             organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
-            resourceGroupName: my-resource-group
             tenantId: tenantId
         providerAccountName: providerAccountName
         version:
@@ -4038,7 +4031,7 @@ components:
           format: date-time
           type: string
         sourceAccountAttributes:
-          $ref: '#/components/schemas/AccountConfig'
+          $ref: '#/components/schemas/SourceAccountCloudAttributes'
       required:
       - id
       - name
@@ -4060,7 +4053,6 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: tenantId
           providerAccountName: providerAccountName
           version:
@@ -4361,7 +4353,6 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: tenantId
           providerAccountName: providerAccountName
           version:
@@ -4381,7 +4372,6 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: tenantId
           providerAccountName: providerAccountName
           version:
@@ -4425,7 +4415,6 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: tenantId
           providerAccountName: providerAccountName
           version:
@@ -4454,7 +4443,6 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: tenantId
           providerAccountName: providerAccountName
           version:
@@ -4547,7 +4535,7 @@ components:
       required:
       - sourceAccountConfig
       type: object
-    AwsRestoreAccountConfigInput:
+    AwsRestoreAccountAttributesInput:
       example:
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
@@ -4559,7 +4547,7 @@ components:
       required:
       - roleArn
       type: object
-    RestoreAccountConfigInput:
+    RestoreAccountAttributesInput:
       example:
         cloudProvider: AWS
         aws:
@@ -4568,7 +4556,7 @@ components:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         aws:
-          $ref: '#/components/schemas/AwsRestoreAccountConfigInput'
+          $ref: '#/components/schemas/AwsRestoreAccountAttributesInput'
       required:
       - cloudProvider
       type: object
@@ -4585,9 +4573,74 @@ components:
           example: restore-sandbox
           type: string
         restoreAccountAttributes:
-          $ref: '#/components/schemas/RestoreAccountConfigInput'
+          $ref: '#/components/schemas/RestoreAccountAttributesInput'
       required:
       - restoreAccountAttributes
+      type: object
+    AwsRestoreAccountAttributes:
+      example:
+        organizationId: o-1234567890
+        roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+      nullable: true
+      properties:
+        roleArn:
+          description: ARN of the role Eon assumes to access the account in AWS.
+          example: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          type: string
+        organizationId:
+          description: Cloud-provider-assigned ID of the AWS organization the account
+            belongs to.
+          example: o-1234567890
+          type: string
+      required:
+      - roleArn
+      type: object
+    GcpRestoreAccountAttributes:
+      example:
+        serviceAccount: serviceAccount
+      nullable: true
+      properties:
+        serviceAccount:
+          type: string
+      required:
+      - serviceAccount
+      type: object
+    AzureRestoreAccountAttributes:
+      example:
+        resourceGroupName: my-resource-group
+        tenantId: tenantId
+      nullable: true
+      properties:
+        tenantId:
+          description: The tenant ID
+          type: string
+        resourceGroupName:
+          description: The resource group name
+          example: my-resource-group
+          type: string
+      required:
+      - tenantId
+      type: object
+    RestoreAccountCloudAttributes:
+      example:
+        gcp:
+          serviceAccount: serviceAccount
+        cloudProvider: AWS
+        aws:
+          organizationId: o-1234567890
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+        azure:
+          resourceGroupName: my-resource-group
+          tenantId: tenantId
+      properties:
+        cloudProvider:
+          $ref: '#/components/schemas/Provider'
+        aws:
+          $ref: '#/components/schemas/AwsRestoreAccountAttributes'
+        gcp:
+          $ref: '#/components/schemas/GcpRestoreAccountAttributes'
+        azure:
+          $ref: '#/components/schemas/AzureRestoreAccountAttributes'
       type: object
     RestoreAccount:
       example:
@@ -4637,7 +4690,7 @@ components:
           format: date-time
           type: string
         restoreAccountAttributes:
-          $ref: '#/components/schemas/AccountConfig'
+          $ref: '#/components/schemas/RestoreAccountCloudAttributes'
       required:
       - id
       - name

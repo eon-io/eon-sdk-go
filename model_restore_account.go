@@ -34,7 +34,7 @@ type RestoreAccount struct {
 	Version *AccountVersion `json:"version,omitempty"`
 	// The date and time the account was connected to Eon
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
-	RestoreAccountAttributes *AccountConfig `json:"restoreAccountAttributes,omitempty"`
+	RestoreAccountAttributes *RestoreAccountCloudAttributes `json:"restoreAccountAttributes,omitempty"`
 }
 
 type _RestoreAccount RestoreAccount
@@ -253,9 +253,9 @@ func (o *RestoreAccount) SetConnectedTime(v time.Time) {
 }
 
 // GetRestoreAccountAttributes returns the RestoreAccountAttributes field value if set, zero value otherwise.
-func (o *RestoreAccount) GetRestoreAccountAttributes() AccountConfig {
+func (o *RestoreAccount) GetRestoreAccountAttributes() RestoreAccountCloudAttributes {
 	if o == nil || IsNil(o.RestoreAccountAttributes) {
-		var ret AccountConfig
+		var ret RestoreAccountCloudAttributes
 		return ret
 	}
 	return *o.RestoreAccountAttributes
@@ -263,7 +263,7 @@ func (o *RestoreAccount) GetRestoreAccountAttributes() AccountConfig {
 
 // GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RestoreAccount) GetRestoreAccountAttributesOk() (*AccountConfig, bool) {
+func (o *RestoreAccount) GetRestoreAccountAttributesOk() (*RestoreAccountCloudAttributes, bool) {
 	if o == nil || IsNil(o.RestoreAccountAttributes) {
 		return nil, false
 	}
@@ -279,8 +279,8 @@ func (o *RestoreAccount) HasRestoreAccountAttributes() bool {
 	return false
 }
 
-// SetRestoreAccountAttributes gets a reference to the given AccountConfig and assigns it to the RestoreAccountAttributes field.
-func (o *RestoreAccount) SetRestoreAccountAttributes(v AccountConfig) {
+// SetRestoreAccountAttributes gets a reference to the given RestoreAccountCloudAttributes and assigns it to the RestoreAccountAttributes field.
+func (o *RestoreAccount) SetRestoreAccountAttributes(v RestoreAccountCloudAttributes) {
 	o.RestoreAccountAttributes = &v
 }
 

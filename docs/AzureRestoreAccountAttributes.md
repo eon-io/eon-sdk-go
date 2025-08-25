@@ -1,4 +1,4 @@
-# AzureAccountConfig
+# AzureRestoreAccountAttributes
 
 ## Properties
 
@@ -9,65 +9,65 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAzureAccountConfig
+### NewAzureRestoreAccountAttributes
 
-`func NewAzureAccountConfig(tenantId string, ) *AzureAccountConfig`
+`func NewAzureRestoreAccountAttributes(tenantId string, ) *AzureRestoreAccountAttributes`
 
-NewAzureAccountConfig instantiates a new AzureAccountConfig object
+NewAzureRestoreAccountAttributes instantiates a new AzureRestoreAccountAttributes object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAzureAccountConfigWithDefaults
+### NewAzureRestoreAccountAttributesWithDefaults
 
-`func NewAzureAccountConfigWithDefaults() *AzureAccountConfig`
+`func NewAzureRestoreAccountAttributesWithDefaults() *AzureRestoreAccountAttributes`
 
-NewAzureAccountConfigWithDefaults instantiates a new AzureAccountConfig object
+NewAzureRestoreAccountAttributesWithDefaults instantiates a new AzureRestoreAccountAttributes object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetTenantId
 
-`func (o *AzureAccountConfig) GetTenantId() string`
+`func (o *AzureRestoreAccountAttributes) GetTenantId() string`
 
 GetTenantId returns the TenantId field if non-nil, zero value otherwise.
 
 ### GetTenantIdOk
 
-`func (o *AzureAccountConfig) GetTenantIdOk() (*string, bool)`
+`func (o *AzureRestoreAccountAttributes) GetTenantIdOk() (*string, bool)`
 
 GetTenantIdOk returns a tuple with the TenantId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTenantId
 
-`func (o *AzureAccountConfig) SetTenantId(v string)`
+`func (o *AzureRestoreAccountAttributes) SetTenantId(v string)`
 
 SetTenantId sets TenantId field to given value.
 
 
 ### GetResourceGroupName
 
-`func (o *AzureAccountConfig) GetResourceGroupName() string`
+`func (o *AzureRestoreAccountAttributes) GetResourceGroupName() string`
 
 GetResourceGroupName returns the ResourceGroupName field if non-nil, zero value otherwise.
 
 ### GetResourceGroupNameOk
 
-`func (o *AzureAccountConfig) GetResourceGroupNameOk() (*string, bool)`
+`func (o *AzureRestoreAccountAttributes) GetResourceGroupNameOk() (*string, bool)`
 
 GetResourceGroupNameOk returns a tuple with the ResourceGroupName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResourceGroupName
 
-`func (o *AzureAccountConfig) SetResourceGroupName(v string)`
+`func (o *AzureRestoreAccountAttributes) SetResourceGroupName(v string)`
 
 SetResourceGroupName sets ResourceGroupName field to given value.
 
 ### HasResourceGroupName
 
-`func (o *AzureAccountConfig) HasResourceGroupName() bool`
+`func (o *AzureRestoreAccountAttributes) HasResourceGroupName() bool`
 
 HasResourceGroupName returns a boolean if a field has been set.
 

@@ -16,39 +16,39 @@ import (
 	"fmt"
 )
 
-// checks if the AwsAccountConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AwsAccountConfig{}
+// checks if the AwsRestoreAccountAttributes type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AwsRestoreAccountAttributes{}
 
-// AwsAccountConfig struct for AwsAccountConfig
-type AwsAccountConfig struct {
+// AwsRestoreAccountAttributes struct for AwsRestoreAccountAttributes
+type AwsRestoreAccountAttributes struct {
 	// ARN of the role Eon assumes to access the account in AWS.
 	RoleArn string `json:"roleArn"`
 	// Cloud-provider-assigned ID of the AWS organization the account belongs to.
 	OrganizationId *string `json:"organizationId,omitempty"`
 }
 
-type _AwsAccountConfig AwsAccountConfig
+type _AwsRestoreAccountAttributes AwsRestoreAccountAttributes
 
-// NewAwsAccountConfig instantiates a new AwsAccountConfig object
+// NewAwsRestoreAccountAttributes instantiates a new AwsRestoreAccountAttributes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAwsAccountConfig(roleArn string) *AwsAccountConfig {
-	this := AwsAccountConfig{}
+func NewAwsRestoreAccountAttributes(roleArn string) *AwsRestoreAccountAttributes {
+	this := AwsRestoreAccountAttributes{}
 	this.RoleArn = roleArn
 	return &this
 }
 
-// NewAwsAccountConfigWithDefaults instantiates a new AwsAccountConfig object
+// NewAwsRestoreAccountAttributesWithDefaults instantiates a new AwsRestoreAccountAttributes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAwsAccountConfigWithDefaults() *AwsAccountConfig {
-	this := AwsAccountConfig{}
+func NewAwsRestoreAccountAttributesWithDefaults() *AwsRestoreAccountAttributes {
+	this := AwsRestoreAccountAttributes{}
 	return &this
 }
 
 // GetRoleArn returns the RoleArn field value
-func (o *AwsAccountConfig) GetRoleArn() string {
+func (o *AwsRestoreAccountAttributes) GetRoleArn() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *AwsAccountConfig) GetRoleArn() string {
 
 // GetRoleArnOk returns a tuple with the RoleArn field value
 // and a boolean to check if the value has been set.
-func (o *AwsAccountConfig) GetRoleArnOk() (*string, bool) {
+func (o *AwsRestoreAccountAttributes) GetRoleArnOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,12 +67,12 @@ func (o *AwsAccountConfig) GetRoleArnOk() (*string, bool) {
 }
 
 // SetRoleArn sets field value
-func (o *AwsAccountConfig) SetRoleArn(v string) {
+func (o *AwsRestoreAccountAttributes) SetRoleArn(v string) {
 	o.RoleArn = v
 }
 
 // GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
-func (o *AwsAccountConfig) GetOrganizationId() string {
+func (o *AwsRestoreAccountAttributes) GetOrganizationId() string {
 	if o == nil || IsNil(o.OrganizationId) {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *AwsAccountConfig) GetOrganizationId() string {
 
 // GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AwsAccountConfig) GetOrganizationIdOk() (*string, bool) {
+func (o *AwsRestoreAccountAttributes) GetOrganizationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.OrganizationId) {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *AwsAccountConfig) GetOrganizationIdOk() (*string, bool) {
 }
 
 // HasOrganizationId returns a boolean if a field has been set.
-func (o *AwsAccountConfig) HasOrganizationId() bool {
+func (o *AwsRestoreAccountAttributes) HasOrganizationId() bool {
 	if o != nil && !IsNil(o.OrganizationId) {
 		return true
 	}
@@ -99,11 +99,11 @@ func (o *AwsAccountConfig) HasOrganizationId() bool {
 }
 
 // SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
-func (o *AwsAccountConfig) SetOrganizationId(v string) {
+func (o *AwsRestoreAccountAttributes) SetOrganizationId(v string) {
 	o.OrganizationId = &v
 }
 
-func (o AwsAccountConfig) MarshalJSON() ([]byte, error) {
+func (o AwsRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -111,7 +111,7 @@ func (o AwsAccountConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AwsAccountConfig) ToMap() (map[string]interface{}, error) {
+func (o AwsRestoreAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["roleArn"] = o.RoleArn
 	if !IsNil(o.OrganizationId) {
@@ -120,7 +120,7 @@ func (o AwsAccountConfig) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AwsAccountConfig) UnmarshalJSON(data []byte) (err error) {
+func (o *AwsRestoreAccountAttributes) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -142,53 +142,53 @@ func (o *AwsAccountConfig) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAwsAccountConfig := _AwsAccountConfig{}
+	varAwsRestoreAccountAttributes := _AwsRestoreAccountAttributes{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAwsAccountConfig)
+	err = decoder.Decode(&varAwsRestoreAccountAttributes)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AwsAccountConfig(varAwsAccountConfig)
+	*o = AwsRestoreAccountAttributes(varAwsRestoreAccountAttributes)
 
 	return err
 }
 
-type NullableAwsAccountConfig struct {
-	value *AwsAccountConfig
+type NullableAwsRestoreAccountAttributes struct {
+	value *AwsRestoreAccountAttributes
 	isSet bool
 }
 
-func (v NullableAwsAccountConfig) Get() *AwsAccountConfig {
+func (v NullableAwsRestoreAccountAttributes) Get() *AwsRestoreAccountAttributes {
 	return v.value
 }
 
-func (v *NullableAwsAccountConfig) Set(val *AwsAccountConfig) {
+func (v *NullableAwsRestoreAccountAttributes) Set(val *AwsRestoreAccountAttributes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAwsAccountConfig) IsSet() bool {
+func (v NullableAwsRestoreAccountAttributes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAwsAccountConfig) Unset() {
+func (v *NullableAwsRestoreAccountAttributes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAwsAccountConfig(val *AwsAccountConfig) *NullableAwsAccountConfig {
-	return &NullableAwsAccountConfig{value: val, isSet: true}
+func NewNullableAwsRestoreAccountAttributes(val *AwsRestoreAccountAttributes) *NullableAwsRestoreAccountAttributes {
+	return &NullableAwsRestoreAccountAttributes{value: val, isSet: true}
 }
 
-func (v NullableAwsAccountConfig) MarshalJSON() ([]byte, error) {
+func (v NullableAwsRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAwsAccountConfig) UnmarshalJSON(src []byte) error {
+func (v *NullableAwsRestoreAccountAttributes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
