@@ -1860,576 +1860,16 @@ paths:
       - read:vaults
       x-audit-log:
         excluded: true
-  /v1/token:
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-files:
     post:
       description: |
-        Description: Retrieves an access token, which you then pass in the `Authorization` header when calling API methods.
+        Description: Restores files from an Eon snapshot.
 
-        The client ID and secret you provide when calling this method must be from a set of API credentials from your Eon account.
-        To learn more about creating API credentials and completing the authentication flow, see [Authentication](/api/using-the-api/authentication).
-
-        The returned access token has the permissions included in the role you assigned to the API credentials.
-        Always make sure the API credentials have the permissions needed for the API methods you want to use it for.
-
-        The access token is valid for 12 hours.
-        After that, you must call this method again to get a new token.
-      operationId: getAccessToken
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApiCredentials'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TokenResponse'
-          description: Authenticated
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: API credentials not found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      security: []
-      summary: Get Access Token
-      tags:
-      - auth
-      x-permissions: []
-      x-internal: false
-      x-data-access:
-        excluded: true
-      x-audit-log:
-        excluded: false
-        action: auth
-  /v1/oauth2/token:
-    post:
-      description: |
-        Description: OAuth2-compliant token endpoint that accepts form-encoded credentials using standard `client_id` and `client_secret` field names.
-
-        This endpoint is specifically designed for OAuth2 clients like Grafana that send credentials as form-encoded data.
-        For JSON-based API calls, use the standard `/v1/token` endpoint instead.
-
-        The client ID and secret you provide when calling this method must be from a set of API credentials from your Eon account.
-        To learn more about creating API credentials and completing the authentication flow, see [Authentication](/api/using-the-api/authentication).
-
-        The returned access token has the permissions included in the role you assigned to the API credentials.
-        Always make sure the API credentials have the permissions needed for the API methods you want to use it for.
-
-        The access token is valid for 12 hours.
-        After that, you must call this method again to get a new token.
-      operationId: getAccessTokenOAuth2
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/OAuth2TokenRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Oauth2TokenResponse'
-          description: Authenticated
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: API credentials not found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      security: []
-      summary: Get Access Token (OAuth2)
-      tags:
-      - auth
-      x-permissions: []
-      x-internal: false
-      x-data-access:
-        excluded: true
-      x-audit-log:
-        excluded: false
-        action: auth
-  /v1/projects/{projectId}/resources:
-    post:
-      description: "Description: Retrieves a list of resources for the given project."
-      operationId: listResources
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+      operationId: restoreFiles
       parameters:
-      - description: |
-          ID of the project whose resources you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: f9304613-dddb-52fe-b883-f5e671a868a3
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - allowEmptyValue: true
-        description: |
-          Cursor that points to the first record of the next page of results.
-          Get this value from the previous response.
-          To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
-        explode: true
-        in: query
-        name: pageToken
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Maximum number of items to return in the response.
-        example: 10
-        explode: true
-        in: query
-        name: pageSize
-        required: false
-        schema:
-          type: integer
-        style: form
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ListInventoryRequest'
-        required: false
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListResourcesResponse'
-          description: Resources retrieved.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: List Resources
-      tags:
-      - resources
-      x-internal: false
-      x-data-access:
-        excluded: true
-      x-permissions:
-      - read:inventory
-      x-audit-log:
-        excluded: true
-  /v1/projects/{projectId}/resources/{id}/data-classifications:
-    delete:
-      description: |
-        Description: Removes a resource's data classes override, which re-enables auto-classification for the resource.
-      operationId: removeDataClassesOverride
-      parameters:
-      - description: |
-          ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned ID of the resource to remove the override from.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Data classes override removed.
-        "404":
-          description: Resource wasn't found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Remove Data Classes Override
-      tags:
-      - resources
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: resource
-          key: id
-      x-permissions:
-      - update:data_classification
-      x-audit-log:
-        action: delete
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-    patch:
-      description: |
-        Description: Manually sets a resource's data classes, overriding auto-classification.
-
-        You can revert to auto-classification of data classes by calling [Remove Data Classes Override](remove-data-classes-override) for the same resource.
-      operationId: overrideDataClasses
-      parameters:
-      - description: |
-          ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned ID of the resource to override.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OverrideDataClassificationsRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OverrideDataClassificationsResponse'
-          description: Data classes overridden.
-        "404":
-          description: Resource wasn't found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Override Data Classes
-      tags:
-      - resources
-      x-permissions:
-      - update:data_classification
-      x-audit-log:
-        action: update
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: resource
-          key: id
-  /v1/projects/{projectId}/resources/{id}/environments:
-    delete:
-      description: |
-        Description: Removes a resource's environment override, which re-enables auto-classification for the resource.
-      operationId: removeEnvironmentOverride
-      parameters:
-      - description: |
-          ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned ID of the resource to remove the override from.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Environment override removed.
-        "404":
-          description: Resource wasn't found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Remove Environment Override
-      tags:
-      - resources
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: resource
-          key: id
-      x-permissions:
-      - update:environment_classification
-      x-audit-log:
-        action: delete
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-    patch:
-      description: |
-        Description: Manually sets a resource's environment, overriding auto-classification.
-
-        You can revert to auto-classification of environment by calling [Remove Environment Override](remove-environment-override) for the same resource.
-      operationId: overrideEnvironment
-      parameters:
-      - description: |
-          ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned ID of the resource to override.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OverrideEnvironmentRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OverrideEnvironmentResponse'
-          description: Environment overridden.
-        "404":
-          description: Resource wasn't found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Override Environment
-      tags:
-      - resources
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: resource
-          key: id
-      x-permissions:
-      - update:environment_classification
-      x-audit-log:
-        action: update
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-  /v1/projects/{projectId}/resources/{id}:
-    get:
-      description: "Description: Retrieves a resource by ID."
-      operationId: getResource
-      parameters:
-      - description: Eon-assigned ID of the resource to retrieve.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: |
-          ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetResourceResponse'
-          description: Resource retrieved.
-        "404":
-          description: Resource wasn't found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Get Resource
-      tags:
-      - resources
-      x-permissions:
-      - read:inventory
-      x-audit-log:
-        excluded: true
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: resource
-          key: id
-  /v1/projects/{projectId}/snapshots/{id}:
-    get:
-      description: "Description: Retrieves an Eon snapshot."
-      operationId: getSnapshot
-      parameters:
-      - description: ID of the Eon snapshot to retrieve.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the snapshot is in.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
@@ -2442,15 +1882,40 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: Eon-assigned resource ID.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+        example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreFilesRequest'
+        required: true
       responses:
-        "200":
+        "202":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetSnapshotResponse'
-          description: Snapshot retrieved.
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Restore job started.
         "404":
-          description: Snapshot wasn't found.
+          description: "Project, resource, or snapshot wasn't found."
         "1XX":
           description: Informational
         "3XX":
@@ -2467,7 +1932,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Get Snapshot
+      summary: Restore Files
       tags:
       - snapshots
       x-internal: false
@@ -2476,11 +1941,117 @@ paths:
         entityRefs:
         - in: path
           entityType: snapshot
-          key: id
+          key: snapshotId
       x-permissions:
-      - read:inventory
+      - create:restore_file
       x-audit-log:
-        excluded: true
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: id
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bucket:
+    post:
+      description: |
+        Description: Restores a bucket from an Eon snapshot.
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+      operationId: restoreBucket
+      parameters:
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned resource ID.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+        example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreBucketRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Restore job started.
+        "404":
+          description: "Project, resource, or snapshot wasn't found."
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Restore Bucket
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: snapshotId
+      x-permissions:
+      - create:restore_resource
+      x-audit-log:
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: id
   /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-ec2-ebs-volume:
     post:
       description: |
@@ -2651,412 +2222,6 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
       summary: Restore to EBS Snapshot
-      tags:
-      - snapshots
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: snapshot
-          key: snapshotId
-      x-permissions:
-      - create:restore_resource
-      x-audit-log:
-        action: trigger
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-        - entityType: snapshot
-          in: path
-          key: snapshotId
-        - entityType: restore_job
-          in: resBody
-          key: id
-  /v1/projects/{projectId}/dashboard/daily-storage-summary:
-    get:
-      description: "Description: Retrieves a list of snapshot storage sizes per day\
-        \ for the given date range."
-      operationId: getDailyStorageSummaries
-      parameters:
-      - description: |
-          ID of the project whose daily storage summaries you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: f9304613-dddb-52fe-b883-f5e671a868a3
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: First day of the date range in `YYYY-MM-DD` format.
-        explode: true
-        in: query
-        name: startDate
-        required: true
-        schema:
-          format: date
-          type: string
-        style: form
-      - description: Last day of the date range in `YYYY-MM-DD` format.
-        explode: true
-        in: query
-        name: endDate
-        required: true
-        schema:
-          format: date
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DailyStorageSummaries'
-          description: Successful operation
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Get Daily Storage Summaries
-      tags:
-      - dashboard
-      x-internal: false
-      x-data-access:
-        excluded: true
-      x-permissions:
-      - read:dashboard
-      x-audit-log:
-        excluded: true
-  /v1/projects/{projectId}/resources/{id}/exclude:
-    patch:
-      description: |
-        Description: Prevents a resource from being backed up by Eon and suppresses scanning and violations.
-
-        You can cancel this action by calling [Cancel Resource Backup Exclusion](cancel-resource-backup-exclusion) for the same resource.
-      operationId: excludeResourceFromBackup
-      parameters:
-      - description: |
-          ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned ID of the resource to exclude from backup.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExcludeFromBackupResponse'
-          description: Resource excluded from backup.
-        "404":
-          description: Resource not found
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Exclude Resource from Backup
-      tags:
-      - resources
-      x-permissions:
-      - update:exclude_resource
-      x-audit-log:
-        action: update
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: resource
-          key: id
-  /v1/projects/{projectId}/resources/{id}/include:
-    patch:
-      description: |
-        Description: Allows a resource to be backed up by Eon, scanned, and checked for violations.
-      operationId: cancelResourceBackupExclusion
-      parameters:
-      - description: |
-          ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned ID of the resource to cancel the backup exclusion
-          for.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelExclusionFromBackupResponse'
-          description: Resource backup exclusion canceled.
-        "404":
-          description: Resource wasn't found.
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Cancel Resource Backup Exclusion
-      tags:
-      - resources
-      x-permissions:
-      - update:exclude_resource
-      x-audit-log:
-        action: update
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: resource
-          key: id
-  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-files:
-    post:
-      description: |
-        Description: Restores files from an Eon snapshot.
-
-        This operation is asynchronous.
-        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
-      operationId: restoreFiles
-      parameters:
-      - description: |
-          ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned resource ID.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
-        example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
-        explode: false
-        in: path
-        name: snapshotId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RestoreFilesRequest'
-        required: true
-      responses:
-        "202":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestoreJobInitiationResponse'
-          description: Restore job started.
-        "404":
-          description: "Project, resource, or snapshot wasn't found."
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Restore Files
-      tags:
-      - snapshots
-      x-internal: false
-      x-data-access:
-        excluded: false
-        entityRefs:
-        - in: path
-          entityType: snapshot
-          key: snapshotId
-      x-permissions:
-      - create:restore_file
-      x-audit-log:
-        action: trigger
-        entityRefs:
-        - entityType: cloud_resource
-          in: path
-          key: id
-        - entityType: snapshot
-          in: path
-          key: snapshotId
-        - entityType: restore_job
-          in: resBody
-          key: id
-  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bucket:
-    post:
-      description: |
-        Description: Restores a bucket from an Eon snapshot.
-
-        This operation is asynchronous.
-        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
-      operationId: restoreBucket
-      parameters:
-      - description: |
-          ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
-        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        explode: false
-        in: path
-        name: projectId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Eon-assigned resource ID.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
-        example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
-        explode: false
-        in: path
-        name: snapshotId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RestoreBucketRequest'
-        required: true
-      responses:
-        "202":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RestoreJobInitiationResponse'
-          description: Restore job started.
-        "404":
-          description: "Project, resource, or snapshot wasn't found."
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Restore Bucket
       tags:
       - snapshots
       x-internal: false
@@ -3635,6 +2800,649 @@ paths:
         - entityType: project
           in: path
           key: projectId
+  /v1/projects/{projectId}/resources:
+    post:
+      description: "Description: Retrieves a list of resources for the given project."
+      operationId: listResources
+      parameters:
+      - description: |
+          ID of the project whose resources you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: f9304613-dddb-52fe-b883-f5e671a868a3
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+          To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListInventoryRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourcesResponse'
+          description: Resources retrieved.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Resources
+      tags:
+      - resources
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:inventory
+      x-audit-log:
+        excluded: true
+  /v1/projects/{projectId}/resources/{id}:
+    get:
+      description: "Description: Retrieves a resource by ID."
+      operationId: getResource
+      parameters:
+      - description: Eon-assigned ID of the resource to retrieve.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceResponse'
+          description: Resource retrieved.
+        "404":
+          description: Resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Resource
+      tags:
+      - resources
+      x-permissions:
+      - read:inventory
+      x-audit-log:
+        excluded: true
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+  /v1/projects/{projectId}/resources/{id}/data-classifications:
+    delete:
+      description: |
+        Description: Removes a resource's data classes override, which re-enables auto-classification for the resource.
+      operationId: removeDataClassesOverride
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to remove the override from.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Data classes override removed.
+        "404":
+          description: Resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Remove Data Classes Override
+      tags:
+      - resources
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+      x-permissions:
+      - update:data_classification
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+    patch:
+      description: |
+        Description: Manually sets a resource's data classes, overriding auto-classification.
+
+        You can revert to auto-classification of data classes by calling [Remove Data Classes Override](remove-data-classes-override) for the same resource.
+      operationId: overrideDataClasses
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to override.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OverrideDataClassificationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverrideDataClassificationsResponse'
+          description: Data classes overridden.
+        "404":
+          description: Resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Override Data Classes
+      tags:
+      - resources
+      x-permissions:
+      - update:data_classification
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+  /v1/projects/{projectId}/resources/{id}/environments:
+    delete:
+      description: |
+        Description: Removes a resource's environment override, which re-enables auto-classification for the resource.
+      operationId: removeEnvironmentOverride
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to remove the override from.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Environment override removed.
+        "404":
+          description: Resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Remove Environment Override
+      tags:
+      - resources
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+      x-permissions:
+      - update:environment_classification
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+    patch:
+      description: |
+        Description: Manually sets a resource's environment, overriding auto-classification.
+
+        You can revert to auto-classification of environment by calling [Remove Environment Override](remove-environment-override) for the same resource.
+      operationId: overrideEnvironment
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to override.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OverrideEnvironmentRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverrideEnvironmentResponse'
+          description: Environment overridden.
+        "404":
+          description: Resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Override Environment
+      tags:
+      - resources
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+      x-permissions:
+      - update:environment_classification
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+  /v1/projects/{projectId}/resources/{id}/exclude:
+    patch:
+      description: |
+        Description: Prevents a resource from being backed up by Eon and suppresses scanning and violations.
+
+        You can cancel this action by calling [Cancel Resource Backup Exclusion](cancel-resource-backup-exclusion) for the same resource.
+      operationId: excludeResourceFromBackup
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to exclude from backup.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExcludeFromBackupResponse'
+          description: Resource excluded from backup.
+        "404":
+          description: Resource not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Exclude Resource from Backup
+      tags:
+      - resources
+      x-permissions:
+      - update:exclude_resource
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+  /v1/projects/{projectId}/resources/{id}/include:
+    patch:
+      description: |
+        Description: Allows a resource to be backed up by Eon, scanned, and checked for violations.
+      operationId: cancelResourceBackupExclusion
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to cancel the backup exclusion
+          for.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelExclusionFromBackupResponse'
+          description: Resource backup exclusion canceled.
+        "404":
+          description: Resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Cancel Resource Backup Exclusion
+      tags:
+      - resources
+      x-permissions:
+      - update:exclude_resource
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+  /v1/projects/{projectId}/snapshots/{id}:
+    get:
+      description: "Description: Retrieves an Eon snapshot."
+      operationId: getSnapshot
+      parameters:
+      - description: ID of the Eon snapshot to retrieve.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSnapshotResponse'
+          description: Snapshot retrieved.
+        "404":
+          description: Snapshot wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Snapshot
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: id
+      x-permissions:
+      - read:inventory
+      x-audit-log:
+        excluded: true
   /v1/projects/{projectId}/resources/{id}/snapshots:
     post:
       description: |
@@ -3730,6 +3538,129 @@ paths:
       - read:inventory
       x-audit-log:
         excluded: true
+  /v1/token:
+    post:
+      description: |
+        Description: Retrieves an access token, which you then pass in the `Authorization` header when calling API methods.
+
+        The client ID and secret you provide when calling this method must be from a set of API credentials from your Eon account.
+        To learn more about creating API credentials and completing the authentication flow, see [Authentication](/api/using-the-api/authentication).
+
+        The returned access token has the permissions included in the role you assigned to the API credentials.
+        Always make sure the API credentials have the permissions needed for the API methods you want to use it for.
+
+        The access token is valid for 12 hours.
+        After that, you must call this method again to get a new token.
+      operationId: getAccessToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCredentials'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+          description: Authenticated
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: API credentials not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security: []
+      summary: Get Access Token
+      tags:
+      - auth
+      x-permissions: []
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-audit-log:
+        excluded: false
+        action: auth
+  /v1/oauth2/token:
+    post:
+      description: |
+        Description: OAuth2-compliant token endpoint that accepts form-encoded credentials using standard `client_id` and `client_secret` field names.
+
+        This endpoint is specifically designed for OAuth2 clients like Grafana that send credentials as form-encoded data.
+        For JSON-based API calls, use the standard `/v1/token` endpoint instead.
+
+        The client ID and secret you provide when calling this method must be from a set of API credentials from your Eon account.
+        To learn more about creating API credentials and completing the authentication flow, see [Authentication](/api/using-the-api/authentication).
+
+        The returned access token has the permissions included in the role you assigned to the API credentials.
+        Always make sure the API credentials have the permissions needed for the API methods you want to use it for.
+
+        The access token is valid for 12 hours.
+        After that, you must call this method again to get a new token.
+      operationId: getAccessTokenOAuth2
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OAuth2TokenRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Oauth2TokenResponse'
+          description: Authenticated
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: API credentials not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security: []
+      summary: Get Access Token (OAuth2)
+      tags:
+      - auth
+      x-permissions: []
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-audit-log:
+        excluded: false
+        action: auth
   /v1/cost-data:
     post:
       description: "Description: Query cost data with support for filtering, grouping,\
@@ -3823,6 +3754,75 @@ paths:
         - entityType: project
           in: reqBody
           key: filters.projectId
+  /v1/projects/{projectId}/dashboard/daily-storage-summary:
+    get:
+      description: "Description: Retrieves a list of snapshot storage sizes per day\
+        \ for the given date range."
+      operationId: getDailyStorageSummaries
+      parameters:
+      - description: |
+          ID of the project whose daily storage summaries you want to retrieve.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: f9304613-dddb-52fe-b883-f5e671a868a3
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: First day of the date range in `YYYY-MM-DD` format.
+        explode: true
+        in: query
+        name: startDate
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Last day of the date range in `YYYY-MM-DD` format.
+        explode: true
+        in: query
+        name: endDate
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyStorageSummaries'
+          description: Successful operation
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Daily Storage Summaries
+      tags:
+      - dashboard
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:dashboard
+      x-audit-log:
+        excluded: true
 components:
   schemas:
     Provider:
@@ -10377,99 +10377,911 @@ components:
       - totalCount
       - vaults
       type: object
-    ApiCredentials:
-      additionalProperties: false
+    S3RestoreTarget:
+      description: |
+        Information about the S3 bucket where you want to restore the files.
+        If you don't specify a target, the files are restored to the original bucket.
       example:
-        clientId: yaeiq73af5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
-        clientSecret: eon_sample620a571c00caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
+        bucketName: my-restore-bucket-12345
+        encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
+        prefix: my-restore-prefix
       properties:
-        clientId:
-          description: Your integration's client ID.
-          example: yaeiq73af5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
+        bucketName:
+          description: Name of an existing bucket to restore the files to.
+          example: my-restore-bucket-12345
           type: string
-        clientSecret:
-          description: Your integration's client secret.
-          example: eon_sample620a571c00caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
+        encryptionKeyId:
+          description: ID of the key you want Eon to use for encrypting the restored
+            files.
+          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
+          type: string
+        prefix:
+          description: |
+            Prefix to add to the restore path.
+            If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the bucket.
+          example: my-restore-prefix
           type: string
       required:
-      - clientId
-      - clientSecret
+      - bucketName
       type: object
-    TokenResponse:
+    StorageAccountRestoreTarget:
+      description: |
+        Information about the storage account where you want to restore the files.
+        If you don't specify a target, the files are restored to the original storage account.
       example:
-        expirationSeconds: 43200
-        accessToken: accessToken
+        container: my-restore-container-12345
+        resourceGroup: my-restore-resource-group-12345
+        prefix: my-restore-prefix
+        name: my-restore-storage-account-12345
       properties:
-        accessToken:
-          description: "Access token, which you pass in the `Authorization` header\
-            \ when calling API methods."
+        name:
+          description: Name of the storage account to restore the files to.
+          example: my-restore-storage-account-12345
           type: string
-        expirationSeconds:
+        resourceGroup:
+          description: Name of the resource group that contains the storage account.
+          example: my-restore-resource-group-12345
+          type: string
+        container:
+          description: Name of the container in the storage account to restore the
+            files to.
+          example: my-restore-container-12345
+          type: string
+        prefix:
           description: |
-            Length of time until the token expires, in seconds.
-
-            Default: `43200` (12 hours).
-          example: 43200
-          type: integer
+            Prefix to add to the restore path.
+            If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the container.
+          example: my-restore-prefix
+          type: string
+      required:
+      - container
+      - name
       type: object
-    Error:
+    ObjectStorageDestination:
       example:
-        error: error
+        storageAccount:
+          container: my-restore-container-12345
+          resourceGroup: my-restore-resource-group-12345
+          prefix: my-restore-prefix
+          name: my-restore-storage-account-12345
+        s3Bucket:
+          bucketName: my-restore-bucket-12345
+          encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
+          prefix: my-restore-prefix
       properties:
-        error:
-          type: string
+        s3Bucket:
+          $ref: '#/components/schemas/S3RestoreTarget'
+        storageAccount:
+          $ref: '#/components/schemas/StorageAccountRestoreTarget'
       type: object
-    OAuth2TokenRequest:
-      additionalProperties: false
+    FilePath:
+      example:
+        path: path
+        isDirectory: true
       properties:
-        client_id:
-          description: Your integration's client ID.
-          example: rachelyaf5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
+        path:
+          description: Absolute path to the file or directory to restore.
           type: string
-        client_secret:
-          description: Your integration's client secret.
-          example: eon_sample008789765400caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
+        isDirectory:
+          description: |
+            Whether `path` is a directory.
+            If `true`, Eon restores all files in all subdirectories under the path.
+            If `false`, Eon restores only the file at the path.
+          type: boolean
+      required:
+      - isDirectory
+      - path
+      type: object
+    RestoreFilesRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          storageAccount:
+            container: my-restore-container-12345
+            resourceGroup: my-restore-resource-group-12345
+            prefix: my-restore-prefix
+            name: my-restore-storage-account-12345
+          s3Bucket:
+            bucketName: my-restore-bucket-12345
+            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
+            prefix: my-restore-prefix
+        files:
+        - path: path
+          isDirectory: true
+        - path: path
+          isDirectory: true
+      properties:
+        destination:
+          $ref: '#/components/schemas/ObjectStorageDestination'
+        files:
+          description: List of file paths to restore.
+          items:
+            $ref: '#/components/schemas/FilePath'
+          type: array
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           type: string
-        grant_type:
-          description: The OAuth2 grant you are using.
-          enum:
-          - client_credentials
-          - refresh_token
+      required:
+      - destination
+      - files
+      - restoreAccountId
+      type: object
+    RestoreJobInitiationResponse:
+      example:
+        jobId: 9892ecab-22d5-47ca-b2b4-70369e80b90a
+      properties:
+        jobId:
+          description: Restore job ID.
+          example: 9892ecab-22d5-47ca-b2b4-70369e80b90a
+          format: uuid
           type: string
-        refresh_token:
-          description: (required if grant_type=refresh_token)
+      required:
+      - jobId
+      type: object
+    RestoreBucketRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          storageAccount:
+            container: my-restore-container-12345
+            resourceGroup: my-restore-resource-group-12345
+            prefix: my-restore-prefix
+            name: my-restore-storage-account-12345
+          s3Bucket:
+            bucketName: my-restore-bucket-12345
+            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
+            prefix: my-restore-prefix
+      properties:
+        destination:
+          $ref: '#/components/schemas/ObjectStorageDestination'
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+      required:
+      - destination
+      - restoreAccountId
+      type: object
+    VolumeSettings:
+      description: Provisioned volume settings.
+      example:
+        iops: 3000
+        throughput: 125
+        type: gp3
+        sizeBytes: 10000000000
+      properties:
+        type:
+          description: Volume type.
+          example: gp3
+          type: string
+        sizeBytes:
+          description: Volume size in bytes.
+          example: 10000000000
+          format: int64
+          type: integer
+        iops:
+          description: Volume IOPS.
+          example: 3000
+          type: integer
+        throughput:
+          description: Volume throughput.
+          example: 125
+          type: integer
+      required:
+      - sizeBytes
+      - type
+      type: object
+    EbsTarget:
+      example:
+        description: Restored through the Eon API
+        volumeSettings:
+          iops: 3000
+          throughput: 125
+          type: gp3
+          sizeBytes: 10000000000
+        availabilityZone: eu-central-1a
+        volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+        tags:
+          eon_api_restore: "true"
+      properties:
+        description:
+          description: |
+            Description to apply to the restored volume.
+
+            Default: No description.
+          example: Restored through the Eon API
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            Tags to apply to the restored volume as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          example:
+            eon_api_restore: "true"
+          type: object
+        volumeEncryptionKeyId:
+          description: ID of the key you want Eon to use for encrypting the restored
+            volume.
+          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          type: string
+        availabilityZone:
+          description: Availability zone to restore the volume to.
+          example: eu-central-1a
+          type: string
+        volumeSettings:
+          $ref: '#/components/schemas/VolumeSettings'
+      required:
+      - availabilityZone
+      - volumeEncryptionKeyId
+      - volumeSettings
+      type: object
+    EbsRestoreDestination:
+      example:
+        awsEbs:
+          description: Restored through the Eon API
+          volumeSettings:
+            iops: 3000
+            throughput: 125
+            type: gp3
+            sizeBytes: 10000000000
+          availabilityZone: eu-central-1a
+          volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          tags:
+            eon_api_restore: "true"
+      properties:
+        awsEbs:
+          $ref: '#/components/schemas/EbsTarget'
+      type: object
+    RestoreVolumeToEbsRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        providerVolumeId: vol-01a29e3ba811d4613
+        destination:
+          awsEbs:
+            description: Restored through the Eon API
+            volumeSettings:
+              iops: 3000
+              throughput: 125
+              type: gp3
+              sizeBytes: 10000000000
+            availabilityZone: eu-central-1a
+            volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+            tags:
+              eon_api_restore: "true"
+      properties:
+        providerVolumeId:
+          description: Cloud-provider-assigned ID of the volume to restore.
+          example: vol-01a29e3ba811d4613
+          type: string
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/EbsRestoreDestination'
+      required:
+      - destination
+      - providerVolumeId
+      - restoreAccountId
+      type: object
+    EbsSnapshotTarget:
+      example:
+        snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+        description: Restored through the Eon API
+        region: eu-central-1
+        tags:
+          eon_api_restore: "true"
+      properties:
+        region:
+          description: Region to restore the EBS snapshot to.
+          example: eu-central-1
+          type: string
+        description:
+          description: Description to apply to the EBS snapshot.
+          example: Restored through the Eon API
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            Tags to apply to the EBS snapshot as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          example:
+            eon_api_restore: "true"
+          type: object
+        snapshotEncryptionKeyId:
+          description: ID of the key you want Eon to use for encrypting the EBS snapshot.
+          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          type: string
+      required:
+      - region
+      - snapshotEncryptionKeyId
+      type: object
+    EbsSnapshotRestoreDestination:
+      example:
+        awsEbs:
+          snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          description: Restored through the Eon API
+          region: eu-central-1
+          tags:
+            eon_api_restore: "true"
+      properties:
+        awsEbs:
+          $ref: '#/components/schemas/EbsSnapshotTarget'
+      type: object
+    RestoreVolumeToEbsSnapshotRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        providerVolumeId: vol-01a29e3ba811d4613
+        destination:
+          awsEbs:
+            snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+            description: Restored through the Eon API
+            region: eu-central-1
+            tags:
+              eon_api_restore: "true"
+      properties:
+        providerVolumeId:
+          description: Cloud-provider-assigned ID of the volume to restore.
+          example: vol-01a29e3ba811d4613
+          type: string
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/EbsSnapshotRestoreDestination'
+      required:
+      - destination
+      - providerVolumeId
+      - restoreAccountId
+      type: object
+    AwsDatabaseDestination:
+      description: Configuration for restoring to RDS.
+      example:
+        encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+        subnetGroup: subnetGroup
+        restoreRegion: eu-west-1
+        securityGroups:
+        - securityGroups
+        - securityGroups
+        restoredName: my-restored-db
+        tags:
+          eon_api_restore: "true"
+      properties:
+        restoreRegion:
+          description: Region to restore to.
+          example: eu-west-1
+          type: string
+        encryptionKeyId:
+          description: ID of the key you want Eon to use for encrypting the restored
+            resource.
+          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          type: string
+        restoredName:
+          description: Name to assign to the restored resource.
+          example: my-restored-db
+          type: string
+        securityGroups:
+          description: |
+            List of security group IDs to associate with the restored resource.
+            Must be in the same VPC of `subnetGroup`.
+          items:
+            type: string
+          type: array
+        subnetGroup:
+          description: |
+            Subnet group ID to associate with the restored resource.
+            Must be in the same VPC of `securityGroup`.
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          example:
+            eon_api_restore: "true"
+          type: object
+      required:
+      - encryptionKeyId
+      - restoreRegion
+      - restoredName
+      type: object
+    DatabaseDestination:
+      description: Restore configuration.
+      example:
+        awsRds:
+          encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          subnetGroup: subnetGroup
+          restoreRegion: eu-west-1
+          securityGroups:
+          - securityGroups
+          - securityGroups
+          restoredName: my-restored-db
+          tags:
+            eon_api_restore: "true"
+      properties:
+        awsRds:
+          $ref: '#/components/schemas/AwsDatabaseDestination'
+      type: object
+    RestoreDbToRdsInstanceRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          awsRds:
+            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+            subnetGroup: subnetGroup
+            restoreRegion: eu-west-1
+            securityGroups:
+            - securityGroups
+            - securityGroups
+            restoredName: my-restored-db
+            tags:
+              eon_api_restore: "true"
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/DatabaseDestination'
+      required:
+      - destination
+      - restoreAccountId
+      type: object
+    RestoreInstanceVolumeInput:
+      example:
+        providerVolumeId: vol-00b7506c1a2bc8cfd
+        description: root volume
+        volumeSettings:
+          iops: 3000
+          throughput: 125
+          type: gp3
+          sizeBytes: 10000000000
+        volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+        tags:
+          key: tags
+      properties:
+        providerVolumeId:
+          description: Cloud-provider-assigned ID of the volume to restore.
+          example: vol-00b7506c1a2bc8cfd
+          type: string
+        description:
+          description: Optional description.
+          example: root volume
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            Tags to apply to the restored volume as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"primary": ""}`
+          type: object
+        volumeEncryptionKeyId:
+          description: ARN of the KMS key for encrypting the restored volume.
+          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          type: string
+        volumeSettings:
+          $ref: '#/components/schemas/VolumeSettings'
+      required:
+      - providerVolumeId
+      - volumeEncryptionKeyId
+      - volumeSettings
+      type: object
+    Ec2InstanceRestoreTarget:
+      example:
+        subnetId: subnet-01234567890123456
+        securityGroupIds:
+        - securityGroupIds
+        - securityGroupIds
+        instanceType: t3.micro
+        volumeRestoreParameters:
+        - providerVolumeId: vol-00b7506c1a2bc8cfd
+          description: root volume
+          volumeSettings:
+            iops: 3000
+            throughput: 125
+            type: gp3
+            sizeBytes: 10000000000
+          volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          tags:
+            key: tags
+        - providerVolumeId: vol-00b7506c1a2bc8cfd
+          description: root volume
+          volumeSettings:
+            iops: 3000
+            throughput: 125
+            type: gp3
+            sizeBytes: 10000000000
+          volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          tags:
+            key: tags
+        region: us-east-1
+        tags:
+          key: tags
+      properties:
+        region:
+          description: Region to restore the instance to.
+          example: us-east-1
+          type: string
+        instanceType:
+          description: Instance type to use for the restored instance.
+          example: t3.micro
+          type: string
+        subnetId:
+          description: Subnet ID to associate with the restored instance.
+          example: subnet-01234567890123456
+          type: string
+        securityGroupIds:
+          description: List of security group IDs to associate with the restored instance.
+          items:
+            type: string
+          type: array
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          type: object
+        volumeRestoreParameters:
+          description: |
+            Volumes to restore and attach to the restored instance.
+            Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot.
+            The root volume must be present in the list.
+          items:
+            $ref: '#/components/schemas/RestoreInstanceVolumeInput'
+          type: array
+      required:
+      - instanceType
+      - region
+      - subnetId
+      - volumeRestoreParameters
+      type: object
+    Ec2InstanceRestoreDestination:
+      example:
+        awsEc2:
+          subnetId: subnet-01234567890123456
+          securityGroupIds:
+          - securityGroupIds
+          - securityGroupIds
+          instanceType: t3.micro
+          volumeRestoreParameters:
+          - providerVolumeId: vol-00b7506c1a2bc8cfd
+            description: root volume
+            volumeSettings:
+              iops: 3000
+              throughput: 125
+              type: gp3
+              sizeBytes: 10000000000
+            volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+            tags:
+              key: tags
+          - providerVolumeId: vol-00b7506c1a2bc8cfd
+            description: root volume
+            volumeSettings:
+              iops: 3000
+              throughput: 125
+              type: gp3
+              sizeBytes: 10000000000
+            volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+            tags:
+              key: tags
+          region: us-east-1
+          tags:
+            key: tags
+      properties:
+        awsEc2:
+          $ref: '#/components/schemas/Ec2InstanceRestoreTarget'
+      type: object
+    RestoreInstanceInput:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          awsEc2:
+            subnetId: subnet-01234567890123456
+            securityGroupIds:
+            - securityGroupIds
+            - securityGroupIds
+            instanceType: t3.micro
+            volumeRestoreParameters:
+            - providerVolumeId: vol-00b7506c1a2bc8cfd
+              description: root volume
+              volumeSettings:
+                iops: 3000
+                throughput: 125
+                type: gp3
+                sizeBytes: 10000000000
+              volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+              tags:
+                key: tags
+            - providerVolumeId: vol-00b7506c1a2bc8cfd
+              description: root volume
+              volumeSettings:
+                iops: 3000
+                throughput: 125
+                type: gp3
+                sizeBytes: 10000000000
+              volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+              tags:
+                key: tags
+            region: us-east-1
+            tags:
+              key: tags
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/Ec2InstanceRestoreDestination'
+      required:
+      - destination
+      - restoreAccountId
+      type: object
+    AwsDynamoDBDestination:
+      description: Configuration for restoring to DynamoDB.
+      example:
+        encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+        restoreRegion: eu-west-1
+        writeCapacityUnits: 50000
+        restoredName: my-restored-table
+        tags:
+          eon_api_restore: "true"
+      properties:
+        restoreRegion:
+          description: Region to restore to.
+          example: eu-west-1
+          type: string
+        encryptionKeyId:
+          description: ID of the key you want Eon to use for encrypting the restored
+            resource.
+          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          type: string
+        restoredName:
+          description: Name to assign to the restored resource.
+          example: my-restored-table
+          type: string
+        writeCapacityUnits:
+          description: "The number of write capacity units for the restored table.\
+            \ If not specified, the default is 5."
+          example: 50000
+          type: integer
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          example:
+            eon_api_restore: "true"
+          type: object
+      required:
+      - encryptionKeyId
+      - restoreRegion
+      - restoredName
+      type: object
+    DynamodbTableRestoreDestination:
+      example:
+        awsDynamodb:
+          encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          restoreRegion: eu-west-1
+          writeCapacityUnits: 50000
+          restoredName: my-restored-table
+          tags:
+            eon_api_restore: "true"
+      properties:
+        awsDynamodb:
+          $ref: '#/components/schemas/AwsDynamoDBDestination'
+      type: object
+    RestoreDynamoDBTableInput:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          awsDynamodb:
+            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+            restoreRegion: eu-west-1
+            writeCapacityUnits: 50000
+            restoredName: my-restored-table
+            tags:
+              eon_api_restore: "true"
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/DynamodbTableRestoreDestination'
+      required:
+      - destination
+      - restoreAccountId
+      type: object
+    S3RestoreDestination:
+      description: S3 bucket.
+      example:
+        bucketName: my-restore-bucket
+        prefix: restored_records/
+      nullable: true
+      properties:
+        bucketName:
+          description: |
+            Name of an existing bucket to restore query results to.
+            Must be in the same region as the snapshot's vault.
+          example: my-restore-bucket
+          type: string
+        prefix:
+          description: |
+            Prefix to prepend to the restore path.
+            If omitted, query results are restored to the bucket root.
+          example: restored_records/
+          type: string
+      required:
+      - bucketName
+      title: S3BucketDestination
+      type: object
+    QueryDBRestoreDestination:
+      example:
+        s3Bucket:
+          bucketName: my-restore-bucket
+          prefix: restored_records/
+      properties:
+        s3Bucket:
+          $ref: '#/components/schemas/S3RestoreDestination'
+      type: object
+    QueryDBRequest:
+      example:
+        restoreAccountId: 1e0b9aa3-a942-5e86-afe6-57606e952622
+        databaseName: postgres
+        query: SELECT * FROM customers LIMIT 50;
+        destination:
+          s3Bucket:
+            bucketName: my-restore-bucket
+            prefix: restored_records/
+      properties:
+        databaseName:
+          description: Name of the database to query.
+          example: postgres
+          type: string
+        query:
+          description: |
+            SQL query to run against the database.
+            Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html).
+          example: SELECT * FROM customers LIMIT 50;
+          type: string
+        restoreAccountId:
+          description: "Eon-assigned ID of the [restore account](./list-restore-accounts)."
+          example: 1e0b9aa3-a942-5e86-afe6-57606e952622
+          type: string
+        destination:
+          $ref: '#/components/schemas/QueryDBRestoreDestination'
+      required:
+      - databaseName
+      - destination
+      - query
+      - restoreAccountId
+      type: object
+    QueryDBResponse:
+      example:
+        queryId: 330e9e09-6cb8-52af-b532-a476f598cf94
+      properties:
+        queryId:
+          description: |
+            Query ID.
+            Can be used to call [Get Query Status](./get-query-status) and [Get Query Result](./get-query-result).
+          example: 330e9e09-6cb8-52af-b532-a476f598cf94
+          type: string
+      required:
+      - queryId
+      type: object
+    QueryDBStatus:
+      description: |
+        Query status.
+        If completed, the query results can be retrieved.
+      enum:
+      - UNSPECIFIED
+      - IN_PROGRESS
+      - COMPLETED
+      - CANCELED
+      - FAILED
+      example: IN_PROGRESS
+      type: string
+      x-enum-varnames:
+      - QUERY_STATUS_UNSPECIFIED
+      - QUERY_IN_PROGRESS
+      - QUERY_COMPLETED
+      - QUERY_CANCELED
+      - QUERY_FAILED
+    QueryDBStatusResponse:
+      example:
+        runningTimeMs: 5000
+        outputLocations:
+        - s3://my-restore-bucket/restored_records/eon_queries/project=330e9...cf94/2025/01/23/22/resource=2c7b...73af/snapshot_time=2025-01-16T00:44:49Z/1c4cd...f666.csv
+        errorMessage: errorMessage
+        status: IN_PROGRESS
+      properties:
+        runningTimeMs:
+          description: "Time the query took to run, in milliseconds."
+          example: 5000
+          type: integer
+        status:
+          $ref: '#/components/schemas/QueryDBStatus'
+        errorMessage:
+          description: |
+            Error message.
+            Present only if the status is `FAILED`.
+          nullable: true
+          type: string
+        outputLocations:
+          description: |
+            Locations where the query results are saved to.
+            This is set by `destination` in the [Run Query](./run-query) request body.
+          example:
+          - s3://my-restore-bucket/restored_records/eon_queries/project=330e9...cf94/2025/01/23/22/resource=2c7b...73af/snapshot_time=2025-01-16T00:44:49Z/1c4cd...f666.csv
+          items:
+            type: string
+          type: array
+      required:
+      - status
+      type: object
+    QueryDBResultResponse:
+      example:
+        records:
+        - - "1"
+          - John
+          - "25"
+        - - "2"
+          - Jane
+          - "30"
+        columns:
+        - id
+        - name
+        - age
+        nextToken: nextToken
+      properties:
+        columns:
+          description: List of the column names in the returned records.
+          example:
+          - id
+          - name
+          - age
+          items:
+            type: string
+          type: array
+        records:
+          description: |
+            List of records, returned as an array of arrays.
+            The inner array contains the values of the columns in the same order as returned in `columns`.
+          example:
+          - - "1"
+            - John
+            - "25"
+          - - "2"
+            - Jane
+            - "30"
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        nextToken:
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
           nullable: true
           type: string
       required:
-      - client_id
-      - client_secret
-      type: object
-    Oauth2TokenResponse:
-      example:
-        access_token: access_token
-        refresh_token: refresh_token
-        token_type: Bearer
-        expires_in: 43200
-      properties:
-        access_token:
-          description: "Access token, which you pass in the `Authorization` header\
-            \ when calling API methods."
-          type: string
-        token_type:
-          description: "Type of the token, which is always `Bearer`."
-          example: Bearer
-          type: string
-        refresh_token:
-          description: |
-            Token used to obtain a new access token when the current one expires.
-            Required if `grant_type` is `refresh_token`.
-          type: string
-        expires_in:
-          description: |
-            Length of time until the token expires, in seconds.
-            Default: `43200` (12 hours).
-          example: 43200
-          type: integer
+      - columns
+      - nextToken
+      - records
       type: object
     ResourceSortField:
       description: Field to sort by.
@@ -11268,35 +12080,6 @@ components:
           example: 0
           type: integer
       type: object
-    VolumeSettings:
-      description: Provisioned volume settings.
-      example:
-        iops: 3000
-        throughput: 125
-        type: gp3
-        sizeBytes: 10000000000
-      properties:
-        type:
-          description: Volume type.
-          example: gp3
-          type: string
-        sizeBytes:
-          description: Volume size in bytes.
-          example: 10000000000
-          format: int64
-          type: integer
-        iops:
-          description: Volume IOPS.
-          example: 3000
-          type: integer
-        throughput:
-          description: Volume throughput.
-          example: 125
-          type: integer
-      required:
-      - sizeBytes
-      - type
-      type: object
     InventoryVolume:
       example:
         path: /dev/xvda
@@ -11783,46 +12566,6 @@ components:
       - resources
       - totalCount
       type: object
-    OverrideDataClassificationsRequest:
-      example:
-        dataClasses:
-        - PII
-      properties:
-        dataClasses:
-          description: List of data classes to set.
-          example:
-          - PII
-          items:
-            $ref: '#/components/schemas/DataClass'
-          type: array
-      type: object
-    OverrideDataClassificationsResponse:
-      example:
-        dataClasses:
-        - PII
-      properties:
-        dataClasses:
-          description: List of data classes that were overridden..
-          example:
-          - PII
-          items:
-            $ref: '#/components/schemas/DataClass'
-          type: array
-      type: object
-    OverrideEnvironmentRequest:
-      example:
-        environment: PROD
-      properties:
-        environment:
-          $ref: '#/components/schemas/Environment'
-      type: object
-    OverrideEnvironmentResponse:
-      example:
-        environment: PROD
-      properties:
-        environment:
-          $ref: '#/components/schemas/Environment'
-      type: object
     GetResourceResponse:
       example:
         resource:
@@ -11908,6 +12651,70 @@ components:
           $ref: '#/components/schemas/InventoryResource'
       required:
       - resource
+      type: object
+    OverrideDataClassificationsRequest:
+      example:
+        dataClasses:
+        - PII
+      properties:
+        dataClasses:
+          description: List of data classes to set.
+          example:
+          - PII
+          items:
+            $ref: '#/components/schemas/DataClass'
+          type: array
+      type: object
+    OverrideDataClassificationsResponse:
+      example:
+        dataClasses:
+        - PII
+      properties:
+        dataClasses:
+          description: List of data classes that were overridden..
+          example:
+          - PII
+          items:
+            $ref: '#/components/schemas/DataClass'
+          type: array
+      type: object
+    OverrideEnvironmentRequest:
+      example:
+        environment: PROD
+      properties:
+        environment:
+          $ref: '#/components/schemas/Environment'
+      type: object
+    OverrideEnvironmentResponse:
+      example:
+        environment: PROD
+      properties:
+        environment:
+          $ref: '#/components/schemas/Environment'
+      type: object
+    ExcludeFromBackupResponse:
+      example:
+        isExcluded: true
+      properties:
+        isExcluded:
+          description: |
+            Whether the resource is excluded from backup.
+            Expected to be `true`.
+          type: boolean
+      required:
+      - isExcluded
+      type: object
+    CancelExclusionFromBackupResponse:
+      example:
+        isExclusionCanceled: true
+      properties:
+        isExclusionCanceled:
+          description: |
+            Whether the call was successful.
+            Expected to be `true`.
+          type: boolean
+      required:
+      - isExclusionCanceled
       type: object
     InventorySnapshotVolume:
       example:
@@ -12234,942 +13041,6 @@ components:
       required:
       - snapshot
       type: object
-    EbsTarget:
-      example:
-        description: Restored through the Eon API
-        volumeSettings:
-          iops: 3000
-          throughput: 125
-          type: gp3
-          sizeBytes: 10000000000
-        availabilityZone: eu-central-1a
-        volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-        tags:
-          eon_api_restore: "true"
-      properties:
-        description:
-          description: |
-            Description to apply to the restored volume.
-
-            Default: No description.
-          example: Restored through the Eon API
-          type: string
-        tags:
-          additionalProperties:
-            type: string
-          description: |
-            Tags to apply to the restored volume as key-value pairs, where key and value are both strings.
-
-            **Example:** `{"eon_api_restore": "true"}`
-          example:
-            eon_api_restore: "true"
-          type: object
-        volumeEncryptionKeyId:
-          description: ID of the key you want Eon to use for encrypting the restored
-            volume.
-          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          type: string
-        availabilityZone:
-          description: Availability zone to restore the volume to.
-          example: eu-central-1a
-          type: string
-        volumeSettings:
-          $ref: '#/components/schemas/VolumeSettings'
-      required:
-      - availabilityZone
-      - volumeEncryptionKeyId
-      - volumeSettings
-      type: object
-    EbsRestoreDestination:
-      example:
-        awsEbs:
-          description: Restored through the Eon API
-          volumeSettings:
-            iops: 3000
-            throughput: 125
-            type: gp3
-            sizeBytes: 10000000000
-          availabilityZone: eu-central-1a
-          volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          tags:
-            eon_api_restore: "true"
-      properties:
-        awsEbs:
-          $ref: '#/components/schemas/EbsTarget'
-      type: object
-    RestoreVolumeToEbsRequest:
-      example:
-        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        providerVolumeId: vol-01a29e3ba811d4613
-        destination:
-          awsEbs:
-            description: Restored through the Eon API
-            volumeSettings:
-              iops: 3000
-              throughput: 125
-              type: gp3
-              sizeBytes: 10000000000
-            availabilityZone: eu-central-1a
-            volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-            tags:
-              eon_api_restore: "true"
-      properties:
-        providerVolumeId:
-          description: Cloud-provider-assigned ID of the volume to restore.
-          example: vol-01a29e3ba811d4613
-          type: string
-        restoreAccountId:
-          description: Eon-assigned ID of the restore account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-        destination:
-          $ref: '#/components/schemas/EbsRestoreDestination'
-      required:
-      - destination
-      - providerVolumeId
-      - restoreAccountId
-      type: object
-    RestoreJobInitiationResponse:
-      example:
-        jobId: 9892ecab-22d5-47ca-b2b4-70369e80b90a
-      properties:
-        jobId:
-          description: Restore job ID.
-          example: 9892ecab-22d5-47ca-b2b4-70369e80b90a
-          format: uuid
-          type: string
-      required:
-      - jobId
-      type: object
-    EbsSnapshotTarget:
-      example:
-        snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-        description: Restored through the Eon API
-        region: eu-central-1
-        tags:
-          eon_api_restore: "true"
-      properties:
-        region:
-          description: Region to restore the EBS snapshot to.
-          example: eu-central-1
-          type: string
-        description:
-          description: Description to apply to the EBS snapshot.
-          example: Restored through the Eon API
-          type: string
-        tags:
-          additionalProperties:
-            type: string
-          description: |
-            Tags to apply to the EBS snapshot as key-value pairs, where key and value are both strings.
-
-            **Example:** `{"eon_api_restore": "true"}`
-          example:
-            eon_api_restore: "true"
-          type: object
-        snapshotEncryptionKeyId:
-          description: ID of the key you want Eon to use for encrypting the EBS snapshot.
-          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          type: string
-      required:
-      - region
-      - snapshotEncryptionKeyId
-      type: object
-    EbsSnapshotRestoreDestination:
-      example:
-        awsEbs:
-          snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          description: Restored through the Eon API
-          region: eu-central-1
-          tags:
-            eon_api_restore: "true"
-      properties:
-        awsEbs:
-          $ref: '#/components/schemas/EbsSnapshotTarget'
-      type: object
-    RestoreVolumeToEbsSnapshotRequest:
-      example:
-        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        providerVolumeId: vol-01a29e3ba811d4613
-        destination:
-          awsEbs:
-            snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-            description: Restored through the Eon API
-            region: eu-central-1
-            tags:
-              eon_api_restore: "true"
-      properties:
-        providerVolumeId:
-          description: Cloud-provider-assigned ID of the volume to restore.
-          example: vol-01a29e3ba811d4613
-          type: string
-        restoreAccountId:
-          description: Eon-assigned ID of the restore account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-        destination:
-          $ref: '#/components/schemas/EbsSnapshotRestoreDestination'
-      required:
-      - destination
-      - providerVolumeId
-      - restoreAccountId
-      type: object
-    DailyStorageSummary:
-      example:
-        summaryDay: 2024-11-01T00:00:00Z
-        dailyStorageBytes: 225000000000000
-      properties:
-        summaryDay:
-          description: Date the storage is calculated for.
-          example: 2024-11-01T00:00:00Z
-          format: date-time
-          type: string
-        dailyStorageBytes:
-          description: "Total snapshot storage for the day, in bytes."
-          example: 225000000000000
-          format: int64
-          type: integer
-      required:
-      - dailyStorageBytes
-      - summaryDay
-      type: object
-    DailyStorageSummaries:
-      example:
-        data:
-        - summaryDay: 2024-11-01T00:00:00Z
-          dailyStorageBytes: 225000000000000
-        - summaryDay: 2024-11-01T00:00:00Z
-          dailyStorageBytes: 225000000000000
-      properties:
-        data:
-          description: List of daily storage summaries.
-          items:
-            $ref: '#/components/schemas/DailyStorageSummary'
-          type: array
-      required:
-      - data
-      type: object
-    ExcludeFromBackupResponse:
-      example:
-        isExcluded: true
-      properties:
-        isExcluded:
-          description: |
-            Whether the resource is excluded from backup.
-            Expected to be `true`.
-          type: boolean
-      required:
-      - isExcluded
-      type: object
-    CancelExclusionFromBackupResponse:
-      example:
-        isExclusionCanceled: true
-      properties:
-        isExclusionCanceled:
-          description: |
-            Whether the call was successful.
-            Expected to be `true`.
-          type: boolean
-      required:
-      - isExclusionCanceled
-      type: object
-    S3RestoreTarget:
-      description: |
-        Information about the S3 bucket where you want to restore the files.
-        If you don't specify a target, the files are restored to the original bucket.
-      example:
-        bucketName: my-restore-bucket-12345
-        encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
-        prefix: my-restore-prefix
-      properties:
-        bucketName:
-          description: Name of an existing bucket to restore the files to.
-          example: my-restore-bucket-12345
-          type: string
-        encryptionKeyId:
-          description: ID of the key you want Eon to use for encrypting the restored
-            files.
-          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
-          type: string
-        prefix:
-          description: |
-            Prefix to add to the restore path.
-            If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the bucket.
-          example: my-restore-prefix
-          type: string
-      required:
-      - bucketName
-      type: object
-    StorageAccountRestoreTarget:
-      description: |
-        Information about the storage account where you want to restore the files.
-        If you don't specify a target, the files are restored to the original storage account.
-      example:
-        container: my-restore-container-12345
-        resourceGroup: my-restore-resource-group-12345
-        prefix: my-restore-prefix
-        name: my-restore-storage-account-12345
-      properties:
-        name:
-          description: Name of the storage account to restore the files to.
-          example: my-restore-storage-account-12345
-          type: string
-        resourceGroup:
-          description: Name of the resource group that contains the storage account.
-          example: my-restore-resource-group-12345
-          type: string
-        container:
-          description: Name of the container in the storage account to restore the
-            files to.
-          example: my-restore-container-12345
-          type: string
-        prefix:
-          description: |
-            Prefix to add to the restore path.
-            If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the container.
-          example: my-restore-prefix
-          type: string
-      required:
-      - container
-      - name
-      type: object
-    ObjectStorageDestination:
-      example:
-        storageAccount:
-          container: my-restore-container-12345
-          resourceGroup: my-restore-resource-group-12345
-          prefix: my-restore-prefix
-          name: my-restore-storage-account-12345
-        s3Bucket:
-          bucketName: my-restore-bucket-12345
-          encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
-          prefix: my-restore-prefix
-      properties:
-        s3Bucket:
-          $ref: '#/components/schemas/S3RestoreTarget'
-        storageAccount:
-          $ref: '#/components/schemas/StorageAccountRestoreTarget'
-      type: object
-    FilePath:
-      example:
-        path: path
-        isDirectory: true
-      properties:
-        path:
-          description: Absolute path to the file or directory to restore.
-          type: string
-        isDirectory:
-          description: |
-            Whether `path` is a directory.
-            If `true`, Eon restores all files in all subdirectories under the path.
-            If `false`, Eon restores only the file at the path.
-          type: boolean
-      required:
-      - isDirectory
-      - path
-      type: object
-    RestoreFilesRequest:
-      example:
-        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        destination:
-          storageAccount:
-            container: my-restore-container-12345
-            resourceGroup: my-restore-resource-group-12345
-            prefix: my-restore-prefix
-            name: my-restore-storage-account-12345
-          s3Bucket:
-            bucketName: my-restore-bucket-12345
-            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
-            prefix: my-restore-prefix
-        files:
-        - path: path
-          isDirectory: true
-        - path: path
-          isDirectory: true
-      properties:
-        destination:
-          $ref: '#/components/schemas/ObjectStorageDestination'
-        files:
-          description: List of file paths to restore.
-          items:
-            $ref: '#/components/schemas/FilePath'
-          type: array
-        restoreAccountId:
-          description: Eon-assigned ID of the restore account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-      required:
-      - destination
-      - files
-      - restoreAccountId
-      type: object
-    RestoreBucketRequest:
-      example:
-        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        destination:
-          storageAccount:
-            container: my-restore-container-12345
-            resourceGroup: my-restore-resource-group-12345
-            prefix: my-restore-prefix
-            name: my-restore-storage-account-12345
-          s3Bucket:
-            bucketName: my-restore-bucket-12345
-            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
-            prefix: my-restore-prefix
-      properties:
-        destination:
-          $ref: '#/components/schemas/ObjectStorageDestination'
-        restoreAccountId:
-          description: Eon-assigned ID of the restore account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-      required:
-      - destination
-      - restoreAccountId
-      type: object
-    AwsDatabaseDestination:
-      description: Configuration for restoring to RDS.
-      example:
-        encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-        subnetGroup: subnetGroup
-        restoreRegion: eu-west-1
-        securityGroups:
-        - securityGroups
-        - securityGroups
-        restoredName: my-restored-db
-        tags:
-          eon_api_restore: "true"
-      properties:
-        restoreRegion:
-          description: Region to restore to.
-          example: eu-west-1
-          type: string
-        encryptionKeyId:
-          description: ID of the key you want Eon to use for encrypting the restored
-            resource.
-          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          type: string
-        restoredName:
-          description: Name to assign to the restored resource.
-          example: my-restored-db
-          type: string
-        securityGroups:
-          description: |
-            List of security group IDs to associate with the restored resource.
-            Must be in the same VPC of `subnetGroup`.
-          items:
-            type: string
-          type: array
-        subnetGroup:
-          description: |
-            Subnet group ID to associate with the restored resource.
-            Must be in the same VPC of `securityGroup`.
-          type: string
-        tags:
-          additionalProperties:
-            type: string
-          description: |
-            Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
-
-            **Example:** `{"eon_api_restore": "true"}`
-          example:
-            eon_api_restore: "true"
-          type: object
-      required:
-      - encryptionKeyId
-      - restoreRegion
-      - restoredName
-      type: object
-    DatabaseDestination:
-      description: Restore configuration.
-      example:
-        awsRds:
-          encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          subnetGroup: subnetGroup
-          restoreRegion: eu-west-1
-          securityGroups:
-          - securityGroups
-          - securityGroups
-          restoredName: my-restored-db
-          tags:
-            eon_api_restore: "true"
-      properties:
-        awsRds:
-          $ref: '#/components/schemas/AwsDatabaseDestination'
-      type: object
-    RestoreDbToRdsInstanceRequest:
-      example:
-        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        destination:
-          awsRds:
-            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-            subnetGroup: subnetGroup
-            restoreRegion: eu-west-1
-            securityGroups:
-            - securityGroups
-            - securityGroups
-            restoredName: my-restored-db
-            tags:
-              eon_api_restore: "true"
-      properties:
-        restoreAccountId:
-          description: Eon-assigned ID of the restore account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-        destination:
-          $ref: '#/components/schemas/DatabaseDestination'
-      required:
-      - destination
-      - restoreAccountId
-      type: object
-    RestoreInstanceVolumeInput:
-      example:
-        providerVolumeId: vol-00b7506c1a2bc8cfd
-        description: root volume
-        volumeSettings:
-          iops: 3000
-          throughput: 125
-          type: gp3
-          sizeBytes: 10000000000
-        volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-        tags:
-          key: tags
-      properties:
-        providerVolumeId:
-          description: Cloud-provider-assigned ID of the volume to restore.
-          example: vol-00b7506c1a2bc8cfd
-          type: string
-        description:
-          description: Optional description.
-          example: root volume
-          type: string
-        tags:
-          additionalProperties:
-            type: string
-          description: |
-            Tags to apply to the restored volume as key-value pairs, where key and value are both strings.
-
-            **Example:** `{"primary": ""}`
-          type: object
-        volumeEncryptionKeyId:
-          description: ARN of the KMS key for encrypting the restored volume.
-          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          type: string
-        volumeSettings:
-          $ref: '#/components/schemas/VolumeSettings'
-      required:
-      - providerVolumeId
-      - volumeEncryptionKeyId
-      - volumeSettings
-      type: object
-    Ec2InstanceRestoreTarget:
-      example:
-        subnetId: subnet-01234567890123456
-        securityGroupIds:
-        - securityGroupIds
-        - securityGroupIds
-        instanceType: t3.micro
-        volumeRestoreParameters:
-        - providerVolumeId: vol-00b7506c1a2bc8cfd
-          description: root volume
-          volumeSettings:
-            iops: 3000
-            throughput: 125
-            type: gp3
-            sizeBytes: 10000000000
-          volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          tags:
-            key: tags
-        - providerVolumeId: vol-00b7506c1a2bc8cfd
-          description: root volume
-          volumeSettings:
-            iops: 3000
-            throughput: 125
-            type: gp3
-            sizeBytes: 10000000000
-          volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          tags:
-            key: tags
-        region: us-east-1
-        tags:
-          key: tags
-      properties:
-        region:
-          description: Region to restore the instance to.
-          example: us-east-1
-          type: string
-        instanceType:
-          description: Instance type to use for the restored instance.
-          example: t3.micro
-          type: string
-        subnetId:
-          description: Subnet ID to associate with the restored instance.
-          example: subnet-01234567890123456
-          type: string
-        securityGroupIds:
-          description: List of security group IDs to associate with the restored instance.
-          items:
-            type: string
-          type: array
-        tags:
-          additionalProperties:
-            type: string
-          description: |
-            Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
-
-            **Example:** `{"eon_api_restore": "true"}`
-          type: object
-        volumeRestoreParameters:
-          description: |
-            Volumes to restore and attach to the restored instance.
-            Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot.
-            The root volume must be present in the list.
-          items:
-            $ref: '#/components/schemas/RestoreInstanceVolumeInput'
-          type: array
-      required:
-      - instanceType
-      - region
-      - subnetId
-      - volumeRestoreParameters
-      type: object
-    Ec2InstanceRestoreDestination:
-      example:
-        awsEc2:
-          subnetId: subnet-01234567890123456
-          securityGroupIds:
-          - securityGroupIds
-          - securityGroupIds
-          instanceType: t3.micro
-          volumeRestoreParameters:
-          - providerVolumeId: vol-00b7506c1a2bc8cfd
-            description: root volume
-            volumeSettings:
-              iops: 3000
-              throughput: 125
-              type: gp3
-              sizeBytes: 10000000000
-            volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-            tags:
-              key: tags
-          - providerVolumeId: vol-00b7506c1a2bc8cfd
-            description: root volume
-            volumeSettings:
-              iops: 3000
-              throughput: 125
-              type: gp3
-              sizeBytes: 10000000000
-            volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-            tags:
-              key: tags
-          region: us-east-1
-          tags:
-            key: tags
-      properties:
-        awsEc2:
-          $ref: '#/components/schemas/Ec2InstanceRestoreTarget'
-      type: object
-    RestoreInstanceInput:
-      example:
-        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        destination:
-          awsEc2:
-            subnetId: subnet-01234567890123456
-            securityGroupIds:
-            - securityGroupIds
-            - securityGroupIds
-            instanceType: t3.micro
-            volumeRestoreParameters:
-            - providerVolumeId: vol-00b7506c1a2bc8cfd
-              description: root volume
-              volumeSettings:
-                iops: 3000
-                throughput: 125
-                type: gp3
-                sizeBytes: 10000000000
-              volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-              tags:
-                key: tags
-            - providerVolumeId: vol-00b7506c1a2bc8cfd
-              description: root volume
-              volumeSettings:
-                iops: 3000
-                throughput: 125
-                type: gp3
-                sizeBytes: 10000000000
-              volumeEncryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-              tags:
-                key: tags
-            region: us-east-1
-            tags:
-              key: tags
-      properties:
-        restoreAccountId:
-          description: Eon-assigned ID of the restore account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-        destination:
-          $ref: '#/components/schemas/Ec2InstanceRestoreDestination'
-      required:
-      - destination
-      - restoreAccountId
-      type: object
-    AwsDynamoDBDestination:
-      description: Configuration for restoring to DynamoDB.
-      example:
-        encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-        restoreRegion: eu-west-1
-        writeCapacityUnits: 50000
-        restoredName: my-restored-table
-        tags:
-          eon_api_restore: "true"
-      properties:
-        restoreRegion:
-          description: Region to restore to.
-          example: eu-west-1
-          type: string
-        encryptionKeyId:
-          description: ID of the key you want Eon to use for encrypting the restored
-            resource.
-          example: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          type: string
-        restoredName:
-          description: Name to assign to the restored resource.
-          example: my-restored-table
-          type: string
-        writeCapacityUnits:
-          description: "The number of write capacity units for the restored table.\
-            \ If not specified, the default is 5."
-          example: 50000
-          type: integer
-        tags:
-          additionalProperties:
-            type: string
-          description: |
-            Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
-
-            **Example:** `{"eon_api_restore": "true"}`
-          example:
-            eon_api_restore: "true"
-          type: object
-      required:
-      - encryptionKeyId
-      - restoreRegion
-      - restoredName
-      type: object
-    DynamodbTableRestoreDestination:
-      example:
-        awsDynamodb:
-          encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-          restoreRegion: eu-west-1
-          writeCapacityUnits: 50000
-          restoredName: my-restored-table
-          tags:
-            eon_api_restore: "true"
-      properties:
-        awsDynamodb:
-          $ref: '#/components/schemas/AwsDynamoDBDestination'
-      type: object
-    RestoreDynamoDBTableInput:
-      example:
-        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        destination:
-          awsDynamodb:
-            encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
-            restoreRegion: eu-west-1
-            writeCapacityUnits: 50000
-            restoredName: my-restored-table
-            tags:
-              eon_api_restore: "true"
-      properties:
-        restoreAccountId:
-          description: Eon-assigned ID of the restore account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-        destination:
-          $ref: '#/components/schemas/DynamodbTableRestoreDestination'
-      required:
-      - destination
-      - restoreAccountId
-      type: object
-    S3RestoreDestination:
-      description: S3 bucket.
-      example:
-        bucketName: my-restore-bucket
-        prefix: restored_records/
-      nullable: true
-      properties:
-        bucketName:
-          description: |
-            Name of an existing bucket to restore query results to.
-            Must be in the same region as the snapshot's vault.
-          example: my-restore-bucket
-          type: string
-        prefix:
-          description: |
-            Prefix to prepend to the restore path.
-            If omitted, query results are restored to the bucket root.
-          example: restored_records/
-          type: string
-      required:
-      - bucketName
-      title: S3BucketDestination
-      type: object
-    QueryDBRestoreDestination:
-      example:
-        s3Bucket:
-          bucketName: my-restore-bucket
-          prefix: restored_records/
-      properties:
-        s3Bucket:
-          $ref: '#/components/schemas/S3RestoreDestination'
-      type: object
-    QueryDBRequest:
-      example:
-        restoreAccountId: 1e0b9aa3-a942-5e86-afe6-57606e952622
-        databaseName: postgres
-        query: SELECT * FROM customers LIMIT 50;
-        destination:
-          s3Bucket:
-            bucketName: my-restore-bucket
-            prefix: restored_records/
-      properties:
-        databaseName:
-          description: Name of the database to query.
-          example: postgres
-          type: string
-        query:
-          description: |
-            SQL query to run against the database.
-            Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html).
-          example: SELECT * FROM customers LIMIT 50;
-          type: string
-        restoreAccountId:
-          description: "Eon-assigned ID of the [restore account](./list-restore-accounts)."
-          example: 1e0b9aa3-a942-5e86-afe6-57606e952622
-          type: string
-        destination:
-          $ref: '#/components/schemas/QueryDBRestoreDestination'
-      required:
-      - databaseName
-      - destination
-      - query
-      - restoreAccountId
-      type: object
-    QueryDBResponse:
-      example:
-        queryId: 330e9e09-6cb8-52af-b532-a476f598cf94
-      properties:
-        queryId:
-          description: |
-            Query ID.
-            Can be used to call [Get Query Status](./get-query-status) and [Get Query Result](./get-query-result).
-          example: 330e9e09-6cb8-52af-b532-a476f598cf94
-          type: string
-      required:
-      - queryId
-      type: object
-    QueryDBStatus:
-      description: |
-        Query status.
-        If completed, the query results can be retrieved.
-      enum:
-      - UNSPECIFIED
-      - IN_PROGRESS
-      - COMPLETED
-      - CANCELED
-      - FAILED
-      example: IN_PROGRESS
-      type: string
-      x-enum-varnames:
-      - QUERY_STATUS_UNSPECIFIED
-      - QUERY_IN_PROGRESS
-      - QUERY_COMPLETED
-      - QUERY_CANCELED
-      - QUERY_FAILED
-    QueryDBStatusResponse:
-      example:
-        runningTimeMs: 5000
-        outputLocations:
-        - s3://my-restore-bucket/restored_records/eon_queries/project=330e9...cf94/2025/01/23/22/resource=2c7b...73af/snapshot_time=2025-01-16T00:44:49Z/1c4cd...f666.csv
-        errorMessage: errorMessage
-        status: IN_PROGRESS
-      properties:
-        runningTimeMs:
-          description: "Time the query took to run, in milliseconds."
-          example: 5000
-          type: integer
-        status:
-          $ref: '#/components/schemas/QueryDBStatus'
-        errorMessage:
-          description: |
-            Error message.
-            Present only if the status is `FAILED`.
-          nullable: true
-          type: string
-        outputLocations:
-          description: |
-            Locations where the query results are saved to.
-            This is set by `destination` in the [Run Query](./run-query) request body.
-          example:
-          - s3://my-restore-bucket/restored_records/eon_queries/project=330e9...cf94/2025/01/23/22/resource=2c7b...73af/snapshot_time=2025-01-16T00:44:49Z/1c4cd...f666.csv
-          items:
-            type: string
-          type: array
-      required:
-      - status
-      type: object
-    QueryDBResultResponse:
-      example:
-        records:
-        - - "1"
-          - John
-          - "25"
-        - - "2"
-          - Jane
-          - "30"
-        columns:
-        - id
-        - name
-        - age
-        nextToken: nextToken
-      properties:
-        columns:
-          description: List of the column names in the returned records.
-          example:
-          - id
-          - name
-          - age
-          items:
-            type: string
-          type: array
-        records:
-          description: |
-            List of records, returned as an array of arrays.
-            The inner array contains the values of the columns in the same order as returned in `columns`.
-          example:
-          - - "1"
-            - John
-            - "25"
-          - - "2"
-            - Jane
-            - "30"
-          items:
-            items:
-              type: string
-            type: array
-          type: array
-        nextToken:
-          description: |
-            Cursor that points to the first record of the next page of results.
-            Pass this value in the next request.
-          nullable: true
-          type: string
-      required:
-      - columns
-      - nextToken
-      - records
-      type: object
     SnapshotDateFilters:
       additionalProperties: false
       example:
@@ -13346,6 +13217,100 @@ components:
       required:
       - snapshots
       - totalCount
+      type: object
+    ApiCredentials:
+      additionalProperties: false
+      example:
+        clientId: yaeiq73af5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
+        clientSecret: eon_sample620a571c00caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
+      properties:
+        clientId:
+          description: Your integration's client ID.
+          example: yaeiq73af5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
+          type: string
+        clientSecret:
+          description: Your integration's client secret.
+          example: eon_sample620a571c00caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
+          type: string
+      required:
+      - clientId
+      - clientSecret
+      type: object
+    TokenResponse:
+      example:
+        expirationSeconds: 43200
+        accessToken: accessToken
+      properties:
+        accessToken:
+          description: "Access token, which you pass in the `Authorization` header\
+            \ when calling API methods."
+          type: string
+        expirationSeconds:
+          description: |
+            Length of time until the token expires, in seconds.
+
+            Default: `43200` (12 hours).
+          example: 43200
+          type: integer
+      type: object
+    Error:
+      example:
+        error: error
+      properties:
+        error:
+          type: string
+      type: object
+    OAuth2TokenRequest:
+      additionalProperties: false
+      properties:
+        client_id:
+          description: Your integration's client ID.
+          example: rachelyaf5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
+          type: string
+        client_secret:
+          description: Your integration's client secret.
+          example: eon_sample008789765400caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
+          type: string
+        grant_type:
+          description: The OAuth2 grant you are using.
+          enum:
+          - client_credentials
+          - refresh_token
+          type: string
+        refresh_token:
+          description: (required if grant_type=refresh_token)
+          nullable: true
+          type: string
+      required:
+      - client_id
+      - client_secret
+      type: object
+    Oauth2TokenResponse:
+      example:
+        access_token: access_token
+        refresh_token: refresh_token
+        token_type: Bearer
+        expires_in: 43200
+      properties:
+        access_token:
+          description: "Access token, which you pass in the `Authorization` header\
+            \ when calling API methods."
+          type: string
+        token_type:
+          description: "Type of the token, which is always `Bearer`."
+          example: Bearer
+          type: string
+        refresh_token:
+          description: |
+            Token used to obtain a new access token when the current one expires.
+            Required if `grant_type` is `refresh_token`.
+          type: string
+        expires_in:
+          description: |
+            Length of time until the token expires, in seconds.
+            Default: `43200` (12 hours).
+          example: 43200
+          type: integer
       type: object
     CostUnit:
       default: CREDITS
@@ -13754,6 +13719,41 @@ components:
       - resourceCount
       - totalCount
       - totalUniqueResources
+      type: object
+    DailyStorageSummary:
+      example:
+        summaryDay: 2024-11-01T00:00:00Z
+        dailyStorageBytes: 225000000000000
+      properties:
+        summaryDay:
+          description: Date the storage is calculated for.
+          example: 2024-11-01T00:00:00Z
+          format: date-time
+          type: string
+        dailyStorageBytes:
+          description: "Total snapshot storage for the day, in bytes."
+          example: 225000000000000
+          format: int64
+          type: integer
+      required:
+      - dailyStorageBytes
+      - summaryDay
+      type: object
+    DailyStorageSummaries:
+      example:
+        data:
+        - summaryDay: 2024-11-01T00:00:00Z
+          dailyStorageBytes: 225000000000000
+        - summaryDay: 2024-11-01T00:00:00Z
+          dailyStorageBytes: 225000000000000
+      properties:
+        data:
+          description: List of daily storage summaries.
+          items:
+            $ref: '#/components/schemas/DailyStorageSummary'
+          type: array
+      required:
+      - data
       type: object
     queryCostData_400_response:
       example:
