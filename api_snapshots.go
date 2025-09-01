@@ -309,6 +309,147 @@ func (a *SnapshotsAPIService) ListResourceSnapshotsExecute(r ApiListResourceSnap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiRestoreAzureVmInstanceRequest struct {
+	ctx context.Context
+	ApiService *SnapshotsAPIService
+	projectId string
+	id string
+	snapshotId string
+	restoreAzureVmInstanceRequest *RestoreAzureVmInstanceRequest
+}
+
+func (r ApiRestoreAzureVmInstanceRequest) RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest RestoreAzureVmInstanceRequest) ApiRestoreAzureVmInstanceRequest {
+	r.restoreAzureVmInstanceRequest = &restoreAzureVmInstanceRequest
+	return r
+}
+
+func (r ApiRestoreAzureVmInstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+	return r.ApiService.RestoreAzureVmInstanceExecute(r)
+}
+
+/*
+RestoreAzureVmInstance Restore Azure VM Instance
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param id Eon-assigned resource ID.
+ @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @return ApiRestoreAzureVmInstanceRequest
+*/
+func (a *SnapshotsAPIService) RestoreAzureVmInstance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureVmInstanceRequest {
+	return ApiRestoreAzureVmInstanceRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		id: id,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmInstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RestoreJobInitiationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureVmInstance")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.restoreAzureVmInstanceRequest == nil {
+		return localVarReturnValue, nil, reportError("restoreAzureVmInstanceRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.restoreAzureVmInstanceRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiRestoreBucketRequest struct {
 	ctx context.Context
 	ApiService *SnapshotsAPIService
@@ -611,11 +752,11 @@ type ApiRestoreDynamoDBTableRequest struct {
 	projectId string
 	id string
 	snapshotId string
-	restoreDynamoDBTableInput *RestoreDynamoDBTableInput
+	restoreDynamoDBTableRequest *RestoreDynamoDBTableRequest
 }
 
-func (r ApiRestoreDynamoDBTableRequest) RestoreDynamoDBTableInput(restoreDynamoDBTableInput RestoreDynamoDBTableInput) ApiRestoreDynamoDBTableRequest {
-	r.restoreDynamoDBTableInput = &restoreDynamoDBTableInput
+func (r ApiRestoreDynamoDBTableRequest) RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest RestoreDynamoDBTableRequest) ApiRestoreDynamoDBTableRequest {
+	r.restoreDynamoDBTableRequest = &restoreDynamoDBTableRequest
 	return r
 }
 
@@ -672,8 +813,8 @@ func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.restoreDynamoDBTableInput == nil {
-		return localVarReturnValue, nil, reportError("restoreDynamoDBTableInput is required and must be specified")
+	if r.restoreDynamoDBTableRequest == nil {
+		return localVarReturnValue, nil, reportError("restoreDynamoDBTableRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -694,7 +835,7 @@ func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.restoreDynamoDBTableInput
+	localVarPostBody = r.restoreDynamoDBTableRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -907,11 +1048,11 @@ type ApiRestoreEc2InstanceRequest struct {
 	projectId string
 	id string
 	snapshotId string
-	restoreInstanceInput *RestoreInstanceInput
+	restoreAwsEc2InstanceRequest *RestoreAwsEc2InstanceRequest
 }
 
-func (r ApiRestoreEc2InstanceRequest) RestoreInstanceInput(restoreInstanceInput RestoreInstanceInput) ApiRestoreEc2InstanceRequest {
-	r.restoreInstanceInput = &restoreInstanceInput
+func (r ApiRestoreEc2InstanceRequest) RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest RestoreAwsEc2InstanceRequest) ApiRestoreEc2InstanceRequest {
+	r.restoreAwsEc2InstanceRequest = &restoreAwsEc2InstanceRequest
 	return r
 }
 
@@ -971,8 +1112,8 @@ func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.restoreInstanceInput == nil {
-		return localVarReturnValue, nil, reportError("restoreInstanceInput is required and must be specified")
+	if r.restoreAwsEc2InstanceRequest == nil {
+		return localVarReturnValue, nil, reportError("restoreAwsEc2InstanceRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -993,7 +1134,7 @@ func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.restoreInstanceInput
+	localVarPostBody = r.restoreAwsEc2InstanceRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -1,4 +1,4 @@
-# Ec2InstanceRestoreTarget
+# AwsEc2InstanceRestoreTarget
 
 ## Properties
 
@@ -13,149 +13,149 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewEc2InstanceRestoreTarget
+### NewAwsEc2InstanceRestoreTarget
 
-`func NewEc2InstanceRestoreTarget(region string, instanceType string, subnetId string, volumeRestoreParameters []RestoreInstanceVolumeInput, ) *Ec2InstanceRestoreTarget`
+`func NewAwsEc2InstanceRestoreTarget(region string, instanceType string, subnetId string, volumeRestoreParameters []RestoreInstanceVolumeInput, ) *AwsEc2InstanceRestoreTarget`
 
-NewEc2InstanceRestoreTarget instantiates a new Ec2InstanceRestoreTarget object
+NewAwsEc2InstanceRestoreTarget instantiates a new AwsEc2InstanceRestoreTarget object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewEc2InstanceRestoreTargetWithDefaults
+### NewAwsEc2InstanceRestoreTargetWithDefaults
 
-`func NewEc2InstanceRestoreTargetWithDefaults() *Ec2InstanceRestoreTarget`
+`func NewAwsEc2InstanceRestoreTargetWithDefaults() *AwsEc2InstanceRestoreTarget`
 
-NewEc2InstanceRestoreTargetWithDefaults instantiates a new Ec2InstanceRestoreTarget object
+NewAwsEc2InstanceRestoreTargetWithDefaults instantiates a new AwsEc2InstanceRestoreTarget object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetRegion
 
-`func (o *Ec2InstanceRestoreTarget) GetRegion() string`
+`func (o *AwsEc2InstanceRestoreTarget) GetRegion() string`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *Ec2InstanceRestoreTarget) GetRegionOk() (*string, bool)`
+`func (o *AwsEc2InstanceRestoreTarget) GetRegionOk() (*string, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *Ec2InstanceRestoreTarget) SetRegion(v string)`
+`func (o *AwsEc2InstanceRestoreTarget) SetRegion(v string)`
 
 SetRegion sets Region field to given value.
 
 
 ### GetInstanceType
 
-`func (o *Ec2InstanceRestoreTarget) GetInstanceType() string`
+`func (o *AwsEc2InstanceRestoreTarget) GetInstanceType() string`
 
 GetInstanceType returns the InstanceType field if non-nil, zero value otherwise.
 
 ### GetInstanceTypeOk
 
-`func (o *Ec2InstanceRestoreTarget) GetInstanceTypeOk() (*string, bool)`
+`func (o *AwsEc2InstanceRestoreTarget) GetInstanceTypeOk() (*string, bool)`
 
 GetInstanceTypeOk returns a tuple with the InstanceType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInstanceType
 
-`func (o *Ec2InstanceRestoreTarget) SetInstanceType(v string)`
+`func (o *AwsEc2InstanceRestoreTarget) SetInstanceType(v string)`
 
 SetInstanceType sets InstanceType field to given value.
 
 
 ### GetSubnetId
 
-`func (o *Ec2InstanceRestoreTarget) GetSubnetId() string`
+`func (o *AwsEc2InstanceRestoreTarget) GetSubnetId() string`
 
 GetSubnetId returns the SubnetId field if non-nil, zero value otherwise.
 
 ### GetSubnetIdOk
 
-`func (o *Ec2InstanceRestoreTarget) GetSubnetIdOk() (*string, bool)`
+`func (o *AwsEc2InstanceRestoreTarget) GetSubnetIdOk() (*string, bool)`
 
 GetSubnetIdOk returns a tuple with the SubnetId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSubnetId
 
-`func (o *Ec2InstanceRestoreTarget) SetSubnetId(v string)`
+`func (o *AwsEc2InstanceRestoreTarget) SetSubnetId(v string)`
 
 SetSubnetId sets SubnetId field to given value.
 
 
 ### GetSecurityGroupIds
 
-`func (o *Ec2InstanceRestoreTarget) GetSecurityGroupIds() []string`
+`func (o *AwsEc2InstanceRestoreTarget) GetSecurityGroupIds() []string`
 
 GetSecurityGroupIds returns the SecurityGroupIds field if non-nil, zero value otherwise.
 
 ### GetSecurityGroupIdsOk
 
-`func (o *Ec2InstanceRestoreTarget) GetSecurityGroupIdsOk() (*[]string, bool)`
+`func (o *AwsEc2InstanceRestoreTarget) GetSecurityGroupIdsOk() (*[]string, bool)`
 
 GetSecurityGroupIdsOk returns a tuple with the SecurityGroupIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSecurityGroupIds
 
-`func (o *Ec2InstanceRestoreTarget) SetSecurityGroupIds(v []string)`
+`func (o *AwsEc2InstanceRestoreTarget) SetSecurityGroupIds(v []string)`
 
 SetSecurityGroupIds sets SecurityGroupIds field to given value.
 
 ### HasSecurityGroupIds
 
-`func (o *Ec2InstanceRestoreTarget) HasSecurityGroupIds() bool`
+`func (o *AwsEc2InstanceRestoreTarget) HasSecurityGroupIds() bool`
 
 HasSecurityGroupIds returns a boolean if a field has been set.
 
 ### GetTags
 
-`func (o *Ec2InstanceRestoreTarget) GetTags() map[string]string`
+`func (o *AwsEc2InstanceRestoreTarget) GetTags() map[string]string`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *Ec2InstanceRestoreTarget) GetTagsOk() (*map[string]string, bool)`
+`func (o *AwsEc2InstanceRestoreTarget) GetTagsOk() (*map[string]string, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *Ec2InstanceRestoreTarget) SetTags(v map[string]string)`
+`func (o *AwsEc2InstanceRestoreTarget) SetTags(v map[string]string)`
 
 SetTags sets Tags field to given value.
 
 ### HasTags
 
-`func (o *Ec2InstanceRestoreTarget) HasTags() bool`
+`func (o *AwsEc2InstanceRestoreTarget) HasTags() bool`
 
 HasTags returns a boolean if a field has been set.
 
 ### GetVolumeRestoreParameters
 
-`func (o *Ec2InstanceRestoreTarget) GetVolumeRestoreParameters() []RestoreInstanceVolumeInput`
+`func (o *AwsEc2InstanceRestoreTarget) GetVolumeRestoreParameters() []RestoreInstanceVolumeInput`
 
 GetVolumeRestoreParameters returns the VolumeRestoreParameters field if non-nil, zero value otherwise.
 
 ### GetVolumeRestoreParametersOk
 
-`func (o *Ec2InstanceRestoreTarget) GetVolumeRestoreParametersOk() (*[]RestoreInstanceVolumeInput, bool)`
+`func (o *AwsEc2InstanceRestoreTarget) GetVolumeRestoreParametersOk() (*[]RestoreInstanceVolumeInput, bool)`
 
 GetVolumeRestoreParametersOk returns a tuple with the VolumeRestoreParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVolumeRestoreParameters
 
-`func (o *Ec2InstanceRestoreTarget) SetVolumeRestoreParameters(v []RestoreInstanceVolumeInput)`
+`func (o *AwsEc2InstanceRestoreTarget) SetVolumeRestoreParameters(v []RestoreInstanceVolumeInput)`
 
 SetVolumeRestoreParameters sets VolumeRestoreParameters field to given value.
 

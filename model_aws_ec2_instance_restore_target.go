@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the Ec2InstanceRestoreTarget type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Ec2InstanceRestoreTarget{}
+// checks if the AwsEc2InstanceRestoreTarget type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AwsEc2InstanceRestoreTarget{}
 
-// Ec2InstanceRestoreTarget struct for Ec2InstanceRestoreTarget
-type Ec2InstanceRestoreTarget struct {
+// AwsEc2InstanceRestoreTarget struct for AwsEc2InstanceRestoreTarget
+type AwsEc2InstanceRestoreTarget struct {
 	// Region to restore the instance to.
 	Region string `json:"region"`
 	// Instance type to use for the restored instance.
@@ -35,14 +35,14 @@ type Ec2InstanceRestoreTarget struct {
 	VolumeRestoreParameters []RestoreInstanceVolumeInput `json:"volumeRestoreParameters"`
 }
 
-type _Ec2InstanceRestoreTarget Ec2InstanceRestoreTarget
+type _AwsEc2InstanceRestoreTarget AwsEc2InstanceRestoreTarget
 
-// NewEc2InstanceRestoreTarget instantiates a new Ec2InstanceRestoreTarget object
+// NewAwsEc2InstanceRestoreTarget instantiates a new AwsEc2InstanceRestoreTarget object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEc2InstanceRestoreTarget(region string, instanceType string, subnetId string, volumeRestoreParameters []RestoreInstanceVolumeInput) *Ec2InstanceRestoreTarget {
-	this := Ec2InstanceRestoreTarget{}
+func NewAwsEc2InstanceRestoreTarget(region string, instanceType string, subnetId string, volumeRestoreParameters []RestoreInstanceVolumeInput) *AwsEc2InstanceRestoreTarget {
+	this := AwsEc2InstanceRestoreTarget{}
 	this.Region = region
 	this.InstanceType = instanceType
 	this.SubnetId = subnetId
@@ -50,16 +50,16 @@ func NewEc2InstanceRestoreTarget(region string, instanceType string, subnetId st
 	return &this
 }
 
-// NewEc2InstanceRestoreTargetWithDefaults instantiates a new Ec2InstanceRestoreTarget object
+// NewAwsEc2InstanceRestoreTargetWithDefaults instantiates a new AwsEc2InstanceRestoreTarget object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewEc2InstanceRestoreTargetWithDefaults() *Ec2InstanceRestoreTarget {
-	this := Ec2InstanceRestoreTarget{}
+func NewAwsEc2InstanceRestoreTargetWithDefaults() *AwsEc2InstanceRestoreTarget {
+	this := AwsEc2InstanceRestoreTarget{}
 	return &this
 }
 
 // GetRegion returns the Region field value
-func (o *Ec2InstanceRestoreTarget) GetRegion() string {
+func (o *AwsEc2InstanceRestoreTarget) GetRegion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -70,7 +70,7 @@ func (o *Ec2InstanceRestoreTarget) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *Ec2InstanceRestoreTarget) GetRegionOk() (*string, bool) {
+func (o *AwsEc2InstanceRestoreTarget) GetRegionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -78,12 +78,12 @@ func (o *Ec2InstanceRestoreTarget) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *Ec2InstanceRestoreTarget) SetRegion(v string) {
+func (o *AwsEc2InstanceRestoreTarget) SetRegion(v string) {
 	o.Region = v
 }
 
 // GetInstanceType returns the InstanceType field value
-func (o *Ec2InstanceRestoreTarget) GetInstanceType() string {
+func (o *AwsEc2InstanceRestoreTarget) GetInstanceType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -94,7 +94,7 @@ func (o *Ec2InstanceRestoreTarget) GetInstanceType() string {
 
 // GetInstanceTypeOk returns a tuple with the InstanceType field value
 // and a boolean to check if the value has been set.
-func (o *Ec2InstanceRestoreTarget) GetInstanceTypeOk() (*string, bool) {
+func (o *AwsEc2InstanceRestoreTarget) GetInstanceTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,12 +102,12 @@ func (o *Ec2InstanceRestoreTarget) GetInstanceTypeOk() (*string, bool) {
 }
 
 // SetInstanceType sets field value
-func (o *Ec2InstanceRestoreTarget) SetInstanceType(v string) {
+func (o *AwsEc2InstanceRestoreTarget) SetInstanceType(v string) {
 	o.InstanceType = v
 }
 
 // GetSubnetId returns the SubnetId field value
-func (o *Ec2InstanceRestoreTarget) GetSubnetId() string {
+func (o *AwsEc2InstanceRestoreTarget) GetSubnetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -118,7 +118,7 @@ func (o *Ec2InstanceRestoreTarget) GetSubnetId() string {
 
 // GetSubnetIdOk returns a tuple with the SubnetId field value
 // and a boolean to check if the value has been set.
-func (o *Ec2InstanceRestoreTarget) GetSubnetIdOk() (*string, bool) {
+func (o *AwsEc2InstanceRestoreTarget) GetSubnetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,12 +126,12 @@ func (o *Ec2InstanceRestoreTarget) GetSubnetIdOk() (*string, bool) {
 }
 
 // SetSubnetId sets field value
-func (o *Ec2InstanceRestoreTarget) SetSubnetId(v string) {
+func (o *AwsEc2InstanceRestoreTarget) SetSubnetId(v string) {
 	o.SubnetId = v
 }
 
 // GetSecurityGroupIds returns the SecurityGroupIds field value if set, zero value otherwise.
-func (o *Ec2InstanceRestoreTarget) GetSecurityGroupIds() []string {
+func (o *AwsEc2InstanceRestoreTarget) GetSecurityGroupIds() []string {
 	if o == nil || IsNil(o.SecurityGroupIds) {
 		var ret []string
 		return ret
@@ -141,7 +141,7 @@ func (o *Ec2InstanceRestoreTarget) GetSecurityGroupIds() []string {
 
 // GetSecurityGroupIdsOk returns a tuple with the SecurityGroupIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Ec2InstanceRestoreTarget) GetSecurityGroupIdsOk() ([]string, bool) {
+func (o *AwsEc2InstanceRestoreTarget) GetSecurityGroupIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.SecurityGroupIds) {
 		return nil, false
 	}
@@ -149,7 +149,7 @@ func (o *Ec2InstanceRestoreTarget) GetSecurityGroupIdsOk() ([]string, bool) {
 }
 
 // HasSecurityGroupIds returns a boolean if a field has been set.
-func (o *Ec2InstanceRestoreTarget) HasSecurityGroupIds() bool {
+func (o *AwsEc2InstanceRestoreTarget) HasSecurityGroupIds() bool {
 	if o != nil && !IsNil(o.SecurityGroupIds) {
 		return true
 	}
@@ -158,12 +158,12 @@ func (o *Ec2InstanceRestoreTarget) HasSecurityGroupIds() bool {
 }
 
 // SetSecurityGroupIds gets a reference to the given []string and assigns it to the SecurityGroupIds field.
-func (o *Ec2InstanceRestoreTarget) SetSecurityGroupIds(v []string) {
+func (o *AwsEc2InstanceRestoreTarget) SetSecurityGroupIds(v []string) {
 	o.SecurityGroupIds = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
-func (o *Ec2InstanceRestoreTarget) GetTags() map[string]string {
+func (o *AwsEc2InstanceRestoreTarget) GetTags() map[string]string {
 	if o == nil || IsNil(o.Tags) {
 		var ret map[string]string
 		return ret
@@ -173,7 +173,7 @@ func (o *Ec2InstanceRestoreTarget) GetTags() map[string]string {
 
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Ec2InstanceRestoreTarget) GetTagsOk() (*map[string]string, bool) {
+func (o *AwsEc2InstanceRestoreTarget) GetTagsOk() (*map[string]string, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
@@ -181,7 +181,7 @@ func (o *Ec2InstanceRestoreTarget) GetTagsOk() (*map[string]string, bool) {
 }
 
 // HasTags returns a boolean if a field has been set.
-func (o *Ec2InstanceRestoreTarget) HasTags() bool {
+func (o *AwsEc2InstanceRestoreTarget) HasTags() bool {
 	if o != nil && !IsNil(o.Tags) {
 		return true
 	}
@@ -190,12 +190,12 @@ func (o *Ec2InstanceRestoreTarget) HasTags() bool {
 }
 
 // SetTags gets a reference to the given map[string]string and assigns it to the Tags field.
-func (o *Ec2InstanceRestoreTarget) SetTags(v map[string]string) {
+func (o *AwsEc2InstanceRestoreTarget) SetTags(v map[string]string) {
 	o.Tags = &v
 }
 
 // GetVolumeRestoreParameters returns the VolumeRestoreParameters field value
-func (o *Ec2InstanceRestoreTarget) GetVolumeRestoreParameters() []RestoreInstanceVolumeInput {
+func (o *AwsEc2InstanceRestoreTarget) GetVolumeRestoreParameters() []RestoreInstanceVolumeInput {
 	if o == nil {
 		var ret []RestoreInstanceVolumeInput
 		return ret
@@ -206,7 +206,7 @@ func (o *Ec2InstanceRestoreTarget) GetVolumeRestoreParameters() []RestoreInstanc
 
 // GetVolumeRestoreParametersOk returns a tuple with the VolumeRestoreParameters field value
 // and a boolean to check if the value has been set.
-func (o *Ec2InstanceRestoreTarget) GetVolumeRestoreParametersOk() ([]RestoreInstanceVolumeInput, bool) {
+func (o *AwsEc2InstanceRestoreTarget) GetVolumeRestoreParametersOk() ([]RestoreInstanceVolumeInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -214,11 +214,11 @@ func (o *Ec2InstanceRestoreTarget) GetVolumeRestoreParametersOk() ([]RestoreInst
 }
 
 // SetVolumeRestoreParameters sets field value
-func (o *Ec2InstanceRestoreTarget) SetVolumeRestoreParameters(v []RestoreInstanceVolumeInput) {
+func (o *AwsEc2InstanceRestoreTarget) SetVolumeRestoreParameters(v []RestoreInstanceVolumeInput) {
 	o.VolumeRestoreParameters = v
 }
 
-func (o Ec2InstanceRestoreTarget) MarshalJSON() ([]byte, error) {
+func (o AwsEc2InstanceRestoreTarget) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -226,7 +226,7 @@ func (o Ec2InstanceRestoreTarget) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Ec2InstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
+func (o AwsEc2InstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["region"] = o.Region
 	toSerialize["instanceType"] = o.InstanceType
@@ -241,7 +241,7 @@ func (o Ec2InstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Ec2InstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
+func (o *AwsEc2InstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -266,53 +266,53 @@ func (o *Ec2InstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varEc2InstanceRestoreTarget := _Ec2InstanceRestoreTarget{}
+	varAwsEc2InstanceRestoreTarget := _AwsEc2InstanceRestoreTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEc2InstanceRestoreTarget)
+	err = decoder.Decode(&varAwsEc2InstanceRestoreTarget)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Ec2InstanceRestoreTarget(varEc2InstanceRestoreTarget)
+	*o = AwsEc2InstanceRestoreTarget(varAwsEc2InstanceRestoreTarget)
 
 	return err
 }
 
-type NullableEc2InstanceRestoreTarget struct {
-	value *Ec2InstanceRestoreTarget
+type NullableAwsEc2InstanceRestoreTarget struct {
+	value *AwsEc2InstanceRestoreTarget
 	isSet bool
 }
 
-func (v NullableEc2InstanceRestoreTarget) Get() *Ec2InstanceRestoreTarget {
+func (v NullableAwsEc2InstanceRestoreTarget) Get() *AwsEc2InstanceRestoreTarget {
 	return v.value
 }
 
-func (v *NullableEc2InstanceRestoreTarget) Set(val *Ec2InstanceRestoreTarget) {
+func (v *NullableAwsEc2InstanceRestoreTarget) Set(val *AwsEc2InstanceRestoreTarget) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableEc2InstanceRestoreTarget) IsSet() bool {
+func (v NullableAwsEc2InstanceRestoreTarget) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableEc2InstanceRestoreTarget) Unset() {
+func (v *NullableAwsEc2InstanceRestoreTarget) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableEc2InstanceRestoreTarget(val *Ec2InstanceRestoreTarget) *NullableEc2InstanceRestoreTarget {
-	return &NullableEc2InstanceRestoreTarget{value: val, isSet: true}
+func NewNullableAwsEc2InstanceRestoreTarget(val *AwsEc2InstanceRestoreTarget) *NullableAwsEc2InstanceRestoreTarget {
+	return &NullableAwsEc2InstanceRestoreTarget{value: val, isSet: true}
 }
 
-func (v NullableEc2InstanceRestoreTarget) MarshalJSON() ([]byte, error) {
+func (v NullableAwsEc2InstanceRestoreTarget) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableEc2InstanceRestoreTarget) UnmarshalJSON(src []byte) error {
+func (v *NullableAwsEc2InstanceRestoreTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

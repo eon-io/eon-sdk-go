@@ -2391,7 +2391,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RestoreInstanceInput'
+              $ref: '#/components/schemas/RestoreAwsEc2InstanceRequest'
         required: true
       responses:
         "202":
@@ -2488,7 +2488,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RestoreDynamoDBTableInput'
+              $ref: '#/components/schemas/RestoreDynamoDBTableRequest'
         required: true
       responses:
         "202":
@@ -2516,6 +2516,97 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
       summary: Restore DynamoDB Table
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: snapshotId
+      x-permissions:
+      - create:restore_resource
+      x-audit-log:
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: id
+  /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance:
+    post:
+      operationId: restoreAzureVmInstance
+      parameters:
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned resource ID.
+        example: fb806ce1-1cd3-5034-928a-33a87be714da
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+        example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreAzureVmInstanceRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Restore job started.
+        "404":
+          description: "Project, resource, or snapshot wasn't found."
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Restore Azure VM Instance
       tags:
       - snapshots
       x-internal: false
@@ -10875,7 +10966,7 @@ components:
       - volumeEncryptionKeyId
       - volumeSettings
       type: object
-    Ec2InstanceRestoreTarget:
+    AwsEc2InstanceRestoreTarget:
       example:
         subnetId: subnet-01234567890123456
         securityGroupIds:
@@ -10946,7 +11037,7 @@ components:
       - subnetId
       - volumeRestoreParameters
       type: object
-    Ec2InstanceRestoreDestination:
+    AwsEc2InstanceRestoreDestination:
       example:
         awsEc2:
           subnetId: subnet-01234567890123456
@@ -10980,9 +11071,9 @@ components:
             key: tags
       properties:
         awsEc2:
-          $ref: '#/components/schemas/Ec2InstanceRestoreTarget'
+          $ref: '#/components/schemas/AwsEc2InstanceRestoreTarget'
       type: object
-    RestoreInstanceInput:
+    RestoreAwsEc2InstanceRequest:
       example:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
@@ -11022,7 +11113,7 @@ components:
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           type: string
         destination:
-          $ref: '#/components/schemas/Ec2InstanceRestoreDestination'
+          $ref: '#/components/schemas/AwsEc2InstanceRestoreDestination'
       required:
       - destination
       - restoreAccountId
@@ -11083,7 +11174,7 @@ components:
         awsDynamodb:
           $ref: '#/components/schemas/AwsDynamoDBDestination'
       type: object
-    RestoreDynamoDBTableInput:
+    RestoreDynamoDBTableRequest:
       example:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
@@ -11101,6 +11192,190 @@ components:
           type: string
         destination:
           $ref: '#/components/schemas/DynamodbTableRestoreDestination'
+      required:
+      - destination
+      - restoreAccountId
+      type: object
+    RestoreAzureInstanceDiskInput:
+      example:
+        tier: Standard
+        providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+        name: my-disk-12345
+        hyperVGeneration: V1
+        type: Standard_LRS
+        sizeBytes: 10737418240
+        tags:
+          key: tags
+      properties:
+        providerDiskId:
+          description: Cloud-provider-assigned ID of the disk to restore
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          type: string
+        name:
+          description: The name of the disk to restore
+          example: my-disk-12345
+          type: string
+        type:
+          description: The type of the disk to restore
+          example: Standard_LRS
+          type: string
+        tier:
+          description: The tier of the disk to restore
+          example: Standard
+          type: string
+        hyperVGeneration:
+          description: The Hyper-V generation of the disk to restore
+          example: V1
+          type: string
+        sizeBytes:
+          description: The size of the disk to restore in bytes
+          example: 10737418240
+          format: int64
+          type: integer
+        tags:
+          additionalProperties:
+            type: string
+          description: Optional tags to apply to the output instance
+          type: object
+      required:
+      - name
+      - providerDiskId
+      - tier
+      - type
+      type: object
+    AzureVmInstanceRestoreTarget:
+      example:
+        vmName: my-vm-12345
+        resourceGroupName: my-resource-group-12345
+        networkInterface: networkInterface
+        diskParameters:
+        - tier: Standard
+          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          name: my-disk-12345
+          hyperVGeneration: V1
+          type: Standard_LRS
+          sizeBytes: 10737418240
+          tags:
+            key: tags
+        - tier: Standard
+          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          name: my-disk-12345
+          hyperVGeneration: V1
+          type: Standard_LRS
+          sizeBytes: 10737418240
+          tags:
+            key: tags
+        location: eastus
+        vmSize: Standard_DS1_v2
+        tags:
+          key: tags
+      properties:
+        location:
+          description: Location to restore the instance to.
+          example: eastus
+          type: string
+        resourceGroupName:
+          description: Name of the resource group to restore the vm to
+          example: my-resource-group-12345
+          type: string
+        vmName:
+          description: The name of the VM resource to restore
+          example: my-vm-12345
+          type: string
+        vmSize:
+          description: The size of the VM to restore
+          example: Standard_DS1_v2
+          type: string
+        networkInterface:
+          description: The Name of the network interface to use
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          type: object
+        diskParameters:
+          items:
+            $ref: '#/components/schemas/RestoreAzureInstanceDiskInput'
+          type: array
+      required:
+      - diskParameters
+      - location
+      - networkInterface
+      - resourceGroupName
+      - vmName
+      - vmSize
+      type: object
+    AzureVmInstanceRestoreDestination:
+      example:
+        azureVm:
+          vmName: my-vm-12345
+          resourceGroupName: my-resource-group-12345
+          networkInterface: networkInterface
+          diskParameters:
+          - tier: Standard
+            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+            name: my-disk-12345
+            hyperVGeneration: V1
+            type: Standard_LRS
+            sizeBytes: 10737418240
+            tags:
+              key: tags
+          - tier: Standard
+            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+            name: my-disk-12345
+            hyperVGeneration: V1
+            type: Standard_LRS
+            sizeBytes: 10737418240
+            tags:
+              key: tags
+          location: eastus
+          vmSize: Standard_DS1_v2
+          tags:
+            key: tags
+      properties:
+        azureVm:
+          $ref: '#/components/schemas/AzureVmInstanceRestoreTarget'
+      type: object
+    RestoreAzureVmInstanceRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          azureVm:
+            vmName: my-vm-12345
+            resourceGroupName: my-resource-group-12345
+            networkInterface: networkInterface
+            diskParameters:
+            - tier: Standard
+              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+              name: my-disk-12345
+              hyperVGeneration: V1
+              type: Standard_LRS
+              sizeBytes: 10737418240
+              tags:
+                key: tags
+            - tier: Standard
+              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+              name: my-disk-12345
+              hyperVGeneration: V1
+              type: Standard_LRS
+              sizeBytes: 10737418240
+              tags:
+                key: tags
+            location: eastus
+            vmSize: Standard_DS1_v2
+            tags:
+              key: tags
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/AzureVmInstanceRestoreDestination'
       required:
       - destination
       - restoreAccountId

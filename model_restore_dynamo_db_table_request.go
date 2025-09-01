@@ -16,39 +16,39 @@ import (
 	"fmt"
 )
 
-// checks if the RestoreInstanceInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RestoreInstanceInput{}
+// checks if the RestoreDynamoDBTableRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RestoreDynamoDBTableRequest{}
 
-// RestoreInstanceInput struct for RestoreInstanceInput
-type RestoreInstanceInput struct {
+// RestoreDynamoDBTableRequest struct for RestoreDynamoDBTableRequest
+type RestoreDynamoDBTableRequest struct {
 	// Eon-assigned ID of the restore account.
 	RestoreAccountId string `json:"restoreAccountId"`
-	Destination Ec2InstanceRestoreDestination `json:"destination"`
+	Destination DynamodbTableRestoreDestination `json:"destination"`
 }
 
-type _RestoreInstanceInput RestoreInstanceInput
+type _RestoreDynamoDBTableRequest RestoreDynamoDBTableRequest
 
-// NewRestoreInstanceInput instantiates a new RestoreInstanceInput object
+// NewRestoreDynamoDBTableRequest instantiates a new RestoreDynamoDBTableRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreInstanceInput(restoreAccountId string, destination Ec2InstanceRestoreDestination) *RestoreInstanceInput {
-	this := RestoreInstanceInput{}
+func NewRestoreDynamoDBTableRequest(restoreAccountId string, destination DynamodbTableRestoreDestination) *RestoreDynamoDBTableRequest {
+	this := RestoreDynamoDBTableRequest{}
 	this.RestoreAccountId = restoreAccountId
 	this.Destination = destination
 	return &this
 }
 
-// NewRestoreInstanceInputWithDefaults instantiates a new RestoreInstanceInput object
+// NewRestoreDynamoDBTableRequestWithDefaults instantiates a new RestoreDynamoDBTableRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRestoreInstanceInputWithDefaults() *RestoreInstanceInput {
-	this := RestoreInstanceInput{}
+func NewRestoreDynamoDBTableRequestWithDefaults() *RestoreDynamoDBTableRequest {
+	this := RestoreDynamoDBTableRequest{}
 	return &this
 }
 
 // GetRestoreAccountId returns the RestoreAccountId field value
-func (o *RestoreInstanceInput) GetRestoreAccountId() string {
+func (o *RestoreDynamoDBTableRequest) GetRestoreAccountId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *RestoreInstanceInput) GetRestoreAccountId() string {
 
 // GetRestoreAccountIdOk returns a tuple with the RestoreAccountId field value
 // and a boolean to check if the value has been set.
-func (o *RestoreInstanceInput) GetRestoreAccountIdOk() (*string, bool) {
+func (o *RestoreDynamoDBTableRequest) GetRestoreAccountIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,14 +67,14 @@ func (o *RestoreInstanceInput) GetRestoreAccountIdOk() (*string, bool) {
 }
 
 // SetRestoreAccountId sets field value
-func (o *RestoreInstanceInput) SetRestoreAccountId(v string) {
+func (o *RestoreDynamoDBTableRequest) SetRestoreAccountId(v string) {
 	o.RestoreAccountId = v
 }
 
 // GetDestination returns the Destination field value
-func (o *RestoreInstanceInput) GetDestination() Ec2InstanceRestoreDestination {
+func (o *RestoreDynamoDBTableRequest) GetDestination() DynamodbTableRestoreDestination {
 	if o == nil {
-		var ret Ec2InstanceRestoreDestination
+		var ret DynamodbTableRestoreDestination
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *RestoreInstanceInput) GetDestination() Ec2InstanceRestoreDestination {
 
 // GetDestinationOk returns a tuple with the Destination field value
 // and a boolean to check if the value has been set.
-func (o *RestoreInstanceInput) GetDestinationOk() (*Ec2InstanceRestoreDestination, bool) {
+func (o *RestoreDynamoDBTableRequest) GetDestinationOk() (*DynamodbTableRestoreDestination, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,11 +91,11 @@ func (o *RestoreInstanceInput) GetDestinationOk() (*Ec2InstanceRestoreDestinatio
 }
 
 // SetDestination sets field value
-func (o *RestoreInstanceInput) SetDestination(v Ec2InstanceRestoreDestination) {
+func (o *RestoreDynamoDBTableRequest) SetDestination(v DynamodbTableRestoreDestination) {
 	o.Destination = v
 }
 
-func (o RestoreInstanceInput) MarshalJSON() ([]byte, error) {
+func (o RestoreDynamoDBTableRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -103,14 +103,14 @@ func (o RestoreInstanceInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RestoreInstanceInput) ToMap() (map[string]interface{}, error) {
+func (o RestoreDynamoDBTableRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["restoreAccountId"] = o.RestoreAccountId
 	toSerialize["destination"] = o.Destination
 	return toSerialize, nil
 }
 
-func (o *RestoreInstanceInput) UnmarshalJSON(data []byte) (err error) {
+func (o *RestoreDynamoDBTableRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -133,53 +133,53 @@ func (o *RestoreInstanceInput) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRestoreInstanceInput := _RestoreInstanceInput{}
+	varRestoreDynamoDBTableRequest := _RestoreDynamoDBTableRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRestoreInstanceInput)
+	err = decoder.Decode(&varRestoreDynamoDBTableRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RestoreInstanceInput(varRestoreInstanceInput)
+	*o = RestoreDynamoDBTableRequest(varRestoreDynamoDBTableRequest)
 
 	return err
 }
 
-type NullableRestoreInstanceInput struct {
-	value *RestoreInstanceInput
+type NullableRestoreDynamoDBTableRequest struct {
+	value *RestoreDynamoDBTableRequest
 	isSet bool
 }
 
-func (v NullableRestoreInstanceInput) Get() *RestoreInstanceInput {
+func (v NullableRestoreDynamoDBTableRequest) Get() *RestoreDynamoDBTableRequest {
 	return v.value
 }
 
-func (v *NullableRestoreInstanceInput) Set(val *RestoreInstanceInput) {
+func (v *NullableRestoreDynamoDBTableRequest) Set(val *RestoreDynamoDBTableRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRestoreInstanceInput) IsSet() bool {
+func (v NullableRestoreDynamoDBTableRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRestoreInstanceInput) Unset() {
+func (v *NullableRestoreDynamoDBTableRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRestoreInstanceInput(val *RestoreInstanceInput) *NullableRestoreInstanceInput {
-	return &NullableRestoreInstanceInput{value: val, isSet: true}
+func NewNullableRestoreDynamoDBTableRequest(val *RestoreDynamoDBTableRequest) *NullableRestoreDynamoDBTableRequest {
+	return &NullableRestoreDynamoDBTableRequest{value: val, isSet: true}
 }
 
-func (v NullableRestoreInstanceInput) MarshalJSON() ([]byte, error) {
+func (v NullableRestoreDynamoDBTableRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRestoreInstanceInput) UnmarshalJSON(src []byte) error {
+func (v *NullableRestoreDynamoDBTableRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

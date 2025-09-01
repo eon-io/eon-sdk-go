@@ -34,7 +34,9 @@ docs/AwsAccountMetricsDestination.md
 docs/AwsDatabaseDestination.md
 docs/AwsDynamoDBDestination.md
 docs/AwsEbsVolumeRestoreResult.md
+docs/AwsEc2InstanceRestoreDestination.md
 docs/AwsEc2InstanceRestoreResult.md
+docs/AwsEc2InstanceRestoreTarget.md
 docs/AwsEc2Resource.md
 docs/AwsEc2SnapshotProperties.md
 docs/AwsRestoreAccountAttributes.md
@@ -47,6 +49,8 @@ docs/AwsVpcConnectivityConfig.md
 docs/AzureDiskRestoreResult.md
 docs/AzureRestoreAccountAttributes.md
 docs/AzureSourceAccountAttributes.md
+docs/AzureVmInstanceRestoreDestination.md
+docs/AzureVmInstanceRestoreTarget.md
 docs/BackupJob.md
 docs/BackupJobSortField.md
 docs/BackupJobType.md
@@ -101,8 +105,6 @@ docs/EbsRestoreDestination.md
 docs/EbsSnapshotRestoreDestination.md
 docs/EbsSnapshotTarget.md
 docs/EbsTarget.md
-docs/Ec2InstanceRestoreDestination.md
-docs/Ec2InstanceRestoreTarget.md
 docs/EnableRestoreAccountMetricsConfigRequest.md
 docs/EnableRestoreAccountMetricsConfigResponse.md
 docs/EnableSourceAccountMetricsConfigRequest.md
@@ -208,11 +210,13 @@ docs/RestoreAccountConnectivityConfig.md
 docs/RestoreAccountMetricsConfig.md
 docs/RestoreAccountSortField.md
 docs/RestoreAccountsFilterConditions.md
+docs/RestoreAwsEc2InstanceRequest.md
+docs/RestoreAzureInstanceDiskInput.md
+docs/RestoreAzureVmInstanceRequest.md
 docs/RestoreBucketRequest.md
 docs/RestoreDbToRdsInstanceRequest.md
-docs/RestoreDynamoDBTableInput.md
+docs/RestoreDynamoDBTableRequest.md
 docs/RestoreFilesRequest.md
-docs/RestoreInstanceInput.md
 docs/RestoreInstanceVolumeInput.md
 docs/RestoreJob.md
 docs/RestoreJobInitiationResponse.md
@@ -297,7 +301,9 @@ model_aws_account_metrics_destination.go
 model_aws_database_destination.go
 model_aws_dynamo_db_destination.go
 model_aws_ebs_volume_restore_result.go
+model_aws_ec2_instance_restore_destination.go
 model_aws_ec2_instance_restore_result.go
+model_aws_ec2_instance_restore_target.go
 model_aws_ec2_resource.go
 model_aws_ec2_snapshot_properties.go
 model_aws_restore_account_attributes.go
@@ -310,6 +316,8 @@ model_aws_vpc_connectivity_config.go
 model_azure_disk_restore_result.go
 model_azure_restore_account_attributes.go
 model_azure_source_account_attributes.go
+model_azure_vm_instance_restore_destination.go
+model_azure_vm_instance_restore_target.go
 model_backup_job.go
 model_backup_job_sort_field.go
 model_backup_job_type.go
@@ -360,8 +368,6 @@ model_ebs_restore_destination.go
 model_ebs_snapshot_restore_destination.go
 model_ebs_snapshot_target.go
 model_ebs_target.go
-model_ec2_instance_restore_destination.go
-model_ec2_instance_restore_target.go
 model_enable_restore_account_metrics_config_request.go
 model_enable_restore_account_metrics_config_response.go
 model_enable_source_account_metrics_config_request.go
@@ -465,11 +471,13 @@ model_restore_account_connectivity_config.go
 model_restore_account_metrics_config.go
 model_restore_account_sort_field.go
 model_restore_accounts_filter_conditions.go
+model_restore_aws_ec2_instance_request.go
+model_restore_azure_instance_disk_input.go
+model_restore_azure_vm_instance_request.go
 model_restore_bucket_request.go
 model_restore_db_to_rds_instance_request.go
-model_restore_dynamo_db_table_input.go
+model_restore_dynamo_db_table_request.go
 model_restore_files_request.go
-model_restore_instance_input.go
 model_restore_instance_volume_input.go
 model_restore_job.go
 model_restore_job_initiation_response.go

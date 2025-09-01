@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetSnapshot**](SnapshotsAPI.md#GetSnapshot) | **Get** /v1/projects/{projectId}/snapshots/{id} | Get Snapshot
 [**ListResourceSnapshots**](SnapshotsAPI.md#ListResourceSnapshots) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots | List Resource Snapshots
+[**RestoreAzureVmInstance**](SnapshotsAPI.md#RestoreAzureVmInstance) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance | Restore Azure VM Instance
 [**RestoreBucket**](SnapshotsAPI.md#RestoreBucket) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bucket | Restore Bucket
 [**RestoreDatabase**](SnapshotsAPI.md#RestoreDatabase) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-rds-instance | Restore RDS Instance
 [**RestoreDynamoDBTable**](SnapshotsAPI.md#RestoreDynamoDBTable) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-dynamo-db-table | Restore DynamoDB Table
@@ -153,6 +154,82 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListInventorySnapshotsResponse**](ListInventorySnapshotsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestoreAzureVmInstance
+
+> RestoreJobInitiationResponse RestoreAzureVmInstance(ctx, projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).Execute()
+
+Restore Azure VM Instance
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	restoreAzureVmInstanceRequest := *openapiclient.NewRestoreAzureVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureVmInstanceRestoreDestination()) // RestoreAzureVmInstanceRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureVmInstance(context.Background(), projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureVmInstance``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RestoreAzureVmInstance`: RestoreJobInitiationResponse
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreAzureVmInstance`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**id** | **string** | Eon-assigned resource ID. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreAzureVmInstanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **restoreAzureVmInstanceRequest** | [**RestoreAzureVmInstanceRequest**](RestoreAzureVmInstanceRequest.md) |  | 
+
+### Return type
+
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -326,7 +403,7 @@ Name | Type | Description  | Notes
 
 ## RestoreDynamoDBTable
 
-> RestoreJobInitiationResponse RestoreDynamoDBTable(ctx, projectId, id, snapshotId).RestoreDynamoDBTableInput(restoreDynamoDBTableInput).Execute()
+> RestoreJobInitiationResponse RestoreDynamoDBTable(ctx, projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).Execute()
 
 Restore DynamoDB Table
 
@@ -348,11 +425,11 @@ func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 	id := "2f97ca76-6a78-55d8-94d3-66c2f2cfff23" // string | Eon-assigned resource ID.
 	snapshotId := "ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
-	restoreDynamoDBTableInput := *openapiclient.NewRestoreDynamoDBTableInput("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDynamodbTableRestoreDestination()) // RestoreDynamoDBTableInput | 
+	restoreDynamoDBTableRequest := *openapiclient.NewRestoreDynamoDBTableRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDynamodbTableRestoreDestination()) // RestoreDynamoDBTableRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreDynamoDBTable(context.Background(), projectId, id, snapshotId).RestoreDynamoDBTableInput(restoreDynamoDBTableInput).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreDynamoDBTable(context.Background(), projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreDynamoDBTable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -382,7 +459,7 @@ Name | Type | Description  | Notes
 
 
 
- **restoreDynamoDBTableInput** | [**RestoreDynamoDBTableInput**](RestoreDynamoDBTableInput.md) |  | 
+ **restoreDynamoDBTableRequest** | [**RestoreDynamoDBTableRequest**](RestoreDynamoDBTableRequest.md) |  | 
 
 ### Return type
 
@@ -482,7 +559,7 @@ Name | Type | Description  | Notes
 
 ## RestoreEc2Instance
 
-> RestoreJobInitiationResponse RestoreEc2Instance(ctx, projectId, id, snapshotId).RestoreInstanceInput(restoreInstanceInput).Execute()
+> RestoreJobInitiationResponse RestoreEc2Instance(ctx, projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).Execute()
 
 Restore EC2 Instance
 
@@ -504,11 +581,11 @@ func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
-	restoreInstanceInput := *openapiclient.NewRestoreInstanceInput("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewEc2InstanceRestoreDestination()) // RestoreInstanceInput | 
+	restoreAwsEc2InstanceRequest := *openapiclient.NewRestoreAwsEc2InstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAwsEc2InstanceRestoreDestination()) // RestoreAwsEc2InstanceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreEc2Instance(context.Background(), projectId, id, snapshotId).RestoreInstanceInput(restoreInstanceInput).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreEc2Instance(context.Background(), projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreEc2Instance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -538,7 +615,7 @@ Name | Type | Description  | Notes
 
 
 
- **restoreInstanceInput** | [**RestoreInstanceInput**](RestoreInstanceInput.md) |  | 
+ **restoreAwsEc2InstanceRequest** | [**RestoreAwsEc2InstanceRequest**](RestoreAwsEc2InstanceRequest.md) |  | 
 
 ### Return type
 
