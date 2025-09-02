@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **RestoreRegion** | **string** | Region to restore to. | 
 **EncryptionKeyId** | **string** | ID of the key you want Eon to use for encrypting the restored resource. | 
 **RestoredName** | **string** | Name to assign to the restored resource. | 
-**WriteCapacityUnits** | Pointer to **int32** | The number of write capacity units for the restored table. If not specified, the default is 5. | [optional] 
+**WriteCapacityUnits** | Pointer to **int32** | Write capacity units for the restored table. Defaults to 5.  | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 
 ## Methods

@@ -30,8 +30,6 @@ type ResourceDetails struct {
 	ResourceType ResourceType `json:"resourceType"`
 	// Cloud-provider-assigned account ID.
 	ProviderAccountId string `json:"providerAccountId"`
-	// The display name of the account in Eon.
-	AccountDisplayName string `json:"accountDisplayName"`
 	CloudProvider Provider `json:"cloudProvider"`
 	// Region the resource is hosted in.
 	Region string `json:"region"`
@@ -45,14 +43,13 @@ type _ResourceDetails ResourceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceDetails(id string, providerResourceId string, resourceName string, resourceType ResourceType, providerAccountId string, accountDisplayName string, cloudProvider Provider, region string, sourceStorageSizeBytes int64) *ResourceDetails {
+func NewResourceDetails(id string, providerResourceId string, resourceName string, resourceType ResourceType, providerAccountId string, cloudProvider Provider, region string, sourceStorageSizeBytes int64) *ResourceDetails {
 	this := ResourceDetails{}
 	this.Id = id
 	this.ProviderResourceId = providerResourceId
 	this.ResourceName = resourceName
 	this.ResourceType = resourceType
 	this.ProviderAccountId = providerAccountId
-	this.AccountDisplayName = accountDisplayName
 	this.CloudProvider = cloudProvider
 	this.Region = region
 	this.SourceStorageSizeBytes = sourceStorageSizeBytes
@@ -187,30 +184,6 @@ func (o *ResourceDetails) SetProviderAccountId(v string) {
 	o.ProviderAccountId = v
 }
 
-// GetAccountDisplayName returns the AccountDisplayName field value
-func (o *ResourceDetails) GetAccountDisplayName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AccountDisplayName
-}
-
-// GetAccountDisplayNameOk returns a tuple with the AccountDisplayName field value
-// and a boolean to check if the value has been set.
-func (o *ResourceDetails) GetAccountDisplayNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AccountDisplayName, true
-}
-
-// SetAccountDisplayName sets field value
-func (o *ResourceDetails) SetAccountDisplayName(v string) {
-	o.AccountDisplayName = v
-}
-
 // GetCloudProvider returns the CloudProvider field value
 func (o *ResourceDetails) GetCloudProvider() Provider {
 	if o == nil {
@@ -298,7 +271,6 @@ func (o ResourceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["resourceName"] = o.ResourceName
 	toSerialize["resourceType"] = o.ResourceType
 	toSerialize["providerAccountId"] = o.ProviderAccountId
-	toSerialize["accountDisplayName"] = o.AccountDisplayName
 	toSerialize["cloudProvider"] = o.CloudProvider
 	toSerialize["region"] = o.Region
 	toSerialize["sourceStorageSizeBytes"] = o.SourceStorageSizeBytes
@@ -315,7 +287,6 @@ func (o *ResourceDetails) UnmarshalJSON(data []byte) (err error) {
 		"resourceName",
 		"resourceType",
 		"providerAccountId",
-		"accountDisplayName",
 		"cloudProvider",
 		"region",
 		"sourceStorageSizeBytes",

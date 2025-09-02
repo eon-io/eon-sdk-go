@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// MeteringDimension Metering dimensions for cost analysis across different cloud providers and resource types
+// MeteringDimension Type of resource usage being metered and billed across different cloud providers. Each dimension represents a specific billable resource type, such as compute instances, storage volumes, database services, or data transfer. Used to categorize costs by service type for detailed analysis and chargeback reporting. 
 type MeteringDimension string
 
 // List of MeteringDimension

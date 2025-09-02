@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**QueryCostData**](BillingAPI.md#QueryCostData) | **Post** /v1/cost-data | Query cost data
+[**QueryCostData**](BillingAPI.md#QueryCostData) | **Post** /v1/cost-data | Query Cost Data
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > QueryCostDataResponse QueryCostData(ctx).QueryCostDataRequest(queryCostDataRequest).PageSize(pageSize).PageToken(pageToken).Execute()
 
-Query cost data
+Query Cost Data
 
 
 
@@ -31,8 +31,8 @@ import (
 
 func main() {
 	queryCostDataRequest := *openapiclient.NewQueryCostDataRequest(*openapiclient.NewTimeFrame(time.Now(), time.Now())) // QueryCostDataRequest | 
-	pageSize := int32(100) // int32 | Maximum number of records to return (optional)
-	pageToken := "eyJwYWdlIjoxfQ==" // string | Token for retrieving next page of results (returned from previous request) (optional)
+	pageSize := int32(100) // int32 | Maximum number of cost records to return in a single response. (optional)
+	pageToken := "pageToken_example" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same time frame, grouping, and filters in the first request as all subsequent requests.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -58,8 +58,8 @@ Other parameters are passed through a pointer to a apiQueryCostDataRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **queryCostDataRequest** | [**QueryCostDataRequest**](QueryCostDataRequest.md) |  | 
- **pageSize** | **int32** | Maximum number of records to return | 
- **pageToken** | **string** | Token for retrieving next page of results (returned from previous request) | 
+ **pageSize** | **int32** | Maximum number of cost records to return in a single response. | 
+ **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same time frame, grouping, and filters in the first request as all subsequent requests.  | 
 
 ### Return type
 

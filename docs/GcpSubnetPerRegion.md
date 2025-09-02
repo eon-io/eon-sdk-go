@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region. | 
-**SubnetName** | **string** | Subnet Name. | 
+**SubnetName** | **string** | Subnet name. | 
 
 ## Methods
 

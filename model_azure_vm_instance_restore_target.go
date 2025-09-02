@@ -25,11 +25,11 @@ type AzureVmInstanceRestoreTarget struct {
 	Location string `json:"location"`
 	// Name of the resource group to restore the vm to
 	ResourceGroupName string `json:"resourceGroupName"`
-	// The name of the VM resource to restore
+	// Name of the VM to restore.
 	VmName string `json:"vmName"`
-	// The size of the VM to restore
+	// Size of the VM to restore.
 	VmSize string `json:"vmSize"`
-	// The Name of the network interface to use
+	// Name of the network interface to use.
 	NetworkInterface string `json:"networkInterface"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`

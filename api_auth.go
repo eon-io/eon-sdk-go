@@ -201,7 +201,7 @@ func (r ApiGetAccessTokenOAuth2Request) GrantType(grantType string) ApiGetAccess
 	return r
 }
 
-// (required if grant_type&#x3D;refresh_token)
+// Refresh token. Required if &#x60;grant_type&#x60; is &#x60;refresh_token&#x60;. 
 func (r ApiGetAccessTokenOAuth2Request) RefreshToken(refreshToken string) ApiGetAccessTokenOAuth2Request {
 	r.refreshToken = &refreshToken
 	return r

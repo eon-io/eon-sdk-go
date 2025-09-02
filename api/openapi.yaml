@@ -68,6 +68,10 @@ tags:
 - description: The Audit Logs API allows you to monitor Eon account activity.
   name: auditLogs
   x-displayName: Audit Logs
+- description: The Billing API allows you to monitor your Eon account usage and billing
+    information.
+  name: billing
+  x-displayName: Billing
 paths:
   /v1/projects/{projectId}/source-accounts:
     post:
@@ -347,10 +351,11 @@ paths:
   /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config:
     delete:
       description: |
-        Description: Disables the source account metrics configuration.
+        Description: Disables metrics for the specified source account.
       operationId: disableSourceAccountMetricsConfig
       parameters:
       - description: Eon-assigned ID of the source account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
         explode: false
         in: path
         name: accountId
@@ -362,6 +367,7 @@ paths:
       - description: |
           ID of the project whose source account metrics configuration you want to disable.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: d593811b-bfbc-515b-a21d-9fb95eb1071b
         explode: false
         in: path
         name: projectId
@@ -372,9 +378,9 @@ paths:
         style: simple
       responses:
         "200":
-          description: Source account metrics configuration disable.
+          description: Metrics disabled.
         "404":
-          description: Source account not found.
+          description: Source account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -391,7 +397,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Disable Source Account Metrics Configuration
+      summary: Disable Source Account Metrics
       tags:
       - accounts
       x-internal: false
@@ -437,9 +443,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetSourceAccountMetricsConfigResponse'
-          description: Source account metrics configuration retrieved.
+          description: Metrics configuration retrieved.
         "404":
-          description: Source account not found.
+          description: Source account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -471,7 +477,8 @@ paths:
         Description: Enables or updates the metrics configuration of the specified source account.
       operationId: enableSourceAccountMetricsConfig
       parameters:
-      - description: ID of the source account
+      - description: Eon-assigned ID of the source account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
         explode: false
         in: path
         name: accountId
@@ -481,8 +488,9 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of the project whose source account metrics configuration you want to enable/update.
+          ID of the project whose source account metrics you want to configure.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: b9c79c3f-399c-5e32-a8fb-762f87bebd7b
         explode: false
         in: path
         name: projectId
@@ -503,9 +511,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnableSourceAccountMetricsConfigResponse'
-          description: Source account metrics configuration enabled/updated.
+          description: Metrics configuration set.
         "404":
-          description: Source account not found.
+          description: Source account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -522,7 +530,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Enable or update Source Account Metrics Configuration
+      summary: Configure Source Account Metrics
       tags:
       - accounts
       x-internal: false
@@ -1004,10 +1012,11 @@ paths:
   /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config:
     delete:
       description: |
-        Description: Disables the restore account metrics configuration.
+        Description: Disables metrics for the specified restore account.
       operationId: disableRestoreAccountMetricsConfig
       parameters:
       - description: Eon-assigned ID of the restore account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
         explode: false
         in: path
         name: accountId
@@ -1017,7 +1026,7 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of the project whose restore account metrics configuration you want to disable.
+          ID of the project whose restore account metrics you want to disable.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
@@ -1029,9 +1038,9 @@ paths:
         style: simple
       responses:
         "200":
-          description: Restore account metrics configuration disable.
+          description: Metrics disabled.
         "404":
-          description: Restore account not found.
+          description: Restore account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -1048,7 +1057,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Disable Restore Account Metrics Configuration
+      summary: Disable Restore Account Metrics
       tags:
       - accounts
       x-internal: false
@@ -1080,6 +1089,7 @@ paths:
       - description: |
           ID of the project whose restore account metrics configuration you want to retrieve.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 4bd9ca0f-b6cd-5a00-b6ce-76960e76c4ba
         explode: false
         in: path
         name: projectId
@@ -1094,9 +1104,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetRestoreAccountMetricsConfigResponse'
-          description: Restore account metrics configuration retrieved.
+          description: Metrics configuration retrieved.
         "404":
-          description: Restore account not found.
+          description: Restore account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -1128,7 +1138,8 @@ paths:
         Description: Enables or updates the metrics configuration of the specified restore account.
       operationId: enableRestoreAccountMetricsConfig
       parameters:
-      - description: ID of the restore account
+      - description: Eon-assigned ID of the restore account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
         explode: false
         in: path
         name: accountId
@@ -1138,7 +1149,7 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of the project whose restore account metrics configuration you want to enable/update.
+          ID of the project whose restore account metrics you want to configure.
           You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
@@ -1160,9 +1171,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnableRestoreAccountMetricsConfigResponse'
-          description: Restore account metrics configuration enabled/updated.
+          description: Metrics configuration set.
         "404":
-          description: Restore account not found.
+          description: Restore account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -1179,7 +1190,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Enable or update Restore Account Metrics Configuration
+      summary: Configure Restore Account Metrics
       tags:
       - accounts
       x-internal: false
@@ -3754,12 +3765,14 @@ paths:
         action: auth
   /v1/cost-data:
     post:
-      description: "Description: Query cost data with support for filtering, grouping,\
-        \ and time period selection. Supports various granularities and dimensions\
-        \ for cost analysis and chargeback reporting."
+      description: |
+        Description: Retrieves cost and usage data for the given time frame.
+
+        Use Query Cost Data to analyze backup costs by cloud provider, resource type, and resource.
+        For details on exploring your costs visually in the Eon console, see [About Cost Explorer](/user-guide/administration/cost-explorer/about-the-cost-explorer.mdx)
       operationId: queryCostData
       parameters:
-      - description: Maximum number of records to return
+      - description: Maximum number of cost records to return in a single response.
         example: 100
         explode: true
         in: query
@@ -3769,9 +3782,10 @@ paths:
           type: integer
         style: form
       - allowEmptyValue: true
-        description: Token for retrieving next page of results (returned from previous
-          request)
-        example: eyJwYWdlIjoxfQ==
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+          To preserve the results in the same order, use the same time frame, grouping, and filters in the first request as all subsequent requests.
         explode: true
         in: query
         name: pageToken
@@ -3791,27 +3805,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QueryCostDataResponse'
-          description: Successfully retrieved cost data
+          description: Cost data retrieved.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/queryCostData_400_response'
-          description: Bad request - Invalid parameters
-        "401":
-          description: Unauthorized - Invalid authentication
-        "403":
-          description: Forbidden - Insufficient permissions
-        "404":
-          description: Not found - Project or resource not found
-        "500":
-          description: Internal server error
-        "501":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/queryCostData_501_response'
-          description: Not implemented (production environment protection)
+          description: Invalid request.
         "1XX":
           description: Informational
         "3XX":
@@ -3828,7 +3828,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Query cost data
+      summary: Query Cost Data
       tags:
       - billing
       x-internal: false
@@ -3927,6 +3927,9 @@ components:
       example: AWS
       type: string
     AwsSourceAccountAttributesInput:
+      description: |
+        AWS account configuration.
+        Applicable if `cloudProvider` is set to `AWS`.
       example:
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
@@ -3985,7 +3988,7 @@ components:
       - ACCOUNT_STATE_UNSPECIFIED
     AccountInstallationMethod:
       default: UNSPECIFIED
-      description: The method used to install the cloud role
+      description: Method used to install the cloud permissions.
       enum:
       - UNSPECIFIED
       - CLOUDFORMATION
@@ -3999,24 +4002,30 @@ components:
       - ACCOUNT_INSTALLATION_METHOD_TERRAFORM
       - ACCOUNT_INSTALLATION_METHOD_BASH_SCRIPT
     AccountVersion:
+      description: |
+        Details on the Eon permissions version and installation method.
       example:
         installed: 1.0.0
         installationMethod: TERRAFORM
-        latest: latest
+        latest: 1.2.0
       properties:
         installed:
-          description: The version of the account that is installed.
+          description: Currently installed permissions version.
           example: 1.0.0
           type: string
         installationMethod:
           $ref: '#/components/schemas/AccountInstallationMethod'
         latest:
-          description: The latest version of the role available for the account
+          description: Latest available permissions version.
+          example: 1.2.0
           type: string
       required:
       - installed
       type: object
     AwsSourceAccountAttributes:
+      description: |
+        AWS account configuration.
+        Applicable if `cloudProvider` is set to `AWS`.
       example:
         organizationId: o-1234567890
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -4035,6 +4044,9 @@ components:
       - roleArn
       type: object
     GcpSourceAccountAttributes:
+      description: |
+        GCP project configuration.
+        Applicable if `cloudProvider` is set to `GCP`.
       example:
         serviceAccount: serviceAccount
       nullable: true
@@ -4045,12 +4057,15 @@ components:
       - serviceAccount
       type: object
     AzureSourceAccountAttributes:
+      description: |
+        Azure subscription configuration.
+        Applicable if `cloudProvider` is set to `AZURE`.
       example:
         tenantId: tenantId
       nullable: true
       properties:
         tenantId:
-          description: The tenant ID
+          description: ID of the Azure tenant the subscription belongs to.
           type: string
       required:
       - tenantId
@@ -4094,7 +4109,7 @@ components:
         version:
           installed: 1.0.0
           installationMethod: TERRAFORM
-          latest: latest
+          latest: 1.2.0
         status: CONNECTED
       properties:
         id:
@@ -4110,14 +4125,14 @@ components:
           example: prod-eu
           type: string
         providerAccountName:
-          description: The display name of the account from the cloud provider
+          description: Display name inherited from the cloud provider.
           type: string
         status:
           $ref: '#/components/schemas/AccountState'
         version:
           $ref: '#/components/schemas/AccountVersion'
         connectedTime:
-          description: The date and time the account was connected to Eon
+          description: Date and time the account was connected to Eon.
           example: 2024-08-29T13:24:03Z
           format: date-time
           type: string
@@ -4149,7 +4164,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4162,6 +4177,7 @@ components:
       example:
         in:
         - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
         notIn:
         - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
       properties:
@@ -4169,6 +4185,7 @@ components:
           description: Matches if any string in this list equals `id`.
           example:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
           items:
             type: string
           type: array
@@ -4208,22 +4225,20 @@ components:
       example:
         in:
         - CONNECTED
-        - DISCONNECTED
         notIn:
-        - CONNECTED
-        - DISCONNECTED
+        - INSUFFICIENT_PERMISSIONS
       properties:
         in:
+          description: Matches if any value in this list equals `accountStatus`.
           example:
           - CONNECTED
-          - DISCONNECTED
           items:
             $ref: '#/components/schemas/AccountState'
           type: array
         notIn:
+          description: Matches if no value in this list equals `accountStatus`.
           example:
-          - CONNECTED
-          - DISCONNECTED
+          - INSUFFICIENT_PERMISSIONS
           items:
             $ref: '#/components/schemas/AccountState'
           type: array
@@ -4299,10 +4314,8 @@ components:
         accountStatus:
           in:
           - CONNECTED
-          - DISCONNECTED
           notIn:
-          - CONNECTED
-          - DISCONNECTED
+          - INSUFFICIENT_PERMISSIONS
         accountName:
           contains:
           - contains
@@ -4330,6 +4343,7 @@ components:
         id:
           in:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
       properties:
@@ -4382,10 +4396,8 @@ components:
           accountStatus:
             in:
             - CONNECTED
-            - DISCONNECTED
             notIn:
-            - CONNECTED
-            - DISCONNECTED
+            - INSUFFICIENT_PERMISSIONS
           accountName:
             contains:
             - contains
@@ -4413,6 +4425,7 @@ components:
           id:
             in:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+            - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
         sorts:
@@ -4449,7 +4462,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
         - providerAccountId: "123412341234"
           name: prod-eu
@@ -4468,7 +4481,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
         totalCount: 13
       properties:
@@ -4511,7 +4524,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4539,7 +4552,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
       properties:
         sourceAccount:
@@ -4553,7 +4566,7 @@ components:
       nullable: true
       properties:
         region:
-          description: The CloudWatch region to use for publishing metrics.
+          description: CloudWatch region to publish metrics to.
           example: us-east-1
           type: string
       type: object
@@ -4627,6 +4640,9 @@ components:
       - sourceAccountConfig
       type: object
     AwsRestoreAccountAttributesInput:
+      description: |
+        AWS account configuration.
+        Applicable if `cloudProvider` is set to `AWS`.
       example:
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
@@ -4669,6 +4685,9 @@ components:
       - restoreAccountAttributes
       type: object
     AwsRestoreAccountAttributes:
+      description: |
+        AWS account configuration.
+        Applicable if `cloudProvider` is set to `AWS`.
       example:
         organizationId: o-1234567890
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -4687,6 +4706,9 @@ components:
       - roleArn
       type: object
     GcpRestoreAccountAttributes:
+      description: |
+        GCP project configuration.
+        Applicable if `cloudProvider` is set to `GCP`.
       example:
         serviceAccount: serviceAccount
       nullable: true
@@ -4697,16 +4719,19 @@ components:
       - serviceAccount
       type: object
     AzureRestoreAccountAttributes:
+      description: |
+        Azure subscription configuration.
+        Applicable if `cloudProvider` is set to `AZURE`.
       example:
         resourceGroupName: my-resource-group
         tenantId: tenantId
       nullable: true
       properties:
         tenantId:
-          description: The tenant ID
+          description: ID of the tenant the subscription belongs to.
           type: string
         resourceGroupName:
-          description: The resource group name
+          description: Resource group name.
           example: my-resource-group
           type: string
       required:
@@ -4753,7 +4778,7 @@ components:
         version:
           installed: 1.0.0
           installationMethod: TERRAFORM
-          latest: latest
+          latest: 1.2.0
         status: CONNECTED
       properties:
         id:
@@ -4769,14 +4794,14 @@ components:
           example: prod-eu
           type: string
         providerAccountName:
-          description: The display name of the account from the cloud provider
+          description: Display name inherited from the cloud provider.
           type: string
         status:
           $ref: '#/components/schemas/AccountState'
         version:
           $ref: '#/components/schemas/AccountVersion'
         connectedTime:
-          description: The date and time the account was connected to Eon
+          description: Date and time the account was connected to Eon.
           example: 2024-08-29T13:24:03Z
           format: date-time
           type: string
@@ -4809,7 +4834,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
       properties:
         restoreAccount:
@@ -4826,10 +4851,8 @@ components:
         accountStatus:
           in:
           - CONNECTED
-          - DISCONNECTED
           notIn:
-          - CONNECTED
-          - DISCONNECTED
+          - INSUFFICIENT_PERMISSIONS
         accountName:
           contains:
           - contains
@@ -4857,6 +4880,7 @@ components:
         id:
           in:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
       properties:
@@ -4901,10 +4925,8 @@ components:
           accountStatus:
             in:
             - CONNECTED
-            - DISCONNECTED
             notIn:
-            - CONNECTED
-            - DISCONNECTED
+            - INSUFFICIENT_PERMISSIONS
           accountName:
             contains:
             - contains
@@ -4932,6 +4954,7 @@ components:
           id:
             in:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+            - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
         sorts:
@@ -4969,7 +4992,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
         - restoreAccountAttributes:
             gcp:
@@ -4989,7 +5012,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
         totalCount: 13
       properties:
@@ -5033,7 +5056,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
       properties:
         restoreAccount:
@@ -5062,7 +5085,7 @@ components:
           version:
             installed: 1.0.0
             installationMethod: TERRAFORM
-            latest: latest
+            latest: 1.2.0
           status: CONNECTED
       properties:
         restoreAccount:
@@ -5198,7 +5221,7 @@ components:
           example: us-east1
           type: string
         subnetName:
-          description: Subnet Name.
+          description: Subnet name.
           example: subnet-01234567890123456
           type: string
       required:
@@ -5215,7 +5238,7 @@ components:
           subnetName: subnet-01234567890123456
       properties:
         network:
-          description: Network Name.
+          description: Network name.
           example: network-01234567890123456
           type: string
         subnetsPerRegion:
@@ -5960,7 +5983,8 @@ components:
       - status
       type: object
     ResourceType:
-      description: Resource cloud provider and type.
+      description: |
+        Resource type identifier combining cloud provider and service type.
       enum:
       - AWS_EC2
       - AWS_RDS
@@ -5994,7 +6018,6 @@ components:
       example:
         providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
         sourceStorageSizeBytes: 561566973952
-        accountDisplayName: My AWS Account
         providerAccountId: "123456789012"
         cloudProvider: AWS
         resourceName: customers db
@@ -6021,11 +6044,6 @@ components:
           description: Cloud-provider-assigned account ID.
           example: "123456789012"
           type: string
-        accountDisplayName:
-          description: The display name of the account in Eon.
-          example: My AWS Account
-          type: string
-          x-intenral: true
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         region:
@@ -6129,7 +6147,6 @@ components:
         resourceDetails:
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           sourceStorageSizeBytes: 561566973952
-          accountDisplayName: My AWS Account
           providerAccountId: "123456789012"
           cloudProvider: AWS
           resourceName: customers db
@@ -6179,7 +6196,6 @@ components:
         - resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
-            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -6210,7 +6226,6 @@ components:
         - resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
-            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -6265,7 +6280,6 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
-            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -6506,7 +6520,7 @@ components:
       nullable: true
       properties:
         instanceId:
-          description: The ID of the restored EC2 instance.
+          description: ID of the restored EC2 instance.
           example: i-1234567890abcdef0
           type: string
       required:
@@ -6519,7 +6533,7 @@ components:
       nullable: true
       properties:
         volumeId:
-          description: The ID of the restored EBS volume.
+          description: ID of the restored EBS volume.
           example: vol-1234567890abcdef0
           type: string
       required:
@@ -6531,7 +6545,7 @@ components:
       nullable: true
       properties:
         diskId:
-          description: The ID of the restored Azure disk.
+          description: ID of the restored Azure disk.
           example: i-1234567890abcdef0
           type: string
       required:
@@ -6608,7 +6622,6 @@ components:
         resourceDetails:
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           sourceStorageSizeBytes: 561566973952
-          accountDisplayName: My AWS Account
           providerAccountId: "123456789012"
           cloudProvider: AWS
           resourceName: customers db
@@ -6673,7 +6686,6 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
-            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -6716,7 +6728,6 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
-            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -6783,7 +6794,6 @@ components:
           resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
             sourceStorageSizeBytes: 561566973952
-            accountDisplayName: My AWS Account
             providerAccountId: "123456789012"
             cloudProvider: AWS
             resourceName: customers db
@@ -7781,9 +7791,6 @@ components:
       type: object
     StandardBackupPolicyPlan:
       example:
-        resourceTypes:
-        - AWS_EC2
-        - AWS_EC2
         backupSchedules:
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           scheduleConfig:
@@ -7859,11 +7866,6 @@ components:
           backupRetentionDays: 30
       nullable: true
       properties:
-        resourceTypes:
-          description: Resource types to backup.
-          items:
-            $ref: '#/components/schemas/ResourceType'
-          type: array
         backupSchedules:
           description: |
             List of backup schedules.
@@ -8206,9 +8208,6 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
         standardPlan:
-          resourceTypes:
-          - AWS_EC2
-          - AWS_EC2
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             scheduleConfig:
@@ -8375,9 +8374,6 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
-            resourceTypes:
-            - AWS_EC2
-            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -8648,9 +8644,6 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
-            resourceTypes:
-            - AWS_EC2
-            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -8928,9 +8921,6 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
-              resourceTypes:
-              - AWS_EC2
-              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -9191,9 +9181,6 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
-              resourceTypes:
-              - AWS_EC2
-              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -9444,9 +9431,6 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
-              resourceTypes:
-              - AWS_EC2
-              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -9717,9 +9701,6 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
-              resourceTypes:
-              - AWS_EC2
-              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -9978,9 +9959,6 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
           standardPlan:
-            resourceTypes:
-            - AWS_EC2
-            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -10252,9 +10230,6 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
             standardPlan:
-              resourceTypes:
-              - AWS_EC2
-              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -11142,8 +11117,9 @@ components:
           example: my-restored-table
           type: string
         writeCapacityUnits:
-          description: "The number of write capacity units for the restored table.\
-            \ If not specified, the default is 5."
+          description: |
+            Write capacity units for the restored table.
+            Defaults to 5.
           example: 50000
           type: integer
         tags:
@@ -11212,23 +11188,23 @@ components:
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
           type: string
         name:
-          description: The name of the disk to restore
+          description: Name of the disk to restore.
           example: my-disk-12345
           type: string
         type:
-          description: The type of the disk to restore
+          description: Type of the disk to restore.
           example: Standard_LRS
           type: string
         tier:
-          description: The tier of the disk to restore
+          description: Tier of the disk to restore.
           example: Standard
           type: string
         hyperVGeneration:
-          description: The Hyper-V generation of the disk to restore
+          description: Hyper-V generation of the disk to restore.
           example: V1
           type: string
         sizeBytes:
-          description: The size of the disk to restore in bytes
+          description: "Size of the disk to restore, in bytes."
           example: 10737418240
           format: int64
           type: integer
@@ -11279,15 +11255,15 @@ components:
           example: my-resource-group-12345
           type: string
         vmName:
-          description: The name of the VM resource to restore
+          description: Name of the VM to restore.
           example: my-vm-12345
           type: string
         vmSize:
-          description: The size of the VM to restore
+          description: Size of the VM to restore.
           example: Standard_DS1_v2
           type: string
         networkInterface:
-          description: The Name of the network interface to use
+          description: Name of the network interface to use.
           type: string
         tags:
           additionalProperties:
@@ -12013,6 +11989,7 @@ components:
         id:
           in:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
         dataClasses:
@@ -12134,6 +12111,7 @@ components:
           id:
             in:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+            - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
           dataClasses:
@@ -13553,7 +13531,9 @@ components:
           - refresh_token
           type: string
         refresh_token:
-          description: (required if grant_type=refresh_token)
+          description: |
+            Refresh token.
+            Required if `grant_type` is `refresh_token`.
           nullable: true
           type: string
       required:
@@ -13589,7 +13569,9 @@ components:
       type: object
     CostUnit:
       default: CREDITS
-      description: Unit of measurement for cost
+      description: |
+        Currency unit for cost amounts.
+        Use `CREDITS` for Eon credits and `USD` for U.S. dollars.
       enum:
       - CREDITS
       - USD
@@ -13602,17 +13584,20 @@ components:
       - COST_UNIT_UNSPECIFIED
     TimeFrame:
       example:
-        startTime: 2025-05-20T00:00:00Z
-        endTime: 2025-05-24T00:00:00Z
+        startTime: 2025-01-01T00:00:00Z
+        endTime: 2025-01-31T23:59:59Z
       properties:
         startTime:
-          description: Start time for cost data (ISO 8601 format)
-          example: 2025-05-20T00:00:00Z
+          description: |
+            Start time for the cost data query in ISO 8601 format.
+            Must be at least 24 hours before end time.
+          example: 2025-01-01T00:00:00Z
           format: date-time
           type: string
         endTime:
-          description: End time for cost data (ISO 8601 format)
-          example: 2025-05-24T00:00:00Z
+          description: |
+            End time for the cost data query in ISO 8601 format.
+          example: 2025-01-31T23:59:59Z
           format: date-time
           type: string
       required:
@@ -13621,7 +13606,7 @@ components:
       type: object
     CostGranularity:
       default: MONTHLY
-      description: Granularity for cost aggregation
+      description: Time granularity for aggregating cost data.
       enum:
       - HOURLY
       - DAILY
@@ -13638,21 +13623,25 @@ components:
       additionalProperties: false
       example:
         in:
-        - "836638811603"
+        - "123456789012"
+        - ce865f0b-3e4a-5455-8dae-826803bd5ca7
         notIn:
-        - "529569125077"
+        - "111222333444"
+        - 9b28c6e9-2423-52f8-af66-3c2a0ec3e536
       properties:
         in:
           description: Matches if any value in this list equals `sourceAccountProviderId`.
           example:
-          - "836638811603"
+          - "123456789012"
+          - ce865f0b-3e4a-5455-8dae-826803bd5ca7
           items:
             type: string
           type: array
         notIn:
           description: Matches if none of the values in this list equal `sourceAccountProviderId`.
           example:
-          - "529569125077"
+          - "111222333444"
+          - 9b28c6e9-2423-52f8-af66-3c2a0ec3e536
           items:
             type: string
           type: array
@@ -13663,6 +13652,7 @@ components:
         resourceId:
           in:
           - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
         cloudProvider:
@@ -13673,9 +13663,11 @@ components:
           - GCP
         sourceAccountProviderId:
           in:
-          - "836638811603"
+          - "123456789012"
+          - ce865f0b-3e4a-5455-8dae-826803bd5ca7
           notIn:
-          - "529569125077"
+          - "111222333444"
+          - 9b28c6e9-2423-52f8-af66-3c2a0ec3e536
         resourceType:
           in:
           - AWS_EC2
@@ -13693,7 +13685,8 @@ components:
       type: object
     CostDataGroupBy:
       default: SOURCE_ACCOUNT
-      description: Group results by specified dimensions
+      description: |
+        Dimension to group cost data by in the response.
       enum:
       - SOURCE_ACCOUNT
       - CLOUD_PROVIDER
@@ -13714,6 +13707,7 @@ components:
           resourceId:
             in:
             - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+            - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
           cloudProvider:
@@ -13724,9 +13718,11 @@ components:
             - GCP
           sourceAccountProviderId:
             in:
-            - "836638811603"
+            - "123456789012"
+            - ce865f0b-3e4a-5455-8dae-826803bd5ca7
             notIn:
-            - "529569125077"
+            - "111222333444"
+            - 9b28c6e9-2423-52f8-af66-3c2a0ec3e536
           resourceType:
             in:
             - AWS_EC2
@@ -13734,8 +13730,8 @@ components:
             - AWS_RDS
         groupBy: SOURCE_ACCOUNT
         timeFrame:
-          startTime: 2025-05-20T00:00:00Z
-          endTime: 2025-05-24T00:00:00Z
+          startTime: 2025-01-01T00:00:00Z
+          endTime: 2025-01-31T23:59:59Z
       properties:
         costUnit:
           $ref: '#/components/schemas/CostUnit'
@@ -13751,11 +13747,13 @@ components:
       - timeFrame
       type: object
     CostDataRecordDimensions:
-      description: "Grouping dimensions (e.g. cloudProvider, meteringDimension, etc.)"
+      description: |
+        Grouping dimensions that categorize this cost record.
+        Contains metadata about the cloud provider, resource type, resource ID, and source account that generated these costs.
       example:
         resourceId: 123e4567-e89b-12d3-a456-426614174000
         cloudProvider: AWS
-        sourceAccountProviderId: "12345678"
+        sourceAccountProviderId: "123456789012"
         resourceType: AWS_EC2
       properties:
         cloudProvider:
@@ -13763,18 +13761,22 @@ components:
         resourceType:
           $ref: '#/components/schemas/ResourceType'
         resourceId:
-          description: Eon-assigned resource ID
+          description: |
+            Eon-assigned resource ID.
           example: 123e4567-e89b-12d3-a456-426614174000
           format: uuid
           type: string
         sourceAccountProviderId:
-          description: Source account provider id
-          example: "12345678"
+          description: |
+            Cloud-provider-assigned account ID for the source account.
+          example: "123456789012"
           type: string
       type: object
     MeteringDimension:
-      description: Metering dimensions for cost analysis across different cloud providers
-        and resource types
+      description: |
+        Type of resource usage being metered and billed across different cloud providers.
+        Each dimension represents a specific billable resource type, such as compute instances, storage volumes, database services, or data transfer.
+        Used to categorize costs by service type for detailed analysis and chargeback reporting.
       enum:
       - AWS_EC2_METERING_DIMENSION
       - AWS_RDS_METERING_DIMENSION
@@ -13803,14 +13805,15 @@ components:
       example: AWS_EC2_METERING_DIMENSION
       type: string
     Cost:
-      description: Cost information with amount in cents and currency
       example:
-        amount: 15075
+        amount: 150.75
         unit: CREDITS
       properties:
         amount:
-          description: Cost amount
-          example: 15075
+          description: |
+            Cost amount in the specified currency unit.
+            1 credit is equivalent to 0.01 USD.
+          example: 150.75
           format: double
           minimum: 0
           type: number
@@ -13821,7 +13824,8 @@ components:
       - unit
       type: object
     UsageUnit:
-      description: Unit of measurement for usage
+      description: |
+        Unit of measurement for resource usage.
       enum:
       - BYTE_MONTHS
       - BYTES
@@ -13833,14 +13837,15 @@ components:
       - USAGE_UNIT_BYTES
       - USAGE_UNIT_UNSPECIFIED
     Usage:
-      description: Resource usage information
+      description: Raw usage amount and unit that generated the associated cost.
       example:
-        amount: 1000
+        amount: 1073741824
         unit: BYTE_MONTHS
       properties:
         amount:
-          description: Raw usage amount for the resource
-          example: 1000
+          description: |
+            Raw usage quantity that generated the cost.
+          example: 1073741824
           format: double
           minimum: 0
           type: number
@@ -13851,13 +13856,14 @@ components:
       - unit
       type: object
     CostDataRecordCost:
-      description: Cost breakdown by metering dimension
+      description: |
+        Cost and usage breakdown for a specific metering dimension.
       example:
         cost:
-          amount: 15075
+          amount: 150.75
           unit: CREDITS
         usage:
-          amount: 1000
+          amount: 1073741824
           unit: BYTE_MONTHS
         meteringDimension: AWS_EC2_METERING_DIMENSION
       properties:
@@ -13873,43 +13879,47 @@ components:
       - usage
       type: object
     CostDataRecord:
-      description: Array of cost records based on requested filters and grouping
+      description: Total cost for this metering dimension in the specified currency
+        unit.
       example:
         costs:
         - cost:
-            amount: 15075
+            amount: 150.75
             unit: CREDITS
           usage:
-            amount: 1000
+            amount: 1073741824
             unit: BYTE_MONTHS
           meteringDimension: AWS_EC2_METERING_DIMENSION
         - cost:
-            amount: 15075
+            amount: 150.75
             unit: CREDITS
           usage:
-            amount: 1000
+            amount: 1073741824
             unit: BYTE_MONTHS
           meteringDimension: AWS_EC2_METERING_DIMENSION
         resourceCount: 10
         recordTimeFrame:
-          startTime: 2025-05-20T00:00:00Z
-          endTime: 2025-05-24T00:00:00Z
+          startTime: 2025-01-01T00:00:00Z
+          endTime: 2025-01-31T23:59:59Z
         dimensions:
           resourceId: 123e4567-e89b-12d3-a456-426614174000
           cloudProvider: AWS
-          sourceAccountProviderId: "12345678"
+          sourceAccountProviderId: "123456789012"
           resourceType: AWS_EC2
       properties:
         recordTimeFrame:
           $ref: '#/components/schemas/TimeFrame'
         resourceCount:
-          description: Total number of unique resources in the record
+          description: |
+            Number of unique resources that contributed to costs in this record's time frame.
           example: 10
           minimum: 0
           type: integer
         dimensions:
           $ref: '#/components/schemas/CostDataRecordDimensions'
         costs:
+          description: |
+            Array of cost breakdowns by metering dimension.
           items:
             $ref: '#/components/schemas/CostDataRecordCost'
           type: array
@@ -13922,72 +13932,80 @@ components:
         records:
         - costs:
           - cost:
-              amount: 15075
+              amount: 150.75
               unit: CREDITS
             usage:
-              amount: 1000
+              amount: 1073741824
               unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
           - cost:
-              amount: 15075
+              amount: 150.75
               unit: CREDITS
             usage:
-              amount: 1000
+              amount: 1073741824
               unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
           resourceCount: 10
           recordTimeFrame:
-            startTime: 2025-05-20T00:00:00Z
-            endTime: 2025-05-24T00:00:00Z
+            startTime: 2025-01-01T00:00:00Z
+            endTime: 2025-01-31T23:59:59Z
           dimensions:
             resourceId: 123e4567-e89b-12d3-a456-426614174000
             cloudProvider: AWS
-            sourceAccountProviderId: "12345678"
+            sourceAccountProviderId: "123456789012"
             resourceType: AWS_EC2
         - costs:
           - cost:
-              amount: 15075
+              amount: 150.75
               unit: CREDITS
             usage:
-              amount: 1000
+              amount: 1073741824
               unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
           - cost:
-              amount: 15075
+              amount: 150.75
               unit: CREDITS
             usage:
-              amount: 1000
+              amount: 1073741824
               unit: BYTE_MONTHS
             meteringDimension: AWS_EC2_METERING_DIMENSION
           resourceCount: 10
           recordTimeFrame:
-            startTime: 2025-05-20T00:00:00Z
-            endTime: 2025-05-24T00:00:00Z
+            startTime: 2025-01-01T00:00:00Z
+            endTime: 2025-01-31T23:59:59Z
           dimensions:
             resourceId: 123e4567-e89b-12d3-a456-426614174000
             cloudProvider: AWS
-            sourceAccountProviderId: "12345678"
+            sourceAccountProviderId: "123456789012"
             resourceType: AWS_EC2
-        nextToken: nextToken
+        nextToken: eyJvZmZzZXQiOjEwMCwic29ydCI6InRpbWVGcmFtZSJ9
         resourceCount: 2000
         totalCount: 1543
       properties:
         records:
+          description: |
+            Array of cost data records matching the requested query criteria.
+            Each record contains cost and usage information grouped by the specified dimensions and time granularity.
           items:
             $ref: '#/components/schemas/CostDataRecord'
           type: array
         totalCount:
-          description: Total number of records available
+          description: |
+            Total number of cost records that matched the time frame and filter options.
           example: 1543
           minimum: 0
           type: integer
         resourceCount:
-          description: Number of unique resources in time frame
+          description: |
+            Total number of resources that incurred costs during the specified time frame.
           example: 2000
           minimum: 0
           type: integer
         nextToken:
-          description: Token for retrieving next page of results
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: eyJvZmZzZXQiOjEwMCwic29ydCI6InRpbWVGcmFtZSJ9
           type: string
       required:
       - records
@@ -14032,18 +14050,10 @@ components:
       type: object
     queryCostData_400_response:
       example:
-        error: Invalid date format or missing required parameters
+        error: start time should be at least 24 hours before end time
       properties:
         error:
-          example: Invalid date format or missing required parameters
-          type: string
-      type: object
-    queryCostData_501_response:
-      example:
-        error: Cost Explorer API not yet available in production
-      properties:
-        error:
-          example: Cost Explorer API not yet available in production
+          example: start time should be at least 24 hours before end time
           type: string
       type: object
   securitySchemes:

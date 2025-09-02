@@ -27,7 +27,7 @@ type AwsDynamoDBDestination struct {
 	EncryptionKeyId string `json:"encryptionKeyId"`
 	// Name to assign to the restored resource.
 	RestoredName string `json:"restoredName"`
-	// The number of write capacity units for the restored table. If not specified, the default is 5.
+	// Write capacity units for the restored table. Defaults to 5. 
 	WriteCapacityUnits *int32 `json:"writeCapacityUnits,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`

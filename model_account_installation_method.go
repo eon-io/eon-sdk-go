@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// AccountInstallationMethod The method used to install the cloud role
+// AccountInstallationMethod Method used to install the cloud permissions.
 type AccountInstallationMethod string
 
 // List of AccountInstallationMethod

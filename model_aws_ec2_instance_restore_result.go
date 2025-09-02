@@ -21,7 +21,7 @@ var _ MappedNullable = &AwsEc2InstanceRestoreResult{}
 
 // AwsEc2InstanceRestoreResult struct for AwsEc2InstanceRestoreResult
 type AwsEc2InstanceRestoreResult struct {
-	// The ID of the restored EC2 instance.
+	// ID of the restored EC2 instance.
 	InstanceId string `json:"instanceId"`
 }
 

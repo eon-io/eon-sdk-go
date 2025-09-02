@@ -19,7 +19,7 @@ import (
 // checks if the AwsRestoreAccountAttributes type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AwsRestoreAccountAttributes{}
 
-// AwsRestoreAccountAttributes struct for AwsRestoreAccountAttributes
+// AwsRestoreAccountAttributes AWS account configuration. Applicable if `cloudProvider` is set to `AWS`. 
 type AwsRestoreAccountAttributes struct {
 	// ARN of the role Eon assumes to access the account in AWS.
 	RoleArn string `json:"roleArn"`

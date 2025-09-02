@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **float64** | Raw usage amount for the resource | 
+**Amount** | **float64** | Raw usage quantity that generated the cost.  | 
 **Unit** | [**UsageUnit**](UsageUnit.md) |  | 
 
 ## Methods

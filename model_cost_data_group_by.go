@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// CostDataGroupBy Group results by specified dimensions
+// CostDataGroupBy Dimension to group cost data by in the response. 
 type CostDataGroupBy string
 
 // List of CostDataGroupBy

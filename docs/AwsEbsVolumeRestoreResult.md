@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VolumeId** | **string** | The ID of the restored EBS volume. | 
+**VolumeId** | **string** | ID of the restored EBS volume. | 
 
 ## Methods
 

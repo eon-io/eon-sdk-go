@@ -7,12 +7,12 @@ Method | HTTP request | Description
 [**ConnectRestoreAccount**](AccountsAPI.md#ConnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts | Connect Restore Account
 [**ConnectSourceAccount**](AccountsAPI.md#ConnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts | Connect Source Account
 [**DeleteRestoreAccountConnectivityConfig**](AccountsAPI.md#DeleteRestoreAccountConnectivityConfig) | **Delete** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Delete Restore Account Connectivity Configuration
-[**DisableRestoreAccountMetricsConfig**](AccountsAPI.md#DisableRestoreAccountMetricsConfig) | **Delete** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Disable Restore Account Metrics Configuration
-[**DisableSourceAccountMetricsConfig**](AccountsAPI.md#DisableSourceAccountMetricsConfig) | **Delete** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Disable Source Account Metrics Configuration
+[**DisableRestoreAccountMetricsConfig**](AccountsAPI.md#DisableRestoreAccountMetricsConfig) | **Delete** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Disable Restore Account Metrics
+[**DisableSourceAccountMetricsConfig**](AccountsAPI.md#DisableSourceAccountMetricsConfig) | **Delete** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Disable Source Account Metrics
 [**DisconnectRestoreAccount**](AccountsAPI.md#DisconnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts/{accountId}/disconnect | Disconnect Restore Account
 [**DisconnectSourceAccount**](AccountsAPI.md#DisconnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts/{accountId}/disconnect | Disconnect Source Account
-[**EnableRestoreAccountMetricsConfig**](AccountsAPI.md#EnableRestoreAccountMetricsConfig) | **Put** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Enable or update Restore Account Metrics Configuration
-[**EnableSourceAccountMetricsConfig**](AccountsAPI.md#EnableSourceAccountMetricsConfig) | **Put** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Enable or update Source Account Metrics Configuration
+[**EnableRestoreAccountMetricsConfig**](AccountsAPI.md#EnableRestoreAccountMetricsConfig) | **Put** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Configure Restore Account Metrics
+[**EnableSourceAccountMetricsConfig**](AccountsAPI.md#EnableSourceAccountMetricsConfig) | **Put** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Configure Source Account Metrics
 [**GetRestoreAccountConnectivityConfig**](AccountsAPI.md#GetRestoreAccountConnectivityConfig) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Get Restore Account Connectivity Configuration
 [**GetRestoreAccountMetricsConfig**](AccountsAPI.md#GetRestoreAccountMetricsConfig) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Get Restore Account Metrics Configuration
 [**GetSourceAccountMetricsConfig**](AccountsAPI.md#GetSourceAccountMetricsConfig) | **Get** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Get Source Account Metrics Configuration
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 
 > DisableRestoreAccountMetricsConfig(ctx, accountId, projectId).Execute()
 
-Disable Restore Account Metrics Configuration
+Disable Restore Account Metrics
 
 
 
@@ -260,8 +260,8 @@ import (
 )
 
 func main() {
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics configuration you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -280,7 +280,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the restore account. | 
-**projectId** | **string** | ID of the project whose restore account metrics configuration you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -314,7 +314,7 @@ Name | Type | Description  | Notes
 
 > DisableSourceAccountMetricsConfig(ctx, accountId, projectId).Execute()
 
-Disable Source Account Metrics Configuration
+Disable Source Account Metrics
 
 
 
@@ -331,8 +331,8 @@ import (
 )
 
 func main() {
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the source account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
+	projectId := "d593811b-bfbc-515b-a21d-9fb95eb1071b" // string | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 
 > EnableRestoreAccountMetricsConfigResponse EnableRestoreAccountMetricsConfig(ctx, accountId, projectId).EnableRestoreAccountMetricsConfigRequest(enableRestoreAccountMetricsConfigRequest).Execute()
 
-Enable or update Restore Account Metrics Configuration
+Configure Restore Account Metrics
 
 
 
@@ -548,8 +548,8 @@ import (
 )
 
 func main() {
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics configuration you want to enable/update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 	enableRestoreAccountMetricsConfigRequest := *openapiclient.NewEnableRestoreAccountMetricsConfigRequest() // EnableRestoreAccountMetricsConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -570,8 +570,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | ID of the restore account | 
-**projectId** | **string** | ID of the project whose restore account metrics configuration you want to enable/update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
+**projectId** | **string** | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -606,7 +606,7 @@ Name | Type | Description  | Notes
 
 > EnableSourceAccountMetricsConfigResponse EnableSourceAccountMetricsConfig(ctx, accountId, projectId).EnableSourceAccountMetricsConfigRequest(enableSourceAccountMetricsConfigRequest).Execute()
 
-Enable or update Source Account Metrics Configuration
+Configure Source Account Metrics
 
 
 
@@ -623,8 +623,8 @@ import (
 )
 
 func main() {
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the source account
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose source account metrics configuration you want to enable/update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
+	projectId := "b9c79c3f-399c-5e32-a8fb-762f87bebd7b" // string | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 	enableSourceAccountMetricsConfigRequest := *openapiclient.NewEnableSourceAccountMetricsConfigRequest() // EnableSourceAccountMetricsConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -645,8 +645,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | ID of the source account | 
-**projectId** | **string** | ID of the project whose source account metrics configuration you want to enable/update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**accountId** | **string** | Eon-assigned ID of the source account. | 
+**projectId** | **string** | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -772,7 +772,7 @@ import (
 
 func main() {
 	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "4bd9ca0f-b6cd-5a00-b6ce-76960e76c4ba" // string | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ResourceType Resource cloud provider and type.
+// ResourceType Resource type identifier combining cloud provider and service type. 
 type ResourceType string
 
 // List of ResourceType

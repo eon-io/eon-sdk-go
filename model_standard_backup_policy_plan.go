@@ -21,8 +21,6 @@ var _ MappedNullable = &StandardBackupPolicyPlan{}
 
 // StandardBackupPolicyPlan struct for StandardBackupPolicyPlan
 type StandardBackupPolicyPlan struct {
-	// Resource types to backup.
-	ResourceTypes []ResourceType `json:"resourceTypes,omitempty"`
 	// List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault. 
 	BackupSchedules []StandardBackupSchedules `json:"backupSchedules"`
 }
@@ -45,38 +43,6 @@ func NewStandardBackupPolicyPlan(backupSchedules []StandardBackupSchedules) *Sta
 func NewStandardBackupPolicyPlanWithDefaults() *StandardBackupPolicyPlan {
 	this := StandardBackupPolicyPlan{}
 	return &this
-}
-
-// GetResourceTypes returns the ResourceTypes field value if set, zero value otherwise.
-func (o *StandardBackupPolicyPlan) GetResourceTypes() []ResourceType {
-	if o == nil || IsNil(o.ResourceTypes) {
-		var ret []ResourceType
-		return ret
-	}
-	return o.ResourceTypes
-}
-
-// GetResourceTypesOk returns a tuple with the ResourceTypes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StandardBackupPolicyPlan) GetResourceTypesOk() ([]ResourceType, bool) {
-	if o == nil || IsNil(o.ResourceTypes) {
-		return nil, false
-	}
-	return o.ResourceTypes, true
-}
-
-// HasResourceTypes returns a boolean if a field has been set.
-func (o *StandardBackupPolicyPlan) HasResourceTypes() bool {
-	if o != nil && !IsNil(o.ResourceTypes) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceTypes gets a reference to the given []ResourceType and assigns it to the ResourceTypes field.
-func (o *StandardBackupPolicyPlan) SetResourceTypes(v []ResourceType) {
-	o.ResourceTypes = v
 }
 
 // GetBackupSchedules returns the BackupSchedules field value
@@ -113,9 +79,6 @@ func (o StandardBackupPolicyPlan) MarshalJSON() ([]byte, error) {
 
 func (o StandardBackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResourceTypes) {
-		toSerialize["resourceTypes"] = o.ResourceTypes
-	}
 	toSerialize["backupSchedules"] = o.BackupSchedules
 	return toSerialize, nil
 }

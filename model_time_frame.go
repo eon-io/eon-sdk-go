@@ -22,9 +22,9 @@ var _ MappedNullable = &TimeFrame{}
 
 // TimeFrame struct for TimeFrame
 type TimeFrame struct {
-	// Start time for cost data (ISO 8601 format)
+	// Start time for the cost data query in ISO 8601 format. Must be at least 24 hours before end time. 
 	StartTime time.Time `json:"startTime"`
-	// End time for cost data (ISO 8601 format)
+	// End time for the cost data query in ISO 8601 format. 
 	EndTime time.Time `json:"endTime"`
 }
 

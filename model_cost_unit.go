@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// CostUnit Unit of measurement for cost
+// CostUnit Currency unit for cost amounts. Use `CREDITS` for Eon credits and `USD` for U.S. dollars. 
 type CostUnit string
 
 // List of CostUnit

@@ -19,9 +19,9 @@ import (
 // checks if the Cost type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Cost{}
 
-// Cost Cost information with amount in cents and currency
+// Cost struct for Cost
 type Cost struct {
-	// Cost amount
+	// Cost amount in the specified currency unit. 1 credit is equivalent to 0.01 USD. 
 	Amount float64 `json:"amount"`
 	Unit CostUnit `json:"unit"`
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Network** | **string** | Network Name. | 
+**Network** | **string** | Network name. | 
 **SubnetsPerRegion** | Pointer to [**[]GcpSubnetPerRegion**](GcpSubnetPerRegion.md) | Subnets to configure for regions in the network. For regions not specified in this list, Eon attempts to use the default subnet.  | [optional] 
 
 ## Methods

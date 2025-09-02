@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// CostGranularity Granularity for cost aggregation
+// CostGranularity Time granularity for aggregating cost data.
 type CostGranularity string
 
 // List of CostGranularity

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**In** | Pointer to [**[]AccountState**](AccountState.md) |  | [optional] 
-**NotIn** | Pointer to [**[]AccountState**](AccountState.md) |  | [optional] 
+**In** | Pointer to [**[]AccountState**](AccountState.md) | Matches if any value in this list equals &#x60;accountStatus&#x60;. | [optional] 
+**NotIn** | Pointer to [**[]AccountState**](AccountState.md) | Matches if no value in this list equals &#x60;accountStatus&#x60;. | [optional] 
 
 ## Methods
 

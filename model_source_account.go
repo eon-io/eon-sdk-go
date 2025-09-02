@@ -28,11 +28,11 @@ type SourceAccount struct {
 	ProviderAccountId string `json:"providerAccountId"`
 	// Account display name in Eon.
 	Name string `json:"name"`
-	// The display name of the account from the cloud provider
+	// Display name inherited from the cloud provider.
 	ProviderAccountName *string `json:"providerAccountName,omitempty"`
 	Status AccountState `json:"status"`
 	Version *AccountVersion `json:"version,omitempty"`
-	// The date and time the account was connected to Eon
+	// Date and time the account was connected to Eon.
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
 	SourceAccountAttributes *SourceAccountCloudAttributes `json:"sourceAccountAttributes,omitempty"`
 }

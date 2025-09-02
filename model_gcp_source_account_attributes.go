@@ -19,7 +19,7 @@ import (
 // checks if the GcpSourceAccountAttributes type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GcpSourceAccountAttributes{}
 
-// GcpSourceAccountAttributes struct for GcpSourceAccountAttributes
+// GcpSourceAccountAttributes GCP project configuration. Applicable if `cloudProvider` is set to `GCP`. 
 type GcpSourceAccountAttributes struct {
 	ServiceAccount string `json:"serviceAccount"`
 }

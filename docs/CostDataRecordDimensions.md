@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CloudProvider** | Pointer to [**Provider**](Provider.md) |  | [optional] 
 **ResourceType** | Pointer to [**ResourceType**](ResourceType.md) |  | [optional] 
-**ResourceId** | Pointer to **string** | Eon-assigned resource ID | [optional] 
-**SourceAccountProviderId** | Pointer to **string** | Source account provider id | [optional] 
+**ResourceId** | Pointer to **string** | Eon-assigned resource ID.  | [optional] 
+**SourceAccountProviderId** | Pointer to **string** | Cloud-provider-assigned account ID for the source account.  | [optional] 
 
 ## Methods
 

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StartTime** | **time.Time** | Start time for cost data (ISO 8601 format) | 
-**EndTime** | **time.Time** | End time for cost data (ISO 8601 format) | 
+**StartTime** | **time.Time** | Start time for the cost data query in ISO 8601 format. Must be at least 24 hours before end time.  | 
+**EndTime** | **time.Time** | End time for the cost data query in ISO 8601 format.  | 
 
 ## Methods
 

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// UsageUnit Unit of measurement for usage
+// UsageUnit Unit of measurement for resource usage. 
 type UsageUnit string
 
 // List of UsageUnit

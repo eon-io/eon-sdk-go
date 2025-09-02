@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TenantId** | **string** | The tenant ID | 
-**ResourceGroupName** | Pointer to **string** | The resource group name | [optional] 
+**TenantId** | **string** | ID of the tenant the subscription belongs to. | 
+**ResourceGroupName** | Pointer to **string** | Resource group name. | [optional] 
 
 ## Methods
 

@@ -19,7 +19,7 @@ var _ MappedNullable = &AwsAccountMetricsDestination{}
 
 // AwsAccountMetricsDestination struct for AwsAccountMetricsDestination
 type AwsAccountMetricsDestination struct {
-	// The CloudWatch region to use for publishing metrics.
+	// CloudWatch region to publish metrics to.
 	Region *string `json:"region,omitempty"`
 }
 

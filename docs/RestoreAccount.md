@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **Id** | **string** | Eon-assigned restore account ID. | 
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
 **Name** | **string** | Account display name in Eon. | 
-**ProviderAccountName** | Pointer to **string** | The display name of the account from the cloud provider | [optional] 
+**ProviderAccountName** | Pointer to **string** | Display name inherited from the cloud provider. | [optional] 
 **Status** | [**AccountState**](AccountState.md) |  | 
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
-**ConnectedTime** | Pointer to **time.Time** | The date and time the account was connected to Eon | [optional] 
+**ConnectedTime** | Pointer to **time.Time** | Date and time the account was connected to Eon. | [optional] 
 **RestoreAccountAttributes** | Pointer to [**RestoreAccountCloudAttributes**](RestoreAccountCloudAttributes.md) |  | [optional] 
 
 ## Methods

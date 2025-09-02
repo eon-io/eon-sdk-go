@@ -23,7 +23,7 @@ var _ MappedNullable = &GcpSubnetPerRegion{}
 type GcpSubnetPerRegion struct {
 	// Region.
 	Region string `json:"region"`
-	// Subnet Name.
+	// Subnet name.
 	SubnetName string `json:"subnetName"`
 }
 

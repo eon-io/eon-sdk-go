@@ -17,13 +17,13 @@ import (
 // checks if the CostDataRecordDimensions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CostDataRecordDimensions{}
 
-// CostDataRecordDimensions Grouping dimensions (e.g. cloudProvider, meteringDimension, etc.)
+// CostDataRecordDimensions Grouping dimensions that categorize this cost record. Contains metadata about the cloud provider, resource type, resource ID, and source account that generated these costs. 
 type CostDataRecordDimensions struct {
 	CloudProvider *Provider `json:"cloudProvider,omitempty"`
 	ResourceType *ResourceType `json:"resourceType,omitempty"`
-	// Eon-assigned resource ID
+	// Eon-assigned resource ID. 
 	ResourceId *string `json:"resourceId,omitempty"`
-	// Source account provider id
+	// Cloud-provider-assigned account ID for the source account. 
 	SourceAccountProviderId *string `json:"sourceAccountProviderId,omitempty"`
 }
 

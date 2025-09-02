@@ -19,12 +19,13 @@ import (
 // checks if the CostDataRecord type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CostDataRecord{}
 
-// CostDataRecord Array of cost records based on requested filters and grouping
+// CostDataRecord Total cost for this metering dimension in the specified currency unit.
 type CostDataRecord struct {
 	RecordTimeFrame TimeFrame `json:"recordTimeFrame"`
-	// Total number of unique resources in the record
+	// Number of unique resources that contributed to costs in this record's time frame. 
 	ResourceCount *int32 `json:"resourceCount,omitempty"`
 	Dimensions *CostDataRecordDimensions `json:"dimensions,omitempty"`
+	// Array of cost breakdowns by metering dimension. 
 	Costs []CostDataRecordCost `json:"costs"`
 }
 

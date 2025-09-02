@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Location** | **string** | Location to restore the instance to. | 
 **ResourceGroupName** | **string** | Name of the resource group to restore the vm to | 
-**VmName** | **string** | The name of the VM resource to restore | 
-**VmSize** | **string** | The size of the VM to restore | 
-**NetworkInterface** | **string** | The Name of the network interface to use | 
+**VmName** | **string** | Name of the VM to restore. | 
+**VmSize** | **string** | Size of the VM to restore. | 
+**NetworkInterface** | **string** | Name of the network interface to use. | 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **DiskParameters** | [**[]RestoreAzureInstanceDiskInput**](RestoreAzureInstanceDiskInput.md) |  | 
 

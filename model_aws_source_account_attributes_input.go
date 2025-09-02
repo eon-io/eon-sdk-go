@@ -19,7 +19,7 @@ import (
 // checks if the AwsSourceAccountAttributesInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AwsSourceAccountAttributesInput{}
 
-// AwsSourceAccountAttributesInput struct for AwsSourceAccountAttributesInput
+// AwsSourceAccountAttributesInput AWS account configuration. Applicable if `cloudProvider` is set to `AWS`. 
 type AwsSourceAccountAttributesInput struct {
 	// ARN of the role Eon assumes to access the account in AWS.
 	RoleArn string `json:"roleArn"`

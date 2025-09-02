@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ProviderDiskId** | **string** | Cloud-provider-assigned ID of the disk to restore | 
-**Name** | **string** | The name of the disk to restore | 
-**Type** | **string** | The type of the disk to restore | 
-**Tier** | **string** | The tier of the disk to restore | 
-**HyperVGeneration** | Pointer to **string** | The Hyper-V generation of the disk to restore | [optional] 
-**SizeBytes** | Pointer to **int64** | The size of the disk to restore in bytes | [optional] 
+**Name** | **string** | Name of the disk to restore. | 
+**Type** | **string** | Type of the disk to restore. | 
+**Tier** | **string** | Tier of the disk to restore. | 
+**HyperVGeneration** | Pointer to **string** | Hyper-V generation of the disk to restore. | [optional] 
+**SizeBytes** | Pointer to **int64** | Size of the disk to restore, in bytes. | [optional] 
 **Tags** | Pointer to **map[string]string** | Optional tags to apply to the output instance | [optional] 
 
 ## Methods

@@ -99,7 +99,7 @@ func main() {
 	clientId := "clientId_example" // string | Your integration's client ID.
 	clientSecret := "clientSecret_example" // string | Your integration's client secret.
 	grantType := "grantType_example" // string | The OAuth2 grant you are using. (optional)
-	refreshToken := "refreshToken_example" // string | (required if grant_type=refresh_token) (optional)
+	refreshToken := "refreshToken_example" // string | Refresh token. Required if `grant_type` is `refresh_token`.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
  **clientId** | **string** | Your integration&#39;s client ID. | 
  **clientSecret** | **string** | Your integration&#39;s client secret. | 
  **grantType** | **string** | The OAuth2 grant you are using. | 
- **refreshToken** | **string** | (required if grant_type&#x3D;refresh_token) | 
+ **refreshToken** | **string** | Refresh token. Required if &#x60;grant_type&#x60; is &#x60;refresh_token&#x60;.  | 
 
 ### Return type
 

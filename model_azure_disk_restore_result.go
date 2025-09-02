@@ -21,7 +21,7 @@ var _ MappedNullable = &AzureDiskRestoreResult{}
 
 // AzureDiskRestoreResult struct for AzureDiskRestoreResult
 type AzureDiskRestoreResult struct {
-	// The ID of the restored Azure disk.
+	// ID of the restored Azure disk.
 	DiskId string `json:"diskId"`
 }
 

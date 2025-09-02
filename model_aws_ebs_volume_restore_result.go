@@ -21,7 +21,7 @@ var _ MappedNullable = &AwsEbsVolumeRestoreResult{}
 
 // AwsEbsVolumeRestoreResult struct for AwsEbsVolumeRestoreResult
 type AwsEbsVolumeRestoreResult struct {
-	// The ID of the restored EBS volume.
+	// ID of the restored EBS volume.
 	VolumeId string `json:"volumeId"`
 }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DiskId** | **string** | The ID of the restored Azure disk. | 
+**DiskId** | **string** | ID of the restored Azure disk. | 
 
 ## Methods
 

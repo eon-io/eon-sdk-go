@@ -424,14 +424,14 @@ func (r ApiDisableRestoreAccountMetricsConfigRequest) Execute() (*http.Response,
 }
 
 /*
-DisableRestoreAccountMetricsConfig Disable Restore Account Metrics Configuration
+DisableRestoreAccountMetricsConfig Disable Restore Account Metrics
 
-Description: Disables the restore account metrics configuration.
+Description: Disables metrics for the specified restore account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the restore account.
- @param projectId ID of the project whose restore account metrics configuration you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
  @return ApiDisableRestoreAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) DisableRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiDisableRestoreAccountMetricsConfigRequest {
@@ -542,9 +542,9 @@ func (r ApiDisableSourceAccountMetricsConfigRequest) Execute() (*http.Response, 
 }
 
 /*
-DisableSourceAccountMetricsConfig Disable Source Account Metrics Configuration
+DisableSourceAccountMetricsConfig Disable Source Account Metrics
 
-Description: Disables the source account metrics configuration.
+Description: Disables metrics for the specified source account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -930,14 +930,14 @@ func (r ApiEnableRestoreAccountMetricsConfigRequest) Execute() (*EnableRestoreAc
 }
 
 /*
-EnableRestoreAccountMetricsConfig Enable or update Restore Account Metrics Configuration
+EnableRestoreAccountMetricsConfig Configure Restore Account Metrics
 
 Description: Enables or updates the metrics configuration of the specified restore account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId ID of the restore account
- @param projectId ID of the project whose restore account metrics configuration you want to enable/update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param accountId Eon-assigned ID of the restore account.
+ @param projectId ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
  @return ApiEnableRestoreAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) EnableRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiEnableRestoreAccountMetricsConfigRequest {
@@ -1070,14 +1070,14 @@ func (r ApiEnableSourceAccountMetricsConfigRequest) Execute() (*EnableSourceAcco
 }
 
 /*
-EnableSourceAccountMetricsConfig Enable or update Source Account Metrics Configuration
+EnableSourceAccountMetricsConfig Configure Source Account Metrics
 
 Description: Enables or updates the metrics configuration of the specified source account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId ID of the source account
- @param projectId ID of the project whose source account metrics configuration you want to enable/update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param accountId Eon-assigned ID of the source account.
+ @param projectId ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
  @return ApiEnableSourceAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) EnableSourceAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiEnableSourceAccountMetricsConfigRequest {

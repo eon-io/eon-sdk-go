@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Installed** | **string** | The version of the account that is installed. | 
+**Installed** | **string** | Currently installed permissions version. | 
 **InstallationMethod** | Pointer to [**AccountInstallationMethod**](AccountInstallationMethod.md) |  | [optional] [default to ACCOUNT_INSTALLATION_METHOD_UNSPECIFIED]
-**Latest** | Pointer to **string** | The latest version of the role available for the account | [optional] 
+**Latest** | Pointer to **string** | Latest available permissions version. | [optional] 
 
 ## Methods
 

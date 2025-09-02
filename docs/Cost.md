@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **float64** | Cost amount | 
+**Amount** | **float64** | Cost amount in the specified currency unit. 1 credit is equivalent to 0.01 USD.  | 
 **Unit** | [**CostUnit**](CostUnit.md) |  | [default to COST_UNIT_CREDITS]
 
 ## Methods

@@ -21,12 +21,13 @@ var _ MappedNullable = &QueryCostDataResponse{}
 
 // QueryCostDataResponse struct for QueryCostDataResponse
 type QueryCostDataResponse struct {
+	// Array of cost data records matching the requested query criteria. Each record contains cost and usage information grouped by the specified dimensions and time granularity. 
 	Records []CostDataRecord `json:"records"`
-	// Total number of records available
+	// Total number of cost records that matched the time frame and filter options. 
 	TotalCount int32 `json:"totalCount"`
-	// Number of unique resources in time frame
+	// Total number of resources that incurred costs during the specified time frame. 
 	ResourceCount int32 `json:"resourceCount"`
-	// Token for retrieving next page of results
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 }
 

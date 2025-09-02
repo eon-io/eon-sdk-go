@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RecordTimeFrame** | [**TimeFrame**](TimeFrame.md) |  | 
-**ResourceCount** | Pointer to **int32** | Total number of unique resources in the record | [optional] 
+**ResourceCount** | Pointer to **int32** | Number of unique resources that contributed to costs in this record&#39;s time frame.  | [optional] 
 **Dimensions** | Pointer to [**CostDataRecordDimensions**](CostDataRecordDimensions.md) |  | [optional] 
-**Costs** | [**[]CostDataRecordCost**](CostDataRecordCost.md) |  | 
+**Costs** | [**[]CostDataRecordCost**](CostDataRecordCost.md) | Array of cost breakdowns by metering dimension.  | 
 
 ## Methods
 

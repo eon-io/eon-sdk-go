@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InstanceId** | **string** | The ID of the restored EC2 instance. | 
+**InstanceId** | **string** | ID of the restored EC2 instance. | 
 
 ## Methods
 

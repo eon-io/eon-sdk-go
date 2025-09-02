@@ -19,9 +19,9 @@ import (
 // checks if the Usage type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Usage{}
 
-// Usage Resource usage information
+// Usage Raw usage amount and unit that generated the associated cost.
 type Usage struct {
-	// Raw usage amount for the resource
+	// Raw usage quantity that generated the cost. 
 	Amount float64 `json:"amount"`
 	Unit UsageUnit `json:"unit"`
 }

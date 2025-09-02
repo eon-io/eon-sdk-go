@@ -19,7 +19,9 @@ var _ MappedNullable = &AccountStatusFilters{}
 
 // AccountStatusFilters struct for AccountStatusFilters
 type AccountStatusFilters struct {
+	// Matches if any value in this list equals `accountStatus`.
 	In []AccountState `json:"in,omitempty"`
+	// Matches if no value in this list equals `accountStatus`.
 	NotIn []AccountState `json:"notIn,omitempty"`
 }
 

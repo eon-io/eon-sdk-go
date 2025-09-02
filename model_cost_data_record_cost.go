@@ -19,7 +19,7 @@ import (
 // checks if the CostDataRecordCost type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CostDataRecordCost{}
 
-// CostDataRecordCost Cost breakdown by metering dimension
+// CostDataRecordCost Cost and usage breakdown for a specific metering dimension. 
 type CostDataRecordCost struct {
 	MeteringDimension MeteringDimension `json:"meteringDimension"`
 	Cost Cost `json:"cost"`

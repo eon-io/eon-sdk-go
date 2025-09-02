@@ -19,9 +19,9 @@ import (
 // checks if the AzureSourceAccountAttributes type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AzureSourceAccountAttributes{}
 
-// AzureSourceAccountAttributes struct for AzureSourceAccountAttributes
+// AzureSourceAccountAttributes Azure subscription configuration. Applicable if `cloudProvider` is set to `AZURE`. 
 type AzureSourceAccountAttributes struct {
-	// The tenant ID
+	// ID of the Azure tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
 }
 

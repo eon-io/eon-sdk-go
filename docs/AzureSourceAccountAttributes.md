@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TenantId** | **string** | The tenant ID | 
+**TenantId** | **string** | ID of the Azure tenant the subscription belongs to. | 
 
 ## Methods
 

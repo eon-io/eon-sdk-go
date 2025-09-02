@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Records** | [**[]CostDataRecord**](CostDataRecord.md) |  | 
-**TotalCount** | **int32** | Total number of records available | 
-**ResourceCount** | **int32** | Number of unique resources in time frame | 
-**NextToken** | Pointer to **string** | Token for retrieving next page of results | [optional] 
+**Records** | [**[]CostDataRecord**](CostDataRecord.md) | Array of cost data records matching the requested query criteria. Each record contains cost and usage information grouped by the specified dimensions and time granularity.  | 
+**TotalCount** | **int32** | Total number of cost records that matched the time frame and filter options.  | 
+**ResourceCount** | **int32** | Total number of resources that incurred costs during the specified time frame.  | 
+**NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 
 ## Methods
 

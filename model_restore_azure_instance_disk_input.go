@@ -23,15 +23,15 @@ var _ MappedNullable = &RestoreAzureInstanceDiskInput{}
 type RestoreAzureInstanceDiskInput struct {
 	// Cloud-provider-assigned ID of the disk to restore
 	ProviderDiskId string `json:"providerDiskId"`
-	// The name of the disk to restore
+	// Name of the disk to restore.
 	Name string `json:"name"`
-	// The type of the disk to restore
+	// Type of the disk to restore.
 	Type string `json:"type"`
-	// The tier of the disk to restore
+	// Tier of the disk to restore.
 	Tier string `json:"tier"`
-	// The Hyper-V generation of the disk to restore
+	// Hyper-V generation of the disk to restore.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty"`
-	// The size of the disk to restore in bytes
+	// Size of the disk to restore, in bytes.
 	SizeBytes *int64 `json:"sizeBytes,omitempty"`
 	// Optional tags to apply to the output instance
 	Tags *map[string]string `json:"tags,omitempty"`

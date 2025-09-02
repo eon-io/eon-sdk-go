@@ -19,12 +19,12 @@ import (
 // checks if the AccountVersion type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AccountVersion{}
 
-// AccountVersion struct for AccountVersion
+// AccountVersion Details on the Eon permissions version and installation method. 
 type AccountVersion struct {
-	// The version of the account that is installed.
+	// Currently installed permissions version.
 	Installed string `json:"installed"`
 	InstallationMethod *AccountInstallationMethod `json:"installationMethod,omitempty"`
-	// The latest version of the role available for the account
+	// Latest available permissions version.
 	Latest *string `json:"latest,omitempty"`
 }
 

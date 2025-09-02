@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Region** | Pointer to **string** | The CloudWatch region to use for publishing metrics. | [optional] 
+**Region** | Pointer to **string** | CloudWatch region to publish metrics to. | [optional] 
 
 ## Methods
 

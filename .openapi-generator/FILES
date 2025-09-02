@@ -175,7 +175,6 @@ docs/Provider.md
 docs/ProviderAccountIdFilters.md
 docs/ProviderRestoreAccountConnectivityConfig.md
 docs/QueryCostData400Response.md
-docs/QueryCostData501Response.md
 docs/QueryCostDataRequest.md
 docs/QueryCostDataResponse.md
 docs/QueryDBRequest.md
@@ -437,7 +436,6 @@ model_provider.go
 model_provider_account_id_filters.go
 model_provider_restore_account_connectivity_config.go
 model_query_cost_data_400_response.go
-model_query_cost_data_501_response.go
 model_query_cost_data_request.go
 model_query_cost_data_response.go
 model_query_db_request.go

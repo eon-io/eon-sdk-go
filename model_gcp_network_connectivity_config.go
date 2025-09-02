@@ -21,7 +21,7 @@ var _ MappedNullable = &GcpNetworkConnectivityConfig{}
 
 // GcpNetworkConnectivityConfig struct for GcpNetworkConnectivityConfig
 type GcpNetworkConnectivityConfig struct {
-	// Network Name.
+	// Network name.
 	Network string `json:"network"`
 	// Subnets to configure for regions in the network. For regions not specified in this list, Eon attempts to use the default subnet. 
 	SubnetsPerRegion []GcpSubnetPerRegion `json:"subnetsPerRegion,omitempty"`

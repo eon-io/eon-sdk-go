@@ -35,13 +35,13 @@ func (r ApiQueryCostDataRequest) QueryCostDataRequest(queryCostDataRequest Query
 	return r
 }
 
-// Maximum number of records to return
+// Maximum number of cost records to return in a single response.
 func (r ApiQueryCostDataRequest) PageSize(pageSize int32) ApiQueryCostDataRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-// Token for retrieving next page of results (returned from previous request)
+// Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same time frame, grouping, and filters in the first request as all subsequent requests. 
 func (r ApiQueryCostDataRequest) PageToken(pageToken string) ApiQueryCostDataRequest {
 	r.pageToken = &pageToken
 	return r
@@ -52,9 +52,13 @@ func (r ApiQueryCostDataRequest) Execute() (*QueryCostDataResponse, *http.Respon
 }
 
 /*
-QueryCostData Query cost data
+QueryCostData Query Cost Data
 
-Description: Query cost data with support for filtering, grouping, and time period selection. Supports various granularities and dimensions for cost analysis and chargeback reporting.
+Description: Retrieves cost and usage data for the given time frame.
+
+Use Query Cost Data to analyze backup costs by cloud provider, resource type, and resource.
+For details on exploring your costs visually in the Eon console, see [About Cost Explorer](/user-guide/administration/cost-explorer/about-the-cost-explorer.mdx)
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQueryCostDataRequest
@@ -139,17 +143,6 @@ func (a *BillingAPIService) QueryCostDataExecute(r ApiQueryCostDataRequest) (*Qu
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v QueryCostData400Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 501 {
-			var v QueryCostData501Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
