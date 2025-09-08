@@ -23,6 +23,7 @@ docs/AccountState.md
 docs/AccountStatusFilters.md
 docs/AccountVersion.md
 docs/AccountsAPI.md
+docs/ActionRequiredDetails.md
 docs/AnnuallyConfig.md
 docs/ApiCredentials.md
 docs/App.md
@@ -49,6 +50,8 @@ docs/AwsVpcConnectivityConfig.md
 docs/AzureDiskRestoreResult.md
 docs/AzureRestoreAccountAttributes.md
 docs/AzureSourceAccountAttributes.md
+docs/AzureSqlDatabaseRestoreDestination.md
+docs/AzureSqlDatabaseRestoreTarget.md
 docs/AzureVmInstanceRestoreDestination.md
 docs/AzureVmInstanceRestoreTarget.md
 docs/BackupJob.md
@@ -211,6 +214,7 @@ docs/RestoreAccountSortField.md
 docs/RestoreAccountsFilterConditions.md
 docs/RestoreAwsEc2InstanceRequest.md
 docs/RestoreAzureInstanceDiskInput.md
+docs/RestoreAzureSqlDatabaseRequest.md
 docs/RestoreAzureVmInstanceRequest.md
 docs/RestoreBucketRequest.md
 docs/RestoreDbToRdsInstanceRequest.md
@@ -290,6 +294,7 @@ model_account_name_filters.go
 model_account_state.go
 model_account_status_filters.go
 model_account_version.go
+model_action_required_details.go
 model_annually_config.go
 model_api_credentials.go
 model_app.go
@@ -315,6 +320,8 @@ model_aws_vpc_connectivity_config.go
 model_azure_disk_restore_result.go
 model_azure_restore_account_attributes.go
 model_azure_source_account_attributes.go
+model_azure_sql_database_restore_destination.go
+model_azure_sql_database_restore_target.go
 model_azure_vm_instance_restore_destination.go
 model_azure_vm_instance_restore_target.go
 model_backup_job.go
@@ -471,6 +478,7 @@ model_restore_account_sort_field.go
 model_restore_accounts_filter_conditions.go
 model_restore_aws_ec2_instance_request.go
 model_restore_azure_instance_disk_input.go
+model_restore_azure_sql_database_request.go
 model_restore_azure_vm_instance_request.go
 model_restore_bucket_request.go
 model_restore_db_to_rds_instance_request.go

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Location** | **string** | Location to restore the instance to. | 
+**Region** | **string** | Region to restore the instance to. | 
 **ResourceGroupName** | **string** | Name of the resource group to restore the vm to | 
 **VmName** | **string** | Name of the VM to restore. | 
 **VmSize** | **string** | Size of the VM to restore. | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewAzureVmInstanceRestoreTarget
 
-`func NewAzureVmInstanceRestoreTarget(location string, resourceGroupName string, vmName string, vmSize string, networkInterface string, diskParameters []RestoreAzureInstanceDiskInput, ) *AzureVmInstanceRestoreTarget`
+`func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, diskParameters []RestoreAzureInstanceDiskInput, ) *AzureVmInstanceRestoreTarget`
 
 NewAzureVmInstanceRestoreTarget instantiates a new AzureVmInstanceRestoreTarget object
 This constructor will assign default values to properties that have it defined,
@@ -31,24 +31,24 @@ NewAzureVmInstanceRestoreTargetWithDefaults instantiates a new AzureVmInstanceRe
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetLocation
+### GetRegion
 
-`func (o *AzureVmInstanceRestoreTarget) GetLocation() string`
+`func (o *AzureVmInstanceRestoreTarget) GetRegion() string`
 
-GetLocation returns the Location field if non-nil, zero value otherwise.
+GetRegion returns the Region field if non-nil, zero value otherwise.
 
-### GetLocationOk
+### GetRegionOk
 
-`func (o *AzureVmInstanceRestoreTarget) GetLocationOk() (*string, bool)`
+`func (o *AzureVmInstanceRestoreTarget) GetRegionOk() (*string, bool)`
 
-GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLocation
+### SetRegion
 
-`func (o *AzureVmInstanceRestoreTarget) SetLocation(v string)`
+`func (o *AzureVmInstanceRestoreTarget) SetRegion(v string)`
 
-SetLocation sets Location field to given value.
+SetRegion sets Region field to given value.
 
 
 ### GetResourceGroupName

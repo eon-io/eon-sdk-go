@@ -21,8 +21,8 @@ var _ MappedNullable = &AzureVmInstanceRestoreTarget{}
 
 // AzureVmInstanceRestoreTarget struct for AzureVmInstanceRestoreTarget
 type AzureVmInstanceRestoreTarget struct {
-	// Location to restore the instance to.
-	Location string `json:"location"`
+	// Region to restore the instance to.
+	Region string `json:"region"`
 	// Name of the resource group to restore the vm to
 	ResourceGroupName string `json:"resourceGroupName"`
 	// Name of the VM to restore.
@@ -42,9 +42,9 @@ type _AzureVmInstanceRestoreTarget AzureVmInstanceRestoreTarget
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAzureVmInstanceRestoreTarget(location string, resourceGroupName string, vmName string, vmSize string, networkInterface string, diskParameters []RestoreAzureInstanceDiskInput) *AzureVmInstanceRestoreTarget {
+func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, diskParameters []RestoreAzureInstanceDiskInput) *AzureVmInstanceRestoreTarget {
 	this := AzureVmInstanceRestoreTarget{}
-	this.Location = location
+	this.Region = region
 	this.ResourceGroupName = resourceGroupName
 	this.VmName = vmName
 	this.VmSize = vmSize
@@ -61,28 +61,28 @@ func NewAzureVmInstanceRestoreTargetWithDefaults() *AzureVmInstanceRestoreTarget
 	return &this
 }
 
-// GetLocation returns the Location field value
-func (o *AzureVmInstanceRestoreTarget) GetLocation() string {
+// GetRegion returns the Region field value
+func (o *AzureVmInstanceRestoreTarget) GetRegion() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Location
+	return o.Region
 }
 
-// GetLocationOk returns a tuple with the Location field value
+// GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *AzureVmInstanceRestoreTarget) GetLocationOk() (*string, bool) {
+func (o *AzureVmInstanceRestoreTarget) GetRegionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Location, true
+	return &o.Region, true
 }
 
-// SetLocation sets field value
-func (o *AzureVmInstanceRestoreTarget) SetLocation(v string) {
-	o.Location = v
+// SetRegion sets field value
+func (o *AzureVmInstanceRestoreTarget) SetRegion(v string) {
+	o.Region = v
 }
 
 // GetResourceGroupName returns the ResourceGroupName field value
@@ -247,7 +247,7 @@ func (o AzureVmInstanceRestoreTarget) MarshalJSON() ([]byte, error) {
 
 func (o AzureVmInstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["location"] = o.Location
+	toSerialize["region"] = o.Region
 	toSerialize["resourceGroupName"] = o.ResourceGroupName
 	toSerialize["vmName"] = o.VmName
 	toSerialize["vmSize"] = o.VmSize
@@ -264,7 +264,7 @@ func (o *AzureVmInstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"location",
+		"region",
 		"resourceGroupName",
 		"vmName",
 		"vmSize",

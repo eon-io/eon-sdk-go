@@ -52,6 +52,22 @@ func Test_eon_SnapshotsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test SnapshotsAPIService RestoreAzureSqlDatabase", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var id string
+		var snapshotId string
+
+		resp, httpRes, err := apiClient.SnapshotsAPI.RestoreAzureSqlDatabase(context.Background(), projectId, id, snapshotId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SnapshotsAPIService RestoreAzureVmInstance", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

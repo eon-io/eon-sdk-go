@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetSnapshot**](SnapshotsAPI.md#GetSnapshot) | **Get** /v1/projects/{projectId}/snapshots/{id} | Get Snapshot
 [**ListResourceSnapshots**](SnapshotsAPI.md#ListResourceSnapshots) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots | List Resource Snapshots
+[**RestoreAzureSqlDatabase**](SnapshotsAPI.md#RestoreAzureSqlDatabase) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-sql-database | Restore Azure SQL Database
 [**RestoreAzureVmInstance**](SnapshotsAPI.md#RestoreAzureVmInstance) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance | Restore Azure VM Instance
 [**RestoreBucket**](SnapshotsAPI.md#RestoreBucket) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bucket | Restore Bucket
 [**RestoreDatabase**](SnapshotsAPI.md#RestoreDatabase) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-rds-instance | Restore RDS Instance
@@ -154,6 +155,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListInventorySnapshotsResponse**](ListInventorySnapshotsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestoreAzureSqlDatabase
+
+> RestoreJobInitiationResponse RestoreAzureSqlDatabase(ctx, projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).Execute()
+
+Restore Azure SQL Database
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	restoreAzureSqlDatabaseRequest := *openapiclient.NewRestoreAzureSqlDatabaseRequest("RestoreAccountId_example", *openapiclient.NewAzureSqlDatabaseRestoreDestination()) // RestoreAzureSqlDatabaseRequest | The request body for restoring the instance
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureSqlDatabase(context.Background(), projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureSqlDatabase``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RestoreAzureSqlDatabase`: RestoreJobInitiationResponse
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreAzureSqlDatabase`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**id** | **string** | Eon-assigned resource ID. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreAzureSqlDatabaseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **restoreAzureSqlDatabaseRequest** | [**RestoreAzureSqlDatabaseRequest**](RestoreAzureSqlDatabaseRequest.md) | The request body for restoring the instance | 
+
+### Return type
+
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
