@@ -309,6 +309,149 @@ func (a *SnapshotsAPIService) ListResourceSnapshotsExecute(r ApiListResourceSnap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiRestoreAzureDiskRequest struct {
+	ctx context.Context
+	ApiService *SnapshotsAPIService
+	projectId string
+	id string
+	snapshotId string
+	restoreAzureDiskRequest *RestoreAzureDiskRequest
+}
+
+func (r ApiRestoreAzureDiskRequest) RestoreAzureDiskRequest(restoreAzureDiskRequest RestoreAzureDiskRequest) ApiRestoreAzureDiskRequest {
+	r.restoreAzureDiskRequest = &restoreAzureDiskRequest
+	return r
+}
+
+func (r ApiRestoreAzureDiskRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+	return r.ApiService.RestoreAzureDiskExecute(r)
+}
+
+/*
+RestoreAzureDisk Restore Azure Disk
+
+Description: This API initiates the process of restoring a instance from a specified snapshot.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param id Eon-assigned resource ID.
+ @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @return ApiRestoreAzureDiskRequest
+*/
+func (a *SnapshotsAPIService) RestoreAzureDisk(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureDiskRequest {
+	return ApiRestoreAzureDiskRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		id: id,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RestoreJobInitiationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureDisk")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-disk"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.restoreAzureDiskRequest == nil {
+		return localVarReturnValue, nil, reportError("restoreAzureDiskRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.restoreAzureDiskRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiRestoreAzureSqlDatabaseRequest struct {
 	ctx context.Context
 	ApiService *SnapshotsAPIService

@@ -10,13 +10,13 @@ Name | Type | Description | Notes
 **VmSize** | **string** | Size of the VM to restore. | 
 **NetworkInterface** | **string** | Name of the network interface to use. | 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
-**DiskParameters** | [**[]RestoreAzureInstanceDiskInput**](RestoreAzureInstanceDiskInput.md) |  | 
+**Disks** | [**[]RestoreAzureInstanceDiskInput**](RestoreAzureInstanceDiskInput.md) |  | 
 
 ## Methods
 
 ### NewAzureVmInstanceRestoreTarget
 
-`func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, diskParameters []RestoreAzureInstanceDiskInput, ) *AzureVmInstanceRestoreTarget`
+`func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, disks []RestoreAzureInstanceDiskInput, ) *AzureVmInstanceRestoreTarget`
 
 NewAzureVmInstanceRestoreTarget instantiates a new AzureVmInstanceRestoreTarget object
 This constructor will assign default values to properties that have it defined,
@@ -156,24 +156,24 @@ SetTags sets Tags field to given value.
 
 HasTags returns a boolean if a field has been set.
 
-### GetDiskParameters
+### GetDisks
 
-`func (o *AzureVmInstanceRestoreTarget) GetDiskParameters() []RestoreAzureInstanceDiskInput`
+`func (o *AzureVmInstanceRestoreTarget) GetDisks() []RestoreAzureInstanceDiskInput`
 
-GetDiskParameters returns the DiskParameters field if non-nil, zero value otherwise.
+GetDisks returns the Disks field if non-nil, zero value otherwise.
 
-### GetDiskParametersOk
+### GetDisksOk
 
-`func (o *AzureVmInstanceRestoreTarget) GetDiskParametersOk() (*[]RestoreAzureInstanceDiskInput, bool)`
+`func (o *AzureVmInstanceRestoreTarget) GetDisksOk() (*[]RestoreAzureInstanceDiskInput, bool)`
 
-GetDiskParametersOk returns a tuple with the DiskParameters field if it's non-nil, zero value otherwise
+GetDisksOk returns a tuple with the Disks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDiskParameters
+### SetDisks
 
-`func (o *AzureVmInstanceRestoreTarget) SetDiskParameters(v []RestoreAzureInstanceDiskInput)`
+`func (o *AzureVmInstanceRestoreTarget) SetDisks(v []RestoreAzureInstanceDiskInput)`
 
-SetDiskParameters sets DiskParameters field to given value.
+SetDisks sets Disks field to given value.
 
 
 

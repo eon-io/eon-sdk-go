@@ -2735,6 +2735,99 @@ paths:
         - entityType: restore_job
           in: resBody
           key: jobId
+  /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-disk:
+    post:
+      description: "Description: This API initiates the process of restoring a instance\
+        \ from a specified snapshot."
+      operationId: restoreAzureDisk
+      parameters:
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned resource ID.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+        example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreAzureDiskRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Operation successfully triggered
+        "404":
+          description: "Volume, snapshot, or restore account wasn't found."
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Restore Azure Disk
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: snapshotId
+      x-permissions:
+      - create:restore_resource
+      x-audit-log:
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: jobId
   /v1/projects/{projectId}/snapshots/{snapshotId}/databases/query:
     post:
       description: |
@@ -11269,10 +11362,9 @@ components:
       - destination
       - restoreAccountId
       type: object
-    RestoreAzureInstanceDiskInput:
+    AzureDiskSettings:
       example:
         tier: Standard
-        providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
         name: my-disk-12345
         hyperVGeneration: V1
         type: Standard_LRS
@@ -11280,10 +11372,6 @@ components:
         tags:
           key: tags
       properties:
-        providerDiskId:
-          description: Cloud-provider-assigned ID of the disk to restore
-          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
-          type: string
         name:
           description: Name of the disk to restore.
           example: my-disk-12345
@@ -11312,32 +11400,55 @@ components:
           type: object
       required:
       - name
-      - providerDiskId
       - tier
       - type
+      type: object
+    RestoreAzureInstanceDiskInput:
+      example:
+        settings:
+          tier: Standard
+          name: my-disk-12345
+          hyperVGeneration: V1
+          type: Standard_LRS
+          sizeBytes: 10737418240
+          tags:
+            key: tags
+        providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+      properties:
+        providerDiskId:
+          description: Cloud-provider-assigned ID of the disk to restore
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          type: string
+        settings:
+          $ref: '#/components/schemas/AzureDiskSettings'
+      required:
+      - providerDiskId
+      - settings
       type: object
     AzureVmInstanceRestoreTarget:
       example:
         vmName: my-vm-12345
         resourceGroupName: my-resource-group-12345
+        disks:
+        - settings:
+            tier: Standard
+            name: my-disk-12345
+            hyperVGeneration: V1
+            type: Standard_LRS
+            sizeBytes: 10737418240
+            tags:
+              key: tags
+          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+        - settings:
+            tier: Standard
+            name: my-disk-12345
+            hyperVGeneration: V1
+            type: Standard_LRS
+            sizeBytes: 10737418240
+            tags:
+              key: tags
+          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
         networkInterface: networkInterface
-        diskParameters:
-        - tier: Standard
-          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
-          name: my-disk-12345
-          hyperVGeneration: V1
-          type: Standard_LRS
-          sizeBytes: 10737418240
-          tags:
-            key: tags
-        - tier: Standard
-          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
-          name: my-disk-12345
-          hyperVGeneration: V1
-          type: Standard_LRS
-          sizeBytes: 10737418240
-          tags:
-            key: tags
         vmSize: Standard_DS1_v2
         region: eastus
         tags:
@@ -11370,12 +11481,12 @@ components:
 
             **Example:** `{"eon_api_restore": "true"}`
           type: object
-        diskParameters:
+        disks:
           items:
             $ref: '#/components/schemas/RestoreAzureInstanceDiskInput'
           type: array
       required:
-      - diskParameters
+      - disks
       - networkInterface
       - region
       - resourceGroupName
@@ -11387,24 +11498,26 @@ components:
         azureVm:
           vmName: my-vm-12345
           resourceGroupName: my-resource-group-12345
+          disks:
+          - settings:
+              tier: Standard
+              name: my-disk-12345
+              hyperVGeneration: V1
+              type: Standard_LRS
+              sizeBytes: 10737418240
+              tags:
+                key: tags
+            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          - settings:
+              tier: Standard
+              name: my-disk-12345
+              hyperVGeneration: V1
+              type: Standard_LRS
+              sizeBytes: 10737418240
+              tags:
+                key: tags
+            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
           networkInterface: networkInterface
-          diskParameters:
-          - tier: Standard
-            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
-            name: my-disk-12345
-            hyperVGeneration: V1
-            type: Standard_LRS
-            sizeBytes: 10737418240
-            tags:
-              key: tags
-          - tier: Standard
-            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
-            name: my-disk-12345
-            hyperVGeneration: V1
-            type: Standard_LRS
-            sizeBytes: 10737418240
-            tags:
-              key: tags
           vmSize: Standard_DS1_v2
           region: eastus
           tags:
@@ -11420,24 +11533,26 @@ components:
           azureVm:
             vmName: my-vm-12345
             resourceGroupName: my-resource-group-12345
+            disks:
+            - settings:
+                tier: Standard
+                name: my-disk-12345
+                hyperVGeneration: V1
+                type: Standard_LRS
+                sizeBytes: 10737418240
+                tags:
+                  key: tags
+              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+            - settings:
+                tier: Standard
+                name: my-disk-12345
+                hyperVGeneration: V1
+                type: Standard_LRS
+                sizeBytes: 10737418240
+                tags:
+                  key: tags
+              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
             networkInterface: networkInterface
-            diskParameters:
-            - tier: Standard
-              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
-              name: my-disk-12345
-              hyperVGeneration: V1
-              type: Standard_LRS
-              sizeBytes: 10737418240
-              tags:
-                key: tags
-            - tier: Standard
-              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
-              name: my-disk-12345
-              hyperVGeneration: V1
-              type: Standard_LRS
-              sizeBytes: 10737418240
-              tags:
-                key: tags
             vmSize: Standard_DS1_v2
             region: eastus
             tags:
@@ -11524,6 +11639,82 @@ components:
           $ref: '#/components/schemas/AzureSqlDatabaseRestoreDestination'
       required:
       - destination
+      - restoreAccountId
+      type: object
+    AzureDiskTarget:
+      example:
+        settings:
+          tier: Standard
+          name: my-disk-12345
+          hyperVGeneration: V1
+          type: Standard_LRS
+          sizeBytes: 10737418240
+          tags:
+            key: tags
+        resourceGroupName: my-resource-group-12345
+        region: region
+      properties:
+        region:
+          description: The region to restore the vm to
+          type: string
+        resourceGroupName:
+          description: Name of the resource group to restore the vm to
+          example: my-resource-group-12345
+          type: string
+        settings:
+          $ref: '#/components/schemas/AzureDiskSettings'
+      required:
+      - region
+      - resourceGroupName
+      - settings
+      type: object
+    AzureDiskRestoreDestination:
+      example:
+        azureDisk:
+          settings:
+            tier: Standard
+            name: my-disk-12345
+            hyperVGeneration: V1
+            type: Standard_LRS
+            sizeBytes: 10737418240
+            tags:
+              key: tags
+          resourceGroupName: my-resource-group-12345
+          region: region
+      properties:
+        azureDisk:
+          $ref: '#/components/schemas/AzureDiskTarget'
+      type: object
+    RestoreAzureDiskRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+        destination:
+          azureDisk:
+            settings:
+              tier: Standard
+              name: my-disk-12345
+              hyperVGeneration: V1
+              type: Standard_LRS
+              sizeBytes: 10737418240
+              tags:
+                key: tags
+            resourceGroupName: my-resource-group-12345
+            region: region
+      properties:
+        providerDiskId:
+          description: Cloud-provider-assigned ID of the disk to restore.
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          type: string
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/AzureDiskRestoreDestination'
+      required:
+      - destination
+      - providerDiskId
       - restoreAccountId
       type: object
     S3RestoreDestination:

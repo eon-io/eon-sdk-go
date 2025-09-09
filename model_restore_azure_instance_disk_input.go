@@ -23,18 +23,7 @@ var _ MappedNullable = &RestoreAzureInstanceDiskInput{}
 type RestoreAzureInstanceDiskInput struct {
 	// Cloud-provider-assigned ID of the disk to restore
 	ProviderDiskId string `json:"providerDiskId"`
-	// Name of the disk to restore.
-	Name string `json:"name"`
-	// Type of the disk to restore.
-	Type string `json:"type"`
-	// Tier of the disk to restore.
-	Tier string `json:"tier"`
-	// Hyper-V generation of the disk to restore.
-	HyperVGeneration *string `json:"hyperVGeneration,omitempty"`
-	// Size of the disk to restore, in bytes.
-	SizeBytes *int64 `json:"sizeBytes,omitempty"`
-	// Optional tags to apply to the output instance
-	Tags *map[string]string `json:"tags,omitempty"`
+	Settings AzureDiskSettings `json:"settings"`
 }
 
 type _RestoreAzureInstanceDiskInput RestoreAzureInstanceDiskInput
@@ -43,12 +32,10 @@ type _RestoreAzureInstanceDiskInput RestoreAzureInstanceDiskInput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreAzureInstanceDiskInput(providerDiskId string, name string, type_ string, tier string) *RestoreAzureInstanceDiskInput {
+func NewRestoreAzureInstanceDiskInput(providerDiskId string, settings AzureDiskSettings) *RestoreAzureInstanceDiskInput {
 	this := RestoreAzureInstanceDiskInput{}
 	this.ProviderDiskId = providerDiskId
-	this.Name = name
-	this.Type = type_
-	this.Tier = tier
+	this.Settings = settings
 	return &this
 }
 
@@ -84,172 +71,28 @@ func (o *RestoreAzureInstanceDiskInput) SetProviderDiskId(v string) {
 	o.ProviderDiskId = v
 }
 
-// GetName returns the Name field value
-func (o *RestoreAzureInstanceDiskInput) GetName() string {
+// GetSettings returns the Settings field value
+func (o *RestoreAzureInstanceDiskInput) GetSettings() AzureDiskSettings {
 	if o == nil {
-		var ret string
+		var ret AzureDiskSettings
 		return ret
 	}
 
-	return o.Name
+	return o.Settings
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
-func (o *RestoreAzureInstanceDiskInput) GetNameOk() (*string, bool) {
+func (o *RestoreAzureInstanceDiskInput) GetSettingsOk() (*AzureDiskSettings, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.Settings, true
 }
 
-// SetName sets field value
-func (o *RestoreAzureInstanceDiskInput) SetName(v string) {
-	o.Name = v
-}
-
-// GetType returns the Type field value
-func (o *RestoreAzureInstanceDiskInput) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *RestoreAzureInstanceDiskInput) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *RestoreAzureInstanceDiskInput) SetType(v string) {
-	o.Type = v
-}
-
-// GetTier returns the Tier field value
-func (o *RestoreAzureInstanceDiskInput) GetTier() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Tier
-}
-
-// GetTierOk returns a tuple with the Tier field value
-// and a boolean to check if the value has been set.
-func (o *RestoreAzureInstanceDiskInput) GetTierOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Tier, true
-}
-
-// SetTier sets field value
-func (o *RestoreAzureInstanceDiskInput) SetTier(v string) {
-	o.Tier = v
-}
-
-// GetHyperVGeneration returns the HyperVGeneration field value if set, zero value otherwise.
-func (o *RestoreAzureInstanceDiskInput) GetHyperVGeneration() string {
-	if o == nil || IsNil(o.HyperVGeneration) {
-		var ret string
-		return ret
-	}
-	return *o.HyperVGeneration
-}
-
-// GetHyperVGenerationOk returns a tuple with the HyperVGeneration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreAzureInstanceDiskInput) GetHyperVGenerationOk() (*string, bool) {
-	if o == nil || IsNil(o.HyperVGeneration) {
-		return nil, false
-	}
-	return o.HyperVGeneration, true
-}
-
-// HasHyperVGeneration returns a boolean if a field has been set.
-func (o *RestoreAzureInstanceDiskInput) HasHyperVGeneration() bool {
-	if o != nil && !IsNil(o.HyperVGeneration) {
-		return true
-	}
-
-	return false
-}
-
-// SetHyperVGeneration gets a reference to the given string and assigns it to the HyperVGeneration field.
-func (o *RestoreAzureInstanceDiskInput) SetHyperVGeneration(v string) {
-	o.HyperVGeneration = &v
-}
-
-// GetSizeBytes returns the SizeBytes field value if set, zero value otherwise.
-func (o *RestoreAzureInstanceDiskInput) GetSizeBytes() int64 {
-	if o == nil || IsNil(o.SizeBytes) {
-		var ret int64
-		return ret
-	}
-	return *o.SizeBytes
-}
-
-// GetSizeBytesOk returns a tuple with the SizeBytes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreAzureInstanceDiskInput) GetSizeBytesOk() (*int64, bool) {
-	if o == nil || IsNil(o.SizeBytes) {
-		return nil, false
-	}
-	return o.SizeBytes, true
-}
-
-// HasSizeBytes returns a boolean if a field has been set.
-func (o *RestoreAzureInstanceDiskInput) HasSizeBytes() bool {
-	if o != nil && !IsNil(o.SizeBytes) {
-		return true
-	}
-
-	return false
-}
-
-// SetSizeBytes gets a reference to the given int64 and assigns it to the SizeBytes field.
-func (o *RestoreAzureInstanceDiskInput) SetSizeBytes(v int64) {
-	o.SizeBytes = &v
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *RestoreAzureInstanceDiskInput) GetTags() map[string]string {
-	if o == nil || IsNil(o.Tags) {
-		var ret map[string]string
-		return ret
-	}
-	return *o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreAzureInstanceDiskInput) GetTagsOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.Tags) {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *RestoreAzureInstanceDiskInput) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given map[string]string and assigns it to the Tags field.
-func (o *RestoreAzureInstanceDiskInput) SetTags(v map[string]string) {
-	o.Tags = &v
+// SetSettings sets field value
+func (o *RestoreAzureInstanceDiskInput) SetSettings(v AzureDiskSettings) {
+	o.Settings = v
 }
 
 func (o RestoreAzureInstanceDiskInput) MarshalJSON() ([]byte, error) {
@@ -263,18 +106,7 @@ func (o RestoreAzureInstanceDiskInput) MarshalJSON() ([]byte, error) {
 func (o RestoreAzureInstanceDiskInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["providerDiskId"] = o.ProviderDiskId
-	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
-	toSerialize["tier"] = o.Tier
-	if !IsNil(o.HyperVGeneration) {
-		toSerialize["hyperVGeneration"] = o.HyperVGeneration
-	}
-	if !IsNil(o.SizeBytes) {
-		toSerialize["sizeBytes"] = o.SizeBytes
-	}
-	if !IsNil(o.Tags) {
-		toSerialize["tags"] = o.Tags
-	}
+	toSerialize["settings"] = o.Settings
 	return toSerialize, nil
 }
 
@@ -284,9 +116,7 @@ func (o *RestoreAzureInstanceDiskInput) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"providerDiskId",
-		"name",
-		"type",
-		"tier",
+		"settings",
 	}
 
 	allProperties := make(map[string]interface{})

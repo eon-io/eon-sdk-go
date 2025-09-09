@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetSnapshot**](SnapshotsAPI.md#GetSnapshot) | **Get** /v1/projects/{projectId}/snapshots/{id} | Get Snapshot
 [**ListResourceSnapshots**](SnapshotsAPI.md#ListResourceSnapshots) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots | List Resource Snapshots
+[**RestoreAzureDisk**](SnapshotsAPI.md#RestoreAzureDisk) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-disk | Restore Azure Disk
 [**RestoreAzureSqlDatabase**](SnapshotsAPI.md#RestoreAzureSqlDatabase) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-sql-database | Restore Azure SQL Database
 [**RestoreAzureVmInstance**](SnapshotsAPI.md#RestoreAzureVmInstance) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance | Restore Azure VM Instance
 [**RestoreBucket**](SnapshotsAPI.md#RestoreBucket) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bucket | Restore Bucket
@@ -155,6 +156,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListInventorySnapshotsResponse**](ListInventorySnapshotsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestoreAzureDisk
+
+> RestoreJobInitiationResponse RestoreAzureDisk(ctx, projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).Execute()
+
+Restore Azure Disk
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	restoreAzureDiskRequest := *openapiclient.NewRestoreAzureDiskRequest("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureDiskRestoreDestination()) // RestoreAzureDiskRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureDisk(context.Background(), projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureDisk``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RestoreAzureDisk`: RestoreJobInitiationResponse
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreAzureDisk`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**id** | **string** | Eon-assigned resource ID. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreAzureDiskRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **restoreAzureDiskRequest** | [**RestoreAzureDiskRequest**](RestoreAzureDiskRequest.md) |  | 
+
+### Return type
+
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 

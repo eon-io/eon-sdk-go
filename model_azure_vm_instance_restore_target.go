@@ -33,7 +33,7 @@ type AzureVmInstanceRestoreTarget struct {
 	NetworkInterface string `json:"networkInterface"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
-	DiskParameters []RestoreAzureInstanceDiskInput `json:"diskParameters"`
+	Disks []RestoreAzureInstanceDiskInput `json:"disks"`
 }
 
 type _AzureVmInstanceRestoreTarget AzureVmInstanceRestoreTarget
@@ -42,14 +42,14 @@ type _AzureVmInstanceRestoreTarget AzureVmInstanceRestoreTarget
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, diskParameters []RestoreAzureInstanceDiskInput) *AzureVmInstanceRestoreTarget {
+func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, disks []RestoreAzureInstanceDiskInput) *AzureVmInstanceRestoreTarget {
 	this := AzureVmInstanceRestoreTarget{}
 	this.Region = region
 	this.ResourceGroupName = resourceGroupName
 	this.VmName = vmName
 	this.VmSize = vmSize
 	this.NetworkInterface = networkInterface
-	this.DiskParameters = diskParameters
+	this.Disks = disks
 	return &this
 }
 
@@ -213,28 +213,28 @@ func (o *AzureVmInstanceRestoreTarget) SetTags(v map[string]string) {
 	o.Tags = &v
 }
 
-// GetDiskParameters returns the DiskParameters field value
-func (o *AzureVmInstanceRestoreTarget) GetDiskParameters() []RestoreAzureInstanceDiskInput {
+// GetDisks returns the Disks field value
+func (o *AzureVmInstanceRestoreTarget) GetDisks() []RestoreAzureInstanceDiskInput {
 	if o == nil {
 		var ret []RestoreAzureInstanceDiskInput
 		return ret
 	}
 
-	return o.DiskParameters
+	return o.Disks
 }
 
-// GetDiskParametersOk returns a tuple with the DiskParameters field value
+// GetDisksOk returns a tuple with the Disks field value
 // and a boolean to check if the value has been set.
-func (o *AzureVmInstanceRestoreTarget) GetDiskParametersOk() ([]RestoreAzureInstanceDiskInput, bool) {
+func (o *AzureVmInstanceRestoreTarget) GetDisksOk() ([]RestoreAzureInstanceDiskInput, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.DiskParameters, true
+	return o.Disks, true
 }
 
-// SetDiskParameters sets field value
-func (o *AzureVmInstanceRestoreTarget) SetDiskParameters(v []RestoreAzureInstanceDiskInput) {
-	o.DiskParameters = v
+// SetDisks sets field value
+func (o *AzureVmInstanceRestoreTarget) SetDisks(v []RestoreAzureInstanceDiskInput) {
+	o.Disks = v
 }
 
 func (o AzureVmInstanceRestoreTarget) MarshalJSON() ([]byte, error) {
@@ -255,7 +255,7 @@ func (o AzureVmInstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
-	toSerialize["diskParameters"] = o.DiskParameters
+	toSerialize["disks"] = o.Disks
 	return toSerialize, nil
 }
 
@@ -269,7 +269,7 @@ func (o *AzureVmInstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 		"vmName",
 		"vmSize",
 		"networkInterface",
-		"diskParameters",
+		"disks",
 	}
 
 	allProperties := make(map[string]interface{})

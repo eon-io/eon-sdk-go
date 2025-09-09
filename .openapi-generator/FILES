@@ -47,7 +47,10 @@ docs/AwsSourceAccountAttributes.md
 docs/AwsSourceAccountAttributesInput.md
 docs/AwsVaultConfig.md
 docs/AwsVpcConnectivityConfig.md
+docs/AzureDiskRestoreDestination.md
 docs/AzureDiskRestoreResult.md
+docs/AzureDiskSettings.md
+docs/AzureDiskTarget.md
 docs/AzureRestoreAccountAttributes.md
 docs/AzureSourceAccountAttributes.md
 docs/AzureSqlDatabaseRestoreDestination.md
@@ -213,6 +216,7 @@ docs/RestoreAccountMetricsConfig.md
 docs/RestoreAccountSortField.md
 docs/RestoreAccountsFilterConditions.md
 docs/RestoreAwsEc2InstanceRequest.md
+docs/RestoreAzureDiskRequest.md
 docs/RestoreAzureInstanceDiskInput.md
 docs/RestoreAzureSqlDatabaseRequest.md
 docs/RestoreAzureVmInstanceRequest.md
@@ -317,7 +321,10 @@ model_aws_source_account_attributes.go
 model_aws_source_account_attributes_input.go
 model_aws_vault_config.go
 model_aws_vpc_connectivity_config.go
+model_azure_disk_restore_destination.go
 model_azure_disk_restore_result.go
+model_azure_disk_settings.go
+model_azure_disk_target.go
 model_azure_restore_account_attributes.go
 model_azure_source_account_attributes.go
 model_azure_sql_database_restore_destination.go
@@ -477,6 +484,7 @@ model_restore_account_metrics_config.go
 model_restore_account_sort_field.go
 model_restore_accounts_filter_conditions.go
 model_restore_aws_ec2_instance_request.go
+model_restore_azure_disk_request.go
 model_restore_azure_instance_disk_input.go
 model_restore_azure_sql_database_request.go
 model_restore_azure_vm_instance_request.go
