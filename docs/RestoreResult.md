@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AwsEc2Instance** | Pointer to [**NullableAwsEc2InstanceRestoreResult**](AwsEc2InstanceRestoreResult.md) |  | [optional] 
 **AwsEbsVolume** | Pointer to [**NullableAwsEbsVolumeRestoreResult**](AwsEbsVolumeRestoreResult.md) |  | [optional] 
 **AzureDisk** | Pointer to [**NullableAzureDiskRestoreResult**](AzureDiskRestoreResult.md) |  | [optional] 
+**AzureVmInstance** | Pointer to [**NullableAzureVmInstanceRestoreResult**](AzureVmInstanceRestoreResult.md) |  | [optional] 
 
 ## Methods
 
@@ -132,6 +133,41 @@ HasAzureDisk returns a boolean if a field has been set.
 `func (o *RestoreResult) UnsetAzureDisk()`
 
 UnsetAzureDisk ensures that no value is present for AzureDisk, not even an explicit nil
+### GetAzureVmInstance
+
+`func (o *RestoreResult) GetAzureVmInstance() AzureVmInstanceRestoreResult`
+
+GetAzureVmInstance returns the AzureVmInstance field if non-nil, zero value otherwise.
+
+### GetAzureVmInstanceOk
+
+`func (o *RestoreResult) GetAzureVmInstanceOk() (*AzureVmInstanceRestoreResult, bool)`
+
+GetAzureVmInstanceOk returns a tuple with the AzureVmInstance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureVmInstance
+
+`func (o *RestoreResult) SetAzureVmInstance(v AzureVmInstanceRestoreResult)`
+
+SetAzureVmInstance sets AzureVmInstance field to given value.
+
+### HasAzureVmInstance
+
+`func (o *RestoreResult) HasAzureVmInstance() bool`
+
+HasAzureVmInstance returns a boolean if a field has been set.
+
+### SetAzureVmInstanceNil
+
+`func (o *RestoreResult) SetAzureVmInstanceNil(b bool)`
+
+ SetAzureVmInstanceNil sets the value for AzureVmInstance to be an explicit nil
+
+### UnsetAzureVmInstance
+`func (o *RestoreResult) UnsetAzureVmInstance()`
+
+UnsetAzureVmInstance ensures that no value is present for AzureVmInstance, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

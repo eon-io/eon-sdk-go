@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **CloudProvider** | Pointer to [**CloudProviderFilters**](CloudProviderFilters.md) |  | [optional] 
 **ResourceType** | Pointer to [**ResourceTypeFilters**](ResourceTypeFilters.md) |  | [optional] 
 **ResourceId** | Pointer to [**IdFilters**](IdFilters.md) |  | [optional] 
+**TagKeys** | Pointer to [**TagKeysFilters**](TagKeysFilters.md) |  | [optional] 
+**TagKeyValues** | Pointer to [**TagKeyValuesFilters**](TagKeyValuesFilters.md) |  | [optional] 
 
 ## Methods
 
@@ -127,6 +129,56 @@ SetResourceId sets ResourceId field to given value.
 `func (o *CostDataFilters) HasResourceId() bool`
 
 HasResourceId returns a boolean if a field has been set.
+
+### GetTagKeys
+
+`func (o *CostDataFilters) GetTagKeys() TagKeysFilters`
+
+GetTagKeys returns the TagKeys field if non-nil, zero value otherwise.
+
+### GetTagKeysOk
+
+`func (o *CostDataFilters) GetTagKeysOk() (*TagKeysFilters, bool)`
+
+GetTagKeysOk returns a tuple with the TagKeys field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTagKeys
+
+`func (o *CostDataFilters) SetTagKeys(v TagKeysFilters)`
+
+SetTagKeys sets TagKeys field to given value.
+
+### HasTagKeys
+
+`func (o *CostDataFilters) HasTagKeys() bool`
+
+HasTagKeys returns a boolean if a field has been set.
+
+### GetTagKeyValues
+
+`func (o *CostDataFilters) GetTagKeyValues() TagKeyValuesFilters`
+
+GetTagKeyValues returns the TagKeyValues field if non-nil, zero value otherwise.
+
+### GetTagKeyValuesOk
+
+`func (o *CostDataFilters) GetTagKeyValuesOk() (*TagKeyValuesFilters, bool)`
+
+GetTagKeyValuesOk returns a tuple with the TagKeyValues field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTagKeyValues
+
+`func (o *CostDataFilters) SetTagKeyValues(v TagKeyValuesFilters)`
+
+SetTagKeyValues sets TagKeyValues field to given value.
+
+### HasTagKeyValues
+
+`func (o *CostDataFilters) HasTagKeyValues() bool`
+
+HasTagKeyValues returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

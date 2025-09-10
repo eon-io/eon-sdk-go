@@ -6741,12 +6741,25 @@ components:
       required:
       - diskId
       type: object
+    AzureVmInstanceRestoreResult:
+      example:
+        instanceId: instanceId
+      nullable: true
+      properties:
+        instanceId:
+          description: ID of the restored VM instance.
+          type: string
+      required:
+      - instanceId
+      type: object
     RestoreResult:
       example:
         azureDisk:
           diskId: i-1234567890abcdef0
         awsEc2Instance:
           instanceId: i-1234567890abcdef0
+        azureVmInstance:
+          instanceId: instanceId
         awsEbsVolume:
           volumeId: vol-1234567890abcdef0
       nullable: true
@@ -6757,6 +6770,8 @@ components:
           $ref: '#/components/schemas/AwsEbsVolumeRestoreResult'
         azureDisk:
           $ref: '#/components/schemas/AzureDiskRestoreResult'
+        azureVmInstance:
+          $ref: '#/components/schemas/AzureVmInstanceRestoreResult'
       type: object
     DestinationDetails:
       example:
@@ -6768,6 +6783,8 @@ components:
             diskId: i-1234567890abcdef0
           awsEc2Instance:
             instanceId: i-1234567890abcdef0
+          azureVmInstance:
+            instanceId: instanceId
           awsEbsVolume:
             volumeId: vol-1234567890abcdef0
         region: us-east-1
@@ -6806,6 +6823,8 @@ components:
               diskId: i-1234567890abcdef0
             awsEc2Instance:
               instanceId: i-1234567890abcdef0
+            azureVmInstance:
+              instanceId: instanceId
             awsEbsVolume:
               volumeId: vol-1234567890abcdef0
           region: us-east-1
@@ -6870,6 +6889,8 @@ components:
                 diskId: i-1234567890abcdef0
               awsEc2Instance:
                 instanceId: i-1234567890abcdef0
+              azureVmInstance:
+                instanceId: instanceId
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
             region: us-east-1
@@ -6912,6 +6933,8 @@ components:
                 diskId: i-1234567890abcdef0
               awsEc2Instance:
                 instanceId: i-1234567890abcdef0
+              azureVmInstance:
+                instanceId: instanceId
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
             region: us-east-1
@@ -6978,6 +7001,8 @@ components:
                 diskId: i-1234567890abcdef0
               awsEc2Instance:
                 instanceId: i-1234567890abcdef0
+              azureVmInstance:
+                instanceId: instanceId
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
             region: us-east-1
@@ -14032,6 +14057,26 @@ components:
           - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+        tagKeyValues:
+          containsAllOf:
+          - environment=staging
+          - app=web
+          containsNoneOf:
+          - environment=staging
+          - app=web
+          containsAnyOf:
+          - environment=production
+          - app=web
+        tagKeys:
+          containsAllOf:
+          - environment
+          - app
+          containsNoneOf:
+          - environment
+          - app
+          containsAnyOf:
+          - environment
+          - app
         cloudProvider:
           in:
           - AWS
@@ -14059,6 +14104,10 @@ components:
           $ref: '#/components/schemas/ResourceTypeFilters'
         resourceId:
           $ref: '#/components/schemas/IdFilters'
+        tagKeys:
+          $ref: '#/components/schemas/TagKeysFilters'
+        tagKeyValues:
+          $ref: '#/components/schemas/TagKeyValuesFilters'
       type: object
     CostDataGroupBy:
       default: SOURCE_ACCOUNT
@@ -14087,6 +14136,26 @@ components:
             - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
+          tagKeyValues:
+            containsAllOf:
+            - environment=staging
+            - app=web
+            containsNoneOf:
+            - environment=staging
+            - app=web
+            containsAnyOf:
+            - environment=production
+            - app=web
+          tagKeys:
+            containsAllOf:
+            - environment
+            - app
+            containsNoneOf:
+            - environment
+            - app
+            containsAnyOf:
+            - environment
+            - app
           cloudProvider:
             in:
             - AWS

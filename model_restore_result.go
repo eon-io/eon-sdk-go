@@ -22,6 +22,7 @@ type RestoreResult struct {
 	AwsEc2Instance NullableAwsEc2InstanceRestoreResult `json:"awsEc2Instance,omitempty"`
 	AwsEbsVolume NullableAwsEbsVolumeRestoreResult `json:"awsEbsVolume,omitempty"`
 	AzureDisk NullableAzureDiskRestoreResult `json:"azureDisk,omitempty"`
+	AzureVmInstance NullableAzureVmInstanceRestoreResult `json:"azureVmInstance,omitempty"`
 }
 
 // NewRestoreResult instantiates a new RestoreResult object
@@ -167,6 +168,48 @@ func (o *RestoreResult) UnsetAzureDisk() {
 	o.AzureDisk.Unset()
 }
 
+// GetAzureVmInstance returns the AzureVmInstance field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RestoreResult) GetAzureVmInstance() AzureVmInstanceRestoreResult {
+	if o == nil || IsNil(o.AzureVmInstance.Get()) {
+		var ret AzureVmInstanceRestoreResult
+		return ret
+	}
+	return *o.AzureVmInstance.Get()
+}
+
+// GetAzureVmInstanceOk returns a tuple with the AzureVmInstance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RestoreResult) GetAzureVmInstanceOk() (*AzureVmInstanceRestoreResult, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AzureVmInstance.Get(), o.AzureVmInstance.IsSet()
+}
+
+// HasAzureVmInstance returns a boolean if a field has been set.
+func (o *RestoreResult) HasAzureVmInstance() bool {
+	if o != nil && o.AzureVmInstance.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureVmInstance gets a reference to the given NullableAzureVmInstanceRestoreResult and assigns it to the AzureVmInstance field.
+func (o *RestoreResult) SetAzureVmInstance(v AzureVmInstanceRestoreResult) {
+	o.AzureVmInstance.Set(&v)
+}
+// SetAzureVmInstanceNil sets the value for AzureVmInstance to be an explicit nil
+func (o *RestoreResult) SetAzureVmInstanceNil() {
+	o.AzureVmInstance.Set(nil)
+}
+
+// UnsetAzureVmInstance ensures that no value is present for AzureVmInstance, not even an explicit nil
+func (o *RestoreResult) UnsetAzureVmInstance() {
+	o.AzureVmInstance.Unset()
+}
+
 func (o RestoreResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -185,6 +228,9 @@ func (o RestoreResult) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AzureDisk.IsSet() {
 		toSerialize["azureDisk"] = o.AzureDisk.Get()
+	}
+	if o.AzureVmInstance.IsSet() {
+		toSerialize["azureVmInstance"] = o.AzureVmInstance.Get()
 	}
 	return toSerialize, nil
 }

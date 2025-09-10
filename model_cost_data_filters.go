@@ -23,6 +23,8 @@ type CostDataFilters struct {
 	CloudProvider *CloudProviderFilters `json:"cloudProvider,omitempty"`
 	ResourceType *ResourceTypeFilters `json:"resourceType,omitempty"`
 	ResourceId *IdFilters `json:"resourceId,omitempty"`
+	TagKeys *TagKeysFilters `json:"tagKeys,omitempty"`
+	TagKeyValues *TagKeyValuesFilters `json:"tagKeyValues,omitempty"`
 }
 
 // NewCostDataFilters instantiates a new CostDataFilters object
@@ -170,6 +172,70 @@ func (o *CostDataFilters) SetResourceId(v IdFilters) {
 	o.ResourceId = &v
 }
 
+// GetTagKeys returns the TagKeys field value if set, zero value otherwise.
+func (o *CostDataFilters) GetTagKeys() TagKeysFilters {
+	if o == nil || IsNil(o.TagKeys) {
+		var ret TagKeysFilters
+		return ret
+	}
+	return *o.TagKeys
+}
+
+// GetTagKeysOk returns a tuple with the TagKeys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CostDataFilters) GetTagKeysOk() (*TagKeysFilters, bool) {
+	if o == nil || IsNil(o.TagKeys) {
+		return nil, false
+	}
+	return o.TagKeys, true
+}
+
+// HasTagKeys returns a boolean if a field has been set.
+func (o *CostDataFilters) HasTagKeys() bool {
+	if o != nil && !IsNil(o.TagKeys) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagKeys gets a reference to the given TagKeysFilters and assigns it to the TagKeys field.
+func (o *CostDataFilters) SetTagKeys(v TagKeysFilters) {
+	o.TagKeys = &v
+}
+
+// GetTagKeyValues returns the TagKeyValues field value if set, zero value otherwise.
+func (o *CostDataFilters) GetTagKeyValues() TagKeyValuesFilters {
+	if o == nil || IsNil(o.TagKeyValues) {
+		var ret TagKeyValuesFilters
+		return ret
+	}
+	return *o.TagKeyValues
+}
+
+// GetTagKeyValuesOk returns a tuple with the TagKeyValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CostDataFilters) GetTagKeyValuesOk() (*TagKeyValuesFilters, bool) {
+	if o == nil || IsNil(o.TagKeyValues) {
+		return nil, false
+	}
+	return o.TagKeyValues, true
+}
+
+// HasTagKeyValues returns a boolean if a field has been set.
+func (o *CostDataFilters) HasTagKeyValues() bool {
+	if o != nil && !IsNil(o.TagKeyValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagKeyValues gets a reference to the given TagKeyValuesFilters and assigns it to the TagKeyValues field.
+func (o *CostDataFilters) SetTagKeyValues(v TagKeyValuesFilters) {
+	o.TagKeyValues = &v
+}
+
 func (o CostDataFilters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -191,6 +257,12 @@ func (o CostDataFilters) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ResourceId) {
 		toSerialize["resourceId"] = o.ResourceId
+	}
+	if !IsNil(o.TagKeys) {
+		toSerialize["tagKeys"] = o.TagKeys
+	}
+	if !IsNil(o.TagKeyValues) {
+		toSerialize["tagKeyValues"] = o.TagKeyValues
 	}
 	return toSerialize, nil
 }
