@@ -33,7 +33,6 @@ type InventoryResource struct {
 	// Date and time of the resource's first Eon snapshot.
 	OldestSnapshotTime *time.Time `json:"oldestSnapshotTime,omitempty"`
 	BackupStatus BackupStatus `json:"backupStatus"`
-	ActionRequiredDetails *ActionRequiredDetails `json:"actionRequiredDetails,omitempty"`
 	// Cloud-provider-assigned resource ID.
 	ProviderResourceId string `json:"providerResourceId"`
 	// Resource display name.
@@ -261,38 +260,6 @@ func (o *InventoryResource) GetBackupStatusOk() (*BackupStatus, bool) {
 // SetBackupStatus sets field value
 func (o *InventoryResource) SetBackupStatus(v BackupStatus) {
 	o.BackupStatus = v
-}
-
-// GetActionRequiredDetails returns the ActionRequiredDetails field value if set, zero value otherwise.
-func (o *InventoryResource) GetActionRequiredDetails() ActionRequiredDetails {
-	if o == nil || IsNil(o.ActionRequiredDetails) {
-		var ret ActionRequiredDetails
-		return ret
-	}
-	return *o.ActionRequiredDetails
-}
-
-// GetActionRequiredDetailsOk returns a tuple with the ActionRequiredDetails field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InventoryResource) GetActionRequiredDetailsOk() (*ActionRequiredDetails, bool) {
-	if o == nil || IsNil(o.ActionRequiredDetails) {
-		return nil, false
-	}
-	return o.ActionRequiredDetails, true
-}
-
-// HasActionRequiredDetails returns a boolean if a field has been set.
-func (o *InventoryResource) HasActionRequiredDetails() bool {
-	if o != nil && !IsNil(o.ActionRequiredDetails) {
-		return true
-	}
-
-	return false
-}
-
-// SetActionRequiredDetails gets a reference to the given ActionRequiredDetails and assigns it to the ActionRequiredDetails field.
-func (o *InventoryResource) SetActionRequiredDetails(v ActionRequiredDetails) {
-	o.ActionRequiredDetails = &v
 }
 
 // GetProviderResourceId returns the ProviderResourceId field value
@@ -705,9 +672,6 @@ func (o InventoryResource) ToMap() (map[string]interface{}, error) {
 		toSerialize["oldestSnapshotTime"] = o.OldestSnapshotTime
 	}
 	toSerialize["backupStatus"] = o.BackupStatus
-	if !IsNil(o.ActionRequiredDetails) {
-		toSerialize["actionRequiredDetails"] = o.ActionRequiredDetails
-	}
 	toSerialize["providerResourceId"] = o.ProviderResourceId
 	toSerialize["resourceName"] = o.ResourceName
 	if !IsNil(o.Classifications) {

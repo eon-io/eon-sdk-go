@@ -27,11 +27,11 @@ type AzureDiskSettings struct {
 	Type string `json:"type"`
 	// Tier of the disk to restore.
 	Tier string `json:"tier"`
-	// Hyper-V generation of the disk to restore.
+	// Hyper-V generation of the disk to restore. Defaults to the original Hyper-V generation captured by the snapshot. 
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty"`
-	// Size of the disk to restore, in bytes.
+	// Size of the disk to restore, in bytes. Defaults to the original disk size captured by the snapshot. 
 	SizeBytes *int64 `json:"sizeBytes,omitempty"`
-	// Optional tags to apply to the output instance
+	// Tags to apply to the restored disk as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 }
 

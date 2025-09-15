@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ProviderDiskId** | **string** | Cloud-provider-assigned ID of the disk to restore | 
+**ProviderDiskId** | **string** | Cloud-provider-assigned ID of the disk to restore. | 
 **Settings** | [**AzureDiskSettings**](AzureDiskSettings.md) |  | 
 
 ## Methods

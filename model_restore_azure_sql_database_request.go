@@ -21,7 +21,7 @@ var _ MappedNullable = &RestoreAzureSqlDatabaseRequest{}
 
 // RestoreAzureSqlDatabaseRequest struct for RestoreAzureSqlDatabaseRequest
 type RestoreAzureSqlDatabaseRequest struct {
-	// The ID of the restore account (target)
+	// Eon-assigned ID of the restore account.
 	RestoreAccountId string `json:"restoreAccountId"`
 	Destination AzureSqlDatabaseRestoreDestination `json:"destination"`
 }

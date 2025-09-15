@@ -21,9 +21,9 @@ var _ MappedNullable = &AzureDiskTarget{}
 
 // AzureDiskTarget struct for AzureDiskTarget
 type AzureDiskTarget struct {
-	// The region to restore the vm to
+	// Region to restore to.
 	Region string `json:"region"`
-	// Name of the resource group to restore the vm to
+	// Name of the resource group to restore to.
 	ResourceGroupName string `json:"resourceGroupName"`
 	Settings AzureDiskSettings `json:"settings"`
 }

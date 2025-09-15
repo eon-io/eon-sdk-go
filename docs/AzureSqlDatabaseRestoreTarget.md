@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Region** | **string** | Region to restore the database to. | 
-**ResourceGroupName** | **string** | Name of the resource group to restore the database to | 
-**ServerName** | **string** | The name of the sql server to restore to | 
-**AdminUserName** | **string** | The admin user name to use for the mssql server | 
-**Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**Region** | **string** | Region to restore to. | 
+**ResourceGroupName** | **string** | Name of the resource group to restore to. | 
+**ServerName** | **string** | Restored SQL server name. | 
+**AdminUserName** | **string** | Username to set for admin of user of the restored database. | 
+**Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 
 ## Methods
 

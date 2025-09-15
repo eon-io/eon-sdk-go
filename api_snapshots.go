@@ -330,7 +330,12 @@ func (r ApiRestoreAzureDiskRequest) Execute() (*RestoreJobInitiationResponse, *h
 /*
 RestoreAzureDisk Restore Azure Disk
 
-Description: This API initiates the process of restoring a instance from a specified snapshot.
+Description: Restores an Azure disk from an Eon snapshot.
+
+This operation is asynchronous.
+It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
@@ -363,7 +368,7 @@ func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-disk"
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-disk"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
@@ -474,7 +479,12 @@ func (r ApiRestoreAzureSqlDatabaseRequest) Execute() (*RestoreJobInitiationRespo
 /*
 RestoreAzureSqlDatabase Restore Azure SQL Database
 
-Description: This API initiates the process of restoring a instance from a specified snapshot.
+Description: Restores an Azure SQL Database from an Eon snapshot.
+
+This operation is asynchronous.
+It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
@@ -507,7 +517,7 @@ func (a *SnapshotsAPIService) RestoreAzureSqlDatabaseExecute(r ApiRestoreAzureSq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-sql-database"
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-sql-database"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
@@ -617,6 +627,13 @@ func (r ApiRestoreAzureVmInstanceRequest) Execute() (*RestoreJobInitiationRespon
 /*
 RestoreAzureVmInstance Restore Azure VM Instance
 
+Description: Restores an Azure VM instance from an Eon snapshot.
+
+This operation is asynchronous.
+It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
@@ -648,7 +665,7 @@ func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmI
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance"
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-vm-instance"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)

@@ -21,15 +21,15 @@ var _ MappedNullable = &AzureSqlDatabaseRestoreTarget{}
 
 // AzureSqlDatabaseRestoreTarget struct for AzureSqlDatabaseRestoreTarget
 type AzureSqlDatabaseRestoreTarget struct {
-	// Region to restore the database to.
+	// Region to restore to.
 	Region string `json:"region"`
-	// Name of the resource group to restore the database to
+	// Name of the resource group to restore to.
 	ResourceGroupName string `json:"resourceGroupName"`
-	// The name of the sql server to restore to
+	// Restored SQL server name.
 	ServerName string `json:"serverName"`
-	// The admin user name to use for the mssql server
+	// Username to set for admin of user of the restored database.
 	AdminUserName string `json:"adminUserName"`
-	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
+	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 }
 

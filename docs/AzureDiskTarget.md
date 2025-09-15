@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Region** | **string** | The region to restore the vm to | 
-**ResourceGroupName** | **string** | Name of the resource group to restore the vm to | 
+**Region** | **string** | Region to restore to. | 
+**ResourceGroupName** | **string** | Name of the resource group to restore to. | 
 **Settings** | [**AzureDiskSettings**](AzureDiskSettings.md) |  | 
 
 ## Methods

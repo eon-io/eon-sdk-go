@@ -21,7 +21,7 @@ var _ MappedNullable = &RestoreAzureInstanceDiskInput{}
 
 // RestoreAzureInstanceDiskInput struct for RestoreAzureInstanceDiskInput
 type RestoreAzureInstanceDiskInput struct {
-	// Cloud-provider-assigned ID of the disk to restore
+	// Cloud-provider-assigned ID of the disk to restore.
 	ProviderDiskId string `json:"providerDiskId"`
 	Settings AzureDiskSettings `json:"settings"`
 }

@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Region** | **string** | Region to restore the instance to. | 
-**ResourceGroupName** | **string** | Name of the resource group to restore the vm to | 
-**VmName** | **string** | Name of the VM to restore. | 
-**VmSize** | **string** | Size of the VM to restore. | 
+**Region** | **string** | Region to restore to. | 
+**ResourceGroupName** | **string** | Name of the resource group to restore to. | 
+**VmName** | **string** | Restored VM name. | 
+**VmSize** | **string** | Size of the restored VM. | 
 **NetworkInterface** | **string** | Name of the network interface to use. | 
-**Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **Disks** | [**[]RestoreAzureInstanceDiskInput**](RestoreAzureInstanceDiskInput.md) |  | 
 
 ## Methods

@@ -6,9 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetSnapshot**](SnapshotsAPI.md#GetSnapshot) | **Get** /v1/projects/{projectId}/snapshots/{id} | Get Snapshot
 [**ListResourceSnapshots**](SnapshotsAPI.md#ListResourceSnapshots) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots | List Resource Snapshots
-[**RestoreAzureDisk**](SnapshotsAPI.md#RestoreAzureDisk) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-disk | Restore Azure Disk
-[**RestoreAzureSqlDatabase**](SnapshotsAPI.md#RestoreAzureSqlDatabase) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-sql-database | Restore Azure SQL Database
-[**RestoreAzureVmInstance**](SnapshotsAPI.md#RestoreAzureVmInstance) | **Post** /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance | Restore Azure VM Instance
+[**RestoreAzureDisk**](SnapshotsAPI.md#RestoreAzureDisk) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-disk | Restore Azure Disk
+[**RestoreAzureSqlDatabase**](SnapshotsAPI.md#RestoreAzureSqlDatabase) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-sql-database | Restore Azure SQL Database
+[**RestoreAzureVmInstance**](SnapshotsAPI.md#RestoreAzureVmInstance) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-vm-instance | Restore Azure VM Instance
 [**RestoreBucket**](SnapshotsAPI.md#RestoreBucket) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bucket | Restore Bucket
 [**RestoreDatabase**](SnapshotsAPI.md#RestoreDatabase) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-rds-instance | Restore RDS Instance
 [**RestoreDynamoDBTable**](SnapshotsAPI.md#RestoreDynamoDBTable) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-dynamo-db-table | Restore DynamoDB Table
@@ -332,6 +332,8 @@ Name | Type | Description  | Notes
 > RestoreJobInitiationResponse RestoreAzureVmInstance(ctx, projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).Execute()
 
 Restore Azure VM Instance
+
+
 
 ### Example
 

@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **Name** | **string** | Name of the disk to restore. | 
 **Type** | **string** | Type of the disk to restore. | 
 **Tier** | **string** | Tier of the disk to restore. | 
-**HyperVGeneration** | Pointer to **string** | Hyper-V generation of the disk to restore. | [optional] 
-**SizeBytes** | Pointer to **int64** | Size of the disk to restore, in bytes. | [optional] 
-**Tags** | Pointer to **map[string]string** | Optional tags to apply to the output instance | [optional] 
+**HyperVGeneration** | Pointer to **string** | Hyper-V generation of the disk to restore. Defaults to the original Hyper-V generation captured by the snapshot.  | [optional] 
+**SizeBytes** | Pointer to **int64** | Size of the disk to restore, in bytes. Defaults to the original disk size captured by the snapshot.  | [optional] 
+**Tags** | Pointer to **map[string]string** | Tags to apply to the restored disk as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 
 ## Methods
 

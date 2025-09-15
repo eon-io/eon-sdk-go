@@ -23,7 +23,7 @@ var _ MappedNullable = &RestoreAzureDiskRequest{}
 type RestoreAzureDiskRequest struct {
 	// Cloud-provider-assigned ID of the disk to restore.
 	ProviderDiskId string `json:"providerDiskId"`
-	// Eon-assigned ID of the restore account
+	// Eon-assigned ID of the restore account.
 	RestoreAccountId string `json:"restoreAccountId"`
 	Destination AzureDiskRestoreDestination `json:"destination"`
 }

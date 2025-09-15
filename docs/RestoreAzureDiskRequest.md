@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ProviderDiskId** | **string** | Cloud-provider-assigned ID of the disk to restore. | 
-**RestoreAccountId** | **string** | Eon-assigned ID of the restore account | 
+**RestoreAccountId** | **string** | Eon-assigned ID of the restore account. | 
 **Destination** | [**AzureDiskRestoreDestination**](AzureDiskRestoreDestination.md) |  | 
 
 ## Methods

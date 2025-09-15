@@ -2550,8 +2550,14 @@ paths:
         - entityType: restore_job
           in: resBody
           key: jobId
-  /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-vm-instance:
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-vm-instance:
     post:
+      description: |
+        Description: Restores an Azure VM instance from an Eon snapshot.
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
       operationId: restoreAzureVmInstance
       parameters:
       - description: |
@@ -2641,10 +2647,14 @@ paths:
         - entityType: restore_job
           in: resBody
           key: jobId
-  /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-sql-database:
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-sql-database:
     post:
-      description: "Description: This API initiates the process of restoring a instance\
-        \ from a specified snapshot."
+      description: |
+        Description: Restores an Azure SQL Database from an Eon snapshot.
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
       operationId: restoreAzureSqlDatabase
       parameters:
       - description: |
@@ -2692,9 +2702,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestoreJobInitiationResponse'
-          description: Operation successfully triggered
+          description: Restore job started.
         "404":
-          description: "SProject, resource, or snapshot wasn't found."
+          description: "Project, resource, or snapshot wasn't found."
         "1XX":
           description: Informational
         "3XX":
@@ -2735,10 +2745,14 @@ paths:
         - entityType: restore_job
           in: resBody
           key: jobId
-  /v1/projects/{projectId}/inventory/{id}/snapshots/{snapshotId}/restore-azure-disk:
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-disk:
     post:
-      description: "Description: This API initiates the process of restoring a instance\
-        \ from a specified snapshot."
+      description: |
+        Description: Restores an Azure disk from an Eon snapshot.
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
       operationId: restoreAzureDisk
       parameters:
       - description: |
@@ -11410,18 +11424,26 @@ components:
           example: Standard
           type: string
         hyperVGeneration:
-          description: Hyper-V generation of the disk to restore.
+          description: |
+            Hyper-V generation of the disk to restore.
+            Defaults to the original Hyper-V generation captured by the snapshot.
           example: V1
           type: string
         sizeBytes:
-          description: "Size of the disk to restore, in bytes."
+          description: |
+            Size of the disk to restore, in bytes.
+            Defaults to the original disk size captured by the snapshot.
           example: 10737418240
           format: int64
           type: integer
         tags:
           additionalProperties:
             type: string
-          description: Optional tags to apply to the output instance
+          description: |
+            Tags to apply to the restored disk as key-value pairs, where key and value are both strings.
+            If not provided, defaults to an empty object, with no tags applied.
+
+            **Example:** `{"eon_api_restore": "true"}`
           type: object
       required:
       - name
@@ -11441,7 +11463,7 @@ components:
         providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
       properties:
         providerDiskId:
-          description: Cloud-provider-assigned ID of the disk to restore
+          description: Cloud-provider-assigned ID of the disk to restore.
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
           type: string
         settings:
@@ -11480,19 +11502,19 @@ components:
           key: tags
       properties:
         region:
-          description: Region to restore the instance to.
+          description: Region to restore to.
           example: eastus
           type: string
         resourceGroupName:
-          description: Name of the resource group to restore the vm to
+          description: Name of the resource group to restore to.
           example: my-resource-group-12345
           type: string
         vmName:
-          description: Name of the VM to restore.
+          description: Restored VM name.
           example: my-vm-12345
           type: string
         vmSize:
-          description: Size of the VM to restore.
+          description: Size of the restored VM.
           example: Standard_DS1_v2
           type: string
         networkInterface:
@@ -11503,6 +11525,7 @@ components:
             type: string
           description: |
             Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
+            If not provided, defaults to an empty object, with no tags applied.
 
             **Example:** `{"eon_api_restore": "true"}`
           type: object
@@ -11603,19 +11626,19 @@ components:
           key: tags
       properties:
         region:
-          description: Region to restore the database to.
+          description: Region to restore to.
           example: eastus
           type: string
         resourceGroupName:
-          description: Name of the resource group to restore the database to
+          description: Name of the resource group to restore to.
           example: my-resource-group-12345
           type: string
         serverName:
-          description: The name of the sql server to restore to
+          description: Restored SQL server name.
           example: my-mssql-server
           type: string
         adminUserName:
-          description: The admin user name to use for the mssql server
+          description: Username to set for admin of user of the restored database.
           example: myadminuser
           type: string
         tags:
@@ -11623,6 +11646,7 @@ components:
             type: string
           description: |
             Tags to apply to the restored instance as key-value pairs, where key and value are both strings.
+            If not provided, defaults to an empty object, with no tags applied.
 
             **Example:** `{"eon_api_restore": "true"}`
           type: object
@@ -11658,7 +11682,7 @@ components:
               key: tags
       properties:
         restoreAccountId:
-          description: The ID of the restore account (target)
+          description: Eon-assigned ID of the restore account.
           type: string
         destination:
           $ref: '#/components/schemas/AzureSqlDatabaseRestoreDestination'
@@ -11680,10 +11704,10 @@ components:
         region: region
       properties:
         region:
-          description: The region to restore the vm to
+          description: Region to restore to.
           type: string
         resourceGroupName:
-          description: Name of the resource group to restore the vm to
+          description: Name of the resource group to restore to.
           example: my-resource-group-12345
           type: string
         settings:
@@ -11732,7 +11756,7 @@ components:
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
           type: string
         restoreAccountId:
-          description: Eon-assigned ID of the restore account
+          description: Eon-assigned ID of the restore account.
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           type: string
         destination:
@@ -12541,16 +12565,6 @@ components:
         filters:
           $ref: '#/components/schemas/InventoryFilterConditions'
       type: object
-    ActionRequiredDetails:
-      description: |
-        Resource action required identifier.
-      enum:
-      - CLOUD_RESOURCE_ACTION_REQUIRED_UNSPECIFIED
-      - AZURE_SQL_VM_INVALID_CONFIGURATION
-      - DYNAMO_DB_INVALID_STREAM_VIEW_TYPE
-      - DYNAMO_DB_INSUFFICIENT_RCUS
-      example: AZURE_SQL_VM_INVALID_CONFIGURATION
-      type: string
     DataClassesDetails:
       description: Details about the resource's data classes.
       example:
@@ -12892,7 +12906,6 @@ components:
         vpc: vpc-041d4426c201ee954
         resourceName: customers db
         oldestSnapshotTime: 2024-09-24T08:21:01Z
-        actionRequiredDetails: AZURE_SQL_VM_INVALID_CONFIGURATION
         latestSnapshotTime: 2024-11-28T23:01:39Z
         tags:
           env: prod
@@ -12967,8 +12980,6 @@ components:
           type: string
         backupStatus:
           $ref: '#/components/schemas/BackupStatus'
-        actionRequiredDetails:
-          $ref: '#/components/schemas/ActionRequiredDetails'
         providerResourceId:
           description: Cloud-provider-assigned resource ID.
           example: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
@@ -13075,7 +13086,6 @@ components:
           vpc: vpc-041d4426c201ee954
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
-          actionRequiredDetails: AZURE_SQL_VM_INVALID_CONFIGURATION
           latestSnapshotTime: 2024-11-28T23:01:39Z
           tags:
             env: prod
@@ -13153,7 +13163,6 @@ components:
           vpc: vpc-041d4426c201ee954
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
-          actionRequiredDetails: AZURE_SQL_VM_INVALID_CONFIGURATION
           latestSnapshotTime: 2024-11-28T23:01:39Z
           tags:
             env: prod
@@ -13253,7 +13262,6 @@ components:
           vpc: vpc-041d4426c201ee954
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
-          actionRequiredDetails: AZURE_SQL_VM_INVALID_CONFIGURATION
           latestSnapshotTime: 2024-11-28T23:01:39Z
           tags:
             env: prod

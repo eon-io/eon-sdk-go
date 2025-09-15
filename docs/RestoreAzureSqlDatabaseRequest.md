@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RestoreAccountId** | **string** | The ID of the restore account (target) | 
+**RestoreAccountId** | **string** | Eon-assigned ID of the restore account. | 
 **Destination** | [**AzureSqlDatabaseRestoreDestination**](AzureSqlDatabaseRestoreDestination.md) |  | 
 
 ## Methods

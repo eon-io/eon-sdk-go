@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **LatestSnapshotTime** | Pointer to **time.Time** | Date and time of the resource&#39;s latest Eon snapshot. | [optional] 
 **OldestSnapshotTime** | Pointer to **time.Time** | Date and time of the resource&#39;s first Eon snapshot. | [optional] 
 **BackupStatus** | [**BackupStatus**](BackupStatus.md) |  | 
-**ActionRequiredDetails** | Pointer to [**ActionRequiredDetails**](ActionRequiredDetails.md) |  | [optional] 
 **ProviderResourceId** | **string** | Cloud-provider-assigned resource ID. | 
 **ResourceName** | **string** | Resource display name. | 
 **Classifications** | Pointer to [**Classifications**](Classifications.md) |  | [optional] 
@@ -184,31 +183,6 @@ and a boolean to check if the value has been set.
 
 SetBackupStatus sets BackupStatus field to given value.
 
-
-### GetActionRequiredDetails
-
-`func (o *InventoryResource) GetActionRequiredDetails() ActionRequiredDetails`
-
-GetActionRequiredDetails returns the ActionRequiredDetails field if non-nil, zero value otherwise.
-
-### GetActionRequiredDetailsOk
-
-`func (o *InventoryResource) GetActionRequiredDetailsOk() (*ActionRequiredDetails, bool)`
-
-GetActionRequiredDetailsOk returns a tuple with the ActionRequiredDetails field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetActionRequiredDetails
-
-`func (o *InventoryResource) SetActionRequiredDetails(v ActionRequiredDetails)`
-
-SetActionRequiredDetails sets ActionRequiredDetails field to given value.
-
-### HasActionRequiredDetails
-
-`func (o *InventoryResource) HasActionRequiredDetails() bool`
-
-HasActionRequiredDetails returns a boolean if a field has been set.
 
 ### GetProviderResourceId
 

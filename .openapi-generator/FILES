@@ -23,7 +23,6 @@ docs/AccountState.md
 docs/AccountStatusFilters.md
 docs/AccountVersion.md
 docs/AccountsAPI.md
-docs/ActionRequiredDetails.md
 docs/AnnuallyConfig.md
 docs/ApiCredentials.md
 docs/App.md
@@ -299,7 +298,6 @@ model_account_name_filters.go
 model_account_state.go
 model_account_status_filters.go
 model_account_version.go
-model_action_required_details.go
 model_annually_config.go
 model_api_credentials.go
 model_app.go
