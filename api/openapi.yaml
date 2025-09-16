@@ -4290,6 +4290,8 @@ components:
           $ref: '#/components/schemas/GcpSourceAccountAttributes'
         azure:
           $ref: '#/components/schemas/AzureSourceAccountAttributes'
+      required:
+      - cloudProvider
       type: object
     SourceAccount:
       example:
@@ -4343,6 +4345,7 @@ components:
       - id
       - name
       - providerAccountId
+      - sourceAccountAttributes
       - status
       type: object
     ConnectSourceAccountResponse:
@@ -13480,11 +13483,95 @@ components:
             $ref: '#/components/schemas/InventorySnapshotVolume'
           type: array
       type: object
+    AzureDisk:
+      example:
+        settings:
+          tier: Standard
+          name: my-disk-12345
+          hyperVGeneration: V1
+          type: Standard_LRS
+          sizeBytes: 10737418240
+          tags:
+            key: tags
+        providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+      properties:
+        providerDiskId:
+          description: Cloud-provider-assigned ID of the disk to restore
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          type: string
+        settings:
+          $ref: '#/components/schemas/AzureDiskSettings'
+      required:
+      - providerDiskId
+      - settings
+      title: AzureVmDisk
+      type: object
+    AzureVmSnapshotProperties:
+      description: |
+        Properties of the original Azure Virtual Machine instance at the time the snapshot was taken.
+        Present only when `resourceType` is set to `AZURE_VIRTUAL_MACHINE`.
+      example:
+        disks:
+        - settings:
+            tier: Standard
+            name: my-disk-12345
+            hyperVGeneration: V1
+            type: Standard_LRS
+            sizeBytes: 10737418240
+            tags:
+              key: tags
+          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+        - settings:
+            tier: Standard
+            name: my-disk-12345
+            hyperVGeneration: V1
+            type: Standard_LRS
+            sizeBytes: 10737418240
+            tags:
+              key: tags
+          providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+        name: name
+        sizeBytes: sizeBytes
+      nullable: true
+      properties:
+        name:
+          description: The name of the resource
+          type: string
+        sizeBytes:
+          description: The size of the virtual machine
+          type: string
+        disks:
+          items:
+            $ref: '#/components/schemas/AzureDisk'
+          type: array
+      type: object
     ResourceSnapshotProperties:
       description: |
         Properties of the original resource at the time the snapshot was taken.
         The properties present in this object change depending on the value set in `resourceType`.
       example:
+        azureVm:
+          disks:
+          - settings:
+              tier: Standard
+              name: my-disk-12345
+              hyperVGeneration: V1
+              type: Standard_LRS
+              sizeBytes: 10737418240
+              tags:
+                key: tags
+            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          - settings:
+              tier: Standard
+              name: my-disk-12345
+              hyperVGeneration: V1
+              type: Standard_LRS
+              sizeBytes: 10737418240
+              tags:
+                key: tags
+            providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+          name: name
+          sizeBytes: sizeBytes
         awsEc2:
           subnetId: subnet-062510159bedef64a
           securityGroupIds:
@@ -13516,12 +13603,36 @@ components:
       properties:
         awsEc2:
           $ref: '#/components/schemas/AwsEc2SnapshotProperties'
+        azureVm:
+          $ref: '#/components/schemas/AzureVmSnapshotProperties'
       type: object
     ResourceSnapshot:
       description: Details about the backed-up resource at the time the snapshot was
         taken.
       example:
         properties:
+          azureVm:
+            disks:
+            - settings:
+                tier: Standard
+                name: my-disk-12345
+                hyperVGeneration: V1
+                type: Standard_LRS
+                sizeBytes: 10737418240
+                tags:
+                  key: tags
+              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+            - settings:
+                tier: Standard
+                name: my-disk-12345
+                hyperVGeneration: V1
+                type: Standard_LRS
+                sizeBytes: 10737418240
+                tags:
+                  key: tags
+              providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+            name: name
+            sizeBytes: sizeBytes
           awsEc2:
             subnetId: subnet-062510159bedef64a
             securityGroupIds:
@@ -13578,6 +13689,28 @@ components:
         vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
         resource:
           properties:
+            azureVm:
+              disks:
+              - settings:
+                  tier: Standard
+                  name: my-disk-12345
+                  hyperVGeneration: V1
+                  type: Standard_LRS
+                  sizeBytes: 10737418240
+                  tags:
+                    key: tags
+                providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+              - settings:
+                  tier: Standard
+                  name: my-disk-12345
+                  hyperVGeneration: V1
+                  type: Standard_LRS
+                  sizeBytes: 10737418240
+                  tags:
+                    key: tags
+                providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+              name: name
+              sizeBytes: sizeBytes
             awsEc2:
               subnetId: subnet-062510159bedef64a
               securityGroupIds:
@@ -13664,6 +13797,28 @@ components:
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
             properties:
+              azureVm:
+                disks:
+                - settings:
+                    tier: Standard
+                    name: my-disk-12345
+                    hyperVGeneration: V1
+                    type: Standard_LRS
+                    sizeBytes: 10737418240
+                    tags:
+                      key: tags
+                  providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+                - settings:
+                    tier: Standard
+                    name: my-disk-12345
+                    hyperVGeneration: V1
+                    type: Standard_LRS
+                    sizeBytes: 10737418240
+                    tags:
+                      key: tags
+                  providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+                name: name
+                sizeBytes: sizeBytes
               awsEc2:
                 subnetId: subnet-062510159bedef64a
                 securityGroupIds:
@@ -13786,6 +13941,28 @@ components:
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
             properties:
+              azureVm:
+                disks:
+                - settings:
+                    tier: Standard
+                    name: my-disk-12345
+                    hyperVGeneration: V1
+                    type: Standard_LRS
+                    sizeBytes: 10737418240
+                    tags:
+                      key: tags
+                  providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+                - settings:
+                    tier: Standard
+                    name: my-disk-12345
+                    hyperVGeneration: V1
+                    type: Standard_LRS
+                    sizeBytes: 10737418240
+                    tags:
+                      key: tags
+                  providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+                name: name
+                sizeBytes: sizeBytes
               awsEc2:
                 subnetId: subnet-062510159bedef64a
                 securityGroupIds:
@@ -13825,6 +14002,28 @@ components:
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
             properties:
+              azureVm:
+                disks:
+                - settings:
+                    tier: Standard
+                    name: my-disk-12345
+                    hyperVGeneration: V1
+                    type: Standard_LRS
+                    sizeBytes: 10737418240
+                    tags:
+                      key: tags
+                  providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+                - settings:
+                    tier: Standard
+                    name: my-disk-12345
+                    hyperVGeneration: V1
+                    type: Standard_LRS
+                    sizeBytes: 10737418240
+                    tags:
+                      key: tags
+                  providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
+                name: name
+                sizeBytes: sizeBytes
               awsEc2:
                 subnetId: subnet-062510159bedef64a
                 securityGroupIds:

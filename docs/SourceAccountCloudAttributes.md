@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CloudProvider** | Pointer to [**Provider**](Provider.md) |  | [optional] 
+**CloudProvider** | [**Provider**](Provider.md) |  | 
 **Aws** | Pointer to [**NullableAwsSourceAccountAttributes**](AwsSourceAccountAttributes.md) |  | [optional] 
 **Gcp** | Pointer to [**NullableGcpSourceAccountAttributes**](GcpSourceAccountAttributes.md) |  | [optional] 
 **Azure** | Pointer to [**NullableAzureSourceAccountAttributes**](AzureSourceAccountAttributes.md) |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewSourceAccountCloudAttributes
 
-`func NewSourceAccountCloudAttributes() *SourceAccountCloudAttributes`
+`func NewSourceAccountCloudAttributes(cloudProvider Provider, ) *SourceAccountCloudAttributes`
 
 NewSourceAccountCloudAttributes instantiates a new SourceAccountCloudAttributes object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetCloudProvider sets CloudProvider field to given value.
 
-### HasCloudProvider
-
-`func (o *SourceAccountCloudAttributes) HasCloudProvider() bool`
-
-HasCloudProvider returns a boolean if a field has been set.
 
 ### GetAws
 

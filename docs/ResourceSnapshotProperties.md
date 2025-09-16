@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AwsEc2** | Pointer to [**NullableAwsEc2SnapshotProperties**](AwsEc2SnapshotProperties.md) |  | [optional] 
+**AzureVm** | Pointer to [**NullableAzureVmSnapshotProperties**](AzureVmSnapshotProperties.md) |  | [optional] 
 
 ## Methods
 
@@ -60,6 +61,41 @@ HasAwsEc2 returns a boolean if a field has been set.
 `func (o *ResourceSnapshotProperties) UnsetAwsEc2()`
 
 UnsetAwsEc2 ensures that no value is present for AwsEc2, not even an explicit nil
+### GetAzureVm
+
+`func (o *ResourceSnapshotProperties) GetAzureVm() AzureVmSnapshotProperties`
+
+GetAzureVm returns the AzureVm field if non-nil, zero value otherwise.
+
+### GetAzureVmOk
+
+`func (o *ResourceSnapshotProperties) GetAzureVmOk() (*AzureVmSnapshotProperties, bool)`
+
+GetAzureVmOk returns a tuple with the AzureVm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureVm
+
+`func (o *ResourceSnapshotProperties) SetAzureVm(v AzureVmSnapshotProperties)`
+
+SetAzureVm sets AzureVm field to given value.
+
+### HasAzureVm
+
+`func (o *ResourceSnapshotProperties) HasAzureVm() bool`
+
+HasAzureVm returns a boolean if a field has been set.
+
+### SetAzureVmNil
+
+`func (o *ResourceSnapshotProperties) SetAzureVmNil(b bool)`
+
+ SetAzureVmNil sets the value for AzureVm to be an explicit nil
+
+### UnsetAzureVm
+`func (o *ResourceSnapshotProperties) UnsetAzureVm()`
+
+UnsetAzureVm ensures that no value is present for AzureVm, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

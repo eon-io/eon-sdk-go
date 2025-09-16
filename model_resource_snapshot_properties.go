@@ -20,6 +20,7 @@ var _ MappedNullable = &ResourceSnapshotProperties{}
 // ResourceSnapshotProperties Properties of the original resource at the time the snapshot was taken. The properties present in this object change depending on the value set in `resourceType`. 
 type ResourceSnapshotProperties struct {
 	AwsEc2 NullableAwsEc2SnapshotProperties `json:"awsEc2,omitempty"`
+	AzureVm NullableAzureVmSnapshotProperties `json:"azureVm,omitempty"`
 }
 
 // NewResourceSnapshotProperties instantiates a new ResourceSnapshotProperties object
@@ -81,6 +82,48 @@ func (o *ResourceSnapshotProperties) UnsetAwsEc2() {
 	o.AwsEc2.Unset()
 }
 
+// GetAzureVm returns the AzureVm field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourceSnapshotProperties) GetAzureVm() AzureVmSnapshotProperties {
+	if o == nil || IsNil(o.AzureVm.Get()) {
+		var ret AzureVmSnapshotProperties
+		return ret
+	}
+	return *o.AzureVm.Get()
+}
+
+// GetAzureVmOk returns a tuple with the AzureVm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourceSnapshotProperties) GetAzureVmOk() (*AzureVmSnapshotProperties, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AzureVm.Get(), o.AzureVm.IsSet()
+}
+
+// HasAzureVm returns a boolean if a field has been set.
+func (o *ResourceSnapshotProperties) HasAzureVm() bool {
+	if o != nil && o.AzureVm.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureVm gets a reference to the given NullableAzureVmSnapshotProperties and assigns it to the AzureVm field.
+func (o *ResourceSnapshotProperties) SetAzureVm(v AzureVmSnapshotProperties) {
+	o.AzureVm.Set(&v)
+}
+// SetAzureVmNil sets the value for AzureVm to be an explicit nil
+func (o *ResourceSnapshotProperties) SetAzureVmNil() {
+	o.AzureVm.Set(nil)
+}
+
+// UnsetAzureVm ensures that no value is present for AzureVm, not even an explicit nil
+func (o *ResourceSnapshotProperties) UnsetAzureVm() {
+	o.AzureVm.Unset()
+}
+
 func (o ResourceSnapshotProperties) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -93,6 +136,9 @@ func (o ResourceSnapshotProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AwsEc2.IsSet() {
 		toSerialize["awsEc2"] = o.AwsEc2.Get()
+	}
+	if o.AzureVm.IsSet() {
+		toSerialize["azureVm"] = o.AzureVm.Get()
 	}
 	return toSerialize, nil
 }

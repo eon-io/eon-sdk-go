@@ -46,6 +46,7 @@ docs/AwsSourceAccountAttributes.md
 docs/AwsSourceAccountAttributesInput.md
 docs/AwsVaultConfig.md
 docs/AwsVpcConnectivityConfig.md
+docs/AzureDisk.md
 docs/AzureDiskRestoreDestination.md
 docs/AzureDiskRestoreResult.md
 docs/AzureDiskSettings.md
@@ -57,6 +58,7 @@ docs/AzureSqlDatabaseRestoreTarget.md
 docs/AzureVmInstanceRestoreDestination.md
 docs/AzureVmInstanceRestoreResult.md
 docs/AzureVmInstanceRestoreTarget.md
+docs/AzureVmSnapshotProperties.md
 docs/BackupJob.md
 docs/BackupJobSortField.md
 docs/BackupJobType.md
@@ -320,6 +322,7 @@ model_aws_source_account_attributes.go
 model_aws_source_account_attributes_input.go
 model_aws_vault_config.go
 model_aws_vpc_connectivity_config.go
+model_azure_disk.go
 model_azure_disk_restore_destination.go
 model_azure_disk_restore_result.go
 model_azure_disk_settings.go
@@ -331,6 +334,7 @@ model_azure_sql_database_restore_target.go
 model_azure_vm_instance_restore_destination.go
 model_azure_vm_instance_restore_result.go
 model_azure_vm_instance_restore_target.go
+model_azure_vm_snapshot_properties.go
 model_backup_job.go
 model_backup_job_sort_field.go
 model_backup_job_type.go

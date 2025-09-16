@@ -34,7 +34,7 @@ type SourceAccount struct {
 	Version *AccountVersion `json:"version,omitempty"`
 	// Date and time the account was connected to Eon.
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
-	SourceAccountAttributes *SourceAccountCloudAttributes `json:"sourceAccountAttributes,omitempty"`
+	SourceAccountAttributes SourceAccountCloudAttributes `json:"sourceAccountAttributes"`
 }
 
 type _SourceAccount SourceAccount
@@ -43,12 +43,13 @@ type _SourceAccount SourceAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSourceAccount(id string, providerAccountId string, name string, status AccountState) *SourceAccount {
+func NewSourceAccount(id string, providerAccountId string, name string, status AccountState, sourceAccountAttributes SourceAccountCloudAttributes) *SourceAccount {
 	this := SourceAccount{}
 	this.Id = id
 	this.ProviderAccountId = providerAccountId
 	this.Name = name
 	this.Status = status
+	this.SourceAccountAttributes = sourceAccountAttributes
 	return &this
 }
 
@@ -252,36 +253,28 @@ func (o *SourceAccount) SetConnectedTime(v time.Time) {
 	o.ConnectedTime = &v
 }
 
-// GetSourceAccountAttributes returns the SourceAccountAttributes field value if set, zero value otherwise.
+// GetSourceAccountAttributes returns the SourceAccountAttributes field value
 func (o *SourceAccount) GetSourceAccountAttributes() SourceAccountCloudAttributes {
-	if o == nil || IsNil(o.SourceAccountAttributes) {
+	if o == nil {
 		var ret SourceAccountCloudAttributes
 		return ret
 	}
-	return *o.SourceAccountAttributes
+
+	return o.SourceAccountAttributes
 }
 
-// GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field value if set, nil otherwise
+// GetSourceAccountAttributesOk returns a tuple with the SourceAccountAttributes field value
 // and a boolean to check if the value has been set.
 func (o *SourceAccount) GetSourceAccountAttributesOk() (*SourceAccountCloudAttributes, bool) {
-	if o == nil || IsNil(o.SourceAccountAttributes) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SourceAccountAttributes, true
+	return &o.SourceAccountAttributes, true
 }
 
-// HasSourceAccountAttributes returns a boolean if a field has been set.
-func (o *SourceAccount) HasSourceAccountAttributes() bool {
-	if o != nil && !IsNil(o.SourceAccountAttributes) {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceAccountAttributes gets a reference to the given SourceAccountCloudAttributes and assigns it to the SourceAccountAttributes field.
+// SetSourceAccountAttributes sets field value
 func (o *SourceAccount) SetSourceAccountAttributes(v SourceAccountCloudAttributes) {
-	o.SourceAccountAttributes = &v
+	o.SourceAccountAttributes = v
 }
 
 func (o SourceAccount) MarshalJSON() ([]byte, error) {
@@ -307,9 +300,7 @@ func (o SourceAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectedTime) {
 		toSerialize["connectedTime"] = o.ConnectedTime
 	}
-	if !IsNil(o.SourceAccountAttributes) {
-		toSerialize["sourceAccountAttributes"] = o.SourceAccountAttributes
-	}
+	toSerialize["sourceAccountAttributes"] = o.SourceAccountAttributes
 	return toSerialize, nil
 }
 
@@ -322,6 +313,7 @@ func (o *SourceAccount) UnmarshalJSON(data []byte) (err error) {
 		"providerAccountId",
 		"name",
 		"status",
+		"sourceAccountAttributes",
 	}
 
 	allProperties := make(map[string]interface{})
