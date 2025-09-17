@@ -12226,6 +12226,7 @@ components:
       - DISCONNECTED
       - ACTION_REQUIRED
       - DLSG
+      - LIMIT_EXCEEDED
       example: VIOLATIONS_DETECTED
       type: string
     BackupStatusFilters:
