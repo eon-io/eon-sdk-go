@@ -15,6 +15,9 @@ Method | HTTP request | Description
 [**RestoreEbsVolume**](SnapshotsAPI.md#RestoreEbsVolume) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-ec2-ebs-volume | Restore EBS Volume
 [**RestoreEc2Instance**](SnapshotsAPI.md#RestoreEc2Instance) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-ec2-instance | Restore EC2 Instance
 [**RestoreFiles**](SnapshotsAPI.md#RestoreFiles) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-files | Restore Files
+[**RestoreGcpCloudSql**](SnapshotsAPI.md#RestoreGcpCloudSql) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-cloudsql | Restore GCP Cloud SQL Instance
+[**RestoreGcpDisk**](SnapshotsAPI.md#RestoreGcpDisk) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-disk | Restore GCP Disk
+[**RestoreGcpVmInstance**](SnapshotsAPI.md#RestoreGcpVmInstance) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-vm-instance | Restore GCP VM Instance
 [**RestoreToEbsSnapshot**](SnapshotsAPI.md#RestoreToEbsSnapshot) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/convert-ec2-ebs-snapshot | Restore to EBS Snapshot
 
 
@@ -854,6 +857,240 @@ Name | Type | Description  | Notes
 
 
  **restoreFilesRequest** | [**RestoreFilesRequest**](RestoreFilesRequest.md) |  | 
+
+### Return type
+
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestoreGcpCloudSql
+
+> RestoreJobInitiationResponse RestoreGcpCloudSql(ctx, projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).Execute()
+
+Restore GCP Cloud SQL Instance
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	restoreGcpCloudSqlRequest := *openapiclient.NewRestoreGcpCloudSqlRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpCloudSqlRestoreDestination()) // RestoreGcpCloudSqlRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpCloudSql(context.Background(), projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpCloudSql``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RestoreGcpCloudSql`: RestoreJobInitiationResponse
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreGcpCloudSql`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**id** | **string** | Eon-assigned resource ID. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreGcpCloudSqlRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **restoreGcpCloudSqlRequest** | [**RestoreGcpCloudSqlRequest**](RestoreGcpCloudSqlRequest.md) |  | 
+
+### Return type
+
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestoreGcpDisk
+
+> RestoreJobInitiationResponse RestoreGcpDisk(ctx, projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).Execute()
+
+Restore GCP Disk
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	restoreGcpDiskRequest := *openapiclient.NewRestoreGcpDiskRequest("5178361631409150158", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpDiskRestoreDestination()) // RestoreGcpDiskRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpDisk(context.Background(), projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpDisk``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RestoreGcpDisk`: RestoreJobInitiationResponse
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreGcpDisk`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**id** | **string** | Eon-assigned resource ID. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreGcpDiskRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **restoreGcpDiskRequest** | [**RestoreGcpDiskRequest**](RestoreGcpDiskRequest.md) |  | 
+
+### Return type
+
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestoreGcpVmInstance
+
+> RestoreJobInitiationResponse RestoreGcpVmInstance(ctx, projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).Execute()
+
+Restore GCP VM Instance
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	restoreGcpVmInstanceRequest := *openapiclient.NewRestoreGcpVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpVmInstanceRestoreDestination()) // RestoreGcpVmInstanceRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpVmInstance(context.Background(), projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpVmInstance``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RestoreGcpVmInstance`: RestoreJobInitiationResponse
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreGcpVmInstance`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**id** | **string** | Eon-assigned resource ID. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreGcpVmInstanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **restoreGcpVmInstanceRequest** | [**RestoreGcpVmInstanceRequest**](RestoreGcpVmInstanceRequest.md) |  | 
 
 ### Return type
 

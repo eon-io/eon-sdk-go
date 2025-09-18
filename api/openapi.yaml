@@ -2842,6 +2842,306 @@ paths:
         - entityType: restore_job
           in: resBody
           key: jobId
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-disk:
+    post:
+      description: |
+        Description: Restores a GCP disk from an Eon snapshot.
+
+        When restoring a GCP disk, you'll need to specify the configurations of the disk you want to restore.
+        You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+      operationId: restoreGcpDisk
+      parameters:
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned resource ID.
+        example: fb806ce1-1cd3-5034-928a-33a87be714da
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+        example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreGcpDiskRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Restore job started.
+        "404":
+          description: "Project, resource, or snapshot wasn't found."
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Restore GCP Disk
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: snapshotId
+      x-permissions:
+      - create:restore_resource
+      x-audit-log:
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: jobId
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-vm-instance:
+    post:
+      description: |
+        Description: Restores a GCP VM instance from an Eon snapshot.
+
+        When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
+        You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+      operationId: restoreGcpVmInstance
+      parameters:
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned resource ID.
+        example: fb806ce1-1cd3-5034-928a-33a87be714da
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+        example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreGcpVmInstanceRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Restore job started.
+        "404":
+          description: "Project, resource, or snapshot wasn't found."
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Restore GCP VM Instance
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: snapshotId
+      x-permissions:
+      - create:restore_resource
+      x-audit-log:
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: jobId
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-cloudsql:
+    post:
+      description: |
+        Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
+
+        When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
+        You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+      operationId: restoreGcpCloudSql
+      parameters:
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned resource ID.
+        example: fb806ce1-1cd3-5034-928a-33a87be714da
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+        example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreGcpCloudSqlRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Restore job started.
+        "404":
+          description: "Project, resource, or snapshot wasn't found."
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Restore GCP Cloud SQL Instance
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: snapshotId
+      x-permissions:
+      - create:restore_resource
+      x-audit-log:
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: jobId
   /v1/projects/{projectId}/snapshots/{snapshotId}/databases/query:
     post:
       description: |
@@ -11769,6 +12069,434 @@ components:
       - providerDiskId
       - restoreAccountId
       type: object
+    GcpDiskSettings:
+      example:
+        encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+        name: my-restored-disk
+        iops: 3000
+        description: boot disk
+        throughput: 125
+        type: pd-ssd
+        sizeBytes: 10737418240
+        labels:
+          key: labels
+      properties:
+        name:
+          description: The name of the restored disk.
+          example: my-restored-disk
+          maxLength: 63
+          type: string
+        type:
+          description: "The type of the disk to restore (e.g., pd-standard, pd-ssd,\
+            \ pd-balanced)."
+          example: pd-ssd
+          type: string
+        sizeBytes:
+          description: The size of the disk to restore in bytes.
+          example: 10737418240
+          format: int64
+          type: integer
+        iops:
+          description: Provisioned IOPS for the disk (only applicable for certain
+            disk types).
+          example: 3000
+          format: int64
+          type: integer
+        throughput:
+          description: Disk throughput.
+          example: 125
+          format: int64
+          type: integer
+        description:
+          description: Optional description.
+          example: boot disk
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: |
+            Labels to apply to the restored disk as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"primary": "true"}`
+          type: object
+        encryptionKeyId:
+          description: ID of the customer-managed encryption key to use for the disk.
+          example: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+          type: string
+      required:
+      - name
+      - sizeBytes
+      - type
+      type: object
+    GcpDiskTarget:
+      example:
+        settings:
+          encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+          name: my-restored-disk
+          iops: 3000
+          description: boot disk
+          throughput: 125
+          type: pd-ssd
+          sizeBytes: 10737418240
+          labels:
+            key: labels
+        zone: us-central1-a
+      properties:
+        zone:
+          description: The zone to restore the disk to.
+          example: us-central1-a
+          type: string
+        settings:
+          $ref: '#/components/schemas/GcpDiskSettings'
+      required:
+      - settings
+      - zone
+      type: object
+    GcpDiskRestoreDestination:
+      example:
+        gcpDisk:
+          settings:
+            encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+            name: my-restored-disk
+            iops: 3000
+            description: boot disk
+            throughput: 125
+            type: pd-ssd
+            sizeBytes: 10737418240
+            labels:
+              key: labels
+          zone: us-central1-a
+      properties:
+        gcpDisk:
+          $ref: '#/components/schemas/GcpDiskTarget'
+      type: object
+    RestoreGcpDiskRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        providerDiskId: "5178361631409150158"
+        destination:
+          gcpDisk:
+            settings:
+              encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+              name: my-restored-disk
+              iops: 3000
+              description: boot disk
+              throughput: 125
+              type: pd-ssd
+              sizeBytes: 10737418240
+              labels:
+                key: labels
+            zone: us-central1-a
+      properties:
+        providerDiskId:
+          description: Cloud-provider-assigned ID of the disk to restore.
+          example: "5178361631409150158"
+          type: string
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/GcpDiskRestoreDestination'
+      required:
+      - destination
+      - providerDiskId
+      - restoreAccountId
+      type: object
+    RestoreGcpInstanceDiskInput:
+      example:
+        settings:
+          encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+          name: my-restored-disk
+          iops: 3000
+          description: boot disk
+          throughput: 125
+          type: pd-ssd
+          sizeBytes: 10737418240
+          labels:
+            key: labels
+        providerDiskId: "5178361631409150158"
+      properties:
+        providerDiskId:
+          description: Cloud-provider-assigned ID of the disk to restore.
+          example: "5178361631409150158"
+          type: string
+        settings:
+          $ref: '#/components/schemas/GcpDiskSettings'
+      required:
+      - providerDiskId
+      - settings
+      type: object
+    GcpVmInstanceRestoreTarget:
+      example:
+        networkHostProject: my-shared-vpc-project
+        disks:
+        - settings:
+            encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+            name: my-restored-disk
+            iops: 3000
+            description: boot disk
+            throughput: 125
+            type: pd-ssd
+            sizeBytes: 10737418240
+            labels:
+              key: labels
+          providerDiskId: "5178361631409150158"
+        - settings:
+            encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+            name: my-restored-disk
+            iops: 3000
+            description: boot disk
+            throughput: 125
+            type: pd-ssd
+            sizeBytes: 10737418240
+            labels:
+              key: labels
+          providerDiskId: "5178361631409150158"
+        zone: us-east1-b
+        name: my-vm-12345
+        networkName: default
+        machineType: e2-medium
+        subnetName: default
+        labels:
+          eon_api_restore: "true"
+      properties:
+        zone:
+          description: The zone to restore the VM to.
+          example: us-east1-b
+          type: string
+        machineType:
+          description: The machine type to use for the restored instance.
+          example: e2-medium
+          type: string
+        name:
+          description: The name of the VM to restore.
+          example: my-vm-12345
+          maxLength: 63
+          type: string
+        networkName:
+          description: The name of the network to use.
+          example: default
+          type: string
+        subnetName:
+          description: The name of the subnet to use.
+          example: default
+          type: string
+        networkHostProject:
+          description: The host project of the network to use (for shared VPC networks).
+          example: my-shared-vpc-project
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: |
+            Labels to apply to the restored VM as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          example:
+            eon_api_restore: "true"
+          type: object
+        disks:
+          description: |
+            Disks to restore and attach to the restored instance.
+            Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot.
+            The boot disk must be present in the list.
+          items:
+            $ref: '#/components/schemas/RestoreGcpInstanceDiskInput'
+          type: array
+      required:
+      - disks
+      - machineType
+      - name
+      - networkName
+      - subnetName
+      - zone
+      type: object
+    GcpVmInstanceRestoreDestination:
+      example:
+        gcpVm:
+          networkHostProject: my-shared-vpc-project
+          disks:
+          - settings:
+              encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+              name: my-restored-disk
+              iops: 3000
+              description: boot disk
+              throughput: 125
+              type: pd-ssd
+              sizeBytes: 10737418240
+              labels:
+                key: labels
+            providerDiskId: "5178361631409150158"
+          - settings:
+              encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+              name: my-restored-disk
+              iops: 3000
+              description: boot disk
+              throughput: 125
+              type: pd-ssd
+              sizeBytes: 10737418240
+              labels:
+                key: labels
+            providerDiskId: "5178361631409150158"
+          zone: us-east1-b
+          name: my-vm-12345
+          networkName: default
+          machineType: e2-medium
+          subnetName: default
+          labels:
+            eon_api_restore: "true"
+      properties:
+        gcpVm:
+          $ref: '#/components/schemas/GcpVmInstanceRestoreTarget'
+      type: object
+    RestoreGcpVmInstanceRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          gcpVm:
+            networkHostProject: my-shared-vpc-project
+            disks:
+            - settings:
+                encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+                name: my-restored-disk
+                iops: 3000
+                description: boot disk
+                throughput: 125
+                type: pd-ssd
+                sizeBytes: 10737418240
+                labels:
+                  key: labels
+              providerDiskId: "5178361631409150158"
+            - settings:
+                encryptionKeyId: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+                name: my-restored-disk
+                iops: 3000
+                description: boot disk
+                throughput: 125
+                type: pd-ssd
+                sizeBytes: 10737418240
+                labels:
+                  key: labels
+              providerDiskId: "5178361631409150158"
+            zone: us-east1-b
+            name: my-vm-12345
+            networkName: default
+            machineType: e2-medium
+            subnetName: default
+            labels:
+              eon_api_restore: "true"
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/GcpVmInstanceRestoreDestination'
+      required:
+      - destination
+      - restoreAccountId
+      type: object
+    GcpNetworkType:
+      description: The type of the cloud account
+      enum:
+      - UNSPECIFIED
+      - PUBLIC
+      - PRIVATE
+      example: PRIVATE
+      type: string
+      x-enum-varnames:
+      - AZURE_NETWORK_TYPE_UNSPECIFIED
+      - AZURE_NETWORK_TYPE_PUBLIC
+      - AZURE_NETWORK_TYPE_PRIVATE
+    GcpCloudSqlTarget:
+      example:
+        networkHostProject: my-shared-vpc-project
+        zone: us-east1-b
+        name: my-instance
+        networkName: default
+        networkType: PRIVATE
+        subnetName: default
+        labels:
+          eon_api_restore: "true"
+      properties:
+        zone:
+          description: The zone to restore the Cloud SQL instance to.
+          example: us-east1-b
+          type: string
+        name:
+          description: The name of the Cloud SQL instance to restore.
+          example: my-instance
+          type: string
+        networkType:
+          $ref: '#/components/schemas/GcpNetworkType'
+        networkName:
+          description: The VPC network name (required for private networking).
+          example: default
+          type: string
+        subnetName:
+          description: The subnet name for the compute node (required for private
+            networking).
+          example: default
+          type: string
+        networkHostProject:
+          description: Host project ID for shared VPC (only required for private networking).
+          example: my-shared-vpc-project
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: |
+            Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon_api_restore": "true"}`
+          example:
+            eon_api_restore: "true"
+          type: object
+      required:
+      - name
+      - networkType
+      - zone
+      type: object
+    GcpCloudSqlRestoreDestination:
+      example:
+        gcpCloudSql:
+          networkHostProject: my-shared-vpc-project
+          zone: us-east1-b
+          name: my-instance
+          networkName: default
+          networkType: PRIVATE
+          subnetName: default
+          labels:
+            eon_api_restore: "true"
+      properties:
+        gcpCloudSql:
+          $ref: '#/components/schemas/GcpCloudSqlTarget'
+      type: object
+    RestoreGcpCloudSqlRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          gcpCloudSql:
+            networkHostProject: my-shared-vpc-project
+            zone: us-east1-b
+            name: my-instance
+            networkName: default
+            networkType: PRIVATE
+            subnetName: default
+            labels:
+              eon_api_restore: "true"
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/GcpCloudSqlRestoreDestination'
+      required:
+      - destination
+      - restoreAccountId
+      type: object
     S3RestoreDestination:
       description: S3 bucket.
       example:
@@ -12729,6 +13457,7 @@ components:
         low: 1
         medium: 2
         muted: 0
+      nullable: true
       properties:
         high:
           description: Number of high-severity control violations.
@@ -12746,6 +13475,11 @@ components:
           description: Number of muted control violations.
           example: 0
           type: integer
+      required:
+      - high
+      - low
+      - medium
+      - muted
       type: object
     InventoryVolume:
       example:
@@ -13505,7 +14239,6 @@ components:
       required:
       - providerDiskId
       - settings
-      title: AzureVmDisk
       type: object
     AzureVmSnapshotProperties:
       description: |

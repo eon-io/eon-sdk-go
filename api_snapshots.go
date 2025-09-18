@@ -1645,6 +1645,459 @@ func (a *SnapshotsAPIService) RestoreFilesExecute(r ApiRestoreFilesRequest) (*Re
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiRestoreGcpCloudSqlRequest struct {
+	ctx context.Context
+	ApiService *SnapshotsAPIService
+	projectId string
+	id string
+	snapshotId string
+	restoreGcpCloudSqlRequest *RestoreGcpCloudSqlRequest
+}
+
+func (r ApiRestoreGcpCloudSqlRequest) RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest RestoreGcpCloudSqlRequest) ApiRestoreGcpCloudSqlRequest {
+	r.restoreGcpCloudSqlRequest = &restoreGcpCloudSqlRequest
+	return r
+}
+
+func (r ApiRestoreGcpCloudSqlRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+	return r.ApiService.RestoreGcpCloudSqlExecute(r)
+}
+
+/*
+RestoreGcpCloudSql Restore GCP Cloud SQL Instance
+
+Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
+
+When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
+You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
+This operation is asynchronous.
+It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param id Eon-assigned resource ID.
+ @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @return ApiRestoreGcpCloudSqlRequest
+*/
+func (a *SnapshotsAPIService) RestoreGcpCloudSql(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpCloudSqlRequest {
+	return ApiRestoreGcpCloudSqlRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		id: id,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreGcpCloudSqlExecute(r ApiRestoreGcpCloudSqlRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RestoreJobInitiationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpCloudSql")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-cloudsql"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.restoreGcpCloudSqlRequest == nil {
+		return localVarReturnValue, nil, reportError("restoreGcpCloudSqlRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.restoreGcpCloudSqlRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRestoreGcpDiskRequest struct {
+	ctx context.Context
+	ApiService *SnapshotsAPIService
+	projectId string
+	id string
+	snapshotId string
+	restoreGcpDiskRequest *RestoreGcpDiskRequest
+}
+
+func (r ApiRestoreGcpDiskRequest) RestoreGcpDiskRequest(restoreGcpDiskRequest RestoreGcpDiskRequest) ApiRestoreGcpDiskRequest {
+	r.restoreGcpDiskRequest = &restoreGcpDiskRequest
+	return r
+}
+
+func (r ApiRestoreGcpDiskRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+	return r.ApiService.RestoreGcpDiskExecute(r)
+}
+
+/*
+RestoreGcpDisk Restore GCP Disk
+
+Description: Restores a GCP disk from an Eon snapshot.
+
+When restoring a GCP disk, you'll need to specify the configurations of the disk you want to restore.
+You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
+This operation is asynchronous.
+It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param id Eon-assigned resource ID.
+ @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @return ApiRestoreGcpDiskRequest
+*/
+func (a *SnapshotsAPIService) RestoreGcpDisk(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpDiskRequest {
+	return ApiRestoreGcpDiskRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		id: id,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreGcpDiskExecute(r ApiRestoreGcpDiskRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RestoreJobInitiationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpDisk")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-disk"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.restoreGcpDiskRequest == nil {
+		return localVarReturnValue, nil, reportError("restoreGcpDiskRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.restoreGcpDiskRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRestoreGcpVmInstanceRequest struct {
+	ctx context.Context
+	ApiService *SnapshotsAPIService
+	projectId string
+	id string
+	snapshotId string
+	restoreGcpVmInstanceRequest *RestoreGcpVmInstanceRequest
+}
+
+func (r ApiRestoreGcpVmInstanceRequest) RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest RestoreGcpVmInstanceRequest) ApiRestoreGcpVmInstanceRequest {
+	r.restoreGcpVmInstanceRequest = &restoreGcpVmInstanceRequest
+	return r
+}
+
+func (r ApiRestoreGcpVmInstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+	return r.ApiService.RestoreGcpVmInstanceExecute(r)
+}
+
+/*
+RestoreGcpVmInstance Restore GCP VM Instance
+
+Description: Restores a GCP VM instance from an Eon snapshot.
+
+When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
+You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
+This operation is asynchronous.
+It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param id Eon-assigned resource ID.
+ @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @return ApiRestoreGcpVmInstanceRequest
+*/
+func (a *SnapshotsAPIService) RestoreGcpVmInstance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpVmInstanceRequest {
+	return ApiRestoreGcpVmInstanceRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		id: id,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreGcpVmInstanceExecute(r ApiRestoreGcpVmInstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RestoreJobInitiationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpVmInstance")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-gcp-vm-instance"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.restoreGcpVmInstanceRequest == nil {
+		return localVarReturnValue, nil, reportError("restoreGcpVmInstanceRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.restoreGcpVmInstanceRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiRestoreToEbsSnapshotRequest struct {
 	ctx context.Context
 	ApiService *SnapshotsAPIService

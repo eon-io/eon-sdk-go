@@ -12,6 +12,8 @@ package eon
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ControlViolations type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,27 @@ var _ MappedNullable = &ControlViolations{}
 // ControlViolations struct for ControlViolations
 type ControlViolations struct {
 	// Number of high-severity control violations.
-	High *int32 `json:"high,omitempty"`
+	High int32 `json:"high"`
 	// Number of medium-severity control violations.
-	Medium *int32 `json:"medium,omitempty"`
+	Medium int32 `json:"medium"`
 	// Number of low-severity control violations.
-	Low *int32 `json:"low,omitempty"`
+	Low int32 `json:"low"`
 	// Number of muted control violations.
-	Muted *int32 `json:"muted,omitempty"`
+	Muted int32 `json:"muted"`
 }
+
+type _ControlViolations ControlViolations
 
 // NewControlViolations instantiates a new ControlViolations object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewControlViolations() *ControlViolations {
+func NewControlViolations(high int32, medium int32, low int32, muted int32) *ControlViolations {
 	this := ControlViolations{}
+	this.High = high
+	this.Medium = medium
+	this.Low = low
+	this.Muted = muted
 	return &this
 }
 
@@ -46,132 +54,100 @@ func NewControlViolationsWithDefaults() *ControlViolations {
 	return &this
 }
 
-// GetHigh returns the High field value if set, zero value otherwise.
+// GetHigh returns the High field value
 func (o *ControlViolations) GetHigh() int32 {
-	if o == nil || IsNil(o.High) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.High
+
+	return o.High
 }
 
-// GetHighOk returns a tuple with the High field value if set, nil otherwise
+// GetHighOk returns a tuple with the High field value
 // and a boolean to check if the value has been set.
 func (o *ControlViolations) GetHighOk() (*int32, bool) {
-	if o == nil || IsNil(o.High) {
+	if o == nil {
 		return nil, false
 	}
-	return o.High, true
+	return &o.High, true
 }
 
-// HasHigh returns a boolean if a field has been set.
-func (o *ControlViolations) HasHigh() bool {
-	if o != nil && !IsNil(o.High) {
-		return true
-	}
-
-	return false
-}
-
-// SetHigh gets a reference to the given int32 and assigns it to the High field.
+// SetHigh sets field value
 func (o *ControlViolations) SetHigh(v int32) {
-	o.High = &v
+	o.High = v
 }
 
-// GetMedium returns the Medium field value if set, zero value otherwise.
+// GetMedium returns the Medium field value
 func (o *ControlViolations) GetMedium() int32 {
-	if o == nil || IsNil(o.Medium) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Medium
+
+	return o.Medium
 }
 
-// GetMediumOk returns a tuple with the Medium field value if set, nil otherwise
+// GetMediumOk returns a tuple with the Medium field value
 // and a boolean to check if the value has been set.
 func (o *ControlViolations) GetMediumOk() (*int32, bool) {
-	if o == nil || IsNil(o.Medium) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Medium, true
+	return &o.Medium, true
 }
 
-// HasMedium returns a boolean if a field has been set.
-func (o *ControlViolations) HasMedium() bool {
-	if o != nil && !IsNil(o.Medium) {
-		return true
-	}
-
-	return false
-}
-
-// SetMedium gets a reference to the given int32 and assigns it to the Medium field.
+// SetMedium sets field value
 func (o *ControlViolations) SetMedium(v int32) {
-	o.Medium = &v
+	o.Medium = v
 }
 
-// GetLow returns the Low field value if set, zero value otherwise.
+// GetLow returns the Low field value
 func (o *ControlViolations) GetLow() int32 {
-	if o == nil || IsNil(o.Low) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Low
+
+	return o.Low
 }
 
-// GetLowOk returns a tuple with the Low field value if set, nil otherwise
+// GetLowOk returns a tuple with the Low field value
 // and a boolean to check if the value has been set.
 func (o *ControlViolations) GetLowOk() (*int32, bool) {
-	if o == nil || IsNil(o.Low) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Low, true
+	return &o.Low, true
 }
 
-// HasLow returns a boolean if a field has been set.
-func (o *ControlViolations) HasLow() bool {
-	if o != nil && !IsNil(o.Low) {
-		return true
-	}
-
-	return false
-}
-
-// SetLow gets a reference to the given int32 and assigns it to the Low field.
+// SetLow sets field value
 func (o *ControlViolations) SetLow(v int32) {
-	o.Low = &v
+	o.Low = v
 }
 
-// GetMuted returns the Muted field value if set, zero value otherwise.
+// GetMuted returns the Muted field value
 func (o *ControlViolations) GetMuted() int32 {
-	if o == nil || IsNil(o.Muted) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Muted
+
+	return o.Muted
 }
 
-// GetMutedOk returns a tuple with the Muted field value if set, nil otherwise
+// GetMutedOk returns a tuple with the Muted field value
 // and a boolean to check if the value has been set.
 func (o *ControlViolations) GetMutedOk() (*int32, bool) {
-	if o == nil || IsNil(o.Muted) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Muted, true
+	return &o.Muted, true
 }
 
-// HasMuted returns a boolean if a field has been set.
-func (o *ControlViolations) HasMuted() bool {
-	if o != nil && !IsNil(o.Muted) {
-		return true
-	}
-
-	return false
-}
-
-// SetMuted gets a reference to the given int32 and assigns it to the Muted field.
+// SetMuted sets field value
 func (o *ControlViolations) SetMuted(v int32) {
-	o.Muted = &v
+	o.Muted = v
 }
 
 func (o ControlViolations) MarshalJSON() ([]byte, error) {
@@ -184,19 +160,51 @@ func (o ControlViolations) MarshalJSON() ([]byte, error) {
 
 func (o ControlViolations) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.High) {
-		toSerialize["high"] = o.High
-	}
-	if !IsNil(o.Medium) {
-		toSerialize["medium"] = o.Medium
-	}
-	if !IsNil(o.Low) {
-		toSerialize["low"] = o.Low
-	}
-	if !IsNil(o.Muted) {
-		toSerialize["muted"] = o.Muted
-	}
+	toSerialize["high"] = o.High
+	toSerialize["medium"] = o.Medium
+	toSerialize["low"] = o.Low
+	toSerialize["muted"] = o.Muted
 	return toSerialize, nil
+}
+
+func (o *ControlViolations) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"high",
+		"medium",
+		"low",
+		"muted",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varControlViolations := _ControlViolations{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	//decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varControlViolations)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ControlViolations(varControlViolations)
+
+	return err
 }
 
 type NullableControlViolations struct {

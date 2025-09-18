@@ -42,7 +42,7 @@ type InventoryResource struct {
 	ProviderAccountId string `json:"providerAccountId"`
 	SnapshotStorage SnapshotStorage `json:"snapshotStorage"`
 	SourceStorage SourceStorage `json:"sourceStorage"`
-	ControlViolationCounts *ControlViolations `json:"controlViolationCounts,omitempty"`
+	ControlViolationCounts NullableControlViolations `json:"controlViolationCounts,omitempty"`
 	// Resource tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"env\": \"prod\", \"app\": \"web\"}` 
 	Tags map[string]string `json:"tags"`
 	CloudProvider Provider `json:"cloudProvider"`
@@ -414,36 +414,46 @@ func (o *InventoryResource) SetSourceStorage(v SourceStorage) {
 	o.SourceStorage = v
 }
 
-// GetControlViolationCounts returns the ControlViolationCounts field value if set, zero value otherwise.
+// GetControlViolationCounts returns the ControlViolationCounts field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryResource) GetControlViolationCounts() ControlViolations {
-	if o == nil || IsNil(o.ControlViolationCounts) {
+	if o == nil || IsNil(o.ControlViolationCounts.Get()) {
 		var ret ControlViolations
 		return ret
 	}
-	return *o.ControlViolationCounts
+	return *o.ControlViolationCounts.Get()
 }
 
 // GetControlViolationCountsOk returns a tuple with the ControlViolationCounts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryResource) GetControlViolationCountsOk() (*ControlViolations, bool) {
-	if o == nil || IsNil(o.ControlViolationCounts) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ControlViolationCounts, true
+	return o.ControlViolationCounts.Get(), o.ControlViolationCounts.IsSet()
 }
 
 // HasControlViolationCounts returns a boolean if a field has been set.
 func (o *InventoryResource) HasControlViolationCounts() bool {
-	if o != nil && !IsNil(o.ControlViolationCounts) {
+	if o != nil && o.ControlViolationCounts.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetControlViolationCounts gets a reference to the given ControlViolations and assigns it to the ControlViolationCounts field.
+// SetControlViolationCounts gets a reference to the given NullableControlViolations and assigns it to the ControlViolationCounts field.
 func (o *InventoryResource) SetControlViolationCounts(v ControlViolations) {
-	o.ControlViolationCounts = &v
+	o.ControlViolationCounts.Set(&v)
+}
+// SetControlViolationCountsNil sets the value for ControlViolationCounts to be an explicit nil
+func (o *InventoryResource) SetControlViolationCountsNil() {
+	o.ControlViolationCounts.Set(nil)
+}
+
+// UnsetControlViolationCounts ensures that no value is present for ControlViolationCounts, not even an explicit nil
+func (o *InventoryResource) UnsetControlViolationCounts() {
+	o.ControlViolationCounts.Unset()
 }
 
 // GetTags returns the Tags field value
@@ -680,8 +690,8 @@ func (o InventoryResource) ToMap() (map[string]interface{}, error) {
 	toSerialize["providerAccountId"] = o.ProviderAccountId
 	toSerialize["snapshotStorage"] = o.SnapshotStorage
 	toSerialize["sourceStorage"] = o.SourceStorage
-	if !IsNil(o.ControlViolationCounts) {
-		toSerialize["controlViolationCounts"] = o.ControlViolationCounts
+	if o.ControlViolationCounts.IsSet() {
+		toSerialize["controlViolationCounts"] = o.ControlViolationCounts.Get()
 	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["cloudProvider"] = o.CloudProvider

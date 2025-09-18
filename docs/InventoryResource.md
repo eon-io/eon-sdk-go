@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
 **SnapshotStorage** | [**SnapshotStorage**](SnapshotStorage.md) |  | 
 **SourceStorage** | [**SourceStorage**](SourceStorage.md) |  | 
-**ControlViolationCounts** | Pointer to [**ControlViolations**](ControlViolations.md) |  | [optional] 
+**ControlViolationCounts** | Pointer to [**NullableControlViolations**](ControlViolations.md) |  | [optional] 
 **Tags** | **map[string]string** | Resource tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** &#x60;{\&quot;env\&quot;: \&quot;prod\&quot;, \&quot;app\&quot;: \&quot;web\&quot;}&#x60;  | 
 **CloudProvider** | [**Provider**](Provider.md) |  | 
 **ResourceType** | [**ResourceType**](ResourceType.md) |  | 
@@ -334,6 +334,16 @@ SetControlViolationCounts sets ControlViolationCounts field to given value.
 
 HasControlViolationCounts returns a boolean if a field has been set.
 
+### SetControlViolationCountsNil
+
+`func (o *InventoryResource) SetControlViolationCountsNil(b bool)`
+
+ SetControlViolationCountsNil sets the value for ControlViolationCounts to be an explicit nil
+
+### UnsetControlViolationCounts
+`func (o *InventoryResource) UnsetControlViolationCounts()`
+
+UnsetControlViolationCounts ensures that no value is present for ControlViolationCounts, not even an explicit nil
 ### GetTags
 
 `func (o *InventoryResource) GetTags() map[string]string`

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**High** | Pointer to **int32** | Number of high-severity control violations. | [optional] 
-**Medium** | Pointer to **int32** | Number of medium-severity control violations. | [optional] 
-**Low** | Pointer to **int32** | Number of low-severity control violations. | [optional] 
-**Muted** | Pointer to **int32** | Number of muted control violations. | [optional] 
+**High** | **int32** | Number of high-severity control violations. | 
+**Medium** | **int32** | Number of medium-severity control violations. | 
+**Low** | **int32** | Number of low-severity control violations. | 
+**Muted** | **int32** | Number of muted control violations. | 
 
 ## Methods
 
 ### NewControlViolations
 
-`func NewControlViolations() *ControlViolations`
+`func NewControlViolations(high int32, medium int32, low int32, muted int32, ) *ControlViolations`
 
 NewControlViolations instantiates a new ControlViolations object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetHigh sets High field to given value.
 
-### HasHigh
-
-`func (o *ControlViolations) HasHigh() bool`
-
-HasHigh returns a boolean if a field has been set.
 
 ### GetMedium
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetMedium sets Medium field to given value.
 
-### HasMedium
-
-`func (o *ControlViolations) HasMedium() bool`
-
-HasMedium returns a boolean if a field has been set.
 
 ### GetLow
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetLow sets Low field to given value.
 
-### HasLow
-
-`func (o *ControlViolations) HasLow() bool`
-
-HasLow returns a boolean if a field has been set.
 
 ### GetMuted
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetMuted sets Muted field to given value.
 
-### HasMuted
-
-`func (o *ControlViolations) HasMuted() bool`
-
-HasMuted returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
