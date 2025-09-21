@@ -31,6 +31,8 @@ type AwsDatabaseDestination struct {
 	SecurityGroups []string `json:"securityGroups,omitempty"`
 	// Subnet group ID to associate with the restored resource. Must be in the same VPC of `securityGroup`. 
 	SubnetGroup *string `json:"subnetGroup,omitempty"`
+	// Instance class to use for the restored resource.
+	DbInstanceClass *string `json:"dbInstanceClass,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 }
@@ -193,6 +195,38 @@ func (o *AwsDatabaseDestination) SetSubnetGroup(v string) {
 	o.SubnetGroup = &v
 }
 
+// GetDbInstanceClass returns the DbInstanceClass field value if set, zero value otherwise.
+func (o *AwsDatabaseDestination) GetDbInstanceClass() string {
+	if o == nil || IsNil(o.DbInstanceClass) {
+		var ret string
+		return ret
+	}
+	return *o.DbInstanceClass
+}
+
+// GetDbInstanceClassOk returns a tuple with the DbInstanceClass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsDatabaseDestination) GetDbInstanceClassOk() (*string, bool) {
+	if o == nil || IsNil(o.DbInstanceClass) {
+		return nil, false
+	}
+	return o.DbInstanceClass, true
+}
+
+// HasDbInstanceClass returns a boolean if a field has been set.
+func (o *AwsDatabaseDestination) HasDbInstanceClass() bool {
+	if o != nil && !IsNil(o.DbInstanceClass) {
+		return true
+	}
+
+	return false
+}
+
+// SetDbInstanceClass gets a reference to the given string and assigns it to the DbInstanceClass field.
+func (o *AwsDatabaseDestination) SetDbInstanceClass(v string) {
+	o.DbInstanceClass = &v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *AwsDatabaseDestination) GetTags() map[string]string {
 	if o == nil || IsNil(o.Tags) {
@@ -243,6 +277,9 @@ func (o AwsDatabaseDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SubnetGroup) {
 		toSerialize["subnetGroup"] = o.SubnetGroup
+	}
+	if !IsNil(o.DbInstanceClass) {
+		toSerialize["dbInstanceClass"] = o.DbInstanceClass
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags

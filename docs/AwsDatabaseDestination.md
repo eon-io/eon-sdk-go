@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **RestoredName** | **string** | Name to assign to the restored resource. | 
 **SecurityGroups** | Pointer to **[]string** | List of security group IDs to associate with the restored resource. Must be in the same VPC of &#x60;subnetGroup&#x60;.  | [optional] 
 **SubnetGroup** | Pointer to **string** | Subnet group ID to associate with the restored resource. Must be in the same VPC of &#x60;securityGroup&#x60;.  | [optional] 
+**DbInstanceClass** | Pointer to **string** | Instance class to use for the restored resource. | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 
 ## Methods
@@ -139,6 +140,31 @@ SetSubnetGroup sets SubnetGroup field to given value.
 `func (o *AwsDatabaseDestination) HasSubnetGroup() bool`
 
 HasSubnetGroup returns a boolean if a field has been set.
+
+### GetDbInstanceClass
+
+`func (o *AwsDatabaseDestination) GetDbInstanceClass() string`
+
+GetDbInstanceClass returns the DbInstanceClass field if non-nil, zero value otherwise.
+
+### GetDbInstanceClassOk
+
+`func (o *AwsDatabaseDestination) GetDbInstanceClassOk() (*string, bool)`
+
+GetDbInstanceClassOk returns a tuple with the DbInstanceClass field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDbInstanceClass
+
+`func (o *AwsDatabaseDestination) SetDbInstanceClass(v string)`
+
+SetDbInstanceClass sets DbInstanceClass field to given value.
+
+### HasDbInstanceClass
+
+`func (o *AwsDatabaseDestination) HasDbInstanceClass() bool`
+
+HasDbInstanceClass returns a boolean if a field has been set.
 
 ### GetTags
 

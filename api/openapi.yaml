@@ -11342,6 +11342,7 @@ components:
       description: Configuration for restoring to RDS.
       example:
         encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+        dbInstanceClass: db.t3.micro
         subnetGroup: subnetGroup
         restoreRegion: eu-west-1
         securityGroups:
@@ -11376,6 +11377,10 @@ components:
             Subnet group ID to associate with the restored resource.
             Must be in the same VPC of `securityGroup`.
           type: string
+        dbInstanceClass:
+          description: Instance class to use for the restored resource.
+          example: db.t3.micro
+          type: string
         tags:
           additionalProperties:
             type: string
@@ -11396,6 +11401,7 @@ components:
       example:
         awsRds:
           encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+          dbInstanceClass: db.t3.micro
           subnetGroup: subnetGroup
           restoreRegion: eu-west-1
           securityGroups:
@@ -11414,6 +11420,7 @@ components:
         destination:
           awsRds:
             encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
+            dbInstanceClass: db.t3.micro
             subnetGroup: subnetGroup
             restoreRegion: eu-west-1
             securityGroups:
