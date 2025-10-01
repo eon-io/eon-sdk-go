@@ -23,10 +23,16 @@ var _ MappedNullable = &BackupVault{}
 type BackupVault struct {
 	// Vault ID.
 	Id string `json:"id"`
+	// Eon-assigned ID of the vault account.
+	VaultAccountId string `json:"vaultAccountId"`
+	// Cloud provider-assigned ID of the vault account.
+	ProviderAccountId string `json:"providerAccountId"`
 	// Vault display name.
 	Name string `json:"name"`
 	// Region where the vault is located.
 	Region string `json:"region"`
+	// Whether the vault is managed by Eon.
+	IsManagedByEon bool `json:"isManagedByEon"`
 	VaultAttributes VaultProviderAttributes `json:"vaultAttributes"`
 }
 
@@ -36,11 +42,14 @@ type _BackupVault BackupVault
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupVault(id string, name string, region string, vaultAttributes VaultProviderAttributes) *BackupVault {
+func NewBackupVault(id string, vaultAccountId string, providerAccountId string, name string, region string, isManagedByEon bool, vaultAttributes VaultProviderAttributes) *BackupVault {
 	this := BackupVault{}
 	this.Id = id
+	this.VaultAccountId = vaultAccountId
+	this.ProviderAccountId = providerAccountId
 	this.Name = name
 	this.Region = region
+	this.IsManagedByEon = isManagedByEon
 	this.VaultAttributes = vaultAttributes
 	return &this
 }
@@ -75,6 +84,54 @@ func (o *BackupVault) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *BackupVault) SetId(v string) {
 	o.Id = v
+}
+
+// GetVaultAccountId returns the VaultAccountId field value
+func (o *BackupVault) GetVaultAccountId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.VaultAccountId
+}
+
+// GetVaultAccountIdOk returns a tuple with the VaultAccountId field value
+// and a boolean to check if the value has been set.
+func (o *BackupVault) GetVaultAccountIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.VaultAccountId, true
+}
+
+// SetVaultAccountId sets field value
+func (o *BackupVault) SetVaultAccountId(v string) {
+	o.VaultAccountId = v
+}
+
+// GetProviderAccountId returns the ProviderAccountId field value
+func (o *BackupVault) GetProviderAccountId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ProviderAccountId
+}
+
+// GetProviderAccountIdOk returns a tuple with the ProviderAccountId field value
+// and a boolean to check if the value has been set.
+func (o *BackupVault) GetProviderAccountIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProviderAccountId, true
+}
+
+// SetProviderAccountId sets field value
+func (o *BackupVault) SetProviderAccountId(v string) {
+	o.ProviderAccountId = v
 }
 
 // GetName returns the Name field value
@@ -125,6 +182,30 @@ func (o *BackupVault) SetRegion(v string) {
 	o.Region = v
 }
 
+// GetIsManagedByEon returns the IsManagedByEon field value
+func (o *BackupVault) GetIsManagedByEon() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsManagedByEon
+}
+
+// GetIsManagedByEonOk returns a tuple with the IsManagedByEon field value
+// and a boolean to check if the value has been set.
+func (o *BackupVault) GetIsManagedByEonOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsManagedByEon, true
+}
+
+// SetIsManagedByEon sets field value
+func (o *BackupVault) SetIsManagedByEon(v bool) {
+	o.IsManagedByEon = v
+}
+
 // GetVaultAttributes returns the VaultAttributes field value
 func (o *BackupVault) GetVaultAttributes() VaultProviderAttributes {
 	if o == nil {
@@ -160,8 +241,11 @@ func (o BackupVault) MarshalJSON() ([]byte, error) {
 func (o BackupVault) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	toSerialize["vaultAccountId"] = o.VaultAccountId
+	toSerialize["providerAccountId"] = o.ProviderAccountId
 	toSerialize["name"] = o.Name
 	toSerialize["region"] = o.Region
+	toSerialize["isManagedByEon"] = o.IsManagedByEon
 	toSerialize["vaultAttributes"] = o.VaultAttributes
 	return toSerialize, nil
 }
@@ -172,8 +256,11 @@ func (o *BackupVault) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
+		"vaultAccountId",
+		"providerAccountId",
 		"name",
 		"region",
+		"isManagedByEon",
 		"vaultAttributes",
 	}
 

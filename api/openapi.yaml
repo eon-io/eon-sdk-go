@@ -6617,17 +6617,28 @@ components:
       type: object
     BackupVault:
       example:
+        providerAccountId: "123412341234"
         name: AWS US East 1
+        vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         vaultAttributes:
           cloudProvider: AWS
           aws:
             encryptionKey: encryptionKey
         id: 37732835-d768-5990-ba93-a7c2d2e6d754
+        isManagedByEon: true
         region: us-east-1
       properties:
         id:
           description: Vault ID.
           example: 37732835-d768-5990-ba93-a7c2d2e6d754
+          type: string
+        vaultAccountId:
+          description: Eon-assigned ID of the vault account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        providerAccountId:
+          description: Cloud provider-assigned ID of the vault account.
+          example: "123412341234"
           type: string
         name:
           description: Vault display name.
@@ -6637,11 +6648,17 @@ components:
           description: Region where the vault is located.
           example: us-east-1
           type: string
+        isManagedByEon:
+          description: Whether the vault is managed by Eon.
+          example: true
+          type: boolean
         vaultAttributes:
           $ref: '#/components/schemas/VaultProviderAttributes'
       required:
       - id
+      - isManagedByEon
       - name
+      - providerAccountId
       - region
       - vaultAccountId
       - vaultAttributes
@@ -6670,12 +6687,15 @@ components:
           pointInTime: 2024-10-29T23:01:30Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
+          providerAccountId: "123412341234"
           name: AWS US East 1
+          vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           vaultAttributes:
             cloudProvider: AWS
             aws:
               encryptionKey: encryptionKey
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          isManagedByEon: true
           region: us-east-1
         backupType: AWS_EC2_BACKUP
       properties:
@@ -6719,12 +6739,15 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            providerAccountId: "123412341234"
             name: AWS US East 1
+            vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             vaultAttributes:
               cloudProvider: AWS
               aws:
                 encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
+            isManagedByEon: true
             region: us-east-1
           backupType: AWS_EC2_BACKUP
         - resourceDetails:
@@ -6749,12 +6772,15 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            providerAccountId: "123412341234"
             name: AWS US East 1
+            vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             vaultAttributes:
               cloudProvider: AWS
               aws:
                 encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
+            isManagedByEon: true
             region: us-east-1
           backupType: AWS_EC2_BACKUP
         totalCount: 2347
@@ -6803,12 +6829,15 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            providerAccountId: "123412341234"
             name: AWS US East 1
+            vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             vaultAttributes:
               cloudProvider: AWS
               aws:
                 encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
+            isManagedByEon: true
             region: us-east-1
           backupType: AWS_EC2_BACKUP
       properties:
@@ -7167,12 +7196,15 @@ components:
           pointInTime: 2024-10-29T23:01:30Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
+          providerAccountId: "123412341234"
           name: AWS US East 1
+          vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           vaultAttributes:
             cloudProvider: AWS
             aws:
               encryptionKey: encryptionKey
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          isManagedByEon: true
           region: us-east-1
       properties:
         jobExecutionDetails:
@@ -7233,12 +7265,15 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            providerAccountId: "123412341234"
             name: AWS US East 1
+            vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             vaultAttributes:
               cloudProvider: AWS
               aws:
                 encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
+            isManagedByEon: true
             region: us-east-1
         - restoreType: AWS_EC2_INSTANCE_RESTORE
           destinationDetails:
@@ -7277,12 +7312,15 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            providerAccountId: "123412341234"
             name: AWS US East 1
+            vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             vaultAttributes:
               cloudProvider: AWS
               aws:
                 encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
+            isManagedByEon: true
             region: us-east-1
         totalCount: 188
       properties:
@@ -7345,12 +7383,15 @@ components:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            providerAccountId: "123412341234"
             name: AWS US East 1
+            vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
             vaultAttributes:
               cloudProvider: AWS
               aws:
                 encryptionKey: encryptionKey
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
+            isManagedByEon: true
             region: us-east-1
       properties:
         job:
@@ -10941,19 +10982,25 @@ components:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         vaults:
-        - name: AWS US East 1
+        - providerAccountId: "123412341234"
+          name: AWS US East 1
+          vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           vaultAttributes:
             cloudProvider: AWS
             aws:
               encryptionKey: encryptionKey
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          isManagedByEon: true
           region: us-east-1
-        - name: AWS US East 1
+        - providerAccountId: "123412341234"
+          name: AWS US East 1
+          vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           vaultAttributes:
             cloudProvider: AWS
             aws:
               encryptionKey: encryptionKey
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          isManagedByEon: true
           region: us-east-1
         totalCount: 188
       properties:

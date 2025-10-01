@@ -5,15 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Vault ID. | 
+**VaultAccountId** | **string** | Eon-assigned ID of the vault account. | 
+**ProviderAccountId** | **string** | Cloud provider-assigned ID of the vault account. | 
 **Name** | **string** | Vault display name. | 
 **Region** | **string** | Region where the vault is located. | 
+**IsManagedByEon** | **bool** | Whether the vault is managed by Eon. | 
 **VaultAttributes** | [**VaultProviderAttributes**](VaultProviderAttributes.md) |  | 
 
 ## Methods
 
 ### NewBackupVault
 
-`func NewBackupVault(id string, name string, region string, vaultAttributes VaultProviderAttributes, ) *BackupVault`
+`func NewBackupVault(id string, vaultAccountId string, providerAccountId string, name string, region string, isManagedByEon bool, vaultAttributes VaultProviderAttributes, ) *BackupVault`
 
 NewBackupVault instantiates a new BackupVault object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +49,46 @@ and a boolean to check if the value has been set.
 `func (o *BackupVault) SetId(v string)`
 
 SetId sets Id field to given value.
+
+
+### GetVaultAccountId
+
+`func (o *BackupVault) GetVaultAccountId() string`
+
+GetVaultAccountId returns the VaultAccountId field if non-nil, zero value otherwise.
+
+### GetVaultAccountIdOk
+
+`func (o *BackupVault) GetVaultAccountIdOk() (*string, bool)`
+
+GetVaultAccountIdOk returns a tuple with the VaultAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVaultAccountId
+
+`func (o *BackupVault) SetVaultAccountId(v string)`
+
+SetVaultAccountId sets VaultAccountId field to given value.
+
+
+### GetProviderAccountId
+
+`func (o *BackupVault) GetProviderAccountId() string`
+
+GetProviderAccountId returns the ProviderAccountId field if non-nil, zero value otherwise.
+
+### GetProviderAccountIdOk
+
+`func (o *BackupVault) GetProviderAccountIdOk() (*string, bool)`
+
+GetProviderAccountIdOk returns a tuple with the ProviderAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderAccountId
+
+`func (o *BackupVault) SetProviderAccountId(v string)`
+
+SetProviderAccountId sets ProviderAccountId field to given value.
 
 
 ### GetName
@@ -86,6 +129,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupVault) SetRegion(v string)`
 
 SetRegion sets Region field to given value.
+
+
+### GetIsManagedByEon
+
+`func (o *BackupVault) GetIsManagedByEon() bool`
+
+GetIsManagedByEon returns the IsManagedByEon field if non-nil, zero value otherwise.
+
+### GetIsManagedByEonOk
+
+`func (o *BackupVault) GetIsManagedByEonOk() (*bool, bool)`
+
+GetIsManagedByEonOk returns a tuple with the IsManagedByEon field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsManagedByEon
+
+`func (o *BackupVault) SetIsManagedByEon(v bool)`
+
+SetIsManagedByEon sets IsManagedByEon field to given value.
 
 
 ### GetVaultAttributes
