@@ -212,8 +212,7 @@ paths:
       x-internal: false
       x-data-access:
         excluded: true
-      x-permissions:
-      - read:source_accounts
+      x-permissions: []
       x-audit-log:
         excluded: true
   /v1/projects/{projectId}/source-accounts/{accountId}/disconnect:
