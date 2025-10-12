@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **AccountStatus** | Pointer to [**AccountStatusFilters**](AccountStatusFilters.md) |  | [optional] 
 **CloudProvider** | Pointer to [**CloudProviderFilters**](CloudProviderFilters.md) |  | [optional] 
 **AccountName** | Pointer to [**AccountNameFilters**](AccountNameFilters.md) |  | [optional] 
+**ProviderOrganizationId** | Pointer to [**ProviderOrganizationIdFilters**](ProviderOrganizationIdFilters.md) |  | [optional] 
+**OrganizationId** | Pointer to [**OrganizationIdFilters**](OrganizationIdFilters.md) |  | [optional] 
 
 ## Methods
 
@@ -153,6 +155,56 @@ SetAccountName sets AccountName field to given value.
 `func (o *SourceAccountsFilterConditions) HasAccountName() bool`
 
 HasAccountName returns a boolean if a field has been set.
+
+### GetProviderOrganizationId
+
+`func (o *SourceAccountsFilterConditions) GetProviderOrganizationId() ProviderOrganizationIdFilters`
+
+GetProviderOrganizationId returns the ProviderOrganizationId field if non-nil, zero value otherwise.
+
+### GetProviderOrganizationIdOk
+
+`func (o *SourceAccountsFilterConditions) GetProviderOrganizationIdOk() (*ProviderOrganizationIdFilters, bool)`
+
+GetProviderOrganizationIdOk returns a tuple with the ProviderOrganizationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderOrganizationId
+
+`func (o *SourceAccountsFilterConditions) SetProviderOrganizationId(v ProviderOrganizationIdFilters)`
+
+SetProviderOrganizationId sets ProviderOrganizationId field to given value.
+
+### HasProviderOrganizationId
+
+`func (o *SourceAccountsFilterConditions) HasProviderOrganizationId() bool`
+
+HasProviderOrganizationId returns a boolean if a field has been set.
+
+### GetOrganizationId
+
+`func (o *SourceAccountsFilterConditions) GetOrganizationId() OrganizationIdFilters`
+
+GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
+
+### GetOrganizationIdOk
+
+`func (o *SourceAccountsFilterConditions) GetOrganizationIdOk() (*OrganizationIdFilters, bool)`
+
+GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganizationId
+
+`func (o *SourceAccountsFilterConditions) SetOrganizationId(v OrganizationIdFilters)`
+
+SetOrganizationId sets OrganizationId field to given value.
+
+### HasOrganizationId
+
+`func (o *SourceAccountsFilterConditions) HasOrganizationId() bool`
+
+HasOrganizationId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

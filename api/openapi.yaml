@@ -4808,6 +4808,52 @@ components:
             type: string
           type: array
       type: object
+    ProviderOrganizationIdFilters:
+      additionalProperties: false
+      example:
+        in:
+        - org-12345678
+        notIn:
+        - org-12345678
+      properties:
+        in:
+          description: Matches if any value in this list equals `providerOrganizationId`.
+          example:
+          - org-12345678
+          items:
+            type: string
+          type: array
+        notIn:
+          description: Matches if none of the values in this list equal `providerOrganizationId`.
+          example:
+          - org-12345678
+          items:
+            type: string
+          type: array
+      type: object
+    OrganizationIdFilters:
+      additionalProperties: false
+      example:
+        in:
+        - org-12345678
+        notIn:
+        - org-12345678
+      properties:
+        in:
+          description: Matches if any value in this list equals `organizationId`.
+          example:
+          - org-12345678
+          items:
+            type: string
+          type: array
+        notIn:
+          description: Matches if none of the values in this list equal `organizationId`.
+          example:
+          - org-12345678
+          items:
+            type: string
+          type: array
+      type: object
     SourceAccountsFilterConditions:
       additionalProperties: false
       description: |
@@ -4819,6 +4865,16 @@ components:
           - CONNECTED
           notIn:
           - INSUFFICIENT_PERMISSIONS
+        organizationId:
+          in:
+          - org-12345678
+          notIn:
+          - org-12345678
+        providerOrganizationId:
+          in:
+          - org-12345678
+          notIn:
+          - org-12345678
         accountName:
           contains:
           - contains
@@ -4860,6 +4916,10 @@ components:
           $ref: '#/components/schemas/CloudProviderFilters'
         accountName:
           $ref: '#/components/schemas/AccountNameFilters'
+        providerOrganizationId:
+          $ref: '#/components/schemas/ProviderOrganizationIdFilters'
+        organizationId:
+          $ref: '#/components/schemas/OrganizationIdFilters'
       type: object
     SourceAccountSortField:
       description: Field to sort by.
@@ -4901,6 +4961,16 @@ components:
             - CONNECTED
             notIn:
             - INSUFFICIENT_PERMISSIONS
+          organizationId:
+            in:
+            - org-12345678
+            notIn:
+            - org-12345678
+          providerOrganizationId:
+            in:
+            - org-12345678
+            notIn:
+            - org-12345678
           accountName:
             contains:
             - contains
