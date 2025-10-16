@@ -332,6 +332,9 @@ RestoreAzureDisk Restore Azure Disk
 
 Description: Restores an Azure disk from an Eon snapshot.
 
+When restoring a disk, you'll specify the configurations of the disk you want to restore.
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
 You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
@@ -1370,7 +1373,7 @@ RestoreEc2Instance Restore EC2 Instance
 Description: Restores an EC2 instance from an Eon snapshot.
 
 When restoring an EC2 instance, you'll need to specify the configurations of the instance and each volume you want to restore.
-You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -1669,7 +1672,7 @@ RestoreGcpCloudSql Restore GCP Cloud SQL Instance
 Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
 
 When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
-You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -1819,8 +1822,8 @@ RestoreGcpDisk Restore GCP Disk
 
 Description: Restores a GCP disk from an Eon snapshot.
 
-When restoring a GCP disk, you'll need to specify the configurations of the disk you want to restore.
-You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+When restoring a disk, you'll specify the configurations of the disk you want to restore.
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -1971,7 +1974,7 @@ RestoreGcpVmInstance Restore GCP VM Instance
 Description: Restores a GCP VM instance from an Eon snapshot.
 
 When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
-You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.

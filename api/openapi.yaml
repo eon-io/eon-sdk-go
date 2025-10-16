@@ -21,9 +21,6 @@ tags:
     accounts connected to your Eon account.
   name: accounts
   x-displayName: Connected Accounts
-- description: The Dashboard API allows you to retrieve daily storage summaries.
-  name: dashboard
-  x-displayName: Dashboard
 - description: "The Resources API allows you to read your resources, override resource\
     \ classification, and exclude resources from backup."
   name: resources
@@ -2358,7 +2355,7 @@ paths:
         Description: Restores an EC2 instance from an Eon snapshot.
 
         When restoring an EC2 instance, you'll need to specify the configurations of the instance and each volume you want to restore.
-        You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -2749,6 +2746,9 @@ paths:
       description: |
         Description: Restores an Azure disk from an Eon snapshot.
 
+        When restoring a disk, you'll specify the configurations of the disk you want to restore.
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
         You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
@@ -2846,8 +2846,8 @@ paths:
       description: |
         Description: Restores a GCP disk from an Eon snapshot.
 
-        When restoring a GCP disk, you'll need to specify the configurations of the disk you want to restore.
-        You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        When restoring a disk, you'll specify the configurations of the disk you want to restore.
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -2947,7 +2947,7 @@ paths:
         Description: Restores a GCP VM instance from an Eon snapshot.
 
         When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
-        You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -3047,7 +3047,7 @@ paths:
         Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
 
         When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
-        You can retrieve the configurations from the snapshot time when calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -4808,52 +4808,6 @@ components:
             type: string
           type: array
       type: object
-    ProviderOrganizationIdFilters:
-      additionalProperties: false
-      example:
-        in:
-        - org-12345678
-        notIn:
-        - org-12345678
-      properties:
-        in:
-          description: Matches if any value in this list equals `providerOrganizationId`.
-          example:
-          - org-12345678
-          items:
-            type: string
-          type: array
-        notIn:
-          description: Matches if none of the values in this list equal `providerOrganizationId`.
-          example:
-          - org-12345678
-          items:
-            type: string
-          type: array
-      type: object
-    OrganizationIdFilters:
-      additionalProperties: false
-      example:
-        in:
-        - org-12345678
-        notIn:
-        - org-12345678
-      properties:
-        in:
-          description: Matches if any value in this list equals `organizationId`.
-          example:
-          - org-12345678
-          items:
-            type: string
-          type: array
-        notIn:
-          description: Matches if none of the values in this list equal `organizationId`.
-          example:
-          - org-12345678
-          items:
-            type: string
-          type: array
-      type: object
     SourceAccountsFilterConditions:
       additionalProperties: false
       description: |
@@ -4865,16 +4819,6 @@ components:
           - CONNECTED
           notIn:
           - INSUFFICIENT_PERMISSIONS
-        organizationId:
-          in:
-          - org-12345678
-          notIn:
-          - org-12345678
-        providerOrganizationId:
-          in:
-          - org-12345678
-          notIn:
-          - org-12345678
         accountName:
           contains:
           - contains
@@ -4916,10 +4860,6 @@ components:
           $ref: '#/components/schemas/CloudProviderFilters'
         accountName:
           $ref: '#/components/schemas/AccountNameFilters'
-        providerOrganizationId:
-          $ref: '#/components/schemas/ProviderOrganizationIdFilters'
-        organizationId:
-          $ref: '#/components/schemas/OrganizationIdFilters'
       type: object
     SourceAccountSortField:
       description: Field to sort by.
@@ -4961,16 +4901,6 @@ components:
             - CONNECTED
             notIn:
             - INSUFFICIENT_PERMISSIONS
-          organizationId:
-            in:
-            - org-12345678
-            notIn:
-            - org-12345678
-          providerOrganizationId:
-            in:
-            - org-12345678
-            notIn:
-            - org-12345678
           accountName:
             contains:
             - contains
@@ -6718,7 +6648,7 @@ components:
           example: us-east-1
           type: string
         isManagedByEon:
-          description: Whether the vault is managed by Eon.
+          description: Whether the vault is in an Eon-managed vault account.
           example: true
           type: boolean
         vaultAttributes:
@@ -11838,27 +11768,27 @@ components:
           key: tags
       properties:
         name:
-          description: Name of the disk to restore.
+          description: Disk name.
           example: my-disk-12345
           type: string
         type:
-          description: Type of the disk to restore.
+          description: Disk type.
           example: Standard_LRS
           type: string
         tier:
-          description: Tier of the disk to restore.
+          description: Disk tier.
           example: Standard
           type: string
         hyperVGeneration:
           description: |
-            Hyper-V generation of the disk to restore.
-            Defaults to the original Hyper-V generation captured by the snapshot.
+            Hyper-V generation of the disk.
+            When restoring, defaults to the original Hyper-V generation captured by the snapshot.
           example: V1
           type: string
         sizeBytes:
           description: |
-            Size of the disk to restore, in bytes.
-            Defaults to the original disk size captured by the snapshot.
+            Size of the disk, in bytes.
+            When restoring, defaults to the original disk size captured by the snapshot.
           example: 10737418240
           format: int64
           type: integer
@@ -12205,33 +12135,36 @@ components:
           key: labels
       properties:
         name:
-          description: The name of the restored disk.
+          description: Disk name.
           example: my-restored-disk
           maxLength: 63
           type: string
         type:
-          description: "The type of the disk to restore (e.g., pd-standard, pd-ssd,\
-            \ pd-balanced)."
+          description: Disk type.
           example: pd-ssd
           type: string
         sizeBytes:
-          description: The size of the disk to restore in bytes.
+          description: "Size of the disk, in bytes."
           example: 10737418240
           format: int64
           type: integer
         iops:
-          description: Provisioned IOPS for the disk (only applicable for certain
-            disk types).
+          description: |
+            Provisioned IOPS for the disk.
+            Applicable only when `type` is `pd-extreme`.
+            When restoring, defaults to the original IOPS captured by the snapshot.
           example: 3000
           format: int64
           type: integer
         throughput:
-          description: Disk throughput.
+          description: |
+            Disk throughput.
+            When restoring, defaults to the original throughput captured by the snapshot.
           example: 125
           format: int64
           type: integer
         description:
-          description: Optional description.
+          description: Disk description.
           example: boot disk
           type: string
         labels:
@@ -12239,6 +12172,7 @@ components:
             type: string
           description: |
             Labels to apply to the restored disk as key-value pairs, where key and value are both strings.
+            These labels are always applied: `"eon-restore": "true"`, `"eon-job-id"`, `"eon-original-disk-id"`, `"eon-original-disk-name"`.
 
             **Example:** `{"primary": "true"}`
           type: object
@@ -12266,7 +12200,7 @@ components:
         zone: us-central1-a
       properties:
         zone:
-          description: The zone to restore the disk to.
+          description: Zone to restore the disk to.
           example: us-central1-a
           type: string
         settings:
@@ -12385,28 +12319,30 @@ components:
           eon_api_restore: "true"
       properties:
         zone:
-          description: The zone to restore the VM to.
+          description: Zone to restore to.
           example: us-east1-b
           type: string
         machineType:
-          description: The machine type to use for the restored instance.
+          description: Machine type to use.
           example: e2-medium
           type: string
         name:
-          description: The name of the VM to restore.
+          description: VM name.
           example: my-vm-12345
           maxLength: 63
           type: string
         networkName:
-          description: The name of the network to use.
+          description: Name of the VPC network to use.
           example: default
           type: string
         subnetName:
-          description: The name of the subnet to use.
+          description: Name of the subnet to use.
           example: default
           type: string
         networkHostProject:
-          description: The host project of the network to use (for shared VPC networks).
+          description: |
+            ID of the project that hosts the VPC network.
+            Applicable only when restoring to a shared VPC network.
           example: my-shared-vpc-project
           type: string
         labels:
@@ -12414,6 +12350,7 @@ components:
             type: string
           description: |
             Labels to apply to the restored VM as key-value pairs, where key and value are both strings.
+            These labels are always applied: `"eon-restore": "true"`.
 
             **Example:** `{"eon_api_restore": "true"}`
           example:
@@ -12423,7 +12360,7 @@ components:
           description: |
             Disks to restore and attach to the restored instance.
             Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot.
-            The boot disk must be present in the list.
+            The boot disk must be in the list.
           items:
             $ref: '#/components/schemas/RestoreGcpInstanceDiskInput'
           type: array
@@ -12544,26 +12481,27 @@ components:
           eon_api_restore: "true"
       properties:
         zone:
-          description: The zone to restore the Cloud SQL instance to.
+          description: Zone to restore to.
           example: us-east1-b
           type: string
         name:
-          description: The name of the Cloud SQL instance to restore.
+          description: Instance name.
           example: my-instance
           type: string
         networkType:
           $ref: '#/components/schemas/GcpNetworkType'
         networkName:
-          description: The VPC network name (required for private networking).
+          description: Name of the VPC network to use.
           example: default
           type: string
         subnetName:
-          description: The subnet name for the compute node (required for private
-            networking).
+          description: Name of the subnet to use.
           example: default
           type: string
         networkHostProject:
-          description: Host project ID for shared VPC (only required for private networking).
+          description: |
+            ID of the project that hosts the VPC network.
+            Applicable only when restoring to a shared VPC network.
           example: my-shared-vpc-project
           type: string
         labels:
@@ -12571,6 +12509,7 @@ components:
             type: string
           description: |
             Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings.
+            These labels are always applied: `"eon-restore": "true"`.
 
             **Example:** `{"eon_api_restore": "true"}`
           example:
@@ -14354,7 +14293,7 @@ components:
         providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
       properties:
         providerDiskId:
-          description: Cloud-provider-assigned ID of the disk to restore
+          description: Cloud-provider-assigned disk ID.
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
           type: string
         settings:
@@ -14392,12 +14331,13 @@ components:
       nullable: true
       properties:
         name:
-          description: The name of the resource
+          description: VM name.
           type: string
         sizeBytes:
-          description: The size of the virtual machine
+          description: "VM size, in bytes."
           type: string
         disks:
+          description: List of disks attached to the resource.
           items:
             $ref: '#/components/schemas/AzureDisk'
           type: array

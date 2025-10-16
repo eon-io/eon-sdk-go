@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | The name of the resource | [optional] 
-**SizeBytes** | Pointer to **string** | The size of the virtual machine | [optional] 
-**Disks** | Pointer to [**[]AzureDisk**](AzureDisk.md) |  | [optional] 
+**Name** | Pointer to **string** | VM name. | [optional] 
+**SizeBytes** | Pointer to **string** | VM size, in bytes. | [optional] 
+**Disks** | Pointer to [**[]AzureDisk**](AzureDisk.md) | List of disks attached to the resource. | [optional] 
 
 ## Methods
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Zone** | **string** | The zone to restore the VM to. | 
-**MachineType** | **string** | The machine type to use for the restored instance. | 
-**Name** | **string** | The name of the VM to restore. | 
-**NetworkName** | **string** | The name of the network to use. | 
-**SubnetName** | **string** | The name of the subnet to use. | 
-**NetworkHostProject** | Pointer to **string** | The host project of the network to use (for shared VPC networks). | [optional] 
-**Labels** | Pointer to **map[string]string** | Labels to apply to the restored VM as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
-**Disks** | [**[]RestoreGcpInstanceDiskInput**](RestoreGcpInstanceDiskInput.md) | Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where &#x60;providerDiskId&#x60; matches the disk&#39;s ID at the time of the snapshot. The boot disk must be present in the list.  | 
+**Zone** | **string** | Zone to restore to. | 
+**MachineType** | **string** | Machine type to use. | 
+**Name** | **string** | VM name. | 
+**NetworkName** | **string** | Name of the VPC network to use. | 
+**SubnetName** | **string** | Name of the subnet to use. | 
+**NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network.  | [optional] 
+**Labels** | Pointer to **map[string]string** | Labels to apply to the restored VM as key-value pairs, where key and value are both strings. These labels are always applied: &#x60;\&quot;eon-restore\&quot;: \&quot;true\&quot;&#x60;.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**Disks** | [**[]RestoreGcpInstanceDiskInput**](RestoreGcpInstanceDiskInput.md) | Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where &#x60;providerDiskId&#x60; matches the disk&#39;s ID at the time of the snapshot. The boot disk must be in the list.  | 
 
 ## Methods
 

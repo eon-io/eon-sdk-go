@@ -21,18 +21,18 @@ var _ MappedNullable = &GcpCloudSqlTarget{}
 
 // GcpCloudSqlTarget struct for GcpCloudSqlTarget
 type GcpCloudSqlTarget struct {
-	// The zone to restore the Cloud SQL instance to.
+	// Zone to restore to.
 	Zone string `json:"zone"`
-	// The name of the Cloud SQL instance to restore.
+	// Instance name.
 	Name string `json:"name"`
 	NetworkType GcpNetworkType `json:"networkType"`
-	// The VPC network name (required for private networking).
+	// Name of the VPC network to use.
 	NetworkName *string `json:"networkName,omitempty"`
-	// The subnet name for the compute node (required for private networking).
+	// Name of the subnet to use.
 	SubnetName *string `json:"subnetName,omitempty"`
-	// Host project ID for shared VPC (only required for private networking).
+	// ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network. 
 	NetworkHostProject *string `json:"networkHostProject,omitempty"`
-	// Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
+	// Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings. These labels are always applied: `\"eon-restore\": \"true\"`.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Labels *map[string]string `json:"labels,omitempty"`
 }
 

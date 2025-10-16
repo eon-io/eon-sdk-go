@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Zone** | **string** | The zone to restore the Cloud SQL instance to. | 
-**Name** | **string** | The name of the Cloud SQL instance to restore. | 
+**Zone** | **string** | Zone to restore to. | 
+**Name** | **string** | Instance name. | 
 **NetworkType** | [**GcpNetworkType**](GcpNetworkType.md) |  | 
-**NetworkName** | Pointer to **string** | The VPC network name (required for private networking). | [optional] 
-**SubnetName** | Pointer to **string** | The subnet name for the compute node (required for private networking). | [optional] 
-**NetworkHostProject** | Pointer to **string** | Host project ID for shared VPC (only required for private networking). | [optional] 
-**Labels** | Pointer to **map[string]string** | Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**NetworkName** | Pointer to **string** | Name of the VPC network to use. | [optional] 
+**SubnetName** | Pointer to **string** | Name of the subnet to use. | [optional] 
+**NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network.  | [optional] 
+**Labels** | Pointer to **map[string]string** | Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings. These labels are always applied: &#x60;\&quot;eon-restore\&quot;: \&quot;true\&quot;&#x60;.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 
 ## Methods
 

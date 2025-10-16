@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | The name of the restored disk. | 
-**Type** | **string** | The type of the disk to restore (e.g., pd-standard, pd-ssd, pd-balanced). | 
-**SizeBytes** | **int64** | The size of the disk to restore in bytes. | 
-**Iops** | Pointer to **int64** | Provisioned IOPS for the disk (only applicable for certain disk types). | [optional] 
-**Throughput** | Pointer to **int64** | Disk throughput. | [optional] 
-**Description** | Pointer to **string** | Optional description. | [optional] 
-**Labels** | Pointer to **map[string]string** | Labels to apply to the restored disk as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;primary\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**Name** | **string** | Disk name. | 
+**Type** | **string** | Disk type. | 
+**SizeBytes** | **int64** | Size of the disk, in bytes. | 
+**Iops** | Pointer to **int64** | Provisioned IOPS for the disk. Applicable only when &#x60;type&#x60; is &#x60;pd-extreme&#x60;. When restoring, defaults to the original IOPS captured by the snapshot.  | [optional] 
+**Throughput** | Pointer to **int64** | Disk throughput. When restoring, defaults to the original throughput captured by the snapshot.  | [optional] 
+**Description** | Pointer to **string** | Disk description. | [optional] 
+**Labels** | Pointer to **map[string]string** | Labels to apply to the restored disk as key-value pairs, where key and value are both strings. These labels are always applied: &#x60;\&quot;eon-restore\&quot;: \&quot;true\&quot;&#x60;, &#x60;\&quot;eon-job-id\&quot;&#x60;, &#x60;\&quot;eon-original-disk-id\&quot;&#x60;, &#x60;\&quot;eon-original-disk-name\&quot;&#x60;.  **Example:** &#x60;{\&quot;primary\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **EncryptionKeyId** | Pointer to **string** | ID of the customer-managed encryption key to use for the disk. | [optional] 
 
 ## Methods

@@ -21,7 +21,7 @@ var _ MappedNullable = &GcpDiskTarget{}
 
 // GcpDiskTarget struct for GcpDiskTarget
 type GcpDiskTarget struct {
-	// The zone to restore the disk to.
+	// Zone to restore the disk to.
 	Zone string `json:"zone"`
 	Settings GcpDiskSettings `json:"settings"`
 }

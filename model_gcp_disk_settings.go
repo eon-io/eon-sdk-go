@@ -21,19 +21,19 @@ var _ MappedNullable = &GcpDiskSettings{}
 
 // GcpDiskSettings struct for GcpDiskSettings
 type GcpDiskSettings struct {
-	// The name of the restored disk.
+	// Disk name.
 	Name string `json:"name"`
-	// The type of the disk to restore (e.g., pd-standard, pd-ssd, pd-balanced).
+	// Disk type.
 	Type string `json:"type"`
-	// The size of the disk to restore in bytes.
+	// Size of the disk, in bytes.
 	SizeBytes int64 `json:"sizeBytes"`
-	// Provisioned IOPS for the disk (only applicable for certain disk types).
+	// Provisioned IOPS for the disk. Applicable only when `type` is `pd-extreme`. When restoring, defaults to the original IOPS captured by the snapshot. 
 	Iops *int64 `json:"iops,omitempty"`
-	// Disk throughput.
+	// Disk throughput. When restoring, defaults to the original throughput captured by the snapshot. 
 	Throughput *int64 `json:"throughput,omitempty"`
-	// Optional description.
+	// Disk description.
 	Description *string `json:"description,omitempty"`
-	// Labels to apply to the restored disk as key-value pairs, where key and value are both strings.  **Example:** `{\"primary\": \"true\"}` 
+	// Labels to apply to the restored disk as key-value pairs, where key and value are both strings. These labels are always applied: `\"eon-restore\": \"true\"`, `\"eon-job-id\"`, `\"eon-original-disk-id\"`, `\"eon-original-disk-name\"`.  **Example:** `{\"primary\": \"true\"}` 
 	Labels *map[string]string `json:"labels,omitempty"`
 	// ID of the customer-managed encryption key to use for the disk.
 	EncryptionKeyId *string `json:"encryptionKeyId,omitempty"`

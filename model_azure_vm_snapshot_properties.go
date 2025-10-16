@@ -19,10 +19,11 @@ var _ MappedNullable = &AzureVmSnapshotProperties{}
 
 // AzureVmSnapshotProperties Properties of the original Azure Virtual Machine instance at the time the snapshot was taken. Present only when `resourceType` is set to `AZURE_VIRTUAL_MACHINE`. 
 type AzureVmSnapshotProperties struct {
-	// The name of the resource
+	// VM name.
 	Name *string `json:"name,omitempty"`
-	// The size of the virtual machine
+	// VM size, in bytes.
 	SizeBytes *string `json:"sizeBytes,omitempty"`
+	// List of disks attached to the resource.
 	Disks []AzureDisk `json:"disks,omitempty"`
 }
 

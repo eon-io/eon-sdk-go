@@ -31,7 +31,7 @@ type BackupVault struct {
 	Name string `json:"name"`
 	// Region where the vault is located.
 	Region string `json:"region"`
-	// Whether the vault is managed by Eon.
+	// Whether the vault is in an Eon-managed vault account.
 	IsManagedByEon bool `json:"isManagedByEon"`
 	VaultAttributes VaultProviderAttributes `json:"vaultAttributes"`
 }

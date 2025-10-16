@@ -21,21 +21,21 @@ var _ MappedNullable = &GcpVmInstanceRestoreTarget{}
 
 // GcpVmInstanceRestoreTarget struct for GcpVmInstanceRestoreTarget
 type GcpVmInstanceRestoreTarget struct {
-	// The zone to restore the VM to.
+	// Zone to restore to.
 	Zone string `json:"zone"`
-	// The machine type to use for the restored instance.
+	// Machine type to use.
 	MachineType string `json:"machineType"`
-	// The name of the VM to restore.
+	// VM name.
 	Name string `json:"name"`
-	// The name of the network to use.
+	// Name of the VPC network to use.
 	NetworkName string `json:"networkName"`
-	// The name of the subnet to use.
+	// Name of the subnet to use.
 	SubnetName string `json:"subnetName"`
-	// The host project of the network to use (for shared VPC networks).
+	// ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network. 
 	NetworkHostProject *string `json:"networkHostProject,omitempty"`
-	// Labels to apply to the restored VM as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
+	// Labels to apply to the restored VM as key-value pairs, where key and value are both strings. These labels are always applied: `\"eon-restore\": \"true\"`.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Labels *map[string]string `json:"labels,omitempty"`
-	// Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot. The boot disk must be present in the list. 
+	// Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot. The boot disk must be in the list. 
 	Disks []RestoreGcpInstanceDiskInput `json:"disks"`
 }
 

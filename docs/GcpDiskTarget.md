@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Zone** | **string** | The zone to restore the disk to. | 
+**Zone** | **string** | Zone to restore the disk to. | 
 **Settings** | [**GcpDiskSettings**](GcpDiskSettings.md) |  | 
 
 ## Methods

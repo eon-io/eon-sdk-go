@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ProviderAccountId** | **string** | Cloud provider-assigned ID of the vault account. | 
 **Name** | **string** | Vault display name. | 
 **Region** | **string** | Region where the vault is located. | 
-**IsManagedByEon** | **bool** | Whether the vault is managed by Eon. | 
+**IsManagedByEon** | **bool** | Whether the vault is in an Eon-managed vault account. | 
 **VaultAttributes** | [**VaultProviderAttributes**](VaultProviderAttributes.md) |  | 
 
 ## Methods

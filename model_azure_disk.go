@@ -21,7 +21,7 @@ var _ MappedNullable = &AzureDisk{}
 
 // AzureDisk struct for AzureDisk
 type AzureDisk struct {
-	// Cloud-provider-assigned ID of the disk to restore
+	// Cloud-provider-assigned disk ID.
 	ProviderDiskId string `json:"providerDiskId"`
 	Settings AzureDiskSettings `json:"settings"`
 }
