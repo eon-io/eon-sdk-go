@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAccessToken**](AuthAPI.md#GetAccessToken) | **Post** /v1/token | Get Access Token
 [**GetAccessTokenOAuth2**](AuthAPI.md#GetAccessTokenOAuth2) | **Post** /v1/oauth2/token | Get Access Token (OAuth2)
+[**RotateApiClientSecret**](AuthAPI.md#RotateApiClientSecret) | **Post** /v1/api-credentials/{clientId}/rotate | Rotate API Client Secret
+[**RotateCurrentApiClientSecret**](AuthAPI.md#RotateCurrentApiClientSecret) | **Post** /v1/api-credentials/current/rotate | Rotate Current API Client Secret
 
 
 
@@ -140,6 +142,137 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/x-www-form-urlencoded
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RotateApiClientSecret
+
+> ApiCredentials RotateApiClientSecret(ctx, clientId).Execute()
+
+Rotate API Client Secret
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	clientId := "yaeiq73af5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta" // string | API client ID.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuthAPI.RotateApiClientSecret(context.Background(), clientId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuthAPI.RotateApiClientSecret``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RotateApiClientSecret`: ApiCredentials
+	fmt.Fprintf(os.Stdout, "Response from `AuthAPI.RotateApiClientSecret`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clientId** | **string** | API client ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRotateApiClientSecretRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ApiCredentials**](ApiCredentials.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RotateCurrentApiClientSecret
+
+> ApiCredentials RotateCurrentApiClientSecret(ctx).Execute()
+
+Rotate Current API Client Secret
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuthAPI.RotateCurrentApiClientSecret(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuthAPI.RotateCurrentApiClientSecret``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RotateCurrentApiClientSecret`: ApiCredentials
+	fmt.Fprintf(os.Stdout, "Response from `AuthAPI.RotateCurrentApiClientSecret`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRotateCurrentApiClientSecretRequest struct via the builder pattern
+
+
+### Return type
+
+[**ApiCredentials**](ApiCredentials.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

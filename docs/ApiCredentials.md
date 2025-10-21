@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClientId** | **string** | Your integration&#39;s client ID. | 
-**ClientSecret** | **string** | Your integration&#39;s client secret. | 
+**ClientId** | **string** | API client ID. | 
+**ClientSecret** | **string** | API client secret. | 
 
 ## Methods
 

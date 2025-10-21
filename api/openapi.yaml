@@ -10,8 +10,8 @@ security:
 tags:
 - description: Operations related to Eon API.
   name: eonApi
-- description: "The Authentication API allows you to generate an access token, which\
-    \ you'll use to authenticate all other API calls."
+- description: |
+    The Auth API allows you to manage API client credentials and generate access tokens, which you'll use to authenticate all other API calls.
   name: auth
   x-displayName: Auth
 - description: The Projects API allows you to retrieve information about your projects.
@@ -4140,6 +4140,120 @@ paths:
       - read:inventory
       x-audit-log:
         excluded: true
+  /v1/api-credentials/{clientId}/rotate:
+    post:
+      description: |
+        Description: Replaces the client secret for the specified API client credentials.
+
+        This method can be used to rotate a secret for the API credentials specified in the request body.
+        To replace the client secret for the access key passed in the `Authorization` header, you can also use [Rotate Current API Client Secret].
+
+        Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
+        However, access tokens that were issued before the rotation remain valid until they expire.
+        This means there is an effective grace period of up to 12 hours where previously-issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+
+        [Rotate Current API Client Secret]: rotate-current-api-client-secret.api.mdx
+      operationId: rotateApiClientSecret
+      parameters:
+      - description: API client ID.
+        example: yaeiq73af5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
+        explode: false
+        in: path
+        name: clientId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCredentials'
+          description: Client secret rotated.
+        "404":
+          description: API credentials weren't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Rotate API Client Secret
+      tags:
+      - auth
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:rotate_api_credentials_secret
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: api_token
+          in: path
+          key: id
+  /v1/api-credentials/current/rotate:
+    post:
+      description: |
+        Description: Replaces the client secret for the currently used set of API credentials.
+
+        This method can be used to rotate a secret only for the access key passed in the `Authorization` header.
+        To replace client secrets for other sets of API credentials, use [Rotate API Client Secret].
+
+        Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
+        However, access tokens that were issued before the rotation remain valid until they expire.
+        This means there is an effective grace period of up to 12 hours where previously-issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+
+        [Rotate API Client Secret]: rotate-api-client-secret.api.mdx
+      operationId: rotateCurrentApiClientSecret
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCredentials'
+          description: Client secret rotated.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Rotate Current API Client Secret
+      tags:
+      - auth
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:rotate_self_api_credentials_secret
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: api_token
+          in: path
+          key: id
   /v1/token:
     post:
       description: |
@@ -14884,11 +14998,11 @@ components:
         clientSecret: eon_sample620a571c00caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
       properties:
         clientId:
-          description: Your integration's client ID.
+          description: API client ID.
           example: yaeiq73af5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
           type: string
         clientSecret:
-          description: Your integration's client secret.
+          description: API client secret.
           example: eon_sample620a571c00caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
           type: string
       required:

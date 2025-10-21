@@ -21,9 +21,9 @@ var _ MappedNullable = &ApiCredentials{}
 
 // ApiCredentials struct for ApiCredentials
 type ApiCredentials struct {
-	// Your integration's client ID.
+	// API client ID.
 	ClientId string `json:"clientId"`
-	// Your integration's client secret.
+	// API client secret.
 	ClientSecret string `json:"clientSecret"`
 }
 
