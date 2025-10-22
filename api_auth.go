@@ -181,7 +181,6 @@ type ApiGetAccessTokenOAuth2Request struct {
 	clientId *string
 	clientSecret *string
 	grantType *string
-	refreshToken *string
 }
 
 // Your integration&#39;s client ID.
@@ -199,12 +198,6 @@ func (r ApiGetAccessTokenOAuth2Request) ClientSecret(clientSecret string) ApiGet
 // The OAuth2 grant you are using.
 func (r ApiGetAccessTokenOAuth2Request) GrantType(grantType string) ApiGetAccessTokenOAuth2Request {
 	r.grantType = &grantType
-	return r
-}
-
-// Refresh token. Required if &#x60;grant_type&#x60; is &#x60;refresh_token&#x60;. 
-func (r ApiGetAccessTokenOAuth2Request) RefreshToken(refreshToken string) ApiGetAccessTokenOAuth2Request {
-	r.refreshToken = &refreshToken
 	return r
 }
 
@@ -288,9 +281,6 @@ func (a *AuthAPIService) GetAccessTokenOAuth2Execute(r ApiGetAccessTokenOAuth2Re
 	parameterAddToHeaderOrQuery(localVarFormParams, "client_secret", r.clientSecret, "")
 	if r.grantType != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "grant_type", r.grantType, "")
-	}
-	if r.refreshToken != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "refresh_token", r.refreshToken, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

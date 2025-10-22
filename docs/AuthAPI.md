@@ -79,7 +79,7 @@ No authorization required
 
 ## GetAccessTokenOAuth2
 
-> Oauth2TokenResponse GetAccessTokenOAuth2(ctx).ClientId(clientId).ClientSecret(clientSecret).GrantType(grantType).RefreshToken(refreshToken).Execute()
+> Oauth2TokenResponse GetAccessTokenOAuth2(ctx).ClientId(clientId).ClientSecret(clientSecret).GrantType(grantType).Execute()
 
 Get Access Token (OAuth2)
 
@@ -101,11 +101,10 @@ func main() {
 	clientId := "clientId_example" // string | Your integration's client ID.
 	clientSecret := "clientSecret_example" // string | Your integration's client secret.
 	grantType := "grantType_example" // string | The OAuth2 grant you are using. (optional)
-	refreshToken := "refreshToken_example" // string | Refresh token. Required if `grant_type` is `refresh_token`.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AuthAPI.GetAccessTokenOAuth2(context.Background()).ClientId(clientId).ClientSecret(clientSecret).GrantType(grantType).RefreshToken(refreshToken).Execute()
+	resp, r, err := apiClient.AuthAPI.GetAccessTokenOAuth2(context.Background()).ClientId(clientId).ClientSecret(clientSecret).GrantType(grantType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuthAPI.GetAccessTokenOAuth2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,7 +128,6 @@ Name | Type | Description  | Notes
  **clientId** | **string** | Your integration&#39;s client ID. | 
  **clientSecret** | **string** | Your integration&#39;s client secret. | 
  **grantType** | **string** | The OAuth2 grant you are using. | 
- **refreshToken** | **string** | Refresh token. Required if &#x60;grant_type&#x60; is &#x60;refresh_token&#x60;.  | 
 
 ### Return type
 

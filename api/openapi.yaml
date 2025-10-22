@@ -70,6 +70,56 @@ tags:
   name: billing
   x-displayName: Billing
 paths:
+  /v1/api-credentials:
+    post:
+      description: "Description: This API endpoint allows the creation of new api\
+        \ credentials for machine to machine communication. It requires administrative\
+        \ permissions."
+      operationId: createApiCredentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiCredentialsRequest'
+        description: The request body for creating api credentials
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApiCredentialsResponse'
+          description: Api credentials created successfully
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create a new api credentials
+      tags:
+      - createApiCredentials
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:api_credentials
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: api_token
+          in: resBody
+          key: id
   /v1/projects/{projectId}/source-accounts:
     post:
       description: "Description: Connects a source cloud account to the given project."
@@ -4530,6 +4580,96 @@ paths:
         excluded: true
 components:
   schemas:
+    CreateApiCredentialsRequest:
+      example:
+        projects:
+        - projects
+        - projects
+        roleId: roleId
+        name: name
+        enableCurrentSecretRotation: false
+      properties:
+        name:
+          description: The name of the api credential user
+          type: string
+        roleId:
+          description: The role ID of the api credential user
+          type: string
+        projects:
+          description: The projects the api credential user has access to
+          items:
+            type: string
+          type: array
+        enableCurrentSecretRotation:
+          default: false
+          description: Whether the api credentials user can rotate their own secret
+          type: boolean
+      required:
+      - name
+      - projects
+      - roleId
+      type: object
+    ApiCredentialsProperties:
+      example:
+        clientId: clientId
+        projects:
+        - projects
+        - projects
+        roleId: roleId
+        name: name
+        id: id
+        enableCurrentSecretRotation: false
+      properties:
+        id:
+          description: The ID of the api credential
+          type: string
+        clientId:
+          description: The client ID of the api credential
+          type: string
+        name:
+          description: The given name of the api credential
+          type: string
+        projects:
+          description: The projects the api credentials has access to
+          items:
+            type: string
+          type: array
+        roleId:
+          description: The role ID of the api credential
+          type: string
+        enableCurrentSecretRotation:
+          default: false
+          description: Whether the api credentials user can rotate their own secret
+          type: boolean
+      required:
+      - clientId
+      - id
+      - name
+      - projects
+      - roleId
+      type: object
+    CreateApiCredentialsResponse:
+      example:
+        clientSecret: clientSecret
+        apiCredentialsProperties:
+          clientId: clientId
+          projects:
+          - projects
+          - projects
+          roleId: roleId
+          name: name
+          id: id
+          enableCurrentSecretRotation: false
+      properties:
+        apiCredentialsProperties:
+          $ref: '#/components/schemas/ApiCredentialsProperties'
+        clientSecret:
+          description: The secret of the api credentials
+          type: string
+      required:
+      - apiCredentialsProperties
+      - clientSecret
+      type: object
     Provider:
       description: Cloud provider.
       enum:
@@ -15048,13 +15188,6 @@ components:
           description: The OAuth2 grant you are using.
           enum:
           - client_credentials
-          - refresh_token
-          type: string
-        refresh_token:
-          description: |
-            Refresh token.
-            Required if `grant_type` is `refresh_token`.
-          nullable: true
           type: string
       required:
       - client_id
