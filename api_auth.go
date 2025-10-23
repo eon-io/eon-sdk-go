@@ -183,19 +183,19 @@ type ApiGetAccessTokenOAuth2Request struct {
 	grantType *string
 }
 
-// Your integration&#39;s client ID.
+// API client ID.
 func (r ApiGetAccessTokenOAuth2Request) ClientId(clientId string) ApiGetAccessTokenOAuth2Request {
 	r.clientId = &clientId
 	return r
 }
 
-// Your integration&#39;s client secret.
+// API client secret.
 func (r ApiGetAccessTokenOAuth2Request) ClientSecret(clientSecret string) ApiGetAccessTokenOAuth2Request {
 	r.clientSecret = &clientSecret
 	return r
 }
 
-// The OAuth2 grant you are using.
+// The OAuth 2.0 grant type you&#39;re using. Must be &#x60;client_credentials&#x60;. 
 func (r ApiGetAccessTokenOAuth2Request) GrantType(grantType string) ApiGetAccessTokenOAuth2Request {
 	r.grantType = &grantType
 	return r
@@ -206,12 +206,13 @@ func (r ApiGetAccessTokenOAuth2Request) Execute() (*Oauth2TokenResponse, *http.R
 }
 
 /*
-GetAccessTokenOAuth2 Get Access Token (OAuth2)
+GetAccessTokenOAuth2 Get Access Token (OAuth 2)
 
-Description: OAuth2-compliant token endpoint that accepts form-encoded credentials using standard `client_id` and `client_secret` field names.
+Description: Retrieves an access token using an OAuth-2.0-compliant flow.
+Accepts form-encoded credentials using standard `client_id` and `client_secret` field names.
 
-This endpoint is specifically designed for OAuth2 clients like Grafana that send credentials as form-encoded data.
-For JSON-based API calls, use the standard `/v1/token` endpoint instead.
+This method is specifically designed for OAuth 2.0 clients like Grafana that send credentials as form-encoded data.
+For JSON-based API calls, use [Get Access Token].
 
 The client ID and secret you provide when calling this method must be from a set of API credentials from your Eon account.
 To learn more about creating API credentials and completing the authentication flow, see [Authentication](/api/using-the-api/authentication).
@@ -221,6 +222,8 @@ Always make sure the API credentials have the permissions needed for the API met
 
 The access token is valid for 12 hours.
 After that, you must call this method again to get a new token.
+
+[Get Access Token]: ./get-access-token.api.mdx
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -259,6 +262,9 @@ func (a *AuthAPIService) GetAccessTokenOAuth2Execute(r ApiGetAccessTokenOAuth2Re
 	if r.clientSecret == nil {
 		return localVarReturnValue, nil, reportError("clientSecret is required and must be specified")
 	}
+	if r.grantType == nil {
+		return localVarReturnValue, nil, reportError("grantType is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/x-www-form-urlencoded"}
@@ -279,9 +285,7 @@ func (a *AuthAPIService) GetAccessTokenOAuth2Execute(r ApiGetAccessTokenOAuth2Re
 	}
 	parameterAddToHeaderOrQuery(localVarFormParams, "client_id", r.clientId, "")
 	parameterAddToHeaderOrQuery(localVarFormParams, "client_secret", r.clientSecret, "")
-	if r.grantType != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "grant_type", r.grantType, "")
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "grant_type", r.grantType, "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

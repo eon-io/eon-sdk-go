@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAccessToken**](AuthAPI.md#GetAccessToken) | **Post** /v1/token | Get Access Token
-[**GetAccessTokenOAuth2**](AuthAPI.md#GetAccessTokenOAuth2) | **Post** /v1/oauth2/token | Get Access Token (OAuth2)
+[**GetAccessTokenOAuth2**](AuthAPI.md#GetAccessTokenOAuth2) | **Post** /v1/oauth2/token | Get Access Token (OAuth 2)
 [**RotateApiClientSecret**](AuthAPI.md#RotateApiClientSecret) | **Post** /v1/api-credentials/{clientId}/rotate | Rotate API Client Secret
 [**RotateCurrentApiClientSecret**](AuthAPI.md#RotateCurrentApiClientSecret) | **Post** /v1/api-credentials/current/rotate | Rotate Current API Client Secret
 
@@ -81,7 +81,7 @@ No authorization required
 
 > Oauth2TokenResponse GetAccessTokenOAuth2(ctx).ClientId(clientId).ClientSecret(clientSecret).GrantType(grantType).Execute()
 
-Get Access Token (OAuth2)
+Get Access Token (OAuth 2)
 
 
 
@@ -98,9 +98,9 @@ import (
 )
 
 func main() {
-	clientId := "clientId_example" // string | Your integration's client ID.
-	clientSecret := "clientSecret_example" // string | Your integration's client secret.
-	grantType := "grantType_example" // string | The OAuth2 grant you are using. (optional)
+	clientId := "clientId_example" // string | API client ID.
+	clientSecret := "clientSecret_example" // string | API client secret.
+	grantType := "grantType_example" // string | The OAuth 2.0 grant type you're using. Must be `client_credentials`. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -125,9 +125,9 @@ Other parameters are passed through a pointer to a apiGetAccessTokenOAuth2Reques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **clientId** | **string** | Your integration&#39;s client ID. | 
- **clientSecret** | **string** | Your integration&#39;s client secret. | 
- **grantType** | **string** | The OAuth2 grant you are using. | 
+ **clientId** | **string** | API client ID. | 
+ **clientSecret** | **string** | API client secret. | 
+ **grantType** | **string** | The OAuth 2.0 grant type you&#39;re using. Must be &#x60;client_credentials&#x60;.  | 
 
 ### Return type
 

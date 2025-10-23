@@ -23,8 +23,6 @@ type Oauth2TokenResponse struct {
 	AccessToken *string `json:"access_token,omitempty"`
 	// Type of the token, which is always `Bearer`.
 	TokenType *string `json:"token_type,omitempty"`
-	// Token used to obtain a new access token when the current one expires. Required if `grant_type` is `refresh_token`. 
-	RefreshToken *string `json:"refresh_token,omitempty"`
 	// Length of time until the token expires, in seconds. Default: `43200` (12 hours). 
 	ExpiresIn *int32 `json:"expires_in,omitempty"`
 }
@@ -110,38 +108,6 @@ func (o *Oauth2TokenResponse) SetTokenType(v string) {
 	o.TokenType = &v
 }
 
-// GetRefreshToken returns the RefreshToken field value if set, zero value otherwise.
-func (o *Oauth2TokenResponse) GetRefreshToken() string {
-	if o == nil || IsNil(o.RefreshToken) {
-		var ret string
-		return ret
-	}
-	return *o.RefreshToken
-}
-
-// GetRefreshTokenOk returns a tuple with the RefreshToken field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Oauth2TokenResponse) GetRefreshTokenOk() (*string, bool) {
-	if o == nil || IsNil(o.RefreshToken) {
-		return nil, false
-	}
-	return o.RefreshToken, true
-}
-
-// HasRefreshToken returns a boolean if a field has been set.
-func (o *Oauth2TokenResponse) HasRefreshToken() bool {
-	if o != nil && !IsNil(o.RefreshToken) {
-		return true
-	}
-
-	return false
-}
-
-// SetRefreshToken gets a reference to the given string and assigns it to the RefreshToken field.
-func (o *Oauth2TokenResponse) SetRefreshToken(v string) {
-	o.RefreshToken = &v
-}
-
 // GetExpiresIn returns the ExpiresIn field value if set, zero value otherwise.
 func (o *Oauth2TokenResponse) GetExpiresIn() int32 {
 	if o == nil || IsNil(o.ExpiresIn) {
@@ -189,9 +155,6 @@ func (o Oauth2TokenResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TokenType) {
 		toSerialize["token_type"] = o.TokenType
-	}
-	if !IsNil(o.RefreshToken) {
-		toSerialize["refresh_token"] = o.RefreshToken
 	}
 	if !IsNil(o.ExpiresIn) {
 		toSerialize["expires_in"] = o.ExpiresIn

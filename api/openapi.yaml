@@ -4367,10 +4367,11 @@ paths:
   /v1/oauth2/token:
     post:
       description: |
-        Description: OAuth2-compliant token endpoint that accepts form-encoded credentials using standard `client_id` and `client_secret` field names.
+        Description: Retrieves an access token using an OAuth-2.0-compliant flow.
+        Accepts form-encoded credentials using standard `client_id` and `client_secret` field names.
 
-        This endpoint is specifically designed for OAuth2 clients like Grafana that send credentials as form-encoded data.
-        For JSON-based API calls, use the standard `/v1/token` endpoint instead.
+        This method is specifically designed for OAuth 2.0 clients like Grafana that send credentials as form-encoded data.
+        For JSON-based API calls, use [Get Access Token].
 
         The client ID and secret you provide when calling this method must be from a set of API credentials from your Eon account.
         To learn more about creating API credentials and completing the authentication flow, see [Authentication](/api/using-the-api/authentication).
@@ -4380,6 +4381,8 @@ paths:
 
         The access token is valid for 12 hours.
         After that, you must call this method again to get a new token.
+
+        [Get Access Token]: ./get-access-token.api.mdx
       operationId: getAccessTokenOAuth2
       requestBody:
         content:
@@ -4417,7 +4420,7 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
       security: []
-      summary: Get Access Token (OAuth2)
+      summary: Get Access Token (OAuth 2)
       tags:
       - auth
       x-permissions: []
@@ -15177,26 +15180,29 @@ components:
       additionalProperties: false
       properties:
         client_id:
-          description: Your integration's client ID.
+          description: API client ID.
           example: rachelyaf5cbxibLiu22yw2t5ezeozxu5itv43uw2tyn3xpqprta
           type: string
         client_secret:
-          description: Your integration's client secret.
+          description: API client secret.
           example: eon_sample008789765400caf772b8e1b69de703792ba12c9eadef689725e0489324a093a64b4459ffecbaaa441c377950628b6b9042af728056d1d060b8f5d5sample
           type: string
         grant_type:
-          description: The OAuth2 grant you are using.
+          description: |
+            The OAuth 2.0 grant type you're using.
+            Must be `client_credentials`.
           enum:
           - client_credentials
+          example: client_credentials
           type: string
       required:
       - client_id
       - client_secret
+      - grant_type
       type: object
     Oauth2TokenResponse:
       example:
         access_token: access_token
-        refresh_token: refresh_token
         token_type: Bearer
         expires_in: 43200
       properties:
@@ -15207,11 +15213,6 @@ components:
         token_type:
           description: "Type of the token, which is always `Bearer`."
           example: Bearer
-          type: string
-        refresh_token:
-          description: |
-            Token used to obtain a new access token when the current one expires.
-            Required if `grant_type` is `refresh_token`.
           type: string
         expires_in:
           description: |
