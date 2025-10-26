@@ -220,6 +220,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 50
           type: integer
         style: form
       requestBody:
@@ -691,6 +692,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 50
           type: integer
         style: form
       requestBody:
@@ -1287,6 +1289,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 50
           type: integer
         style: form
       requestBody:
@@ -1433,6 +1436,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 50
           type: integer
         style: form
       requestBody:
@@ -1882,6 +1886,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 50
           type: integer
         style: form
       responses:
@@ -3400,6 +3405,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 500
           type: integer
         style: form
       - allowEmptyValue: true
@@ -3488,6 +3494,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 50
           type: integer
         style: form
       requestBody:
@@ -4142,6 +4149,7 @@ paths:
         name: pageSize
         required: false
         schema:
+          default: 50
           type: integer
         style: form
       requestBody:

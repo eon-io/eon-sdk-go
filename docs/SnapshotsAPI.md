@@ -119,7 +119,7 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource whose Eon snapshots you want to retrieve.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
 	pageToken := "OGRjZmRkNjYtZjJiMy00MmQ3LWIyMjMtNzU2M2NmMThiYWM2fDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
-	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional)
+	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 	listInventorySnapshotsRequest := *openapiclient.NewListInventorySnapshotsRequest() // ListInventorySnapshotsRequest | Filter options. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
- **pageSize** | **int32** | Maximum number of items to return in the response. | 
+ **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
  **listInventorySnapshotsRequest** | [**ListInventorySnapshotsRequest**](ListInventorySnapshotsRequest.md) | Filter options. | 
 
 ### Return type

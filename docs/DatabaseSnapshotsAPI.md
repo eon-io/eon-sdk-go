@@ -33,7 +33,7 @@ import (
 func main() {
 	projectId := "330e9e09-6cb8-52af-b532-a476f598cf94" // string | ID of the project that contains the query you want to retrieve. You can see your project ID in the [API Credentials](/global-settings/api-credentials) page in your global settings.  
 	queryId := "330e9e09-6cb8-52af-b532-a476f598cf94:3fdf3419-366b-5e58-847d-c4671f79ce8f" // string | Query ID returned by [Run Query](./run-query).
-	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional)
+	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 500)
 	pageToken := "pageToken_example" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **pageSize** | **int32** | Maximum number of items to return in the response. | 
+ **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 500]
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response.  | 
 
 ### Return type

@@ -98,6 +98,9 @@ func (a *DatabaseSnapshotsAPIService) GetQueryResultExecute(r ApiGetQueryResultR
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 500
+		r.pageSize = &defaultValue
 	}
 	if r.pageToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "")

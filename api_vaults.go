@@ -91,6 +91,9 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ListBacku
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 50
+		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
