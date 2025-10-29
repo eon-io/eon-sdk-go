@@ -20,9 +20,9 @@ type GcpNetworkType string
 
 // List of GcpNetworkType
 const (
-	AZURE_NETWORK_TYPE_UNSPECIFIED GcpNetworkType = "UNSPECIFIED"
-	AZURE_NETWORK_TYPE_PUBLIC GcpNetworkType = "PUBLIC"
-	AZURE_NETWORK_TYPE_PRIVATE GcpNetworkType = "PRIVATE"
+	GCP_NETWORK_TYPE_UNSPECIFIED GcpNetworkType = "UNSPECIFIED"
+	GCP_NETWORK_TYPE_PUBLIC GcpNetworkType = "PUBLIC"
+	GCP_NETWORK_TYPE_PRIVATE GcpNetworkType = "PRIVATE"
 )
 
 // All allowed values of GcpNetworkType enum

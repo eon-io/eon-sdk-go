@@ -211,6 +211,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       - description: Maximum number of items to return in the response.
@@ -292,6 +293,7 @@ paths:
         name: accountId
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       responses:
@@ -356,6 +358,7 @@ paths:
         name: accountId
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       responses:
@@ -683,6 +686,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       - description: Maximum number of items to return in the response.
@@ -763,6 +767,7 @@ paths:
         name: accountId
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       responses:
@@ -827,6 +832,7 @@ paths:
         name: accountId
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       responses:
@@ -1280,6 +1286,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       - description: Maximum number of items to return in the response.
@@ -1427,6 +1434,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       - description: Maximum number of items to return in the response.
@@ -1877,6 +1885,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       - description: Maximum number of items to return in the response.
@@ -1951,6 +1960,7 @@ paths:
         name: id
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
@@ -2047,6 +2057,7 @@ paths:
         name: id
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
@@ -2143,6 +2154,7 @@ paths:
         name: id
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
@@ -3325,6 +3337,7 @@ paths:
         name: queryId
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       responses:
@@ -3396,6 +3409,7 @@ paths:
         name: queryId
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       - description: Maximum number of items to return in the response.
@@ -3417,6 +3431,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       responses:
@@ -3485,6 +3500,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       - description: Maximum number of items to return in the response.
@@ -3548,6 +3564,7 @@ paths:
         name: id
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       - description: |
@@ -4116,6 +4133,7 @@ paths:
         name: id
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       - description: |
@@ -4140,6 +4158,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       - description: Maximum number of items to return in the response.
@@ -4220,6 +4239,7 @@ paths:
         name: clientId
         required: true
         schema:
+          format: tobedefined
           type: string
         style: simple
       responses:
@@ -4466,6 +4486,7 @@ paths:
         name: pageToken
         required: false
         schema:
+          format: tobedefined
           type: string
         style: form
       requestBody:
@@ -11744,6 +11765,7 @@ components:
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          format: uuid
           type: string
         destination:
           $ref: '#/components/schemas/DatabaseDestination'
@@ -12731,9 +12753,9 @@ components:
       example: PRIVATE
       type: string
       x-enum-varnames:
-      - AZURE_NETWORK_TYPE_UNSPECIFIED
-      - AZURE_NETWORK_TYPE_PUBLIC
-      - AZURE_NETWORK_TYPE_PRIVATE
+      - GCP_NETWORK_TYPE_UNSPECIFIED
+      - GCP_NETWORK_TYPE_PUBLIC
+      - GCP_NETWORK_TYPE_PRIVATE
     GcpCloudSqlTarget:
       example:
         networkHostProject: my-shared-vpc-project
@@ -15761,6 +15783,7 @@ components:
       properties:
         error:
           example: start time should be at least 24 hours before end time
+          format: tobedefined
           type: string
       type: object
   securitySchemes:
