@@ -15400,6 +15400,7 @@ components:
       - CLOUD_PROVIDER
       - RESOURCE_TYPE
       - RESOURCE
+      - RESOURCE_AND_VAULT
       example: SOURCE_ACCOUNT
       type: string
       x-enum-varnames:
@@ -15407,6 +15408,7 @@ components:
       - COST_GROUP_BY_CLOUD_PROVIDER
       - COST_GROUP_BY_RESOURCE_TYPE
       - COST_GROUP_BY_RESOURCE
+      - COST_GROUP_BY_RESOURCE_AND_VAULT
     QueryCostDataRequest:
       example:
         costUnit: CREDITS

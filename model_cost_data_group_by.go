@@ -24,6 +24,7 @@ const (
 	COST_GROUP_BY_CLOUD_PROVIDER CostDataGroupBy = "CLOUD_PROVIDER"
 	COST_GROUP_BY_RESOURCE_TYPE CostDataGroupBy = "RESOURCE_TYPE"
 	COST_GROUP_BY_RESOURCE CostDataGroupBy = "RESOURCE"
+	COST_GROUP_BY_RESOURCE_AND_VAULT CostDataGroupBy = "RESOURCE_AND_VAULT"
 )
 
 // All allowed values of CostDataGroupBy enum
@@ -32,6 +33,7 @@ var AllowedCostDataGroupByEnumValues = []CostDataGroupBy{
 	"CLOUD_PROVIDER",
 	"RESOURCE_TYPE",
 	"RESOURCE",
+	"RESOURCE_AND_VAULT",
 }
 
 func (v *CostDataGroupBy) UnmarshalJSON(src []byte) error {
