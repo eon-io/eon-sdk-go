@@ -46,7 +46,7 @@ Description: Connects a restore account to the given project.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiConnectRestoreAccountRequest
 */
 func (a *AccountsAPIService) ConnectRestoreAccount(ctx context.Context, projectId string) ApiConnectRestoreAccountRequest {
@@ -181,7 +181,7 @@ ConnectSourceAccount Connect Source Account
 Description: Connects a source cloud account to the given project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiConnectSourceAccountRequest
 */
 func (a *AccountsAPIService) ConnectSourceAccount(ctx context.Context, projectId string) ApiConnectSourceAccountRequest {
@@ -313,7 +313,7 @@ Description: Deletes the restore account connectivity configuration, reverting t
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the restore account.
- @param projectId ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiDeleteRestoreAccountConnectivityConfigRequest
 */
 func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiDeleteRestoreAccountConnectivityConfigRequest {
@@ -431,7 +431,7 @@ Description: Disables metrics for the specified restore account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the restore account.
- @param projectId ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiDisableRestoreAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) DisableRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiDisableRestoreAccountMetricsConfigRequest {
@@ -549,7 +549,7 @@ Description: Disables metrics for the specified source account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the source account.
- @param projectId ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiDisableSourceAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) DisableSourceAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiDisableSourceAccountMetricsConfigRequest {
@@ -668,7 +668,7 @@ After disconnecting, data and resources can no longer be restored to the restore
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param accountId Eon-assigned ID of the restore account to disconnect.
  @return ApiDisconnectRestoreAccountRequest
 */
@@ -801,7 +801,7 @@ Resources with no remaining snapshots are removed from the inventory.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param accountId Eon-assigned ID of the source account to disconnect.
  @return ApiDisconnectSourceAccountRequest
 */
@@ -937,7 +937,7 @@ Description: Enables or updates the metrics configuration of the specified resto
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the restore account.
- @param projectId ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiEnableRestoreAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) EnableRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiEnableRestoreAccountMetricsConfigRequest {
@@ -1077,7 +1077,7 @@ Description: Enables or updates the metrics configuration of the specified sourc
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the source account.
- @param projectId ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiEnableSourceAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) EnableSourceAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiEnableSourceAccountMetricsConfigRequest {
@@ -1211,7 +1211,7 @@ Description: Retrieves the connectivity configuration of the specified restore a
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the restore account.
- @param projectId ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetRestoreAccountConnectivityConfigRequest
 */
 func (a *AccountsAPIService) GetRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiGetRestoreAccountConnectivityConfigRequest {
@@ -1340,7 +1340,7 @@ Description: Retrieves the metrics configuration of the specified restore accoun
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the restore account.
- @param projectId ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetRestoreAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) GetRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiGetRestoreAccountMetricsConfigRequest {
@@ -1469,7 +1469,7 @@ Description: Retrieves the metrics configuration of the specified source account
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId Eon-assigned ID of the source account.
- @param projectId ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetSourceAccountMetricsConfigRequest
 */
 func (a *AccountsAPIService) GetSourceAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiGetSourceAccountMetricsConfigRequest {
@@ -1616,7 +1616,7 @@ ListRestoreAccounts List Restore Accounts
 Description: Retrieves a list of restore accounts for the given project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiListRestoreAccountsRequest
 */
 func (a *AccountsAPIService) ListRestoreAccounts(ctx context.Context, projectId string) ApiListRestoreAccountsRequest {
@@ -1772,7 +1772,7 @@ ListSourceAccounts List Source Accounts
 Description: Retrieves a list of source accounts for the given project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiListSourceAccountsRequest
 */
 func (a *AccountsAPIService) ListSourceAccounts(ctx context.Context, projectId string) ApiListSourceAccountsRequest {
@@ -1909,7 +1909,7 @@ Description: Reconnects a restore account to the given project.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param accountId Eon-assigned ID of the restore account to reconnect.
  @return ApiReconnectRestoreAccountRequest
 */
@@ -2038,7 +2038,7 @@ Description: Reconnects a source account to the given project.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param accountId Eon-assigned ID of the source account to reconnect.
  @return ApiReconnectSourceAccountRequest
 */
@@ -2174,7 +2174,7 @@ Description: Updates the connectivity configuration of the specified restore acc
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId ID of the restore account
- @param projectId ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiUpdateRestoreAccountConnectivityConfigRequest
 */
 func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiUpdateRestoreAccountConnectivityConfigRequest {

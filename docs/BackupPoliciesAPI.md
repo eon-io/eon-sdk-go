@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	createBackupPolicyRequest := *openapiclient.NewCreateBackupPolicyRequest("Production with PII", *openapiclient.NewBackupPolicyResourceSelector(openapiclient.ResourceSelectorMode("ALL")), *openapiclient.NewBackupPolicyPlan(openapiclient.BackupPolicyType("UNSPECIFIED"))) // CreateBackupPolicyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -106,7 +106,7 @@ import (
 
 func main() {
 	backupPolicyId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the backup policy to delete
-	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **backupPolicyId** | **string** | ID of the backup policy to delete | 
-**projectId** | **string** | ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -177,7 +177,7 @@ import (
 
 func main() {
 	backupPolicyId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the backup policy to retrieve
-	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **backupPolicyId** | **string** | ID of the backup policy to retrieve | 
-**projectId** | **string** | ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -249,7 +249,7 @@ import (
 )
 
 func main() {
-	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -269,7 +269,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -320,7 +320,7 @@ import (
 
 func main() {
 	backupPolicyId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the backup policy to update
-	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	updateBackupPolicyRequest := *openapiclient.NewUpdateBackupPolicyRequest("Production with PII", *openapiclient.NewBackupPolicyResourceSelector(openapiclient.ResourceSelectorMode("ALL")), *openapiclient.NewBackupPolicyPlan(openapiclient.BackupPolicyType("UNSPECIFIED"))) // UpdateBackupPolicyRequest | The request body for updating a policy
 
 	configuration := openapiclient.NewConfiguration()
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **backupPolicyId** | **string** | ID of the backup policy to update | 
-**projectId** | **string** | ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 

@@ -53,7 +53,7 @@ ListVaults List Vaults
 Description: Retrieves a list of vaults in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiListVaultsRequest
 */
 func (a *VaultsAPIService) ListVaults(ctx context.Context, projectId string) ApiListVaultsRequest {

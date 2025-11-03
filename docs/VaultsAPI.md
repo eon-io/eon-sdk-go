@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 
@@ -51,7 +51,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 

@@ -41,7 +41,7 @@ Description: Retrieves a backup job by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param jobId ID of the job to retrieve.
- @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetBackupJobRequest
 */
 func (a *JobsAPIService) GetBackupJob(ctx context.Context, jobId string, projectId string) ApiGetBackupJobRequest {
@@ -169,7 +169,7 @@ Description: Retrieves a restore job by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param jobId ID of the job to retrieve.
- @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetRestoreJobRequest
 */
 func (a *JobsAPIService) GetRestoreJob(ctx context.Context, jobId string, projectId string) ApiGetRestoreJobRequest {
@@ -316,7 +316,7 @@ ListBackupJobs List Backup Jobs
 Description: Retrieves a list of backup jobs for the given project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose restore jobs you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore jobs you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiListBackupJobsRequest
 */
 func (a *JobsAPIService) ListBackupJobs(ctx context.Context, projectId string) ApiListBackupJobsRequest {
@@ -473,7 +473,7 @@ Description: Retrieves a list of restore jobs for the given project.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose restore jobs you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose restore jobs you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiListRestoreJobsRequest
 */
 func (a *JobsAPIService) ListRestoreJobs(ctx context.Context, projectId string) ApiListRestoreJobsRequest {

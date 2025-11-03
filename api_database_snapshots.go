@@ -60,7 +60,7 @@ You can check a query's status by calling [Get Query Status](./get-query-status)
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the query you want to retrieve. You can see your project ID in the [API Credentials](/global-settings/api-credentials) page in your global settings.  
+ @param projectId ID of the project that contains the query you want to retrieve. You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  
  @param queryId Query ID returned by [Run Query](./run-query).
  @return ApiGetQueryResultRequest
 */
@@ -211,7 +211,7 @@ If the query failed, see [Troubleshooting Queries] for possible errors and how t
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the query status you want to retrieve. You can see your project ID in the [API Credentials](/global-settings/api-credentials) page in your global settings.  
+ @param projectId ID of the project that contains the query status you want to retrieve. You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  
  @param queryId Query ID returned by [Run Query](./run-query).
  @return ApiGetQueryStatusRequest
 */
@@ -358,7 +358,7 @@ If the request fails, see [Troubleshooting Queries] for possible errors and how 
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the database snapshot you want to retrieve. You can see your project ID in the [API Credentials](/global-settings/api-credentials) page in your global settings.  
+ @param projectId ID of the project that contains the database snapshot you want to retrieve. You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  
  @param snapshotId ID of the database [snapshot](./list-resource-snapshots) you want to query. Snapshot must belong to an RDS resource. 
  @return ApiRunQueryRequest
 */

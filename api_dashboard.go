@@ -53,7 +53,7 @@ GetDailyStorageSummaries Get Daily Storage Summaries
 Description: Retrieves a list of snapshot storage sizes per day for the given date range.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose daily storage summaries you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose daily storage summaries you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetDailyStorageSummariesRequest
 */
 func (a *DashboardAPIService) GetDailyStorageSummaries(ctx context.Context, projectId string) ApiGetDailyStorageSummariesRequest {

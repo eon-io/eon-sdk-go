@@ -36,7 +36,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the resource to cancel the backup exclusion for.
 
 	configuration := openapiclient.NewConfiguration()
@@ -57,7 +57,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned ID of the resource to cancel the backup exclusion for. | 
 
 ### Other Parameters
@@ -109,7 +109,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the resource to exclude from backup.
 
 	configuration := openapiclient.NewConfiguration()
@@ -130,7 +130,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned ID of the resource to exclude from backup. | 
 
 ### Other Parameters
@@ -183,7 +183,7 @@ import (
 
 func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource to retrieve.
-	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **id** | **string** | Eon-assigned ID of the resource to retrieve. | 
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -255,7 +255,7 @@ import (
 )
 
 func main() {
-	projectId := "f9304613-dddb-52fe-b883-f5e671a868a3" // string | ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "f9304613-dddb-52fe-b883-f5e671a868a3" // string | ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	pageToken := "pageToken_example" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 	listInventoryRequest := *openapiclient.NewListInventoryRequest() // ListInventoryRequest |  (optional)
@@ -278,7 +278,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -331,7 +331,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the resource to override.
 	overrideDataClassificationsRequest := *openapiclient.NewOverrideDataClassificationsRequest() // OverrideDataClassificationsRequest | 
 
@@ -353,7 +353,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned ID of the resource to override. | 
 
 ### Other Parameters
@@ -406,7 +406,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the resource to override.
 	overrideEnvironmentRequest := *openapiclient.NewOverrideEnvironmentRequest() // OverrideEnvironmentRequest | 
 
@@ -428,7 +428,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned ID of the resource to override. | 
 
 ### Other Parameters
@@ -481,7 +481,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the resource to remove the override from.
 
 	configuration := openapiclient.NewConfiguration()
@@ -500,7 +500,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned ID of the resource to remove the override from. | 
 
 ### Other Parameters
@@ -552,7 +552,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the resource to remove the override from.
 
 	configuration := openapiclient.NewConfiguration()
@@ -571,7 +571,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned ID of the resource to remove the override from. | 
 
 ### Other Parameters

@@ -45,7 +45,7 @@ CreateBackupPolicy Create Backup Policy
 Description: Creates a backup policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiCreateBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) CreateBackupPolicy(ctx context.Context, projectId string) ApiCreateBackupPolicyRequest {
@@ -176,7 +176,7 @@ Description: Deletes a backup policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param backupPolicyId ID of the backup policy to delete
- @param projectId ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiDeleteBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) DeleteBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiDeleteBackupPolicyRequest {
@@ -293,7 +293,7 @@ Description: Retrieves a backup policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param backupPolicyId ID of the backup policy to retrieve
- @param projectId ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) GetBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiGetBackupPolicyRequest {
@@ -420,7 +420,7 @@ Description: Retrieves a list of backup policies in the specified project.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiListBackupPoliciesRequest
 */
 func (a *BackupPoliciesAPIService) ListBackupPolicies(ctx context.Context, projectId string) ApiListBackupPoliciesRequest {
@@ -553,7 +553,7 @@ Description: Updates a backup policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param backupPolicyId ID of the backup policy to update
- @param projectId ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiUpdateBackupPolicyRequest
 */
 func (a *BackupPoliciesAPIService) UpdateBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiUpdateBackupPolicyRequest {

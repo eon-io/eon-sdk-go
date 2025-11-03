@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	projectId := "f9304613-dddb-52fe-b883-f5e671a868a3" // string | ID of the project whose daily storage summaries you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+	projectId := "f9304613-dddb-52fe-b883-f5e671a868a3" // string | ID of the project whose daily storage summaries you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	startDate := time.Now() // string | First day of the date range in `YYYY-MM-DD` format.
 	endDate := time.Now() // string | Last day of the date range in `YYYY-MM-DD` format.
 
@@ -52,7 +52,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose daily storage summaries you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose daily storage summaries you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 

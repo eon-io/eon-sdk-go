@@ -6,7 +6,6 @@ api_accounts.go
 api_auth.go
 api_backup_policies.go
 api_billing.go
-api_create_api_credentials.go
 api_dashboard.go
 api_database_snapshots.go
 api_jobs.go
@@ -26,7 +25,6 @@ docs/AccountVersion.md
 docs/AccountsAPI.md
 docs/AnnuallyConfig.md
 docs/ApiCredentials.md
-docs/ApiCredentialsProperties.md
 docs/App.md
 docs/AppFilters.md
 docs/AppsCondition.md
@@ -94,9 +92,6 @@ docs/CostDataRecordCost.md
 docs/CostDataRecordDimensions.md
 docs/CostGranularity.md
 docs/CostUnit.md
-docs/CreateApiCredentialsAPI.md
-docs/CreateApiCredentialsRequest.md
-docs/CreateApiCredentialsResponse.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
 docs/DailyConfig.md
@@ -319,7 +314,6 @@ model_account_status_filters.go
 model_account_version.go
 model_annually_config.go
 model_api_credentials.go
-model_api_credentials_properties.go
 model_app.go
 model_app_filters.go
 model_apps_condition.go
@@ -384,8 +378,6 @@ model_cost_data_record_cost.go
 model_cost_data_record_dimensions.go
 model_cost_granularity.go
 model_cost_unit.go
-model_create_api_credentials_request.go
-model_create_api_credentials_response.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
 model_daily_config.go
@@ -596,7 +588,6 @@ test/api_accounts_test.go
 test/api_auth_test.go
 test/api_backup_policies_test.go
 test/api_billing_test.go
-test/api_create_api_credentials_test.go
 test/api_dashboard_test.go
 test/api_database_snapshots_test.go
 test/api_jobs_test.go

@@ -41,7 +41,7 @@ Description: Allows a resource to be backed up by Eon, scanned, and checked for 
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned ID of the resource to cancel the backup exclusion for.
  @return ApiCancelResourceBackupExclusionRequest
 */
@@ -172,7 +172,7 @@ You can cancel this action by calling [Cancel Resource Backup Exclusion](cancel-
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned ID of the resource to exclude from backup.
  @return ApiExcludeResourceFromBackupRequest
 */
@@ -301,7 +301,7 @@ Description: Retrieves a resource by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Eon-assigned ID of the resource to retrieve.
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetResourceRequest
 */
 func (a *ResourcesAPIService) GetResource(ctx context.Context, id string, projectId string) ApiGetResourceRequest {
@@ -447,7 +447,7 @@ ListResources List Resources
 Description: Retrieves a list of resources for the given project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiListResourcesRequest
 */
 func (a *ResourcesAPIService) ListResources(ctx context.Context, projectId string) ApiListResourcesRequest {
@@ -592,7 +592,7 @@ You can revert to auto-classification of data classes by calling [Remove Data Cl
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned ID of the resource to override.
  @return ApiOverrideDataClassesRequest
 */
@@ -734,7 +734,7 @@ You can revert to auto-classification of environment by calling [Remove Environm
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned ID of the resource to override.
  @return ApiOverrideEnvironmentRequest
 */
@@ -868,7 +868,7 @@ Description: Removes a resource's data classes override, which re-enables auto-c
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned ID of the resource to remove the override from.
  @return ApiRemoveDataClassesOverrideRequest
 */
@@ -986,7 +986,7 @@ Description: Removes a resource's environment override, which re-enables auto-cl
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned ID of the resource to remove the override from.
  @return ApiRemoveEnvironmentOverrideRequest
 */

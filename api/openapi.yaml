@@ -70,56 +70,6 @@ tags:
   name: billing
   x-displayName: Billing
 paths:
-  /v1/api-credentials:
-    post:
-      description: "Description: This API endpoint allows the creation of new api\
-        \ credentials for machine to machine communication. It requires administrative\
-        \ permissions."
-      operationId: createApiCredentials
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateApiCredentialsRequest'
-        description: The request body for creating api credentials
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateApiCredentialsResponse'
-          description: Api credentials created successfully
-        "1XX":
-          description: Informational
-        "3XX":
-          description: Redirect
-        "4XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Client Error
-        "5XX":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal Server Error
-      summary: Create a new api credentials
-      tags:
-      - createApiCredentials
-      x-internal: false
-      x-data-access:
-        excluded: true
-      x-permissions:
-      - create:api_credentials
-      x-audit-log:
-        action: create
-        entityRefs:
-        - entityType: api_token
-          in: resBody
-          key: id
   /v1/projects/{projectId}/source-accounts:
     post:
       description: "Description: Connects a source cloud account to the given project."
@@ -127,7 +77,7 @@ paths:
       parameters:
       - description: |
           ID of the project you want to connect the source account to.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -190,7 +140,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose source accounts you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -276,7 +226,7 @@ paths:
       parameters:
       - description: |
           ID of the project.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -341,7 +291,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose source account you want to reconnect.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -416,7 +366,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose source account metrics configuration you want to disable.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: d593811b-bfbc-515b-a21d-9fb95eb1071b
         explode: false
         in: path
@@ -478,7 +428,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose source account metrics configuration you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
         name: projectId
@@ -539,7 +489,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose source account metrics you want to configure.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: b9c79c3f-399c-5e32-a8fb-762f87bebd7b
         explode: false
         in: path
@@ -602,7 +552,7 @@ paths:
       parameters:
       - description: |
           ID of the project you want to connect the source account to.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 733888d8-2573-5f9a-b81d-21f051d24fda
         explode: false
         in: path
@@ -665,7 +615,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore accounts you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -750,7 +700,7 @@ paths:
       parameters:
       - description: |
           ID of the project.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -815,7 +765,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore account you want to reconnect.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -889,7 +839,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to delete.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
         name: projectId
@@ -949,7 +899,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
         name: projectId
@@ -1009,7 +959,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to update.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
         name: projectId
@@ -1081,7 +1031,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account metrics you want to disable.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
         name: projectId
@@ -1142,7 +1092,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account metrics configuration you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 4bd9ca0f-b6cd-5a00-b6ce-76960e76c4ba
         explode: false
         in: path
@@ -1204,7 +1154,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account metrics you want to configure.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         explode: false
         in: path
         name: projectId
@@ -1265,7 +1215,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore jobs you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -1356,7 +1306,7 @@ paths:
         style: simple
       - description: |
           ID of the project the job is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -1413,7 +1363,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore jobs you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -1505,7 +1455,7 @@ paths:
         style: simple
       - description: |
           ID of the project the job is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -1561,7 +1511,7 @@ paths:
       parameters:
       - description: |
           ID of the project you want to create a backup policy in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 733888d8-2573-5f9a-b81d-21f051d24fda
         explode: false
         in: path
@@ -1622,7 +1572,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose backup policies you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -1681,7 +1631,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose backup policy you want to delete.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -1741,7 +1691,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose backup policy you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -1801,7 +1751,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose backup policy you want to update.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -1864,7 +1814,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose vaults you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -1943,7 +1893,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2040,7 +1990,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2137,7 +2087,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2234,7 +2184,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2331,7 +2281,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2431,7 +2381,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2528,7 +2478,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2625,7 +2575,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2722,7 +2672,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2823,7 +2773,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2923,7 +2873,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3023,7 +2973,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3123,7 +3073,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3227,7 +3177,7 @@ paths:
       operationId: runQuery
       parameters:
       - description: "ID of the project that contains the database snapshot you want\
-          \ to retrieve.\nYou can see your project ID in the [API Credentials](/global-settings/api-credentials)\
+          \ to retrieve.\nYou can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials)\
           \ page in your global settings. \n"
         example: 330e9e09-6cb8-52af-b532-a476f598cf94
         explode: false
@@ -3319,7 +3269,7 @@ paths:
       operationId: getQueryStatus
       parameters:
       - description: "ID of the project that contains the query status you want to\
-          \ retrieve.\nYou can see your project ID in the [API Credentials](/global-settings/api-credentials)\
+          \ retrieve.\nYou can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials)\
           \ page in your global settings. \n"
         example: 330e9e09-6cb8-52af-b532-a476f598cf94
         explode: false
@@ -3391,7 +3341,7 @@ paths:
       operationId: getQueryResult
       parameters:
       - description: "ID of the project that contains the query you want to retrieve.\n\
-          You can see your project ID in the [API Credentials](/global-settings/api-credentials)\
+          You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials)\
           \ page in your global settings. \n"
         example: 330e9e09-6cb8-52af-b532-a476f598cf94
         explode: false
@@ -3480,7 +3430,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose resources you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: f9304613-dddb-52fe-b883-f5e671a868a3
         explode: false
         in: path
@@ -3569,7 +3519,7 @@ paths:
         style: simple
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3626,7 +3576,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -3694,7 +3644,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -3771,7 +3721,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -3839,7 +3789,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -3918,7 +3868,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -3989,7 +3939,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -4070,7 +4020,7 @@ paths:
         style: simple
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4138,7 +4088,7 @@ paths:
         style: simple
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4549,7 +4499,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose daily storage summaries you want to retrieve.
-          You can get your project ID from the [API Credentials](/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
         example: f9304613-dddb-52fe-b883-f5e671a868a3
         explode: false
         in: path
@@ -4612,96 +4562,6 @@ paths:
         excluded: true
 components:
   schemas:
-    CreateApiCredentialsRequest:
-      example:
-        projects:
-        - projects
-        - projects
-        roleId: roleId
-        name: name
-        enableCurrentSecretRotation: false
-      properties:
-        name:
-          description: The name of the api credential user
-          type: string
-        roleId:
-          description: The role ID of the api credential user
-          type: string
-        projects:
-          description: The projects the api credential user has access to
-          items:
-            type: string
-          type: array
-        enableCurrentSecretRotation:
-          default: false
-          description: Whether the api credentials user can rotate their own secret
-          type: boolean
-      required:
-      - name
-      - projects
-      - roleId
-      type: object
-    ApiCredentialsProperties:
-      example:
-        clientId: clientId
-        projects:
-        - projects
-        - projects
-        roleId: roleId
-        name: name
-        id: id
-        enableCurrentSecretRotation: false
-      properties:
-        id:
-          description: The ID of the api credential
-          type: string
-        clientId:
-          description: The client ID of the api credential
-          type: string
-        name:
-          description: The given name of the api credential
-          type: string
-        projects:
-          description: The projects the api credentials has access to
-          items:
-            type: string
-          type: array
-        roleId:
-          description: The role ID of the api credential
-          type: string
-        enableCurrentSecretRotation:
-          default: false
-          description: Whether the api credentials user can rotate their own secret
-          type: boolean
-      required:
-      - clientId
-      - id
-      - name
-      - projects
-      - roleId
-      type: object
-    CreateApiCredentialsResponse:
-      example:
-        clientSecret: clientSecret
-        apiCredentialsProperties:
-          clientId: clientId
-          projects:
-          - projects
-          - projects
-          roleId: roleId
-          name: name
-          id: id
-          enableCurrentSecretRotation: false
-      properties:
-        apiCredentialsProperties:
-          $ref: '#/components/schemas/ApiCredentialsProperties'
-        clientSecret:
-          description: The secret of the api credentials
-          type: string
-      required:
-      - apiCredentialsProperties
-      - clientSecret
-      type: object
     Provider:
       description: Cloud provider.
       enum:
@@ -6504,6 +6364,7 @@ components:
       - AWS_EKS_NAMESPACE_BACKUP
       - AZURE_STORAGE_ACCOUNT_BACKUP
       - AZURE_VM_BACKUP
+      - AZURE_VM_RESTORE_POINT_CONVERSION
       - AZURE_SQL_DATABASE_BACKUP
       - AZURE_SQL_MANAGED_INSTANCE_BACKUP
       - AZURE_SQL_VIRTUAL_MACHINE_BACKUP
