@@ -45,6 +45,7 @@ docs/AwsRestoreAccountConnectivityConfig.md
 docs/AwsSourceAccountAttributes.md
 docs/AwsSourceAccountAttributesInput.md
 docs/AwsVaultConfig.md
+docs/AwsVaultConfigInput.md
 docs/AwsVpcConnectivityConfig.md
 docs/AzureDisk.md
 docs/AzureDiskRestoreDestination.md
@@ -94,6 +95,8 @@ docs/CostGranularity.md
 docs/CostUnit.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
+docs/CreateVaultRequest.md
+docs/CreateVaultResponse.md
 docs/DailyConfig.md
 docs/DailyStorageSummaries.md
 docs/DailyStorageSummary.md
@@ -146,6 +149,7 @@ docs/GetRestoreAccountMetricsConfigResponse.md
 docs/GetRestoreJobResponse.md
 docs/GetSnapshotResponse.md
 docs/GetSourceAccountMetricsConfigResponse.md
+docs/GetVaultResponse.md
 docs/HighFrequencyBackupPolicyPlan.md
 docs/HighFrequencyBackupResourceType.md
 docs/HighFrequencyBackupScheduleConfig.md
@@ -296,9 +300,12 @@ docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
 docs/UpdateRestoreAccountConnectivityConfigRequest.md
 docs/UpdateRestoreAccountConnectivityConfigResponse.md
+docs/UpdateVaultRequest.md
+docs/UpdateVaultResponse.md
 docs/Usage.md
 docs/UsageUnit.md
 docs/VaultProviderAttributes.md
+docs/VaultProviderAttributesInput.md
 docs/VaultsAPI.md
 docs/VolumeSettings.md
 docs/VpcCondition.md
@@ -333,6 +340,7 @@ model_aws_restore_account_connectivity_config.go
 model_aws_source_account_attributes.go
 model_aws_source_account_attributes_input.go
 model_aws_vault_config.go
+model_aws_vault_config_input.go
 model_aws_vpc_connectivity_config.go
 model_azure_disk.go
 model_azure_disk_restore_destination.go
@@ -380,6 +388,8 @@ model_cost_granularity.go
 model_cost_unit.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
+model_create_vault_request.go
+model_create_vault_response.go
 model_daily_config.go
 model_daily_storage_summaries.go
 model_daily_storage_summary.go
@@ -430,6 +440,7 @@ model_get_restore_account_metrics_config_response.go
 model_get_restore_job_response.go
 model_get_snapshot_response.go
 model_get_source_account_metrics_config_response.go
+model_get_vault_response.go
 model_high_frequency_backup_policy_plan.go
 model_high_frequency_backup_resource_type.go
 model_high_frequency_backup_schedule_config.go
@@ -577,9 +588,12 @@ model_update_backup_policy_request.go
 model_update_backup_policy_response.go
 model_update_restore_account_connectivity_config_request.go
 model_update_restore_account_connectivity_config_response.go
+model_update_vault_request.go
+model_update_vault_response.go
 model_usage.go
 model_usage_unit.go
 model_vault_provider_attributes.go
+model_vault_provider_attributes_input.go
 model_volume_settings.go
 model_vpc_condition.go
 model_weekly_config.go

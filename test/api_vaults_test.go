@@ -22,6 +22,35 @@ func Test_eon_VaultsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test VaultsAPIService CreateVault", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+
+		resp, httpRes, err := apiClient.VaultsAPI.CreateVault(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test VaultsAPIService GetVault", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var vaultId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.VaultsAPI.GetVault(context.Background(), vaultId, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test VaultsAPIService ListVaults", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -29,6 +58,21 @@ func Test_eon_VaultsAPIService(t *testing.T) {
 		var projectId string
 
 		resp, httpRes, err := apiClient.VaultsAPI.ListVaults(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test VaultsAPIService UpdateVault", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var vaultId string
+		var projectId string
+
+		resp, httpRes, err := apiClient.VaultsAPI.UpdateVault(context.Background(), vaultId, projectId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

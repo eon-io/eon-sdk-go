@@ -1807,6 +1807,195 @@ paths:
         - entityType: backup_policy
           in: path
           key: backupPolicyId
+  /v1/projects/{projectId}/vaults:
+    post:
+      description: "Description: This API allows the creation of a new vault for a\
+        \ specified project."
+      operationId: createVault
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVaultRequest'
+        description: The request body for creating a new vault
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVaultResponse'
+          description: Vault created successfully
+        "409":
+          description: Vault already exists in region
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create a new vault
+      tags:
+      - vaults
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:vaults
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: vault
+          in: resBody
+          key: id
+  /v1/projects/{projectId}/vaults/{vaultId}:
+    get:
+      description: "Description: Retrieve detailed information about a specific vault\
+        \ using its ID and the project ID."
+      operationId: getVault
+      parameters:
+      - description: ID of the vault to retrieve
+        explode: false
+        in: path
+        name: vaultId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVaultResponse'
+          description: Successful operation
+        "404":
+          description: Vault not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Retrieves a vault
+      tags:
+      - vaults
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:vaults
+      x-audit-log:
+        excluded: true
+    patch:
+      description: "Description: API to update the name of an existing vault in a\
+        \ specified project."
+      operationId: updateVault
+      parameters:
+      - description: ID of the backup vault to update
+        explode: false
+        in: path
+        name: vaultId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVaultRequest'
+        description: The request body for creating an updated vault
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVaultResponse'
+          description: Successful operation
+        "404":
+          description: Vault not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update a vault
+      tags:
+      - vaults
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:vaults
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: vault
+          in: path
+          key: vaultId
   /v1/projects/{projectId}/vaults/list:
     post:
       description: "Description: Retrieves a list of vaults in the specified project."
@@ -11123,6 +11312,121 @@ components:
           $ref: '#/components/schemas/BackupPolicy'
       required:
       - backupPolicy
+      type: object
+    AwsVaultConfigInput:
+      description: |
+        AWS-specific vault configuration.
+      example:
+        encryptionKey: encryptionKey
+      nullable: true
+      properties:
+        encryptionKey:
+          description: ARN of the KMS key used for encryption.
+          type: string
+      type: object
+    VaultProviderAttributesInput:
+      description: |
+        Cloud-provider-specific vault attributes input.
+      example:
+        cloudProvider: AWS
+        aws:
+          encryptionKey: encryptionKey
+      properties:
+        cloudProvider:
+          $ref: '#/components/schemas/Provider'
+        aws:
+          $ref: '#/components/schemas/AwsVaultConfigInput'
+      required:
+      - cloudProvider
+      type: object
+    CreateVaultRequest:
+      example:
+        name: name
+        vaultAttributes:
+          cloudProvider: AWS
+          aws:
+            encryptionKey: encryptionKey
+        region: region
+      properties:
+        name:
+          description: The name of the backup vault
+          type: string
+        region:
+          description: The region where the backup vault is located
+          type: string
+        vaultAttributes:
+          $ref: '#/components/schemas/VaultProviderAttributesInput'
+      required:
+      - name
+      - region
+      - vaultAttributes
+      type: object
+    CreateVaultResponse:
+      example:
+        vault:
+          providerAccountId: "123412341234"
+          name: AWS US East 1
+          vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          vaultAttributes:
+            cloudProvider: AWS
+            aws:
+              encryptionKey: encryptionKey
+          id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          isManagedByEon: true
+          region: us-east-1
+      properties:
+        vault:
+          $ref: '#/components/schemas/BackupVault'
+      required:
+      - vault
+      type: object
+    GetVaultResponse:
+      example:
+        vault:
+          providerAccountId: "123412341234"
+          name: AWS US East 1
+          vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          vaultAttributes:
+            cloudProvider: AWS
+            aws:
+              encryptionKey: encryptionKey
+          id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          isManagedByEon: true
+          region: us-east-1
+      properties:
+        vault:
+          $ref: '#/components/schemas/BackupVault'
+      required:
+      - vault
+      type: object
+    UpdateVaultRequest:
+      example:
+        name: name
+      properties:
+        name:
+          description: The name of the backup vault
+          type: string
+      required:
+      - name
+      type: object
+    UpdateVaultResponse:
+      example:
+        vault:
+          providerAccountId: "123412341234"
+          name: AWS US East 1
+          vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          vaultAttributes:
+            cloudProvider: AWS
+            aws:
+              encryptionKey: encryptionKey
+          id: 37732835-d768-5990-ba93-a7c2d2e6d754
+          isManagedByEon: true
+          region: us-east-1
+      properties:
+        vault:
+          $ref: '#/components/schemas/BackupVault'
+      required:
+      - vault
       type: object
     ListBackupVaultResponse:
       example:
