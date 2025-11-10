@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EncryptionKey** | Pointer to **string** | ARN of the KMS key used for encryption. | [optional] 
+**EncryptionKey** | Pointer to **string** | ARN of the KMS key used for encryption. Omitted if the key is managed by Eon.  | [optional] 
 
 ## Methods
 

@@ -30,7 +30,6 @@ type ApiCreateVaultRequest struct {
 	createVaultRequest *CreateVaultRequest
 }
 
-// The request body for creating a new vault
 func (r ApiCreateVaultRequest) CreateVaultRequest(createVaultRequest CreateVaultRequest) ApiCreateVaultRequest {
 	r.createVaultRequest = &createVaultRequest
 	return r
@@ -41,12 +40,25 @@ func (r ApiCreateVaultRequest) Execute() (*CreateVaultResponse, *http.Response, 
 }
 
 /*
-CreateVault Create a new vault
+CreateVault Create Vault
 
-Description: This API allows the creation of a new vault for a specified project.
+Description: Creates a vault in the specified project.
+
+By default, vaults are encrypted using an Eon-managed KMS key.
+However, if your requirements mandate control over encryption keys, you can use a customer-managed KMS key.
+For more information on customer-managed KMS keys, see [About Customer-Managed Vault Keys].
+
+:::warning
+If you use customer-managed vault keys, you assume responsibility for securing your keys from unauthorized access and deletion.
+Although keys can be rotated, they must not be deleted while snapshots that were encrypted with them exist.
+If a key is deleted, you'll lose all ability to retrieve any snapshots encrypted with it.
+:::
+
+[About Customer-Managed Vault Keys]: /docs/user-guide/backing-up/vaults/about-customer-managed-vault-keys
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
+ @param projectId ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiCreateVaultRequest
 */
 func (a *VaultsAPIService) CreateVault(ctx context.Context, projectId string) ApiCreateVaultRequest {
@@ -171,13 +183,13 @@ func (r ApiGetVaultRequest) Execute() (*GetVaultResponse, *http.Response, error)
 }
 
 /*
-GetVault Retrieves a vault
+GetVault Get Vault
 
-Description: Retrieve detailed information about a specific vault using its ID and the project ID.
+Description: Retrieves a vault.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param vaultId ID of the vault to retrieve
- @param projectId The project ID
+ @param vaultId ID of the vault to retrieve.
+ @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiGetVaultRequest
 */
 func (a *VaultsAPIService) GetVault(ctx context.Context, vaultId string, projectId string) ApiGetVaultRequest {
@@ -442,7 +454,6 @@ type ApiUpdateVaultRequest struct {
 	updateVaultRequest *UpdateVaultRequest
 }
 
-// The request body for creating an updated vault
 func (r ApiUpdateVaultRequest) UpdateVaultRequest(updateVaultRequest UpdateVaultRequest) ApiUpdateVaultRequest {
 	r.updateVaultRequest = &updateVaultRequest
 	return r
@@ -453,13 +464,13 @@ func (r ApiUpdateVaultRequest) Execute() (*UpdateVaultResponse, *http.Response, 
 }
 
 /*
-UpdateVault Update a vault
+UpdateVault Update Vault
 
-Description: API to update the name of an existing vault in a specified project.
+Description: Updates a vault's display name.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param vaultId ID of the backup vault to update
- @param projectId The project ID
+ @param vaultId ID of the vault to update.
+ @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiUpdateVaultRequest
 */
 func (a *VaultsAPIService) UpdateVault(ctx context.Context, vaultId string, projectId string) ApiUpdateVaultRequest {

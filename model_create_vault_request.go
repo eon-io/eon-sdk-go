@@ -21,9 +21,9 @@ var _ MappedNullable = &CreateVaultRequest{}
 
 // CreateVaultRequest struct for CreateVaultRequest
 type CreateVaultRequest struct {
-	// The name of the backup vault
+	// Vault display name.
 	Name string `json:"name"`
-	// The region where the backup vault is located
+	// Region where the vault is hosted.
 	Region string `json:"region"`
 	VaultAttributes VaultProviderAttributesInput `json:"vaultAttributes"`
 }

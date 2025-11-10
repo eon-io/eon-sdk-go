@@ -4,10 +4,10 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateVault**](VaultsAPI.md#CreateVault) | **Post** /v1/projects/{projectId}/vaults | Create a new vault
-[**GetVault**](VaultsAPI.md#GetVault) | **Get** /v1/projects/{projectId}/vaults/{vaultId} | Retrieves a vault
+[**CreateVault**](VaultsAPI.md#CreateVault) | **Post** /v1/projects/{projectId}/vaults | Create Vault
+[**GetVault**](VaultsAPI.md#GetVault) | **Get** /v1/projects/{projectId}/vaults/{vaultId} | Get Vault
 [**ListVaults**](VaultsAPI.md#ListVaults) | **Post** /v1/projects/{projectId}/vaults/list | List Vaults
-[**UpdateVault**](VaultsAPI.md#UpdateVault) | **Patch** /v1/projects/{projectId}/vaults/{vaultId} | Update a vault
+[**UpdateVault**](VaultsAPI.md#UpdateVault) | **Patch** /v1/projects/{projectId}/vaults/{vaultId} | Update Vault
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > CreateVaultResponse CreateVault(ctx, projectId).CreateVaultRequest(createVaultRequest).Execute()
 
-Create a new vault
+Create Vault
 
 
 
@@ -32,8 +32,8 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	createVaultRequest := *openapiclient.NewCreateVaultRequest("Name_example", "Region_example", *openapiclient.NewVaultProviderAttributesInput(openapiclient.Provider("AWS"))) // CreateVaultRequest | The request body for creating a new vault
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	createVaultRequest := *openapiclient.NewCreateVaultRequest("EU central", "eu-central-1", *openapiclient.NewVaultProviderAttributesInput(openapiclient.Provider("AWS"))) // CreateVaultRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The project ID | 
+**projectId** | **string** | ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiCreateVaultRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createVaultRequest** | [**CreateVaultRequest**](CreateVaultRequest.md) | The request body for creating a new vault | 
+ **createVaultRequest** | [**CreateVaultRequest**](CreateVaultRequest.md) |  | 
 
 ### Return type
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > GetVaultResponse GetVault(ctx, vaultId, projectId).Execute()
 
-Retrieves a vault
+Get Vault
 
 
 
@@ -104,8 +104,8 @@ import (
 )
 
 func main() {
-	vaultId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the vault to retrieve
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
+	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to retrieve.
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -125,8 +125,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vaultId** | **string** | ID of the vault to retrieve | 
-**projectId** | **string** | The project ID | 
+**vaultId** | **string** | ID of the vault to retrieve. | 
+**projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 > UpdateVaultResponse UpdateVault(ctx, vaultId, projectId).UpdateVaultRequest(updateVaultRequest).Execute()
 
-Update a vault
+Update Vault
 
 
 
@@ -251,9 +251,9 @@ import (
 )
 
 func main() {
-	vaultId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the backup vault to update
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	updateVaultRequest := *openapiclient.NewUpdateVaultRequest("Name_example") // UpdateVaultRequest | The request body for creating an updated vault
+	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to update.
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	updateVaultRequest := *openapiclient.NewUpdateVaultRequest("My new vault name") // UpdateVaultRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -273,8 +273,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vaultId** | **string** | ID of the backup vault to update | 
-**projectId** | **string** | The project ID | 
+**vaultId** | **string** | ID of the vault to update. | 
+**projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 
 ### Other Parameters
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateVaultRequest** | [**UpdateVaultRequest**](UpdateVaultRequest.md) | The request body for creating an updated vault | 
+ **updateVaultRequest** | [**UpdateVaultRequest**](UpdateVaultRequest.md) |  | 
 
 ### Return type
 

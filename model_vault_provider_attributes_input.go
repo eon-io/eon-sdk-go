@@ -19,7 +19,7 @@ import (
 // checks if the VaultProviderAttributesInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VaultProviderAttributesInput{}
 
-// VaultProviderAttributesInput Cloud-provider-specific vault attributes input. 
+// VaultProviderAttributesInput Cloud-provider-specific vault attributes. 
 type VaultProviderAttributesInput struct {
 	CloudProvider Provider `json:"cloudProvider"`
 	Aws NullableAwsVaultConfigInput `json:"aws,omitempty"`

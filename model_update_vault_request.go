@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateVaultRequest{}
 
 // UpdateVaultRequest struct for UpdateVaultRequest
 type UpdateVaultRequest struct {
-	// The name of the backup vault
+	// Vault display name.
 	Name string `json:"name"`
 }
 

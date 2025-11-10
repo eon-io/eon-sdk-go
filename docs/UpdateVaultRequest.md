@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | The name of the backup vault | 
+**Name** | **string** | Vault display name. | 
 
 ## Methods
 

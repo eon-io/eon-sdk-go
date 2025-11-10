@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | The name of the backup vault | 
-**Region** | **string** | The region where the backup vault is located | 
+**Name** | **string** | Vault display name. | 
+**Region** | **string** | Region where the vault is hosted. | 
 **VaultAttributes** | [**VaultProviderAttributesInput**](VaultProviderAttributesInput.md) |  | 
 
 ## Methods

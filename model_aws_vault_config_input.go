@@ -19,7 +19,7 @@ var _ MappedNullable = &AwsVaultConfigInput{}
 
 // AwsVaultConfigInput AWS-specific vault configuration. 
 type AwsVaultConfigInput struct {
-	// ARN of the KMS key used for encryption.
+	// ARN of the KMS key used for encryption. Omitted if the key is managed by Eon. 
 	EncryptionKey *string `json:"encryptionKey,omitempty"`
 }
 

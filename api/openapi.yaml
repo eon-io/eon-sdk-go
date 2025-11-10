@@ -1809,11 +1809,26 @@ paths:
           key: backupPolicyId
   /v1/projects/{projectId}/vaults:
     post:
-      description: "Description: This API allows the creation of a new vault for a\
-        \ specified project."
+      description: |
+        Description: Creates a vault in the specified project.
+
+        By default, vaults are encrypted using an Eon-managed KMS key.
+        However, if your requirements mandate control over encryption keys, you can use a customer-managed KMS key.
+        For more information on customer-managed KMS keys, see [About Customer-Managed Vault Keys].
+
+        :::warning
+        If you use customer-managed vault keys, you assume responsibility for securing your keys from unauthorized access and deletion.
+        Although keys can be rotated, they must not be deleted while snapshots that were encrypted with them exist.
+        If a key is deleted, you'll lose all ability to retrieve any snapshots encrypted with it.
+        :::
+
+        [About Customer-Managed Vault Keys]: /docs/user-guide/backing-up/vaults/about-customer-managed-vault-keys
       operationId: createVault
       parameters:
-      - description: The project ID
+      - description: |
+          ID of the project the vault is created in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
         name: projectId
@@ -1827,7 +1842,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateVaultRequest'
-        description: The request body for creating a new vault
         required: true
       responses:
         "201":
@@ -1835,9 +1849,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateVaultResponse'
-          description: Vault created successfully
+          description: Vault created.
         "409":
-          description: Vault already exists in region
+          description: A vault already exists in the specified region.
         "1XX":
           description: Informational
         "3XX":
@@ -1854,7 +1868,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Create a new vault
+      summary: Create Vault
       tags:
       - vaults
       x-internal: false
@@ -1870,11 +1884,11 @@ paths:
           key: id
   /v1/projects/{projectId}/vaults/{vaultId}:
     get:
-      description: "Description: Retrieve detailed information about a specific vault\
-        \ using its ID and the project ID."
+      description: "Description: Retrieves a vault."
       operationId: getVault
       parameters:
-      - description: ID of the vault to retrieve
+      - description: ID of the vault to retrieve.
+        example: 36388572-9c69-5309-b362-04e7d85ae503
         explode: false
         in: path
         name: vaultId
@@ -1883,7 +1897,10 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: The project ID
+      - description: |
+          ID of the project the vault is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
         name: projectId
@@ -1898,9 +1915,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetVaultResponse'
-          description: Successful operation
+          description: Vault retrieved.
         "404":
-          description: Vault not found
+          description: Project or vault wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -1917,7 +1934,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Retrieves a vault
+      summary: Get Vault
       tags:
       - vaults
       x-internal: false
@@ -1928,11 +1945,11 @@ paths:
       x-audit-log:
         excluded: true
     patch:
-      description: "Description: API to update the name of an existing vault in a\
-        \ specified project."
+      description: "Description: Updates a vault's display name."
       operationId: updateVault
       parameters:
-      - description: ID of the backup vault to update
+      - description: ID of the vault to update.
+        example: 36388572-9c69-5309-b362-04e7d85ae503
         explode: false
         in: path
         name: vaultId
@@ -1941,7 +1958,10 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: The project ID
+      - description: |
+          ID of the project the vault is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
         name: projectId
@@ -1955,7 +1975,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateVaultRequest'
-        description: The request body for creating an updated vault
         required: true
       responses:
         "200":
@@ -1963,9 +1982,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateVaultResponse'
-          description: Successful operation
+          description: Vault is updated.
         "404":
-          description: Vault not found
+          description: Project or vault wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -1982,7 +2001,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Update a vault
+      summary: Update Vault
       tags:
       - vaults
       x-internal: false
@@ -6928,11 +6947,14 @@ components:
       description: |
         AWS-specific vault configuration.
       example:
-        encryptionKey: encryptionKey
+        encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
       nullable: true
       properties:
         encryptionKey:
-          description: ARN of the KMS key used for encryption.
+          description: |
+            ARN of the KMS key used for encryption.
+            Omitted if the key is managed by Eon.
+          example: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           type: string
       type: object
     VaultProviderAttributes:
@@ -6941,7 +6963,7 @@ components:
       example:
         cloudProvider: AWS
         aws:
-          encryptionKey: encryptionKey
+          encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -6958,7 +6980,7 @@ components:
         vaultAttributes:
           cloudProvider: AWS
           aws:
-            encryptionKey: encryptionKey
+            encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
         id: 37732835-d768-5990-ba93-a7c2d2e6d754
         isManagedByEon: true
         region: us-east-1
@@ -7028,7 +7050,7 @@ components:
           vaultAttributes:
             cloudProvider: AWS
             aws:
-              encryptionKey: encryptionKey
+              encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
@@ -7080,7 +7102,7 @@ components:
             vaultAttributes:
               cloudProvider: AWS
               aws:
-                encryptionKey: encryptionKey
+                encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
@@ -7113,7 +7135,7 @@ components:
             vaultAttributes:
               cloudProvider: AWS
               aws:
-                encryptionKey: encryptionKey
+                encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
@@ -7170,7 +7192,7 @@ components:
             vaultAttributes:
               cloudProvider: AWS
               aws:
-                encryptionKey: encryptionKey
+                encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
@@ -7537,7 +7559,7 @@ components:
           vaultAttributes:
             cloudProvider: AWS
             aws:
-              encryptionKey: encryptionKey
+              encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
@@ -7606,7 +7628,7 @@ components:
             vaultAttributes:
               cloudProvider: AWS
               aws:
-                encryptionKey: encryptionKey
+                encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
@@ -7653,7 +7675,7 @@ components:
             vaultAttributes:
               cloudProvider: AWS
               aws:
-                encryptionKey: encryptionKey
+                encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
@@ -7724,7 +7746,7 @@ components:
             vaultAttributes:
               cloudProvider: AWS
               aws:
-                encryptionKey: encryptionKey
+                encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
@@ -11317,20 +11339,23 @@ components:
       description: |
         AWS-specific vault configuration.
       example:
-        encryptionKey: encryptionKey
+        encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
       nullable: true
       properties:
         encryptionKey:
-          description: ARN of the KMS key used for encryption.
+          description: |
+            ARN of the KMS key used for encryption.
+            Omitted if the key is managed by Eon.
+          example: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           type: string
       type: object
     VaultProviderAttributesInput:
       description: |
-        Cloud-provider-specific vault attributes input.
+        Cloud-provider-specific vault attributes.
       example:
         cloudProvider: AWS
         aws:
-          encryptionKey: encryptionKey
+          encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -11341,18 +11366,20 @@ components:
       type: object
     CreateVaultRequest:
       example:
-        name: name
+        name: EU central
         vaultAttributes:
           cloudProvider: AWS
           aws:
-            encryptionKey: encryptionKey
-        region: region
+            encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
+        region: eu-central-1
       properties:
         name:
-          description: The name of the backup vault
+          description: Vault display name.
+          example: EU central
           type: string
         region:
-          description: The region where the backup vault is located
+          description: Region where the vault is hosted.
+          example: eu-central-1
           type: string
         vaultAttributes:
           $ref: '#/components/schemas/VaultProviderAttributesInput'
@@ -11370,7 +11397,7 @@ components:
           vaultAttributes:
             cloudProvider: AWS
             aws:
-              encryptionKey: encryptionKey
+              encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
@@ -11389,7 +11416,7 @@ components:
           vaultAttributes:
             cloudProvider: AWS
             aws:
-              encryptionKey: encryptionKey
+              encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
@@ -11401,10 +11428,11 @@ components:
       type: object
     UpdateVaultRequest:
       example:
-        name: name
+        name: My new vault name
       properties:
         name:
-          description: The name of the backup vault
+          description: Vault display name.
+          example: My new vault name
           type: string
       required:
       - name
@@ -11418,7 +11446,7 @@ components:
           vaultAttributes:
             cloudProvider: AWS
             aws:
-              encryptionKey: encryptionKey
+              encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
@@ -11438,7 +11466,7 @@ components:
           vaultAttributes:
             cloudProvider: AWS
             aws:
-              encryptionKey: encryptionKey
+              encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
@@ -11448,7 +11476,7 @@ components:
           vaultAttributes:
             cloudProvider: AWS
             aws:
-              encryptionKey: encryptionKey
+              encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
