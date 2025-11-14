@@ -31,6 +31,7 @@ type AwsDynamoDBDestination struct {
 	WriteCapacityUnits *int32 `json:"writeCapacityUnits,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
+	AdvancedIndexConfig *DynamoDBAdvancedIndexConfig `json:"advancedIndexConfig,omitempty"`
 }
 
 type _AwsDynamoDBDestination AwsDynamoDBDestination
@@ -191,6 +192,38 @@ func (o *AwsDynamoDBDestination) SetTags(v map[string]string) {
 	o.Tags = &v
 }
 
+// GetAdvancedIndexConfig returns the AdvancedIndexConfig field value if set, zero value otherwise.
+func (o *AwsDynamoDBDestination) GetAdvancedIndexConfig() DynamoDBAdvancedIndexConfig {
+	if o == nil || IsNil(o.AdvancedIndexConfig) {
+		var ret DynamoDBAdvancedIndexConfig
+		return ret
+	}
+	return *o.AdvancedIndexConfig
+}
+
+// GetAdvancedIndexConfigOk returns a tuple with the AdvancedIndexConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsDynamoDBDestination) GetAdvancedIndexConfigOk() (*DynamoDBAdvancedIndexConfig, bool) {
+	if o == nil || IsNil(o.AdvancedIndexConfig) {
+		return nil, false
+	}
+	return o.AdvancedIndexConfig, true
+}
+
+// HasAdvancedIndexConfig returns a boolean if a field has been set.
+func (o *AwsDynamoDBDestination) HasAdvancedIndexConfig() bool {
+	if o != nil && !IsNil(o.AdvancedIndexConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdvancedIndexConfig gets a reference to the given DynamoDBAdvancedIndexConfig and assigns it to the AdvancedIndexConfig field.
+func (o *AwsDynamoDBDestination) SetAdvancedIndexConfig(v DynamoDBAdvancedIndexConfig) {
+	o.AdvancedIndexConfig = &v
+}
+
 func (o AwsDynamoDBDestination) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -209,6 +242,9 @@ func (o AwsDynamoDBDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
+	}
+	if !IsNil(o.AdvancedIndexConfig) {
+		toSerialize["advancedIndexConfig"] = o.AdvancedIndexConfig
 	}
 	return toSerialize, nil
 }

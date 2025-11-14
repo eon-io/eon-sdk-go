@@ -22,6 +22,7 @@ var _ MappedNullable = &QueryCostDataRequest{}
 // QueryCostDataRequest struct for QueryCostDataRequest
 type QueryCostDataRequest struct {
 	CostUnit *CostUnit `json:"costUnit,omitempty"`
+	UsageUnit *UsageUnit `json:"usageUnit,omitempty"`
 	TimeFrame TimeFrame `json:"timeFrame"`
 	Granularity *CostGranularity `json:"granularity,omitempty"`
 	Filters *CostDataFilters `json:"filters,omitempty"`
@@ -38,6 +39,8 @@ func NewQueryCostDataRequest(timeFrame TimeFrame) *QueryCostDataRequest {
 	this := QueryCostDataRequest{}
 	var costUnit CostUnit = COST_UNIT_CREDITS
 	this.CostUnit = &costUnit
+	var usageUnit UsageUnit = USAGE_UNIT_BYTE_MONTHS
+	this.UsageUnit = &usageUnit
 	this.TimeFrame = timeFrame
 	var granularity CostGranularity = COST_GRANULARITY_MONTHLY
 	this.Granularity = &granularity
@@ -53,6 +56,8 @@ func NewQueryCostDataRequestWithDefaults() *QueryCostDataRequest {
 	this := QueryCostDataRequest{}
 	var costUnit CostUnit = COST_UNIT_CREDITS
 	this.CostUnit = &costUnit
+	var usageUnit UsageUnit = USAGE_UNIT_BYTE_MONTHS
+	this.UsageUnit = &usageUnit
 	var granularity CostGranularity = COST_GRANULARITY_MONTHLY
 	this.Granularity = &granularity
 	var groupBy CostDataGroupBy = COST_GROUP_BY_SOURCE_ACCOUNT
@@ -90,6 +95,38 @@ func (o *QueryCostDataRequest) HasCostUnit() bool {
 // SetCostUnit gets a reference to the given CostUnit and assigns it to the CostUnit field.
 func (o *QueryCostDataRequest) SetCostUnit(v CostUnit) {
 	o.CostUnit = &v
+}
+
+// GetUsageUnit returns the UsageUnit field value if set, zero value otherwise.
+func (o *QueryCostDataRequest) GetUsageUnit() UsageUnit {
+	if o == nil || IsNil(o.UsageUnit) {
+		var ret UsageUnit
+		return ret
+	}
+	return *o.UsageUnit
+}
+
+// GetUsageUnitOk returns a tuple with the UsageUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryCostDataRequest) GetUsageUnitOk() (*UsageUnit, bool) {
+	if o == nil || IsNil(o.UsageUnit) {
+		return nil, false
+	}
+	return o.UsageUnit, true
+}
+
+// HasUsageUnit returns a boolean if a field has been set.
+func (o *QueryCostDataRequest) HasUsageUnit() bool {
+	if o != nil && !IsNil(o.UsageUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsageUnit gets a reference to the given UsageUnit and assigns it to the UsageUnit field.
+func (o *QueryCostDataRequest) SetUsageUnit(v UsageUnit) {
+	o.UsageUnit = &v
 }
 
 // GetTimeFrame returns the TimeFrame field value
@@ -224,6 +261,9 @@ func (o QueryCostDataRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CostUnit) {
 		toSerialize["costUnit"] = o.CostUnit
+	}
+	if !IsNil(o.UsageUnit) {
+		toSerialize["usageUnit"] = o.UsageUnit
 	}
 	toSerialize["timeFrame"] = o.TimeFrame
 	if !IsNil(o.Granularity) {

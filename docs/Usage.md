@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **float64** | Raw usage quantity that generated the cost.  | 
-**Unit** | [**UsageUnit**](UsageUnit.md) |  | 
+**Unit** | [**UsageUnit**](UsageUnit.md) |  | [default to USAGE_UNIT_BYTE_MONTHS]
 
 ## Methods
 

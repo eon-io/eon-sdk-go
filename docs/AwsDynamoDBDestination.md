@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **RestoredName** | **string** | Name to assign to the restored resource. | 
 **WriteCapacityUnits** | Pointer to **int32** | Write capacity units for the restored table. Defaults to 5.  | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**AdvancedIndexConfig** | Pointer to [**DynamoDBAdvancedIndexConfig**](DynamoDBAdvancedIndexConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -138,6 +139,31 @@ SetTags sets Tags field to given value.
 `func (o *AwsDynamoDBDestination) HasTags() bool`
 
 HasTags returns a boolean if a field has been set.
+
+### GetAdvancedIndexConfig
+
+`func (o *AwsDynamoDBDestination) GetAdvancedIndexConfig() DynamoDBAdvancedIndexConfig`
+
+GetAdvancedIndexConfig returns the AdvancedIndexConfig field if non-nil, zero value otherwise.
+
+### GetAdvancedIndexConfigOk
+
+`func (o *AwsDynamoDBDestination) GetAdvancedIndexConfigOk() (*DynamoDBAdvancedIndexConfig, bool)`
+
+GetAdvancedIndexConfigOk returns a tuple with the AdvancedIndexConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdvancedIndexConfig
+
+`func (o *AwsDynamoDBDestination) SetAdvancedIndexConfig(v DynamoDBAdvancedIndexConfig)`
+
+SetAdvancedIndexConfig sets AdvancedIndexConfig field to given value.
+
+### HasAdvancedIndexConfig
+
+`func (o *AwsDynamoDBDestination) HasAdvancedIndexConfig() bool`
+
+HasAdvancedIndexConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

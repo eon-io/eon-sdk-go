@@ -111,6 +111,7 @@ docs/DayOfWeek.md
 docs/DestinationDetails.md
 docs/DisconnectRestoreAccountResponse.md
 docs/DisconnectSourceAccountResponse.md
+docs/DynamoDBAdvancedIndexConfig.md
 docs/DynamodbTableRestoreDestination.md
 docs/EbsRestoreDestination.md
 docs/EbsSnapshotRestoreDestination.md
@@ -157,6 +158,7 @@ docs/HighFrequencyBackupScheduleFrequency.md
 docs/HighFrequencyBackupSchedules.md
 docs/HighFrequencyIntervalConfig.md
 docs/IdFilters.md
+docs/IndexRestoreMode.md
 docs/InventoryFilterConditions.md
 docs/InventoryResource.md
 docs/InventorySnapshotVolume.md
@@ -402,6 +404,7 @@ model_day_of_week.go
 model_destination_details.go
 model_disconnect_restore_account_response.go
 model_disconnect_source_account_response.go
+model_dynamo_db_advanced_index_config.go
 model_dynamodb_table_restore_destination.go
 model_ebs_restore_destination.go
 model_ebs_snapshot_restore_destination.go
@@ -448,6 +451,7 @@ model_high_frequency_backup_schedule_frequency.go
 model_high_frequency_backup_schedules.go
 model_high_frequency_interval_config.go
 model_id_filters.go
+model_index_restore_mode.go
 model_inventory_filter_conditions.go
 model_inventory_resource.go
 model_inventory_snapshot_volume.go

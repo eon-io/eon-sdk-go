@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CostUnit** | Pointer to [**CostUnit**](CostUnit.md) |  | [optional] [default to COST_UNIT_CREDITS]
+**UsageUnit** | Pointer to [**UsageUnit**](UsageUnit.md) |  | [optional] [default to USAGE_UNIT_BYTE_MONTHS]
 **TimeFrame** | [**TimeFrame**](TimeFrame.md) |  | 
 **Granularity** | Pointer to [**CostGranularity**](CostGranularity.md) |  | [optional] [default to COST_GRANULARITY_MONTHLY]
 **Filters** | Pointer to [**CostDataFilters**](CostDataFilters.md) |  | [optional] 
@@ -53,6 +54,31 @@ SetCostUnit sets CostUnit field to given value.
 `func (o *QueryCostDataRequest) HasCostUnit() bool`
 
 HasCostUnit returns a boolean if a field has been set.
+
+### GetUsageUnit
+
+`func (o *QueryCostDataRequest) GetUsageUnit() UsageUnit`
+
+GetUsageUnit returns the UsageUnit field if non-nil, zero value otherwise.
+
+### GetUsageUnitOk
+
+`func (o *QueryCostDataRequest) GetUsageUnitOk() (*UsageUnit, bool)`
+
+GetUsageUnitOk returns a tuple with the UsageUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsageUnit
+
+`func (o *QueryCostDataRequest) SetUsageUnit(v UsageUnit)`
+
+SetUsageUnit sets UsageUnit field to given value.
+
+### HasUsageUnit
+
+`func (o *QueryCostDataRequest) HasUsageUnit() bool`
+
+HasUsageUnit returns a boolean if a field has been set.
 
 ### GetTimeFrame
 

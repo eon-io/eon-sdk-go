@@ -44,6 +44,8 @@ func NewUsage(amount float64, unit UsageUnit) *Usage {
 // but it doesn't guarantee that properties required by API are set
 func NewUsageWithDefaults() *Usage {
 	this := Usage{}
+	var unit UsageUnit = USAGE_UNIT_BYTE_MONTHS
+	this.Unit = unit
 	return &this
 }
 
