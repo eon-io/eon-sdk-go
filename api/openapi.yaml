@@ -12161,40 +12161,12 @@ components:
       - destination
       - restoreAccountId
       type: object
-    IndexRestoreMode:
-      default: keep
-      description: |
-        Specifies how to handle secondary indices during restore.
-        - `keep`: Restore the indices as they were in the snapshot (default)
-        - `discard`: Do not restore the indices
-      enum:
-      - keep
-      - discard
-      example: keep
-      type: string
-    DynamoDBAdvancedIndexConfig:
-      description: |
-        Advanced configuration for DynamoDB index restoration.
-        Controls how Local Secondary Indexes (LSI) and Global Secondary Indexes (GSI) are handled during restore.
-        By default, all indices are restored as they existed in the snapshot.
-      example:
-        localSecondaryIndexMode: keep
-        globalSecondaryIndexMode: discard
-      properties:
-        localSecondaryIndexMode:
-          $ref: '#/components/schemas/IndexRestoreMode'
-        globalSecondaryIndexMode:
-          $ref: '#/components/schemas/IndexRestoreMode'
-      type: object
     AwsDynamoDBDestination:
       description: Configuration for restoring to DynamoDB.
       example:
         encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
         restoreRegion: eu-west-1
         writeCapacityUnits: 50000
-        advancedIndexConfig:
-          localSecondaryIndexMode: keep
-          globalSecondaryIndexMode: discard
         restoredName: my-restored-table
         tags:
           eon_api_restore: "true"
@@ -12228,8 +12200,6 @@ components:
           example:
             eon_api_restore: "true"
           type: object
-        advancedIndexConfig:
-          $ref: '#/components/schemas/DynamoDBAdvancedIndexConfig'
       required:
       - encryptionKeyId
       - restoreRegion
@@ -12241,9 +12211,6 @@ components:
           encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
           restoreRegion: eu-west-1
           writeCapacityUnits: 50000
-          advancedIndexConfig:
-            localSecondaryIndexMode: keep
-            globalSecondaryIndexMode: discard
           restoredName: my-restored-table
           tags:
             eon_api_restore: "true"
@@ -12259,9 +12226,6 @@ components:
             encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b
             restoreRegion: eu-west-1
             writeCapacityUnits: 50000
-            advancedIndexConfig:
-              localSecondaryIndexMode: keep
-              globalSecondaryIndexMode: discard
             restoredName: my-restored-table
             tags:
               eon_api_restore: "true"
