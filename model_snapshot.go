@@ -34,6 +34,8 @@ type Snapshot struct {
 	VaultId string `json:"vaultId"`
 	// Eon-assigned ID of the resource the snapshot is backing up.
 	ResourceId string `json:"resourceId"`
+	// Backup job ID.
+	JobId *string `json:"jobId,omitempty"`
 	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
 	Resource *ResourceSnapshot `json:"resource,omitempty"`
@@ -222,6 +224,38 @@ func (o *Snapshot) SetResourceId(v string) {
 	o.ResourceId = v
 }
 
+// GetJobId returns the JobId field value if set, zero value otherwise.
+func (o *Snapshot) GetJobId() string {
+	if o == nil || IsNil(o.JobId) {
+		var ret string
+		return ret
+	}
+	return *o.JobId
+}
+
+// GetJobIdOk returns a tuple with the JobId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetJobIdOk() (*string, bool) {
+	if o == nil || IsNil(o.JobId) {
+		return nil, false
+	}
+	return o.JobId, true
+}
+
+// HasJobId returns a boolean if a field has been set.
+func (o *Snapshot) HasJobId() bool {
+	if o != nil && !IsNil(o.JobId) {
+		return true
+	}
+
+	return false
+}
+
+// SetJobId gets a reference to the given string and assigns it to the JobId field.
+func (o *Snapshot) SetJobId(v string) {
+	o.JobId = &v
+}
+
 // GetExpirationTime returns the ExpirationTime field value if set, zero value otherwise.
 func (o *Snapshot) GetExpirationTime() time.Time {
 	if o == nil || IsNil(o.ExpirationTime) {
@@ -306,6 +340,9 @@ func (o Snapshot) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["vaultId"] = o.VaultId
 	toSerialize["resourceId"] = o.ResourceId
+	if !IsNil(o.JobId) {
+		toSerialize["jobId"] = o.JobId
+	}
 	if !IsNil(o.ExpirationTime) {
 		toSerialize["expirationTime"] = o.ExpirationTime
 	}

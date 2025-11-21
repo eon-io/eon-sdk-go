@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **PointInTime** | Pointer to **time.Time** | Date and time of the resource that&#39;s preserved by the snapshot. | [optional] 
 **VaultId** | **string** | ID of the vault the snapshot is stored in. | 
 **ResourceId** | **string** | Eon-assigned ID of the resource the snapshot is backing up. | 
+**JobId** | Pointer to **string** | Backup job ID. | [optional] 
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
 **Resource** | Pointer to [**ResourceSnapshot**](ResourceSnapshot.md) |  | [optional] 
 
@@ -161,6 +162,31 @@ and a boolean to check if the value has been set.
 
 SetResourceId sets ResourceId field to given value.
 
+
+### GetJobId
+
+`func (o *Snapshot) GetJobId() string`
+
+GetJobId returns the JobId field if non-nil, zero value otherwise.
+
+### GetJobIdOk
+
+`func (o *Snapshot) GetJobIdOk() (*string, bool)`
+
+GetJobIdOk returns a tuple with the JobId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJobId
+
+`func (o *Snapshot) SetJobId(v string)`
+
+SetJobId sets JobId field to given value.
+
+### HasJobId
+
+`func (o *Snapshot) HasJobId() bool`
+
+HasJobId returns a boolean if a field has been set.
 
 ### GetExpirationTime
 

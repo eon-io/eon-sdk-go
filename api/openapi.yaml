@@ -14965,6 +14965,7 @@ components:
       description: Eon snapshot.
       example:
         pointInTime: 2024-10-29T23:01:30Z
+        jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
         resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
         vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
         resource:
@@ -15054,6 +15055,10 @@ components:
           description: Eon-assigned ID of the resource the snapshot is backing up.
           example: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           type: string
+        jobId:
+          description: Backup job ID.
+          example: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
+          type: string
         expirationTime:
           description: "Date and time the snapshot's retention is expected to expire,\
             \ after which it's marked for deletion."
@@ -15073,6 +15078,7 @@ components:
       example:
         snapshot:
           pointInTime: 2024-10-29T23:01:30Z
+          jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
@@ -15217,6 +15223,7 @@ components:
       example:
         snapshots:
         - pointInTime: 2024-10-29T23:01:30Z
+          jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
@@ -15278,6 +15285,7 @@ components:
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         - pointInTime: 2024-10-29T23:01:30Z
+          jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
