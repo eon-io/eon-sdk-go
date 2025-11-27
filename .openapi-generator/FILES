@@ -128,6 +128,7 @@ docs/EnvironmentFilters.md
 docs/Error.md
 docs/ExcludeFromBackupResponse.md
 docs/FilePath.md
+docs/GCSRestoreTarget.md
 docs/GcpCloudSqlRestoreDestination.md
 docs/GcpCloudSqlTarget.md
 docs/GcpDiskRestoreDestination.md
@@ -432,6 +433,7 @@ model_gcp_source_account_attributes.go
 model_gcp_subnet_per_region.go
 model_gcp_vm_instance_restore_destination.go
 model_gcp_vm_instance_restore_target.go
+model_gcs_restore_target.go
 model_get_backup_job_response.go
 model_get_backup_policy_response.go
 model_get_resource_response.go

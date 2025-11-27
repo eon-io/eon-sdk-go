@@ -11563,8 +11563,33 @@ components:
       - container
       - name
       type: object
+    GCSRestoreTarget:
+      description: |
+        Information about the GCS bucket where you want to restore the files.
+        If you don't specify a target, the files are restored to the original bucket.
+      example:
+        bucketName: my-restore-bucket-12345
+        prefix: my-restore-prefix
+      properties:
+        bucketName:
+          description: Name of an existing bucket to restore the files to.
+          example: my-restore-bucket-12345
+          type: string
+        prefix:
+          description: |
+            Prefix to add to the restore path.
+            If you don't specify a prefix, the files are restored to their respective folders in the original file tree, starting from the root of the bucket.
+          example: my-restore-prefix
+          type: string
+      required:
+      - bucketName
+      type: object
+      x-internal: false
     ObjectStorageDestination:
       example:
+        gcsBucket:
+          bucketName: my-restore-bucket-12345
+          prefix: my-restore-prefix
         storageAccount:
           container: my-restore-container-12345
           resourceGroup: my-restore-resource-group-12345
@@ -11579,6 +11604,8 @@ components:
           $ref: '#/components/schemas/S3RestoreTarget'
         storageAccount:
           $ref: '#/components/schemas/StorageAccountRestoreTarget'
+        gcsBucket:
+          $ref: '#/components/schemas/GCSRestoreTarget'
       type: object
     FilePath:
       example:
@@ -11602,6 +11629,9 @@ components:
       example:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
+          gcsBucket:
+            bucketName: my-restore-bucket-12345
+            prefix: my-restore-prefix
           storageAccount:
             container: my-restore-container-12345
             resourceGroup: my-restore-resource-group-12345
@@ -11649,6 +11679,9 @@ components:
       example:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
+          gcsBucket:
+            bucketName: my-restore-bucket-12345
+            prefix: my-restore-prefix
           storageAccount:
             container: my-restore-container-12345
             resourceGroup: my-restore-resource-group-12345

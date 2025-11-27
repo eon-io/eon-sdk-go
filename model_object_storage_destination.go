@@ -21,6 +21,7 @@ var _ MappedNullable = &ObjectStorageDestination{}
 type ObjectStorageDestination struct {
 	S3Bucket *S3RestoreTarget `json:"s3Bucket,omitempty"`
 	StorageAccount *StorageAccountRestoreTarget `json:"storageAccount,omitempty"`
+	GcsBucket *GCSRestoreTarget `json:"gcsBucket,omitempty"`
 }
 
 // NewObjectStorageDestination instantiates a new ObjectStorageDestination object
@@ -104,6 +105,38 @@ func (o *ObjectStorageDestination) SetStorageAccount(v StorageAccountRestoreTarg
 	o.StorageAccount = &v
 }
 
+// GetGcsBucket returns the GcsBucket field value if set, zero value otherwise.
+func (o *ObjectStorageDestination) GetGcsBucket() GCSRestoreTarget {
+	if o == nil || IsNil(o.GcsBucket) {
+		var ret GCSRestoreTarget
+		return ret
+	}
+	return *o.GcsBucket
+}
+
+// GetGcsBucketOk returns a tuple with the GcsBucket field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ObjectStorageDestination) GetGcsBucketOk() (*GCSRestoreTarget, bool) {
+	if o == nil || IsNil(o.GcsBucket) {
+		return nil, false
+	}
+	return o.GcsBucket, true
+}
+
+// HasGcsBucket returns a boolean if a field has been set.
+func (o *ObjectStorageDestination) HasGcsBucket() bool {
+	if o != nil && !IsNil(o.GcsBucket) {
+		return true
+	}
+
+	return false
+}
+
+// SetGcsBucket gets a reference to the given GCSRestoreTarget and assigns it to the GcsBucket field.
+func (o *ObjectStorageDestination) SetGcsBucket(v GCSRestoreTarget) {
+	o.GcsBucket = &v
+}
+
 func (o ObjectStorageDestination) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -119,6 +152,9 @@ func (o ObjectStorageDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.StorageAccount) {
 		toSerialize["storageAccount"] = o.StorageAccount
+	}
+	if !IsNil(o.GcsBucket) {
+		toSerialize["gcsBucket"] = o.GcsBucket
 	}
 	return toSerialize, nil
 }

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **S3Bucket** | Pointer to [**S3RestoreTarget**](S3RestoreTarget.md) |  | [optional] 
 **StorageAccount** | Pointer to [**StorageAccountRestoreTarget**](StorageAccountRestoreTarget.md) |  | [optional] 
+**GcsBucket** | Pointer to [**GCSRestoreTarget**](GCSRestoreTarget.md) |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetStorageAccount sets StorageAccount field to given value.
 `func (o *ObjectStorageDestination) HasStorageAccount() bool`
 
 HasStorageAccount returns a boolean if a field has been set.
+
+### GetGcsBucket
+
+`func (o *ObjectStorageDestination) GetGcsBucket() GCSRestoreTarget`
+
+GetGcsBucket returns the GcsBucket field if non-nil, zero value otherwise.
+
+### GetGcsBucketOk
+
+`func (o *ObjectStorageDestination) GetGcsBucketOk() (*GCSRestoreTarget, bool)`
+
+GetGcsBucketOk returns a tuple with the GcsBucket field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcsBucket
+
+`func (o *ObjectStorageDestination) SetGcsBucket(v GCSRestoreTarget)`
+
+SetGcsBucket sets GcsBucket field to given value.
+
+### HasGcsBucket
+
+`func (o *ObjectStorageDestination) HasGcsBucket() bool`
+
+HasGcsBucket returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
