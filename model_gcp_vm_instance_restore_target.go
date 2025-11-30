@@ -37,6 +37,8 @@ type GcpVmInstanceRestoreTarget struct {
 	Labels *map[string]string `json:"labels,omitempty"`
 	// Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot. The boot disk must be in the list. 
 	Disks []RestoreGcpInstanceDiskInput `json:"disks"`
+	// Whether to start the VM instance after restoring it. If set to `false`, the VM will be created in a stopped state. 
+	StartInstanceAfterRestore *bool `json:"startInstanceAfterRestore,omitempty"`
 }
 
 type _GcpVmInstanceRestoreTarget GcpVmInstanceRestoreTarget
@@ -53,6 +55,8 @@ func NewGcpVmInstanceRestoreTarget(zone string, machineType string, name string,
 	this.NetworkName = networkName
 	this.SubnetName = subnetName
 	this.Disks = disks
+	var startInstanceAfterRestore bool = true
+	this.StartInstanceAfterRestore = &startInstanceAfterRestore
 	return &this
 }
 
@@ -61,6 +65,8 @@ func NewGcpVmInstanceRestoreTarget(zone string, machineType string, name string,
 // but it doesn't guarantee that properties required by API are set
 func NewGcpVmInstanceRestoreTargetWithDefaults() *GcpVmInstanceRestoreTarget {
 	this := GcpVmInstanceRestoreTarget{}
+	var startInstanceAfterRestore bool = true
+	this.StartInstanceAfterRestore = &startInstanceAfterRestore
 	return &this
 }
 
@@ -272,6 +278,38 @@ func (o *GcpVmInstanceRestoreTarget) SetDisks(v []RestoreGcpInstanceDiskInput) {
 	o.Disks = v
 }
 
+// GetStartInstanceAfterRestore returns the StartInstanceAfterRestore field value if set, zero value otherwise.
+func (o *GcpVmInstanceRestoreTarget) GetStartInstanceAfterRestore() bool {
+	if o == nil || IsNil(o.StartInstanceAfterRestore) {
+		var ret bool
+		return ret
+	}
+	return *o.StartInstanceAfterRestore
+}
+
+// GetStartInstanceAfterRestoreOk returns a tuple with the StartInstanceAfterRestore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GcpVmInstanceRestoreTarget) GetStartInstanceAfterRestoreOk() (*bool, bool) {
+	if o == nil || IsNil(o.StartInstanceAfterRestore) {
+		return nil, false
+	}
+	return o.StartInstanceAfterRestore, true
+}
+
+// HasStartInstanceAfterRestore returns a boolean if a field has been set.
+func (o *GcpVmInstanceRestoreTarget) HasStartInstanceAfterRestore() bool {
+	if o != nil && !IsNil(o.StartInstanceAfterRestore) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartInstanceAfterRestore gets a reference to the given bool and assigns it to the StartInstanceAfterRestore field.
+func (o *GcpVmInstanceRestoreTarget) SetStartInstanceAfterRestore(v bool) {
+	o.StartInstanceAfterRestore = &v
+}
+
 func (o GcpVmInstanceRestoreTarget) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -294,6 +332,9 @@ func (o GcpVmInstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 		toSerialize["labels"] = o.Labels
 	}
 	toSerialize["disks"] = o.Disks
+	if !IsNil(o.StartInstanceAfterRestore) {
+		toSerialize["startInstanceAfterRestore"] = o.StartInstanceAfterRestore
+	}
 	return toSerialize, nil
 }
 

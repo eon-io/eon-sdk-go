@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network.  | [optional] 
 **Labels** | Pointer to **map[string]string** | Labels to apply to the restored VM as key-value pairs, where key and value are both strings. These labels are always applied: &#x60;\&quot;eon-restore\&quot;: \&quot;true\&quot;&#x60;.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **Disks** | [**[]RestoreGcpInstanceDiskInput**](RestoreGcpInstanceDiskInput.md) | Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where &#x60;providerDiskId&#x60; matches the disk&#39;s ID at the time of the snapshot. The boot disk must be in the list.  | 
+**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM will be created in a stopped state.  | [optional] [default to true]
 
 ## Methods
 
@@ -201,6 +202,31 @@ and a boolean to check if the value has been set.
 
 SetDisks sets Disks field to given value.
 
+
+### GetStartInstanceAfterRestore
+
+`func (o *GcpVmInstanceRestoreTarget) GetStartInstanceAfterRestore() bool`
+
+GetStartInstanceAfterRestore returns the StartInstanceAfterRestore field if non-nil, zero value otherwise.
+
+### GetStartInstanceAfterRestoreOk
+
+`func (o *GcpVmInstanceRestoreTarget) GetStartInstanceAfterRestoreOk() (*bool, bool)`
+
+GetStartInstanceAfterRestoreOk returns a tuple with the StartInstanceAfterRestore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartInstanceAfterRestore
+
+`func (o *GcpVmInstanceRestoreTarget) SetStartInstanceAfterRestore(v bool)`
+
+SetStartInstanceAfterRestore sets StartInstanceAfterRestore field to given value.
+
+### HasStartInstanceAfterRestore
+
+`func (o *GcpVmInstanceRestoreTarget) HasStartInstanceAfterRestore() bool`
+
+HasStartInstanceAfterRestore returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

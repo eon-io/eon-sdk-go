@@ -12802,6 +12802,7 @@ components:
       type: object
     GcpVmInstanceRestoreTarget:
       example:
+        startInstanceAfterRestore: true
         networkHostProject: my-shared-vpc-project
         disks:
         - settings:
@@ -12880,6 +12881,12 @@ components:
           items:
             $ref: '#/components/schemas/RestoreGcpInstanceDiskInput'
           type: array
+        startInstanceAfterRestore:
+          default: true
+          description: |
+            Whether to start the VM instance after restoring it.
+            If set to `false`, the VM will be created in a stopped state.
+          type: boolean
       required:
       - disks
       - machineType
@@ -12891,6 +12898,7 @@ components:
     GcpVmInstanceRestoreDestination:
       example:
         gcpVm:
+          startInstanceAfterRestore: true
           networkHostProject: my-shared-vpc-project
           disks:
           - settings:
@@ -12931,6 +12939,7 @@ components:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
           gcpVm:
+            startInstanceAfterRestore: true
             networkHostProject: my-shared-vpc-project
             disks:
             - settings:
@@ -15771,6 +15780,7 @@ components:
       - AZURE_VIRTUAL_MACHINE_METERING_DIMENSION
       - AZURE_STORAGE_ACCOUNT_METERING_DIMENSION
       - AZURE_SQL_VIRTUAL_MACHINE_METERING_DIMENSION
+      - AZURE_SQL_DATABASE_METERING_DIMENSION
       - GCP_VM_INSTANCE_METERING_DIMENSION
       - GCP_CLOUD_STORAGE_METERING_DIMENSION
       - GCP_CLOUD_SQL_POSTGRES_SQL_METERING_DIMENSION
@@ -15786,6 +15796,11 @@ components:
       - AZURE_VIRTUAL_MACHINE_TO_AWS_VAULT_METERING_DIMENSION
       - AZURE_STORAGE_ACCOUNT_TO_AWS_VAULT_METERING_DIMENSION
       - AZURE_SQL_VIRTUAL_MACHINE_TO_AWS_VAULT_METERING_DIMENSION
+      - GCP_VM_INSTANCE_TO_AZURE_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_STORAGE_TO_AZURE_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_POSTGRES_TO_AZURE_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_MYSQL_TO_AZURE_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_SQL_SERVER_TO_AZURE_VAULT_METERING_DIMENSION
       - RANSOMWARE_PROTECTED_STORAGE_METERING_DIMENSION
       example: AWS_EC2_METERING_DIMENSION
       type: string
