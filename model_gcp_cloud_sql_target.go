@@ -28,8 +28,6 @@ type GcpCloudSqlTarget struct {
 	NetworkType GcpNetworkType `json:"networkType"`
 	// Name of the VPC network to use.
 	NetworkName *string `json:"networkName,omitempty"`
-	// Name of the subnet to use.
-	SubnetName *string `json:"subnetName,omitempty"`
 	// ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network. 
 	NetworkHostProject *string `json:"networkHostProject,omitempty"`
 	// Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings. These labels are always applied: `\"eon-restore\": \"true\"`.  **Example:** `{\"eon_api_restore\": \"true\"}` 
@@ -162,38 +160,6 @@ func (o *GcpCloudSqlTarget) SetNetworkName(v string) {
 	o.NetworkName = &v
 }
 
-// GetSubnetName returns the SubnetName field value if set, zero value otherwise.
-func (o *GcpCloudSqlTarget) GetSubnetName() string {
-	if o == nil || IsNil(o.SubnetName) {
-		var ret string
-		return ret
-	}
-	return *o.SubnetName
-}
-
-// GetSubnetNameOk returns a tuple with the SubnetName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GcpCloudSqlTarget) GetSubnetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.SubnetName) {
-		return nil, false
-	}
-	return o.SubnetName, true
-}
-
-// HasSubnetName returns a boolean if a field has been set.
-func (o *GcpCloudSqlTarget) HasSubnetName() bool {
-	if o != nil && !IsNil(o.SubnetName) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubnetName gets a reference to the given string and assigns it to the SubnetName field.
-func (o *GcpCloudSqlTarget) SetSubnetName(v string) {
-	o.SubnetName = &v
-}
-
 // GetNetworkHostProject returns the NetworkHostProject field value if set, zero value otherwise.
 func (o *GcpCloudSqlTarget) GetNetworkHostProject() string {
 	if o == nil || IsNil(o.NetworkHostProject) {
@@ -273,9 +239,6 @@ func (o GcpCloudSqlTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize["networkType"] = o.NetworkType
 	if !IsNil(o.NetworkName) {
 		toSerialize["networkName"] = o.NetworkName
-	}
-	if !IsNil(o.SubnetName) {
-		toSerialize["subnetName"] = o.SubnetName
 	}
 	if !IsNil(o.NetworkHostProject) {
 		toSerialize["networkHostProject"] = o.NetworkHostProject

@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**DisconnectSourceAccount**](AccountsAPI.md#DisconnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts/{accountId}/disconnect | Disconnect Source Account
 [**EnableRestoreAccountMetricsConfig**](AccountsAPI.md#EnableRestoreAccountMetricsConfig) | **Put** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Configure Restore Account Metrics
 [**EnableSourceAccountMetricsConfig**](AccountsAPI.md#EnableSourceAccountMetricsConfig) | **Put** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Configure Source Account Metrics
+[**GetAzureOnboardedTenants**](AccountsAPI.md#GetAzureOnboardedTenants) | **Get** /projects/{projectId}/azure/onboarded-tenants | Get onboarded Azure tenants for an Eon account
 [**GetRestoreAccountConnectivityConfig**](AccountsAPI.md#GetRestoreAccountConnectivityConfig) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Get Restore Account Connectivity Configuration
 [**GetRestoreAccountMetricsConfig**](AccountsAPI.md#GetRestoreAccountMetricsConfig) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Get Restore Account Metrics Configuration
 [**GetSourceAccountMetricsConfig**](AccountsAPI.md#GetSourceAccountMetricsConfig) | **Get** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Get Source Account Metrics Configuration
@@ -670,6 +671,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAzureOnboardedTenants
+
+> AzureOnboardedTenantsResponse GetAzureOnboardedTenants(ctx, projectId).Execute()
+
+Get onboarded Azure tenants for an Eon account
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.GetAzureOnboardedTenants(context.Background(), projectId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetAzureOnboardedTenants``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAzureOnboardedTenants`: AzureOnboardedTenantsResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.GetAzureOnboardedTenants`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | The project ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAzureOnboardedTenantsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AzureOnboardedTenantsResponse**](AzureOnboardedTenantsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

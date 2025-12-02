@@ -52,6 +52,7 @@ docs/AzureDiskRestoreDestination.md
 docs/AzureDiskRestoreResult.md
 docs/AzureDiskSettings.md
 docs/AzureDiskTarget.md
+docs/AzureOnboardedTenantsResponse.md
 docs/AzureRestoreAccountAttributes.md
 docs/AzureSourceAccountAttributes.md
 docs/AzureSqlDatabaseRestoreDestination.md
@@ -167,6 +168,9 @@ docs/JobIdFilters.md
 docs/JobSnapshotDetails.md
 docs/JobStatus.md
 docs/JobStatusFilters.md
+docs/JobStep.md
+docs/JobStepName.md
+docs/JobStepStatus.md
 docs/JobsAPI.md
 docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
@@ -348,6 +352,7 @@ model_azure_disk_restore_destination.go
 model_azure_disk_restore_result.go
 model_azure_disk_settings.go
 model_azure_disk_target.go
+model_azure_onboarded_tenants_response.go
 model_azure_restore_account_attributes.go
 model_azure_source_account_attributes.go
 model_azure_sql_database_restore_destination.go
@@ -459,6 +464,9 @@ model_job_id_filters.go
 model_job_snapshot_details.go
 model_job_status.go
 model_job_status_filters.go
+model_job_step.go
+model_job_step_name.go
+model_job_step_status.go
 model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
 model_list_backup_policies_response.go

@@ -26,6 +26,8 @@ type BackupJob struct {
 	SnapshotDetails NullableJobSnapshotDetails `json:"snapshotDetails,omitempty"`
 	BackupType BackupJobType `json:"backupType"`
 	Vault NullableBackupVault `json:"vault,omitempty"`
+	// Job steps. Only populated for job types that have steps defined.
+	Steps []JobStep `json:"steps,omitempty"`
 }
 
 type _BackupJob BackupJob
@@ -223,6 +225,39 @@ func (o *BackupJob) UnsetVault() {
 	o.Vault.Unset()
 }
 
+// GetSteps returns the Steps field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BackupJob) GetSteps() []JobStep {
+	if o == nil {
+		var ret []JobStep
+		return ret
+	}
+	return o.Steps
+}
+
+// GetStepsOk returns a tuple with the Steps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BackupJob) GetStepsOk() ([]JobStep, bool) {
+	if o == nil || IsNil(o.Steps) {
+		return nil, false
+	}
+	return o.Steps, true
+}
+
+// HasSteps returns a boolean if a field has been set.
+func (o *BackupJob) HasSteps() bool {
+	if o != nil && !IsNil(o.Steps) {
+		return true
+	}
+
+	return false
+}
+
+// SetSteps gets a reference to the given []JobStep and assigns it to the Steps field.
+func (o *BackupJob) SetSteps(v []JobStep) {
+	o.Steps = v
+}
+
 func (o BackupJob) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -243,6 +278,9 @@ func (o BackupJob) ToMap() (map[string]interface{}, error) {
 	toSerialize["backupType"] = o.BackupType
 	if o.Vault.IsSet() {
 		toSerialize["vault"] = o.Vault.Get()
+	}
+	if o.Steps != nil {
+		toSerialize["steps"] = o.Steps
 	}
 	return toSerialize, nil
 }

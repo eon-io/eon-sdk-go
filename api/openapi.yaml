@@ -70,6 +70,59 @@ tags:
   name: billing
   x-displayName: Billing
 paths:
+  /projects/{projectId}/azure/onboarded-tenants:
+    get:
+      operationId: getAzureOnboardedTenants
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureOnboardedTenantsResponse'
+          description: List of onboarded Azure tenant IDs
+        "400":
+          description: Bad request - Invalid project ID
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal server error
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get onboarded Azure tenants for an Eon account
+      tags:
+      - accounts
+      x-permissions:
+      - admin:source_accounts
+      x-internal: false
+      x-skip-request-validation: true
+      x-data-access:
+        excluded: true
+      x-audit-log:
+        excluded: true
   /v1/projects/{projectId}/source-accounts:
     post:
       description: "Description: Connects a source cloud account to the given project."
@@ -4770,6 +4823,21 @@ paths:
         excluded: true
 components:
   schemas:
+    AzureOnboardedTenantsResponse:
+      example:
+        tenantIds:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        tenantIds:
+          description: List of Azure tenant IDs where management apps are registered
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - tenantIds
+      type: object
     Provider:
       description: Cloud provider.
       enum:
@@ -6087,6 +6155,7 @@ components:
       type: object
     GcpNetworkConnectivityConfig:
       example:
+        networkHostProject: my-shared-vpc-project
         network: network-01234567890123456
         subnetsPerRegion:
         - region: us-east1
@@ -6105,19 +6174,27 @@ components:
           items:
             $ref: '#/components/schemas/GcpSubnetPerRegion'
           type: array
+        networkHostProject:
+          description: |
+            ID of the project that hosts the VPC network.
+            Applicable for shared VPC network.
+          example: my-shared-vpc-project
+          type: string
       required:
       - network
       type: object
     GcpRestoreAccountConnectivityConfig:
       example:
         networkConfigs:
-        - network: network-01234567890123456
+        - networkHostProject: my-shared-vpc-project
+          network: network-01234567890123456
           subnetsPerRegion:
           - region: us-east1
             subnetName: subnet-01234567890123456
           - region: us-east1
             subnetName: subnet-01234567890123456
-        - network: network-01234567890123456
+        - networkHostProject: my-shared-vpc-project
+          network: network-01234567890123456
           subnetsPerRegion:
           - region: us-east1
             subnetName: subnet-01234567890123456
@@ -6135,13 +6212,15 @@ components:
       example:
         gcp:
           networkConfigs:
-          - network: network-01234567890123456
+          - networkHostProject: my-shared-vpc-project
+            network: network-01234567890123456
             subnetsPerRegion:
             - region: us-east1
               subnetName: subnet-01234567890123456
             - region: us-east1
               subnetName: subnet-01234567890123456
-          - network: network-01234567890123456
+          - networkHostProject: my-shared-vpc-project
+            network: network-01234567890123456
             subnetsPerRegion:
             - region: us-east1
               subnetName: subnet-01234567890123456
@@ -6185,13 +6264,15 @@ components:
         config:
           gcp:
             networkConfigs:
-            - network: network-01234567890123456
+            - networkHostProject: my-shared-vpc-project
+              network: network-01234567890123456
               subnetsPerRegion:
               - region: us-east1
                 subnetName: subnet-01234567890123456
               - region: us-east1
                 subnetName: subnet-01234567890123456
-            - network: network-01234567890123456
+            - networkHostProject: my-shared-vpc-project
+              network: network-01234567890123456
               subnetsPerRegion:
               - region: us-east1
                 subnetName: subnet-01234567890123456
@@ -6241,13 +6322,15 @@ components:
           config:
             gcp:
               networkConfigs:
-              - network: network-01234567890123456
+              - networkHostProject: my-shared-vpc-project
+                network: network-01234567890123456
                 subnetsPerRegion:
                 - region: us-east1
                   subnetName: subnet-01234567890123456
                 - region: us-east1
                   subnetName: subnet-01234567890123456
-              - network: network-01234567890123456
+              - networkHostProject: my-shared-vpc-project
+                network: network-01234567890123456
                 subnetsPerRegion:
                 - region: us-east1
                   subnetName: subnet-01234567890123456
@@ -6289,13 +6372,15 @@ components:
       example:
         gcp:
           networkConfigs:
-          - network: network-01234567890123456
+          - networkHostProject: my-shared-vpc-project
+            network: network-01234567890123456
             subnetsPerRegion:
             - region: us-east1
               subnetName: subnet-01234567890123456
             - region: us-east1
               subnetName: subnet-01234567890123456
-          - network: network-01234567890123456
+          - networkHostProject: my-shared-vpc-project
+            network: network-01234567890123456
             subnetsPerRegion:
             - region: us-east1
               subnetName: subnet-01234567890123456
@@ -6340,13 +6425,15 @@ components:
           config:
             gcp:
               networkConfigs:
-              - network: network-01234567890123456
+              - networkHostProject: my-shared-vpc-project
+                network: network-01234567890123456
                 subnetsPerRegion:
                 - region: us-east1
                   subnetName: subnet-01234567890123456
                 - region: us-east1
                   subnetName: subnet-01234567890123456
-              - network: network-01234567890123456
+              - networkHostProject: my-shared-vpc-project
+                network: network-01234567890123456
                 subnetsPerRegion:
                 - region: us-east1
                   subnetName: subnet-01234567890123456
@@ -7022,6 +7109,62 @@ components:
       - vaultAccountId
       - vaultAttributes
       type: object
+    JobStepName:
+      description: The name of a step within a backup job workflow.
+      enum:
+      - create_vm_snapshot
+      example: create_vm_snapshot
+      type: string
+    JobStepStatus:
+      description: |
+        The status of a job step.
+
+        - `JOB_STEP_STATUS_UNSPECIFIED`: Status is not specified.
+        - `PENDING`: Step is valid but hasn't started yet.
+        - `RUNNING`: Step is currently running.
+        - `COMPLETED`: Step completed successfully.
+        - `FAILED`: Step failed.
+      enum:
+      - JOB_STEP_STATUS_UNSPECIFIED
+      - PENDING
+      - RUNNING
+      - COMPLETED
+      - FAILED
+      example: RUNNING
+      type: string
+      x-enum-varnames:
+      - JOB_STEP_STATUS_UNSPECIFIED
+      - JOB_STEP_STATUS_PENDING
+      - JOB_STEP_STATUS_RUNNING
+      - JOB_STEP_STATUS_COMPLETED
+      - JOB_STEP_STATUS_FAILED
+    JobStep:
+      example:
+        stepName: create_vm_snapshot
+        startTime: 2025-06-12T20:28:35.073285Z
+        endTime: 2025-06-12T20:30:35.073285Z
+        status: RUNNING
+      properties:
+        stepName:
+          $ref: '#/components/schemas/JobStepName'
+        status:
+          $ref: '#/components/schemas/JobStepStatus'
+        startTime:
+          description: Date and time the step started.
+          example: 2025-06-12T20:28:35.073285Z
+          format: date-time
+          nullable: true
+          type: string
+        endTime:
+          description: Date and time the step completed.
+          example: 2025-06-12T20:30:35.073285Z
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - status
+      - stepName
+      type: object
     BackupJob:
       example:
         resourceDetails:
@@ -7045,6 +7188,15 @@ components:
         snapshotDetails:
           pointInTime: 2024-10-29T23:01:30Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
+        steps:
+        - stepName: create_vm_snapshot
+          startTime: 2025-06-12T20:28:35.073285Z
+          endTime: 2025-06-12T20:30:35.073285Z
+          status: RUNNING
+        - stepName: create_vm_snapshot
+          startTime: 2025-06-12T20:28:35.073285Z
+          endTime: 2025-06-12T20:30:35.073285Z
+          status: RUNNING
         vault:
           providerAccountId: "123412341234"
           name: AWS US East 1
@@ -7068,6 +7220,12 @@ components:
           $ref: '#/components/schemas/BackupJobType'
         vault:
           $ref: '#/components/schemas/BackupVault'
+        steps:
+          description: Job steps. Only populated for job types that have steps defined.
+          items:
+            $ref: '#/components/schemas/JobStep'
+          nullable: true
+          type: array
       required:
       - backupType
       - jobExecutionDetails
@@ -7097,6 +7255,15 @@ components:
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
+          steps:
+          - stepName: create_vm_snapshot
+            startTime: 2025-06-12T20:28:35.073285Z
+            endTime: 2025-06-12T20:30:35.073285Z
+            status: RUNNING
+          - stepName: create_vm_snapshot
+            startTime: 2025-06-12T20:28:35.073285Z
+            endTime: 2025-06-12T20:30:35.073285Z
+            status: RUNNING
           vault:
             providerAccountId: "123412341234"
             name: AWS US East 1
@@ -7130,6 +7297,15 @@ components:
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
+          steps:
+          - stepName: create_vm_snapshot
+            startTime: 2025-06-12T20:28:35.073285Z
+            endTime: 2025-06-12T20:30:35.073285Z
+            status: RUNNING
+          - stepName: create_vm_snapshot
+            startTime: 2025-06-12T20:28:35.073285Z
+            endTime: 2025-06-12T20:30:35.073285Z
+            status: RUNNING
           vault:
             providerAccountId: "123412341234"
             name: AWS US East 1
@@ -7187,6 +7363,15 @@ components:
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
+          steps:
+          - stepName: create_vm_snapshot
+            startTime: 2025-06-12T20:28:35.073285Z
+            endTime: 2025-06-12T20:30:35.073285Z
+            status: RUNNING
+          - stepName: create_vm_snapshot
+            startTime: 2025-06-12T20:28:35.073285Z
+            endTime: 2025-06-12T20:30:35.073285Z
+            status: RUNNING
           vault:
             providerAccountId: "123412341234"
             name: AWS US East 1
@@ -13001,7 +13186,6 @@ components:
         name: my-instance
         networkName: default
         networkType: PRIVATE
-        subnetName: default
         labels:
           eon_api_restore: "true"
       properties:
@@ -13017,10 +13201,6 @@ components:
           $ref: '#/components/schemas/GcpNetworkType'
         networkName:
           description: Name of the VPC network to use.
-          example: default
-          type: string
-        subnetName:
-          description: Name of the subnet to use.
           example: default
           type: string
         networkHostProject:
@@ -13053,7 +13233,6 @@ components:
           name: my-instance
           networkName: default
           networkType: PRIVATE
-          subnetName: default
           labels:
             eon_api_restore: "true"
       properties:
@@ -13070,7 +13249,6 @@ components:
             name: my-instance
             networkName: default
             networkType: PRIVATE
-            subnetName: default
             labels:
               eon_api_restore: "true"
       properties:

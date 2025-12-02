@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Network** | **string** | Network name. | 
 **SubnetsPerRegion** | Pointer to [**[]GcpSubnetPerRegion**](GcpSubnetPerRegion.md) | Subnets to configure for regions in the network. For regions not specified in this list, Eon attempts to use the default subnet.  | [optional] 
+**NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable for shared VPC network.  | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ SetSubnetsPerRegion sets SubnetsPerRegion field to given value.
 `func (o *GcpNetworkConnectivityConfig) HasSubnetsPerRegion() bool`
 
 HasSubnetsPerRegion returns a boolean if a field has been set.
+
+### GetNetworkHostProject
+
+`func (o *GcpNetworkConnectivityConfig) GetNetworkHostProject() string`
+
+GetNetworkHostProject returns the NetworkHostProject field if non-nil, zero value otherwise.
+
+### GetNetworkHostProjectOk
+
+`func (o *GcpNetworkConnectivityConfig) GetNetworkHostProjectOk() (*string, bool)`
+
+GetNetworkHostProjectOk returns a tuple with the NetworkHostProject field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkHostProject
+
+`func (o *GcpNetworkConnectivityConfig) SetNetworkHostProject(v string)`
+
+SetNetworkHostProject sets NetworkHostProject field to given value.
+
+### HasNetworkHostProject
+
+`func (o *GcpNetworkConnectivityConfig) HasNetworkHostProject() bool`
+
+HasNetworkHostProject returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

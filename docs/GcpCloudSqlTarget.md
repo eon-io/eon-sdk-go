@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Name** | **string** | Instance name. | 
 **NetworkType** | [**GcpNetworkType**](GcpNetworkType.md) |  | 
 **NetworkName** | Pointer to **string** | Name of the VPC network to use. | [optional] 
-**SubnetName** | Pointer to **string** | Name of the subnet to use. | [optional] 
 **NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network.  | [optional] 
 **Labels** | Pointer to **map[string]string** | Labels to apply to the restored Cloud SQL instance as key-value pairs, where key and value are both strings. These labels are always applied: &#x60;\&quot;eon-restore\&quot;: \&quot;true\&quot;&#x60;.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 
@@ -115,31 +114,6 @@ SetNetworkName sets NetworkName field to given value.
 `func (o *GcpCloudSqlTarget) HasNetworkName() bool`
 
 HasNetworkName returns a boolean if a field has been set.
-
-### GetSubnetName
-
-`func (o *GcpCloudSqlTarget) GetSubnetName() string`
-
-GetSubnetName returns the SubnetName field if non-nil, zero value otherwise.
-
-### GetSubnetNameOk
-
-`func (o *GcpCloudSqlTarget) GetSubnetNameOk() (*string, bool)`
-
-GetSubnetNameOk returns a tuple with the SubnetName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSubnetName
-
-`func (o *GcpCloudSqlTarget) SetSubnetName(v string)`
-
-SetSubnetName sets SubnetName field to given value.
-
-### HasSubnetName
-
-`func (o *GcpCloudSqlTarget) HasSubnetName() bool`
-
-HasSubnetName returns a boolean if a field has been set.
 
 ### GetNetworkHostProject
 

@@ -25,6 +25,8 @@ type GcpNetworkConnectivityConfig struct {
 	Network string `json:"network"`
 	// Subnets to configure for regions in the network. For regions not specified in this list, Eon attempts to use the default subnet. 
 	SubnetsPerRegion []GcpSubnetPerRegion `json:"subnetsPerRegion,omitempty"`
+	// ID of the project that hosts the VPC network. Applicable for shared VPC network. 
+	NetworkHostProject *string `json:"networkHostProject,omitempty"`
 }
 
 type _GcpNetworkConnectivityConfig GcpNetworkConnectivityConfig
@@ -103,6 +105,38 @@ func (o *GcpNetworkConnectivityConfig) SetSubnetsPerRegion(v []GcpSubnetPerRegio
 	o.SubnetsPerRegion = v
 }
 
+// GetNetworkHostProject returns the NetworkHostProject field value if set, zero value otherwise.
+func (o *GcpNetworkConnectivityConfig) GetNetworkHostProject() string {
+	if o == nil || IsNil(o.NetworkHostProject) {
+		var ret string
+		return ret
+	}
+	return *o.NetworkHostProject
+}
+
+// GetNetworkHostProjectOk returns a tuple with the NetworkHostProject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GcpNetworkConnectivityConfig) GetNetworkHostProjectOk() (*string, bool) {
+	if o == nil || IsNil(o.NetworkHostProject) {
+		return nil, false
+	}
+	return o.NetworkHostProject, true
+}
+
+// HasNetworkHostProject returns a boolean if a field has been set.
+func (o *GcpNetworkConnectivityConfig) HasNetworkHostProject() bool {
+	if o != nil && !IsNil(o.NetworkHostProject) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkHostProject gets a reference to the given string and assigns it to the NetworkHostProject field.
+func (o *GcpNetworkConnectivityConfig) SetNetworkHostProject(v string) {
+	o.NetworkHostProject = &v
+}
+
 func (o GcpNetworkConnectivityConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -116,6 +150,9 @@ func (o GcpNetworkConnectivityConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize["network"] = o.Network
 	if !IsNil(o.SubnetsPerRegion) {
 		toSerialize["subnetsPerRegion"] = o.SubnetsPerRegion
+	}
+	if !IsNil(o.NetworkHostProject) {
+		toSerialize["networkHostProject"] = o.NetworkHostProject
 	}
 	return toSerialize, nil
 }

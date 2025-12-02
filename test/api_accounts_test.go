@@ -152,6 +152,20 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService GetAzureOnboardedTenants", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.GetAzureOnboardedTenants(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService GetRestoreAccountConnectivityConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
