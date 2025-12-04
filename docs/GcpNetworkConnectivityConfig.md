@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Network** | **string** | Network name. | 
 **SubnetsPerRegion** | Pointer to [**[]GcpSubnetPerRegion**](GcpSubnetPerRegion.md) | Subnets to configure for regions in the network. For regions not specified in this list, Eon attempts to use the default subnet.  | [optional] 
-**NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable for shared VPC network.  | [optional] 
+**IsSharedVPC** | **bool** | Indicates whether the VPC network is a shared VPC. If true, &#x60;networkHostProject&#x60; must be specified.  | [default to false]
+**NetworkHostProject** | **string** | ID of the project that hosts the VPC network. Applicable for shared VPC network.  | 
 
 ## Methods
 
 ### NewGcpNetworkConnectivityConfig
 
-`func NewGcpNetworkConnectivityConfig(network string, ) *GcpNetworkConnectivityConfig`
+`func NewGcpNetworkConnectivityConfig(network string, isSharedVPC bool, networkHostProject string, ) *GcpNetworkConnectivityConfig`
 
 NewGcpNetworkConnectivityConfig instantiates a new GcpNetworkConnectivityConfig object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +73,26 @@ SetSubnetsPerRegion sets SubnetsPerRegion field to given value.
 
 HasSubnetsPerRegion returns a boolean if a field has been set.
 
+### GetIsSharedVPC
+
+`func (o *GcpNetworkConnectivityConfig) GetIsSharedVPC() bool`
+
+GetIsSharedVPC returns the IsSharedVPC field if non-nil, zero value otherwise.
+
+### GetIsSharedVPCOk
+
+`func (o *GcpNetworkConnectivityConfig) GetIsSharedVPCOk() (*bool, bool)`
+
+GetIsSharedVPCOk returns a tuple with the IsSharedVPC field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSharedVPC
+
+`func (o *GcpNetworkConnectivityConfig) SetIsSharedVPC(v bool)`
+
+SetIsSharedVPC sets IsSharedVPC field to given value.
+
+
 ### GetNetworkHostProject
 
 `func (o *GcpNetworkConnectivityConfig) GetNetworkHostProject() string`
@@ -91,11 +112,6 @@ and a boolean to check if the value has been set.
 
 SetNetworkHostProject sets NetworkHostProject field to given value.
 
-### HasNetworkHostProject
-
-`func (o *GcpNetworkConnectivityConfig) HasNetworkHostProject() bool`
-
-HasNetworkHostProject returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -55,6 +55,8 @@ type APIClient struct {
 
 	BackupPoliciesAPI *BackupPoliciesAPIService
 
+	BackupsAPI *BackupsAPIService
+
 	BillingAPI *BillingAPIService
 
 	DashboardAPI *DashboardAPIService
@@ -89,6 +91,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountsAPI = (*AccountsAPIService)(&c.common)
 	c.AuthAPI = (*AuthAPIService)(&c.common)
 	c.BackupPoliciesAPI = (*BackupPoliciesAPIService)(&c.common)
+	c.BackupsAPI = (*BackupsAPIService)(&c.common)
 	c.BillingAPI = (*BillingAPIService)(&c.common)
 	c.DashboardAPI = (*DashboardAPIService)(&c.common)
 	c.DatabaseSnapshotsAPI = (*DatabaseSnapshotsAPIService)(&c.common)

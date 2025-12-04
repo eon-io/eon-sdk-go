@@ -25,8 +25,10 @@ type GcpNetworkConnectivityConfig struct {
 	Network string `json:"network"`
 	// Subnets to configure for regions in the network. For regions not specified in this list, Eon attempts to use the default subnet. 
 	SubnetsPerRegion []GcpSubnetPerRegion `json:"subnetsPerRegion,omitempty"`
+	// Indicates whether the VPC network is a shared VPC. If true, `networkHostProject` must be specified. 
+	IsSharedVPC bool `json:"isSharedVPC"`
 	// ID of the project that hosts the VPC network. Applicable for shared VPC network. 
-	NetworkHostProject *string `json:"networkHostProject,omitempty"`
+	NetworkHostProject string `json:"networkHostProject"`
 }
 
 type _GcpNetworkConnectivityConfig GcpNetworkConnectivityConfig
@@ -35,9 +37,11 @@ type _GcpNetworkConnectivityConfig GcpNetworkConnectivityConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGcpNetworkConnectivityConfig(network string) *GcpNetworkConnectivityConfig {
+func NewGcpNetworkConnectivityConfig(network string, isSharedVPC bool, networkHostProject string) *GcpNetworkConnectivityConfig {
 	this := GcpNetworkConnectivityConfig{}
 	this.Network = network
+	this.IsSharedVPC = isSharedVPC
+	this.NetworkHostProject = networkHostProject
 	return &this
 }
 
@@ -46,6 +50,8 @@ func NewGcpNetworkConnectivityConfig(network string) *GcpNetworkConnectivityConf
 // but it doesn't guarantee that properties required by API are set
 func NewGcpNetworkConnectivityConfigWithDefaults() *GcpNetworkConnectivityConfig {
 	this := GcpNetworkConnectivityConfig{}
+	var isSharedVPC bool = false
+	this.IsSharedVPC = isSharedVPC
 	return &this
 }
 
@@ -105,36 +111,52 @@ func (o *GcpNetworkConnectivityConfig) SetSubnetsPerRegion(v []GcpSubnetPerRegio
 	o.SubnetsPerRegion = v
 }
 
-// GetNetworkHostProject returns the NetworkHostProject field value if set, zero value otherwise.
+// GetIsSharedVPC returns the IsSharedVPC field value
+func (o *GcpNetworkConnectivityConfig) GetIsSharedVPC() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsSharedVPC
+}
+
+// GetIsSharedVPCOk returns a tuple with the IsSharedVPC field value
+// and a boolean to check if the value has been set.
+func (o *GcpNetworkConnectivityConfig) GetIsSharedVPCOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsSharedVPC, true
+}
+
+// SetIsSharedVPC sets field value
+func (o *GcpNetworkConnectivityConfig) SetIsSharedVPC(v bool) {
+	o.IsSharedVPC = v
+}
+
+// GetNetworkHostProject returns the NetworkHostProject field value
 func (o *GcpNetworkConnectivityConfig) GetNetworkHostProject() string {
-	if o == nil || IsNil(o.NetworkHostProject) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.NetworkHostProject
+
+	return o.NetworkHostProject
 }
 
-// GetNetworkHostProjectOk returns a tuple with the NetworkHostProject field value if set, nil otherwise
+// GetNetworkHostProjectOk returns a tuple with the NetworkHostProject field value
 // and a boolean to check if the value has been set.
 func (o *GcpNetworkConnectivityConfig) GetNetworkHostProjectOk() (*string, bool) {
-	if o == nil || IsNil(o.NetworkHostProject) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkHostProject, true
+	return &o.NetworkHostProject, true
 }
 
-// HasNetworkHostProject returns a boolean if a field has been set.
-func (o *GcpNetworkConnectivityConfig) HasNetworkHostProject() bool {
-	if o != nil && !IsNil(o.NetworkHostProject) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetworkHostProject gets a reference to the given string and assigns it to the NetworkHostProject field.
+// SetNetworkHostProject sets field value
 func (o *GcpNetworkConnectivityConfig) SetNetworkHostProject(v string) {
-	o.NetworkHostProject = &v
+	o.NetworkHostProject = v
 }
 
 func (o GcpNetworkConnectivityConfig) MarshalJSON() ([]byte, error) {
@@ -151,9 +173,8 @@ func (o GcpNetworkConnectivityConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubnetsPerRegion) {
 		toSerialize["subnetsPerRegion"] = o.SubnetsPerRegion
 	}
-	if !IsNil(o.NetworkHostProject) {
-		toSerialize["networkHostProject"] = o.NetworkHostProject
-	}
+	toSerialize["isSharedVPC"] = o.IsSharedVPC
+	toSerialize["networkHostProject"] = o.NetworkHostProject
 	return toSerialize, nil
 }
 
@@ -163,6 +184,8 @@ func (o *GcpNetworkConnectivityConfig) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"network",
+		"isSharedVPC",
+		"networkHostProject",
 	}
 
 	allProperties := make(map[string]interface{})

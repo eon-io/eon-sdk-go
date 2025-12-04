@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Snapshot ID. | [optional] 
 **PointInTime** | **time.Time** | Date and time of the resource that&#39;s preserved by the snapshot. | 
+**ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetPointInTime sets PointInTime field to given value.
 
+
+### GetExpirationTime
+
+`func (o *JobSnapshotDetails) GetExpirationTime() time.Time`
+
+GetExpirationTime returns the ExpirationTime field if non-nil, zero value otherwise.
+
+### GetExpirationTimeOk
+
+`func (o *JobSnapshotDetails) GetExpirationTimeOk() (*time.Time, bool)`
+
+GetExpirationTimeOk returns a tuple with the ExpirationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationTime
+
+`func (o *JobSnapshotDetails) SetExpirationTime(v time.Time)`
+
+SetExpirationTime sets ExpirationTime field to given value.
+
+### HasExpirationTime
+
+`func (o *JobSnapshotDetails) HasExpirationTime() bool`
+
+HasExpirationTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -26,6 +26,8 @@ type JobSnapshotDetails struct {
 	Id *string `json:"id,omitempty"`
 	// Date and time of the resource that's preserved by the snapshot.
 	PointInTime time.Time `json:"pointInTime"`
+	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
+	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
 }
 
 type _JobSnapshotDetails JobSnapshotDetails
@@ -104,6 +106,38 @@ func (o *JobSnapshotDetails) SetPointInTime(v time.Time) {
 	o.PointInTime = v
 }
 
+// GetExpirationTime returns the ExpirationTime field value if set, zero value otherwise.
+func (o *JobSnapshotDetails) GetExpirationTime() time.Time {
+	if o == nil || IsNil(o.ExpirationTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpirationTime
+}
+
+// GetExpirationTimeOk returns a tuple with the ExpirationTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *JobSnapshotDetails) GetExpirationTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ExpirationTime) {
+		return nil, false
+	}
+	return o.ExpirationTime, true
+}
+
+// HasExpirationTime returns a boolean if a field has been set.
+func (o *JobSnapshotDetails) HasExpirationTime() bool {
+	if o != nil && !IsNil(o.ExpirationTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpirationTime gets a reference to the given time.Time and assigns it to the ExpirationTime field.
+func (o *JobSnapshotDetails) SetExpirationTime(v time.Time) {
+	o.ExpirationTime = &v
+}
+
 func (o JobSnapshotDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -118,6 +152,9 @@ func (o JobSnapshotDetails) ToMap() (map[string]interface{}, error) {
 		toSerialize["id"] = o.Id
 	}
 	toSerialize["pointInTime"] = o.PointInTime
+	if !IsNil(o.ExpirationTime) {
+		toSerialize["expirationTime"] = o.ExpirationTime
+	}
 	return toSerialize, nil
 }
 
