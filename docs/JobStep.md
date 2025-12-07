@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StepName** | [**JobStepName**](JobStepName.md) |  | 
 **Status** | [**JobStepStatus**](JobStepStatus.md) |  | 
 **StartTime** | Pointer to **NullableTime** | Date and time the step started. | [optional] 
 **EndTime** | Pointer to **NullableTime** | Date and time the step completed. | [optional] 
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewJobStep
 
-`func NewJobStep(stepName JobStepName, status JobStepStatus, ) *JobStep`
+`func NewJobStep(status JobStepStatus, ) *JobStep`
 
 NewJobStep instantiates a new JobStep object
 This constructor will assign default values to properties that have it defined,
@@ -27,26 +26,6 @@ will change when the set of required properties is changed
 NewJobStepWithDefaults instantiates a new JobStep object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetStepName
-
-`func (o *JobStep) GetStepName() JobStepName`
-
-GetStepName returns the StepName field if non-nil, zero value otherwise.
-
-### GetStepNameOk
-
-`func (o *JobStep) GetStepNameOk() (*JobStepName, bool)`
-
-GetStepNameOk returns a tuple with the StepName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStepName
-
-`func (o *JobStep) SetStepName(v JobStepName)`
-
-SetStepName sets StepName field to given value.
-
 
 ### GetStatus
 

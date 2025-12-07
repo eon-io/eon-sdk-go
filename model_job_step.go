@@ -22,7 +22,6 @@ var _ MappedNullable = &JobStep{}
 
 // JobStep struct for JobStep
 type JobStep struct {
-	StepName JobStepName `json:"stepName"`
 	Status JobStepStatus `json:"status"`
 	// Date and time the step started.
 	StartTime NullableTime `json:"startTime,omitempty"`
@@ -36,9 +35,8 @@ type _JobStep JobStep
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewJobStep(stepName JobStepName, status JobStepStatus) *JobStep {
+func NewJobStep(status JobStepStatus) *JobStep {
 	this := JobStep{}
-	this.StepName = stepName
 	this.Status = status
 	return &this
 }
@@ -49,30 +47,6 @@ func NewJobStep(stepName JobStepName, status JobStepStatus) *JobStep {
 func NewJobStepWithDefaults() *JobStep {
 	this := JobStep{}
 	return &this
-}
-
-// GetStepName returns the StepName field value
-func (o *JobStep) GetStepName() JobStepName {
-	if o == nil {
-		var ret JobStepName
-		return ret
-	}
-
-	return o.StepName
-}
-
-// GetStepNameOk returns a tuple with the StepName field value
-// and a boolean to check if the value has been set.
-func (o *JobStep) GetStepNameOk() (*JobStepName, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StepName, true
-}
-
-// SetStepName sets field value
-func (o *JobStep) SetStepName(v JobStepName) {
-	o.StepName = v
 }
 
 // GetStatus returns the Status field value
@@ -193,7 +167,6 @@ func (o JobStep) MarshalJSON() ([]byte, error) {
 
 func (o JobStep) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["stepName"] = o.StepName
 	toSerialize["status"] = o.Status
 	if o.StartTime.IsSet() {
 		toSerialize["startTime"] = o.StartTime.Get()
@@ -209,7 +182,6 @@ func (o *JobStep) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"stepName",
 		"status",
 	}
 
