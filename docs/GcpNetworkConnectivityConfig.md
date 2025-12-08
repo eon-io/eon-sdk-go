@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Network** | **string** | Network name. | 
 **SubnetsPerRegion** | Pointer to [**[]GcpSubnetPerRegion**](GcpSubnetPerRegion.md) | Subnets to configure for regions in the network. For regions not specified in this list, Eon attempts to use the default subnet.  | [optional] 
-**IsSharedVPC** | **bool** | Indicates whether the VPC network is a shared VPC. If true, &#x60;networkHostProject&#x60; must be specified.  | [default to false]
+**IsSharedVpc** | **bool** | Indicates whether the VPC network is a shared VPC. If true, &#x60;networkHostProject&#x60; must be specified.  | 
 **NetworkHostProject** | **string** | ID of the project that hosts the VPC network. Applicable for shared VPC network.  | 
 
 ## Methods
 
 ### NewGcpNetworkConnectivityConfig
 
-`func NewGcpNetworkConnectivityConfig(network string, isSharedVPC bool, networkHostProject string, ) *GcpNetworkConnectivityConfig`
+`func NewGcpNetworkConnectivityConfig(network string, isSharedVpc bool, networkHostProject string, ) *GcpNetworkConnectivityConfig`
 
 NewGcpNetworkConnectivityConfig instantiates a new GcpNetworkConnectivityConfig object
 This constructor will assign default values to properties that have it defined,
@@ -73,24 +73,24 @@ SetSubnetsPerRegion sets SubnetsPerRegion field to given value.
 
 HasSubnetsPerRegion returns a boolean if a field has been set.
 
-### GetIsSharedVPC
+### GetIsSharedVpc
 
-`func (o *GcpNetworkConnectivityConfig) GetIsSharedVPC() bool`
+`func (o *GcpNetworkConnectivityConfig) GetIsSharedVpc() bool`
 
-GetIsSharedVPC returns the IsSharedVPC field if non-nil, zero value otherwise.
+GetIsSharedVpc returns the IsSharedVpc field if non-nil, zero value otherwise.
 
-### GetIsSharedVPCOk
+### GetIsSharedVpcOk
 
-`func (o *GcpNetworkConnectivityConfig) GetIsSharedVPCOk() (*bool, bool)`
+`func (o *GcpNetworkConnectivityConfig) GetIsSharedVpcOk() (*bool, bool)`
 
-GetIsSharedVPCOk returns a tuple with the IsSharedVPC field if it's non-nil, zero value otherwise
+GetIsSharedVpcOk returns a tuple with the IsSharedVpc field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsSharedVPC
+### SetIsSharedVpc
 
-`func (o *GcpNetworkConnectivityConfig) SetIsSharedVPC(v bool)`
+`func (o *GcpNetworkConnectivityConfig) SetIsSharedVpc(v bool)`
 
-SetIsSharedVPC sets IsSharedVPC field to given value.
+SetIsSharedVpc sets IsSharedVpc field to given value.
 
 
 ### GetNetworkHostProject
