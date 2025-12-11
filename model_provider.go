@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// Provider Cloud provider.
+// Provider Cloud provider. `PROVIDER_UNSPECIFIED` is supported only in responses. 
 type Provider string
 
 // List of Provider

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VaultId** | **string** | The ID of the vault | 
-**RetentionDays** | **int32** | The number of days to retain the backup | 
+**VaultId** | **string** | Eon-assigned ID of the vault to store the snapshot in.  | 
+**RetentionDays** | **int32** | Number of days to retain the snapshot. | 
 
 ## Methods
 

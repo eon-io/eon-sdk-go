@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// HighFrequencyBackupScheduleFrequency the model 'HighFrequencyBackupScheduleFrequency'
+// HighFrequencyBackupScheduleFrequency Backup frequency. `UNSPECIFIED` is supported only in responses. 
 type HighFrequencyBackupScheduleFrequency string
 
 // List of HighFrequencyBackupScheduleFrequency

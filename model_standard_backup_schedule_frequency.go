@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// StandardBackupScheduleFrequency the model 'StandardBackupScheduleFrequency'
+// StandardBackupScheduleFrequency Backup frequency. `UNSPECIFIED` is supported only in responses. 
 type StandardBackupScheduleFrequency string
 
 // List of StandardBackupScheduleFrequency

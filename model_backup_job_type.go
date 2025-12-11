@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// BackupJobType Backup Job type. 
+// BackupJobType Backup job type. `BACKUP_JOB_TYPE_UNSPECIFIED` is supported only in responses. 
 type BackupJobType string
 
 // List of BackupJobType

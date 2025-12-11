@@ -169,8 +169,6 @@ docs/JobIdFilters.md
 docs/JobSnapshotDetails.md
 docs/JobStatus.md
 docs/JobStatusFilters.md
-docs/JobStep.md
-docs/JobStepStatus.md
 docs/JobsAPI.md
 docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
@@ -465,8 +463,6 @@ model_job_id_filters.go
 model_job_snapshot_details.go
 model_job_status.go
 model_job_status_filters.go
-model_job_step.go
-model_job_step_status.go
 model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
 model_list_backup_policies_response.go

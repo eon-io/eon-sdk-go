@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// RestoreJobType Type of restore. This value is a combination of the cloud provider, resource type, and restore method. 
+// RestoreJobType Type of restore. This value is a combination of the cloud provider, resource type, and restore method. `RESTORE_JOB_TYPE_UNSPECIFIED` is supported only in responses. 
 type RestoreJobType string
 
 // List of RestoreJobType
@@ -54,6 +54,7 @@ const (
 	GCP_COMPUTE_ENGINE_RECORD_RESTORE RestoreJobType = "GCP_COMPUTE_ENGINE_RECORD_RESTORE"
 	GCP_CLOUD_SQL_DATABASE_RESTORE RestoreJobType = "GCP_CLOUD_SQL_DATABASE_RESTORE"
 	GCP_CLOUD_SQL_RECORD_RESTORE RestoreJobType = "GCP_CLOUD_SQL_RECORD_RESTORE"
+	GCP_BIGQUERY_RECORD_RESTORE RestoreJobType = "GCP_BIGQUERY_RECORD_RESTORE"
 )
 
 // All allowed values of RestoreJobType enum
@@ -92,6 +93,7 @@ var AllowedRestoreJobTypeEnumValues = []RestoreJobType{
 	"GCP_COMPUTE_ENGINE_RECORD_RESTORE",
 	"GCP_CLOUD_SQL_DATABASE_RESTORE",
 	"GCP_CLOUD_SQL_RECORD_RESTORE",
+	"GCP_BIGQUERY_RECORD_RESTORE",
 }
 
 func (v *RestoreJobType) UnmarshalJSON(src []byte) error {

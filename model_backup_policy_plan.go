@@ -21,6 +21,7 @@ var _ MappedNullable = &BackupPolicyPlan{}
 
 // BackupPolicyPlan struct for BackupPolicyPlan
 type BackupPolicyPlan struct {
+	SourceCloudProvider *Provider `json:"sourceCloudProvider,omitempty"`
 	BackupPolicyType BackupPolicyType `json:"backupPolicyType"`
 	StandardPlan NullableStandardBackupPolicyPlan `json:"standardPlan,omitempty"`
 	HighFrequencyPlan NullableHighFrequencyBackupPolicyPlan `json:"highFrequencyPlan,omitempty"`
@@ -44,6 +45,38 @@ func NewBackupPolicyPlan(backupPolicyType BackupPolicyType) *BackupPolicyPlan {
 func NewBackupPolicyPlanWithDefaults() *BackupPolicyPlan {
 	this := BackupPolicyPlan{}
 	return &this
+}
+
+// GetSourceCloudProvider returns the SourceCloudProvider field value if set, zero value otherwise.
+func (o *BackupPolicyPlan) GetSourceCloudProvider() Provider {
+	if o == nil || IsNil(o.SourceCloudProvider) {
+		var ret Provider
+		return ret
+	}
+	return *o.SourceCloudProvider
+}
+
+// GetSourceCloudProviderOk returns a tuple with the SourceCloudProvider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupPolicyPlan) GetSourceCloudProviderOk() (*Provider, bool) {
+	if o == nil || IsNil(o.SourceCloudProvider) {
+		return nil, false
+	}
+	return o.SourceCloudProvider, true
+}
+
+// HasSourceCloudProvider returns a boolean if a field has been set.
+func (o *BackupPolicyPlan) HasSourceCloudProvider() bool {
+	if o != nil && !IsNil(o.SourceCloudProvider) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceCloudProvider gets a reference to the given Provider and assigns it to the SourceCloudProvider field.
+func (o *BackupPolicyPlan) SetSourceCloudProvider(v Provider) {
+	o.SourceCloudProvider = &v
 }
 
 // GetBackupPolicyType returns the BackupPolicyType field value
@@ -164,6 +197,9 @@ func (o BackupPolicyPlan) MarshalJSON() ([]byte, error) {
 
 func (o BackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.SourceCloudProvider) {
+		toSerialize["sourceCloudProvider"] = o.SourceCloudProvider
+	}
 	toSerialize["backupPolicyType"] = o.BackupPolicyType
 	if o.StandardPlan.IsSet() {
 		toSerialize["standardPlan"] = o.StandardPlan.Get()

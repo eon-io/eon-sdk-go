@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// GcpNetworkType The type of the cloud account
+// GcpNetworkType Network type. `UNSPECIFIED` is supported only in responses. 
 type GcpNetworkType string
 
 // List of GcpNetworkType

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ListOperators the model 'ListOperators'
+// ListOperators Evaluates whether the original list constains any, all, or none of the values in this list. `UNSPECIFIED` is supported only in responses. 
 type ListOperators string
 
 // List of ListOperators

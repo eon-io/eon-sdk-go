@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// AccountInstallationMethod Method used to install the cloud permissions.
+// AccountInstallationMethod Method used to deploy the cloud permissions. `UNSPECIFIED` is supported only in responses. 
 type AccountInstallationMethod string
 
 // List of AccountInstallationMethod

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// LogicalOperator Logical operator to apply to the list of `operands`. 
+// LogicalOperator Logical operator to apply to the list of `operands`. `UNSPECIFIED` is supported only in responses. 
 type LogicalOperator string
 
 // List of LogicalOperator

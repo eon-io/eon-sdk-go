@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// AccountState Connection status of the AWS account, Azure subscription, or GCP project.
+// AccountState Connection status of the AWS account, Azure subscription, or GCP project. `ACCOUNT_STATUS_UNSPECIFIED` is supported only in responses. 
 type AccountState string
 
 // List of AccountState

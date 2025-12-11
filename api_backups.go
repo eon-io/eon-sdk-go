@@ -41,12 +41,17 @@ func (r ApiTakeSnapshotRequest) Execute() (*TakeSnapshotResponse, *http.Response
 }
 
 /*
-TakeSnapshot Take snapshot
+TakeSnapshot Take Snapshot
 
-Description: Creates a new backup job for a given project by specifying the project ID and providing necessary details in the request body.
+Description: Takes an on-demand snapshot of the specified resource.
+
+This operation is asynchronous.
+It triggers a backup job and returns a job ID, which can be used to track the progress of the backup job.
+You can follow the progress of the backup job by calling [Get Backup Job](/api/reference/get-backup-job) with the job ID.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Eon-assigned ID of the resource to backup.
+ @param id Eon-assigned ID of the resource to back up.
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @return ApiTakeSnapshotRequest
 */

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// BackupPolicyType The type of the policy. 
+// BackupPolicyType Backup policy type. `UNSPECIFIED` is supported only in responses. 
 type BackupPolicyType string
 
 // List of BackupPolicyType

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// CostUnit Currency unit for cost amounts. Use `CREDITS` for Eon credits and `USD` for U.S. dollars. 
+// CostUnit Currency unit for cost amounts. Use `CREDITS` for Eon credits and `USD` for U.S. dollars. `UNSPECIFIED` is supported only in responses. 
 type CostUnit string
 
 // List of CostUnit

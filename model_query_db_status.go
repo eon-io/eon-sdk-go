@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// QueryDBStatus Query status. If completed, the query results can be retrieved. 
+// QueryDBStatus Query status. If completed, the query results can be retrieved. `UNSPECIFIED` is supported only in responses. 
 type QueryDBStatus string
 
 // List of QueryDBStatus

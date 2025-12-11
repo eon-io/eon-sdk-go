@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// JobStatus the model 'JobStatus'
+// JobStatus Job status. `JOB_UNSPECIFIED` is supported only in responses. 
 type JobStatus string
 
 // List of JobStatus

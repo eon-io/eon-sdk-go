@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// Environment The resource's environment: production, internal production, or staging. 
+// Environment The resource's environment: production, internal production, or staging. `ENVIRONMENT_UNSPECIFIED` is supported only in responses. 
 type Environment string
 
 // List of Environment

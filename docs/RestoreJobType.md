@@ -71,6 +71,8 @@
 
 * `GCP_CLOUD_SQL_RECORD_RESTORE` (value: `"GCP_CLOUD_SQL_RECORD_RESTORE"`)
 
+* `GCP_BIGQUERY_RECORD_RESTORE` (value: `"GCP_BIGQUERY_RECORD_RESTORE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

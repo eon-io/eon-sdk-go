@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// DataClass Data classes.
+// DataClass Data classes. `DATA_CLASS_UNSPECIFIED` is supported only in responses. 
 type DataClass string
 
 // List of DataClass

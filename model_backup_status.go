@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// BackupStatus Eon backup status. For an explanation of statuses, see [Backup Statuses](/docs/user-guide/monitoring/backup-statuses). 
+// BackupStatus Eon backup status. For an explanation of statuses, see [Backup Statuses](/docs/user-guide/monitoring/backup-statuses). `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses. 
 type BackupStatus string
 
 // List of BackupStatus

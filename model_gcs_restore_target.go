@@ -19,7 +19,7 @@ import (
 // checks if the GCSRestoreTarget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GCSRestoreTarget{}
 
-// GCSRestoreTarget Information about the GCS bucket where you want to restore the files. If you don't specify a target, the files are restored to the original bucket. 
+// GCSRestoreTarget Information about the Google Cloud Storage bucket where you want to restore the files. If you don't specify a target, the files are restored to the original bucket. 
 type GCSRestoreTarget struct {
 	// Name of an existing bucket to restore the files to.
 	BucketName string `json:"bucketName"`

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ResourceType Resource type identifier combining cloud provider and service type. 
+// ResourceType Resource type identifier combining cloud provider and service type. `RESOURCE_TYPE_UNSPECIFIED` is supported only in responses. 
 type ResourceType string
 
 // List of ResourceType

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**ResourceTypes** | [**[]ResourceType**](ResourceType.md) |  | 
+**ResourceTypes** | [**[]ResourceType**](ResourceType.md) | Resource types to evaluate. &#x60;RESOURCE_TYPE_UNSPECIFIED&#x60; is supported only in responses.  | 
 
 ## Methods
 

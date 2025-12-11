@@ -21,9 +21,9 @@ var _ MappedNullable = &TakeSnapshotRequest{}
 
 // TakeSnapshotRequest struct for TakeSnapshotRequest
 type TakeSnapshotRequest struct {
-	// The ID of the vault
+	// Eon-assigned ID of the vault to store the snapshot in. 
 	VaultId string `json:"vaultId"`
-	// The number of days to retain the backup
+	// Number of days to retain the snapshot.
 	RetentionDays int32 `json:"retentionDays"`
 }
 

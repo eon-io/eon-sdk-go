@@ -22,6 +22,7 @@ var _ MappedNullable = &ResourceTypeCondition{}
 // ResourceTypeCondition struct for ResourceTypeCondition
 type ResourceTypeCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Resource types to evaluate. `RESOURCE_TYPE_UNSPECIFIED` is supported only in responses. 
 	ResourceTypes []ResourceType `json:"resourceTypes"`
 }
 
