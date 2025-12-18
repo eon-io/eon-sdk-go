@@ -39,6 +39,8 @@ type Snapshot struct {
 	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
 	Resource *ResourceSnapshot `json:"resource,omitempty"`
+	// Whether the snapshot is protected from deletion by user action.
+	UserProtectedFromDeletion *bool `json:"userProtectedFromDeletion,omitempty"`
 }
 
 type _Snapshot Snapshot
@@ -320,6 +322,38 @@ func (o *Snapshot) SetResource(v ResourceSnapshot) {
 	o.Resource = &v
 }
 
+// GetUserProtectedFromDeletion returns the UserProtectedFromDeletion field value if set, zero value otherwise.
+func (o *Snapshot) GetUserProtectedFromDeletion() bool {
+	if o == nil || IsNil(o.UserProtectedFromDeletion) {
+		var ret bool
+		return ret
+	}
+	return *o.UserProtectedFromDeletion
+}
+
+// GetUserProtectedFromDeletionOk returns a tuple with the UserProtectedFromDeletion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetUserProtectedFromDeletionOk() (*bool, bool) {
+	if o == nil || IsNil(o.UserProtectedFromDeletion) {
+		return nil, false
+	}
+	return o.UserProtectedFromDeletion, true
+}
+
+// HasUserProtectedFromDeletion returns a boolean if a field has been set.
+func (o *Snapshot) HasUserProtectedFromDeletion() bool {
+	if o != nil && !IsNil(o.UserProtectedFromDeletion) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserProtectedFromDeletion gets a reference to the given bool and assigns it to the UserProtectedFromDeletion field.
+func (o *Snapshot) SetUserProtectedFromDeletion(v bool) {
+	o.UserProtectedFromDeletion = &v
+}
+
 func (o Snapshot) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -348,6 +382,9 @@ func (o Snapshot) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Resource) {
 		toSerialize["resource"] = o.Resource
+	}
+	if !IsNil(o.UserProtectedFromDeletion) {
+		toSerialize["userProtectedFromDeletion"] = o.UserProtectedFromDeletion
 	}
 	return toSerialize, nil
 }

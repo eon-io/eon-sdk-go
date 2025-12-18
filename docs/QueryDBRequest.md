@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DatabaseName** | **string** | Name of the database to query. | 
-**Query** | **string** | SQL query to run against the database. Support is limited to Athena [&#x60;SELECT&#x60; queries](https://docs.aws.amazon.com/athena/latest/ug/select.html).  | 
+**Query** | **string** | SQL query to run against the database. Support is limited to Athena [&#x60;SELECT&#x60; queries](https://docs.aws.amazon.com/athena/latest/ug/select.html). Either &#x60;query&#x60; or &#x60;lucene&#x60; must be provided.  | 
 **RestoreAccountId** | **string** | Eon-assigned ID of the [restore account](./list-restore-accounts). | 
 **Destination** | [**QueryDBRestoreDestination**](QueryDBRestoreDestination.md) |  | 
 

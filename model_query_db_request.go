@@ -23,7 +23,7 @@ var _ MappedNullable = &QueryDBRequest{}
 type QueryDBRequest struct {
 	// Name of the database to query.
 	DatabaseName string `json:"databaseName"`
-	// SQL query to run against the database. Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html). 
+	// SQL query to run against the database. Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html). Either `query` or `lucene` must be provided. 
 	Query string `json:"query"`
 	// Eon-assigned ID of the [restore account](./list-restore-accounts).
 	RestoreAccountId string `json:"restoreAccountId"`

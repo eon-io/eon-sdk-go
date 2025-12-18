@@ -6725,6 +6725,7 @@ components:
       - GCP_COMPUTE_ENGINE_INSTANCE_BACKUP
       - GCP_CLOUD_STORAGE_BACKUP
       - GCP_CLOUD_SQL_BACKUP
+      - GCP_BIGQUERY_BACKUP
       - ATLAS_MONGODB_CLUSTER_BACKUP
       example: AWS_EC2_BACKUP
       type: string
@@ -7400,6 +7401,7 @@ components:
       - GCP_COMPUTE_ENGINE_RECORD_RESTORE
       - GCP_CLOUD_SQL_DATABASE_RESTORE
       - GCP_CLOUD_SQL_RECORD_RESTORE
+      - GCP_BIGQUERY_DATASET_RESTORE
       - GCP_BIGQUERY_RECORD_RESTORE
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
@@ -13351,6 +13353,7 @@ components:
           description: |
             SQL query to run against the database.
             Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html).
+            Either `query` or `lucene` must be provided.
           example: SELECT * FROM customers LIMIT 50;
           type: string
         restoreAccountId:
@@ -14961,6 +14964,7 @@ components:
           $ref: '#/components/schemas/VolumeSettings'
       required:
       - availabilityZone
+      - deviceName
       - providerVolumeId
       - region
       - tags
@@ -15284,6 +15288,7 @@ components:
             Name: customers
           resourceType: AWS_EC2
         expirationTime: 2025-01-20T09:40:26Z
+        userProtectedFromDeletion: false
         createdTime: 2024-10-29T23:01:24.841897Z
         id: 043090df-9fe5-4f89-9859-45db589c2936
         projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -15328,6 +15333,10 @@ components:
           type: string
         resource:
           $ref: '#/components/schemas/ResourceSnapshot'
+        userProtectedFromDeletion:
+          description: Whether the snapshot is protected from deletion by user action.
+          example: false
+          type: boolean
       required:
       - createdTime
       - id
@@ -15397,6 +15406,7 @@ components:
               Name: customers
             resourceType: AWS_EC2
           expirationTime: 2025-01-20T09:40:26Z
+          userProtectedFromDeletion: false
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -15542,6 +15552,7 @@ components:
               Name: customers
             resourceType: AWS_EC2
           expirationTime: 2025-01-20T09:40:26Z
+          userProtectedFromDeletion: false
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -15604,6 +15615,7 @@ components:
               Name: customers
             resourceType: AWS_EC2
           expirationTime: 2025-01-20T09:40:26Z
+          userProtectedFromDeletion: false
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
