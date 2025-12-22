@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **NetworkInterface** | **string** | Name of the network interface to use. | 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **Disks** | [**[]RestoreAzureInstanceDiskInput**](RestoreAzureInstanceDiskInput.md) |  | 
+**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM will be created in a stopped state.  | [optional] [default to true]
 
 ## Methods
 
@@ -175,6 +176,31 @@ and a boolean to check if the value has been set.
 
 SetDisks sets Disks field to given value.
 
+
+### GetStartInstanceAfterRestore
+
+`func (o *AzureVmInstanceRestoreTarget) GetStartInstanceAfterRestore() bool`
+
+GetStartInstanceAfterRestore returns the StartInstanceAfterRestore field if non-nil, zero value otherwise.
+
+### GetStartInstanceAfterRestoreOk
+
+`func (o *AzureVmInstanceRestoreTarget) GetStartInstanceAfterRestoreOk() (*bool, bool)`
+
+GetStartInstanceAfterRestoreOk returns a tuple with the StartInstanceAfterRestore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartInstanceAfterRestore
+
+`func (o *AzureVmInstanceRestoreTarget) SetStartInstanceAfterRestore(v bool)`
+
+SetStartInstanceAfterRestore sets StartInstanceAfterRestore field to given value.
+
+### HasStartInstanceAfterRestore
+
+`func (o *AzureVmInstanceRestoreTarget) HasStartInstanceAfterRestore() bool`
+
+HasStartInstanceAfterRestore returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

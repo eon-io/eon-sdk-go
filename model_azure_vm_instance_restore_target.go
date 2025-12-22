@@ -34,6 +34,8 @@ type AzureVmInstanceRestoreTarget struct {
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 	Disks []RestoreAzureInstanceDiskInput `json:"disks"`
+	// Whether to start the VM instance after restoring it. If set to `false`, the VM will be created in a stopped state. 
+	StartInstanceAfterRestore *bool `json:"startInstanceAfterRestore,omitempty"`
 }
 
 type _AzureVmInstanceRestoreTarget AzureVmInstanceRestoreTarget
@@ -50,6 +52,8 @@ func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vm
 	this.VmSize = vmSize
 	this.NetworkInterface = networkInterface
 	this.Disks = disks
+	var startInstanceAfterRestore bool = true
+	this.StartInstanceAfterRestore = &startInstanceAfterRestore
 	return &this
 }
 
@@ -58,6 +62,8 @@ func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vm
 // but it doesn't guarantee that properties required by API are set
 func NewAzureVmInstanceRestoreTargetWithDefaults() *AzureVmInstanceRestoreTarget {
 	this := AzureVmInstanceRestoreTarget{}
+	var startInstanceAfterRestore bool = true
+	this.StartInstanceAfterRestore = &startInstanceAfterRestore
 	return &this
 }
 
@@ -237,6 +243,38 @@ func (o *AzureVmInstanceRestoreTarget) SetDisks(v []RestoreAzureInstanceDiskInpu
 	o.Disks = v
 }
 
+// GetStartInstanceAfterRestore returns the StartInstanceAfterRestore field value if set, zero value otherwise.
+func (o *AzureVmInstanceRestoreTarget) GetStartInstanceAfterRestore() bool {
+	if o == nil || IsNil(o.StartInstanceAfterRestore) {
+		var ret bool
+		return ret
+	}
+	return *o.StartInstanceAfterRestore
+}
+
+// GetStartInstanceAfterRestoreOk returns a tuple with the StartInstanceAfterRestore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureVmInstanceRestoreTarget) GetStartInstanceAfterRestoreOk() (*bool, bool) {
+	if o == nil || IsNil(o.StartInstanceAfterRestore) {
+		return nil, false
+	}
+	return o.StartInstanceAfterRestore, true
+}
+
+// HasStartInstanceAfterRestore returns a boolean if a field has been set.
+func (o *AzureVmInstanceRestoreTarget) HasStartInstanceAfterRestore() bool {
+	if o != nil && !IsNil(o.StartInstanceAfterRestore) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartInstanceAfterRestore gets a reference to the given bool and assigns it to the StartInstanceAfterRestore field.
+func (o *AzureVmInstanceRestoreTarget) SetStartInstanceAfterRestore(v bool) {
+	o.StartInstanceAfterRestore = &v
+}
+
 func (o AzureVmInstanceRestoreTarget) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -256,6 +294,9 @@ func (o AzureVmInstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 		toSerialize["tags"] = o.Tags
 	}
 	toSerialize["disks"] = o.Disks
+	if !IsNil(o.StartInstanceAfterRestore) {
+		toSerialize["startInstanceAfterRestore"] = o.StartInstanceAfterRestore
+	}
 	return toSerialize, nil
 }
 

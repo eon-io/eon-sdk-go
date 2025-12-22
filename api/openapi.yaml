@@ -12572,6 +12572,7 @@ components:
       type: object
     AzureVmInstanceRestoreTarget:
       example:
+        startInstanceAfterRestore: true
         vmName: my-vm-12345
         resourceGroupName: my-resource-group-12345
         disks:
@@ -12631,6 +12632,12 @@ components:
           items:
             $ref: '#/components/schemas/RestoreAzureInstanceDiskInput'
           type: array
+        startInstanceAfterRestore:
+          default: true
+          description: |
+            Whether to start the VM instance after restoring it.
+            If set to `false`, the VM will be created in a stopped state.
+          type: boolean
       required:
       - disks
       - networkInterface
@@ -12642,6 +12649,7 @@ components:
     AzureVmInstanceRestoreDestination:
       example:
         azureVm:
+          startInstanceAfterRestore: true
           vmName: my-vm-12345
           resourceGroupName: my-resource-group-12345
           disks:
@@ -12677,6 +12685,7 @@ components:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
           azureVm:
+            startInstanceAfterRestore: true
             vmName: my-vm-12345
             resourceGroupName: my-resource-group-12345
             disks:
