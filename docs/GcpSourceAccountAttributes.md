@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ServiceAccount** | **string** |  | 
+**OrganizationId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP organization the account belongs to. | [optional] 
+**FolderId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP folder the account belongs to. | [optional] 
 
 ## Methods
 
@@ -44,6 +46,56 @@ and a boolean to check if the value has been set.
 
 SetServiceAccount sets ServiceAccount field to given value.
 
+
+### GetOrganizationId
+
+`func (o *GcpSourceAccountAttributes) GetOrganizationId() string`
+
+GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
+
+### GetOrganizationIdOk
+
+`func (o *GcpSourceAccountAttributes) GetOrganizationIdOk() (*string, bool)`
+
+GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganizationId
+
+`func (o *GcpSourceAccountAttributes) SetOrganizationId(v string)`
+
+SetOrganizationId sets OrganizationId field to given value.
+
+### HasOrganizationId
+
+`func (o *GcpSourceAccountAttributes) HasOrganizationId() bool`
+
+HasOrganizationId returns a boolean if a field has been set.
+
+### GetFolderId
+
+`func (o *GcpSourceAccountAttributes) GetFolderId() string`
+
+GetFolderId returns the FolderId field if non-nil, zero value otherwise.
+
+### GetFolderIdOk
+
+`func (o *GcpSourceAccountAttributes) GetFolderIdOk() (*string, bool)`
+
+GetFolderIdOk returns a tuple with the FolderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFolderId
+
+`func (o *GcpSourceAccountAttributes) SetFolderId(v string)`
+
+SetFolderId sets FolderId field to given value.
+
+### HasFolderId
+
+`func (o *GcpSourceAccountAttributes) HasFolderId() bool`
+
+HasFolderId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

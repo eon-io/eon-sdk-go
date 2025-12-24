@@ -5001,10 +5001,22 @@ components:
         GCP project configuration.
         Applicable if `cloudProvider` is set to `GCP`.
       example:
+        organizationId: "123456789012"
         serviceAccount: serviceAccount
+        folderId: "123456789012"
       nullable: true
       properties:
         serviceAccount:
+          type: string
+        organizationId:
+          description: Cloud-provider-assigned ID of the GCP organization the account
+            belongs to.
+          example: "123456789012"
+          type: string
+        folderId:
+          description: Cloud-provider-assigned ID of the GCP folder the account belongs
+            to.
+          example: "123456789012"
           type: string
       required:
       - serviceAccount
@@ -5026,7 +5038,9 @@ components:
     SourceAccountCloudAttributes:
       example:
         gcp:
+          organizationId: "123456789012"
           serviceAccount: serviceAccount
+          folderId: "123456789012"
         cloudProvider: AWS
         aws:
           organizationId: o-1234567890
@@ -5053,7 +5067,9 @@ components:
         id: fc495499-9796-5fc9-ade7-1ba924cbcc42
         sourceAccountAttributes:
           gcp:
+            organizationId: "123456789012"
             serviceAccount: serviceAccount
+            folderId: "123456789012"
           cloudProvider: AWS
           aws:
             organizationId: o-1234567890
@@ -5109,7 +5125,9 @@ components:
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
+              organizationId: "123456789012"
               serviceAccount: serviceAccount
+              folderId: "123456789012"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
@@ -5407,7 +5425,9 @@ components:
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
+              organizationId: "123456789012"
               serviceAccount: serviceAccount
+              folderId: "123456789012"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
@@ -5426,7 +5446,9 @@ components:
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
+              organizationId: "123456789012"
               serviceAccount: serviceAccount
+              folderId: "123456789012"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
@@ -5469,7 +5491,9 @@ components:
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
+              organizationId: "123456789012"
               serviceAccount: serviceAccount
+              folderId: "123456789012"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
@@ -5497,7 +5521,9 @@ components:
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
             gcp:
+              organizationId: "123456789012"
               serviceAccount: serviceAccount
+              folderId: "123456789012"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
@@ -7378,6 +7404,8 @@ components:
       - AWS_EC2_EBS_VOLUME_RESTORE
       - AWS_EC2_EBS_SNAPSHOT_CONVERT
       - AWS_EC2_RECORD_RESTORE
+      - AWS_EBS_VOLUME_RESTORE
+      - AWS_EBS_SNAPSHOT_CONVERT
       - AWS_RDS_INSTANCE_RESTORE
       - AWS_RDS_RECORD_RESTORE
       - AWS_EKS_NAMESPACE_RESTORE

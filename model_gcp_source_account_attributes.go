@@ -22,6 +22,10 @@ var _ MappedNullable = &GcpSourceAccountAttributes{}
 // GcpSourceAccountAttributes GCP project configuration. Applicable if `cloudProvider` is set to `GCP`. 
 type GcpSourceAccountAttributes struct {
 	ServiceAccount string `json:"serviceAccount"`
+	// Cloud-provider-assigned ID of the GCP organization the account belongs to.
+	OrganizationId *string `json:"organizationId,omitempty"`
+	// Cloud-provider-assigned ID of the GCP folder the account belongs to.
+	FolderId *string `json:"folderId,omitempty"`
 }
 
 type _GcpSourceAccountAttributes GcpSourceAccountAttributes
@@ -68,6 +72,70 @@ func (o *GcpSourceAccountAttributes) SetServiceAccount(v string) {
 	o.ServiceAccount = v
 }
 
+// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
+func (o *GcpSourceAccountAttributes) GetOrganizationId() string {
+	if o == nil || IsNil(o.OrganizationId) {
+		var ret string
+		return ret
+	}
+	return *o.OrganizationId
+}
+
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GcpSourceAccountAttributes) GetOrganizationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OrganizationId) {
+		return nil, false
+	}
+	return o.OrganizationId, true
+}
+
+// HasOrganizationId returns a boolean if a field has been set.
+func (o *GcpSourceAccountAttributes) HasOrganizationId() bool {
+	if o != nil && !IsNil(o.OrganizationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
+func (o *GcpSourceAccountAttributes) SetOrganizationId(v string) {
+	o.OrganizationId = &v
+}
+
+// GetFolderId returns the FolderId field value if set, zero value otherwise.
+func (o *GcpSourceAccountAttributes) GetFolderId() string {
+	if o == nil || IsNil(o.FolderId) {
+		var ret string
+		return ret
+	}
+	return *o.FolderId
+}
+
+// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GcpSourceAccountAttributes) GetFolderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.FolderId) {
+		return nil, false
+	}
+	return o.FolderId, true
+}
+
+// HasFolderId returns a boolean if a field has been set.
+func (o *GcpSourceAccountAttributes) HasFolderId() bool {
+	if o != nil && !IsNil(o.FolderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderId gets a reference to the given string and assigns it to the FolderId field.
+func (o *GcpSourceAccountAttributes) SetFolderId(v string) {
+	o.FolderId = &v
+}
+
 func (o GcpSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -79,6 +147,12 @@ func (o GcpSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 func (o GcpSourceAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["serviceAccount"] = o.ServiceAccount
+	if !IsNil(o.OrganizationId) {
+		toSerialize["organizationId"] = o.OrganizationId
+	}
+	if !IsNil(o.FolderId) {
+		toSerialize["folderId"] = o.FolderId
+	}
 	return toSerialize, nil
 }
 
