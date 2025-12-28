@@ -4891,6 +4891,21 @@ components:
       required:
       - roleArn
       type: object
+    GcpSourceAccountAttributesInput:
+      description: |
+        GCP project configuration.
+        Applicable if `cloudProvider` is set to `GCP`.
+      example:
+        serviceAccount: eon-backup@my-project.iam.gserviceaccount.com
+      nullable: true
+      properties:
+        serviceAccount:
+          description: Email of the GCP service account Eon uses to access the project.
+          example: eon-backup@my-project.iam.gserviceaccount.com
+          type: string
+      required:
+      - serviceAccount
+      type: object
     SourceAccountAttributesInput:
       example:
         cloudProvider: AWS
@@ -4901,6 +4916,8 @@ components:
           $ref: '#/components/schemas/Provider'
         aws:
           $ref: '#/components/schemas/AwsSourceAccountAttributesInput'
+        gcp:
+          $ref: '#/components/schemas/GcpSourceAccountAttributesInput'
       required:
       - cloudProvider
       type: object
