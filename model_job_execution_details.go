@@ -35,6 +35,7 @@ type JobExecutionDetails struct {
 	EndTime NullableTime `json:"endTime,omitempty"`
 	// How long the job took, in seconds.
 	DurationSeconds NullableInt64 `json:"durationSeconds,omitempty"`
+	ErrorCode NullableErrorCode `json:"errorCode,omitempty"`
 	// Message that gives additional details about the job status, if applicable.
 	StatusMessage *string `json:"statusMessage,omitempty"`
 }
@@ -301,6 +302,48 @@ func (o *JobExecutionDetails) UnsetDurationSeconds() {
 	o.DurationSeconds.Unset()
 }
 
+// GetErrorCode returns the ErrorCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *JobExecutionDetails) GetErrorCode() ErrorCode {
+	if o == nil || IsNil(o.ErrorCode.Get()) {
+		var ret ErrorCode
+		return ret
+	}
+	return *o.ErrorCode.Get()
+}
+
+// GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *JobExecutionDetails) GetErrorCodeOk() (*ErrorCode, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ErrorCode.Get(), o.ErrorCode.IsSet()
+}
+
+// HasErrorCode returns a boolean if a field has been set.
+func (o *JobExecutionDetails) HasErrorCode() bool {
+	if o != nil && o.ErrorCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorCode gets a reference to the given NullableErrorCode and assigns it to the ErrorCode field.
+func (o *JobExecutionDetails) SetErrorCode(v ErrorCode) {
+	o.ErrorCode.Set(&v)
+}
+// SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
+func (o *JobExecutionDetails) SetErrorCodeNil() {
+	o.ErrorCode.Set(nil)
+}
+
+// UnsetErrorCode ensures that no value is present for ErrorCode, not even an explicit nil
+func (o *JobExecutionDetails) UnsetErrorCode() {
+	o.ErrorCode.Unset()
+}
+
 // GetStatusMessage returns the StatusMessage field value if set, zero value otherwise.
 func (o *JobExecutionDetails) GetStatusMessage() string {
 	if o == nil || IsNil(o.StatusMessage) {
@@ -357,6 +400,9 @@ func (o JobExecutionDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if o.DurationSeconds.IsSet() {
 		toSerialize["durationSeconds"] = o.DurationSeconds.Get()
+	}
+	if o.ErrorCode.IsSet() {
+		toSerialize["errorCode"] = o.ErrorCode.Get()
 	}
 	if !IsNil(o.StatusMessage) {
 		toSerialize["statusMessage"] = o.StatusMessage

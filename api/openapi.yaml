@@ -4891,16 +4891,52 @@ components:
       required:
       - roleArn
       type: object
+    AzureSourceAccountAttributesInput:
+      description: |
+        Azure subscription configuration.
+        Applicable if `cloudProvider` is set to `AZURE`.
+      example:
+        resourceGroupName: my-resource-group
+        tenantId: 12345678-1234-1234-1234-123456789012
+        subscriptionId: 12345678-1234-1234-1234-123456789012
+      nullable: true
+      properties:
+        tenantId:
+          description: ID of the Azure tenant the source subscription belongs to.
+          example: 12345678-1234-1234-1234-123456789012
+          format: uuid
+          type: string
+        subscriptionId:
+          description: ID of the Azure source subscription.
+          example: 12345678-1234-1234-1234-123456789012
+          format: uuid
+          type: string
+        resourceGroupName:
+          description: |
+            Name of the Azure resource group to scope the source account to.
+            When provided, discovery and permissions are limited to this specific resource group.
+          example: my-resource-group
+          type: string
+      required:
+      - subscriptionId
+      - tenantId
+      type: object
     SourceAccountAttributesInput:
       example:
         cloudProvider: AWS
         aws:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+        azure:
+          resourceGroupName: my-resource-group
+          tenantId: 12345678-1234-1234-1234-123456789012
+          subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         aws:
           $ref: '#/components/schemas/AwsSourceAccountAttributesInput'
+        azure:
+          $ref: '#/components/schemas/AzureSourceAccountAttributesInput'
       required:
       - cloudProvider
       type: object
@@ -4911,6 +4947,10 @@ components:
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          azure:
+            resourceGroupName: my-resource-group
+            tenantId: 12345678-1234-1234-1234-123456789012
+            subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         name:
           description: Account display name in Eon.
@@ -5636,16 +5676,49 @@ components:
       required:
       - roleArn
       type: object
+    AzureRestoreAccountAttributesInput:
+      description: |
+        Azure subscription configuration.
+        Applicable if `cloudProvider` is set to `AZURE`.
+      example:
+        resourceGroupName: my-resource-group
+        tenantId: 12345678-1234-1234-1234-123456789012
+        subscriptionId: 12345678-1234-1234-1234-123456789012
+      nullable: true
+      properties:
+        tenantId:
+          description: ID of the tenant the subscription belongs to.
+          example: 12345678-1234-1234-1234-123456789012
+          type: string
+        subscriptionId:
+          description: |
+            Subscription ID. This field is required.
+          example: 12345678-1234-1234-1234-123456789012
+          type: string
+        resourceGroupName:
+          description: Resource group name.
+          example: my-resource-group
+          type: string
+      required:
+      - subscriptionId
+      - tenantId
+      type: object
     RestoreAccountAttributesInput:
       example:
         cloudProvider: AWS
         aws:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+        azure:
+          resourceGroupName: my-resource-group
+          tenantId: 12345678-1234-1234-1234-123456789012
+          subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
         aws:
           $ref: '#/components/schemas/AwsRestoreAccountAttributesInput'
+        azure:
+          $ref: '#/components/schemas/AzureRestoreAccountAttributesInput'
       required:
       - cloudProvider
       type: object
@@ -5655,6 +5728,10 @@ components:
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          azure:
+            resourceGroupName: my-resource-group
+            tenantId: 12345678-1234-1234-1234-123456789012
+            subscriptionId: 12345678-1234-1234-1234-123456789012
         name: restore-sandbox
       properties:
         name:
@@ -6955,12 +7032,51 @@ components:
             $ref: '#/components/schemas/SortBackupJobBy'
           type: array
       type: object
+    ErrorCode:
+      description: Error code indicating the type of the error occurred.
+      enum:
+      - INTERNAL_JOB_ERROR
+      - JOB_CANCELLED
+      - FAILED_TO_GET_RESOURCE_INFORMATION
+      - RESOURCE_IS_TERMINATED
+      - INVALID_RESOURCE_STATE
+      - INVALID_RESOURCE_CONFIGURATION
+      - RESOURCE_CONFLICT
+      - UNSUPPORTED_OPERATION_ON_RESOURCE
+      - FAILED_TO_CREATE_RESOURCE
+      - FAILED_TO_START_RESOURCE
+      - FAILED_TO_STOP_RESOURCE
+      - FAILED_TO_GET_STORAGE_INFORMATION
+      - FAILED_TO_CREATE_STORAGE
+      - FAILED_TO_DELETE_STORAGE
+      - FAILED_TO_ATTACH_STORAGE
+      - FAILED_TO_DETACH_STORAGE
+      - FAILED_TO_CREATE_IMAGE
+      - FAILED_TO_GET_SNAPSHOT_INFORMATION
+      - FAILED_TO_TAKE_SNAPSHOT
+      - FAILED_TO_USE_SNAPSHOT
+      - FAILED_TO_DELETE_SNAPSHOT
+      - SNAPSHOT_QUOTA_EXCEEDED
+      - RESOURCE_USAGE_QUOTA_EXCEEDED
+      - AUTHENTICATION_FAILURE
+      - INVALID_ACCOUNT_CONFIGURATION
+      - INVALID_VAULT_CONFIGURATION
+      - INVALID_INPUT_PARAMETERS
+      - TOO_MANY_REQUESTS
+      - BACKUP_CONFLICT
+      - FAILED_TO_RUN_QUERY
+      - OPERATION_DENIED_BY_CONFIGURATION
+      - INSUFFICIENT_ENCRYPTION_PERMISSIONS
+      example: INVALID_RESOURCE_STATE
+      nullable: true
+      type: string
     JobExecutionDetails:
       example:
         jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
         durationSeconds: 1338
         expectedStartTime: 2025-06-12T20:38:35.073285Z
         createdTime: 2025-06-12T20:18:35.073285Z
+        errorCode: INVALID_RESOURCE_STATE
         startTime: 2025-06-12T20:28:35.073285Z
         endTime: 2025-06-12T20:50:53.130436Z
         statusMessage: statusMessage
@@ -7003,6 +7119,8 @@ components:
           format: int64
           nullable: true
           type: integer
+        errorCode:
+          $ref: '#/components/schemas/ErrorCode'
         statusMessage:
           description: "Message that gives additional details about the job status,\
             \ if applicable."
@@ -7218,6 +7336,7 @@ components:
           durationSeconds: 1338
           expectedStartTime: 2025-06-12T20:38:35.073285Z
           createdTime: 2025-06-12T20:18:35.073285Z
+          errorCode: INVALID_RESOURCE_STATE
           startTime: 2025-06-12T20:28:35.073285Z
           endTime: 2025-06-12T20:50:53.130436Z
           statusMessage: statusMessage
@@ -7271,6 +7390,7 @@ components:
             durationSeconds: 1338
             expectedStartTime: 2025-06-12T20:38:35.073285Z
             createdTime: 2025-06-12T20:18:35.073285Z
+            errorCode: INVALID_RESOURCE_STATE
             startTime: 2025-06-12T20:28:35.073285Z
             endTime: 2025-06-12T20:50:53.130436Z
             statusMessage: statusMessage
@@ -7305,6 +7425,7 @@ components:
             durationSeconds: 1338
             expectedStartTime: 2025-06-12T20:38:35.073285Z
             createdTime: 2025-06-12T20:18:35.073285Z
+            errorCode: INVALID_RESOURCE_STATE
             startTime: 2025-06-12T20:28:35.073285Z
             endTime: 2025-06-12T20:50:53.130436Z
             statusMessage: statusMessage
@@ -7363,6 +7484,7 @@ components:
             durationSeconds: 1338
             expectedStartTime: 2025-06-12T20:38:35.073285Z
             createdTime: 2025-06-12T20:18:35.073285Z
+            errorCode: INVALID_RESOURCE_STATE
             startTime: 2025-06-12T20:28:35.073285Z
             endTime: 2025-06-12T20:50:53.130436Z
             statusMessage: statusMessage
@@ -7736,6 +7858,7 @@ components:
           durationSeconds: 1338
           expectedStartTime: 2025-06-12T20:38:35.073285Z
           createdTime: 2025-06-12T20:18:35.073285Z
+          errorCode: INVALID_RESOURCE_STATE
           startTime: 2025-06-12T20:28:35.073285Z
           endTime: 2025-06-12T20:50:53.130436Z
           statusMessage: statusMessage
@@ -7806,6 +7929,7 @@ components:
             durationSeconds: 1338
             expectedStartTime: 2025-06-12T20:38:35.073285Z
             createdTime: 2025-06-12T20:18:35.073285Z
+            errorCode: INVALID_RESOURCE_STATE
             startTime: 2025-06-12T20:28:35.073285Z
             endTime: 2025-06-12T20:50:53.130436Z
             statusMessage: statusMessage
@@ -7854,6 +7978,7 @@ components:
             durationSeconds: 1338
             expectedStartTime: 2025-06-12T20:38:35.073285Z
             createdTime: 2025-06-12T20:18:35.073285Z
+            errorCode: INVALID_RESOURCE_STATE
             startTime: 2025-06-12T20:28:35.073285Z
             endTime: 2025-06-12T20:50:53.130436Z
             statusMessage: statusMessage
@@ -7926,6 +8051,7 @@ components:
             durationSeconds: 1338
             expectedStartTime: 2025-06-12T20:38:35.073285Z
             createdTime: 2025-06-12T20:18:35.073285Z
+            errorCode: INVALID_RESOURCE_STATE
             startTime: 2025-06-12T20:28:35.073285Z
             endTime: 2025-06-12T20:50:53.130436Z
             statusMessage: statusMessage

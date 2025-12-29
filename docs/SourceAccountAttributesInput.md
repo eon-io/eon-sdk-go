@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CloudProvider** | [**Provider**](Provider.md) |  | 
 **Aws** | Pointer to [**NullableAwsSourceAccountAttributesInput**](AwsSourceAccountAttributesInput.md) |  | [optional] 
+**Azure** | Pointer to [**NullableAzureSourceAccountAttributesInput**](AzureSourceAccountAttributesInput.md) |  | [optional] 
 
 ## Methods
 
@@ -81,6 +82,41 @@ HasAws returns a boolean if a field has been set.
 `func (o *SourceAccountAttributesInput) UnsetAws()`
 
 UnsetAws ensures that no value is present for Aws, not even an explicit nil
+### GetAzure
+
+`func (o *SourceAccountAttributesInput) GetAzure() AzureSourceAccountAttributesInput`
+
+GetAzure returns the Azure field if non-nil, zero value otherwise.
+
+### GetAzureOk
+
+`func (o *SourceAccountAttributesInput) GetAzureOk() (*AzureSourceAccountAttributesInput, bool)`
+
+GetAzureOk returns a tuple with the Azure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzure
+
+`func (o *SourceAccountAttributesInput) SetAzure(v AzureSourceAccountAttributesInput)`
+
+SetAzure sets Azure field to given value.
+
+### HasAzure
+
+`func (o *SourceAccountAttributesInput) HasAzure() bool`
+
+HasAzure returns a boolean if a field has been set.
+
+### SetAzureNil
+
+`func (o *SourceAccountAttributesInput) SetAzureNil(b bool)`
+
+ SetAzureNil sets the value for Azure to be an explicit nil
+
+### UnsetAzure
+`func (o *SourceAccountAttributesInput) UnsetAzure()`
+
+UnsetAzure ensures that no value is present for Azure, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

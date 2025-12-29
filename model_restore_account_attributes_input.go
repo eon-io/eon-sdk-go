@@ -23,6 +23,7 @@ var _ MappedNullable = &RestoreAccountAttributesInput{}
 type RestoreAccountAttributesInput struct {
 	CloudProvider Provider `json:"cloudProvider"`
 	Aws NullableAwsRestoreAccountAttributesInput `json:"aws,omitempty"`
+	Azure NullableAzureRestoreAccountAttributesInput `json:"azure,omitempty"`
 }
 
 type _RestoreAccountAttributesInput RestoreAccountAttributesInput
@@ -111,6 +112,48 @@ func (o *RestoreAccountAttributesInput) UnsetAws() {
 	o.Aws.Unset()
 }
 
+// GetAzure returns the Azure field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RestoreAccountAttributesInput) GetAzure() AzureRestoreAccountAttributesInput {
+	if o == nil || IsNil(o.Azure.Get()) {
+		var ret AzureRestoreAccountAttributesInput
+		return ret
+	}
+	return *o.Azure.Get()
+}
+
+// GetAzureOk returns a tuple with the Azure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RestoreAccountAttributesInput) GetAzureOk() (*AzureRestoreAccountAttributesInput, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Azure.Get(), o.Azure.IsSet()
+}
+
+// HasAzure returns a boolean if a field has been set.
+func (o *RestoreAccountAttributesInput) HasAzure() bool {
+	if o != nil && o.Azure.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAzure gets a reference to the given NullableAzureRestoreAccountAttributesInput and assigns it to the Azure field.
+func (o *RestoreAccountAttributesInput) SetAzure(v AzureRestoreAccountAttributesInput) {
+	o.Azure.Set(&v)
+}
+// SetAzureNil sets the value for Azure to be an explicit nil
+func (o *RestoreAccountAttributesInput) SetAzureNil() {
+	o.Azure.Set(nil)
+}
+
+// UnsetAzure ensures that no value is present for Azure, not even an explicit nil
+func (o *RestoreAccountAttributesInput) UnsetAzure() {
+	o.Azure.Unset()
+}
+
 func (o RestoreAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -124,6 +167,9 @@ func (o RestoreAccountAttributesInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["cloudProvider"] = o.CloudProvider
 	if o.Aws.IsSet() {
 		toSerialize["aws"] = o.Aws.Get()
+	}
+	if o.Azure.IsSet() {
+		toSerialize["azure"] = o.Azure.Get()
 	}
 	return toSerialize, nil
 }
