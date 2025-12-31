@@ -54,7 +54,9 @@ docs/AzureDiskRestoreResult.md
 docs/AzureDiskSettings.md
 docs/AzureDiskTarget.md
 docs/AzureRestoreAccountAttributes.md
+docs/AzureRestoreAccountAttributesInput.md
 docs/AzureSourceAccountAttributes.md
+docs/AzureSourceAccountAttributesInput.md
 docs/AzureSqlDatabaseRestoreDestination.md
 docs/AzureSqlDatabaseRestoreTarget.md
 docs/AzureVmInstanceRestoreDestination.md
@@ -128,6 +130,7 @@ docs/EnvironmentCondition.md
 docs/EnvironmentDetails.md
 docs/EnvironmentFilters.md
 docs/Error.md
+docs/ErrorCode.md
 docs/ExcludeFromBackupResponse.md
 docs/FilePath.md
 docs/GCSRestoreTarget.md
@@ -353,7 +356,9 @@ model_azure_disk_restore_result.go
 model_azure_disk_settings.go
 model_azure_disk_target.go
 model_azure_restore_account_attributes.go
+model_azure_restore_account_attributes_input.go
 model_azure_source_account_attributes.go
+model_azure_source_account_attributes_input.go
 model_azure_sql_database_restore_destination.go
 model_azure_sql_database_restore_target.go
 model_azure_vm_instance_restore_destination.go
@@ -422,6 +427,7 @@ model_environment_condition.go
 model_environment_details.go
 model_environment_filters.go
 model_error.go
+model_error_code.go
 model_exclude_from_backup_response.go
 model_file_path.go
 model_gcp_cloud_sql_restore_destination.go

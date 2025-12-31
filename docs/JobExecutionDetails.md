@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **StartTime** | Pointer to **NullableTime** | Date and time the job started. | [optional] 
 **EndTime** | Pointer to **NullableTime** | Date and time the job finished. | [optional] 
 **DurationSeconds** | Pointer to **NullableInt64** | How long the job took, in seconds. | [optional] 
+**ErrorCode** | Pointer to [**NullableErrorCode**](ErrorCode.md) |  | [optional] 
 **StatusMessage** | Pointer to **string** | Message that gives additional details about the job status, if applicable. | [optional] 
 
 ## Methods
@@ -232,6 +233,41 @@ HasDurationSeconds returns a boolean if a field has been set.
 `func (o *JobExecutionDetails) UnsetDurationSeconds()`
 
 UnsetDurationSeconds ensures that no value is present for DurationSeconds, not even an explicit nil
+### GetErrorCode
+
+`func (o *JobExecutionDetails) GetErrorCode() ErrorCode`
+
+GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
+
+### GetErrorCodeOk
+
+`func (o *JobExecutionDetails) GetErrorCodeOk() (*ErrorCode, bool)`
+
+GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorCode
+
+`func (o *JobExecutionDetails) SetErrorCode(v ErrorCode)`
+
+SetErrorCode sets ErrorCode field to given value.
+
+### HasErrorCode
+
+`func (o *JobExecutionDetails) HasErrorCode() bool`
+
+HasErrorCode returns a boolean if a field has been set.
+
+### SetErrorCodeNil
+
+`func (o *JobExecutionDetails) SetErrorCodeNil(b bool)`
+
+ SetErrorCodeNil sets the value for ErrorCode to be an explicit nil
+
+### UnsetErrorCode
+`func (o *JobExecutionDetails) UnsetErrorCode()`
+
+UnsetErrorCode ensures that no value is present for ErrorCode, not even an explicit nil
 ### GetStatusMessage
 
 `func (o *JobExecutionDetails) GetStatusMessage() string`
