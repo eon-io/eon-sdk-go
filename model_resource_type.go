@@ -24,6 +24,7 @@ const (
 	AWS_RDS ResourceType = "AWS_RDS"
 	AWS_S3 ResourceType = "AWS_S3"
 	AWS_EFS ResourceType = "AWS_EFS"
+	AWS_FSX ResourceType = "AWS_FSX"
 	AWS_EKS_NAMESPACE ResourceType = "AWS_EKS_NAMESPACE"
 	AWS_DYNAMO_DB ResourceType = "AWS_DYNAMO_DB"
 	AWS_EBS_VOLUME ResourceType = "AWS_EBS_VOLUME"
@@ -56,6 +57,7 @@ var AllowedResourceTypeEnumValues = []ResourceType{
 	"AWS_RDS",
 	"AWS_S3",
 	"AWS_EFS",
+	"AWS_FSX",
 	"AWS_EKS_NAMESPACE",
 	"AWS_DYNAMO_DB",
 	"AWS_EBS_VOLUME",

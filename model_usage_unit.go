@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// UsageUnit Unit of measurement for resource usage. 
+// UsageUnit Whether usage is returned in byte-months or raw bytes for the specified `timeFrame`. `UNSPECIFIED` is supported only in responses. 
 type UsageUnit string
 
 // List of UsageUnit

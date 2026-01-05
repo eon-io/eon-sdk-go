@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **JobId** | Pointer to **string** | Backup job ID. | [optional] 
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
 **Resource** | Pointer to [**ResourceSnapshot**](ResourceSnapshot.md) |  | [optional] 
-**UserProtectedFromDeletion** | Pointer to **bool** | Whether the snapshot is protected from deletion by user action. | [optional] 
 
 ## Methods
 
@@ -238,31 +237,6 @@ SetResource sets Resource field to given value.
 `func (o *Snapshot) HasResource() bool`
 
 HasResource returns a boolean if a field has been set.
-
-### GetUserProtectedFromDeletion
-
-`func (o *Snapshot) GetUserProtectedFromDeletion() bool`
-
-GetUserProtectedFromDeletion returns the UserProtectedFromDeletion field if non-nil, zero value otherwise.
-
-### GetUserProtectedFromDeletionOk
-
-`func (o *Snapshot) GetUserProtectedFromDeletionOk() (*bool, bool)`
-
-GetUserProtectedFromDeletionOk returns a tuple with the UserProtectedFromDeletion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserProtectedFromDeletion
-
-`func (o *Snapshot) SetUserProtectedFromDeletion(v bool)`
-
-SetUserProtectedFromDeletion sets UserProtectedFromDeletion field to given value.
-
-### HasUserProtectedFromDeletion
-
-`func (o *Snapshot) HasUserProtectedFromDeletion() bool`
-
-HasUserProtectedFromDeletion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

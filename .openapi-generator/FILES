@@ -142,8 +142,10 @@ docs/GcpDiskTarget.md
 docs/GcpNetworkConnectivityConfig.md
 docs/GcpNetworkType.md
 docs/GcpRestoreAccountAttributes.md
+docs/GcpRestoreAccountAttributesInput.md
 docs/GcpRestoreAccountConnectivityConfig.md
 docs/GcpSourceAccountAttributes.md
+docs/GcpSourceAccountAttributesInput.md
 docs/GcpSubnetPerRegion.md
 docs/GcpVmInstanceRestoreDestination.md
 docs/GcpVmInstanceRestoreTarget.md
@@ -438,8 +440,10 @@ model_gcp_disk_target.go
 model_gcp_network_connectivity_config.go
 model_gcp_network_type.go
 model_gcp_restore_account_attributes.go
+model_gcp_restore_account_attributes_input.go
 model_gcp_restore_account_connectivity_config.go
 model_gcp_source_account_attributes.go
+model_gcp_source_account_attributes_input.go
 model_gcp_subnet_per_region.go
 model_gcp_vm_instance_restore_destination.go
 model_gcp_vm_instance_restore_target.go

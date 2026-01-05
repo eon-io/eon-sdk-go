@@ -24,6 +24,7 @@ type SourceAccountAttributesInput struct {
 	CloudProvider Provider `json:"cloudProvider"`
 	Aws NullableAwsSourceAccountAttributesInput `json:"aws,omitempty"`
 	Azure NullableAzureSourceAccountAttributesInput `json:"azure,omitempty"`
+	Gcp NullableGcpSourceAccountAttributesInput `json:"gcp,omitempty"`
 }
 
 type _SourceAccountAttributesInput SourceAccountAttributesInput
@@ -154,6 +155,48 @@ func (o *SourceAccountAttributesInput) UnsetAzure() {
 	o.Azure.Unset()
 }
 
+// GetGcp returns the Gcp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SourceAccountAttributesInput) GetGcp() GcpSourceAccountAttributesInput {
+	if o == nil || IsNil(o.Gcp.Get()) {
+		var ret GcpSourceAccountAttributesInput
+		return ret
+	}
+	return *o.Gcp.Get()
+}
+
+// GetGcpOk returns a tuple with the Gcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SourceAccountAttributesInput) GetGcpOk() (*GcpSourceAccountAttributesInput, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gcp.Get(), o.Gcp.IsSet()
+}
+
+// HasGcp returns a boolean if a field has been set.
+func (o *SourceAccountAttributesInput) HasGcp() bool {
+	if o != nil && o.Gcp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGcp gets a reference to the given NullableGcpSourceAccountAttributesInput and assigns it to the Gcp field.
+func (o *SourceAccountAttributesInput) SetGcp(v GcpSourceAccountAttributesInput) {
+	o.Gcp.Set(&v)
+}
+// SetGcpNil sets the value for Gcp to be an explicit nil
+func (o *SourceAccountAttributesInput) SetGcpNil() {
+	o.Gcp.Set(nil)
+}
+
+// UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
+func (o *SourceAccountAttributesInput) UnsetGcp() {
+	o.Gcp.Unset()
+}
+
 func (o SourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -170,6 +213,9 @@ func (o SourceAccountAttributesInput) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Azure.IsSet() {
 		toSerialize["azure"] = o.Azure.Get()
+	}
+	if o.Gcp.IsSet() {
+		toSerialize["gcp"] = o.Gcp.Get()
 	}
 	return toSerialize, nil
 }

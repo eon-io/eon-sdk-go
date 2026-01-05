@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **CloudProvider** | [**Provider**](Provider.md) |  | 
 **Aws** | Pointer to [**NullableAwsSourceAccountAttributesInput**](AwsSourceAccountAttributesInput.md) |  | [optional] 
 **Azure** | Pointer to [**NullableAzureSourceAccountAttributesInput**](AzureSourceAccountAttributesInput.md) |  | [optional] 
+**Gcp** | Pointer to [**NullableGcpSourceAccountAttributesInput**](GcpSourceAccountAttributesInput.md) |  | [optional] 
 
 ## Methods
 
@@ -117,6 +118,41 @@ HasAzure returns a boolean if a field has been set.
 `func (o *SourceAccountAttributesInput) UnsetAzure()`
 
 UnsetAzure ensures that no value is present for Azure, not even an explicit nil
+### GetGcp
+
+`func (o *SourceAccountAttributesInput) GetGcp() GcpSourceAccountAttributesInput`
+
+GetGcp returns the Gcp field if non-nil, zero value otherwise.
+
+### GetGcpOk
+
+`func (o *SourceAccountAttributesInput) GetGcpOk() (*GcpSourceAccountAttributesInput, bool)`
+
+GetGcpOk returns a tuple with the Gcp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcp
+
+`func (o *SourceAccountAttributesInput) SetGcp(v GcpSourceAccountAttributesInput)`
+
+SetGcp sets Gcp field to given value.
+
+### HasGcp
+
+`func (o *SourceAccountAttributesInput) HasGcp() bool`
+
+HasGcp returns a boolean if a field has been set.
+
+### SetGcpNil
+
+`func (o *SourceAccountAttributesInput) SetGcpNil(b bool)`
+
+ SetGcpNil sets the value for Gcp to be an explicit nil
+
+### UnsetGcp
+`func (o *SourceAccountAttributesInput) UnsetGcp()`
+
+UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

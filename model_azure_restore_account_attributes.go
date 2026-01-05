@@ -23,8 +23,12 @@ var _ MappedNullable = &AzureRestoreAccountAttributes{}
 type AzureRestoreAccountAttributes struct {
 	// ID of the tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
-	// Resource group name.
+	// ID of the Azure subscription.
+	SubscriptionId string `json:"subscriptionId"`
+	// Name of the target restore resource group.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
+	// Azure region for restore operations.
+	Location *string `json:"location,omitempty"`
 }
 
 type _AzureRestoreAccountAttributes AzureRestoreAccountAttributes
@@ -33,9 +37,10 @@ type _AzureRestoreAccountAttributes AzureRestoreAccountAttributes
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAzureRestoreAccountAttributes(tenantId string) *AzureRestoreAccountAttributes {
+func NewAzureRestoreAccountAttributes(tenantId string, subscriptionId string) *AzureRestoreAccountAttributes {
 	this := AzureRestoreAccountAttributes{}
 	this.TenantId = tenantId
+	this.SubscriptionId = subscriptionId
 	return &this
 }
 
@@ -71,6 +76,30 @@ func (o *AzureRestoreAccountAttributes) SetTenantId(v string) {
 	o.TenantId = v
 }
 
+// GetSubscriptionId returns the SubscriptionId field value
+func (o *AzureRestoreAccountAttributes) GetSubscriptionId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SubscriptionId
+}
+
+// GetSubscriptionIdOk returns a tuple with the SubscriptionId field value
+// and a boolean to check if the value has been set.
+func (o *AzureRestoreAccountAttributes) GetSubscriptionIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SubscriptionId, true
+}
+
+// SetSubscriptionId sets field value
+func (o *AzureRestoreAccountAttributes) SetSubscriptionId(v string) {
+	o.SubscriptionId = v
+}
+
 // GetResourceGroupName returns the ResourceGroupName field value if set, zero value otherwise.
 func (o *AzureRestoreAccountAttributes) GetResourceGroupName() string {
 	if o == nil || IsNil(o.ResourceGroupName) {
@@ -103,6 +132,38 @@ func (o *AzureRestoreAccountAttributes) SetResourceGroupName(v string) {
 	o.ResourceGroupName = &v
 }
 
+// GetLocation returns the Location field value if set, zero value otherwise.
+func (o *AzureRestoreAccountAttributes) GetLocation() string {
+	if o == nil || IsNil(o.Location) {
+		var ret string
+		return ret
+	}
+	return *o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureRestoreAccountAttributes) GetLocationOk() (*string, bool) {
+	if o == nil || IsNil(o.Location) {
+		return nil, false
+	}
+	return o.Location, true
+}
+
+// HasLocation returns a boolean if a field has been set.
+func (o *AzureRestoreAccountAttributes) HasLocation() bool {
+	if o != nil && !IsNil(o.Location) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocation gets a reference to the given string and assigns it to the Location field.
+func (o *AzureRestoreAccountAttributes) SetLocation(v string) {
+	o.Location = &v
+}
+
 func (o AzureRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -114,8 +175,12 @@ func (o AzureRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 func (o AzureRestoreAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tenantId"] = o.TenantId
+	toSerialize["subscriptionId"] = o.SubscriptionId
 	if !IsNil(o.ResourceGroupName) {
 		toSerialize["resourceGroupName"] = o.ResourceGroupName
+	}
+	if !IsNil(o.Location) {
+		toSerialize["location"] = o.Location
 	}
 	return toSerialize, nil
 }
@@ -126,6 +191,7 @@ func (o *AzureRestoreAccountAttributes) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"tenantId",
+		"subscriptionId",
 	}
 
 	allProperties := make(map[string]interface{})

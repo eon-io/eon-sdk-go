@@ -4478,7 +4478,7 @@ paths:
 
         Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
         However, access tokens that were issued before the rotation remain valid until they expire.
-        This means there is an effective grace period of up to 12 hours where previously-issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+        This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
         [Rotate Current API Client Secret]: rotate-current-api-client-secret.api.mdx
       operationId: rotateApiClientSecret
@@ -4542,7 +4542,7 @@ paths:
 
         Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
         However, access tokens that were issued before the rotation remain valid until they expire.
-        This means there is an effective grace period of up to 12 hours where previously-issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+        This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
         [Rotate API Client Secret]: rotate-api-client-secret.api.mdx
       operationId: rotateCurrentApiClientSecret
@@ -4921,8 +4921,26 @@ components:
       - subscriptionId
       - tenantId
       type: object
+    GcpSourceAccountAttributesInput:
+      description: |
+        GCP project configuration.
+        Applicable if `cloudProvider` is set to `GCP`.
+      example:
+        serviceAccount: eon-source@my-project.iam.gserviceaccount.com
+      nullable: true
+      properties:
+        serviceAccount:
+          description: Email address of the GCP service account Eon uses to access
+            the project.
+          example: eon-source@my-project.iam.gserviceaccount.com
+          type: string
+      required:
+      - serviceAccount
+      type: object
     SourceAccountAttributesInput:
       example:
+        gcp:
+          serviceAccount: eon-source@my-project.iam.gserviceaccount.com
         cloudProvider: AWS
         aws:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -4937,6 +4955,8 @@ components:
           $ref: '#/components/schemas/AwsSourceAccountAttributesInput'
         azure:
           $ref: '#/components/schemas/AzureSourceAccountAttributesInput'
+        gcp:
+          $ref: '#/components/schemas/GcpSourceAccountAttributesInput'
       required:
       - cloudProvider
       type: object
@@ -4944,6 +4964,8 @@ components:
       example:
         name: prod-eu
         sourceAccountAttributes:
+          gcp:
+            serviceAccount: eon-source@my-project.iam.gserviceaccount.com
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
@@ -5043,20 +5065,18 @@ components:
       example:
         organizationId: "123456789012"
         serviceAccount: serviceAccount
-        folderId: "123456789012"
+        folderId: "987654321098"
       nullable: true
       properties:
         serviceAccount:
           type: string
         organizationId:
-          description: Cloud-provider-assigned ID of the GCP organization the account
-            belongs to.
+          description: Cloud-provider-assigned ID of the GCP project's parent organization.
           example: "123456789012"
           type: string
         folderId:
-          description: Cloud-provider-assigned ID of the GCP folder the account belongs
-            to.
-          example: "123456789012"
+          description: Cloud-provider-assigned ID of the GCP project's parent folder.
+          example: "987654321098"
           type: string
       required:
       - serviceAccount
@@ -5066,13 +5086,28 @@ components:
         Azure subscription configuration.
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
-        tenantId: tenantId
+        resourceGroupName: my-resource-group
+        tenantId: 12345678-1234-1234-1234-123456789012
+        subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
         tenantId:
           description: ID of the Azure tenant the subscription belongs to.
+          example: 12345678-1234-1234-1234-123456789012
+          format: uuid
+          type: string
+        subscriptionId:
+          description: ID of the Azure subscription.
+          example: 12345678-1234-1234-1234-123456789012
+          format: uuid
+          type: string
+        resourceGroupName:
+          description: Name of the Azure resource group the source account is scoped
+            to.
+          example: my-resource-group
           type: string
       required:
+      - subscriptionId
       - tenantId
       type: object
     SourceAccountCloudAttributes:
@@ -5080,13 +5115,15 @@ components:
         gcp:
           organizationId: "123456789012"
           serviceAccount: serviceAccount
-          folderId: "123456789012"
+          folderId: "987654321098"
         cloudProvider: AWS
         aws:
           organizationId: o-1234567890
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
-          tenantId: tenantId
+          resourceGroupName: my-resource-group
+          tenantId: 12345678-1234-1234-1234-123456789012
+          subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -5109,13 +5146,15 @@ components:
           gcp:
             organizationId: "123456789012"
             serviceAccount: serviceAccount
-            folderId: "123456789012"
+            folderId: "987654321098"
           cloudProvider: AWS
           aws:
             organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
-            tenantId: tenantId
+            resourceGroupName: my-resource-group
+            tenantId: 12345678-1234-1234-1234-123456789012
+            subscriptionId: 12345678-1234-1234-1234-123456789012
         providerAccountName: providerAccountName
         version:
           installed: 1.0.0
@@ -5167,13 +5206,15 @@ components:
             gcp:
               organizationId: "123456789012"
               serviceAccount: serviceAccount
-              folderId: "123456789012"
+              folderId: "987654321098"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: tenantId
+              resourceGroupName: my-resource-group
+              tenantId: 12345678-1234-1234-1234-123456789012
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
@@ -5467,13 +5508,15 @@ components:
             gcp:
               organizationId: "123456789012"
               serviceAccount: serviceAccount
-              folderId: "123456789012"
+              folderId: "987654321098"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: tenantId
+              resourceGroupName: my-resource-group
+              tenantId: 12345678-1234-1234-1234-123456789012
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
@@ -5488,13 +5531,15 @@ components:
             gcp:
               organizationId: "123456789012"
               serviceAccount: serviceAccount
-              folderId: "123456789012"
+              folderId: "987654321098"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: tenantId
+              resourceGroupName: my-resource-group
+              tenantId: 12345678-1234-1234-1234-123456789012
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
@@ -5533,13 +5578,15 @@ components:
             gcp:
               organizationId: "123456789012"
               serviceAccount: serviceAccount
-              folderId: "123456789012"
+              folderId: "987654321098"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: tenantId
+              resourceGroupName: my-resource-group
+              tenantId: 12345678-1234-1234-1234-123456789012
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
@@ -5563,13 +5610,15 @@ components:
             gcp:
               organizationId: "123456789012"
               serviceAccount: serviceAccount
-              folderId: "123456789012"
+              folderId: "987654321098"
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: tenantId
+              resourceGroupName: my-resource-group
+              tenantId: 12345678-1234-1234-1234-123456789012
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
             installed: 1.0.0
@@ -5683,6 +5732,7 @@ components:
       example:
         resourceGroupName: my-resource-group
         tenantId: 12345678-1234-1234-1234-123456789012
+        eonInternalResourceGroupName: eon-restore-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
@@ -5699,18 +5749,42 @@ components:
           description: Resource group name.
           example: my-resource-group
           type: string
+        eonInternalResourceGroupName:
+          description: |
+            Optional. The name of the Eon internal resource group for restore operations. If not provided, the default value will be used.
+          example: eon-restore-internal-rg
+          type: string
       required:
       - subscriptionId
       - tenantId
       type: object
+    GcpRestoreAccountAttributesInput:
+      description: |
+        GCP project configuration.
+        Applicable if `cloudProvider` is set to `GCP`.
+      example:
+        serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
+      nullable: true
+      properties:
+        serviceAccount:
+          description: Email address of the GCP service account Eon uses to access
+            the project for restore operations.
+          example: eon-restore@my-project.iam.gserviceaccount.com
+          type: string
+      required:
+      - serviceAccount
+      type: object
     RestoreAccountAttributesInput:
       example:
+        gcp:
+          serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
         cloudProvider: AWS
         aws:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
           resourceGroupName: my-resource-group
           tenantId: 12345678-1234-1234-1234-123456789012
+          eonInternalResourceGroupName: eon-restore-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
@@ -5719,18 +5793,23 @@ components:
           $ref: '#/components/schemas/AwsRestoreAccountAttributesInput'
         azure:
           $ref: '#/components/schemas/AzureRestoreAccountAttributesInput'
+        gcp:
+          $ref: '#/components/schemas/GcpRestoreAccountAttributesInput'
       required:
       - cloudProvider
       type: object
     ConnectRestoreAccountRequest:
       example:
         restoreAccountAttributes:
+          gcp:
+            serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
           cloudProvider: AWS
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
             resourceGroupName: my-resource-group
             tenantId: 12345678-1234-1234-1234-123456789012
+            eonInternalResourceGroupName: eon-restore-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
         name: restore-sandbox
       properties:
@@ -5783,17 +5862,31 @@ components:
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
         resourceGroupName: my-resource-group
-        tenantId: tenantId
+        tenantId: 12345678-1234-1234-1234-123456789012
+        location: eastus
+        subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
         tenantId:
           description: ID of the tenant the subscription belongs to.
+          example: 12345678-1234-1234-1234-123456789012
+          format: uuid
+          type: string
+        subscriptionId:
+          description: ID of the Azure subscription.
+          example: 12345678-1234-1234-1234-123456789012
+          format: uuid
           type: string
         resourceGroupName:
-          description: Resource group name.
+          description: Name of the target restore resource group.
           example: my-resource-group
           type: string
+        location:
+          description: Azure region for restore operations.
+          example: eastus
+          type: string
       required:
+      - subscriptionId
       - tenantId
       type: object
     RestoreAccountCloudAttributes:
@@ -5806,7 +5899,9 @@ components:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
           resourceGroupName: my-resource-group
-          tenantId: tenantId
+          tenantId: 12345678-1234-1234-1234-123456789012
+          location: eastus
+          subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -5828,7 +5923,9 @@ components:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
             resourceGroupName: my-resource-group
-            tenantId: tenantId
+            tenantId: 12345678-1234-1234-1234-123456789012
+            location: eastus
+            subscriptionId: 12345678-1234-1234-1234-123456789012
         providerAccountId: "123412341234"
         name: prod-eu
         connectedTime: 2024-08-29T13:24:03Z
@@ -5884,7 +5981,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               resourceGroupName: my-resource-group
-              tenantId: tenantId
+              tenantId: 12345678-1234-1234-1234-123456789012
+              location: eastus
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
@@ -6042,7 +6141,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               resourceGroupName: my-resource-group
-              tenantId: tenantId
+              tenantId: 12345678-1234-1234-1234-123456789012
+              location: eastus
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
@@ -6062,7 +6163,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               resourceGroupName: my-resource-group
-              tenantId: tenantId
+              tenantId: 12345678-1234-1234-1234-123456789012
+              location: eastus
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
@@ -6106,7 +6209,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               resourceGroupName: my-resource-group
-              tenantId: tenantId
+              tenantId: 12345678-1234-1234-1234-123456789012
+              location: eastus
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
@@ -6135,7 +6240,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               resourceGroupName: my-resource-group
-              tenantId: tenantId
+              tenantId: 12345678-1234-1234-1234-123456789012
+              location: eastus
+              subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
@@ -7036,7 +7143,7 @@ components:
       description: Error code indicating the type of the error occurred.
       enum:
       - INTERNAL_JOB_ERROR
-      - JOB_CANCELLED
+      - JOB_CANCELED_ERROR
       - FAILED_TO_GET_RESOURCE_INFORMATION
       - RESOURCE_IS_TERMINATED
       - INVALID_RESOURCE_STATE
@@ -7139,6 +7246,7 @@ components:
       - AWS_RDS
       - AWS_S3
       - AWS_EFS
+      - AWS_FSX
       - AWS_EKS_NAMESPACE
       - AWS_DYNAMO_DB
       - AWS_EBS_VOLUME
@@ -9509,7 +9617,6 @@ components:
                   minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
-        sourceCloudProvider: AWS
         standardPlan:
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -9585,8 +9692,6 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
       properties:
-        sourceCloudProvider:
-          $ref: '#/components/schemas/Provider'
         backupPolicyType:
           $ref: '#/components/schemas/BackupPolicyType'
         standardPlan:
@@ -9678,7 +9783,6 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
-          sourceCloudProvider: AWS
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -9949,7 +10053,6 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
-          sourceCloudProvider: AWS
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -10227,7 +10330,6 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
-            sourceCloudProvider: AWS
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -10488,7 +10590,6 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
-            sourceCloudProvider: AWS
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -10739,7 +10840,6 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
-            sourceCloudProvider: AWS
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -11010,7 +11110,6 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
-            sourceCloudProvider: AWS
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -11269,7 +11368,6 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
-          sourceCloudProvider: AWS
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -11541,7 +11639,6 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
-            sourceCloudProvider: AWS
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -15453,7 +15550,6 @@ components:
             Name: customers
           resourceType: AWS_EC2
         expirationTime: 2025-01-20T09:40:26Z
-        userProtectedFromDeletion: false
         createdTime: 2024-10-29T23:01:24.841897Z
         id: 043090df-9fe5-4f89-9859-45db589c2936
         projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -15498,10 +15594,6 @@ components:
           type: string
         resource:
           $ref: '#/components/schemas/ResourceSnapshot'
-        userProtectedFromDeletion:
-          description: Whether the snapshot is protected from deletion by user action.
-          example: false
-          type: boolean
       required:
       - createdTime
       - id
@@ -15571,7 +15663,6 @@ components:
               Name: customers
             resourceType: AWS_EC2
           expirationTime: 2025-01-20T09:40:26Z
-          userProtectedFromDeletion: false
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -15717,7 +15808,6 @@ components:
               Name: customers
             resourceType: AWS_EC2
           expirationTime: 2025-01-20T09:40:26Z
-          userProtectedFromDeletion: false
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -15780,7 +15870,6 @@ components:
               Name: customers
             resourceType: AWS_EC2
           expirationTime: 2025-01-20T09:40:26Z
-          userProtectedFromDeletion: false
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -15912,12 +16001,13 @@ components:
     UsageUnit:
       default: BYTE_MONTHS
       description: |
-        Unit of measurement for resource usage.
+        Whether usage is returned in byte-months or raw bytes for the specified `timeFrame`.
+        `UNSPECIFIED` is supported only in responses.
       enum:
       - BYTE_MONTHS
       - BYTES
       - UNSPECIFIED
-      example: BYTE_MONTHS
+      example: BYTES
       type: string
       x-enum-varnames:
       - USAGE_UNIT_BYTE_MONTHS
@@ -16068,7 +16158,7 @@ components:
       - COST_GROUP_BY_RESOURCE_AND_VAULT
     QueryCostDataRequest:
       example:
-        usageUnit: BYTE_MONTHS
+        usageUnit: BYTES
         costUnit: CREDITS
         granularity: MONTHLY
         filters:
@@ -16223,7 +16313,7 @@ components:
       description: Raw usage amount and unit that generated the associated cost.
       example:
         amount: 1073741824
-        unit: BYTE_MONTHS
+        unit: BYTES
       properties:
         amount:
           description: |
@@ -16247,7 +16337,7 @@ components:
           unit: CREDITS
         usage:
           amount: 1073741824
-          unit: BYTE_MONTHS
+          unit: BYTES
         meteringDimension: AWS_EC2_METERING_DIMENSION
       properties:
         meteringDimension:
@@ -16271,14 +16361,14 @@ components:
             unit: CREDITS
           usage:
             amount: 1073741824
-            unit: BYTE_MONTHS
+            unit: BYTES
           meteringDimension: AWS_EC2_METERING_DIMENSION
         - cost:
             amount: 150.75
             unit: CREDITS
           usage:
             amount: 1073741824
-            unit: BYTE_MONTHS
+            unit: BYTES
           meteringDimension: AWS_EC2_METERING_DIMENSION
         resourceCount: 10
         recordTimeFrame:
@@ -16319,14 +16409,14 @@ components:
               unit: CREDITS
             usage:
               amount: 1073741824
-              unit: BYTE_MONTHS
+              unit: BYTES
             meteringDimension: AWS_EC2_METERING_DIMENSION
           - cost:
               amount: 150.75
               unit: CREDITS
             usage:
               amount: 1073741824
-              unit: BYTE_MONTHS
+              unit: BYTES
             meteringDimension: AWS_EC2_METERING_DIMENSION
           resourceCount: 10
           recordTimeFrame:
@@ -16343,14 +16433,14 @@ components:
               unit: CREDITS
             usage:
               amount: 1073741824
-              unit: BYTE_MONTHS
+              unit: BYTES
             meteringDimension: AWS_EC2_METERING_DIMENSION
           - cost:
               amount: 150.75
               unit: CREDITS
             usage:
               amount: 1073741824
-              unit: BYTE_MONTHS
+              unit: BYTES
             meteringDimension: AWS_EC2_METERING_DIMENSION
           resourceCount: 10
           recordTimeFrame:

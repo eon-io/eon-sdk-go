@@ -27,6 +27,8 @@ type AzureRestoreAccountAttributesInput struct {
 	SubscriptionId string `json:"subscriptionId"`
 	// Resource group name.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
+	// Optional. The name of the Eon internal resource group for restore operations. If not provided, the default value will be used. 
+	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 }
 
 type _AzureRestoreAccountAttributesInput AzureRestoreAccountAttributesInput
@@ -130,6 +132,38 @@ func (o *AzureRestoreAccountAttributesInput) SetResourceGroupName(v string) {
 	o.ResourceGroupName = &v
 }
 
+// GetEonInternalResourceGroupName returns the EonInternalResourceGroupName field value if set, zero value otherwise.
+func (o *AzureRestoreAccountAttributesInput) GetEonInternalResourceGroupName() string {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
+		var ret string
+		return ret
+	}
+	return *o.EonInternalResourceGroupName
+}
+
+// GetEonInternalResourceGroupNameOk returns a tuple with the EonInternalResourceGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureRestoreAccountAttributesInput) GetEonInternalResourceGroupNameOk() (*string, bool) {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
+		return nil, false
+	}
+	return o.EonInternalResourceGroupName, true
+}
+
+// HasEonInternalResourceGroupName returns a boolean if a field has been set.
+func (o *AzureRestoreAccountAttributesInput) HasEonInternalResourceGroupName() bool {
+	if o != nil && !IsNil(o.EonInternalResourceGroupName) {
+		return true
+	}
+
+	return false
+}
+
+// SetEonInternalResourceGroupName gets a reference to the given string and assigns it to the EonInternalResourceGroupName field.
+func (o *AzureRestoreAccountAttributesInput) SetEonInternalResourceGroupName(v string) {
+	o.EonInternalResourceGroupName = &v
+}
+
 func (o AzureRestoreAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -144,6 +178,9 @@ func (o AzureRestoreAccountAttributesInput) ToMap() (map[string]interface{}, err
 	toSerialize["subscriptionId"] = o.SubscriptionId
 	if !IsNil(o.ResourceGroupName) {
 		toSerialize["resourceGroupName"] = o.ResourceGroupName
+	}
+	if !IsNil(o.EonInternalResourceGroupName) {
+		toSerialize["eonInternalResourceGroupName"] = o.EonInternalResourceGroupName
 	}
 	return toSerialize, nil
 }

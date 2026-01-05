@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **TenantId** | **string** | ID of the tenant the subscription belongs to. | 
 **SubscriptionId** | **string** | Subscription ID. This field is required.  | 
 **ResourceGroupName** | Pointer to **string** | Resource group name. | [optional] 
+**EonInternalResourceGroupName** | Pointer to **string** | Optional. The name of the Eon internal resource group for restore operations. If not provided, the default value will be used.  | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetResourceGroupName sets ResourceGroupName field to given value.
 `func (o *AzureRestoreAccountAttributesInput) HasResourceGroupName() bool`
 
 HasResourceGroupName returns a boolean if a field has been set.
+
+### GetEonInternalResourceGroupName
+
+`func (o *AzureRestoreAccountAttributesInput) GetEonInternalResourceGroupName() string`
+
+GetEonInternalResourceGroupName returns the EonInternalResourceGroupName field if non-nil, zero value otherwise.
+
+### GetEonInternalResourceGroupNameOk
+
+`func (o *AzureRestoreAccountAttributesInput) GetEonInternalResourceGroupNameOk() (*string, bool)`
+
+GetEonInternalResourceGroupNameOk returns a tuple with the EonInternalResourceGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEonInternalResourceGroupName
+
+`func (o *AzureRestoreAccountAttributesInput) SetEonInternalResourceGroupName(v string)`
+
+SetEonInternalResourceGroupName sets EonInternalResourceGroupName field to given value.
+
+### HasEonInternalResourceGroupName
+
+`func (o *AzureRestoreAccountAttributesInput) HasEonInternalResourceGroupName() bool`
+
+HasEonInternalResourceGroupName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

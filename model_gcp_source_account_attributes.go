@@ -22,9 +22,9 @@ var _ MappedNullable = &GcpSourceAccountAttributes{}
 // GcpSourceAccountAttributes GCP project configuration. Applicable if `cloudProvider` is set to `GCP`. 
 type GcpSourceAccountAttributes struct {
 	ServiceAccount string `json:"serviceAccount"`
-	// Cloud-provider-assigned ID of the GCP organization the account belongs to.
+	// Cloud-provider-assigned ID of the GCP project's parent organization.
 	OrganizationId *string `json:"organizationId,omitempty"`
-	// Cloud-provider-assigned ID of the GCP folder the account belongs to.
+	// Cloud-provider-assigned ID of the GCP project's parent folder.
 	FolderId *string `json:"folderId,omitempty"`
 }
 

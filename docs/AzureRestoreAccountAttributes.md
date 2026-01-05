@@ -5,13 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TenantId** | **string** | ID of the tenant the subscription belongs to. | 
-**ResourceGroupName** | Pointer to **string** | Resource group name. | [optional] 
+**SubscriptionId** | **string** | ID of the Azure subscription. | 
+**ResourceGroupName** | Pointer to **string** | Name of the target restore resource group. | [optional] 
+**Location** | Pointer to **string** | Azure region for restore operations. | [optional] 
 
 ## Methods
 
 ### NewAzureRestoreAccountAttributes
 
-`func NewAzureRestoreAccountAttributes(tenantId string, ) *AzureRestoreAccountAttributes`
+`func NewAzureRestoreAccountAttributes(tenantId string, subscriptionId string, ) *AzureRestoreAccountAttributes`
 
 NewAzureRestoreAccountAttributes instantiates a new AzureRestoreAccountAttributes object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +48,26 @@ and a boolean to check if the value has been set.
 SetTenantId sets TenantId field to given value.
 
 
+### GetSubscriptionId
+
+`func (o *AzureRestoreAccountAttributes) GetSubscriptionId() string`
+
+GetSubscriptionId returns the SubscriptionId field if non-nil, zero value otherwise.
+
+### GetSubscriptionIdOk
+
+`func (o *AzureRestoreAccountAttributes) GetSubscriptionIdOk() (*string, bool)`
+
+GetSubscriptionIdOk returns a tuple with the SubscriptionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubscriptionId
+
+`func (o *AzureRestoreAccountAttributes) SetSubscriptionId(v string)`
+
+SetSubscriptionId sets SubscriptionId field to given value.
+
+
 ### GetResourceGroupName
 
 `func (o *AzureRestoreAccountAttributes) GetResourceGroupName() string`
@@ -70,6 +92,31 @@ SetResourceGroupName sets ResourceGroupName field to given value.
 `func (o *AzureRestoreAccountAttributes) HasResourceGroupName() bool`
 
 HasResourceGroupName returns a boolean if a field has been set.
+
+### GetLocation
+
+`func (o *AzureRestoreAccountAttributes) GetLocation() string`
+
+GetLocation returns the Location field if non-nil, zero value otherwise.
+
+### GetLocationOk
+
+`func (o *AzureRestoreAccountAttributes) GetLocationOk() (*string, bool)`
+
+GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocation
+
+`func (o *AzureRestoreAccountAttributes) SetLocation(v string)`
+
+SetLocation sets Location field to given value.
+
+### HasLocation
+
+`func (o *AzureRestoreAccountAttributes) HasLocation() bool`
+
+HasLocation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

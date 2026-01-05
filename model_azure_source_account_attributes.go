@@ -23,6 +23,10 @@ var _ MappedNullable = &AzureSourceAccountAttributes{}
 type AzureSourceAccountAttributes struct {
 	// ID of the Azure tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
+	// ID of the Azure subscription.
+	SubscriptionId string `json:"subscriptionId"`
+	// Name of the Azure resource group the source account is scoped to.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
 }
 
 type _AzureSourceAccountAttributes AzureSourceAccountAttributes
@@ -31,9 +35,10 @@ type _AzureSourceAccountAttributes AzureSourceAccountAttributes
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAzureSourceAccountAttributes(tenantId string) *AzureSourceAccountAttributes {
+func NewAzureSourceAccountAttributes(tenantId string, subscriptionId string) *AzureSourceAccountAttributes {
 	this := AzureSourceAccountAttributes{}
 	this.TenantId = tenantId
+	this.SubscriptionId = subscriptionId
 	return &this
 }
 
@@ -69,6 +74,62 @@ func (o *AzureSourceAccountAttributes) SetTenantId(v string) {
 	o.TenantId = v
 }
 
+// GetSubscriptionId returns the SubscriptionId field value
+func (o *AzureSourceAccountAttributes) GetSubscriptionId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SubscriptionId
+}
+
+// GetSubscriptionIdOk returns a tuple with the SubscriptionId field value
+// and a boolean to check if the value has been set.
+func (o *AzureSourceAccountAttributes) GetSubscriptionIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SubscriptionId, true
+}
+
+// SetSubscriptionId sets field value
+func (o *AzureSourceAccountAttributes) SetSubscriptionId(v string) {
+	o.SubscriptionId = v
+}
+
+// GetResourceGroupName returns the ResourceGroupName field value if set, zero value otherwise.
+func (o *AzureSourceAccountAttributes) GetResourceGroupName() string {
+	if o == nil || IsNil(o.ResourceGroupName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceGroupName
+}
+
+// GetResourceGroupNameOk returns a tuple with the ResourceGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureSourceAccountAttributes) GetResourceGroupNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceGroupName) {
+		return nil, false
+	}
+	return o.ResourceGroupName, true
+}
+
+// HasResourceGroupName returns a boolean if a field has been set.
+func (o *AzureSourceAccountAttributes) HasResourceGroupName() bool {
+	if o != nil && !IsNil(o.ResourceGroupName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceGroupName gets a reference to the given string and assigns it to the ResourceGroupName field.
+func (o *AzureSourceAccountAttributes) SetResourceGroupName(v string) {
+	o.ResourceGroupName = &v
+}
+
 func (o AzureSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +141,10 @@ func (o AzureSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 func (o AzureSourceAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tenantId"] = o.TenantId
+	toSerialize["subscriptionId"] = o.SubscriptionId
+	if !IsNil(o.ResourceGroupName) {
+		toSerialize["resourceGroupName"] = o.ResourceGroupName
+	}
 	return toSerialize, nil
 }
 
@@ -89,6 +154,7 @@ func (o *AzureSourceAccountAttributes) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"tenantId",
+		"subscriptionId",
 	}
 
 	allProperties := make(map[string]interface{})

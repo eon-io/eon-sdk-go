@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ServiceAccount** | **string** |  | 
-**OrganizationId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP organization the account belongs to. | [optional] 
-**FolderId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP folder the account belongs to. | [optional] 
+**OrganizationId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP project&#39;s parent organization. | [optional] 
+**FolderId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP project&#39;s parent folder. | [optional] 
 
 ## Methods
 

@@ -375,7 +375,7 @@ To replace the client secret for the access key passed in the `Authorization` he
 
 Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
 However, access tokens that were issued before the rotation remain valid until they expire.
-This means there is an effective grace period of up to 12 hours where previously-issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
 [Rotate Current API Client Secret]: rotate-current-api-client-secret.api.mdx
 
@@ -508,7 +508,7 @@ To replace client secrets for other sets of API credentials, use [Rotate API Cli
 
 Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
 However, access tokens that were issued before the rotation remain valid until they expire.
-This means there is an effective grace period of up to 12 hours where previously-issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
 [Rotate API Client Secret]: rotate-api-client-secret.api.mdx
 

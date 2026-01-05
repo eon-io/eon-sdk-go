@@ -11,6 +11,8 @@
 
 * `AWS_EFS` (value: `"AWS_EFS"`)
 
+* `AWS_FSX` (value: `"AWS_FSX"`)
+
 * `AWS_EKS_NAMESPACE` (value: `"AWS_EKS_NAMESPACE"`)
 
 * `AWS_DYNAMO_DB` (value: `"AWS_DYNAMO_DB"`)

@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SourceCloudProvider** | Pointer to [**Provider**](Provider.md) |  | [optional] 
 **BackupPolicyType** | [**BackupPolicyType**](BackupPolicyType.md) |  | 
 **StandardPlan** | Pointer to [**NullableStandardBackupPolicyPlan**](StandardBackupPolicyPlan.md) |  | [optional] 
 **HighFrequencyPlan** | Pointer to [**NullableHighFrequencyBackupPolicyPlan**](HighFrequencyBackupPolicyPlan.md) |  | [optional] 
@@ -27,31 +26,6 @@ will change when the set of required properties is changed
 NewBackupPolicyPlanWithDefaults instantiates a new BackupPolicyPlan object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetSourceCloudProvider
-
-`func (o *BackupPolicyPlan) GetSourceCloudProvider() Provider`
-
-GetSourceCloudProvider returns the SourceCloudProvider field if non-nil, zero value otherwise.
-
-### GetSourceCloudProviderOk
-
-`func (o *BackupPolicyPlan) GetSourceCloudProviderOk() (*Provider, bool)`
-
-GetSourceCloudProviderOk returns a tuple with the SourceCloudProvider field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSourceCloudProvider
-
-`func (o *BackupPolicyPlan) SetSourceCloudProvider(v Provider)`
-
-SetSourceCloudProvider sets SourceCloudProvider field to given value.
-
-### HasSourceCloudProvider
-
-`func (o *BackupPolicyPlan) HasSourceCloudProvider() bool`
-
-HasSourceCloudProvider returns a boolean if a field has been set.
 
 ### GetBackupPolicyType
 

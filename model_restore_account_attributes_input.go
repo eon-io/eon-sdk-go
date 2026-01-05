@@ -24,6 +24,7 @@ type RestoreAccountAttributesInput struct {
 	CloudProvider Provider `json:"cloudProvider"`
 	Aws NullableAwsRestoreAccountAttributesInput `json:"aws,omitempty"`
 	Azure NullableAzureRestoreAccountAttributesInput `json:"azure,omitempty"`
+	Gcp NullableGcpRestoreAccountAttributesInput `json:"gcp,omitempty"`
 }
 
 type _RestoreAccountAttributesInput RestoreAccountAttributesInput
@@ -154,6 +155,48 @@ func (o *RestoreAccountAttributesInput) UnsetAzure() {
 	o.Azure.Unset()
 }
 
+// GetGcp returns the Gcp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RestoreAccountAttributesInput) GetGcp() GcpRestoreAccountAttributesInput {
+	if o == nil || IsNil(o.Gcp.Get()) {
+		var ret GcpRestoreAccountAttributesInput
+		return ret
+	}
+	return *o.Gcp.Get()
+}
+
+// GetGcpOk returns a tuple with the Gcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RestoreAccountAttributesInput) GetGcpOk() (*GcpRestoreAccountAttributesInput, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gcp.Get(), o.Gcp.IsSet()
+}
+
+// HasGcp returns a boolean if a field has been set.
+func (o *RestoreAccountAttributesInput) HasGcp() bool {
+	if o != nil && o.Gcp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGcp gets a reference to the given NullableGcpRestoreAccountAttributesInput and assigns it to the Gcp field.
+func (o *RestoreAccountAttributesInput) SetGcp(v GcpRestoreAccountAttributesInput) {
+	o.Gcp.Set(&v)
+}
+// SetGcpNil sets the value for Gcp to be an explicit nil
+func (o *RestoreAccountAttributesInput) SetGcpNil() {
+	o.Gcp.Set(nil)
+}
+
+// UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
+func (o *RestoreAccountAttributesInput) UnsetGcp() {
+	o.Gcp.Unset()
+}
+
 func (o RestoreAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -170,6 +213,9 @@ func (o RestoreAccountAttributesInput) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Azure.IsSet() {
 		toSerialize["azure"] = o.Azure.Get()
+	}
+	if o.Gcp.IsSet() {
+		toSerialize["gcp"] = o.Gcp.Get()
 	}
 	return toSerialize, nil
 }
