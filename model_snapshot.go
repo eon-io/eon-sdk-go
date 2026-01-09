@@ -30,8 +30,10 @@ type Snapshot struct {
 	CreatedTime time.Time `json:"createdTime"`
 	// Date and time of the resource that's preserved by the snapshot.
 	PointInTime *time.Time `json:"pointInTime,omitempty"`
-	// ID of the vault the snapshot is stored in.
-	VaultId string `json:"vaultId"`
+	// ID of the vault the snapshot is stored in. Empty for native snapshots.
+	VaultId *string `json:"vaultId,omitempty"`
+	// Whether this is a native snapshot stored in the cloud provider (e.g., FSx backup) rather than in an Eon vault.
+	IsNative *bool `json:"isNative,omitempty"`
 	// Eon-assigned ID of the resource the snapshot is backing up.
 	ResourceId string `json:"resourceId"`
 	// Backup job ID.
@@ -47,11 +49,10 @@ type _Snapshot Snapshot
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSnapshot(id string, createdTime time.Time, vaultId string, resourceId string) *Snapshot {
+func NewSnapshot(id string, createdTime time.Time, resourceId string) *Snapshot {
 	this := Snapshot{}
 	this.Id = id
 	this.CreatedTime = createdTime
-	this.VaultId = vaultId
 	this.ResourceId = resourceId
 	return &this
 }
@@ -176,28 +177,68 @@ func (o *Snapshot) SetPointInTime(v time.Time) {
 	o.PointInTime = &v
 }
 
-// GetVaultId returns the VaultId field value
+// GetVaultId returns the VaultId field value if set, zero value otherwise.
 func (o *Snapshot) GetVaultId() string {
-	if o == nil {
+	if o == nil || IsNil(o.VaultId) {
 		var ret string
 		return ret
 	}
-
-	return o.VaultId
+	return *o.VaultId
 }
 
-// GetVaultIdOk returns a tuple with the VaultId field value
+// GetVaultIdOk returns a tuple with the VaultId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Snapshot) GetVaultIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.VaultId) {
 		return nil, false
 	}
-	return &o.VaultId, true
+	return o.VaultId, true
 }
 
-// SetVaultId sets field value
+// HasVaultId returns a boolean if a field has been set.
+func (o *Snapshot) HasVaultId() bool {
+	if o != nil && !IsNil(o.VaultId) {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultId gets a reference to the given string and assigns it to the VaultId field.
 func (o *Snapshot) SetVaultId(v string) {
-	o.VaultId = v
+	o.VaultId = &v
+}
+
+// GetIsNative returns the IsNative field value if set, zero value otherwise.
+func (o *Snapshot) GetIsNative() bool {
+	if o == nil || IsNil(o.IsNative) {
+		var ret bool
+		return ret
+	}
+	return *o.IsNative
+}
+
+// GetIsNativeOk returns a tuple with the IsNative field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetIsNativeOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsNative) {
+		return nil, false
+	}
+	return o.IsNative, true
+}
+
+// HasIsNative returns a boolean if a field has been set.
+func (o *Snapshot) HasIsNative() bool {
+	if o != nil && !IsNil(o.IsNative) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsNative gets a reference to the given bool and assigns it to the IsNative field.
+func (o *Snapshot) SetIsNative(v bool) {
+	o.IsNative = &v
 }
 
 // GetResourceId returns the ResourceId field value
@@ -338,7 +379,12 @@ func (o Snapshot) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PointInTime) {
 		toSerialize["pointInTime"] = o.PointInTime
 	}
-	toSerialize["vaultId"] = o.VaultId
+	if !IsNil(o.VaultId) {
+		toSerialize["vaultId"] = o.VaultId
+	}
+	if !IsNil(o.IsNative) {
+		toSerialize["isNative"] = o.IsNative
+	}
 	toSerialize["resourceId"] = o.ResourceId
 	if !IsNil(o.JobId) {
 		toSerialize["jobId"] = o.JobId
@@ -359,7 +405,6 @@ func (o *Snapshot) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"createdTime",
-		"vaultId",
 		"resourceId",
 	}
 

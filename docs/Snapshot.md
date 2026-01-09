@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **ProjectId** | Pointer to **string** | ID of the snapshot&#39;s parent project. | [optional] 
 **CreatedTime** | **time.Time** | Date and time the snapshot creation was started. This doesn&#39;t represent the point in time the resource is backed up from, which is instead represented by the &#x60;pointInTime&#x60; property.  | 
 **PointInTime** | Pointer to **time.Time** | Date and time of the resource that&#39;s preserved by the snapshot. | [optional] 
-**VaultId** | **string** | ID of the vault the snapshot is stored in. | 
+**VaultId** | Pointer to **string** | ID of the vault the snapshot is stored in. Empty for native snapshots. | [optional] 
+**IsNative** | Pointer to **bool** | Whether this is a native snapshot stored in the cloud provider (e.g., FSx backup) rather than in an Eon vault. | [optional] 
 **ResourceId** | **string** | Eon-assigned ID of the resource the snapshot is backing up. | 
 **JobId** | Pointer to **string** | Backup job ID. | [optional] 
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewSnapshot
 
-`func NewSnapshot(id string, createdTime time.Time, vaultId string, resourceId string, ) *Snapshot`
+`func NewSnapshot(id string, createdTime time.Time, resourceId string, ) *Snapshot`
 
 NewSnapshot instantiates a new Snapshot object
 This constructor will assign default values to properties that have it defined,
@@ -142,6 +143,36 @@ and a boolean to check if the value has been set.
 
 SetVaultId sets VaultId field to given value.
 
+### HasVaultId
+
+`func (o *Snapshot) HasVaultId() bool`
+
+HasVaultId returns a boolean if a field has been set.
+
+### GetIsNative
+
+`func (o *Snapshot) GetIsNative() bool`
+
+GetIsNative returns the IsNative field if non-nil, zero value otherwise.
+
+### GetIsNativeOk
+
+`func (o *Snapshot) GetIsNativeOk() (*bool, bool)`
+
+GetIsNativeOk returns a tuple with the IsNative field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsNative
+
+`func (o *Snapshot) SetIsNative(v bool)`
+
+SetIsNative sets IsNative field to given value.
+
+### HasIsNative
+
+`func (o *Snapshot) HasIsNative() bool`
+
+HasIsNative returns a boolean if a field has been set.
 
 ### GetResourceId
 

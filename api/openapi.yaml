@@ -3814,7 +3814,7 @@ paths:
         name: id
         required: true
         schema:
-          format: tobedefined
+          format: uuid
           type: string
         style: simple
       - description: |
@@ -4383,7 +4383,7 @@ paths:
         name: id
         required: true
         schema:
-          format: tobedefined
+          format: uuid
           type: string
         style: simple
       - description: |
@@ -7643,6 +7643,7 @@ components:
       - AWS_EKS_NAMESPACE_RECORD_RESTORE
       - AWS_EKS_FILE_RESTORE
       - AWS_DYNAMO_DB_TABLE_RESTORE
+      - AWS_DYNAMO_DB_TABLE_TO_EXISTING_TABLE_RESTORE
       - AWS_DYNAMO_DB_RECORD_RESTORE
       - AZURE_STORAGE_ACCOUNT_RESTORE
       - AZURE_STORAGE_ACCOUNT_BLOB_RESTORE
@@ -15554,6 +15555,7 @@ components:
         createdTime: 2024-10-29T23:01:24.841897Z
         id: 043090df-9fe5-4f89-9859-45db589c2936
         projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        isNative: false
       properties:
         id:
           description: Eon snapshot ID.
@@ -15576,9 +15578,15 @@ components:
           format: date-time
           type: string
         vaultId:
-          description: ID of the vault the snapshot is stored in.
+          description: ID of the vault the snapshot is stored in. Empty for native
+            snapshots.
           example: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           type: string
+        isNative:
+          description: "Whether this is a native snapshot stored in the cloud provider\
+            \ (e.g., FSx backup) rather than in an Eon vault."
+          example: false
+          type: boolean
         resourceId:
           description: Eon-assigned ID of the resource the snapshot is backing up.
           example: b06bc01a-b08a-4fc7-933d-3f26ed434a29
@@ -15600,7 +15608,6 @@ components:
       - id
       - resourceId
       - status
-      - vaultId
       type: object
     GetSnapshotResponse:
       example:
@@ -15667,6 +15674,7 @@ components:
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          isNative: false
       properties:
         snapshot:
           $ref: '#/components/schemas/Snapshot'
@@ -15812,6 +15820,7 @@ components:
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          isNative: false
         - pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
@@ -15874,6 +15883,7 @@ components:
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          isNative: false
         nextToken: ZjRmYmQ4Y2YtYmEzNi00Yjc1LWI1ZjMtMzUyMmYzMTA5OTYzfDE=
         totalCount: 58
       properties:
