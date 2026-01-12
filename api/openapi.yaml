@@ -9295,6 +9295,7 @@ components:
             - AWS_S3
             - AWS_DYNAMO_DB
             - GCP_CLOUD_STORAGE_BUCKET
+            - AWS_EC2
             - RESOURCE_TYPE_UNSPECIFIED
             type: string
           example: AWS_S3
