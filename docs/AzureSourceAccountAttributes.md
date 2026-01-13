@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TenantId** | **string** | ID of the Azure tenant the subscription belongs to. | 
 **SubscriptionId** | **string** | ID of the Azure subscription. | 
-**ResourceGroupName** | Pointer to **string** | Name of the Azure resource group the source account is scoped to. | [optional] 
+**EonInternalResourceGroupName** | Pointer to **string** | Eon internal resource group name for temporary resources. Defaults to eon-source-internal-rg. | [optional] 
 
 ## Methods
 
@@ -67,30 +67,30 @@ and a boolean to check if the value has been set.
 SetSubscriptionId sets SubscriptionId field to given value.
 
 
-### GetResourceGroupName
+### GetEonInternalResourceGroupName
 
-`func (o *AzureSourceAccountAttributes) GetResourceGroupName() string`
+`func (o *AzureSourceAccountAttributes) GetEonInternalResourceGroupName() string`
 
-GetResourceGroupName returns the ResourceGroupName field if non-nil, zero value otherwise.
+GetEonInternalResourceGroupName returns the EonInternalResourceGroupName field if non-nil, zero value otherwise.
 
-### GetResourceGroupNameOk
+### GetEonInternalResourceGroupNameOk
 
-`func (o *AzureSourceAccountAttributes) GetResourceGroupNameOk() (*string, bool)`
+`func (o *AzureSourceAccountAttributes) GetEonInternalResourceGroupNameOk() (*string, bool)`
 
-GetResourceGroupNameOk returns a tuple with the ResourceGroupName field if it's non-nil, zero value otherwise
+GetEonInternalResourceGroupNameOk returns a tuple with the EonInternalResourceGroupName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResourceGroupName
+### SetEonInternalResourceGroupName
 
-`func (o *AzureSourceAccountAttributes) SetResourceGroupName(v string)`
+`func (o *AzureSourceAccountAttributes) SetEonInternalResourceGroupName(v string)`
 
-SetResourceGroupName sets ResourceGroupName field to given value.
+SetEonInternalResourceGroupName sets EonInternalResourceGroupName field to given value.
 
-### HasResourceGroupName
+### HasEonInternalResourceGroupName
 
-`func (o *AzureSourceAccountAttributes) HasResourceGroupName() bool`
+`func (o *AzureSourceAccountAttributes) HasEonInternalResourceGroupName() bool`
 
-HasResourceGroupName returns a boolean if a field has been set.
+HasEonInternalResourceGroupName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

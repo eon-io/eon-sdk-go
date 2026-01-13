@@ -81,6 +81,8 @@
 
 * `GCP_BIGQUERY_RECORD_RESTORE` (value: `"GCP_BIGQUERY_RECORD_RESTORE"`)
 
+* `RDS_NATIVE_PITR_RESTORE` (value: `"RDS_NATIVE_PITR_RESTORE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

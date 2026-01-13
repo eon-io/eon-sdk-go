@@ -4898,6 +4898,7 @@ components:
       example:
         resourceGroupName: my-resource-group
         tenantId: 12345678-1234-1234-1234-123456789012
+        eonInternalResourceGroupName: eon-source-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
@@ -4916,6 +4917,12 @@ components:
             Name of the Azure resource group to scope the source account to.
             When provided, discovery and permissions are limited to this specific resource group.
           example: my-resource-group
+          type: string
+        eonInternalResourceGroupName:
+          description: |
+            Eon internal resource group name for temporary resources.
+            Defaults to eon-source-internal-rg if not provided.
+          example: eon-source-internal-rg
           type: string
       required:
       - subscriptionId
@@ -4947,6 +4954,7 @@ components:
         azure:
           resourceGroupName: my-resource-group
           tenantId: 12345678-1234-1234-1234-123456789012
+          eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
@@ -4972,6 +4980,7 @@ components:
           azure:
             resourceGroupName: my-resource-group
             tenantId: 12345678-1234-1234-1234-123456789012
+            eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         name:
@@ -5086,8 +5095,8 @@ components:
         Azure subscription configuration.
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
-        resourceGroupName: my-resource-group
         tenantId: 12345678-1234-1234-1234-123456789012
+        eonInternalResourceGroupName: eon-source-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
@@ -5101,10 +5110,10 @@ components:
           example: 12345678-1234-1234-1234-123456789012
           format: uuid
           type: string
-        resourceGroupName:
-          description: Name of the Azure resource group the source account is scoped
-            to.
-          example: my-resource-group
+        eonInternalResourceGroupName:
+          description: Eon internal resource group name for temporary resources. Defaults
+            to eon-source-internal-rg.
+          example: eon-source-internal-rg
           type: string
       required:
       - subscriptionId
@@ -5121,8 +5130,8 @@ components:
           organizationId: o-1234567890
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
-          resourceGroupName: my-resource-group
           tenantId: 12345678-1234-1234-1234-123456789012
+          eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
@@ -5152,8 +5161,8 @@ components:
             organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
-            resourceGroupName: my-resource-group
             tenantId: 12345678-1234-1234-1234-123456789012
+            eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
         providerAccountName: providerAccountName
         version:
@@ -5212,8 +5221,8 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
@@ -5514,8 +5523,8 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
@@ -5537,8 +5546,8 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
@@ -5584,8 +5593,8 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
@@ -5616,8 +5625,8 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
           version:
@@ -6922,6 +6931,7 @@ components:
       - AWS_EC2_SNAPSHOT_CONVERSION
       - AWS_RDS_BACKUP
       - AWS_S3_BACKUP
+      - AWS_FSX_BACKUP
       - AWS_DYNAMO_DB_BACKUP
       - AWS_DYNAMO_DB_BACKUP_FULL
       - AWS_EKS_NAMESPACE_BACKUP
@@ -7665,6 +7675,7 @@ components:
       - GCP_CLOUD_SQL_RECORD_RESTORE
       - GCP_BIGQUERY_DATASET_RESTORE
       - GCP_BIGQUERY_RECORD_RESTORE
+      - RDS_NATIVE_PITR_RESTORE
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
     RestoreJobTypeFilters:
@@ -9327,6 +9338,7 @@ components:
       properties:
         intervalMinutes:
           enum:
+          - 15
           - 30
           - 60
           - 120
@@ -16271,6 +16283,7 @@ components:
         Used to categorize costs by service type for detailed analysis and chargeback reporting.
       enum:
       - AWS_EC2_METERING_DIMENSION
+      - AWS_EC2_NATIVE_METERING_DIMENSION
       - AWS_RDS_METERING_DIMENSION
       - AWS_S3_METERING_DIMENSION
       - AWS_S3_DLSG_METERING_DIMENSION

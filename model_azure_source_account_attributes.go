@@ -25,8 +25,8 @@ type AzureSourceAccountAttributes struct {
 	TenantId string `json:"tenantId"`
 	// ID of the Azure subscription.
 	SubscriptionId string `json:"subscriptionId"`
-	// Name of the Azure resource group the source account is scoped to.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
+	// Eon internal resource group name for temporary resources. Defaults to eon-source-internal-rg.
+	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 }
 
 type _AzureSourceAccountAttributes AzureSourceAccountAttributes
@@ -98,36 +98,36 @@ func (o *AzureSourceAccountAttributes) SetSubscriptionId(v string) {
 	o.SubscriptionId = v
 }
 
-// GetResourceGroupName returns the ResourceGroupName field value if set, zero value otherwise.
-func (o *AzureSourceAccountAttributes) GetResourceGroupName() string {
-	if o == nil || IsNil(o.ResourceGroupName) {
+// GetEonInternalResourceGroupName returns the EonInternalResourceGroupName field value if set, zero value otherwise.
+func (o *AzureSourceAccountAttributes) GetEonInternalResourceGroupName() string {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
 		var ret string
 		return ret
 	}
-	return *o.ResourceGroupName
+	return *o.EonInternalResourceGroupName
 }
 
-// GetResourceGroupNameOk returns a tuple with the ResourceGroupName field value if set, nil otherwise
+// GetEonInternalResourceGroupNameOk returns a tuple with the EonInternalResourceGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AzureSourceAccountAttributes) GetResourceGroupNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceGroupName) {
+func (o *AzureSourceAccountAttributes) GetEonInternalResourceGroupNameOk() (*string, bool) {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
 		return nil, false
 	}
-	return o.ResourceGroupName, true
+	return o.EonInternalResourceGroupName, true
 }
 
-// HasResourceGroupName returns a boolean if a field has been set.
-func (o *AzureSourceAccountAttributes) HasResourceGroupName() bool {
-	if o != nil && !IsNil(o.ResourceGroupName) {
+// HasEonInternalResourceGroupName returns a boolean if a field has been set.
+func (o *AzureSourceAccountAttributes) HasEonInternalResourceGroupName() bool {
+	if o != nil && !IsNil(o.EonInternalResourceGroupName) {
 		return true
 	}
 
 	return false
 }
 
-// SetResourceGroupName gets a reference to the given string and assigns it to the ResourceGroupName field.
-func (o *AzureSourceAccountAttributes) SetResourceGroupName(v string) {
-	o.ResourceGroupName = &v
+// SetEonInternalResourceGroupName gets a reference to the given string and assigns it to the EonInternalResourceGroupName field.
+func (o *AzureSourceAccountAttributes) SetEonInternalResourceGroupName(v string) {
+	o.EonInternalResourceGroupName = &v
 }
 
 func (o AzureSourceAccountAttributes) MarshalJSON() ([]byte, error) {
@@ -142,8 +142,8 @@ func (o AzureSourceAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tenantId"] = o.TenantId
 	toSerialize["subscriptionId"] = o.SubscriptionId
-	if !IsNil(o.ResourceGroupName) {
-		toSerialize["resourceGroupName"] = o.ResourceGroupName
+	if !IsNil(o.EonInternalResourceGroupName) {
+		toSerialize["eonInternalResourceGroupName"] = o.EonInternalResourceGroupName
 	}
 	return toSerialize, nil
 }

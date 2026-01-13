@@ -27,6 +27,8 @@ type AzureSourceAccountAttributesInput struct {
 	SubscriptionId string `json:"subscriptionId"`
 	// Name of the Azure resource group to scope the source account to. When provided, discovery and permissions are limited to this specific resource group. 
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
+	// Eon internal resource group name for temporary resources. Defaults to eon-source-internal-rg if not provided. 
+	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 }
 
 type _AzureSourceAccountAttributesInput AzureSourceAccountAttributesInput
@@ -130,6 +132,38 @@ func (o *AzureSourceAccountAttributesInput) SetResourceGroupName(v string) {
 	o.ResourceGroupName = &v
 }
 
+// GetEonInternalResourceGroupName returns the EonInternalResourceGroupName field value if set, zero value otherwise.
+func (o *AzureSourceAccountAttributesInput) GetEonInternalResourceGroupName() string {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
+		var ret string
+		return ret
+	}
+	return *o.EonInternalResourceGroupName
+}
+
+// GetEonInternalResourceGroupNameOk returns a tuple with the EonInternalResourceGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureSourceAccountAttributesInput) GetEonInternalResourceGroupNameOk() (*string, bool) {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
+		return nil, false
+	}
+	return o.EonInternalResourceGroupName, true
+}
+
+// HasEonInternalResourceGroupName returns a boolean if a field has been set.
+func (o *AzureSourceAccountAttributesInput) HasEonInternalResourceGroupName() bool {
+	if o != nil && !IsNil(o.EonInternalResourceGroupName) {
+		return true
+	}
+
+	return false
+}
+
+// SetEonInternalResourceGroupName gets a reference to the given string and assigns it to the EonInternalResourceGroupName field.
+func (o *AzureSourceAccountAttributesInput) SetEonInternalResourceGroupName(v string) {
+	o.EonInternalResourceGroupName = &v
+}
+
 func (o AzureSourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -144,6 +178,9 @@ func (o AzureSourceAccountAttributesInput) ToMap() (map[string]interface{}, erro
 	toSerialize["subscriptionId"] = o.SubscriptionId
 	if !IsNil(o.ResourceGroupName) {
 		toSerialize["resourceGroupName"] = o.ResourceGroupName
+	}
+	if !IsNil(o.EonInternalResourceGroupName) {
+		toSerialize["eonInternalResourceGroupName"] = o.EonInternalResourceGroupName
 	}
 	return toSerialize, nil
 }
