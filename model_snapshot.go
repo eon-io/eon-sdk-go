@@ -41,6 +41,7 @@ type Snapshot struct {
 	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
 	Resource *ResourceSnapshot `json:"resource,omitempty"`
+	FsxSnapshotProperties *FsxSnapshotProperties `json:"fsxSnapshotProperties,omitempty"`
 }
 
 type _Snapshot Snapshot
@@ -361,6 +362,38 @@ func (o *Snapshot) SetResource(v ResourceSnapshot) {
 	o.Resource = &v
 }
 
+// GetFsxSnapshotProperties returns the FsxSnapshotProperties field value if set, zero value otherwise.
+func (o *Snapshot) GetFsxSnapshotProperties() FsxSnapshotProperties {
+	if o == nil || IsNil(o.FsxSnapshotProperties) {
+		var ret FsxSnapshotProperties
+		return ret
+	}
+	return *o.FsxSnapshotProperties
+}
+
+// GetFsxSnapshotPropertiesOk returns a tuple with the FsxSnapshotProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetFsxSnapshotPropertiesOk() (*FsxSnapshotProperties, bool) {
+	if o == nil || IsNil(o.FsxSnapshotProperties) {
+		return nil, false
+	}
+	return o.FsxSnapshotProperties, true
+}
+
+// HasFsxSnapshotProperties returns a boolean if a field has been set.
+func (o *Snapshot) HasFsxSnapshotProperties() bool {
+	if o != nil && !IsNil(o.FsxSnapshotProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetFsxSnapshotProperties gets a reference to the given FsxSnapshotProperties and assigns it to the FsxSnapshotProperties field.
+func (o *Snapshot) SetFsxSnapshotProperties(v FsxSnapshotProperties) {
+	o.FsxSnapshotProperties = &v
+}
+
 func (o Snapshot) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -394,6 +427,9 @@ func (o Snapshot) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Resource) {
 		toSerialize["resource"] = o.Resource
+	}
+	if !IsNil(o.FsxSnapshotProperties) {
+		toSerialize["fsxSnapshotProperties"] = o.FsxSnapshotProperties
 	}
 	return toSerialize, nil
 }

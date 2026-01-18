@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **JobId** | Pointer to **string** | Backup job ID. | [optional] 
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
 **Resource** | Pointer to [**ResourceSnapshot**](ResourceSnapshot.md) |  | [optional] 
+**FsxSnapshotProperties** | Pointer to [**FsxSnapshotProperties**](FsxSnapshotProperties.md) |  | [optional] 
 
 ## Methods
 
@@ -268,6 +269,31 @@ SetResource sets Resource field to given value.
 `func (o *Snapshot) HasResource() bool`
 
 HasResource returns a boolean if a field has been set.
+
+### GetFsxSnapshotProperties
+
+`func (o *Snapshot) GetFsxSnapshotProperties() FsxSnapshotProperties`
+
+GetFsxSnapshotProperties returns the FsxSnapshotProperties field if non-nil, zero value otherwise.
+
+### GetFsxSnapshotPropertiesOk
+
+`func (o *Snapshot) GetFsxSnapshotPropertiesOk() (*FsxSnapshotProperties, bool)`
+
+GetFsxSnapshotPropertiesOk returns a tuple with the FsxSnapshotProperties field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFsxSnapshotProperties
+
+`func (o *Snapshot) SetFsxSnapshotProperties(v FsxSnapshotProperties)`
+
+SetFsxSnapshotProperties sets FsxSnapshotProperties field to given value.
+
+### HasFsxSnapshotProperties
+
+`func (o *Snapshot) HasFsxSnapshotProperties() bool`
+
+HasFsxSnapshotProperties returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

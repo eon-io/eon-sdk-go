@@ -7261,6 +7261,7 @@ components:
       - AWS_EKS_NAMESPACE
       - AWS_DYNAMO_DB
       - AWS_EBS_VOLUME
+      - AWS_KEYSPACE
       - AZURE_VIRTUAL_MACHINE
       - AZURE_FILE_SHARE
       - AZURE_STORAGE_ACCOUNT
@@ -7268,6 +7269,7 @@ components:
       - AZURE_SQL_DATABASE
       - AZURE_SQL_MANAGED_INSTANCE
       - AZURE_SQL_VIRTUAL_MACHINE
+      - AZURE_SAP_HANA_VM
       - AZURE_MYSQL
       - AZURE_POSTGRESQL
       - AZURE_COSMOSDB_MONGODB
@@ -7665,6 +7667,7 @@ components:
       - AZURE_SQL_DATABASE_RESTORE
       - AZURE_SQL_VM_INSTANCE_RESTORE
       - AZURE_SQL_VM_RECORD_RESTORE
+      - AZURE_SAP_HANA_VM_INSTANCE_RESTORE
       - GCP_CLOUD_STORAGE_BUCKET_RESTORE
       - GCP_CLOUD_STORAGE_OBJECT_RESTORE
       - GCP_COMPUTE_ENGINE_FILE_RESTORE
@@ -7676,6 +7679,7 @@ components:
       - GCP_BIGQUERY_DATASET_RESTORE
       - GCP_BIGQUERY_RECORD_RESTORE
       - RDS_NATIVE_PITR_RESTORE
+      - AWS_FSX_RESTORE
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
     RestoreJobTypeFilters:
@@ -15503,11 +15507,121 @@ components:
         resourceType:
           $ref: '#/components/schemas/ResourceType'
       type: object
+    FsxVolumeBackupInfo:
+      description: Information about a volume that was backed up in an FSx snapshot.
+      example:
+        volumeType: RW
+        recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+        junctionPath: /vol1
+        volumeId: fsvol-0fdec21190aa5b8be
+        name: vol1
+        sizeBytes: 1099511627776
+      properties:
+        volumeId:
+          description: The volume ID.
+          example: fsvol-0fdec21190aa5b8be
+          type: string
+        name:
+          description: The volume name.
+          example: vol1
+          type: string
+        sizeBytes:
+          description: The volume size in bytes.
+          example: 1099511627776
+          format: int64
+          type: integer
+        junctionPath:
+          description: The volume junction path.
+          example: /vol1
+          type: string
+        volumeType:
+          description: "The volume type (RW, DP, LS)."
+          example: RW
+          type: string
+        recoveryPointArn:
+          description: The AWS Backup recovery point ARN for this volume.
+          example: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+          type: string
+      type: object
+    FsxSnapshotProperties:
+      description: FSx snapshot properties for native AWS Backup snapshots.
+      example:
+        sourceAccountId: "423623849087"
+        recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+        region: us-east-1
+        backupVaultName: eon-fsx-b6dc32f8
+        backedUpVolumes:
+        - volumeType: RW
+          recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+          junctionPath: /vol1
+          volumeId: fsvol-0fdec21190aa5b8be
+          name: vol1
+          sizeBytes: 1099511627776
+        - volumeType: RW
+          recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+          junctionPath: /vol1
+          volumeId: fsvol-0fdec21190aa5b8be
+          name: vol1
+          sizeBytes: 1099511627776
+        volumeBackupArns:
+        - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+      properties:
+        recoveryPointArn:
+          description: "AWS Backup recovery point ARN (primary for file systems, or\
+            \ first volume for ONTAP)."
+          example: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+          type: string
+        backupVaultName:
+          description: AWS Backup vault name where the backup is stored.
+          example: eon-fsx-b6dc32f8
+          type: string
+        region:
+          description: AWS region where the backup is stored.
+          example: us-east-1
+          type: string
+        sourceAccountId:
+          description: AWS account ID where the backup is stored.
+          example: "423623849087"
+          type: string
+        volumeBackupArns:
+          description: "For ONTAP file systems, the list of recovery point ARNs for\
+            \ each volume backup."
+          example:
+          - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+          items:
+            type: string
+          type: array
+        backedUpVolumes:
+          description: Details of volumes that were backed up in this snapshot.
+          items:
+            $ref: '#/components/schemas/FsxVolumeBackupInfo'
+          type: array
+      type: object
     Snapshot:
       description: Eon snapshot.
       example:
         pointInTime: 2024-10-29T23:01:30Z
         jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
+        fsxSnapshotProperties:
+          sourceAccountId: "423623849087"
+          recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+          region: us-east-1
+          backupVaultName: eon-fsx-b6dc32f8
+          backedUpVolumes:
+          - volumeType: RW
+            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+            junctionPath: /vol1
+            volumeId: fsvol-0fdec21190aa5b8be
+            name: vol1
+            sizeBytes: 1099511627776
+          - volumeType: RW
+            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+            junctionPath: /vol1
+            volumeId: fsvol-0fdec21190aa5b8be
+            name: vol1
+            sizeBytes: 1099511627776
+          volumeBackupArns:
+          - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
         resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
         vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
         resource:
@@ -15616,6 +15730,8 @@ components:
           type: string
         resource:
           $ref: '#/components/schemas/ResourceSnapshot'
+        fsxSnapshotProperties:
+          $ref: '#/components/schemas/FsxSnapshotProperties'
       required:
       - createdTime
       - id
@@ -15627,6 +15743,26 @@ components:
         snapshot:
           pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
+          fsxSnapshotProperties:
+            sourceAccountId: "423623849087"
+            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+            region: us-east-1
+            backupVaultName: eon-fsx-b6dc32f8
+            backedUpVolumes:
+            - volumeType: RW
+              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+              junctionPath: /vol1
+              volumeId: fsvol-0fdec21190aa5b8be
+              name: vol1
+              sizeBytes: 1099511627776
+            - volumeType: RW
+              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+              junctionPath: /vol1
+              volumeId: fsvol-0fdec21190aa5b8be
+              name: vol1
+              sizeBytes: 1099511627776
+            volumeBackupArns:
+            - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
@@ -15773,6 +15909,26 @@ components:
         snapshots:
         - pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
+          fsxSnapshotProperties:
+            sourceAccountId: "423623849087"
+            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+            region: us-east-1
+            backupVaultName: eon-fsx-b6dc32f8
+            backedUpVolumes:
+            - volumeType: RW
+              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+              junctionPath: /vol1
+              volumeId: fsvol-0fdec21190aa5b8be
+              name: vol1
+              sizeBytes: 1099511627776
+            - volumeType: RW
+              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+              junctionPath: /vol1
+              volumeId: fsvol-0fdec21190aa5b8be
+              name: vol1
+              sizeBytes: 1099511627776
+            volumeBackupArns:
+            - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
@@ -15836,6 +15992,26 @@ components:
           isNative: false
         - pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
+          fsxSnapshotProperties:
+            sourceAccountId: "423623849087"
+            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+            region: us-east-1
+            backupVaultName: eon-fsx-b6dc32f8
+            backedUpVolumes:
+            - volumeType: RW
+              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+              junctionPath: /vol1
+              volumeId: fsvol-0fdec21190aa5b8be
+              name: vol1
+              sizeBytes: 1099511627776
+            - volumeType: RW
+              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
+              junctionPath: /vol1
+              volumeId: fsvol-0fdec21190aa5b8be
+              name: vol1
+              sizeBytes: 1099511627776
+            volumeBackupArns:
+            - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
