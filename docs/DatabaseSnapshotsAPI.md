@@ -182,7 +182,7 @@ import (
 
 func main() {
 	projectId := "330e9e09-6cb8-52af-b532-a476f598cf94" // string | ID of the project that contains the database snapshot you want to retrieve. You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  
-	snapshotId := "9888b6d9-8d8c-4c25-bcd9-7c71298eba0f" // string | ID of the database [snapshot](./list-resource-snapshots) you want to query. Snapshot must belong to an RDS resource. 
+	snapshotId := "9888b6d9-8d8c-4c25-bcd9-7c71298eba0f" // string | ID of the database [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) you want to query. Snapshot must belong to an RDS resource. 
 	queryDBRequest := *openapiclient.NewQueryDBRequest("postgres", "SELECT * FROM customers LIMIT 50;", "1e0b9aa3-a942-5e86-afe6-57606e952622", *openapiclient.NewQueryDBRestoreDestination()) // QueryDBRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project that contains the database snapshot you want to retrieve. You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.   | 
-**snapshotId** | **string** | ID of the database [snapshot](./list-resource-snapshots) you want to query. Snapshot must belong to an RDS resource.  | 
+**snapshotId** | **string** | ID of the database [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) you want to query. Snapshot must belong to an RDS resource.  | 
 
 ### Other Parameters
 

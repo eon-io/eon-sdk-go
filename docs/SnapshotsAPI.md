@@ -197,7 +197,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAzureDiskRequest := *openapiclient.NewRestoreAzureDiskRequest("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureDiskRestoreDestination()) // RestoreAzureDiskRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -275,7 +275,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAzureSqlDatabaseRequest := *openapiclient.NewRestoreAzureSqlDatabaseRequest("RestoreAccountId_example", *openapiclient.NewAzureSqlDatabaseRestoreDestination()) // RestoreAzureSqlDatabaseRequest | The request body for restoring the instance
 
 	configuration := openapiclient.NewConfiguration()
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -353,7 +353,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAzureVmInstanceRequest := *openapiclient.NewRestoreAzureVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureVmInstanceRestoreDestination()) // RestoreAzureVmInstanceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -431,7 +431,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreBucketRequest := *openapiclient.NewRestoreBucketRequest(*openapiclient.NewObjectStorageDestination(), "1ee34dc5-0a7c-4e56-a820-917371e05c8d") // RestoreBucketRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -454,7 +454,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -509,7 +509,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreDbToRdsInstanceRequest := *openapiclient.NewRestoreDbToRdsInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDatabaseDestination()) // RestoreDbToRdsInstanceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -532,7 +532,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -587,7 +587,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "2f97ca76-6a78-55d8-94d3-66c2f2cfff23" // string | Eon-assigned resource ID.
-	snapshotId := "ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreDynamoDBTableRequest := *openapiclient.NewRestoreDynamoDBTableRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDynamodbTableRestoreDestination()) // RestoreDynamoDBTableRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -610,7 +610,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -665,7 +665,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreVolumeToEbsRequest := *openapiclient.NewRestoreVolumeToEbsRequest("vol-01a29e3ba811d4613", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewEbsRestoreDestination()) // RestoreVolumeToEbsRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -688,7 +688,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -743,7 +743,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAwsEc2InstanceRequest := *openapiclient.NewRestoreAwsEc2InstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAwsEc2InstanceRestoreDestination()) // RestoreAwsEc2InstanceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -766,7 +766,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -821,7 +821,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreFilesRequest := *openapiclient.NewRestoreFilesRequest(*openapiclient.NewObjectStorageDestination(), []openapiclient.FilePath{*openapiclient.NewFilePath("Path_example", false)}, "1ee34dc5-0a7c-4e56-a820-917371e05c8d") // RestoreFilesRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -844,7 +844,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -899,7 +899,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreGcpCloudSqlRequest := *openapiclient.NewRestoreGcpCloudSqlRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpCloudSqlRestoreDestination()) // RestoreGcpCloudSqlRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -922,7 +922,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -977,7 +977,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreGcpDiskRequest := *openapiclient.NewRestoreGcpDiskRequest("5178361631409150158", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpDiskRestoreDestination()) // RestoreGcpDiskRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -1000,7 +1000,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1055,7 +1055,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreGcpVmInstanceRequest := *openapiclient.NewRestoreGcpVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpVmInstanceRestoreDestination()) // RestoreGcpVmInstanceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -1078,7 +1078,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1133,7 +1133,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreVolumeToEbsSnapshotRequest := *openapiclient.NewRestoreVolumeToEbsSnapshotRequest("vol-01a29e3ba811d4613", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewEbsSnapshotRestoreDestination()) // RestoreVolumeToEbsSnapshotRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -1156,7 +1156,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](./list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 

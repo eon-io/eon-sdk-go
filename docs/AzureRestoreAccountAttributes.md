@@ -6,8 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TenantId** | **string** | ID of the tenant the subscription belongs to. | 
 **SubscriptionId** | **string** | ID of the Azure subscription. | 
-**ResourceGroupName** | Pointer to **string** | Name of the target restore resource group. | [optional] 
-**Location** | Pointer to **string** | Azure region for restore operations. | [optional] 
+**ResourceGroupName** | Pointer to **string** | Name of the Azure resource group to scope permissions to. When provided, restoring is limited to this specific resource group. When omitted, permissions are scoped to the subscription.  | [optional] 
 
 ## Methods
 
@@ -92,31 +91,6 @@ SetResourceGroupName sets ResourceGroupName field to given value.
 `func (o *AzureRestoreAccountAttributes) HasResourceGroupName() bool`
 
 HasResourceGroupName returns a boolean if a field has been set.
-
-### GetLocation
-
-`func (o *AzureRestoreAccountAttributes) GetLocation() string`
-
-GetLocation returns the Location field if non-nil, zero value otherwise.
-
-### GetLocationOk
-
-`func (o *AzureRestoreAccountAttributes) GetLocationOk() (*string, bool)`
-
-GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLocation
-
-`func (o *AzureRestoreAccountAttributes) SetLocation(v string)`
-
-SetLocation sets Location field to given value.
-
-### HasLocation
-
-`func (o *AzureRestoreAccountAttributes) HasLocation() bool`
-
-HasLocation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

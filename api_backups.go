@@ -47,7 +47,7 @@ Description: Takes an on-demand snapshot of the specified resource.
 
 This operation is asynchronous.
 It triggers a backup job and returns a job ID, which can be used to track the progress of the backup job.
-You can follow the progress of the backup job by calling [Get Backup Job](/api/reference/get-backup-job) with the job ID.
+You can follow the progress of the backup job by calling [Get Backup Job](/api/api-reference/jobs/backup-jobs/get-backup-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

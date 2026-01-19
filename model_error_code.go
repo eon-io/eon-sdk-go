@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ErrorCode Error code indicating the type of the error occurred.
+// ErrorCode Code indicating the type of error.
 type ErrorCode string
 
 // List of ErrorCode

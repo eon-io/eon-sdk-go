@@ -21,7 +21,7 @@ var _ MappedNullable = &App{}
 
 // App struct for App
 type App struct {
-	// App display name. For a list of supported apps, see [Apps](/docs/user-guide/backing-up/resource-classifications#apps). 
+	// App display name. For a list of supported apps, see [Apps](/user-guide/monitoring/classifications/resource-classifications#apps). 
 	Name string `json:"name"`
 	// List of paths where the app was found.
 	Paths []string `json:"paths,omitempty"`

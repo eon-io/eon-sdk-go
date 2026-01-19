@@ -1515,7 +1515,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a backup job and returns a job ID, which can be used to track the progress of the backup job.
-        You can follow the progress of the backup job by calling [Get Backup Job](/api/reference/get-backup-job) with the job ID.
+        You can follow the progress of the backup job by calling [Get Backup Job](/api/api-reference/jobs/backup-jobs/get-backup-job) with the job ID.
       operationId: takeSnapshot
       parameters:
       - description: Eon-assigned ID of the resource to back up.
@@ -1905,13 +1905,13 @@ paths:
         However, if your requirements mandate control over encryption keys, you can use a customer-managed KMS key.
         For more information on customer-managed KMS keys, see [About Customer-Managed Vault Keys].
 
-        :::warning
+        <Warning>
         If you use customer-managed vault keys, you assume responsibility for securing your keys from unauthorized access and deletion.
         Although keys can be rotated, they must not be deleted while snapshots that were encrypted with them exist.
         If a key is deleted, you'll lose all ability to retrieve any snapshots encrypted with it.
-        :::
+        </Warning>
 
-        [About Customer-Managed Vault Keys]: /docs/user-guide/backing-up/vaults/about-customer-managed-vault-keys
+        [About Customer-Managed Vault Keys]: /user-guide/backing-up/vaults/about-customer-managed-vault-keys
       operationId: createVault
       parameters:
       - description: |
@@ -2186,7 +2186,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreFiles
       parameters:
       - description: |
@@ -2211,7 +2211,8 @@ paths:
           format: tobedefined
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
         in: path
@@ -2283,7 +2284,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreBucket
       parameters:
       - description: |
@@ -2308,7 +2309,8 @@ paths:
           format: tobedefined
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
         in: path
@@ -2380,7 +2382,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreEbsVolume
       parameters:
       - description: |
@@ -2405,7 +2407,8 @@ paths:
           format: tobedefined
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
         in: path
@@ -2477,7 +2480,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreToEbsSnapshot
       parameters:
       - description: |
@@ -2502,7 +2505,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
         in: path
@@ -2574,7 +2578,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreDatabase
       parameters:
       - description: |
@@ -2599,7 +2603,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
         in: path
@@ -2670,11 +2675,11 @@ paths:
         Description: Restores an EC2 instance from an Eon snapshot.
 
         When restoring an EC2 instance, you'll need to specify the configurations of the instance and each volume you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreEc2Instance
       parameters:
       - description: |
@@ -2699,7 +2704,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
         in: path
@@ -2771,7 +2777,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreDynamoDBTable
       parameters:
       - description: |
@@ -2796,7 +2802,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5
         explode: false
         in: path
@@ -2868,7 +2875,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreAzureVmInstance
       parameters:
       - description: |
@@ -2893,7 +2900,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
         in: path
@@ -2965,7 +2973,7 @@ paths:
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreAzureSqlDatabase
       parameters:
       - description: |
@@ -2990,7 +2998,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
         in: path
@@ -3062,11 +3071,11 @@ paths:
         Description: Restores an Azure disk from an Eon snapshot.
 
         When restoring a disk, you'll specify the configurations of the disk you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreAzureDisk
       parameters:
       - description: |
@@ -3091,7 +3100,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
         in: path
@@ -3162,11 +3172,11 @@ paths:
         Description: Restores a GCP disk from an Eon snapshot.
 
         When restoring a disk, you'll specify the configurations of the disk you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreGcpDisk
       parameters:
       - description: |
@@ -3191,7 +3201,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
         in: path
@@ -3262,11 +3273,11 @@ paths:
         Description: Restores a GCP VM instance from an Eon snapshot.
 
         When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreGcpVmInstance
       parameters:
       - description: |
@@ -3291,7 +3302,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
         in: path
@@ -3362,11 +3374,11 @@ paths:
         Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
 
         When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-        You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
       operationId: restoreGcpCloudSql
       parameters:
       - description: |
@@ -3391,7 +3403,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](./list-resource-snapshots) to restore."
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
         in: path
@@ -3487,7 +3500,7 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of the database [snapshot](./list-resource-snapshots) you want to query.
+          ID of the database [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) you want to query.
           Snapshot must belong to an RDS resource.
         example: 9888b6d9-8d8c-4c25-bcd9-7c71298eba0f
         explode: false
@@ -4480,7 +4493,7 @@ paths:
         However, access tokens that were issued before the rotation remain valid until they expire.
         This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
-        [Rotate Current API Client Secret]: rotate-current-api-client-secret.api.mdx
+        [Rotate Current API Client Secret]: ./rotate-current-api-client-secret
       operationId: rotateApiClientSecret
       parameters:
       - description: API client ID.
@@ -4544,7 +4557,7 @@ paths:
         However, access tokens that were issued before the rotation remain valid until they expire.
         This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
-        [Rotate API Client Secret]: rotate-api-client-secret.api.mdx
+        [Rotate API Client Secret]: ./rotate-api-client-secret
       operationId: rotateCurrentApiClientSecret
       responses:
         "200":
@@ -4661,7 +4674,7 @@ paths:
         The access token is valid for 12 hours.
         After that, you must call this method again to get a new token.
 
-        [Get Access Token]: ./get-access-token.api.mdx
+        [Get Access Token]: ./get-access-token
       operationId: getAccessTokenOAuth2
       requestBody:
         content:
@@ -4715,7 +4728,7 @@ paths:
         Description: Retrieves cost and usage data for the given time frame.
 
         Use Query Cost Data to analyze backup costs by cloud provider, resource type, and resource.
-        For details on exploring your costs visually in the Eon console, see [About Cost Explorer](/user-guide/administration/cost-explorer/about-the-cost-explorer.mdx)
+        For details on exploring your costs visually in the Eon console, see [About Cost Explorer](/user-guide/administration/cost-explorer/about-the-cost-explorer).
       operationId: queryCostData
       parameters:
       - description: Maximum number of cost records to return in a single response.
@@ -4896,32 +4909,25 @@ components:
         Azure subscription configuration.
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
-        resourceGroupName: my-resource-group
-        tenantId: 12345678-1234-1234-1234-123456789012
+        tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
         eonInternalResourceGroupName: eon-source-internal-rg
-        subscriptionId: 12345678-1234-1234-1234-123456789012
+        subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
       nullable: true
       properties:
         tenantId:
-          description: ID of the Azure tenant the source subscription belongs to.
-          example: 12345678-1234-1234-1234-123456789012
+          description: ID of the Azure tenant the subscription belongs to.
+          example: c9f36fd0-566d-53d3-a59c-b59828f17e58
           format: uuid
           type: string
         subscriptionId:
           description: ID of the Azure source subscription.
-          example: 12345678-1234-1234-1234-123456789012
+          example: 0b9c9b5f-75a1-5c98-8b76-39e301282301
           format: uuid
           type: string
-        resourceGroupName:
-          description: |
-            Name of the Azure resource group to scope the source account to.
-            When provided, discovery and permissions are limited to this specific resource group.
-          example: my-resource-group
-          type: string
         eonInternalResourceGroupName:
+          default: eon-source-internal-rg
           description: |
-            Eon internal resource group name for temporary resources.
-            Defaults to eon-source-internal-rg if not provided.
+            Resource group name for Eon's temporary internal resources.
           example: eon-source-internal-rg
           type: string
       required:
@@ -4952,10 +4958,9 @@ components:
         aws:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
-          resourceGroupName: my-resource-group
-          tenantId: 12345678-1234-1234-1234-123456789012
+          tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
           eonInternalResourceGroupName: eon-source-internal-rg
-          subscriptionId: 12345678-1234-1234-1234-123456789012
+          subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -4978,10 +4983,9 @@ components:
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
-            resourceGroupName: my-resource-group
-            tenantId: 12345678-1234-1234-1234-123456789012
+            tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
             eonInternalResourceGroupName: eon-source-internal-rg
-            subscriptionId: 12345678-1234-1234-1234-123456789012
+            subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
       properties:
         name:
           description: Account display name in Eon.
@@ -5095,14 +5099,14 @@ components:
         Azure subscription configuration.
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
-        tenantId: 12345678-1234-1234-1234-123456789012
+        tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
         eonInternalResourceGroupName: eon-source-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
         tenantId:
           description: ID of the Azure tenant the subscription belongs to.
-          example: 12345678-1234-1234-1234-123456789012
+          example: 060901b5-ae27-5b6f-aaf5-829b635615e9
           format: uuid
           type: string
         subscriptionId:
@@ -5111,8 +5115,9 @@ components:
           format: uuid
           type: string
         eonInternalResourceGroupName:
-          description: Eon internal resource group name for temporary resources. Defaults
-            to eon-source-internal-rg.
+          default: eon-source-internal-rg
+          description: |
+            Resource group name for Eon's temporary internal resources.
           example: eon-source-internal-rg
           type: string
       required:
@@ -5130,7 +5135,7 @@ components:
           organizationId: o-1234567890
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
-          tenantId: 12345678-1234-1234-1234-123456789012
+          tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
           eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
@@ -5161,7 +5166,7 @@ components:
             organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
-            tenantId: 12345678-1234-1234-1234-123456789012
+            tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
             eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
         providerAccountName: providerAccountName
@@ -5221,7 +5226,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: 12345678-1234-1234-1234-123456789012
+              tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
@@ -5523,7 +5528,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: 12345678-1234-1234-1234-123456789012
+              tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
@@ -5546,7 +5551,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: 12345678-1234-1234-1234-123456789012
+              tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
@@ -5593,7 +5598,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: 12345678-1234-1234-1234-123456789012
+              tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
@@ -5625,7 +5630,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
-              tenantId: 12345678-1234-1234-1234-123456789012
+              tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountName: providerAccountName
@@ -5740,27 +5745,28 @@ components:
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
         resourceGroupName: my-resource-group
-        tenantId: 12345678-1234-1234-1234-123456789012
+        tenantId: bbfc521c-73c1-5927-aa6e-41200f1e8c6d
         eonInternalResourceGroupName: eon-restore-internal-rg
-        subscriptionId: 12345678-1234-1234-1234-123456789012
+        subscriptionId: 3e27a7a1-9e99-5cd9-8e03-bed54d48796e
       nullable: true
       properties:
         tenantId:
           description: ID of the tenant the subscription belongs to.
-          example: 12345678-1234-1234-1234-123456789012
+          example: bbfc521c-73c1-5927-aa6e-41200f1e8c6d
           type: string
         subscriptionId:
           description: |
-            Subscription ID. This field is required.
-          example: 12345678-1234-1234-1234-123456789012
+            Subscription ID.
+          example: 3e27a7a1-9e99-5cd9-8e03-bed54d48796e
           type: string
         resourceGroupName:
           description: Resource group name.
           example: my-resource-group
           type: string
         eonInternalResourceGroupName:
+          default: eon-restore-internal-rg
           description: |
-            Optional. The name of the Eon internal resource group for restore operations. If not provided, the default value will be used.
+            Resource group name for Eon's temporary internal resources.
           example: eon-restore-internal-rg
           type: string
       required:
@@ -5792,9 +5798,9 @@ components:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
           resourceGroupName: my-resource-group
-          tenantId: 12345678-1234-1234-1234-123456789012
+          tenantId: bbfc521c-73c1-5927-aa6e-41200f1e8c6d
           eonInternalResourceGroupName: eon-restore-internal-rg
-          subscriptionId: 12345678-1234-1234-1234-123456789012
+          subscriptionId: 3e27a7a1-9e99-5cd9-8e03-bed54d48796e
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -5817,9 +5823,9 @@ components:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
             resourceGroupName: my-resource-group
-            tenantId: 12345678-1234-1234-1234-123456789012
+            tenantId: bbfc521c-73c1-5927-aa6e-41200f1e8c6d
             eonInternalResourceGroupName: eon-restore-internal-rg
-            subscriptionId: 12345678-1234-1234-1234-123456789012
+            subscriptionId: 3e27a7a1-9e99-5cd9-8e03-bed54d48796e
         name: restore-sandbox
       properties:
         name:
@@ -5872,7 +5878,6 @@ components:
       example:
         resourceGroupName: my-resource-group
         tenantId: 12345678-1234-1234-1234-123456789012
-        location: eastus
         subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
@@ -5887,12 +5892,11 @@ components:
           format: uuid
           type: string
         resourceGroupName:
-          description: Name of the target restore resource group.
+          description: |
+            Name of the Azure resource group to scope permissions to.
+            When provided, restoring is limited to this specific resource group.
+            When omitted, permissions are scoped to the subscription.
           example: my-resource-group
-          type: string
-        location:
-          description: Azure region for restore operations.
-          example: eastus
           type: string
       required:
       - subscriptionId
@@ -5909,7 +5913,6 @@ components:
         azure:
           resourceGroupName: my-resource-group
           tenantId: 12345678-1234-1234-1234-123456789012
-          location: eastus
           subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
@@ -5933,7 +5936,6 @@ components:
           azure:
             resourceGroupName: my-resource-group
             tenantId: 12345678-1234-1234-1234-123456789012
-            location: eastus
             subscriptionId: 12345678-1234-1234-1234-123456789012
         providerAccountId: "123412341234"
         name: prod-eu
@@ -5991,7 +5993,6 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
-              location: eastus
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6151,7 +6152,6 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
-              location: eastus
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6173,7 +6173,6 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
-              location: eastus
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6219,7 +6218,6 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
-              location: eastus
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6250,7 +6248,6 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
-              location: eastus
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -7151,7 +7148,7 @@ components:
           type: array
       type: object
     ErrorCode:
-      description: Error code indicating the type of the error occurred.
+      description: Code indicating the type of error.
       enum:
       - INTERNAL_JOB_ERROR
       - JOB_CANCELED_ERROR
@@ -14028,7 +14025,7 @@ components:
     BackupStatus:
       description: |
         Eon backup status.
-        For an explanation of statuses, see [Backup Statuses](/docs/user-guide/monitoring/backup-statuses).
+        For an explanation of statuses, see [Backup Statuses](/user-guide/monitoring/backup-statuses).
         `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses.
       enum:
       - BACKUP_POSTURE_STATUS_UNSPECIFIED
@@ -14435,7 +14432,7 @@ components:
         name:
           description: |
             App display name.
-            For a list of supported apps, see [Apps](/docs/user-guide/backing-up/resource-classifications#apps).
+            For a list of supported apps, see [Apps](/user-guide/monitoring/classifications/resource-classifications#apps).
           example: Jenkins
           type: string
         paths:
@@ -15507,121 +15504,11 @@ components:
         resourceType:
           $ref: '#/components/schemas/ResourceType'
       type: object
-    FsxVolumeBackupInfo:
-      description: Information about a volume that was backed up in an FSx snapshot.
-      example:
-        volumeType: RW
-        recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-        junctionPath: /vol1
-        volumeId: fsvol-0fdec21190aa5b8be
-        name: vol1
-        sizeBytes: 1099511627776
-      properties:
-        volumeId:
-          description: The volume ID.
-          example: fsvol-0fdec21190aa5b8be
-          type: string
-        name:
-          description: The volume name.
-          example: vol1
-          type: string
-        sizeBytes:
-          description: The volume size in bytes.
-          example: 1099511627776
-          format: int64
-          type: integer
-        junctionPath:
-          description: The volume junction path.
-          example: /vol1
-          type: string
-        volumeType:
-          description: "The volume type (RW, DP, LS)."
-          example: RW
-          type: string
-        recoveryPointArn:
-          description: The AWS Backup recovery point ARN for this volume.
-          example: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-          type: string
-      type: object
-    FsxSnapshotProperties:
-      description: FSx snapshot properties for native AWS Backup snapshots.
-      example:
-        sourceAccountId: "423623849087"
-        recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-        region: us-east-1
-        backupVaultName: eon-fsx-b6dc32f8
-        backedUpVolumes:
-        - volumeType: RW
-          recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-          junctionPath: /vol1
-          volumeId: fsvol-0fdec21190aa5b8be
-          name: vol1
-          sizeBytes: 1099511627776
-        - volumeType: RW
-          recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-          junctionPath: /vol1
-          volumeId: fsvol-0fdec21190aa5b8be
-          name: vol1
-          sizeBytes: 1099511627776
-        volumeBackupArns:
-        - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-      properties:
-        recoveryPointArn:
-          description: "AWS Backup recovery point ARN (primary for file systems, or\
-            \ first volume for ONTAP)."
-          example: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-          type: string
-        backupVaultName:
-          description: AWS Backup vault name where the backup is stored.
-          example: eon-fsx-b6dc32f8
-          type: string
-        region:
-          description: AWS region where the backup is stored.
-          example: us-east-1
-          type: string
-        sourceAccountId:
-          description: AWS account ID where the backup is stored.
-          example: "423623849087"
-          type: string
-        volumeBackupArns:
-          description: "For ONTAP file systems, the list of recovery point ARNs for\
-            \ each volume backup."
-          example:
-          - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-          items:
-            type: string
-          type: array
-        backedUpVolumes:
-          description: Details of volumes that were backed up in this snapshot.
-          items:
-            $ref: '#/components/schemas/FsxVolumeBackupInfo'
-          type: array
-      type: object
     Snapshot:
       description: Eon snapshot.
       example:
         pointInTime: 2024-10-29T23:01:30Z
         jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
-        fsxSnapshotProperties:
-          sourceAccountId: "423623849087"
-          recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-          region: us-east-1
-          backupVaultName: eon-fsx-b6dc32f8
-          backedUpVolumes:
-          - volumeType: RW
-            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-            junctionPath: /vol1
-            volumeId: fsvol-0fdec21190aa5b8be
-            name: vol1
-            sizeBytes: 1099511627776
-          - volumeType: RW
-            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-            junctionPath: /vol1
-            volumeId: fsvol-0fdec21190aa5b8be
-            name: vol1
-            sizeBytes: 1099511627776
-          volumeBackupArns:
-          - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
         resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
         vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
         resource:
@@ -15682,7 +15569,6 @@ components:
         createdTime: 2024-10-29T23:01:24.841897Z
         id: 043090df-9fe5-4f89-9859-45db589c2936
         projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-        isNative: false
       properties:
         id:
           description: Eon snapshot ID.
@@ -15709,11 +15595,6 @@ components:
             snapshots.
           example: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           type: string
-        isNative:
-          description: "Whether this is a native snapshot stored in the cloud provider\
-            \ (e.g., FSx backup) rather than in an Eon vault."
-          example: false
-          type: boolean
         resourceId:
           description: Eon-assigned ID of the resource the snapshot is backing up.
           example: b06bc01a-b08a-4fc7-933d-3f26ed434a29
@@ -15730,8 +15611,6 @@ components:
           type: string
         resource:
           $ref: '#/components/schemas/ResourceSnapshot'
-        fsxSnapshotProperties:
-          $ref: '#/components/schemas/FsxSnapshotProperties'
       required:
       - createdTime
       - id
@@ -15743,26 +15622,6 @@ components:
         snapshot:
           pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
-          fsxSnapshotProperties:
-            sourceAccountId: "423623849087"
-            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-            region: us-east-1
-            backupVaultName: eon-fsx-b6dc32f8
-            backedUpVolumes:
-            - volumeType: RW
-              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-              junctionPath: /vol1
-              volumeId: fsvol-0fdec21190aa5b8be
-              name: vol1
-              sizeBytes: 1099511627776
-            - volumeType: RW
-              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-              junctionPath: /vol1
-              volumeId: fsvol-0fdec21190aa5b8be
-              name: vol1
-              sizeBytes: 1099511627776
-            volumeBackupArns:
-            - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
@@ -15823,7 +15682,6 @@ components:
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          isNative: false
       properties:
         snapshot:
           $ref: '#/components/schemas/Snapshot'
@@ -15909,26 +15767,6 @@ components:
         snapshots:
         - pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
-          fsxSnapshotProperties:
-            sourceAccountId: "423623849087"
-            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-            region: us-east-1
-            backupVaultName: eon-fsx-b6dc32f8
-            backedUpVolumes:
-            - volumeType: RW
-              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-              junctionPath: /vol1
-              volumeId: fsvol-0fdec21190aa5b8be
-              name: vol1
-              sizeBytes: 1099511627776
-            - volumeType: RW
-              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-              junctionPath: /vol1
-              volumeId: fsvol-0fdec21190aa5b8be
-              name: vol1
-              sizeBytes: 1099511627776
-            volumeBackupArns:
-            - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
@@ -15989,29 +15827,8 @@ components:
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          isNative: false
         - pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
-          fsxSnapshotProperties:
-            sourceAccountId: "423623849087"
-            recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-            region: us-east-1
-            backupVaultName: eon-fsx-b6dc32f8
-            backedUpVolumes:
-            - volumeType: RW
-              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-              junctionPath: /vol1
-              volumeId: fsvol-0fdec21190aa5b8be
-              name: vol1
-              sizeBytes: 1099511627776
-            - volumeType: RW
-              recoveryPointArn: arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
-              junctionPath: /vol1
-              volumeId: fsvol-0fdec21190aa5b8be
-              name: vol1
-              sizeBytes: 1099511627776
-            volumeBackupArns:
-            - arn:aws:fsx:us-east-1:123456789012:backup/backup-08953fef78841dfeb
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
@@ -16072,7 +15889,6 @@ components:
           createdTime: 2024-10-29T23:01:24.841897Z
           id: 043090df-9fe5-4f89-9859-45db589c2936
           projectId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          isNative: false
         nextToken: ZjRmYmQ4Y2YtYmEzNi00Yjc1LWI1ZjMtMzUyMmYzMTA5OTYzfDE=
         totalCount: 58
       properties:

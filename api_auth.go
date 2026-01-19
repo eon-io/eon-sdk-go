@@ -223,7 +223,7 @@ Always make sure the API credentials have the permissions needed for the API met
 The access token is valid for 12 hours.
 After that, you must call this method again to get a new token.
 
-[Get Access Token]: ./get-access-token.api.mdx
+[Get Access Token]: ./get-access-token
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -377,7 +377,7 @@ Once replaced, the old client secret can't be used to authenticate or obtain new
 However, access tokens that were issued before the rotation remain valid until they expire.
 This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
-[Rotate Current API Client Secret]: rotate-current-api-client-secret.api.mdx
+[Rotate Current API Client Secret]: ./rotate-current-api-client-secret
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -510,7 +510,7 @@ Once replaced, the old client secret can't be used to authenticate or obtain new
 However, access tokens that were issued before the rotation remain valid until they expire.
 This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
 
-[Rotate API Client Secret]: rotate-api-client-secret.api.mdx
+[Rotate API Client Secret]: ./rotate-api-client-secret
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

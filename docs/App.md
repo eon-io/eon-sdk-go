@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | App display name. For a list of supported apps, see [Apps](/docs/user-guide/backing-up/resource-classifications#apps).  | 
+**Name** | **string** | App display name. For a list of supported apps, see [Apps](/user-guide/monitoring/classifications/resource-classifications#apps).  | 
 **Paths** | Pointer to **[]string** | List of paths where the app was found. | [optional] 
 
 ## Methods

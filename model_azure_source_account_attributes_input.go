@@ -21,13 +21,11 @@ var _ MappedNullable = &AzureSourceAccountAttributesInput{}
 
 // AzureSourceAccountAttributesInput Azure subscription configuration. Applicable if `cloudProvider` is set to `AZURE`. 
 type AzureSourceAccountAttributesInput struct {
-	// ID of the Azure tenant the source subscription belongs to.
+	// ID of the Azure tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
 	// ID of the Azure source subscription.
 	SubscriptionId string `json:"subscriptionId"`
-	// Name of the Azure resource group to scope the source account to. When provided, discovery and permissions are limited to this specific resource group. 
-	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
-	// Eon internal resource group name for temporary resources. Defaults to eon-source-internal-rg if not provided. 
+	// Resource group name for Eon's temporary internal resources. 
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 }
 
@@ -41,6 +39,8 @@ func NewAzureSourceAccountAttributesInput(tenantId string, subscriptionId string
 	this := AzureSourceAccountAttributesInput{}
 	this.TenantId = tenantId
 	this.SubscriptionId = subscriptionId
+	var eonInternalResourceGroupName string = "eon-source-internal-rg"
+	this.EonInternalResourceGroupName = &eonInternalResourceGroupName
 	return &this
 }
 
@@ -49,6 +49,8 @@ func NewAzureSourceAccountAttributesInput(tenantId string, subscriptionId string
 // but it doesn't guarantee that properties required by API are set
 func NewAzureSourceAccountAttributesInputWithDefaults() *AzureSourceAccountAttributesInput {
 	this := AzureSourceAccountAttributesInput{}
+	var eonInternalResourceGroupName string = "eon-source-internal-rg"
+	this.EonInternalResourceGroupName = &eonInternalResourceGroupName
 	return &this
 }
 
@@ -100,38 +102,6 @@ func (o *AzureSourceAccountAttributesInput) SetSubscriptionId(v string) {
 	o.SubscriptionId = v
 }
 
-// GetResourceGroupName returns the ResourceGroupName field value if set, zero value otherwise.
-func (o *AzureSourceAccountAttributesInput) GetResourceGroupName() string {
-	if o == nil || IsNil(o.ResourceGroupName) {
-		var ret string
-		return ret
-	}
-	return *o.ResourceGroupName
-}
-
-// GetResourceGroupNameOk returns a tuple with the ResourceGroupName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AzureSourceAccountAttributesInput) GetResourceGroupNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceGroupName) {
-		return nil, false
-	}
-	return o.ResourceGroupName, true
-}
-
-// HasResourceGroupName returns a boolean if a field has been set.
-func (o *AzureSourceAccountAttributesInput) HasResourceGroupName() bool {
-	if o != nil && !IsNil(o.ResourceGroupName) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceGroupName gets a reference to the given string and assigns it to the ResourceGroupName field.
-func (o *AzureSourceAccountAttributesInput) SetResourceGroupName(v string) {
-	o.ResourceGroupName = &v
-}
-
 // GetEonInternalResourceGroupName returns the EonInternalResourceGroupName field value if set, zero value otherwise.
 func (o *AzureSourceAccountAttributesInput) GetEonInternalResourceGroupName() string {
 	if o == nil || IsNil(o.EonInternalResourceGroupName) {
@@ -176,9 +146,6 @@ func (o AzureSourceAccountAttributesInput) ToMap() (map[string]interface{}, erro
 	toSerialize := map[string]interface{}{}
 	toSerialize["tenantId"] = o.TenantId
 	toSerialize["subscriptionId"] = o.SubscriptionId
-	if !IsNil(o.ResourceGroupName) {
-		toSerialize["resourceGroupName"] = o.ResourceGroupName
-	}
 	if !IsNil(o.EonInternalResourceGroupName) {
 		toSerialize["eonInternalResourceGroupName"] = o.EonInternalResourceGroupName
 	}

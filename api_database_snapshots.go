@@ -359,7 +359,7 @@ If the request fails, see [Troubleshooting Queries] for possible errors and how 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project that contains the database snapshot you want to retrieve. You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  
- @param snapshotId ID of the database [snapshot](./list-resource-snapshots) you want to query. Snapshot must belong to an RDS resource. 
+ @param snapshotId ID of the database [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) you want to query. Snapshot must belong to an RDS resource. 
  @return ApiRunQueryRequest
 */
 func (a *DatabaseSnapshotsAPIService) RunQuery(ctx context.Context, projectId string, snapshotId string) ApiRunQueryRequest {

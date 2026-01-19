@@ -23,11 +23,11 @@ var _ MappedNullable = &AzureRestoreAccountAttributesInput{}
 type AzureRestoreAccountAttributesInput struct {
 	// ID of the tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
-	// Subscription ID. This field is required. 
+	// Subscription ID. 
 	SubscriptionId string `json:"subscriptionId"`
 	// Resource group name.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
-	// Optional. The name of the Eon internal resource group for restore operations. If not provided, the default value will be used. 
+	// Resource group name for Eon's temporary internal resources. 
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 }
 
@@ -41,6 +41,8 @@ func NewAzureRestoreAccountAttributesInput(tenantId string, subscriptionId strin
 	this := AzureRestoreAccountAttributesInput{}
 	this.TenantId = tenantId
 	this.SubscriptionId = subscriptionId
+	var eonInternalResourceGroupName string = "eon-restore-internal-rg"
+	this.EonInternalResourceGroupName = &eonInternalResourceGroupName
 	return &this
 }
 
@@ -49,6 +51,8 @@ func NewAzureRestoreAccountAttributesInput(tenantId string, subscriptionId strin
 // but it doesn't guarantee that properties required by API are set
 func NewAzureRestoreAccountAttributesInputWithDefaults() *AzureRestoreAccountAttributesInput {
 	this := AzureRestoreAccountAttributesInput{}
+	var eonInternalResourceGroupName string = "eon-restore-internal-rg"
+	this.EonInternalResourceGroupName = &eonInternalResourceGroupName
 	return &this
 }
 

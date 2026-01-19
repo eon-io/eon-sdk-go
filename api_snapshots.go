@@ -336,17 +336,17 @@ RestoreAzureDisk Restore Azure Disk
 Description: Restores an Azure disk from an Eon snapshot.
 
 When restoring a disk, you'll specify the configurations of the disk you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureDiskRequest
 */
 func (a *SnapshotsAPIService) RestoreAzureDisk(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureDiskRequest {
@@ -489,13 +489,13 @@ Description: Restores an Azure SQL Database from an Eon snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureSqlDatabaseRequest
 */
 func (a *SnapshotsAPIService) RestoreAzureSqlDatabase(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureSqlDatabaseRequest {
@@ -637,13 +637,13 @@ Description: Restores an Azure VM instance from an Eon snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureVmInstanceRequest
 */
 func (a *SnapshotsAPIService) RestoreAzureVmInstance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureVmInstanceRequest {
@@ -785,13 +785,13 @@ Description: Restores a bucket from an Eon snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreBucketRequest
 */
 func (a *SnapshotsAPIService) RestoreBucket(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreBucketRequest {
@@ -933,13 +933,13 @@ Description: Restores an RDS instance from an Eon snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreDatabaseRequest
 */
 func (a *SnapshotsAPIService) RestoreDatabase(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreDatabaseRequest {
@@ -1081,13 +1081,13 @@ Description: Restores a DynamoDB table from an Eon snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreDynamoDBTableRequest
 */
 func (a *SnapshotsAPIService) RestoreDynamoDBTable(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreDynamoDBTableRequest {
@@ -1229,13 +1229,13 @@ Description: Restores an EBS volume from an Eon snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreEbsVolumeRequest
 */
 func (a *SnapshotsAPIService) RestoreEbsVolume(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreEbsVolumeRequest {
@@ -1376,17 +1376,17 @@ RestoreEc2Instance Restore EC2 Instance
 Description: Restores an EC2 instance from an Eon snapshot.
 
 When restoring an EC2 instance, you'll need to specify the configurations of the instance and each volume you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreEc2InstanceRequest
 */
 func (a *SnapshotsAPIService) RestoreEc2Instance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreEc2InstanceRequest {
@@ -1528,13 +1528,13 @@ Description: Restores files from an Eon snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreFilesRequest
 */
 func (a *SnapshotsAPIService) RestoreFiles(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreFilesRequest {
@@ -1675,17 +1675,17 @@ RestoreGcpCloudSql Restore GCP Cloud SQL Instance
 Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
 
 When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpCloudSqlRequest
 */
 func (a *SnapshotsAPIService) RestoreGcpCloudSql(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpCloudSqlRequest {
@@ -1826,17 +1826,17 @@ RestoreGcpDisk Restore GCP Disk
 Description: Restores a GCP disk from an Eon snapshot.
 
 When restoring a disk, you'll specify the configurations of the disk you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpDiskRequest
 */
 func (a *SnapshotsAPIService) RestoreGcpDisk(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpDiskRequest {
@@ -1977,17 +1977,17 @@ RestoreGcpVmInstance Restore GCP VM Instance
 Description: Restores a GCP VM instance from an Eon snapshot.
 
 When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/reference/get-snapshot) or [List Resource Snapshots](/api/reference/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpVmInstanceRequest
 */
 func (a *SnapshotsAPIService) RestoreGcpVmInstance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpVmInstanceRequest {
@@ -2129,13 +2129,13 @@ Description: Restores an Eon volume snapshot to an EBS snapshot.
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
-You can follow the progress of the restore job by calling [Get Restore Job](/api/reference/get-restore-job) with the job ID.
+You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](./list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreToEbsSnapshotRequest
 */
 func (a *SnapshotsAPIService) RestoreToEbsSnapshot(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreToEbsSnapshotRequest {

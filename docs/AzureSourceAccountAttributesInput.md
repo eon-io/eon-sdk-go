@@ -4,10 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TenantId** | **string** | ID of the Azure tenant the source subscription belongs to. | 
+**TenantId** | **string** | ID of the Azure tenant the subscription belongs to. | 
 **SubscriptionId** | **string** | ID of the Azure source subscription. | 
-**ResourceGroupName** | Pointer to **string** | Name of the Azure resource group to scope the source account to. When provided, discovery and permissions are limited to this specific resource group.  | [optional] 
-**EonInternalResourceGroupName** | Pointer to **string** | Eon internal resource group name for temporary resources. Defaults to eon-source-internal-rg if not provided.  | [optional] 
+**EonInternalResourceGroupName** | Pointer to **string** | Resource group name for Eon&#39;s temporary internal resources.  | [optional] [default to "eon-source-internal-rg"]
 
 ## Methods
 
@@ -67,31 +66,6 @@ and a boolean to check if the value has been set.
 
 SetSubscriptionId sets SubscriptionId field to given value.
 
-
-### GetResourceGroupName
-
-`func (o *AzureSourceAccountAttributesInput) GetResourceGroupName() string`
-
-GetResourceGroupName returns the ResourceGroupName field if non-nil, zero value otherwise.
-
-### GetResourceGroupNameOk
-
-`func (o *AzureSourceAccountAttributesInput) GetResourceGroupNameOk() (*string, bool)`
-
-GetResourceGroupNameOk returns a tuple with the ResourceGroupName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResourceGroupName
-
-`func (o *AzureSourceAccountAttributesInput) SetResourceGroupName(v string)`
-
-SetResourceGroupName sets ResourceGroupName field to given value.
-
-### HasResourceGroupName
-
-`func (o *AzureSourceAccountAttributesInput) HasResourceGroupName() bool`
-
-HasResourceGroupName returns a boolean if a field has been set.
 
 ### GetEonInternalResourceGroupName
 

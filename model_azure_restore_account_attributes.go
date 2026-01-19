@@ -25,10 +25,8 @@ type AzureRestoreAccountAttributes struct {
 	TenantId string `json:"tenantId"`
 	// ID of the Azure subscription.
 	SubscriptionId string `json:"subscriptionId"`
-	// Name of the target restore resource group.
+	// Name of the Azure resource group to scope permissions to. When provided, restoring is limited to this specific resource group. When omitted, permissions are scoped to the subscription. 
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
-	// Azure region for restore operations.
-	Location *string `json:"location,omitempty"`
 }
 
 type _AzureRestoreAccountAttributes AzureRestoreAccountAttributes
@@ -132,38 +130,6 @@ func (o *AzureRestoreAccountAttributes) SetResourceGroupName(v string) {
 	o.ResourceGroupName = &v
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
-func (o *AzureRestoreAccountAttributes) GetLocation() string {
-	if o == nil || IsNil(o.Location) {
-		var ret string
-		return ret
-	}
-	return *o.Location
-}
-
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AzureRestoreAccountAttributes) GetLocationOk() (*string, bool) {
-	if o == nil || IsNil(o.Location) {
-		return nil, false
-	}
-	return o.Location, true
-}
-
-// HasLocation returns a boolean if a field has been set.
-func (o *AzureRestoreAccountAttributes) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given string and assigns it to the Location field.
-func (o *AzureRestoreAccountAttributes) SetLocation(v string) {
-	o.Location = &v
-}
-
 func (o AzureRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -178,9 +144,6 @@ func (o AzureRestoreAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize["subscriptionId"] = o.SubscriptionId
 	if !IsNil(o.ResourceGroupName) {
 		toSerialize["resourceGroupName"] = o.ResourceGroupName
-	}
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
 	}
 	return toSerialize, nil
 }

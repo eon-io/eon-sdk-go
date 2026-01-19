@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TenantId** | **string** | ID of the tenant the subscription belongs to. | 
-**SubscriptionId** | **string** | Subscription ID. This field is required.  | 
+**SubscriptionId** | **string** | Subscription ID.  | 
 **ResourceGroupName** | Pointer to **string** | Resource group name. | [optional] 
-**EonInternalResourceGroupName** | Pointer to **string** | Optional. The name of the Eon internal resource group for restore operations. If not provided, the default value will be used.  | [optional] 
+**EonInternalResourceGroupName** | Pointer to **string** | Resource group name for Eon&#39;s temporary internal resources.  | [optional] [default to "eon-restore-internal-rg"]
 
 ## Methods
 

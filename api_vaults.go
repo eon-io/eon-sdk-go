@@ -48,13 +48,13 @@ By default, vaults are encrypted using an Eon-managed KMS key.
 However, if your requirements mandate control over encryption keys, you can use a customer-managed KMS key.
 For more information on customer-managed KMS keys, see [About Customer-Managed Vault Keys].
 
-:::warning
+<Warning>
 If you use customer-managed vault keys, you assume responsibility for securing your keys from unauthorized access and deletion.
 Although keys can be rotated, they must not be deleted while snapshots that were encrypted with them exist.
 If a key is deleted, you'll lose all ability to retrieve any snapshots encrypted with it.
-:::
+</Warning>
 
-[About Customer-Managed Vault Keys]: /docs/user-guide/backing-up/vaults/about-customer-managed-vault-keys
+[About Customer-Managed Vault Keys]: /user-guide/backing-up/vaults/about-customer-managed-vault-keys
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

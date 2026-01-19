@@ -25,7 +25,7 @@ type AzureSourceAccountAttributes struct {
 	TenantId string `json:"tenantId"`
 	// ID of the Azure subscription.
 	SubscriptionId string `json:"subscriptionId"`
-	// Eon internal resource group name for temporary resources. Defaults to eon-source-internal-rg.
+	// Resource group name for Eon's temporary internal resources. 
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 }
 
@@ -39,6 +39,8 @@ func NewAzureSourceAccountAttributes(tenantId string, subscriptionId string) *Az
 	this := AzureSourceAccountAttributes{}
 	this.TenantId = tenantId
 	this.SubscriptionId = subscriptionId
+	var eonInternalResourceGroupName string = "eon-source-internal-rg"
+	this.EonInternalResourceGroupName = &eonInternalResourceGroupName
 	return &this
 }
 
@@ -47,6 +49,8 @@ func NewAzureSourceAccountAttributes(tenantId string, subscriptionId string) *Az
 // but it doesn't guarantee that properties required by API are set
 func NewAzureSourceAccountAttributesWithDefaults() *AzureSourceAccountAttributes {
 	this := AzureSourceAccountAttributes{}
+	var eonInternalResourceGroupName string = "eon-source-internal-rg"
+	this.EonInternalResourceGroupName = &eonInternalResourceGroupName
 	return &this
 }
 

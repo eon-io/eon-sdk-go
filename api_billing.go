@@ -57,7 +57,7 @@ QueryCostData Query Cost Data
 Description: Retrieves cost and usage data for the given time frame.
 
 Use Query Cost Data to analyze backup costs by cloud provider, resource type, and resource.
-For details on exploring your costs visually in the Eon console, see [About Cost Explorer](/user-guide/administration/cost-explorer/about-the-cost-explorer.mdx)
+For details on exploring your costs visually in the Eon console, see [About Cost Explorer](/user-guide/administration/cost-explorer/about-the-cost-explorer).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
