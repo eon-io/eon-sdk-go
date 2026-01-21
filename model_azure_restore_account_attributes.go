@@ -27,6 +27,8 @@ type AzureRestoreAccountAttributes struct {
 	SubscriptionId string `json:"subscriptionId"`
 	// Name of the Azure resource group to scope permissions to. When provided, restoring is limited to this specific resource group. When omitted, permissions are scoped to the subscription. 
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
+	// Name of the Eon internal resource group for temporary restore resources. 
+	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 }
 
 type _AzureRestoreAccountAttributes AzureRestoreAccountAttributes
@@ -130,6 +132,38 @@ func (o *AzureRestoreAccountAttributes) SetResourceGroupName(v string) {
 	o.ResourceGroupName = &v
 }
 
+// GetEonInternalResourceGroupName returns the EonInternalResourceGroupName field value if set, zero value otherwise.
+func (o *AzureRestoreAccountAttributes) GetEonInternalResourceGroupName() string {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
+		var ret string
+		return ret
+	}
+	return *o.EonInternalResourceGroupName
+}
+
+// GetEonInternalResourceGroupNameOk returns a tuple with the EonInternalResourceGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureRestoreAccountAttributes) GetEonInternalResourceGroupNameOk() (*string, bool) {
+	if o == nil || IsNil(o.EonInternalResourceGroupName) {
+		return nil, false
+	}
+	return o.EonInternalResourceGroupName, true
+}
+
+// HasEonInternalResourceGroupName returns a boolean if a field has been set.
+func (o *AzureRestoreAccountAttributes) HasEonInternalResourceGroupName() bool {
+	if o != nil && !IsNil(o.EonInternalResourceGroupName) {
+		return true
+	}
+
+	return false
+}
+
+// SetEonInternalResourceGroupName gets a reference to the given string and assigns it to the EonInternalResourceGroupName field.
+func (o *AzureRestoreAccountAttributes) SetEonInternalResourceGroupName(v string) {
+	o.EonInternalResourceGroupName = &v
+}
+
 func (o AzureRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -144,6 +178,9 @@ func (o AzureRestoreAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize["subscriptionId"] = o.SubscriptionId
 	if !IsNil(o.ResourceGroupName) {
 		toSerialize["resourceGroupName"] = o.ResourceGroupName
+	}
+	if !IsNil(o.EonInternalResourceGroupName) {
+		toSerialize["eonInternalResourceGroupName"] = o.EonInternalResourceGroupName
 	}
 	return toSerialize, nil
 }

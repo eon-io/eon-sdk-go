@@ -5878,6 +5878,7 @@ components:
       example:
         resourceGroupName: my-resource-group
         tenantId: 12345678-1234-1234-1234-123456789012
+        eonInternalResourceGroupName: eon-restore-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
       nullable: true
       properties:
@@ -5898,6 +5899,11 @@ components:
             When omitted, permissions are scoped to the subscription.
           example: my-resource-group
           type: string
+        eonInternalResourceGroupName:
+          description: |
+            Name of the Eon internal resource group for temporary restore resources.
+          example: eon-restore-internal-rg
+          type: string
       required:
       - subscriptionId
       - tenantId
@@ -5913,6 +5919,7 @@ components:
         azure:
           resourceGroupName: my-resource-group
           tenantId: 12345678-1234-1234-1234-123456789012
+          eonInternalResourceGroupName: eon-restore-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
       properties:
         cloudProvider:
@@ -5936,6 +5943,7 @@ components:
           azure:
             resourceGroupName: my-resource-group
             tenantId: 12345678-1234-1234-1234-123456789012
+            eonInternalResourceGroupName: eon-restore-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
         providerAccountId: "123412341234"
         name: prod-eu
@@ -5993,6 +6001,7 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6152,6 +6161,7 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6173,6 +6183,7 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6218,6 +6229,7 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
@@ -6248,6 +6260,7 @@ components:
             azure:
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
