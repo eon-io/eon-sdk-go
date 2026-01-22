@@ -8891,6 +8891,7 @@ components:
       - STANDARD
       - HIGH_FREQUENCY
       - PITR
+      - AWS_NATIVE_PITR
       example: STANDARD
       type: string
       x-enum-varnames:
@@ -8898,6 +8899,7 @@ components:
       - BACKUP_POLICY_TYPE_STANDARD
       - BACKUP_POLICY_TYPE_HIGH_FREQUENCY
       - BACKUP_POLICY_TYPE_PITR
+      - BACKUP_POLICY_TYPE_AWS_NATIVE_PITR
     StandardBackupScheduleFrequency:
       description: |
         Backup frequency.

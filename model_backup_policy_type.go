@@ -24,6 +24,7 @@ const (
 	BACKUP_POLICY_TYPE_STANDARD BackupPolicyType = "STANDARD"
 	BACKUP_POLICY_TYPE_HIGH_FREQUENCY BackupPolicyType = "HIGH_FREQUENCY"
 	BACKUP_POLICY_TYPE_PITR BackupPolicyType = "PITR"
+	BACKUP_POLICY_TYPE_AWS_NATIVE_PITR BackupPolicyType = "AWS_NATIVE_PITR"
 )
 
 // All allowed values of BackupPolicyType enum
@@ -32,6 +33,7 @@ var AllowedBackupPolicyTypeEnumValues = []BackupPolicyType{
 	"STANDARD",
 	"HIGH_FREQUENCY",
 	"PITR",
+	"AWS_NATIVE_PITR",
 }
 
 func (v *BackupPolicyType) UnmarshalJSON(src []byte) error {
