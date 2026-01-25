@@ -99,6 +99,7 @@ docs/CostGranularity.md
 docs/CostUnit.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
+docs/CreateVault409Response.md
 docs/CreateVaultRequest.md
 docs/CreateVaultResponse.md
 docs/DailyConfig.md
@@ -400,6 +401,7 @@ model_cost_granularity.go
 model_cost_unit.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
+model_create_vault_409_response.go
 model_create_vault_request.go
 model_create_vault_response.go
 model_daily_config.go

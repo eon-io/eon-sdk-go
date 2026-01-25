@@ -1940,7 +1940,12 @@ paths:
                 $ref: '#/components/schemas/CreateVaultResponse'
           description: Vault created.
         "409":
-          description: A vault already exists in the specified region.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createVault_409_response'
+          description: A vault with the same encryption key already exists in the
+            specified region.
         "1XX":
           description: Informational
         "3XX":
@@ -16552,6 +16557,13 @@ components:
           type: array
       required:
       - data
+      type: object
+    createVault_409_response:
+      example:
+        error: error
+      properties:
+        error:
+          type: string
       type: object
     queryCostData_400_response:
       example:
