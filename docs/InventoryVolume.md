@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Path** | **string** | Path of the volume on the machine it&#39;s attached to. | 
 **Region** | **string** | Region the volume is hosted in. | 
 **EncryptionKeyId** | Pointer to **string** | ID of the encryption key used to encrypt the volume. | [optional] 
+**IsAwsManagedKey** | Pointer to **bool** | Whether the encryption key is AWS-managed (true) or customer-managed (false). | [optional] 
 **Tags** | **map[string]string** | Volume tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** &#x60;{\&quot;primary\&quot;: \&quot;\&quot;}&#x60;  | 
 **AvailabilityZone** | **string** | Volume availability zone. | 
 **VolumeSettings** | [**VolumeSettings**](VolumeSettings.md) |  | 
@@ -115,6 +116,31 @@ SetEncryptionKeyId sets EncryptionKeyId field to given value.
 `func (o *InventoryVolume) HasEncryptionKeyId() bool`
 
 HasEncryptionKeyId returns a boolean if a field has been set.
+
+### GetIsAwsManagedKey
+
+`func (o *InventoryVolume) GetIsAwsManagedKey() bool`
+
+GetIsAwsManagedKey returns the IsAwsManagedKey field if non-nil, zero value otherwise.
+
+### GetIsAwsManagedKeyOk
+
+`func (o *InventoryVolume) GetIsAwsManagedKeyOk() (*bool, bool)`
+
+GetIsAwsManagedKeyOk returns a tuple with the IsAwsManagedKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAwsManagedKey
+
+`func (o *InventoryVolume) SetIsAwsManagedKey(v bool)`
+
+SetIsAwsManagedKey sets IsAwsManagedKey field to given value.
+
+### HasIsAwsManagedKey
+
+`func (o *InventoryVolume) HasIsAwsManagedKey() bool`
+
+HasIsAwsManagedKey returns a boolean if a field has been set.
 
 ### GetTags
 

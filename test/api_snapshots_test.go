@@ -37,6 +37,21 @@ func Test_eon_SnapshotsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test SnapshotsAPIService HoldSnapshot", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+		var projectId string
+
+		resp, httpRes, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), id, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SnapshotsAPIService ListResourceSnapshots", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -45,6 +60,21 @@ func Test_eon_SnapshotsAPIService(t *testing.T) {
 		var projectId string
 
 		resp, httpRes, err := apiClient.SnapshotsAPI.ListResourceSnapshots(context.Background(), id, projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SnapshotsAPIService RemoveSnapshotHold", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+		var projectId string
+
+		resp, httpRes, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), id, projectId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

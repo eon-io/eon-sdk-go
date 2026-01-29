@@ -5,7 +5,9 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetSnapshot**](SnapshotsAPI.md#GetSnapshot) | **Get** /v1/projects/{projectId}/snapshots/{id} | Get Snapshot
+[**HoldSnapshot**](SnapshotsAPI.md#HoldSnapshot) | **Patch** /v1/projects/{projectId}/snapshots/{id}/hold | Hold Snapshot
 [**ListResourceSnapshots**](SnapshotsAPI.md#ListResourceSnapshots) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots | List Resource Snapshots
+[**RemoveSnapshotHold**](SnapshotsAPI.md#RemoveSnapshotHold) | **Patch** /v1/projects/{projectId}/snapshots/{id}/remove-hold | Remove Snapshot Hold
 [**RestoreAzureDisk**](SnapshotsAPI.md#RestoreAzureDisk) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-disk | Restore Azure Disk
 [**RestoreAzureSqlDatabase**](SnapshotsAPI.md#RestoreAzureSqlDatabase) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-sql-database | Restore Azure SQL Database
 [**RestoreAzureVmInstance**](SnapshotsAPI.md#RestoreAzureVmInstance) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-vm-instance | Restore Azure VM Instance
@@ -95,6 +97,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## HoldSnapshot
+
+> map[string]interface{} HoldSnapshot(ctx, id, projectId).Execute()
+
+Hold Snapshot
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), id, projectId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.HoldSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `HoldSnapshot`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.HoldSnapshot`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | ID of the Eon snapshot. | 
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiHoldSnapshotRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListResourceSnapshots
 
 > ListInventorySnapshotsResponse ListResourceSnapshots(ctx, id, projectId).PageToken(pageToken).PageSize(pageSize).ListInventorySnapshotsRequest(listInventorySnapshotsRequest).Execute()
@@ -167,6 +242,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemoveSnapshotHold
+
+> map[string]interface{} RemoveSnapshotHold(ctx, id, projectId).Execute()
+
+Remove Snapshot Hold
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), id, projectId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RemoveSnapshotHold``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RemoveSnapshotHold`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RemoveSnapshotHold`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | ID of the Eon snapshot. | 
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveSnapshotHoldRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

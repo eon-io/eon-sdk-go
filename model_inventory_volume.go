@@ -29,6 +29,8 @@ type InventoryVolume struct {
 	Region string `json:"region"`
 	// ID of the encryption key used to encrypt the volume.
 	EncryptionKeyId *string `json:"encryptionKeyId,omitempty"`
+	// Whether the encryption key is AWS-managed (true) or customer-managed (false).
+	IsAwsManagedKey *bool `json:"isAwsManagedKey,omitempty"`
 	// Volume tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"primary\": \"\"}` 
 	Tags map[string]string `json:"tags"`
 	// Volume availability zone.
@@ -165,6 +167,38 @@ func (o *InventoryVolume) SetEncryptionKeyId(v string) {
 	o.EncryptionKeyId = &v
 }
 
+// GetIsAwsManagedKey returns the IsAwsManagedKey field value if set, zero value otherwise.
+func (o *InventoryVolume) GetIsAwsManagedKey() bool {
+	if o == nil || IsNil(o.IsAwsManagedKey) {
+		var ret bool
+		return ret
+	}
+	return *o.IsAwsManagedKey
+}
+
+// GetIsAwsManagedKeyOk returns a tuple with the IsAwsManagedKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryVolume) GetIsAwsManagedKeyOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsAwsManagedKey) {
+		return nil, false
+	}
+	return o.IsAwsManagedKey, true
+}
+
+// HasIsAwsManagedKey returns a boolean if a field has been set.
+func (o *InventoryVolume) HasIsAwsManagedKey() bool {
+	if o != nil && !IsNil(o.IsAwsManagedKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAwsManagedKey gets a reference to the given bool and assigns it to the IsAwsManagedKey field.
+func (o *InventoryVolume) SetIsAwsManagedKey(v bool) {
+	o.IsAwsManagedKey = &v
+}
+
 // GetTags returns the Tags field value
 func (o *InventoryVolume) GetTags() map[string]string {
 	if o == nil {
@@ -252,6 +286,9 @@ func (o InventoryVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize["region"] = o.Region
 	if !IsNil(o.EncryptionKeyId) {
 		toSerialize["encryptionKeyId"] = o.EncryptionKeyId
+	}
+	if !IsNil(o.IsAwsManagedKey) {
+		toSerialize["isAwsManagedKey"] = o.IsAwsManagedKey
 	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["availabilityZone"] = o.AvailabilityZone

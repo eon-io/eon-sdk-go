@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **JobId** | Pointer to **string** | Backup job ID. | [optional] 
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
 **Resource** | Pointer to [**ResourceSnapshot**](ResourceSnapshot.md) |  | [optional] 
+**OnHold** | Pointer to **bool** | Whether the snapshot is on user hold. | [optional] 
 
 ## Methods
 
@@ -242,6 +243,31 @@ SetResource sets Resource field to given value.
 `func (o *Snapshot) HasResource() bool`
 
 HasResource returns a boolean if a field has been set.
+
+### GetOnHold
+
+`func (o *Snapshot) GetOnHold() bool`
+
+GetOnHold returns the OnHold field if non-nil, zero value otherwise.
+
+### GetOnHoldOk
+
+`func (o *Snapshot) GetOnHoldOk() (*bool, bool)`
+
+GetOnHoldOk returns a tuple with the OnHold field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnHold
+
+`func (o *Snapshot) SetOnHold(v bool)`
+
+SetOnHold sets OnHold field to given value.
+
+### HasOnHold
+
+`func (o *Snapshot) HasOnHold() bool`
+
+HasOnHold returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

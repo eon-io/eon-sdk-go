@@ -1903,15 +1903,13 @@ paths:
 
         By default, vaults are encrypted using an Eon-managed KMS key.
         However, if your requirements mandate control over encryption keys, you can use a customer-managed KMS key.
-        For more information on customer-managed KMS keys, see [About Customer-Managed Vault Keys].
+        For more information, see [About Self-Managed Vault Keys].
 
-        <Warning>
-        If you use customer-managed vault keys, you assume responsibility for securing your keys from unauthorized access and deletion.
-        Although keys can be rotated, they must not be deleted while snapshots that were encrypted with them exist.
-        If a key is deleted, you'll lose all ability to retrieve any snapshots encrypted with it.
-        </Warning>
+        <Error>
+        If you use self-managed vault keys, you assume responsibility for securing them from unauthorized access and deletion.
+        </Error>
 
-        [About Customer-Managed Vault Keys]: /user-guide/backing-up/vaults/about-customer-managed-vault-keys
+        [About Self-Managed Vault Keys]: /user-guide/backing-up/vaults/about-self-managed-vault-keys
       operationId: createVault
       parameters:
       - description: |
@@ -4387,6 +4385,155 @@ paths:
       - read:inventory
       x-audit-log:
         excluded: true
+  /v1/projects/{projectId}/snapshots/{id}/hold:
+    patch:
+      description: |
+        Description: Places a user hold on an Eon snapshot.
+        Snapshots with user holds are protected from removal even if their expiration time passes.
+
+        <Note>
+        Point-in-time recovery (PiTR) snapshots can't be placed on hold.
+        </Note>
+      operationId: holdSnapshot
+      parameters:
+      - description: ID of the Eon snapshot.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Hold was placed on the snapshot.
+        "400":
+          description: |
+            Invalid snapshot hold requested.
+            This includes attempts to hold PiTR snapshots, which aren't supported.
+        "404":
+          description: Snapshot wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Hold Snapshot
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:jobs
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: snapshot
+          in: path
+          key: id
+  /v1/projects/{projectId}/snapshots/{id}/remove-hold:
+    patch:
+      description: |
+        Description: Removes user hold from an Eon snapshot, allowing it to be removed once it passes its expiration time.
+
+        <Warning>
+        If the snapshot is past its expiration time, it's marked for removal as soon as the hold is removed.
+        </Warning>
+      operationId: removeSnapshotHold
+      parameters:
+      - description: ID of the Eon snapshot.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: User hold removed from snapshot.
+        "404":
+          description: Snapshot wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Remove Snapshot Hold
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:jobs
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: snapshot
+          in: path
+          key: id
   /v1/projects/{projectId}/resources/{id}/snapshots:
     post:
       description: |
@@ -6947,6 +7094,7 @@ components:
       - AWS_RDS_BACKUP
       - AWS_S3_BACKUP
       - AWS_FSX_BACKUP
+      - AWS_EFS_BACKUP
       - AWS_DYNAMO_DB_BACKUP
       - AWS_DYNAMO_DB_BACKUP_FULL
       - AWS_EKS_NAMESPACE_BACKUP
@@ -14600,6 +14748,7 @@ components:
           throughput: 125
           type: gp3
           sizeBytes: 10000000000
+        isAwsManagedKey: false
         region: eu-central-1
         availabilityZone: eu-central-1a
         tags:
@@ -14621,6 +14770,11 @@ components:
           description: ID of the encryption key used to encrypt the volume.
           example: arn:aws:kms:eu-central-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab
           type: string
+        isAwsManagedKey:
+          description: Whether the encryption key is AWS-managed (true) or customer-managed
+            (false).
+          example: false
+          type: boolean
         tags:
           additionalProperties:
             type: string
@@ -14661,6 +14815,7 @@ components:
             throughput: 125
             type: gp3
             sizeBytes: 10000000000
+          isAwsManagedKey: false
           region: eu-central-1
           availabilityZone: eu-central-1a
           tags:
@@ -14673,6 +14828,7 @@ components:
             throughput: 125
             type: gp3
             sizeBytes: 10000000000
+          isAwsManagedKey: false
           region: eu-central-1
           availabilityZone: eu-central-1a
           tags:
@@ -14700,6 +14856,7 @@ components:
               throughput: 125
               type: gp3
               sizeBytes: 10000000000
+            isAwsManagedKey: false
             region: eu-central-1
             availabilityZone: eu-central-1a
             tags:
@@ -14712,6 +14869,7 @@ components:
               throughput: 125
               type: gp3
               sizeBytes: 10000000000
+            isAwsManagedKey: false
             region: eu-central-1
             availabilityZone: eu-central-1a
             tags:
@@ -14734,6 +14892,7 @@ components:
                 throughput: 125
                 type: gp3
                 sizeBytes: 10000000000
+              isAwsManagedKey: false
               region: eu-central-1
               availabilityZone: eu-central-1a
               tags:
@@ -14746,6 +14905,7 @@ components:
                 throughput: 125
                 type: gp3
                 sizeBytes: 10000000000
+              isAwsManagedKey: false
               region: eu-central-1
               availabilityZone: eu-central-1a
               tags:
@@ -14914,6 +15074,7 @@ components:
                   throughput: 125
                   type: gp3
                   sizeBytes: 10000000000
+                isAwsManagedKey: false
                 region: eu-central-1
                 availabilityZone: eu-central-1a
                 tags:
@@ -14926,6 +15087,7 @@ components:
                   throughput: 125
                   type: gp3
                   sizeBytes: 10000000000
+                isAwsManagedKey: false
                 region: eu-central-1
                 availabilityZone: eu-central-1a
                 tags:
@@ -14991,6 +15153,7 @@ components:
                   throughput: 125
                   type: gp3
                   sizeBytes: 10000000000
+                isAwsManagedKey: false
                 region: eu-central-1
                 availabilityZone: eu-central-1a
                 tags:
@@ -15003,6 +15166,7 @@ components:
                   throughput: 125
                   type: gp3
                   sizeBytes: 10000000000
+                isAwsManagedKey: false
                 region: eu-central-1
                 availabilityZone: eu-central-1a
                 tags:
@@ -15090,6 +15254,7 @@ components:
                   throughput: 125
                   type: gp3
                   sizeBytes: 10000000000
+                isAwsManagedKey: false
                 region: eu-central-1
                 availabilityZone: eu-central-1a
                 tags:
@@ -15102,6 +15267,7 @@ components:
                   throughput: 125
                   type: gp3
                   sizeBytes: 10000000000
+                isAwsManagedKey: false
                 region: eu-central-1
                 availabilityZone: eu-central-1a
                 tags:
@@ -15532,6 +15698,7 @@ components:
         pointInTime: 2024-10-29T23:01:30Z
         jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
         resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
+        onHold: false
         vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
         resource:
           properties:
@@ -15633,6 +15800,11 @@ components:
           type: string
         resource:
           $ref: '#/components/schemas/ResourceSnapshot'
+        onHold:
+          description: Whether the snapshot is on user hold.
+          example: false
+          type: boolean
+          x-internal: false
       required:
       - createdTime
       - id
@@ -15645,6 +15817,7 @@ components:
           pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
+          onHold: false
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
             properties:
@@ -15790,6 +15963,7 @@ components:
         - pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
+          onHold: false
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
             properties:
@@ -15852,6 +16026,7 @@ components:
         - pointInTime: 2024-10-29T23:01:30Z
           jobId: 2cfe604d-1fc3-5db2-9f4c-2044f08e9411
           resourceId: b06bc01a-b08a-4fc7-933d-3f26ed434a29
+          onHold: false
           vaultId: 0c71a8aa-edcc-4bf3-8498-fdea45621953
           resource:
             properties:
