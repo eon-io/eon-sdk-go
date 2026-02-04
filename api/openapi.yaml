@@ -70,6 +70,311 @@ tags:
   name: billing
   x-displayName: Billing
 paths:
+  /v1/permissions:
+    get:
+      description: "Description: Fetches and retrieves a list of all user roles."
+      operationId: listPermissions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPermissionsResponse'
+          description: Successful operation
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Summary of all permissions
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions: []
+      x-audit-log:
+        excluded: true
+  /v1/roles:
+    post:
+      operationId: createRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRoleResponse'
+          description: Role created
+        "400":
+          description: Bad request
+        "409":
+          description: Role already exists
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create a new role
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:account_roles
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: role
+          in: resBody
+          key: id
+  /v1/roles/list:
+    post:
+      description: "Description: Retrieves a list of all user roles."
+      operationId: listRoles
+      parameters:
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+          To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+        example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRolesResponse'
+          description: Successful operation
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Roles
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions: []
+      x-audit-log:
+        excluded: true
+  /v1/roles/{roleId}:
+    delete:
+      description: "Description: This API operation deletes a role using its unique\
+        \ ID. "
+      operationId: deleteRole
+      parameters:
+      - description: ID of the role
+        explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Role deleted successfully
+        "404":
+          description: Role not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete a role
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:account_roles
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: role
+          in: path
+          key: roleId
+    get:
+      description: "Description: Fetches specific details of a role using its unique\
+        \ ID."
+      operationId: getRole
+      parameters:
+      - description: ID of the role
+        explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoleResponse'
+          description: Successful operation
+        "404":
+          description: Role not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get details of a role
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions: []
+      x-audit-log:
+        excluded: true
+    put:
+      description: "Description: This API operation updates the details of a role\
+        \ using its unique ID. The request body must contain the updated role details."
+      operationId: updateRole
+      parameters:
+      - description: ID of the role
+        explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRequest'
+        description: The request body for updating a user
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRoleResponse'
+          description: Role updated successfully
+        "404":
+          description: Role not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update a role
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:account_roles
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: role
+          in: path
+          key: roleId
   /v1/projects/{projectId}/source-accounts:
     post:
       description: "Description: Connects a source cloud account to the given project."
@@ -5029,6 +5334,464 @@ paths:
         excluded: true
 components:
   schemas:
+    PermissionType:
+      description: User Permission.
+      enum:
+      - permission_id_unspecified
+      - global_settings.view
+      - vault_accounts.manage
+      - cost_explorer.view
+      - user_access.manage
+      - saml_group_access.manage
+      - api_credentials.manage
+      - api_credentials.rotate_secret
+      - custom_roles.manage
+      - dashboard.view
+      - inventory.view
+      - jobs.view
+      - audit_logs.view
+      - backup_settings.view
+      - storage_gateway.view
+      - database_explorer.search
+      - file_explorer.search
+      - snapshots.take_or_convert
+      - resources.restore
+      - configuration.validate
+      - files.restore
+      - databases.query
+      - data_classes.override
+      - environments.override
+      - detected_apps.override
+      - control_violations.mute
+      - backup_exclusion.manage
+      - vaults.manage
+      - source_accounts.manage
+      - restore_accounts.manage
+      - backup_policies.manage
+      - discovery_configuration.manage
+      - backup_configuration.manage
+      - controls.manage
+      - ransomware_detection.manage
+      - notification_policies.manage
+      - storage_gateway.manage
+      example: inventory.view
+      type: string
+    Permission:
+      example:
+        permissionType: inventory.view
+        allowConditions: true
+        description: Allows viewing and editing of settings
+      properties:
+        permissionType:
+          $ref: '#/components/schemas/PermissionType'
+        description:
+          description: The description of the permission
+          example: Allows viewing and editing of settings
+          type: string
+        allowConditions:
+          description: "When true, this permission may be granted under an access\
+            \ condition (using accessConditionId on a PermissionGrant). When false,\
+            \ any PermissionGrant for this permission must NOT specify accessConditionId."
+          type: boolean
+      required:
+      - allowConditions
+      - category
+      - description
+      - name
+      - permissionType
+      type: object
+    ListPermissionsResponse:
+      example:
+        permissions:
+        - permissionType: inventory.view
+          allowConditions: true
+          description: Allows viewing and editing of settings
+        - permissionType: inventory.view
+          allowConditions: true
+          description: Allows viewing and editing of settings
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+      required:
+      - permissions
+      type: object
+    PermissionGrantInput:
+      example:
+        accessConditionId: accessConditionId
+        permission: inventory.view
+      properties:
+        permission:
+          $ref: '#/components/schemas/PermissionType'
+        accessConditionId:
+          description: Optional ID of the access condition associated with this permission
+            grant. MUST be null for permissions where allowConditions=false.
+          type: string
+      required:
+      - permission
+      type: object
+    AccessConditionEffect:
+      description: Data Access Rule effect.
+      enum:
+      - INCLUSIVE
+      - EXCLUSIVE
+      example: INCLUSIVE
+      type: string
+      x-enum-varnames:
+      - RULE_EFFECT_INCLUSIVE
+      - RULE_EFFECT_EXCLUSIVE
+    LogicalOperator:
+      description: |
+        Logical operator to apply to the list of `operands`.
+        `UNSPECIFIED` is supported only in responses.
+      enum:
+      - AND
+      - OR
+      - UNSPECIFIED
+      example: AND
+      type: string
+      x-enum-varnames:
+      - AND_OPERATOR
+      - OR_OPERATOR
+      - LOGICAL_OPERATOR_UNSPECIFIED
+    AccessConditionalExpression:
+      description: |
+        Conditional expression to evaluate to determine which resources are accessible.
+
+        Only one of the expressions below can be used.
+        For multiple conditions using `AND` or `OR` logic, group expressions with `group`.
+        You can nest multiple groups to create more complex expressions.
+      example:
+        resourceId:
+          operator: IN
+          resourceIds:
+          - resourceIds
+          - resourceIds
+        resourceGroupName:
+          resourceGroupNames:
+          - resourceGroupNames
+          - resourceGroupNames
+          operator: IN
+        tagKeys:
+          tagKeys:
+          - tagKeys
+          - tagKeys
+          operator: CONTAINS_ANY_OF
+        vpc:
+          vpcs:
+          - vpcs
+          - vpcs
+          operator: IN
+        resourceName:
+          resourceNames:
+          - resourceNames
+          - resourceNames
+          operator: IN
+        dataClasses:
+          dataClasses:
+          - PII
+          - PII
+          operator: CONTAINS_ANY_OF
+        accountId:
+          accountIds:
+          - accountIds
+          - accountIds
+          operator: IN
+        environment:
+          environments:
+          - PROD
+          - PROD
+          operator: IN
+        tagKeyValues:
+          tagKeyValues:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          operator: CONTAINS_ANY_OF
+        cloudProvider:
+          cloudProviders:
+          - AWS
+          - AWS
+          operator: IN
+        sourceRegion:
+          regions:
+          - regions
+          - regions
+          operator: IN
+        subnets:
+          subnets:
+          - subnets
+          - subnets
+          operator: CONTAINS_ANY_OF
+        group:
+          operands:
+          - resourceType:
+              operator: IN
+              resourceTypes:
+              - AWS_EC2
+              - AWS_RDS
+          - environment:
+              operator: IN
+              environments:
+              - PROD
+              - PROD_INTERNAL
+          operator: AND
+        resourceType:
+          resourceTypes:
+          - AWS_EC2
+          - AWS_EC2
+          operator: IN
+        apps:
+          operator: CONTAINS_ANY_OF
+          apps:
+          - apps
+          - apps
+      nullable: true
+      properties:
+        group:
+          $ref: '#/components/schemas/RoleAccessGroupCondition'
+        resourceType:
+          $ref: '#/components/schemas/ResourceTypeCondition'
+        dataClasses:
+          $ref: '#/components/schemas/DataClassesCondition'
+        environment:
+          $ref: '#/components/schemas/EnvironmentCondition'
+        apps:
+          $ref: '#/components/schemas/AppsCondition'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderCondition'
+        accountId:
+          $ref: '#/components/schemas/AccountIdCondition'
+        sourceRegion:
+          $ref: '#/components/schemas/RegionCondition'
+        vpc:
+          $ref: '#/components/schemas/VpcCondition'
+        subnets:
+          $ref: '#/components/schemas/SubnetsCondition'
+        resourceGroupName:
+          $ref: '#/components/schemas/ResourceGroupNameCondition'
+        resourceName:
+          $ref: '#/components/schemas/ResourceNameCondition'
+        resourceId:
+          $ref: '#/components/schemas/ResourceIdCondition'
+        tagKeys:
+          $ref: '#/components/schemas/TagKeysCondition'
+        tagKeyValues:
+          $ref: '#/components/schemas/TagKeyValuesCondition'
+      type: object
+    RoleAccessGroupCondition:
+      description: |
+        Group of expressions to evaluate using the logical operator specified in `operator`.
+        Each item in the `operands` list can be either a single expression or a nested `group` expression.
+      example:
+        operands:
+        - resourceType:
+            operator: IN
+            resourceTypes:
+            - AWS_EC2
+            - AWS_RDS
+        - environment:
+            operator: IN
+            environments:
+            - PROD
+            - PROD_INTERNAL
+        operator: AND
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/LogicalOperator'
+        operands:
+          description: |
+            List of expressions to evaluate using the logical operator specified in `operator`.
+            Each item in the list can be either a single expression or a nested `group` expression.
+
+            Must contain at least 2 items.
+          example:
+          - resourceType:
+              operator: IN
+              resourceTypes:
+              - AWS_EC2
+              - AWS_RDS
+          - environment:
+              operator: IN
+              environments:
+              - PROD
+              - PROD_INTERNAL
+          items:
+            $ref: '#/components/schemas/AccessConditionalExpression'
+          minItems: 2
+          type: array
+      required:
+      - operands
+      - operator
+      type: object
+    ScalarOperators:
+      description: |
+        Evaluates whether the value is in the list.
+        `UNSPECIFIED` is supported only in responses.
+      enum:
+      - IN
+      - NOT_IN
+      - UNSPECIFIED
+      example: IN
+      type: string
+      x-enum-varnames:
+      - IN_OPERATOR
+      - NOT_IN_OPERATOR
+      - SCALAR_OPERATOR_UNSPECIFIED
+    ResourceType:
+      description: |
+        Resource type identifier combining cloud provider and service type.
+        `RESOURCE_TYPE_UNSPECIFIED` is supported only in responses.
+      enum:
+      - AWS_EC2
+      - AWS_RDS
+      - AWS_S3
+      - AWS_EFS
+      - AWS_FSX
+      - AWS_EKS_NAMESPACE
+      - AWS_DYNAMO_DB
+      - AWS_EBS_VOLUME
+      - AWS_KEYSPACES_TABLE
+      - AZURE_VIRTUAL_MACHINE
+      - AZURE_FILE_SHARE
+      - AZURE_STORAGE_ACCOUNT
+      - AZURE_DISK
+      - AZURE_SQL_DATABASE
+      - AZURE_SQL_MANAGED_INSTANCE
+      - AZURE_SQL_VIRTUAL_MACHINE
+      - AZURE_SAP_HANA_VM
+      - AZURE_MYSQL
+      - AZURE_POSTGRESQL
+      - AZURE_COSMOSDB_MONGODB
+      - AZURE_COSMOSDB_NOSQL
+      - AZURE_AKS_NAMESPACE
+      - ATLAS_MONGODB_CLUSTER
+      - GCP_COMPUTE_ENGINE_INSTANCE
+      - GCP_CLOUD_SQL_INSTANCE
+      - GCP_CLOUD_STORAGE_BUCKET
+      - GCP_GKE_NAMESPACE
+      - GCP_BIG_QUERY
+      - GCP_CLOUD_FIRESTORE
+      - GCP_DISK
+      - RESOURCE_TYPE_UNSPECIFIED
+      example: AWS_EC2
+      type: string
+    ResourceTypeCondition:
+      example:
+        resourceTypes:
+        - AWS_EC2
+        - AWS_EC2
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceTypes:
+          description: |
+            Resource types to evaluate.
+            `RESOURCE_TYPE_UNSPECIFIED` is supported only in responses.
+          items:
+            $ref: '#/components/schemas/ResourceType'
+          type: array
+      required:
+      - operator
+      - resourceTypes
+      type: object
+    ListOperators:
+      description: |
+        Evaluates whether the original list constains any, all, or none of the values in this list.
+        `UNSPECIFIED` is supported only in responses.
+      enum:
+      - CONTAINS_ANY_OF
+      - CONTAINS_NONE_OF
+      - CONTAINS_ALL_OF
+      - UNSPECIFIED
+      example: CONTAINS_ANY_OF
+      type: string
+      x-enum-varnames:
+      - CONTAINS_ANY_OF_OPERATOR
+      - CONTAINS_NONE_OF_OPERATOR
+      - CONTAINS_ALL_OF_OPERATOR
+      - LIST_OPERATOR_UNSPECIFIED
+    DataClass:
+      description: |
+        Data classes.
+        `DATA_CLASS_UNSPECIFIED` is supported only in responses.
+      enum:
+      - FI
+      - PHI
+      - PII
+      - DATA_CLASS_UNSPECIFIED
+      example: PII
+      type: string
+    DataClassesCondition:
+      example:
+        dataClasses:
+        - PII
+        - PII
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        dataClasses:
+          items:
+            $ref: '#/components/schemas/DataClass'
+          type: array
+      required:
+      - dataClasses
+      - operator
+      type: object
+    Environment:
+      description: |
+        The resource's environment: production, internal production, or staging.
+        `ENVIRONMENT_UNSPECIFIED` is supported only in responses.
+      enum:
+      - PROD
+      - PROD_INTERNAL
+      - STAGE
+      - ENVIRONMENT_UNSPECIFIED
+      example: PROD
+      type: string
+    EnvironmentCondition:
+      example:
+        environments:
+        - PROD
+        - PROD
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        environments:
+          items:
+            $ref: '#/components/schemas/Environment'
+          type: array
+      required:
+      - environments
+      - operator
+      type: object
+    AppsCondition:
+      example:
+        operator: CONTAINS_ANY_OF
+        apps:
+        - apps
+        - apps
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        apps:
+          items:
+            type: string
+          type: array
+      required:
+      - apps
+      - operator
+      type: object
     Provider:
       description: |
         Cloud provider.
@@ -5041,6 +5804,1905 @@ components:
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string
+    CloudProviderCondition:
+      example:
+        cloudProviders:
+        - AWS
+        - AWS
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        cloudProviders:
+          items:
+            $ref: '#/components/schemas/Provider'
+          type: array
+      required:
+      - cloudProviders
+      - operator
+      type: object
+    AccountIdCondition:
+      example:
+        accountIds:
+        - accountIds
+        - accountIds
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        accountIds:
+          items:
+            type: string
+          type: array
+      required:
+      - accountIds
+      - operator
+      type: object
+    RegionCondition:
+      example:
+        regions:
+        - regions
+        - regions
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        regions:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - regions
+      type: object
+    VpcCondition:
+      example:
+        vpcs:
+        - vpcs
+        - vpcs
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        vpcs:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - vpcs
+      type: object
+    SubnetsCondition:
+      example:
+        subnets:
+        - subnets
+        - subnets
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        subnets:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - subnets
+      type: object
+    ResourceGroupNameCondition:
+      example:
+        resourceGroupNames:
+        - resourceGroupNames
+        - resourceGroupNames
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceGroupNames:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - resourceGroupNames
+      type: object
+    ResourceNameCondition:
+      example:
+        resourceNames:
+        - resourceNames
+        - resourceNames
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceNames:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - resourceNames
+      type: object
+    ResourceIdCondition:
+      example:
+        operator: IN
+        resourceIds:
+        - resourceIds
+        - resourceIds
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        resourceIds:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - resourceIds
+      type: object
+    TagKeysCondition:
+      example:
+        tagKeys:
+        - tagKeys
+        - tagKeys
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        tagKeys:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - tagKeys
+      type: object
+    TagKeyValue:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      type: object
+    TagKeyValuesCondition:
+      example:
+        tagKeyValues:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        tagKeyValues:
+          items:
+            $ref: '#/components/schemas/TagKeyValue'
+          type: array
+      required:
+      - operator
+      - tagKeyValues
+      type: object
+    AccessCondition:
+      example:
+        expression:
+          resourceId:
+            operator: IN
+            resourceIds:
+            - resourceIds
+            - resourceIds
+          resourceGroupName:
+            resourceGroupNames:
+            - resourceGroupNames
+            - resourceGroupNames
+            operator: IN
+          tagKeys:
+            tagKeys:
+            - tagKeys
+            - tagKeys
+            operator: CONTAINS_ANY_OF
+          vpc:
+            vpcs:
+            - vpcs
+            - vpcs
+            operator: IN
+          resourceName:
+            resourceNames:
+            - resourceNames
+            - resourceNames
+            operator: IN
+          dataClasses:
+            dataClasses:
+            - PII
+            - PII
+            operator: CONTAINS_ANY_OF
+          accountId:
+            accountIds:
+            - accountIds
+            - accountIds
+            operator: IN
+          environment:
+            environments:
+            - PROD
+            - PROD
+            operator: IN
+          tagKeyValues:
+            tagKeyValues:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            operator: CONTAINS_ANY_OF
+          cloudProvider:
+            cloudProviders:
+            - AWS
+            - AWS
+            operator: IN
+          sourceRegion:
+            regions:
+            - regions
+            - regions
+            operator: IN
+          subnets:
+            subnets:
+            - subnets
+            - subnets
+            operator: CONTAINS_ANY_OF
+          group:
+            operands:
+            - resourceType:
+                operator: IN
+                resourceTypes:
+                - AWS_EC2
+                - AWS_RDS
+            - environment:
+                operator: IN
+                environments:
+                - PROD
+                - PROD_INTERNAL
+            operator: AND
+          resourceType:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
+            operator: IN
+          apps:
+            operator: CONTAINS_ANY_OF
+            apps:
+            - apps
+            - apps
+        effect: INCLUSIVE
+        id: id
+      properties:
+        id:
+          description: The ID of the data access rule
+          type: string
+        effect:
+          $ref: '#/components/schemas/AccessConditionEffect'
+        expression:
+          $ref: '#/components/schemas/AccessConditionalExpression'
+      required:
+      - effect
+      - expression
+      - id
+      type: object
+    CreateRoleRequest:
+      example:
+        permissionGrants:
+        - accessConditionId: accessConditionId
+          permission: inventory.view
+        - accessConditionId: accessConditionId
+          permission: inventory.view
+        name: name
+        accessConditions:
+        - expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          effect: INCLUSIVE
+          id: id
+        - expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          effect: INCLUSIVE
+          id: id
+      properties:
+        name:
+          description: The name of the role
+          type: string
+        permissionGrants:
+          description: The permissions of the role
+          items:
+            $ref: '#/components/schemas/PermissionGrantInput'
+          type: array
+        accessConditions:
+          description: "The condition of the role, keyed by name"
+          items:
+            $ref: '#/components/schemas/AccessCondition'
+          type: array
+      required:
+      - name
+      - permissionGrants
+      type: object
+    PermissionGrant:
+      example:
+        accessConditionId: accessConditionId
+        permission: inventory.view
+      properties:
+        permission:
+          $ref: '#/components/schemas/PermissionType'
+        accessConditionId:
+          description: Optional ID of the access condition associated with this permission
+            grant. MUST be null for permissions where allowConditions=false.
+          type: string
+      required:
+      - permission
+      type: object
+    Role:
+      example:
+        permissionGrants:
+        - accessConditionId: accessConditionId
+          permission: inventory.view
+        - accessConditionId: accessConditionId
+          permission: inventory.view
+        isBuiltInRole: true
+        name: name
+        accessConditions:
+        - expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          effect: INCLUSIVE
+          id: id
+        - expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          effect: INCLUSIVE
+          id: id
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The ID of the role
+          format: uuid
+          type: string
+        name:
+          description: The name of the role
+          type: string
+        isBuiltInRole:
+          description: Whether the role is built in
+          type: boolean
+        permissionGrants:
+          description: The permissions of the role
+          items:
+            $ref: '#/components/schemas/PermissionGrant'
+          type: array
+        accessConditions:
+          description: The condition of the role
+          items:
+            $ref: '#/components/schemas/AccessCondition'
+          type: array
+      required:
+      - id
+      - isBuiltInRole
+      - name
+      - permissionGrants
+      - scopes
+      type: object
+    CreateRoleResponse:
+      example:
+        role:
+          permissionGrants:
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          isBuiltInRole: true
+          name: name
+          accessConditions:
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        role:
+          $ref: '#/components/schemas/Role'
+      required:
+      - role
+      type: object
+    ListRolesResponse:
+      example:
+        roles:
+        - permissionGrants:
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          isBuiltInRole: true
+          name: name
+          accessConditions:
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - permissionGrants:
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          isBuiltInRole: true
+          name: name
+          accessConditions:
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        totalCount: 0
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/Role'
+          type: array
+        totalCount:
+          description: Total number of roles.
+          type: integer
+      required:
+      - roles
+      type: object
+    GetRoleResponse:
+      example:
+        role:
+          permissionGrants:
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          isBuiltInRole: true
+          name: name
+          accessConditions:
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        role:
+          $ref: '#/components/schemas/Role'
+      required:
+      - role
+      type: object
+    UpdateRoleRequest:
+      example:
+        permissionGrants:
+        - accessConditionId: accessConditionId
+          permission: inventory.view
+        - accessConditionId: accessConditionId
+          permission: inventory.view
+        name: name
+        accessConditions:
+        - expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          effect: INCLUSIVE
+          id: id
+        - expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: IN
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - resourceType:
+                  operator: IN
+                  resourceTypes:
+                  - AWS_EC2
+                  - AWS_RDS
+              - environment:
+                  operator: IN
+                  environments:
+                  - PROD
+                  - PROD_INTERNAL
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          effect: INCLUSIVE
+          id: id
+      properties:
+        name:
+          description: The name of the role
+          type: string
+        permissionGrants:
+          description: The permissions of the role
+          items:
+            $ref: '#/components/schemas/PermissionGrantInput'
+          type: array
+        accessConditions:
+          description: "The condition of the role, keyed by name"
+          items:
+            $ref: '#/components/schemas/AccessCondition'
+          type: array
+      required:
+      - name
+      - permissionGrants
+      type: object
+    UpdateRoleResponse:
+      example:
+        role:
+          permissionGrants:
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          - accessConditionId: accessConditionId
+            permission: inventory.view
+          isBuiltInRole: true
+          name: name
+          accessConditions:
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          - expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: IN
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - resourceType:
+                    operator: IN
+                    resourceTypes:
+                    - AWS_EC2
+                    - AWS_RDS
+                - environment:
+                    operator: IN
+                    environments:
+                    - PROD
+                    - PROD_INTERNAL
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            effect: INCLUSIVE
+            id: id
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        role:
+          $ref: '#/components/schemas/Role'
+      required:
+      - role
+      type: object
     AwsSourceAccountAttributesInput:
       description: |
         AWS account configuration.
@@ -7089,7 +9751,6 @@ components:
       - BACKUP_JOB_TYPE_UNSPECIFIED
       - AWS_EC2_BACKUP
       - AWS_EBS_VOLUME_BACKUP
-      - AWS_EC2_HIGH_FREQUENCY_BACKUP
       - AWS_EC2_SNAPSHOT_CONVERSION
       - AWS_RDS_BACKUP
       - AWS_S3_BACKUP
@@ -7411,44 +10072,6 @@ components:
       - jobId
       - status
       type: object
-    ResourceType:
-      description: |
-        Resource type identifier combining cloud provider and service type.
-        `RESOURCE_TYPE_UNSPECIFIED` is supported only in responses.
-      enum:
-      - AWS_EC2
-      - AWS_RDS
-      - AWS_S3
-      - AWS_EFS
-      - AWS_FSX
-      - AWS_EKS_NAMESPACE
-      - AWS_DYNAMO_DB
-      - AWS_EBS_VOLUME
-      - AWS_KEYSPACES_TABLE
-      - AZURE_VIRTUAL_MACHINE
-      - AZURE_FILE_SHARE
-      - AZURE_STORAGE_ACCOUNT
-      - AZURE_DISK
-      - AZURE_SQL_DATABASE
-      - AZURE_SQL_MANAGED_INSTANCE
-      - AZURE_SQL_VIRTUAL_MACHINE
-      - AZURE_SAP_HANA_VM
-      - AZURE_MYSQL
-      - AZURE_POSTGRESQL
-      - AZURE_COSMOSDB_MONGODB
-      - AZURE_COSMOSDB_NOSQL
-      - AZURE_AKS_NAMESPACE
-      - ATLAS_MONGODB_CLUSTER
-      - GCP_COMPUTE_ENGINE_INSTANCE
-      - GCP_CLOUD_SQL_INSTANCE
-      - GCP_CLOUD_STORAGE_BUCKET
-      - GCP_GKE_NAMESPACE
-      - GCP_BIG_QUERY
-      - GCP_CLOUD_FIRESTORE
-      - GCP_DISK
-      - RESOURCE_TYPE_UNSPECIFIED
-      example: AWS_EC2
-      type: string
     ResourceDetails:
       example:
         providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
@@ -8406,20 +11029,6 @@ components:
       - RESOURCE_SELECTOR_MODE_ALL
       - RESOURCE_SELECTOR_MODE_NONE
       - RESOURCE_SELECTOR_MODE_CONDITIONAL
-    LogicalOperator:
-      description: |
-        Logical operator to apply to the list of `operands`.
-        `UNSPECIFIED` is supported only in responses.
-      enum:
-      - AND
-      - OR
-      - UNSPECIFIED
-      example: AND
-      type: string
-      x-enum-varnames:
-      - AND_OPERATOR
-      - OR_OPERATOR
-      - LOGICAL_OPERATOR_UNSPECIFIED
     BackupPolicyExpression:
       description: |
         Conditional expression to evaulate to determine which resources are to included in the backup policy.
@@ -8592,327 +11201,6 @@ components:
       required:
       - operands
       - operator
-      type: object
-    ScalarOperators:
-      description: |
-        Evaluates whether the value is in the list.
-        `UNSPECIFIED` is supported only in responses.
-      enum:
-      - IN
-      - NOT_IN
-      - UNSPECIFIED
-      example: IN
-      type: string
-      x-enum-varnames:
-      - IN_OPERATOR
-      - NOT_IN_OPERATOR
-      - SCALAR_OPERATOR_UNSPECIFIED
-    ResourceTypeCondition:
-      example:
-        resourceTypes:
-        - AWS_EC2
-        - AWS_EC2
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        resourceTypes:
-          description: |
-            Resource types to evaluate.
-            `RESOURCE_TYPE_UNSPECIFIED` is supported only in responses.
-          items:
-            $ref: '#/components/schemas/ResourceType'
-          type: array
-      required:
-      - operator
-      - resourceTypes
-      type: object
-    ListOperators:
-      description: |
-        Evaluates whether the original list constains any, all, or none of the values in this list.
-        `UNSPECIFIED` is supported only in responses.
-      enum:
-      - CONTAINS_ANY_OF
-      - CONTAINS_NONE_OF
-      - CONTAINS_ALL_OF
-      - UNSPECIFIED
-      example: CONTAINS_ANY_OF
-      type: string
-      x-enum-varnames:
-      - CONTAINS_ANY_OF_OPERATOR
-      - CONTAINS_NONE_OF_OPERATOR
-      - CONTAINS_ALL_OF_OPERATOR
-      - LIST_OPERATOR_UNSPECIFIED
-    DataClass:
-      description: |
-        Data classes.
-        `DATA_CLASS_UNSPECIFIED` is supported only in responses.
-      enum:
-      - FI
-      - PHI
-      - PII
-      - DATA_CLASS_UNSPECIFIED
-      example: PII
-      type: string
-    DataClassesCondition:
-      example:
-        dataClasses:
-        - PII
-        - PII
-        operator: CONTAINS_ANY_OF
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ListOperators'
-        dataClasses:
-          items:
-            $ref: '#/components/schemas/DataClass'
-          type: array
-      required:
-      - dataClasses
-      - operator
-      type: object
-    Environment:
-      description: |
-        The resource's environment: production, internal production, or staging.
-        `ENVIRONMENT_UNSPECIFIED` is supported only in responses.
-      enum:
-      - PROD
-      - PROD_INTERNAL
-      - STAGE
-      - ENVIRONMENT_UNSPECIFIED
-      example: PROD
-      type: string
-    EnvironmentCondition:
-      example:
-        environments:
-        - PROD
-        - PROD
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        environments:
-          items:
-            $ref: '#/components/schemas/Environment'
-          type: array
-      required:
-      - environments
-      - operator
-      type: object
-    AppsCondition:
-      example:
-        operator: CONTAINS_ANY_OF
-        apps:
-        - apps
-        - apps
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ListOperators'
-        apps:
-          items:
-            type: string
-          type: array
-      required:
-      - apps
-      - operator
-      type: object
-    CloudProviderCondition:
-      example:
-        cloudProviders:
-        - AWS
-        - AWS
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        cloudProviders:
-          items:
-            $ref: '#/components/schemas/Provider'
-          type: array
-      required:
-      - cloudProviders
-      - operator
-      type: object
-    AccountIdCondition:
-      example:
-        accountIds:
-        - accountIds
-        - accountIds
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        accountIds:
-          items:
-            type: string
-          type: array
-      required:
-      - accountIds
-      - operator
-      type: object
-    RegionCondition:
-      example:
-        regions:
-        - regions
-        - regions
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        regions:
-          items:
-            type: string
-          type: array
-      required:
-      - operator
-      - regions
-      type: object
-    VpcCondition:
-      example:
-        vpcs:
-        - vpcs
-        - vpcs
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        vpcs:
-          items:
-            type: string
-          type: array
-      required:
-      - operator
-      - vpcs
-      type: object
-    SubnetsCondition:
-      example:
-        subnets:
-        - subnets
-        - subnets
-        operator: CONTAINS_ANY_OF
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ListOperators'
-        subnets:
-          items:
-            type: string
-          type: array
-      required:
-      - operator
-      - subnets
-      type: object
-    ResourceGroupNameCondition:
-      example:
-        resourceGroupNames:
-        - resourceGroupNames
-        - resourceGroupNames
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        resourceGroupNames:
-          items:
-            type: string
-          type: array
-      required:
-      - operator
-      - resourceGroupNames
-      type: object
-    ResourceNameCondition:
-      example:
-        resourceNames:
-        - resourceNames
-        - resourceNames
-        operator: IN
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        resourceNames:
-          items:
-            type: string
-          type: array
-      required:
-      - operator
-      - resourceNames
-      type: object
-    ResourceIdCondition:
-      example:
-        operator: IN
-        resourceIds:
-        - resourceIds
-        - resourceIds
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ScalarOperators'
-        resourceIds:
-          items:
-            type: string
-          type: array
-      required:
-      - operator
-      - resourceIds
-      type: object
-    TagKeysCondition:
-      example:
-        tagKeys:
-        - tagKeys
-        - tagKeys
-        operator: CONTAINS_ANY_OF
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ListOperators'
-        tagKeys:
-          items:
-            type: string
-          type: array
-      required:
-      - operator
-      - tagKeys
-      type: object
-    TagKeyValue:
-      example:
-        value: value
-        key: key
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      type: object
-    TagKeyValuesCondition:
-      example:
-        tagKeyValues:
-        - value: value
-          key: key
-        - value: value
-          key: key
-        operator: CONTAINS_ANY_OF
-      nullable: true
-      properties:
-        operator:
-          $ref: '#/components/schemas/ListOperators'
-        tagKeyValues:
-          items:
-            $ref: '#/components/schemas/TagKeyValue'
-          type: array
-      required:
-      - operator
-      - tagKeyValues
       type: object
     BackupPolicyResourceSelector:
       example:
@@ -16487,6 +18775,7 @@ components:
       - GCP_CLOUD_SQL_POSTGRES_SQL_METERING_DIMENSION
       - GCP_CLOUD_SQL_MYSQL_METERING_DIMENSION
       - GCP_CLOUD_SQL_SQL_SERVER_METERING_DIMENSION
+      - GCP_BIG_QUERY_METERING_DIMENSION
       - DATA_TRANSFER_METERING_DIMENSION
       - AWS_EC2_TO_AZURE_VAULT_METERING_DIMENSION
       - AWS_S3_TO_AZURE_VAULT_METERING_DIMENSION

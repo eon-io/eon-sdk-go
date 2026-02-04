@@ -9,12 +9,16 @@ api_backups.go
 api_billing.go
 api_dashboard.go
 api_database_snapshots.go
+api_iam.go
 api_jobs.go
 api_resources.go
 api_snapshots.go
 api_vaults.go
 client.go
 configuration.go
+docs/AccessCondition.md
+docs/AccessConditionEffect.md
+docs/AccessConditionalExpression.md
 docs/AccountIdCondition.md
 docs/AccountIdFilters.md
 docs/AccountInstallationMethod.md
@@ -99,6 +103,8 @@ docs/CostGranularity.md
 docs/CostUnit.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
+docs/CreateRoleRequest.md
+docs/CreateRoleResponse.md
 docs/CreateVault409Response.md
 docs/CreateVaultRequest.md
 docs/CreateVaultResponse.md
@@ -156,6 +162,7 @@ docs/GetResourceResponse.md
 docs/GetRestoreAccountConnectivityConfigResponse.md
 docs/GetRestoreAccountMetricsConfigResponse.md
 docs/GetRestoreJobResponse.md
+docs/GetRoleResponse.md
 docs/GetSnapshotResponse.md
 docs/GetSourceAccountMetricsConfigResponse.md
 docs/GetVaultResponse.md
@@ -165,6 +172,7 @@ docs/HighFrequencyBackupScheduleConfig.md
 docs/HighFrequencyBackupScheduleFrequency.md
 docs/HighFrequencyBackupSchedules.md
 docs/HighFrequencyIntervalConfig.md
+docs/IamAPI.md
 docs/IdFilters.md
 docs/InventoryFilterConditions.md
 docs/InventoryResource.md
@@ -184,11 +192,13 @@ docs/ListInventoryRequest.md
 docs/ListInventorySnapshotsRequest.md
 docs/ListInventorySnapshotsResponse.md
 docs/ListOperators.md
+docs/ListPermissionsResponse.md
 docs/ListResourcesResponse.md
 docs/ListRestoreAccountsRequest.md
 docs/ListRestoreAccountsResponse.md
 docs/ListRestoreJobsRequest.md
 docs/ListRestoreJobsResponse.md
+docs/ListRolesResponse.md
 docs/ListSourceAccountsRequest.md
 docs/ListSourceAccountsResponse.md
 docs/LogicalOperator.md
@@ -200,6 +210,10 @@ docs/OverrideDataClassificationsRequest.md
 docs/OverrideDataClassificationsResponse.md
 docs/OverrideEnvironmentRequest.md
 docs/OverrideEnvironmentResponse.md
+docs/Permission.md
+docs/PermissionGrant.md
+docs/PermissionGrantInput.md
+docs/PermissionType.md
 docs/Provider.md
 docs/ProviderAccountIdFilters.md
 docs/ProviderRestoreAccountConnectivityConfig.md
@@ -261,6 +275,8 @@ docs/RestoreJobsFilterConditions.md
 docs/RestoreResult.md
 docs/RestoreVolumeToEbsRequest.md
 docs/RestoreVolumeToEbsSnapshotRequest.md
+docs/Role.md
+docs/RoleAccessGroupCondition.md
 docs/S3RestoreDestination.md
 docs/S3RestoreTarget.md
 docs/ScalarOperators.md
@@ -311,6 +327,8 @@ docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
 docs/UpdateRestoreAccountConnectivityConfigRequest.md
 docs/UpdateRestoreAccountConnectivityConfigResponse.md
+docs/UpdateRoleRequest.md
+docs/UpdateRoleResponse.md
 docs/UpdateVaultRequest.md
 docs/UpdateVaultResponse.md
 docs/Usage.md
@@ -322,6 +340,9 @@ docs/VolumeSettings.md
 docs/VpcCondition.md
 docs/WeeklyConfig.md
 git_push.sh
+model_access_condition.go
+model_access_condition_effect.go
+model_access_conditional_expression.go
 model_account_id_condition.go
 model_account_id_filters.go
 model_account_installation_method.go
@@ -401,6 +422,8 @@ model_cost_granularity.go
 model_cost_unit.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
+model_create_role_request.go
+model_create_role_response.go
 model_create_vault_409_response.go
 model_create_vault_request.go
 model_create_vault_response.go
@@ -456,6 +479,7 @@ model_get_resource_response.go
 model_get_restore_account_connectivity_config_response.go
 model_get_restore_account_metrics_config_response.go
 model_get_restore_job_response.go
+model_get_role_response.go
 model_get_snapshot_response.go
 model_get_source_account_metrics_config_response.go
 model_get_vault_response.go
@@ -483,11 +507,13 @@ model_list_inventory_request.go
 model_list_inventory_snapshots_request.go
 model_list_inventory_snapshots_response.go
 model_list_operators.go
+model_list_permissions_response.go
 model_list_resources_response.go
 model_list_restore_accounts_request.go
 model_list_restore_accounts_response.go
 model_list_restore_jobs_request.go
 model_list_restore_jobs_response.go
+model_list_roles_response.go
 model_list_source_accounts_request.go
 model_list_source_accounts_response.go
 model_logical_operator.go
@@ -499,6 +525,10 @@ model_override_data_classifications_request.go
 model_override_data_classifications_response.go
 model_override_environment_request.go
 model_override_environment_response.go
+model_permission.go
+model_permission_grant.go
+model_permission_grant_input.go
+model_permission_type.go
 model_provider.go
 model_provider_account_id_filters.go
 model_provider_restore_account_connectivity_config.go
@@ -559,6 +589,8 @@ model_restore_jobs_filter_conditions.go
 model_restore_result.go
 model_restore_volume_to_ebs_request.go
 model_restore_volume_to_ebs_snapshot_request.go
+model_role.go
+model_role_access_group_condition.go
 model_s3_restore_destination.go
 model_s3_restore_target.go
 model_scalar_operators.go
@@ -608,6 +640,8 @@ model_update_backup_policy_request.go
 model_update_backup_policy_response.go
 model_update_restore_account_connectivity_config_request.go
 model_update_restore_account_connectivity_config_response.go
+model_update_role_request.go
+model_update_role_response.go
 model_update_vault_request.go
 model_update_vault_response.go
 model_usage.go
@@ -625,6 +659,7 @@ test/api_backups_test.go
 test/api_billing_test.go
 test/api_dashboard_test.go
 test/api_database_snapshots_test.go
+test/api_iam_test.go
 test/api_jobs_test.go
 test/api_resources_test.go
 test/api_snapshots_test.go
