@@ -21,7 +21,7 @@ var _ MappedNullable = &AccessCondition{}
 
 // AccessCondition struct for AccessCondition
 type AccessCondition struct {
-	// The ID of the data access rule
+	// Display name for the data access rule, which also serves as its ID for use in `permissionGrants`. Valid characters: `[a-zA-Z0-9-_.\\s]`. 
 	Id string `json:"id"`
 	Effect AccessConditionEffect `json:"effect"`
 	Expression NullableAccessConditionalExpression `json:"expression"`

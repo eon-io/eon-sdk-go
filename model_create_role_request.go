@@ -21,11 +21,11 @@ var _ MappedNullable = &CreateRoleRequest{}
 
 // CreateRoleRequest struct for CreateRoleRequest
 type CreateRoleRequest struct {
-	// The name of the role
+	// Role display name. Must be unique in your Eon account. 
 	Name string `json:"name"`
-	// The permissions of the role
+	// Permissions granted by the role.
 	PermissionGrants []PermissionGrantInput `json:"permissionGrants"`
-	// The condition of the role, keyed by name
+	// If present, the ID of the set of access conditions that restrict the resources the permission is granted for. The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions. If omitted, the permission is granted for all resources. 
 	AccessConditions []AccessCondition `json:"accessConditions,omitempty"`
 }
 

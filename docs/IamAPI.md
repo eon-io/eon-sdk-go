@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateRole**](IamAPI.md#CreateRole) | **Post** /v1/roles | Create a new role
-[**DeleteRole**](IamAPI.md#DeleteRole) | **Delete** /v1/roles/{roleId} | Delete a role
-[**GetRole**](IamAPI.md#GetRole) | **Get** /v1/roles/{roleId} | Get details of a role
-[**ListPermissions**](IamAPI.md#ListPermissions) | **Get** /v1/permissions | Summary of all permissions
+[**CreateRole**](IamAPI.md#CreateRole) | **Post** /v1/roles | Create Role
+[**DeleteRole**](IamAPI.md#DeleteRole) | **Delete** /v1/roles/{roleId} | Delete Role
+[**GetRole**](IamAPI.md#GetRole) | **Get** /v1/roles/{roleId} | Get Role
+[**ListPermissions**](IamAPI.md#ListPermissions) | **Get** /v1/permissions | List Permissions
 [**ListRoles**](IamAPI.md#ListRoles) | **Post** /v1/roles/list | List Roles
-[**UpdateRole**](IamAPI.md#UpdateRole) | **Put** /v1/roles/{roleId} | Update a role
+[**UpdateRole**](IamAPI.md#UpdateRole) | **Put** /v1/roles/{roleId} | Update Role
 
 
 
@@ -17,7 +17,9 @@ Method | HTTP request | Description
 
 > CreateRoleResponse CreateRole(ctx).CreateRoleRequest(createRoleRequest).Execute()
 
-Create a new role
+Create Role
+
+
 
 ### Example
 
@@ -81,7 +83,7 @@ Name | Type | Description  | Notes
 
 > DeleteRole(ctx, roleId).Execute()
 
-Delete a role
+Delete Role
 
 
 
@@ -98,7 +100,7 @@ import (
 )
 
 func main() {
-	roleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the role
+	roleId := "ceaf2281-bf04-542d-a801-a6a4865373ad" // string | Role ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -116,7 +118,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**roleId** | **string** | ID of the role | 
+**roleId** | **string** | Role ID. | 
 
 ### Other Parameters
 
@@ -149,7 +151,7 @@ Name | Type | Description  | Notes
 
 > GetRoleResponse GetRole(ctx, roleId).Execute()
 
-Get details of a role
+Get Role
 
 
 
@@ -166,7 +168,7 @@ import (
 )
 
 func main() {
-	roleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the role
+	roleId := "daa42222-6ad2-5d37-bb26-4f2a9cba73da" // string | Role ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -186,7 +188,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**roleId** | **string** | ID of the role | 
+**roleId** | **string** | Role ID. | 
 
 ### Other Parameters
 
@@ -219,7 +221,7 @@ Name | Type | Description  | Notes
 
 > ListPermissionsResponse ListPermissions(ctx).Execute()
 
-Summary of all permissions
+List Permissions
 
 
 
@@ -348,7 +350,7 @@ Name | Type | Description  | Notes
 
 > UpdateRoleResponse UpdateRole(ctx, roleId).UpdateRoleRequest(updateRoleRequest).Execute()
 
-Update a role
+Update Role
 
 
 

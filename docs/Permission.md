@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PermissionType** | [**PermissionType**](PermissionType.md) |  | 
-**Description** | **string** | The description of the permission | 
-**AllowConditions** | **bool** | When true, this permission may be granted under an access condition (using accessConditionId on a PermissionGrant). When false, any PermissionGrant for this permission must NOT specify accessConditionId. | 
+**Description** | **string** | Description of the actions the permission allows. | 
+**AllowConditions** | **bool** | Whether the permission can be restricted with access conditions. Relevant when the permission is used in a user role.  | [default to false]
 
 ## Methods
 

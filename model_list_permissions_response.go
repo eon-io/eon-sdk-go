@@ -21,6 +21,7 @@ var _ MappedNullable = &ListPermissionsResponse{}
 
 // ListPermissionsResponse struct for ListPermissionsResponse
 type ListPermissionsResponse struct {
+	// List of available user permissions.
 	Permissions []Permission `json:"permissions"`
 }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The ID of the data access rule | 
+**Id** | **string** | Display name for the data access rule, which also serves as its ID for use in &#x60;permissionGrants&#x60;. Valid characters: &#x60;[a-zA-Z0-9-_.\\s]&#x60;.  | 
 **Effect** | [**AccessConditionEffect**](AccessConditionEffect.md) |  | 
 **Expression** | [**NullableAccessConditionalExpression**](AccessConditionalExpression.md) |  | 
 

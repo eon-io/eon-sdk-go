@@ -19,17 +19,17 @@ import (
 // checks if the Role type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Role{}
 
-// Role struct for Role
+// Role Role.
 type Role struct {
-	// The ID of the role
+	// Role ID.
 	Id string `json:"id"`
-	// The name of the role
+	// Role display name.
 	Name string `json:"name"`
-	// Whether the role is built in
+	// Whether the role is a default role. If `true`, the role is a default role provided by Eon and can't be modified or deleted. If `false`, the role is a custom, user-created role. 
 	IsBuiltInRole bool `json:"isBuiltInRole"`
-	// The permissions of the role
+	// List of permissions granted by the role.
 	PermissionGrants []PermissionGrant `json:"permissionGrants"`
-	// The condition of the role
+	// Sets of access conditions that restrict the resources a permission is granted for. IDs are set by you and are applied to the relevant permission in `permissionGrants`. An access condition can be applied to more than one permission grant. 
 	AccessConditions []AccessCondition `json:"accessConditions,omitempty"`
 }
 

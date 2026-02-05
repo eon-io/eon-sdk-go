@@ -22,7 +22,7 @@ var _ MappedNullable = &PermissionGrant{}
 // PermissionGrant struct for PermissionGrant
 type PermissionGrant struct {
 	Permission PermissionType `json:"permission"`
-	// Optional ID of the access condition associated with this permission grant. MUST be null for permissions where allowConditions=false.
+	// If present, the ID of the set of access conditions that restrict the resources the permission is granted for. The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions. If omitted, the permission is granted for all resources. 
 	AccessConditionId *string `json:"accessConditionId,omitempty"`
 }
 

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// PermissionType User Permission.
+// PermissionType User permission.
 type PermissionType string
 
 // List of PermissionType

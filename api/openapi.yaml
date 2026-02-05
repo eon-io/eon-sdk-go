@@ -72,7 +72,7 @@ tags:
 paths:
   /v1/permissions:
     get:
-      description: "Description: Fetches and retrieves a list of all user roles."
+      description: "Description: Retrieves a list of user permissions."
       operationId: listPermissions
       responses:
         "200":
@@ -80,7 +80,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListPermissionsResponse'
-          description: Successful operation
+          description: Permissions retrieved.
         "1XX":
           description: Informational
         "3XX":
@@ -97,7 +97,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Summary of all permissions
+      summary: List Permissions
       tags:
       - iam
       x-internal: false
@@ -108,6 +108,12 @@ paths:
         excluded: true
   /v1/roles:
     post:
+      description: |
+        Description: Creates a custom role.<br/>
+
+        When creating a role, you'll specify a list of permissions and, optionally, data access conditions.
+        Data access conditions let you restrict the resources a permission is granted for.
+        For example, for a particular role, you can set data access conditions to allow access only to resources without PII.
       operationId: createRole
       requestBody:
         content:
@@ -120,11 +126,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateRoleResponse'
-          description: Role created
+          description: Role created.
         "400":
-          description: Bad request
+          description: Validation error.
         "409":
-          description: Role already exists
+          description: A role with the same name already exists.
         "1XX":
           description: Informational
         "3XX":
@@ -141,7 +147,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Create a new role
+      summary: Create Role
       tags:
       - iam
       x-internal: false
@@ -157,7 +163,7 @@ paths:
           key: id
   /v1/roles/list:
     post:
-      description: "Description: Retrieves a list of all user roles."
+      description: "Description: Retrieves a list of user roles."
       operationId: listRoles
       parameters:
       - allowEmptyValue: true
@@ -191,7 +197,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListRolesResponse'
-          description: Successful operation
+          description: Roles retrieved.
         "1XX":
           description: Informational
         "3XX":
@@ -219,11 +225,11 @@ paths:
         excluded: true
   /v1/roles/{roleId}:
     delete:
-      description: "Description: This API operation deletes a role using its unique\
-        \ ID. "
+      description: "Description: Deletes a role."
       operationId: deleteRole
       parameters:
-      - description: ID of the role
+      - description: Role ID.
+        example: ceaf2281-bf04-542d-a801-a6a4865373ad
         explode: false
         in: path
         name: roleId
@@ -253,7 +259,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Delete a role
+      summary: Delete Role
       tags:
       - iam
       x-internal: false
@@ -268,11 +274,11 @@ paths:
           in: path
           key: roleId
     get:
-      description: "Description: Fetches specific details of a role using its unique\
-        \ ID."
+      description: "Description: Retrieves a role."
       operationId: getRole
       parameters:
-      - description: ID of the role
+      - description: Role ID.
+        example: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         explode: false
         in: path
         name: roleId
@@ -287,9 +293,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetRoleResponse'
-          description: Successful operation
+          description: Role retrieved.
         "404":
-          description: Role not found
+          description: Role wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -306,7 +312,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Get details of a role
+      summary: Get Role
       tags:
       - iam
       x-internal: false
@@ -361,7 +367,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Update a role
+      summary: Update Role
       tags:
       - iam
       x-internal: false
@@ -5335,7 +5341,7 @@ paths:
 components:
   schemas:
     PermissionType:
-      description: User Permission.
+      description: User permission.
       enum:
       - permission_id_unspecified
       - global_settings.view
@@ -5379,19 +5385,20 @@ components:
     Permission:
       example:
         permissionType: inventory.view
-        allowConditions: true
-        description: Allows viewing and editing of settings
+        allowConditions: false
+        description: Can view resource details in the inventory.
       properties:
         permissionType:
           $ref: '#/components/schemas/PermissionType'
         description:
-          description: The description of the permission
-          example: Allows viewing and editing of settings
+          description: Description of the actions the permission allows.
+          example: Can view resource details in the inventory.
           type: string
         allowConditions:
-          description: "When true, this permission may be granted under an access\
-            \ condition (using accessConditionId on a PermissionGrant). When false,\
-            \ any PermissionGrant for this permission must NOT specify accessConditionId."
+          default: false
+          description: |
+            Whether the permission can be restricted with access conditions.
+            Relevant when the permission is used in a user role.
           type: boolean
       required:
       - allowConditions
@@ -5404,13 +5411,14 @@ components:
       example:
         permissions:
         - permissionType: inventory.view
-          allowConditions: true
-          description: Allows viewing and editing of settings
+          allowConditions: false
+          description: Can view resource details in the inventory.
         - permissionType: inventory.view
-          allowConditions: true
-          description: Allows viewing and editing of settings
+          allowConditions: false
+          description: Can view resource details in the inventory.
       properties:
         permissions:
+          description: List of available user permissions.
           items:
             $ref: '#/components/schemas/Permission'
           type: array
@@ -5419,20 +5427,24 @@ components:
       type: object
     PermissionGrantInput:
       example:
-        accessConditionId: accessConditionId
+        accessConditionId: Non-PII only.
         permission: inventory.view
       properties:
         permission:
           $ref: '#/components/schemas/PermissionType'
         accessConditionId:
-          description: Optional ID of the access condition associated with this permission
-            grant. MUST be null for permissions where allowConditions=false.
+          description: |
+            If present, the ID of the set of access conditions that restrict the resources the permission is granted for.
+            The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions.
+            If omitted, the permission is granted for all resources.
+          example: Non-PII only.
           type: string
       required:
       - permission
       type: object
     AccessConditionEffect:
-      description: Data Access Rule effect.
+      description: |
+        Whether the data access condition is an allowlist or blocklist.
       enum:
       - INCLUSIVE
       - EXCLUSIVE
@@ -5441,6 +5453,14 @@ components:
       x-enum-varnames:
       - RULE_EFFECT_INCLUSIVE
       - RULE_EFFECT_EXCLUSIVE
+      x-fern-enum:
+        INCLUSIVE:
+          description: |
+            The permission is granted only to the resources that match the conditions.
+            All other resources are excluded from the permission.
+        EXCLUSIVE:
+          description: |
+            The permission is granted to all resources except those that match the conditions.
     LogicalOperator:
       description: |
         Logical operator to apply to the list of `operands`.
@@ -6087,10 +6107,13 @@ components:
             - apps
             - apps
         effect: INCLUSIVE
-        id: id
+        id: Non-PII only
       properties:
         id:
-          description: The ID of the data access rule
+          description: |
+            Display name for the data access rule, which also serves as its ID for use in `permissionGrants`.
+            Valid characters: `[a-zA-Z0-9-_.\s]`.
+          example: Non-PII only
           type: string
         effect:
           $ref: '#/components/schemas/AccessConditionEffect'
@@ -6104,9 +6127,9 @@ components:
     CreateRoleRequest:
       example:
         permissionGrants:
-        - accessConditionId: accessConditionId
+        - accessConditionId: Non-PII only.
           permission: inventory.view
-        - accessConditionId: accessConditionId
+        - accessConditionId: Non-PII only.
           permission: inventory.view
         name: name
         accessConditions:
@@ -6197,7 +6220,7 @@ components:
               - apps
               - apps
           effect: INCLUSIVE
-          id: id
+          id: Non-PII only
         - expression:
             resourceId:
               operator: IN
@@ -6285,18 +6308,23 @@ components:
               - apps
               - apps
           effect: INCLUSIVE
-          id: id
+          id: Non-PII only
       properties:
         name:
-          description: The name of the role
+          description: |
+            Role display name.
+            Must be unique in your Eon account.
           type: string
         permissionGrants:
-          description: The permissions of the role
+          description: Permissions granted by the role.
           items:
             $ref: '#/components/schemas/PermissionGrantInput'
           type: array
         accessConditions:
-          description: "The condition of the role, keyed by name"
+          description: |
+            If present, the ID of the set of access conditions that restrict the resources the permission is granted for.
+            The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions.
+            If omitted, the permission is granted for all resources.
           items:
             $ref: '#/components/schemas/AccessCondition'
           type: array
@@ -6306,27 +6334,31 @@ components:
       type: object
     PermissionGrant:
       example:
-        accessConditionId: accessConditionId
+        accessConditionId: Non-PII only.
         permission: inventory.view
       properties:
         permission:
           $ref: '#/components/schemas/PermissionType'
         accessConditionId:
-          description: Optional ID of the access condition associated with this permission
-            grant. MUST be null for permissions where allowConditions=false.
+          description: |
+            If present, the ID of the set of access conditions that restrict the resources the permission is granted for.
+            The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions.
+            If omitted, the permission is granted for all resources.
+          example: Non-PII only.
           type: string
       required:
       - permission
       type: object
     Role:
+      description: Role.
       example:
         permissionGrants:
-        - accessConditionId: accessConditionId
+        - accessConditionId: Non-PII only.
           permission: inventory.view
-        - accessConditionId: accessConditionId
+        - accessConditionId: Non-PII only.
           permission: inventory.view
         isBuiltInRole: true
-        name: name
+        name: My custom role
         accessConditions:
         - expression:
             resourceId:
@@ -6415,7 +6447,7 @@ components:
               - apps
               - apps
           effect: INCLUSIVE
-          id: id
+          id: Non-PII only
         - expression:
             resourceId:
               operator: IN
@@ -6503,26 +6535,34 @@ components:
               - apps
               - apps
           effect: INCLUSIVE
-          id: id
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: Non-PII only
+        id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         id:
-          description: The ID of the role
+          description: Role ID.
+          example: daa42222-6ad2-5d37-bb26-4f2a9cba73da
           format: uuid
           type: string
         name:
-          description: The name of the role
+          description: Role display name.
+          example: My custom role
           type: string
         isBuiltInRole:
-          description: Whether the role is built in
+          description: |
+            Whether the role is a default role.
+            If `true`, the role is a default role provided by Eon and can't be modified or deleted.
+            If `false`, the role is a custom, user-created role.
           type: boolean
         permissionGrants:
-          description: The permissions of the role
+          description: List of permissions granted by the role.
           items:
             $ref: '#/components/schemas/PermissionGrant'
           type: array
         accessConditions:
-          description: The condition of the role
+          description: |
+            Sets of access conditions that restrict the resources a permission is granted for.
+            IDs are set by you and are applied to the relevant permission in `permissionGrants`.
+            An access condition can be applied to more than one permission grant.
           items:
             $ref: '#/components/schemas/AccessCondition'
           type: array
@@ -6537,12 +6577,12 @@ components:
       example:
         role:
           permissionGrants:
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
           isBuiltInRole: true
-          name: name
+          name: My custom role
           accessConditions:
           - expression:
               resourceId:
@@ -6631,7 +6671,7 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
+            id: Non-PII only
           - expression:
               resourceId:
                 operator: IN
@@ -6719,8 +6759,8 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: Non-PII only
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         role:
           $ref: '#/components/schemas/Role'
@@ -6731,12 +6771,12 @@ components:
       example:
         roles:
         - permissionGrants:
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
           isBuiltInRole: true
-          name: name
+          name: My custom role
           accessConditions:
           - expression:
               resourceId:
@@ -6825,7 +6865,7 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
+            id: Non-PII only
           - expression:
               resourceId:
                 operator: IN
@@ -6913,15 +6953,15 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: Non-PII only
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         - permissionGrants:
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
           isBuiltInRole: true
-          name: name
+          name: My custom role
           accessConditions:
           - expression:
               resourceId:
@@ -7010,7 +7050,7 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
+            id: Non-PII only
           - expression:
               resourceId:
                 operator: IN
@@ -7098,8 +7138,8 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: Non-PII only
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         totalCount: 0
       properties:
         roles:
@@ -7116,12 +7156,12 @@ components:
       example:
         role:
           permissionGrants:
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
           isBuiltInRole: true
-          name: name
+          name: My custom role
           accessConditions:
           - expression:
               resourceId:
@@ -7210,7 +7250,7 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
+            id: Non-PII only
           - expression:
               resourceId:
                 operator: IN
@@ -7298,8 +7338,8 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: Non-PII only
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         role:
           $ref: '#/components/schemas/Role'
@@ -7309,9 +7349,9 @@ components:
     UpdateRoleRequest:
       example:
         permissionGrants:
-        - accessConditionId: accessConditionId
+        - accessConditionId: Non-PII only.
           permission: inventory.view
-        - accessConditionId: accessConditionId
+        - accessConditionId: Non-PII only.
           permission: inventory.view
         name: name
         accessConditions:
@@ -7402,7 +7442,7 @@ components:
               - apps
               - apps
           effect: INCLUSIVE
-          id: id
+          id: Non-PII only
         - expression:
             resourceId:
               operator: IN
@@ -7490,7 +7530,7 @@ components:
               - apps
               - apps
           effect: INCLUSIVE
-          id: id
+          id: Non-PII only
       properties:
         name:
           description: The name of the role
@@ -7513,12 +7553,12 @@ components:
       example:
         role:
           permissionGrants:
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
-          - accessConditionId: accessConditionId
+          - accessConditionId: Non-PII only.
             permission: inventory.view
           isBuiltInRole: true
-          name: name
+          name: My custom role
           accessConditions:
           - expression:
               resourceId:
@@ -7607,7 +7647,7 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
+            id: Non-PII only
           - expression:
               resourceId:
                 operator: IN
@@ -7695,8 +7735,8 @@ components:
                 - apps
                 - apps
             effect: INCLUSIVE
-            id: id
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: Non-PII only
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         role:
           $ref: '#/components/schemas/Role'
@@ -17059,8 +17099,10 @@ components:
           example: arn:aws:kms:eu-central-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab
           type: string
         isAwsManagedKey:
-          description: Whether the encryption key is AWS-managed (true) or customer-managed
-            (false).
+          description: |
+            Whether the encryption key is an AWS-managed KMS key.
+            If `true`, the key is AWS-managed.
+            If `false`, the key is customer-managed.
           example: false
           type: boolean
         tags:

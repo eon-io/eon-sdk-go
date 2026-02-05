@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// AccessConditionEffect Data Access Rule effect.
+// AccessConditionEffect Whether the data access condition is an allowlist or blocklist. 
 type AccessConditionEffect string
 
 // List of AccessConditionEffect

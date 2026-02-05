@@ -29,7 +29,7 @@ type InventoryVolume struct {
 	Region string `json:"region"`
 	// ID of the encryption key used to encrypt the volume.
 	EncryptionKeyId *string `json:"encryptionKeyId,omitempty"`
-	// Whether the encryption key is AWS-managed (true) or customer-managed (false).
+	// Whether the encryption key is an AWS-managed KMS key. If `true`, the key is AWS-managed. If `false`, the key is customer-managed. 
 	IsAwsManagedKey *bool `json:"isAwsManagedKey,omitempty"`
 	// Volume tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"primary\": \"\"}` 
 	Tags map[string]string `json:"tags"`

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | The name of the role | 
-**PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | The permissions of the role | 
-**AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | The condition of the role, keyed by name | [optional] 
+**Name** | **string** | Role display name. Must be unique in your Eon account.  | 
+**PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | Permissions granted by the role. | 
+**AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | If present, the ID of the set of access conditions that restrict the resources the permission is granted for. The ID must be present in an entry in &#x60;accessConditions&#x60;, and the permission itself must support access conditions. If omitted, the permission is granted for all resources.  | [optional] 
 
 ## Methods
 

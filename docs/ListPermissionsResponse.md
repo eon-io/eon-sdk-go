@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Permissions** | [**[]Permission**](Permission.md) |  | 
+**Permissions** | [**[]Permission**](Permission.md) | List of available user permissions. | 
 
 ## Methods
 

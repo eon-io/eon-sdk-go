@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Permission** | [**PermissionType**](PermissionType.md) |  | 
-**AccessConditionId** | Pointer to **string** | Optional ID of the access condition associated with this permission grant. MUST be null for permissions where allowConditions&#x3D;false. | [optional] 
+**AccessConditionId** | Pointer to **string** | If present, the ID of the set of access conditions that restrict the resources the permission is granted for. The ID must be present in an entry in &#x60;accessConditions&#x60;, and the permission itself must support access conditions. If omitted, the permission is granted for all resources.  | [optional] 
 
 ## Methods
 

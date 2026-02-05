@@ -39,7 +39,14 @@ func (r ApiCreateRoleRequest) Execute() (*CreateRoleResponse, *http.Response, er
 }
 
 /*
-CreateRole Create a new role
+CreateRole Create Role
+
+Description: Creates a custom role.<br/>
+
+When creating a role, you'll specify a list of permissions and, optionally, data access conditions.
+Data access conditions let you restrict the resources a permission is granted for.
+For example, for a particular role, you can set data access conditions to allow access only to resources without PII.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateRoleRequest
@@ -160,12 +167,12 @@ func (r ApiDeleteRoleRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteRole Delete a role
+DeleteRole Delete Role
 
-Description: This API operation deletes a role using its unique ID. 
+Description: Deletes a role.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId ID of the role
+ @param roleId Role ID.
  @return ApiDeleteRoleRequest
 */
 func (a *IamAPIService) DeleteRole(ctx context.Context, roleId string) ApiDeleteRoleRequest {
@@ -273,12 +280,12 @@ func (r ApiGetRoleRequest) Execute() (*GetRoleResponse, *http.Response, error) {
 }
 
 /*
-GetRole Get details of a role
+GetRole Get Role
 
-Description: Fetches specific details of a role using its unique ID.
+Description: Retrieves a role.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId ID of the role
+ @param roleId Role ID.
  @return ApiGetRoleRequest
 */
 func (a *IamAPIService) GetRole(ctx context.Context, roleId string) ApiGetRoleRequest {
@@ -396,9 +403,9 @@ func (r ApiListPermissionsRequest) Execute() (*ListPermissionsResponse, *http.Re
 }
 
 /*
-ListPermissions Summary of all permissions
+ListPermissions List Permissions
 
-Description: Fetches and retrieves a list of all user roles.
+Description: Retrieves a list of user permissions.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListPermissionsRequest
@@ -532,7 +539,7 @@ func (r ApiListRolesRequest) Execute() (*ListRolesResponse, *http.Response, erro
 /*
 ListRoles List Roles
 
-Description: Retrieves a list of all user roles.
+Description: Retrieves a list of user roles.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListRolesRequest
@@ -667,7 +674,7 @@ func (r ApiUpdateRoleRequest) Execute() (*UpdateRoleResponse, *http.Response, er
 }
 
 /*
-UpdateRole Update a role
+UpdateRole Update Role
 
 Description: This API operation updates the details of a role using its unique ID. The request body must contain the updated role details.
 

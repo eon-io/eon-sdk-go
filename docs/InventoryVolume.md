@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Path** | **string** | Path of the volume on the machine it&#39;s attached to. | 
 **Region** | **string** | Region the volume is hosted in. | 
 **EncryptionKeyId** | Pointer to **string** | ID of the encryption key used to encrypt the volume. | [optional] 
-**IsAwsManagedKey** | Pointer to **bool** | Whether the encryption key is AWS-managed (true) or customer-managed (false). | [optional] 
+**IsAwsManagedKey** | Pointer to **bool** | Whether the encryption key is an AWS-managed KMS key. If &#x60;true&#x60;, the key is AWS-managed. If &#x60;false&#x60;, the key is customer-managed.  | [optional] 
 **Tags** | **map[string]string** | Volume tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** &#x60;{\&quot;primary\&quot;: \&quot;\&quot;}&#x60;  | 
 **AvailabilityZone** | **string** | Volume availability zone. | 
 **VolumeSettings** | [**VolumeSettings**](VolumeSettings.md) |  | 

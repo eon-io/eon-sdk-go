@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The ID of the role | 
-**Name** | **string** | The name of the role | 
-**IsBuiltInRole** | **bool** | Whether the role is built in | 
-**PermissionGrants** | [**[]PermissionGrant**](PermissionGrant.md) | The permissions of the role | 
-**AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | The condition of the role | [optional] 
+**Id** | **string** | Role ID. | 
+**Name** | **string** | Role display name. | 
+**IsBuiltInRole** | **bool** | Whether the role is a default role. If &#x60;true&#x60;, the role is a default role provided by Eon and can&#39;t be modified or deleted. If &#x60;false&#x60;, the role is a custom, user-created role.  | 
+**PermissionGrants** | [**[]PermissionGrant**](PermissionGrant.md) | List of permissions granted by the role. | 
+**AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | Sets of access conditions that restrict the resources a permission is granted for. IDs are set by you and are applied to the relevant permission in &#x60;permissionGrants&#x60;. An access condition can be applied to more than one permission grant.  | [optional] 
 
 ## Methods
 

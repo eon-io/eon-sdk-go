@@ -22,9 +22,9 @@ var _ MappedNullable = &Permission{}
 // Permission struct for Permission
 type Permission struct {
 	PermissionType PermissionType `json:"permissionType"`
-	// The description of the permission
+	// Description of the actions the permission allows.
 	Description string `json:"description"`
-	// When true, this permission may be granted under an access condition (using accessConditionId on a PermissionGrant). When false, any PermissionGrant for this permission must NOT specify accessConditionId.
+	// Whether the permission can be restricted with access conditions. Relevant when the permission is used in a user role. 
 	AllowConditions bool `json:"allowConditions"`
 }
 
@@ -47,6 +47,8 @@ func NewPermission(permissionType PermissionType, description string, allowCondi
 // but it doesn't guarantee that properties required by API are set
 func NewPermissionWithDefaults() *Permission {
 	this := Permission{}
+	var allowConditions bool = false
+	this.AllowConditions = allowConditions
 	return &this
 }
 
