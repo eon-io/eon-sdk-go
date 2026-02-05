@@ -294,6 +294,143 @@ func (a *AccountsAPIService) ConnectSourceAccountExecute(r ApiConnectSourceAccou
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiConnectSourceAwsOrganizationalUnitRequest struct {
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
+	connectSourceAwsOrganizationalUnitRequest *ConnectSourceAwsOrganizationalUnitRequest
+}
+
+func (r ApiConnectSourceAwsOrganizationalUnitRequest) ConnectSourceAwsOrganizationalUnitRequest(connectSourceAwsOrganizationalUnitRequest ConnectSourceAwsOrganizationalUnitRequest) ApiConnectSourceAwsOrganizationalUnitRequest {
+	r.connectSourceAwsOrganizationalUnitRequest = &connectSourceAwsOrganizationalUnitRequest
+	return r
+}
+
+func (r ApiConnectSourceAwsOrganizationalUnitRequest) Execute() (*ConnectSourceAwsOrganizationalUnitResponse, *http.Response, error) {
+	return r.ApiService.ConnectSourceAwsOrganizationalUnitExecute(r)
+}
+
+/*
+ConnectSourceAwsOrganizationalUnit Connect Source AWS Organizational Unit
+
+Description: Connects an AWS organizational unit to the given project.
+All AWS accounts within the organizational unit (and its nested OUs) will be automatically discovered and available for backup.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @return ApiConnectSourceAwsOrganizationalUnitRequest
+*/
+func (a *AccountsAPIService) ConnectSourceAwsOrganizationalUnit(ctx context.Context, projectId string) ApiConnectSourceAwsOrganizationalUnitRequest {
+	return ApiConnectSourceAwsOrganizationalUnitRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+	}
+}
+
+// Execute executes the request
+//  @return ConnectSourceAwsOrganizationalUnitResponse
+func (a *AccountsAPIService) ConnectSourceAwsOrganizationalUnitExecute(r ApiConnectSourceAwsOrganizationalUnitRequest) (*ConnectSourceAwsOrganizationalUnitResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ConnectSourceAwsOrganizationalUnitResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ConnectSourceAwsOrganizationalUnit")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/source-aws-organizational-units"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.connectSourceAwsOrganizationalUnitRequest == nil {
+		return localVarReturnValue, nil, reportError("connectSourceAwsOrganizationalUnitRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.connectSourceAwsOrganizationalUnitRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteRestoreAccountConnectivityConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
@@ -832,6 +969,139 @@ func (a *AccountsAPIService) DisconnectSourceAccountExecute(r ApiDisconnectSourc
 	localVarPath := localBasePath + "/v1/projects/{projectId}/source-accounts/{accountId}/disconnect"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDisconnectSourceAwsOrganizationalUnitRequest struct {
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
+	organizationalUnitId string
+}
+
+func (r ApiDisconnectSourceAwsOrganizationalUnitRequest) Execute() (*DisconnectSourceAwsOrganizationalUnitResponse, *http.Response, error) {
+	return r.ApiService.DisconnectSourceAwsOrganizationalUnitExecute(r)
+}
+
+/*
+DisconnectSourceAwsOrganizationalUnit Disconnect Source AWS Organizational Unit
+
+Description: Disconnects an AWS organizational unit and its accounts from the given project.
+
+After disconnecting, resources in the organizational unit's accounts will no longer be backed up.
+Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
+Resources with no remaining snapshots are removed from the inventory.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose AWS organizational unit you want to disconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param organizationalUnitId Eon-assigned ID of the AWS organizational unit to disconnect.
+ @return ApiDisconnectSourceAwsOrganizationalUnitRequest
+*/
+func (a *AccountsAPIService) DisconnectSourceAwsOrganizationalUnit(ctx context.Context, projectId string, organizationalUnitId string) ApiDisconnectSourceAwsOrganizationalUnitRequest {
+	return ApiDisconnectSourceAwsOrganizationalUnitRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		organizationalUnitId: organizationalUnitId,
+	}
+}
+
+// Execute executes the request
+//  @return DisconnectSourceAwsOrganizationalUnitResponse
+func (a *AccountsAPIService) DisconnectSourceAwsOrganizationalUnitExecute(r ApiDisconnectSourceAwsOrganizationalUnitRequest) (*DisconnectSourceAwsOrganizationalUnitResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DisconnectSourceAwsOrganizationalUnitResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.DisconnectSourceAwsOrganizationalUnit")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/disconnect"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationalUnitId"+"}", url.PathEscape(parameterValueToString(r.organizationalUnitId, "organizationalUnitId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1891,6 +2161,153 @@ func (a *AccountsAPIService) ListSourceAccountsExecute(r ApiListSourceAccountsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiListSourceAwsOrganizationalUnitsRequest struct {
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
+	pageToken *string
+	pageSize *int32
+}
+
+// Cursor that points to the first record of the next page of results. Get this value from the previous response. 
+func (r ApiListSourceAwsOrganizationalUnitsRequest) PageToken(pageToken string) ApiListSourceAwsOrganizationalUnitsRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// Maximum number of items to return in the response.
+func (r ApiListSourceAwsOrganizationalUnitsRequest) PageSize(pageSize int32) ApiListSourceAwsOrganizationalUnitsRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiListSourceAwsOrganizationalUnitsRequest) Execute() (*ListSourceAwsOrganizationalUnitsResponse, *http.Response, error) {
+	return r.ApiService.ListSourceAwsOrganizationalUnitsExecute(r)
+}
+
+/*
+ListSourceAwsOrganizationalUnits List Source AWS Organizational Units
+
+Description: Retrieves a list of AWS organizational units for the given project.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @return ApiListSourceAwsOrganizationalUnitsRequest
+*/
+func (a *AccountsAPIService) ListSourceAwsOrganizationalUnits(ctx context.Context, projectId string) ApiListSourceAwsOrganizationalUnitsRequest {
+	return ApiListSourceAwsOrganizationalUnitsRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+	}
+}
+
+// Execute executes the request
+//  @return ListSourceAwsOrganizationalUnitsResponse
+func (a *AccountsAPIService) ListSourceAwsOrganizationalUnitsExecute(r ApiListSourceAwsOrganizationalUnitsRequest) (*ListSourceAwsOrganizationalUnitsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListSourceAwsOrganizationalUnitsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ListSourceAwsOrganizationalUnits")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/source-aws-organizational-units/list"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 50
+		r.pageSize = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiReconnectRestoreAccountRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
@@ -2069,6 +2486,135 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 	localVarPath := localBasePath + "/v1/projects/{projectId}/source-accounts/{accountId}/reconnect"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiReconnectSourceAwsOrganizationalUnitRequest struct {
+	ctx context.Context
+	ApiService *AccountsAPIService
+	projectId string
+	organizationalUnitId string
+}
+
+func (r ApiReconnectSourceAwsOrganizationalUnitRequest) Execute() (*ReconnectSourceAwsOrganizationalUnitResponse, *http.Response, error) {
+	return r.ApiService.ReconnectSourceAwsOrganizationalUnitExecute(r)
+}
+
+/*
+ReconnectSourceAwsOrganizationalUnit Reconnect Source AWS Organizational Unit
+
+Description: Reconnects a previously disconnected AWS organizational unit and its accounts to the given project.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose AWS organizational unit you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param organizationalUnitId Eon-assigned ID of the AWS organizational unit to reconnect.
+ @return ApiReconnectSourceAwsOrganizationalUnitRequest
+*/
+func (a *AccountsAPIService) ReconnectSourceAwsOrganizationalUnit(ctx context.Context, projectId string, organizationalUnitId string) ApiReconnectSourceAwsOrganizationalUnitRequest {
+	return ApiReconnectSourceAwsOrganizationalUnitRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		organizationalUnitId: organizationalUnitId,
+	}
+}
+
+// Execute executes the request
+//  @return ReconnectSourceAwsOrganizationalUnitResponse
+func (a *AccountsAPIService) ReconnectSourceAwsOrganizationalUnitExecute(r ApiReconnectSourceAwsOrganizationalUnitRequest) (*ReconnectSourceAwsOrganizationalUnitResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReconnectSourceAwsOrganizationalUnitResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountsAPIService.ReconnectSourceAwsOrganizationalUnit")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/reconnect"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationalUnitId"+"}", url.PathEscape(parameterValueToString(r.organizationalUnitId, "organizationalUnitId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

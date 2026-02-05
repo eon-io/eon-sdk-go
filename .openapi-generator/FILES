@@ -92,6 +92,8 @@ docs/ConnectRestoreAccountRequest.md
 docs/ConnectRestoreAccountResponse.md
 docs/ConnectSourceAccountRequest.md
 docs/ConnectSourceAccountResponse.md
+docs/ConnectSourceAwsOrganizationalUnitRequest.md
+docs/ConnectSourceAwsOrganizationalUnitResponse.md
 docs/ControlViolations.md
 docs/Cost.md
 docs/CostDataFilters.md
@@ -122,6 +124,7 @@ docs/DayOfWeek.md
 docs/DestinationDetails.md
 docs/DisconnectRestoreAccountResponse.md
 docs/DisconnectSourceAccountResponse.md
+docs/DisconnectSourceAwsOrganizationalUnitResponse.md
 docs/DynamodbTableRestoreDestination.md
 docs/EbsRestoreDestination.md
 docs/EbsSnapshotRestoreDestination.md
@@ -201,6 +204,7 @@ docs/ListRestoreJobsResponse.md
 docs/ListRolesResponse.md
 docs/ListSourceAccountsRequest.md
 docs/ListSourceAccountsResponse.md
+docs/ListSourceAwsOrganizationalUnitsResponse.md
 docs/LogicalOperator.md
 docs/MeteringDimension.md
 docs/MonthlyConfig.md
@@ -228,6 +232,7 @@ docs/QueryDBStatus.md
 docs/QueryDBStatusResponse.md
 docs/ReconnectRestoreAccountResponse.md
 docs/ReconnectSourceAccountResponse.md
+docs/ReconnectSourceAwsOrganizationalUnitResponse.md
 docs/RegionCondition.md
 docs/ResourceDetails.md
 docs/ResourceGroupNameCondition.md
@@ -301,6 +306,7 @@ docs/SourceAccountMetricsConfig.md
 docs/SourceAccountProviderIdFilters.md
 docs/SourceAccountSortField.md
 docs/SourceAccountsFilterConditions.md
+docs/SourceAwsOrganizationalUnit.md
 docs/SourceStorage.md
 docs/StandardBackupPolicyPlan.md
 docs/StandardBackupScheduleConfig.md
@@ -411,6 +417,8 @@ model_connect_restore_account_request.go
 model_connect_restore_account_response.go
 model_connect_source_account_request.go
 model_connect_source_account_response.go
+model_connect_source_aws_organizational_unit_request.go
+model_connect_source_aws_organizational_unit_response.go
 model_control_violations.go
 model_cost.go
 model_cost_data_filters.go
@@ -439,6 +447,7 @@ model_day_of_week.go
 model_destination_details.go
 model_disconnect_restore_account_response.go
 model_disconnect_source_account_response.go
+model_disconnect_source_aws_organizational_unit_response.go
 model_dynamodb_table_restore_destination.go
 model_ebs_restore_destination.go
 model_ebs_snapshot_restore_destination.go
@@ -516,6 +525,7 @@ model_list_restore_jobs_response.go
 model_list_roles_response.go
 model_list_source_accounts_request.go
 model_list_source_accounts_response.go
+model_list_source_aws_organizational_units_response.go
 model_logical_operator.go
 model_metering_dimension.go
 model_monthly_config.go
@@ -543,6 +553,7 @@ model_query_db_status.go
 model_query_db_status_response.go
 model_reconnect_restore_account_response.go
 model_reconnect_source_account_response.go
+model_reconnect_source_aws_organizational_unit_response.go
 model_region_condition.go
 model_resource_details.go
 model_resource_group_name_condition.go
@@ -614,6 +625,7 @@ model_source_account_metrics_config.go
 model_source_account_provider_id_filters.go
 model_source_account_sort_field.go
 model_source_accounts_filter_conditions.go
+model_source_aws_organizational_unit.go
 model_source_storage.go
 model_standard_backup_policy_plan.go
 model_standard_backup_schedule_config.go

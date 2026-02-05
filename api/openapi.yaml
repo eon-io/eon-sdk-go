@@ -70,6 +70,278 @@ tags:
   name: billing
   x-displayName: Billing
 paths:
+  /v1/projects/{projectId}/source-aws-organizational-units:
+    post:
+      description: |
+        Description: Connects an AWS organizational unit to the given project.
+        All AWS accounts within the organizational unit (and its nested OUs) will be automatically discovered and available for backup.
+      operationId: connectSourceAwsOrganizationalUnit
+      parameters:
+      - description: |
+          ID of the project you want to connect the AWS organizational unit to.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectSourceAwsOrganizationalUnitRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectSourceAwsOrganizationalUnitResponse'
+          description: AWS organizational unit connected.
+        "409":
+          description: AWS organizational unit already exists in Eon.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Connect Source AWS Organizational Unit
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:source_accounts
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: account
+          in: resBody
+          key: id
+  /v1/projects/{projectId}/source-aws-organizational-units/list:
+    post:
+      description: "Description: Retrieves a list of AWS organizational units for\
+        \ the given project."
+      operationId: listSourceAwsOrganizationalUnits
+      parameters:
+      - description: |
+          ID of the project whose AWS organizational units you want to retrieve.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+        example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSourceAwsOrganizationalUnitsResponse'
+          description: AWS organizational units retrieved.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Source AWS Organizational Units
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions: []
+      x-audit-log:
+        excluded: true
+  /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/reconnect:
+    post:
+      description: |
+        Description: Reconnects a previously disconnected AWS organizational unit and its accounts to the given project.
+      operationId: reconnectSourceAwsOrganizationalUnit
+      parameters:
+      - description: |
+          ID of the project whose AWS organizational unit you want to reconnect.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the AWS organizational unit to reconnect.
+        example: 72d29280-a0be-59df-b33c-59f9015606c3
+        explode: false
+        in: path
+        name: organizationalUnitId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReconnectSourceAwsOrganizationalUnitResponse'
+          description: AWS organizational unit reconnected successfully.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Reconnect Source AWS Organizational Unit
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:source_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: account
+          in: path
+          key: organizationalUnitId
+  /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/disconnect:
+    post:
+      description: |
+        Description: Disconnects an AWS organizational unit and its accounts from the given project.
+
+        After disconnecting, resources in the organizational unit's accounts will no longer be backed up.
+        Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
+        Resources with no remaining snapshots are removed from the inventory.
+      operationId: disconnectSourceAwsOrganizationalUnit
+      parameters:
+      - description: |
+          ID of the project whose AWS organizational unit you want to disconnect.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the AWS organizational unit to disconnect.
+        example: 72d29280-a0be-59df-b33c-59f9015606c3
+        explode: false
+        in: path
+        name: organizationalUnitId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectSourceAwsOrganizationalUnitResponse'
+          description: AWS organizational unit disconnected successfully.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Disconnect Source AWS Organizational Unit
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:source_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: account
+          in: path
+          key: organizationalUnitId
   /v1/permissions:
     get:
       description: "Description: Retrieves a list of user permissions."
@@ -5340,6 +5612,161 @@ paths:
         excluded: true
 components:
   schemas:
+    ConnectSourceAwsOrganizationalUnitRequest:
+      example:
+        providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+        roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+      properties:
+        roleArn:
+          description: ARN of the role Eon assumes to access the organizational unit
+            in AWS.
+          example: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          type: string
+        providerOrganizationalUnitId:
+          description: AWS Organizational Unit ID.
+          example: ou-xxxx-xxxxxxxx
+          type: string
+      required:
+      - providerOrganizationalUnitId
+      - roleArn
+      type: object
+    AccountState:
+      description: |
+        Connection status of the AWS account, Azure subscription, or GCP project.
+        `ACCOUNT_STATUS_UNSPECIFIED` is supported only in responses.
+      enum:
+      - CONNECTED
+      - DISCONNECTED
+      - INSUFFICIENT_PERMISSIONS
+      - ACCOUNT_STATUS_UNSPECIFIED
+      example: CONNECTED
+      type: string
+      x-enum-varnames:
+      - ACCOUNT_STATE_CONNECTED
+      - ACCOUNT_STATE_DISCONNECTED
+      - ACCOUNT_STATE_INSUFFICIENT_PERMISSIONS
+      - ACCOUNT_STATE_UNSPECIFIED
+    SourceAwsOrganizationalUnit:
+      example:
+        providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+        roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+        name: prod-eu organizational unit
+        id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+        providerManagementAccountId: "123456789012"
+        status: CONNECTED
+      properties:
+        id:
+          description: Eon-assigned organizational unit ID.
+          example: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          type: string
+        roleArn:
+          description: ARN of the role Eon assumes to access the organizational unit
+            in AWS.
+          example: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          type: string
+        name:
+          description: The organizational unit display name in Eon.
+          example: prod-eu organizational unit
+          type: string
+        providerOrganizationalUnitId:
+          description: AWS Organizational Unit ID.
+          example: ou-xxxx-xxxxxxxx
+          type: string
+        providerManagementAccountId:
+          description: AWS Organization management account ID.
+          example: "123456789012"
+          type: string
+        status:
+          $ref: '#/components/schemas/AccountState'
+      required:
+      - id
+      - name
+      - providerManagementAccountId
+      - providerOrganizationalUnitId
+      - roleArn
+      - status
+      type: object
+    ConnectSourceAwsOrganizationalUnitResponse:
+      example:
+        organizationalUnit:
+          providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          name: prod-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+      properties:
+        organizationalUnit:
+          $ref: '#/components/schemas/SourceAwsOrganizationalUnit'
+      required:
+      - organizationalUnit
+      type: object
+    ListSourceAwsOrganizationalUnitsResponse:
+      example:
+        nextToken: nextToken
+        organizationalUnits:
+        - providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          name: prod-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+        - providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          name: prod-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+        totalCount: 0
+      properties:
+        organizationalUnits:
+          description: List of AWS organizational units.
+          items:
+            $ref: '#/components/schemas/SourceAwsOrganizationalUnit'
+          type: array
+        nextToken:
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          type: string
+        totalCount:
+          description: Total number of AWS organizational units that matched the filter
+            options.
+          type: integer
+      required:
+      - organizationalUnits
+      - totalCount
+      type: object
+    ReconnectSourceAwsOrganizationalUnitResponse:
+      example:
+        organizationalUnit:
+          providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          name: prod-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+      properties:
+        organizationalUnit:
+          $ref: '#/components/schemas/SourceAwsOrganizationalUnit'
+      required:
+      - organizationalUnit
+      type: object
+    DisconnectSourceAwsOrganizationalUnitResponse:
+      example:
+        organizationalUnit:
+          providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          name: prod-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+      properties:
+        organizationalUnit:
+          $ref: '#/components/schemas/SourceAwsOrganizationalUnit'
+      required:
+      - organizationalUnit
+      type: object
     PermissionType:
       description: User permission.
       enum:
@@ -7850,22 +8277,6 @@ components:
       required:
       - sourceAccountAttributes
       type: object
-    AccountState:
-      description: |
-        Connection status of the AWS account, Azure subscription, or GCP project.
-        `ACCOUNT_STATUS_UNSPECIFIED` is supported only in responses.
-      enum:
-      - CONNECTED
-      - DISCONNECTED
-      - INSUFFICIENT_PERMISSIONS
-      - ACCOUNT_STATUS_UNSPECIFIED
-      example: CONNECTED
-      type: string
-      x-enum-varnames:
-      - ACCOUNT_STATE_CONNECTED
-      - ACCOUNT_STATE_DISCONNECTED
-      - ACCOUNT_STATE_INSUFFICIENT_PERMISSIONS
-      - ACCOUNT_STATE_UNSPECIFIED
     AccountInstallationMethod:
       default: UNSPECIFIED
       description: |
