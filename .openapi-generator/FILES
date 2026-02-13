@@ -105,6 +105,8 @@ docs/CostGranularity.md
 docs/CostUnit.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
+docs/CreateIdpGroupRequest.md
+docs/CreateIdpGroupResponse.md
 docs/CreateRoleRequest.md
 docs/CreateRoleResponse.md
 docs/CreateVault409Response.md
@@ -161,6 +163,7 @@ docs/GcpVmInstanceRestoreDestination.md
 docs/GcpVmInstanceRestoreTarget.md
 docs/GetBackupJobResponse.md
 docs/GetBackupPolicyResponse.md
+docs/GetIdpGroupResponse.md
 docs/GetResourceResponse.md
 docs/GetRestoreAccountConnectivityConfigResponse.md
 docs/GetRestoreAccountMetricsConfigResponse.md
@@ -177,6 +180,8 @@ docs/HighFrequencyBackupSchedules.md
 docs/HighFrequencyIntervalConfig.md
 docs/IamAPI.md
 docs/IdFilters.md
+docs/Idp.md
+docs/IdpGroup.md
 docs/InventoryFilterConditions.md
 docs/InventoryResource.md
 docs/InventorySnapshotVolume.md
@@ -191,6 +196,8 @@ docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
 docs/ListBackupPoliciesResponse.md
 docs/ListBackupVaultResponse.md
+docs/ListIdpGroupsResponse.md
+docs/ListIdpsResponse.md
 docs/ListInventoryRequest.md
 docs/ListInventorySnapshotsRequest.md
 docs/ListInventorySnapshotsResponse.md
@@ -331,6 +338,8 @@ docs/TimeOfYear.md
 docs/TokenResponse.md
 docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
+docs/UpdateIdpGroupRequest.md
+docs/UpdateIdpGroupResponse.md
 docs/UpdateRestoreAccountConnectivityConfigRequest.md
 docs/UpdateRestoreAccountConnectivityConfigResponse.md
 docs/UpdateRoleRequest.md
@@ -430,6 +439,8 @@ model_cost_granularity.go
 model_cost_unit.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
+model_create_idp_group_request.go
+model_create_idp_group_response.go
 model_create_role_request.go
 model_create_role_response.go
 model_create_vault_409_response.go
@@ -484,6 +495,7 @@ model_gcp_vm_instance_restore_target.go
 model_gcs_restore_target.go
 model_get_backup_job_response.go
 model_get_backup_policy_response.go
+model_get_idp_group_response.go
 model_get_resource_response.go
 model_get_restore_account_connectivity_config_response.go
 model_get_restore_account_metrics_config_response.go
@@ -499,6 +511,8 @@ model_high_frequency_backup_schedule_frequency.go
 model_high_frequency_backup_schedules.go
 model_high_frequency_interval_config.go
 model_id_filters.go
+model_idp.go
+model_idp_group.go
 model_inventory_filter_conditions.go
 model_inventory_resource.go
 model_inventory_snapshot_volume.go
@@ -512,6 +526,8 @@ model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
 model_list_backup_policies_response.go
 model_list_backup_vault_response.go
+model_list_idp_groups_response.go
+model_list_idps_response.go
 model_list_inventory_request.go
 model_list_inventory_snapshots_request.go
 model_list_inventory_snapshots_response.go
@@ -650,6 +666,8 @@ model_time_of_year.go
 model_token_response.go
 model_update_backup_policy_request.go
 model_update_backup_policy_response.go
+model_update_idp_group_request.go
+model_update_idp_group_response.go
 model_update_restore_account_connectivity_config_request.go
 model_update_restore_account_connectivity_config_response.go
 model_update_role_request.go

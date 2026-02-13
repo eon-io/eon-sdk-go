@@ -653,6 +653,356 @@ paths:
         - entityType: role
           in: path
           key: roleId
+  /v1/idps/list:
+    post:
+      description: "Description: Retrieves a list of Identity Providers (IDPs) for\
+        \ the account."
+      operationId: listIdps
+      parameters:
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+          To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+        example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIdpsResponse'
+          description: Identity Providers retrieved.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Identity Providers
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:idp_configs
+      x-audit-log:
+        excluded: true
+  /v1/idp-groups:
+    post:
+      description: |
+        Description: Creates a new IDP group and assigns roles to it.<br/>
+
+        An IDP group represents a group from your Identity Provider and maps it to one or more roles in Eon.
+        When users authenticate via SAML and belong to this group, they will receive the assigned roles.
+      operationId: createIdpGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIdpGroupRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIdpGroupResponse'
+          description: IDP group created.
+        "400":
+          description: Validation error.
+        "404":
+          description: Identity provider not found.
+        "409":
+          description: An IDP group with the same provider group ID already exists
+            for this IDP.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create IDP Group
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:idp_groups
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: idp
+          in: resBody
+          key: group.idpId
+  /v1/idp-groups/list:
+    post:
+      description: "Description: Retrieves a list of IDP groups for the account."
+      operationId: listIdpGroups
+      parameters:
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+          To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+        example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIdpGroupsResponse'
+          description: IDP groups retrieved.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List IDP Groups
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:idp_groups
+      x-audit-log:
+        excluded: true
+  /v1/idp-groups/{groupId}:
+    delete:
+      description: |
+        Description: Deletes an IDP group and all its role assignments.<br/>
+
+        After deletion, users who belong to this group in the Identity Provider will no longer receive roles from this mapping.
+      operationId: deleteIdpGroup
+      parameters:
+      - description: IDP Group ID.
+        example: ceaf2281-bf04-542d-a801-a6a4865373ad
+        explode: false
+        in: path
+        name: groupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: IDP group deleted successfully.
+        "404":
+          description: IDP group not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete IDP Group
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:idp_groups
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: idp
+          in: path
+          key: groupId
+    get:
+      description: "Description: Retrieves an IDP group by its ID."
+      operationId: getIdpGroup
+      parameters:
+      - description: IDP Group ID.
+        example: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+        explode: false
+        in: path
+        name: groupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIdpGroupResponse'
+          description: IDP group retrieved.
+        "404":
+          description: IDP group not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get IDP Group
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:idp_groups
+      x-audit-log:
+        excluded: true
+    put:
+      description: |
+        Description: Updates the role assignments for an IDP group.<br/>
+
+        This operation replaces all existing role assignments with the provided list.
+        To add a role, include all existing roles plus the new one.
+        To remove a role, include all roles except the one to remove.
+      operationId: updateIdpGroup
+      parameters:
+      - description: IDP Group ID.
+        explode: false
+        in: path
+        name: groupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIdpGroupRequest'
+        description: The request body for updating an IDP group
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateIdpGroupResponse'
+          description: IDP group updated successfully.
+        "404":
+          description: IDP group not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update IDP Group
+      tags:
+      - iam
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:idp_groups
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: idp
+          in: path
+          key: groupId
   /v1/projects/{projectId}/source-accounts:
     post:
       description: "Description: Connects a source cloud account to the given project."
@@ -8169,6 +8519,213 @@ components:
           $ref: '#/components/schemas/Role'
       required:
       - role
+      type: object
+    Idp:
+      description: An Identity Provider (IDP) configuration.
+      example:
+        id: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+        providerName: okta-prod
+      properties:
+        id:
+          description: System-generated unique identifier for the IDP.
+          example: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          format: uuid
+          type: string
+        providerName:
+          description: The name of the identity provider.
+          example: okta-prod
+          type: string
+      required:
+      - id
+      - providerName
+      type: object
+    ListIdpsResponse:
+      example:
+        nextToken: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        totalCount: 5
+        idps:
+        - id: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          providerName: okta-prod
+        - id: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          providerName: okta-prod
+      properties:
+        idps:
+          description: List of Identity Providers.
+          items:
+            $ref: '#/components/schemas/Idp'
+          type: array
+        totalCount:
+          description: Total number of IDPs.
+          example: 5
+          type: integer
+        nextToken:
+          description: Token to retrieve the next page of results.
+          example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+          type: string
+      required:
+      - idps
+      - totalCount
+      type: object
+    CreateIdpGroupRequest:
+      example:
+        roleIds:
+        - 550e8400-e29b-41d4-a716-446655440000
+        providerGroupId: engineering-team
+        idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+      properties:
+        idpId:
+          description: The ID of the Identity Provider this group belongs to.
+          example: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          format: uuid
+          type: string
+        providerGroupId:
+          description: The group identifier from the Identity Provider.
+          example: engineering-team
+          type: string
+        roleIds:
+          description: List of role IDs to assign to this IDP group.
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - idpId
+      - providerGroupId
+      - roleIds
+      type: object
+    IdpGroup:
+      description: An IDP Group with its associated role assignments.
+      example:
+        roleIds:
+        - 550e8400-e29b-41d4-a716-446655440000
+        - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+        providerGroupId: engineering-team
+        idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+        id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+      properties:
+        id:
+          description: System-generated unique identifier for the IDP group.
+          example: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+          format: uuid
+          type: string
+        idpId:
+          description: The ID of the Identity Provider this group belongs to.
+          example: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          format: uuid
+          type: string
+        providerGroupId:
+          description: The group identifier from the Identity Provider.
+          example: engineering-team
+          type: string
+        roleIds:
+          description: List of role IDs assigned to this IDP group.
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - id
+      - idpId
+      - providerGroupId
+      - roleIds
+      type: object
+    CreateIdpGroupResponse:
+      example:
+        group:
+          roleIds:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          providerGroupId: engineering-team
+          idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+      properties:
+        group:
+          $ref: '#/components/schemas/IdpGroup'
+      required:
+      - group
+      type: object
+    ListIdpGroupsResponse:
+      example:
+        groups:
+        - roleIds:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          providerGroupId: engineering-team
+          idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+        - roleIds:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          providerGroupId: engineering-team
+          idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+        totalCount: 0
+      properties:
+        groups:
+          description: List of IDP groups.
+          items:
+            $ref: '#/components/schemas/IdpGroup'
+          type: array
+        totalCount:
+          description: Total number of IDP groups.
+          type: integer
+      required:
+      - groups
+      type: object
+    GetIdpGroupResponse:
+      example:
+        group:
+          roleIds:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          providerGroupId: engineering-team
+          idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+      properties:
+        group:
+          $ref: '#/components/schemas/IdpGroup'
+      required:
+      - group
+      type: object
+    UpdateIdpGroupRequest:
+      example:
+        roleIds:
+        - 550e8400-e29b-41d4-a716-446655440000
+        - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+      properties:
+        roleIds:
+          description: |
+            List of role IDs to assign to this IDP group.
+            This replaces all existing role assignments.
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - roleIds
+      type: object
+    UpdateIdpGroupResponse:
+      example:
+        group:
+          roleIds:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          providerGroupId: engineering-team
+          idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+      properties:
+        group:
+          $ref: '#/components/schemas/IdpGroup'
+      required:
+      - group
       type: object
     AwsSourceAccountAttributesInput:
       description: |
