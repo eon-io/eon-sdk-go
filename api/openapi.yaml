@@ -8651,6 +8651,7 @@ components:
       type: object
     ListIdpGroupsResponse:
       example:
+        nextToken: nextToken
         groups:
         - roleIds:
           - 550e8400-e29b-41d4-a716-446655440000
@@ -8674,6 +8675,9 @@ components:
         totalCount:
           description: Total number of IDP groups.
           type: integer
+        nextToken:
+          description: Token to retrieve the next page of results.
+          type: string
       required:
       - groups
       type: object

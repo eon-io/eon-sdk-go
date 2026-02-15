@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Groups** | [**[]IdpGroup**](IdpGroup.md) | List of IDP groups. | 
 **TotalCount** | Pointer to **int32** | Total number of IDP groups. | [optional] 
+**NextToken** | Pointer to **string** | Token to retrieve the next page of results. | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ SetTotalCount sets TotalCount field to given value.
 `func (o *ListIdpGroupsResponse) HasTotalCount() bool`
 
 HasTotalCount returns a boolean if a field has been set.
+
+### GetNextToken
+
+`func (o *ListIdpGroupsResponse) GetNextToken() string`
+
+GetNextToken returns the NextToken field if non-nil, zero value otherwise.
+
+### GetNextTokenOk
+
+`func (o *ListIdpGroupsResponse) GetNextTokenOk() (*string, bool)`
+
+GetNextTokenOk returns a tuple with the NextToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextToken
+
+`func (o *ListIdpGroupsResponse) SetNextToken(v string)`
+
+SetNextToken sets NextToken field to given value.
+
+### HasNextToken
+
+`func (o *ListIdpGroupsResponse) HasNextToken() bool`
+
+HasNextToken returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

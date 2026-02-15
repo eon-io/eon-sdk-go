@@ -25,6 +25,8 @@ type ListIdpGroupsResponse struct {
 	Groups []IdpGroup `json:"groups"`
 	// Total number of IDP groups.
 	TotalCount *int32 `json:"totalCount,omitempty"`
+	// Token to retrieve the next page of results.
+	NextToken *string `json:"nextToken,omitempty"`
 }
 
 type _ListIdpGroupsResponse ListIdpGroupsResponse
@@ -103,6 +105,38 @@ func (o *ListIdpGroupsResponse) SetTotalCount(v int32) {
 	o.TotalCount = &v
 }
 
+// GetNextToken returns the NextToken field value if set, zero value otherwise.
+func (o *ListIdpGroupsResponse) GetNextToken() string {
+	if o == nil || IsNil(o.NextToken) {
+		var ret string
+		return ret
+	}
+	return *o.NextToken
+}
+
+// GetNextTokenOk returns a tuple with the NextToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListIdpGroupsResponse) GetNextTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.NextToken) {
+		return nil, false
+	}
+	return o.NextToken, true
+}
+
+// HasNextToken returns a boolean if a field has been set.
+func (o *ListIdpGroupsResponse) HasNextToken() bool {
+	if o != nil && !IsNil(o.NextToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextToken gets a reference to the given string and assigns it to the NextToken field.
+func (o *ListIdpGroupsResponse) SetNextToken(v string) {
+	o.NextToken = &v
+}
+
 func (o ListIdpGroupsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -116,6 +150,9 @@ func (o ListIdpGroupsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["groups"] = o.Groups
 	if !IsNil(o.TotalCount) {
 		toSerialize["totalCount"] = o.TotalCount
+	}
+	if !IsNil(o.NextToken) {
+		toSerialize["nextToken"] = o.NextToken
 	}
 	return toSerialize, nil
 }
