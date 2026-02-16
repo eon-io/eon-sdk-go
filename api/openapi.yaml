@@ -7546,6 +7546,7 @@ components:
       type: object
     ListRolesResponse:
       example:
+        nextToken: nextToken
         roles:
         - permissionGrants:
           - accessConditionId: Non-PII only.
@@ -7926,6 +7927,8 @@ components:
         totalCount:
           description: Total number of roles.
           type: integer
+        nextToken:
+          type: string
       required:
       - roles
       type: object

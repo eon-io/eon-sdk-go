@@ -24,6 +24,7 @@ type ListRolesResponse struct {
 	Roles []Role `json:"roles"`
 	// Total number of roles.
 	TotalCount *int32 `json:"totalCount,omitempty"`
+	NextToken *string `json:"nextToken,omitempty"`
 }
 
 type _ListRolesResponse ListRolesResponse
@@ -102,6 +103,38 @@ func (o *ListRolesResponse) SetTotalCount(v int32) {
 	o.TotalCount = &v
 }
 
+// GetNextToken returns the NextToken field value if set, zero value otherwise.
+func (o *ListRolesResponse) GetNextToken() string {
+	if o == nil || IsNil(o.NextToken) {
+		var ret string
+		return ret
+	}
+	return *o.NextToken
+}
+
+// GetNextTokenOk returns a tuple with the NextToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListRolesResponse) GetNextTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.NextToken) {
+		return nil, false
+	}
+	return o.NextToken, true
+}
+
+// HasNextToken returns a boolean if a field has been set.
+func (o *ListRolesResponse) HasNextToken() bool {
+	if o != nil && !IsNil(o.NextToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextToken gets a reference to the given string and assigns it to the NextToken field.
+func (o *ListRolesResponse) SetNextToken(v string) {
+	o.NextToken = &v
+}
+
 func (o ListRolesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -115,6 +148,9 @@ func (o ListRolesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["roles"] = o.Roles
 	if !IsNil(o.TotalCount) {
 		toSerialize["totalCount"] = o.TotalCount
+	}
+	if !IsNil(o.NextToken) {
+		toSerialize["nextToken"] = o.NextToken
 	}
 	return toSerialize, nil
 }

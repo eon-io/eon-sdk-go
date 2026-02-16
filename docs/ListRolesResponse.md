@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Roles** | [**[]Role**](Role.md) |  | 
 **TotalCount** | Pointer to **int32** | Total number of roles. | [optional] 
+**NextToken** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ SetTotalCount sets TotalCount field to given value.
 `func (o *ListRolesResponse) HasTotalCount() bool`
 
 HasTotalCount returns a boolean if a field has been set.
+
+### GetNextToken
+
+`func (o *ListRolesResponse) GetNextToken() string`
+
+GetNextToken returns the NextToken field if non-nil, zero value otherwise.
+
+### GetNextTokenOk
+
+`func (o *ListRolesResponse) GetNextTokenOk() (*string, bool)`
+
+GetNextTokenOk returns a tuple with the NextToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextToken
+
+`func (o *ListRolesResponse) SetNextToken(v string)`
+
+SetNextToken sets NextToken field to given value.
+
+### HasNextToken
+
+`func (o *ListRolesResponse) HasNextToken() bool`
+
+HasNextToken returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
