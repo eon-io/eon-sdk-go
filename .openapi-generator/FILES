@@ -215,6 +215,7 @@ docs/ListSourceAwsOrganizationalUnitsResponse.md
 docs/LogicalOperator.md
 docs/MeteringDimension.md
 docs/MonthlyConfig.md
+docs/NetworkInterfaceConfig.md
 docs/Oauth2TokenResponse.md
 docs/ObjectStorageDestination.md
 docs/OverrideDataClassificationsRequest.md
@@ -322,6 +323,7 @@ docs/StandardBackupSchedules.md
 docs/StandardIntervalConfig.md
 docs/StartTimeDateFilters.md
 docs/StorageAccountRestoreTarget.md
+docs/SubnetConfig.md
 docs/SubnetFilters.md
 docs/SubnetPerAvailabilityZone.md
 docs/SubnetsCondition.md
@@ -348,6 +350,7 @@ docs/UpdateVaultRequest.md
 docs/UpdateVaultResponse.md
 docs/Usage.md
 docs/UsageUnit.md
+docs/VNetConfig.md
 docs/VaultProviderAttributes.md
 docs/VaultProviderAttributesInput.md
 docs/VaultsAPI.md
@@ -545,6 +548,7 @@ model_list_source_aws_organizational_units_response.go
 model_logical_operator.go
 model_metering_dimension.go
 model_monthly_config.go
+model_network_interface_config.go
 model_oauth2_token_response.go
 model_object_storage_destination.go
 model_override_data_classifications_request.go
@@ -650,6 +654,7 @@ model_standard_backup_schedules.go
 model_standard_interval_config.go
 model_start_time_date_filters.go
 model_storage_account_restore_target.go
+model_subnet_config.go
 model_subnet_filters.go
 model_subnet_per_availability_zone.go
 model_subnets_condition.go
@@ -676,6 +681,7 @@ model_update_vault_request.go
 model_update_vault_response.go
 model_usage.go
 model_usage_unit.go
+model_v_net_config.go
 model_vault_provider_attributes.go
 model_vault_provider_attributes_input.go
 model_volume_settings.go

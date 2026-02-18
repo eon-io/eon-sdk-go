@@ -16239,6 +16239,104 @@ components:
       - destination
       - restoreAccountId
       type: object
+    VNetConfig:
+      description: Virtual network configuration for network interface creation
+      example:
+        mode: existing
+        addressSpace: 10.0.0.0/16
+        name: my-vnet
+      properties:
+        mode:
+          description: Whether to use an existing VNet or create a new one
+          enum:
+          - existing
+          - create
+          type: string
+        name:
+          description: |
+            VNet name. Required when mode=existing.
+            Optional when mode=create (defaults to eon-default-vnet-<region>).
+          example: my-vnet
+          type: string
+        addressSpace:
+          description: |
+            Address space in CIDR notation. Only used when mode=create.
+            Defaults to 10.0.0.0/16 if not specified.
+          example: 10.0.0.0/16
+          type: string
+      required:
+      - mode
+      type: object
+    SubnetConfig:
+      description: Subnet configuration for network interface creation
+      example:
+        mode: existing
+        addressPrefix: 10.0.0.0/24
+        name: my-subnet
+      properties:
+        mode:
+          description: Whether to use an existing subnet or create a new one
+          enum:
+          - existing
+          - create
+          type: string
+        name:
+          description: |
+            Subnet name. Required when mode=existing.
+            Optional when mode=create (defaults to eon-default-subnet-<region>).
+          example: my-subnet
+          type: string
+        addressPrefix:
+          description: |
+            Address prefix in CIDR notation. Only used when mode=create.
+            Defaults to 10.0.0.0/24 if not specified.
+          example: 10.0.0.0/24
+          type: string
+      required:
+      - mode
+      type: object
+    NetworkInterfaceConfig:
+      description: |
+        Network interface configuration for Azure VM restore.
+        Use mode=existing to attach an existing NIC, or mode=create to create a new NIC.
+      example:
+        mode: existing
+        vnet:
+          mode: existing
+          addressSpace: 10.0.0.0/16
+          name: my-vnet
+        nicName: my-new-nic
+        subnet:
+          mode: existing
+          addressPrefix: 10.0.0.0/24
+          name: my-subnet
+        nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
+      properties:
+        mode:
+          description: Whether to use an existing NIC or create a new one
+          enum:
+          - existing
+          - create
+          type: string
+        nicId:
+          description: |
+            Full Azure resource ID of the existing NIC. Required when mode=existing.
+            Format: /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/networkInterfaces/{name}
+          example: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
+          type: string
+        nicName:
+          description: |
+            Name for the new NIC. Only used when mode=create.
+            Defaults to <vmName>-nic if not specified.
+          example: my-new-nic
+          type: string
+        vnet:
+          $ref: '#/components/schemas/VNetConfig'
+        subnet:
+          $ref: '#/components/schemas/SubnetConfig'
+      required:
+      - mode
+      type: object
     AzureDiskSettings:
       example:
         tier: Standard
@@ -16314,6 +16412,18 @@ components:
       example:
         startInstanceAfterRestore: true
         vmName: my-vm-12345
+        networkInterfaceConfig:
+          mode: existing
+          vnet:
+            mode: existing
+            addressSpace: 10.0.0.0/16
+            name: my-vnet
+          nicName: my-new-nic
+          subnet:
+            mode: existing
+            addressPrefix: 10.0.0.0/24
+            name: my-subnet
+          nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
         resourceGroupName: my-resource-group-12345
         disks:
         - settings:
@@ -16357,8 +16467,13 @@ components:
           example: Standard_DS1_v2
           type: string
         networkInterface:
-          description: Name of the network interface to use.
+          description: |
+            Name of the network interface to use (legacy field).
+            Prefer using networkInterfaceConfig for new integrations.
+            If networkInterfaceConfig is provided, this field is ignored.
           type: string
+        networkInterfaceConfig:
+          $ref: '#/components/schemas/NetworkInterfaceConfig'
         tags:
           additionalProperties:
             type: string
@@ -16380,7 +16495,6 @@ components:
           type: boolean
       required:
       - disks
-      - networkInterface
       - region
       - resourceGroupName
       - vmName
@@ -16391,6 +16505,18 @@ components:
         azureVm:
           startInstanceAfterRestore: true
           vmName: my-vm-12345
+          networkInterfaceConfig:
+            mode: existing
+            vnet:
+              mode: existing
+              addressSpace: 10.0.0.0/16
+              name: my-vnet
+            nicName: my-new-nic
+            subnet:
+              mode: existing
+              addressPrefix: 10.0.0.0/24
+              name: my-subnet
+            nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
           resourceGroupName: my-resource-group-12345
           disks:
           - settings:
@@ -16427,6 +16553,18 @@ components:
           azureVm:
             startInstanceAfterRestore: true
             vmName: my-vm-12345
+            networkInterfaceConfig:
+              mode: existing
+              vnet:
+                mode: existing
+                addressSpace: 10.0.0.0/16
+                name: my-vnet
+              nicName: my-new-nic
+              subnet:
+                mode: existing
+                addressPrefix: 10.0.0.0/24
+                name: my-subnet
+              nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
             resourceGroupName: my-resource-group-12345
             disks:
             - settings:

@@ -29,8 +29,9 @@ type AzureVmInstanceRestoreTarget struct {
 	VmName string `json:"vmName"`
 	// Size of the restored VM.
 	VmSize string `json:"vmSize"`
-	// Name of the network interface to use.
-	NetworkInterface string `json:"networkInterface"`
+	// Name of the network interface to use (legacy field). Prefer using networkInterfaceConfig for new integrations. If networkInterfaceConfig is provided, this field is ignored. 
+	NetworkInterface *string `json:"networkInterface,omitempty"`
+	NetworkInterfaceConfig *NetworkInterfaceConfig `json:"networkInterfaceConfig,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 	Disks []RestoreAzureInstanceDiskInput `json:"disks"`
@@ -44,13 +45,12 @@ type _AzureVmInstanceRestoreTarget AzureVmInstanceRestoreTarget
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, disks []RestoreAzureInstanceDiskInput) *AzureVmInstanceRestoreTarget {
+func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, disks []RestoreAzureInstanceDiskInput) *AzureVmInstanceRestoreTarget {
 	this := AzureVmInstanceRestoreTarget{}
 	this.Region = region
 	this.ResourceGroupName = resourceGroupName
 	this.VmName = vmName
 	this.VmSize = vmSize
-	this.NetworkInterface = networkInterface
 	this.Disks = disks
 	var startInstanceAfterRestore bool = true
 	this.StartInstanceAfterRestore = &startInstanceAfterRestore
@@ -163,28 +163,68 @@ func (o *AzureVmInstanceRestoreTarget) SetVmSize(v string) {
 	o.VmSize = v
 }
 
-// GetNetworkInterface returns the NetworkInterface field value
+// GetNetworkInterface returns the NetworkInterface field value if set, zero value otherwise.
 func (o *AzureVmInstanceRestoreTarget) GetNetworkInterface() string {
-	if o == nil {
+	if o == nil || IsNil(o.NetworkInterface) {
 		var ret string
 		return ret
 	}
-
-	return o.NetworkInterface
+	return *o.NetworkInterface
 }
 
-// GetNetworkInterfaceOk returns a tuple with the NetworkInterface field value
+// GetNetworkInterfaceOk returns a tuple with the NetworkInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AzureVmInstanceRestoreTarget) GetNetworkInterfaceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NetworkInterface) {
 		return nil, false
 	}
-	return &o.NetworkInterface, true
+	return o.NetworkInterface, true
 }
 
-// SetNetworkInterface sets field value
+// HasNetworkInterface returns a boolean if a field has been set.
+func (o *AzureVmInstanceRestoreTarget) HasNetworkInterface() bool {
+	if o != nil && !IsNil(o.NetworkInterface) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkInterface gets a reference to the given string and assigns it to the NetworkInterface field.
 func (o *AzureVmInstanceRestoreTarget) SetNetworkInterface(v string) {
-	o.NetworkInterface = v
+	o.NetworkInterface = &v
+}
+
+// GetNetworkInterfaceConfig returns the NetworkInterfaceConfig field value if set, zero value otherwise.
+func (o *AzureVmInstanceRestoreTarget) GetNetworkInterfaceConfig() NetworkInterfaceConfig {
+	if o == nil || IsNil(o.NetworkInterfaceConfig) {
+		var ret NetworkInterfaceConfig
+		return ret
+	}
+	return *o.NetworkInterfaceConfig
+}
+
+// GetNetworkInterfaceConfigOk returns a tuple with the NetworkInterfaceConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureVmInstanceRestoreTarget) GetNetworkInterfaceConfigOk() (*NetworkInterfaceConfig, bool) {
+	if o == nil || IsNil(o.NetworkInterfaceConfig) {
+		return nil, false
+	}
+	return o.NetworkInterfaceConfig, true
+}
+
+// HasNetworkInterfaceConfig returns a boolean if a field has been set.
+func (o *AzureVmInstanceRestoreTarget) HasNetworkInterfaceConfig() bool {
+	if o != nil && !IsNil(o.NetworkInterfaceConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkInterfaceConfig gets a reference to the given NetworkInterfaceConfig and assigns it to the NetworkInterfaceConfig field.
+func (o *AzureVmInstanceRestoreTarget) SetNetworkInterfaceConfig(v NetworkInterfaceConfig) {
+	o.NetworkInterfaceConfig = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -289,7 +329,12 @@ func (o AzureVmInstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize["resourceGroupName"] = o.ResourceGroupName
 	toSerialize["vmName"] = o.VmName
 	toSerialize["vmSize"] = o.VmSize
-	toSerialize["networkInterface"] = o.NetworkInterface
+	if !IsNil(o.NetworkInterface) {
+		toSerialize["networkInterface"] = o.NetworkInterface
+	}
+	if !IsNil(o.NetworkInterfaceConfig) {
+		toSerialize["networkInterfaceConfig"] = o.NetworkInterfaceConfig
+	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
@@ -309,7 +354,6 @@ func (o *AzureVmInstanceRestoreTarget) UnmarshalJSON(data []byte) (err error) {
 		"resourceGroupName",
 		"vmName",
 		"vmSize",
-		"networkInterface",
 		"disks",
 	}
 

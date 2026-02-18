@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **ResourceGroupName** | **string** | Name of the resource group to restore to. | 
 **VmName** | **string** | Restored VM name. | 
 **VmSize** | **string** | Size of the restored VM. | 
-**NetworkInterface** | **string** | Name of the network interface to use. | 
+**NetworkInterface** | Pointer to **string** | Name of the network interface to use (legacy field). Prefer using networkInterfaceConfig for new integrations. If networkInterfaceConfig is provided, this field is ignored.  | [optional] 
+**NetworkInterfaceConfig** | Pointer to [**NetworkInterfaceConfig**](NetworkInterfaceConfig.md) |  | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **Disks** | [**[]RestoreAzureInstanceDiskInput**](RestoreAzureInstanceDiskInput.md) |  | 
 **StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM will be created in a stopped state.  | [optional] [default to true]
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewAzureVmInstanceRestoreTarget
 
-`func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, networkInterface string, disks []RestoreAzureInstanceDiskInput, ) *AzureVmInstanceRestoreTarget`
+`func NewAzureVmInstanceRestoreTarget(region string, resourceGroupName string, vmName string, vmSize string, disks []RestoreAzureInstanceDiskInput, ) *AzureVmInstanceRestoreTarget`
 
 NewAzureVmInstanceRestoreTarget instantiates a new AzureVmInstanceRestoreTarget object
 This constructor will assign default values to properties that have it defined,
@@ -131,6 +132,36 @@ and a boolean to check if the value has been set.
 
 SetNetworkInterface sets NetworkInterface field to given value.
 
+### HasNetworkInterface
+
+`func (o *AzureVmInstanceRestoreTarget) HasNetworkInterface() bool`
+
+HasNetworkInterface returns a boolean if a field has been set.
+
+### GetNetworkInterfaceConfig
+
+`func (o *AzureVmInstanceRestoreTarget) GetNetworkInterfaceConfig() NetworkInterfaceConfig`
+
+GetNetworkInterfaceConfig returns the NetworkInterfaceConfig field if non-nil, zero value otherwise.
+
+### GetNetworkInterfaceConfigOk
+
+`func (o *AzureVmInstanceRestoreTarget) GetNetworkInterfaceConfigOk() (*NetworkInterfaceConfig, bool)`
+
+GetNetworkInterfaceConfigOk returns a tuple with the NetworkInterfaceConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkInterfaceConfig
+
+`func (o *AzureVmInstanceRestoreTarget) SetNetworkInterfaceConfig(v NetworkInterfaceConfig)`
+
+SetNetworkInterfaceConfig sets NetworkInterfaceConfig field to given value.
+
+### HasNetworkInterfaceConfig
+
+`func (o *AzureVmInstanceRestoreTarget) HasNetworkInterfaceConfig() bool`
+
+HasNetworkInterfaceConfig returns a boolean if a field has been set.
 
 ### GetTags
 
