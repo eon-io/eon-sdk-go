@@ -83,6 +83,7 @@ docs/BackupStatus.md
 docs/BackupStatusFilters.md
 docs/BackupVault.md
 docs/BackupsAPI.md
+docs/BigQueryDatasetDestination.md
 docs/BillingAPI.md
 docs/CancelExclusionFromBackupResponse.md
 docs/Classifications.md
@@ -270,6 +271,7 @@ docs/RestoreAzureDiskRequest.md
 docs/RestoreAzureInstanceDiskInput.md
 docs/RestoreAzureSqlDatabaseRequest.md
 docs/RestoreAzureVmInstanceRequest.md
+docs/RestoreBigQueryDatasetRequest.md
 docs/RestoreBucketRequest.md
 docs/RestoreDbToRdsInstanceRequest.md
 docs/RestoreDynamoDBTableRequest.md
@@ -421,6 +423,7 @@ model_backup_policy_type.go
 model_backup_status.go
 model_backup_status_filters.go
 model_backup_vault.go
+model_big_query_dataset_destination.go
 model_cancel_exclusion_from_backup_response.go
 model_classifications.go
 model_cloud_provider_condition.go
@@ -602,6 +605,7 @@ model_restore_azure_disk_request.go
 model_restore_azure_instance_disk_input.go
 model_restore_azure_sql_database_request.go
 model_restore_azure_vm_instance_request.go
+model_restore_big_query_dataset_request.go
 model_restore_bucket_request.go
 model_restore_db_to_rds_instance_request.go
 model_restore_dynamo_db_table_request.go

@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**RestoreAzureDisk**](SnapshotsAPI.md#RestoreAzureDisk) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-disk | Restore Azure Disk
 [**RestoreAzureSqlDatabase**](SnapshotsAPI.md#RestoreAzureSqlDatabase) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-sql-database | Restore Azure SQL Database
 [**RestoreAzureVmInstance**](SnapshotsAPI.md#RestoreAzureVmInstance) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-azure-vm-instance | Restore Azure VM Instance
+[**RestoreBigQueryDataset**](SnapshotsAPI.md#RestoreBigQueryDataset) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bigquery-dataset | Restore BigQuery Dataset
 [**RestoreBucket**](SnapshotsAPI.md#RestoreBucket) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bucket | Restore Bucket
 [**RestoreDatabase**](SnapshotsAPI.md#RestoreDatabase) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-rds-instance | Restore RDS Instance
 [**RestoreDynamoDBTable**](SnapshotsAPI.md#RestoreDynamoDBTable) | **Post** /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-dynamo-db-table | Restore DynamoDB Table
@@ -537,6 +538,84 @@ Name | Type | Description  | Notes
 
 
  **restoreAzureVmInstanceRequest** | [**RestoreAzureVmInstanceRequest**](RestoreAzureVmInstanceRequest.md) |  | 
+
+### Return type
+
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestoreBigQueryDataset
+
+> RestoreJobInitiationResponse RestoreBigQueryDataset(ctx, projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).Execute()
+
+Restore BigQuery Dataset
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	restoreBigQueryDatasetRequest := *openapiclient.NewRestoreBigQueryDatasetRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewBigQueryDatasetDestination("restored_dataset")) // RestoreBigQueryDatasetRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SnapshotsAPI.RestoreBigQueryDataset(context.Background(), projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreBigQueryDataset``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RestoreBigQueryDataset`: RestoreJobInitiationResponse
+	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreBigQueryDataset`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**id** | **string** | Eon-assigned resource ID. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestoreBigQueryDatasetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **restoreBigQueryDatasetRequest** | [**RestoreBigQueryDatasetRequest**](RestoreBigQueryDatasetRequest.md) |  | 
 
 ### Return type
 

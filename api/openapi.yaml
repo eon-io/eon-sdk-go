@@ -3311,6 +3311,104 @@ paths:
         - entityType: restore_job
           in: resBody
           key: jobId
+  /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-bigquery-dataset:
+    post:
+      description: |
+        Description: Restores a BigQuery dataset from an Eon snapshot.
+
+        This operation is asynchronous.
+        It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
+        You can follow the progress of the restore job by calling [Get Restore Job](/api/api-reference/jobs/restore-jobs/get-restore-job) with the job ID.
+      operationId: restoreBigQueryDataset
+      parameters:
+      - description: |
+          ID of the project the snapshot is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned resource ID.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: tobedefined
+          type: string
+        style: simple
+      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+          \ to restore."
+        example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
+        explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreBigQueryDatasetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
+          description: Restore job started.
+        "404":
+          description: "Project, resource, or snapshot wasn't found."
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Restore BigQuery Dataset
+      tags:
+      - snapshots
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: snapshot
+          key: snapshotId
+      x-permissions:
+      - create:restore_resource
+      x-audit-log:
+        action: trigger
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+        - entityType: snapshot
+          in: path
+          key: snapshotId
+        - entityType: restore_job
+          in: resBody
+          key: jobId
   /v1/projects/{projectId}/resources/{id}/snapshots/{snapshotId}/restore-ec2-ebs-volume:
     post:
       description: |
@@ -6452,6 +6550,7 @@ components:
       - AWS_DYNAMO_DB
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
+      - AWS_REDSHIFT
       - AZURE_VIRTUAL_MACHINE
       - AZURE_FILE_SHARE
       - AZURE_STORAGE_ACCOUNT
@@ -15664,6 +15763,60 @@ components:
           description: Eon-assigned ID of the restore account.
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           type: string
+      required:
+      - destination
+      - restoreAccountId
+      type: object
+    BigQueryDatasetDestination:
+      description: Destination configuration for BigQuery dataset restore.
+      example:
+        datasetId: restored_dataset
+        location: US
+        selectedTables:
+        - users
+        - orders
+      properties:
+        datasetId:
+          description: |
+            Target dataset ID for the restore.
+            If the dataset doesn't exist, it will be created.
+          example: restored_dataset
+          type: string
+        location:
+          description: |
+            BigQuery location for the dataset (e.g., "US", "EU", "us-central1").
+            Defaults to the original dataset location if not specified.
+          example: US
+          type: string
+        selectedTables:
+          description: |
+            List of table names to restore.
+            If empty or not specified, all tables in the snapshot will be restored.
+          example:
+          - users
+          - orders
+          items:
+            type: string
+          type: array
+      required:
+      - datasetId
+      type: object
+    RestoreBigQueryDatasetRequest:
+      example:
+        restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        destination:
+          datasetId: restored_dataset
+          location: US
+          selectedTables:
+          - users
+          - orders
+      properties:
+        restoreAccountId:
+          description: Eon-assigned ID of the restore account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        destination:
+          $ref: '#/components/schemas/BigQueryDatasetDestination'
       required:
       - destination
       - restoreAccountId
