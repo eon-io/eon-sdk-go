@@ -27,6 +27,8 @@ type AzureSourceAccountAttributes struct {
 	SubscriptionId string `json:"subscriptionId"`
 	// Resource group name for Eon's temporary internal resources. 
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
+	// ID of the Azure management group the source account is scoped to.
+	ManagementGroupId *string `json:"managementGroupId,omitempty"`
 }
 
 type _AzureSourceAccountAttributes AzureSourceAccountAttributes
@@ -134,6 +136,38 @@ func (o *AzureSourceAccountAttributes) SetEonInternalResourceGroupName(v string)
 	o.EonInternalResourceGroupName = &v
 }
 
+// GetManagementGroupId returns the ManagementGroupId field value if set, zero value otherwise.
+func (o *AzureSourceAccountAttributes) GetManagementGroupId() string {
+	if o == nil || IsNil(o.ManagementGroupId) {
+		var ret string
+		return ret
+	}
+	return *o.ManagementGroupId
+}
+
+// GetManagementGroupIdOk returns a tuple with the ManagementGroupId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureSourceAccountAttributes) GetManagementGroupIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ManagementGroupId) {
+		return nil, false
+	}
+	return o.ManagementGroupId, true
+}
+
+// HasManagementGroupId returns a boolean if a field has been set.
+func (o *AzureSourceAccountAttributes) HasManagementGroupId() bool {
+	if o != nil && !IsNil(o.ManagementGroupId) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagementGroupId gets a reference to the given string and assigns it to the ManagementGroupId field.
+func (o *AzureSourceAccountAttributes) SetManagementGroupId(v string) {
+	o.ManagementGroupId = &v
+}
+
 func (o AzureSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -148,6 +182,9 @@ func (o AzureSourceAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize["subscriptionId"] = o.SubscriptionId
 	if !IsNil(o.EonInternalResourceGroupName) {
 		toSerialize["eonInternalResourceGroupName"] = o.EonInternalResourceGroupName
+	}
+	if !IsNil(o.ManagementGroupId) {
+		toSerialize["managementGroupId"] = o.ManagementGroupId
 	}
 	return toSerialize, nil
 }

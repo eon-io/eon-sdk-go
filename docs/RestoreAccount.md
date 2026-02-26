@@ -11,13 +11,13 @@ Name | Type | Description | Notes
 **Status** | [**AccountState**](AccountState.md) |  | 
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
 **ConnectedTime** | Pointer to **time.Time** | Date and time the account was connected to Eon. | [optional] 
-**RestoreAccountAttributes** | Pointer to [**RestoreAccountCloudAttributes**](RestoreAccountCloudAttributes.md) |  | [optional] 
+**RestoreAccountAttributes** | [**RestoreAccountCloudAttributes**](RestoreAccountCloudAttributes.md) |  | 
 
 ## Methods
 
 ### NewRestoreAccount
 
-`func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, ) *RestoreAccount`
+`func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, restoreAccountAttributes RestoreAccountCloudAttributes, ) *RestoreAccount`
 
 NewRestoreAccount instantiates a new RestoreAccount object
 This constructor will assign default values to properties that have it defined,
@@ -206,11 +206,6 @@ and a boolean to check if the value has been set.
 
 SetRestoreAccountAttributes sets RestoreAccountAttributes field to given value.
 
-### HasRestoreAccountAttributes
-
-`func (o *RestoreAccount) HasRestoreAccountAttributes() bool`
-
-HasRestoreAccountAttributes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

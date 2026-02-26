@@ -9027,6 +9027,7 @@ components:
         Azure subscription configuration.
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
+        managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
         tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
         eonInternalResourceGroupName: eon-source-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9048,6 +9049,11 @@ components:
             Resource group name for Eon's temporary internal resources.
           example: eon-source-internal-rg
           type: string
+        managementGroupId:
+          description: ID of the Azure management group the source account is scoped
+            to.
+          example: 3eca9074-011f-5008-9605-a7ccf00aa93e
+          type: string
       required:
       - subscriptionId
       - tenantId
@@ -9063,6 +9069,7 @@ components:
           organizationId: o-1234567890
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
+          managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
           tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
           eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9094,6 +9101,7 @@ components:
             organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
+            managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
             tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
             eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9154,6 +9162,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9456,6 +9465,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9479,6 +9489,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9526,6 +9537,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9558,6 +9570,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -9804,6 +9817,7 @@ components:
         Azure subscription configuration.
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
+        managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
         resourceGroupName: my-resource-group
         tenantId: 12345678-1234-1234-1234-123456789012
         eonInternalResourceGroupName: eon-restore-internal-rg
@@ -9832,6 +9846,11 @@ components:
             Name of the Eon internal resource group for temporary restore resources.
           example: eon-restore-internal-rg
           type: string
+        managementGroupId:
+          description: ID of the Azure management group the restore account is scoped
+            to.
+          example: 3eca9074-011f-5008-9605-a7ccf00aa93e
+          type: string
       required:
       - subscriptionId
       - tenantId
@@ -9845,6 +9864,7 @@ components:
           organizationId: o-1234567890
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
+          managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
           resourceGroupName: my-resource-group
           tenantId: 12345678-1234-1234-1234-123456789012
           eonInternalResourceGroupName: eon-restore-internal-rg
@@ -9858,6 +9878,8 @@ components:
           $ref: '#/components/schemas/GcpRestoreAccountAttributes'
         azure:
           $ref: '#/components/schemas/AzureRestoreAccountAttributes'
+      required:
+      - cloudProvider
       type: object
     RestoreAccount:
       example:
@@ -9869,6 +9891,7 @@ components:
             organizationId: o-1234567890
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
+            managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
             resourceGroupName: my-resource-group
             tenantId: 12345678-1234-1234-1234-123456789012
             eonInternalResourceGroupName: eon-restore-internal-rg
@@ -9914,6 +9937,7 @@ components:
       - id
       - name
       - providerAccountId
+      - restoreAccountAttributes
       - status
       type: object
     ConnectRestoreAccountResponse:
@@ -9927,6 +9951,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
@@ -10087,6 +10112,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
@@ -10109,6 +10135,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
@@ -10155,6 +10182,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
@@ -10186,6 +10214,7 @@ components:
               organizationId: o-1234567890
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
@@ -10870,6 +10899,7 @@ components:
       - AWS_S3_BACKUP
       - AWS_FSX_BACKUP
       - AWS_EFS_BACKUP
+      - AWS_REDSHIFT_BACKUP
       - AWS_DYNAMO_DB_BACKUP
       - AWS_DYNAMO_DB_BACKUP_FULL
       - AWS_EKS_NAMESPACE_BACKUP

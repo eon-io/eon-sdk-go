@@ -12,6 +12,8 @@ package eon
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the RestoreAccountCloudAttributes type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,21 @@ var _ MappedNullable = &RestoreAccountCloudAttributes{}
 
 // RestoreAccountCloudAttributes struct for RestoreAccountCloudAttributes
 type RestoreAccountCloudAttributes struct {
-	CloudProvider *Provider `json:"cloudProvider,omitempty"`
+	CloudProvider Provider `json:"cloudProvider"`
 	Aws NullableAwsRestoreAccountAttributes `json:"aws,omitempty"`
 	Gcp NullableGcpRestoreAccountAttributes `json:"gcp,omitempty"`
 	Azure NullableAzureRestoreAccountAttributes `json:"azure,omitempty"`
 }
 
+type _RestoreAccountCloudAttributes RestoreAccountCloudAttributes
+
 // NewRestoreAccountCloudAttributes instantiates a new RestoreAccountCloudAttributes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreAccountCloudAttributes() *RestoreAccountCloudAttributes {
+func NewRestoreAccountCloudAttributes(cloudProvider Provider) *RestoreAccountCloudAttributes {
 	this := RestoreAccountCloudAttributes{}
+	this.CloudProvider = cloudProvider
 	return &this
 }
 
@@ -42,36 +47,28 @@ func NewRestoreAccountCloudAttributesWithDefaults() *RestoreAccountCloudAttribut
 	return &this
 }
 
-// GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
+// GetCloudProvider returns the CloudProvider field value
 func (o *RestoreAccountCloudAttributes) GetCloudProvider() Provider {
-	if o == nil || IsNil(o.CloudProvider) {
+	if o == nil {
 		var ret Provider
 		return ret
 	}
-	return *o.CloudProvider
+
+	return o.CloudProvider
 }
 
-// GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
+// GetCloudProviderOk returns a tuple with the CloudProvider field value
 // and a boolean to check if the value has been set.
 func (o *RestoreAccountCloudAttributes) GetCloudProviderOk() (*Provider, bool) {
-	if o == nil || IsNil(o.CloudProvider) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CloudProvider, true
+	return &o.CloudProvider, true
 }
 
-// HasCloudProvider returns a boolean if a field has been set.
-func (o *RestoreAccountCloudAttributes) HasCloudProvider() bool {
-	if o != nil && !IsNil(o.CloudProvider) {
-		return true
-	}
-
-	return false
-}
-
-// SetCloudProvider gets a reference to the given Provider and assigns it to the CloudProvider field.
+// SetCloudProvider sets field value
 func (o *RestoreAccountCloudAttributes) SetCloudProvider(v Provider) {
-	o.CloudProvider = &v
+	o.CloudProvider = v
 }
 
 // GetAws returns the Aws field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -210,9 +207,7 @@ func (o RestoreAccountCloudAttributes) MarshalJSON() ([]byte, error) {
 
 func (o RestoreAccountCloudAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CloudProvider) {
-		toSerialize["cloudProvider"] = o.CloudProvider
-	}
+	toSerialize["cloudProvider"] = o.CloudProvider
 	if o.Aws.IsSet() {
 		toSerialize["aws"] = o.Aws.Get()
 	}
@@ -223,6 +218,43 @@ func (o RestoreAccountCloudAttributes) ToMap() (map[string]interface{}, error) {
 		toSerialize["azure"] = o.Azure.Get()
 	}
 	return toSerialize, nil
+}
+
+func (o *RestoreAccountCloudAttributes) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"cloudProvider",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRestoreAccountCloudAttributes := _RestoreAccountCloudAttributes{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	//decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRestoreAccountCloudAttributes)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RestoreAccountCloudAttributes(varRestoreAccountCloudAttributes)
+
+	return err
 }
 
 type NullableRestoreAccountCloudAttributes struct {

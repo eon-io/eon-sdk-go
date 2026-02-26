@@ -34,7 +34,7 @@ type RestoreAccount struct {
 	Version *AccountVersion `json:"version,omitempty"`
 	// Date and time the account was connected to Eon.
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
-	RestoreAccountAttributes *RestoreAccountCloudAttributes `json:"restoreAccountAttributes,omitempty"`
+	RestoreAccountAttributes RestoreAccountCloudAttributes `json:"restoreAccountAttributes"`
 }
 
 type _RestoreAccount RestoreAccount
@@ -43,12 +43,13 @@ type _RestoreAccount RestoreAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState) *RestoreAccount {
+func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, restoreAccountAttributes RestoreAccountCloudAttributes) *RestoreAccount {
 	this := RestoreAccount{}
 	this.Id = id
 	this.ProviderAccountId = providerAccountId
 	this.Name = name
 	this.Status = status
+	this.RestoreAccountAttributes = restoreAccountAttributes
 	return &this
 }
 
@@ -252,36 +253,28 @@ func (o *RestoreAccount) SetConnectedTime(v time.Time) {
 	o.ConnectedTime = &v
 }
 
-// GetRestoreAccountAttributes returns the RestoreAccountAttributes field value if set, zero value otherwise.
+// GetRestoreAccountAttributes returns the RestoreAccountAttributes field value
 func (o *RestoreAccount) GetRestoreAccountAttributes() RestoreAccountCloudAttributes {
-	if o == nil || IsNil(o.RestoreAccountAttributes) {
+	if o == nil {
 		var ret RestoreAccountCloudAttributes
 		return ret
 	}
-	return *o.RestoreAccountAttributes
+
+	return o.RestoreAccountAttributes
 }
 
-// GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field value if set, nil otherwise
+// GetRestoreAccountAttributesOk returns a tuple with the RestoreAccountAttributes field value
 // and a boolean to check if the value has been set.
 func (o *RestoreAccount) GetRestoreAccountAttributesOk() (*RestoreAccountCloudAttributes, bool) {
-	if o == nil || IsNil(o.RestoreAccountAttributes) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RestoreAccountAttributes, true
+	return &o.RestoreAccountAttributes, true
 }
 
-// HasRestoreAccountAttributes returns a boolean if a field has been set.
-func (o *RestoreAccount) HasRestoreAccountAttributes() bool {
-	if o != nil && !IsNil(o.RestoreAccountAttributes) {
-		return true
-	}
-
-	return false
-}
-
-// SetRestoreAccountAttributes gets a reference to the given RestoreAccountCloudAttributes and assigns it to the RestoreAccountAttributes field.
+// SetRestoreAccountAttributes sets field value
 func (o *RestoreAccount) SetRestoreAccountAttributes(v RestoreAccountCloudAttributes) {
-	o.RestoreAccountAttributes = &v
+	o.RestoreAccountAttributes = v
 }
 
 func (o RestoreAccount) MarshalJSON() ([]byte, error) {
@@ -307,9 +300,7 @@ func (o RestoreAccount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectedTime) {
 		toSerialize["connectedTime"] = o.ConnectedTime
 	}
-	if !IsNil(o.RestoreAccountAttributes) {
-		toSerialize["restoreAccountAttributes"] = o.RestoreAccountAttributes
-	}
+	toSerialize["restoreAccountAttributes"] = o.RestoreAccountAttributes
 	return toSerialize, nil
 }
 
@@ -322,6 +313,7 @@ func (o *RestoreAccount) UnmarshalJSON(data []byte) (err error) {
 		"providerAccountId",
 		"name",
 		"status",
+		"restoreAccountAttributes",
 	}
 
 	allProperties := make(map[string]interface{})

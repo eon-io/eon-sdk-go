@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CloudProvider** | Pointer to [**Provider**](Provider.md) |  | [optional] 
+**CloudProvider** | [**Provider**](Provider.md) |  | 
 **Aws** | Pointer to [**NullableAwsRestoreAccountAttributes**](AwsRestoreAccountAttributes.md) |  | [optional] 
 **Gcp** | Pointer to [**NullableGcpRestoreAccountAttributes**](GcpRestoreAccountAttributes.md) |  | [optional] 
 **Azure** | Pointer to [**NullableAzureRestoreAccountAttributes**](AzureRestoreAccountAttributes.md) |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreAccountCloudAttributes
 
-`func NewRestoreAccountCloudAttributes() *RestoreAccountCloudAttributes`
+`func NewRestoreAccountCloudAttributes(cloudProvider Provider, ) *RestoreAccountCloudAttributes`
 
 NewRestoreAccountCloudAttributes instantiates a new RestoreAccountCloudAttributes object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetCloudProvider sets CloudProvider field to given value.
 
-### HasCloudProvider
-
-`func (o *RestoreAccountCloudAttributes) HasCloudProvider() bool`
-
-HasCloudProvider returns a boolean if a field has been set.
 
 ### GetAws
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **SubscriptionId** | **string** | ID of the Azure subscription. | 
 **ResourceGroupName** | Pointer to **string** | Name of the Azure resource group to scope permissions to. When provided, restoring is limited to this specific resource group. When omitted, permissions are scoped to the subscription.  | [optional] 
 **EonInternalResourceGroupName** | Pointer to **string** | Name of the Eon internal resource group for temporary restore resources.  | [optional] 
+**ManagementGroupId** | Pointer to **string** | ID of the Azure management group the restore account is scoped to. | [optional] 
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetEonInternalResourceGroupName sets EonInternalResourceGroupName field to given
 `func (o *AzureRestoreAccountAttributes) HasEonInternalResourceGroupName() bool`
 
 HasEonInternalResourceGroupName returns a boolean if a field has been set.
+
+### GetManagementGroupId
+
+`func (o *AzureRestoreAccountAttributes) GetManagementGroupId() string`
+
+GetManagementGroupId returns the ManagementGroupId field if non-nil, zero value otherwise.
+
+### GetManagementGroupIdOk
+
+`func (o *AzureRestoreAccountAttributes) GetManagementGroupIdOk() (*string, bool)`
+
+GetManagementGroupIdOk returns a tuple with the ManagementGroupId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagementGroupId
+
+`func (o *AzureRestoreAccountAttributes) SetManagementGroupId(v string)`
+
+SetManagementGroupId sets ManagementGroupId field to given value.
+
+### HasManagementGroupId
+
+`func (o *AzureRestoreAccountAttributes) HasManagementGroupId() bool`
+
+HasManagementGroupId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

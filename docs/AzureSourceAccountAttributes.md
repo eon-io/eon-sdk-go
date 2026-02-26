@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **TenantId** | **string** | ID of the Azure tenant the subscription belongs to. | 
 **SubscriptionId** | **string** | ID of the Azure subscription. | 
 **EonInternalResourceGroupName** | Pointer to **string** | Resource group name for Eon&#39;s temporary internal resources.  | [optional] [default to "eon-source-internal-rg"]
+**ManagementGroupId** | Pointer to **string** | ID of the Azure management group the source account is scoped to. | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetEonInternalResourceGroupName sets EonInternalResourceGroupName field to given
 `func (o *AzureSourceAccountAttributes) HasEonInternalResourceGroupName() bool`
 
 HasEonInternalResourceGroupName returns a boolean if a field has been set.
+
+### GetManagementGroupId
+
+`func (o *AzureSourceAccountAttributes) GetManagementGroupId() string`
+
+GetManagementGroupId returns the ManagementGroupId field if non-nil, zero value otherwise.
+
+### GetManagementGroupIdOk
+
+`func (o *AzureSourceAccountAttributes) GetManagementGroupIdOk() (*string, bool)`
+
+GetManagementGroupIdOk returns a tuple with the ManagementGroupId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagementGroupId
+
+`func (o *AzureSourceAccountAttributes) SetManagementGroupId(v string)`
+
+SetManagementGroupId sets ManagementGroupId field to given value.
+
+### HasManagementGroupId
+
+`func (o *AzureSourceAccountAttributes) HasManagementGroupId() bool`
+
+HasManagementGroupId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
