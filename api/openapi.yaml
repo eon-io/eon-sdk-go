@@ -16194,6 +16194,7 @@ components:
     AwsEc2InstanceRestoreTarget:
       example:
         subnetId: subnet-01234567890123456
+        startInstanceAfterRestore: true
         securityGroupIds:
         - securityGroupIds
         - securityGroupIds
@@ -16256,6 +16257,12 @@ components:
           items:
             $ref: '#/components/schemas/RestoreInstanceVolumeInput'
           type: array
+        startInstanceAfterRestore:
+          default: true
+          description: |
+            Whether to start the EC2 instance after restoring it.
+            If set to `false`, the instance will be left in a stopped state.
+          type: boolean
       required:
       - instanceType
       - region
@@ -16266,6 +16273,7 @@ components:
       example:
         awsEc2:
           subnetId: subnet-01234567890123456
+          startInstanceAfterRestore: true
           securityGroupIds:
           - securityGroupIds
           - securityGroupIds
@@ -16304,6 +16312,7 @@ components:
         destination:
           awsEc2:
             subnetId: subnet-01234567890123456
+            startInstanceAfterRestore: true
             securityGroupIds:
             - securityGroupIds
             - securityGroupIds

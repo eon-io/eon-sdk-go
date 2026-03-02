@@ -33,6 +33,8 @@ type AwsEc2InstanceRestoreTarget struct {
 	Tags *map[string]string `json:"tags,omitempty"`
 	// Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot. The root volume must be present in the list. 
 	VolumeRestoreParameters []RestoreInstanceVolumeInput `json:"volumeRestoreParameters"`
+	// Whether to start the EC2 instance after restoring it. If set to `false`, the instance will be left in a stopped state. 
+	StartInstanceAfterRestore *bool `json:"startInstanceAfterRestore,omitempty"`
 }
 
 type _AwsEc2InstanceRestoreTarget AwsEc2InstanceRestoreTarget
@@ -47,6 +49,8 @@ func NewAwsEc2InstanceRestoreTarget(region string, instanceType string, subnetId
 	this.InstanceType = instanceType
 	this.SubnetId = subnetId
 	this.VolumeRestoreParameters = volumeRestoreParameters
+	var startInstanceAfterRestore bool = true
+	this.StartInstanceAfterRestore = &startInstanceAfterRestore
 	return &this
 }
 
@@ -55,6 +59,8 @@ func NewAwsEc2InstanceRestoreTarget(region string, instanceType string, subnetId
 // but it doesn't guarantee that properties required by API are set
 func NewAwsEc2InstanceRestoreTargetWithDefaults() *AwsEc2InstanceRestoreTarget {
 	this := AwsEc2InstanceRestoreTarget{}
+	var startInstanceAfterRestore bool = true
+	this.StartInstanceAfterRestore = &startInstanceAfterRestore
 	return &this
 }
 
@@ -218,6 +224,38 @@ func (o *AwsEc2InstanceRestoreTarget) SetVolumeRestoreParameters(v []RestoreInst
 	o.VolumeRestoreParameters = v
 }
 
+// GetStartInstanceAfterRestore returns the StartInstanceAfterRestore field value if set, zero value otherwise.
+func (o *AwsEc2InstanceRestoreTarget) GetStartInstanceAfterRestore() bool {
+	if o == nil || IsNil(o.StartInstanceAfterRestore) {
+		var ret bool
+		return ret
+	}
+	return *o.StartInstanceAfterRestore
+}
+
+// GetStartInstanceAfterRestoreOk returns a tuple with the StartInstanceAfterRestore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsEc2InstanceRestoreTarget) GetStartInstanceAfterRestoreOk() (*bool, bool) {
+	if o == nil || IsNil(o.StartInstanceAfterRestore) {
+		return nil, false
+	}
+	return o.StartInstanceAfterRestore, true
+}
+
+// HasStartInstanceAfterRestore returns a boolean if a field has been set.
+func (o *AwsEc2InstanceRestoreTarget) HasStartInstanceAfterRestore() bool {
+	if o != nil && !IsNil(o.StartInstanceAfterRestore) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartInstanceAfterRestore gets a reference to the given bool and assigns it to the StartInstanceAfterRestore field.
+func (o *AwsEc2InstanceRestoreTarget) SetStartInstanceAfterRestore(v bool) {
+	o.StartInstanceAfterRestore = &v
+}
+
 func (o AwsEc2InstanceRestoreTarget) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -238,6 +276,9 @@ func (o AwsEc2InstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 		toSerialize["tags"] = o.Tags
 	}
 	toSerialize["volumeRestoreParameters"] = o.VolumeRestoreParameters
+	if !IsNil(o.StartInstanceAfterRestore) {
+		toSerialize["startInstanceAfterRestore"] = o.StartInstanceAfterRestore
+	}
 	return toSerialize, nil
 }
 
