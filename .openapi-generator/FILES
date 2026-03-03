@@ -295,6 +295,7 @@ docs/RoleAccessGroupCondition.md
 docs/S3RestoreDestination.md
 docs/S3RestoreTarget.md
 docs/ScalarOperators.md
+docs/SensitivityAnnotationsDetails.md
 docs/Snapshot.md
 docs/SnapshotDateFilters.md
 docs/SnapshotFilterConditions.md
@@ -629,6 +630,7 @@ model_role_access_group_condition.go
 model_s3_restore_destination.go
 model_s3_restore_target.go
 model_scalar_operators.go
+model_sensitivity_annotations_details.go
 model_snapshot.go
 model_snapshot_date_filters.go
 model_snapshot_filter_conditions.go

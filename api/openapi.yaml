@@ -18277,9 +18277,26 @@ components:
             If `false`, the apps are automatically detected and listed by Eon.
           type: boolean
       type: object
+    SensitivityAnnotationsDetails:
+      description: Details about the resource's sensitivity annotations.
+      example:
+        isOverridden: true
+        hasSensitivityAnnotations: true
+      properties:
+        hasSensitivityAnnotations:
+          description: Whether the resource has sensitivity annotations detected.
+          type: boolean
+        isOverridden:
+          description: Whether the sensitivity annotations status has been manually
+            overridden.
+          type: boolean
+      type: object
     Classifications:
       description: Resource classification details.
       example:
+        sensitivityAnnotationsDetails:
+          isOverridden: true
+          hasSensitivityAnnotations: true
         appsDetails:
           isOverridden: true
           apps:
@@ -18306,6 +18323,8 @@ components:
           $ref: '#/components/schemas/EnvironmentDetails'
         appsDetails:
           $ref: '#/components/schemas/AppsDetails'
+        sensitivityAnnotationsDetails:
+          $ref: '#/components/schemas/SensitivityAnnotationsDetails'
       type: object
     SnapshotStorage:
       description: Details about backup snapshot storage.
@@ -18554,6 +18573,9 @@ components:
           app: web
         providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
         classifications:
+          sensitivityAnnotationsDetails:
+            isOverridden: true
+            hasSensitivityAnnotations: true
           appsDetails:
             isOverridden: true
             apps:
@@ -18736,6 +18758,9 @@ components:
             app: web
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           classifications:
+            sensitivityAnnotationsDetails:
+              isOverridden: true
+              hasSensitivityAnnotations: true
             appsDetails:
               isOverridden: true
               apps:
@@ -18815,6 +18840,9 @@ components:
             app: web
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           classifications:
+            sensitivityAnnotationsDetails:
+              isOverridden: true
+              hasSensitivityAnnotations: true
             appsDetails:
               isOverridden: true
               apps:
@@ -18916,6 +18944,9 @@ components:
             app: web
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           classifications:
+            sensitivityAnnotationsDetails:
+              isOverridden: true
+              hasSensitivityAnnotations: true
             appsDetails:
               isOverridden: true
               apps:
