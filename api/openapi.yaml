@@ -11610,6 +11610,7 @@ components:
       - GCP_BIGQUERY_RECORD_RESTORE
       - RDS_NATIVE_PITR_RESTORE
       - AWS_FSX_RESTORE
+      - AWS_REDSHIFT_RESTORE
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
     RestoreJobTypeFilters:

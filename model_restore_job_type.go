@@ -62,6 +62,7 @@ const (
 	GCP_BIGQUERY_RECORD_RESTORE RestoreJobType = "GCP_BIGQUERY_RECORD_RESTORE"
 	RDS_NATIVE_PITR_RESTORE RestoreJobType = "RDS_NATIVE_PITR_RESTORE"
 	AWS_FSX_RESTORE RestoreJobType = "AWS_FSX_RESTORE"
+	AWS_REDSHIFT_RESTORE RestoreJobType = "AWS_REDSHIFT_RESTORE"
 )
 
 // All allowed values of RestoreJobType enum
@@ -108,6 +109,7 @@ var AllowedRestoreJobTypeEnumValues = []RestoreJobType{
 	"GCP_BIGQUERY_RECORD_RESTORE",
 	"RDS_NATIVE_PITR_RESTORE",
 	"AWS_FSX_RESTORE",
+	"AWS_REDSHIFT_RESTORE",
 }
 
 func (v *RestoreJobType) UnmarshalJSON(src []byte) error {

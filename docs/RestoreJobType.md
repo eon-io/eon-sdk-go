@@ -87,6 +87,8 @@
 
 * `AWS_FSX_RESTORE` (value: `"AWS_FSX_RESTORE"`)
 
+* `AWS_REDSHIFT_RESTORE` (value: `"AWS_REDSHIFT_RESTORE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
