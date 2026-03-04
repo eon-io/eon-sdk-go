@@ -15,6 +15,8 @@
 
 * `AWS_S3_BACKUP` (value: `"AWS_S3_BACKUP"`)
 
+* `AWS_S3_LLG_BACKUP` (value: `"AWS_S3_LLG_BACKUP"`)
+
 * `AWS_FSX_BACKUP` (value: `"AWS_FSX_BACKUP"`)
 
 * `AWS_EFS_BACKUP` (value: `"AWS_EFS_BACKUP"`)
