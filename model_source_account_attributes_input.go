@@ -25,6 +25,7 @@ type SourceAccountAttributesInput struct {
 	Aws NullableAwsSourceAccountAttributesInput `json:"aws,omitempty"`
 	Azure NullableAzureSourceAccountAttributesInput `json:"azure,omitempty"`
 	Gcp NullableGcpSourceAccountAttributesInput `json:"gcp,omitempty"`
+	MongoAtlas NullableMongoAtlasSourceAccountAttributesInput `json:"mongoAtlas,omitempty"`
 }
 
 type _SourceAccountAttributesInput SourceAccountAttributesInput
@@ -197,6 +198,48 @@ func (o *SourceAccountAttributesInput) UnsetGcp() {
 	o.Gcp.Unset()
 }
 
+// GetMongoAtlas returns the MongoAtlas field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SourceAccountAttributesInput) GetMongoAtlas() MongoAtlasSourceAccountAttributesInput {
+	if o == nil || IsNil(o.MongoAtlas.Get()) {
+		var ret MongoAtlasSourceAccountAttributesInput
+		return ret
+	}
+	return *o.MongoAtlas.Get()
+}
+
+// GetMongoAtlasOk returns a tuple with the MongoAtlas field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SourceAccountAttributesInput) GetMongoAtlasOk() (*MongoAtlasSourceAccountAttributesInput, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MongoAtlas.Get(), o.MongoAtlas.IsSet()
+}
+
+// HasMongoAtlas returns a boolean if a field has been set.
+func (o *SourceAccountAttributesInput) HasMongoAtlas() bool {
+	if o != nil && o.MongoAtlas.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMongoAtlas gets a reference to the given NullableMongoAtlasSourceAccountAttributesInput and assigns it to the MongoAtlas field.
+func (o *SourceAccountAttributesInput) SetMongoAtlas(v MongoAtlasSourceAccountAttributesInput) {
+	o.MongoAtlas.Set(&v)
+}
+// SetMongoAtlasNil sets the value for MongoAtlas to be an explicit nil
+func (o *SourceAccountAttributesInput) SetMongoAtlasNil() {
+	o.MongoAtlas.Set(nil)
+}
+
+// UnsetMongoAtlas ensures that no value is present for MongoAtlas, not even an explicit nil
+func (o *SourceAccountAttributesInput) UnsetMongoAtlas() {
+	o.MongoAtlas.Unset()
+}
+
 func (o SourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -216,6 +259,9 @@ func (o SourceAccountAttributesInput) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Gcp.IsSet() {
 		toSerialize["gcp"] = o.Gcp.Get()
+	}
+	if o.MongoAtlas.IsSet() {
+		toSerialize["mongoAtlas"] = o.MongoAtlas.Get()
 	}
 	return toSerialize, nil
 }

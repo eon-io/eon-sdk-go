@@ -215,6 +215,7 @@ docs/ListSourceAccountsResponse.md
 docs/ListSourceAwsOrganizationalUnitsResponse.md
 docs/LogicalOperator.md
 docs/MeteringDimension.md
+docs/MongoAtlasSourceAccountAttributesInput.md
 docs/MonthlyConfig.md
 docs/NetworkInterfaceConfig.md
 docs/Oauth2TokenResponse.md
@@ -551,6 +552,7 @@ model_list_source_accounts_response.go
 model_list_source_aws_organizational_units_response.go
 model_logical_operator.go
 model_metering_dimension.go
+model_mongo_atlas_source_account_attributes_input.go
 model_monthly_config.go
 model_network_interface_config.go
 model_oauth2_token_response.go

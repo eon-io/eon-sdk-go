@@ -8894,6 +8894,26 @@ components:
       required:
       - serviceAccount
       type: object
+    MongoAtlasSourceAccountAttributesInput:
+      description: |
+        MongoDB Atlas organization configuration.
+        Applicable if `cloudProvider` is set to `MONGO_ATLAS`.
+      example:
+        apiPublicKey: apiPublicKey
+        apiPrivateKey: apiPrivateKey
+      nullable: true
+      properties:
+        apiPublicKey:
+          description: Public key of the MongoDB Atlas API key with Organization Read
+            Only permissions.
+          type: string
+        apiPrivateKey:
+          description: Private key of the MongoDB Atlas API key.
+          type: string
+      required:
+      - apiPrivateKey
+      - apiPublicKey
+      type: object
     SourceAccountAttributesInput:
       example:
         gcp:
@@ -8905,6 +8925,9 @@ components:
           tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
           eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
+        mongoAtlas:
+          apiPublicKey: apiPublicKey
+          apiPrivateKey: apiPrivateKey
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -8914,6 +8937,8 @@ components:
           $ref: '#/components/schemas/AzureSourceAccountAttributesInput'
         gcp:
           $ref: '#/components/schemas/GcpSourceAccountAttributesInput'
+        mongoAtlas:
+          $ref: '#/components/schemas/MongoAtlasSourceAccountAttributesInput'
       required:
       - cloudProvider
       type: object
@@ -8930,6 +8955,9 @@ components:
             tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
             eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
+          mongoAtlas:
+            apiPublicKey: apiPublicKey
+            apiPrivateKey: apiPrivateKey
       properties:
         name:
           description: Account display name in Eon.
