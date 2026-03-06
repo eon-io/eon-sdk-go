@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **AwsEbsVolume** | Pointer to [**NullableAwsEbsVolumeRestoreResult**](AwsEbsVolumeRestoreResult.md) |  | [optional] 
 **AzureDisk** | Pointer to [**NullableAzureDiskRestoreResult**](AzureDiskRestoreResult.md) |  | [optional] 
 **AzureVmInstance** | Pointer to [**NullableAzureVmInstanceRestoreResult**](AzureVmInstanceRestoreResult.md) |  | [optional] 
+**GcpVmInstance** | Pointer to [**NullableGcpVmInstanceRestoreResult**](GcpVmInstanceRestoreResult.md) |  | [optional] 
 
 ## Methods
 
@@ -168,6 +169,41 @@ HasAzureVmInstance returns a boolean if a field has been set.
 `func (o *RestoreResult) UnsetAzureVmInstance()`
 
 UnsetAzureVmInstance ensures that no value is present for AzureVmInstance, not even an explicit nil
+### GetGcpVmInstance
+
+`func (o *RestoreResult) GetGcpVmInstance() GcpVmInstanceRestoreResult`
+
+GetGcpVmInstance returns the GcpVmInstance field if non-nil, zero value otherwise.
+
+### GetGcpVmInstanceOk
+
+`func (o *RestoreResult) GetGcpVmInstanceOk() (*GcpVmInstanceRestoreResult, bool)`
+
+GetGcpVmInstanceOk returns a tuple with the GcpVmInstance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpVmInstance
+
+`func (o *RestoreResult) SetGcpVmInstance(v GcpVmInstanceRestoreResult)`
+
+SetGcpVmInstance sets GcpVmInstance field to given value.
+
+### HasGcpVmInstance
+
+`func (o *RestoreResult) HasGcpVmInstance() bool`
+
+HasGcpVmInstance returns a boolean if a field has been set.
+
+### SetGcpVmInstanceNil
+
+`func (o *RestoreResult) SetGcpVmInstanceNil(b bool)`
+
+ SetGcpVmInstanceNil sets the value for GcpVmInstance to be an explicit nil
+
+### UnsetGcpVmInstance
+`func (o *RestoreResult) UnsetGcpVmInstance()`
+
+UnsetGcpVmInstance ensures that no value is present for GcpVmInstance, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

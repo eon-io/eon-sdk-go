@@ -65,6 +65,8 @@
 
 * `GCP_DISK` (value: `"GCP_DISK"`)
 
+* `GCP_SAP_HANA_VM` (value: `"GCP_SAP_HANA_VM"`)
+
 * `RESOURCE_TYPE_UNSPECIFIED` (value: `"RESOURCE_TYPE_UNSPECIFIED"`)
 
 

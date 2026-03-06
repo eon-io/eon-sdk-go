@@ -161,6 +161,7 @@ docs/GcpSourceAccountAttributes.md
 docs/GcpSourceAccountAttributesInput.md
 docs/GcpSubnetPerRegion.md
 docs/GcpVmInstanceRestoreDestination.md
+docs/GcpVmInstanceRestoreResult.md
 docs/GcpVmInstanceRestoreTarget.md
 docs/GetBackupJobResponse.md
 docs/GetBackupPolicyResponse.md
@@ -499,6 +500,7 @@ model_gcp_source_account_attributes.go
 model_gcp_source_account_attributes_input.go
 model_gcp_subnet_per_region.go
 model_gcp_vm_instance_restore_destination.go
+model_gcp_vm_instance_restore_result.go
 model_gcp_vm_instance_restore_target.go
 model_gcs_restore_target.go
 model_get_backup_job_response.go

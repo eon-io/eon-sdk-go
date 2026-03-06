@@ -19,12 +19,14 @@ import (
 // checks if the MongoAtlasSourceAccountAttributesInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MongoAtlasSourceAccountAttributesInput{}
 
-// MongoAtlasSourceAccountAttributesInput MongoDB Atlas organization configuration. Applicable if `cloudProvider` is set to `MONGO_ATLAS`. 
+// MongoAtlasSourceAccountAttributesInput MongoDB Atlas project configuration. Applicable if `cloudProvider` is set to `MONGO_ATLAS`. 
 type MongoAtlasSourceAccountAttributesInput struct {
 	// Public key of the MongoDB Atlas API key with Organization Read Only permissions.
 	ApiPublicKey string `json:"apiPublicKey"`
 	// Private key of the MongoDB Atlas API key.
 	ApiPrivateKey string `json:"apiPrivateKey"`
+	// The MongoDB Atlas project ID to onboard.
+	AtlasProjectId string `json:"atlasProjectId"`
 }
 
 type _MongoAtlasSourceAccountAttributesInput MongoAtlasSourceAccountAttributesInput
@@ -33,10 +35,11 @@ type _MongoAtlasSourceAccountAttributesInput MongoAtlasSourceAccountAttributesIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMongoAtlasSourceAccountAttributesInput(apiPublicKey string, apiPrivateKey string) *MongoAtlasSourceAccountAttributesInput {
+func NewMongoAtlasSourceAccountAttributesInput(apiPublicKey string, apiPrivateKey string, atlasProjectId string) *MongoAtlasSourceAccountAttributesInput {
 	this := MongoAtlasSourceAccountAttributesInput{}
 	this.ApiPublicKey = apiPublicKey
 	this.ApiPrivateKey = apiPrivateKey
+	this.AtlasProjectId = atlasProjectId
 	return &this
 }
 
@@ -96,6 +99,30 @@ func (o *MongoAtlasSourceAccountAttributesInput) SetApiPrivateKey(v string) {
 	o.ApiPrivateKey = v
 }
 
+// GetAtlasProjectId returns the AtlasProjectId field value
+func (o *MongoAtlasSourceAccountAttributesInput) GetAtlasProjectId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AtlasProjectId
+}
+
+// GetAtlasProjectIdOk returns a tuple with the AtlasProjectId field value
+// and a boolean to check if the value has been set.
+func (o *MongoAtlasSourceAccountAttributesInput) GetAtlasProjectIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AtlasProjectId, true
+}
+
+// SetAtlasProjectId sets field value
+func (o *MongoAtlasSourceAccountAttributesInput) SetAtlasProjectId(v string) {
+	o.AtlasProjectId = v
+}
+
 func (o MongoAtlasSourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -108,6 +135,7 @@ func (o MongoAtlasSourceAccountAttributesInput) ToMap() (map[string]interface{},
 	toSerialize := map[string]interface{}{}
 	toSerialize["apiPublicKey"] = o.ApiPublicKey
 	toSerialize["apiPrivateKey"] = o.ApiPrivateKey
+	toSerialize["atlasProjectId"] = o.AtlasProjectId
 	return toSerialize, nil
 }
 
@@ -118,6 +146,7 @@ func (o *MongoAtlasSourceAccountAttributesInput) UnmarshalJSON(data []byte) (err
 	requiredProperties := []string{
 		"apiPublicKey",
 		"apiPrivateKey",
+		"atlasProjectId",
 	}
 
 	allProperties := make(map[string]interface{})

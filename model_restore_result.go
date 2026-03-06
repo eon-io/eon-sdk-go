@@ -23,6 +23,7 @@ type RestoreResult struct {
 	AwsEbsVolume NullableAwsEbsVolumeRestoreResult `json:"awsEbsVolume,omitempty"`
 	AzureDisk NullableAzureDiskRestoreResult `json:"azureDisk,omitempty"`
 	AzureVmInstance NullableAzureVmInstanceRestoreResult `json:"azureVmInstance,omitempty"`
+	GcpVmInstance NullableGcpVmInstanceRestoreResult `json:"gcpVmInstance,omitempty"`
 }
 
 // NewRestoreResult instantiates a new RestoreResult object
@@ -210,6 +211,48 @@ func (o *RestoreResult) UnsetAzureVmInstance() {
 	o.AzureVmInstance.Unset()
 }
 
+// GetGcpVmInstance returns the GcpVmInstance field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RestoreResult) GetGcpVmInstance() GcpVmInstanceRestoreResult {
+	if o == nil || IsNil(o.GcpVmInstance.Get()) {
+		var ret GcpVmInstanceRestoreResult
+		return ret
+	}
+	return *o.GcpVmInstance.Get()
+}
+
+// GetGcpVmInstanceOk returns a tuple with the GcpVmInstance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RestoreResult) GetGcpVmInstanceOk() (*GcpVmInstanceRestoreResult, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GcpVmInstance.Get(), o.GcpVmInstance.IsSet()
+}
+
+// HasGcpVmInstance returns a boolean if a field has been set.
+func (o *RestoreResult) HasGcpVmInstance() bool {
+	if o != nil && o.GcpVmInstance.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGcpVmInstance gets a reference to the given NullableGcpVmInstanceRestoreResult and assigns it to the GcpVmInstance field.
+func (o *RestoreResult) SetGcpVmInstance(v GcpVmInstanceRestoreResult) {
+	o.GcpVmInstance.Set(&v)
+}
+// SetGcpVmInstanceNil sets the value for GcpVmInstance to be an explicit nil
+func (o *RestoreResult) SetGcpVmInstanceNil() {
+	o.GcpVmInstance.Set(nil)
+}
+
+// UnsetGcpVmInstance ensures that no value is present for GcpVmInstance, not even an explicit nil
+func (o *RestoreResult) UnsetGcpVmInstance() {
+	o.GcpVmInstance.Unset()
+}
+
 func (o RestoreResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -231,6 +274,9 @@ func (o RestoreResult) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AzureVmInstance.IsSet() {
 		toSerialize["azureVmInstance"] = o.AzureVmInstance.Get()
+	}
+	if o.GcpVmInstance.IsSet() {
+		toSerialize["gcpVmInstance"] = o.GcpVmInstance.Get()
 	}
 	return toSerialize, nil
 }

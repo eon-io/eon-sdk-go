@@ -51,6 +51,7 @@ const (
 	GCP_BIG_QUERY ResourceType = "GCP_BIG_QUERY"
 	GCP_CLOUD_FIRESTORE ResourceType = "GCP_CLOUD_FIRESTORE"
 	GCP_DISK ResourceType = "GCP_DISK"
+	GCP_SAP_HANA_VM ResourceType = "GCP_SAP_HANA_VM"
 	RESOURCE_TYPE_UNSPECIFIED ResourceType = "RESOURCE_TYPE_UNSPECIFIED"
 )
 
@@ -87,6 +88,7 @@ var AllowedResourceTypeEnumValues = []ResourceType{
 	"GCP_BIG_QUERY",
 	"GCP_CLOUD_FIRESTORE",
 	"GCP_DISK",
+	"GCP_SAP_HANA_VM",
 	"RESOURCE_TYPE_UNSPECIFIED",
 }
 

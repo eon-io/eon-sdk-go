@@ -6572,6 +6572,7 @@ components:
       - GCP_BIG_QUERY
       - GCP_CLOUD_FIRESTORE
       - GCP_DISK
+      - GCP_SAP_HANA_VM
       - RESOURCE_TYPE_UNSPECIFIED
       example: AWS_EC2
       type: string
@@ -8896,10 +8897,11 @@ components:
       type: object
     MongoAtlasSourceAccountAttributesInput:
       description: |
-        MongoDB Atlas organization configuration.
+        MongoDB Atlas project configuration.
         Applicable if `cloudProvider` is set to `MONGO_ATLAS`.
       example:
         apiPublicKey: apiPublicKey
+        atlasProjectId: atlasProjectId
         apiPrivateKey: apiPrivateKey
       nullable: true
       properties:
@@ -8910,9 +8912,13 @@ components:
         apiPrivateKey:
           description: Private key of the MongoDB Atlas API key.
           type: string
+        atlasProjectId:
+          description: The MongoDB Atlas project ID to onboard.
+          type: string
       required:
       - apiPrivateKey
       - apiPublicKey
+      - atlasProjectId
       type: object
     SourceAccountAttributesInput:
       example:
@@ -8927,6 +8933,7 @@ components:
           subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
         mongoAtlas:
           apiPublicKey: apiPublicKey
+          atlasProjectId: atlasProjectId
           apiPrivateKey: apiPrivateKey
       properties:
         cloudProvider:
@@ -8957,6 +8964,7 @@ components:
             subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
           mongoAtlas:
             apiPublicKey: apiPublicKey
+            atlasProjectId: atlasProjectId
             apiPrivateKey: apiPrivateKey
       properties:
         name:
@@ -11637,9 +11645,12 @@ components:
       - GCP_CLOUD_SQL_RECORD_RESTORE
       - GCP_BIGQUERY_DATASET_RESTORE
       - GCP_BIGQUERY_RECORD_RESTORE
+      - GCP_BIGQUERY_NATIVE_RESTORE_DATASET
+      - GCP_BIGQUERY_NATIVE_RESTORE_TABLE
       - RDS_NATIVE_PITR_RESTORE
       - AWS_FSX_RESTORE
       - AWS_REDSHIFT_RESTORE
+      - GCP_SAP_HANA_VM_INSTANCE_RESTORE
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
     RestoreJobTypeFilters:
@@ -11853,6 +11864,17 @@ components:
       required:
       - instanceId
       type: object
+    GcpVmInstanceRestoreResult:
+      example:
+        instanceId: instanceId
+      nullable: true
+      properties:
+        instanceId:
+          description: ID of the restored VM instance.
+          type: string
+      required:
+      - instanceId
+      type: object
     RestoreResult:
       example:
         azureDisk:
@@ -11860,6 +11882,8 @@ components:
         awsEc2Instance:
           instanceId: i-1234567890abcdef0
         azureVmInstance:
+          instanceId: instanceId
+        gcpVmInstance:
           instanceId: instanceId
         awsEbsVolume:
           volumeId: vol-1234567890abcdef0
@@ -11873,6 +11897,8 @@ components:
           $ref: '#/components/schemas/AzureDiskRestoreResult'
         azureVmInstance:
           $ref: '#/components/schemas/AzureVmInstanceRestoreResult'
+        gcpVmInstance:
+          $ref: '#/components/schemas/GcpVmInstanceRestoreResult'
       type: object
     DestinationDetails:
       example:
@@ -11885,6 +11911,8 @@ components:
           awsEc2Instance:
             instanceId: i-1234567890abcdef0
           azureVmInstance:
+            instanceId: instanceId
+          gcpVmInstance:
             instanceId: instanceId
           awsEbsVolume:
             volumeId: vol-1234567890abcdef0
@@ -11925,6 +11953,8 @@ components:
             awsEc2Instance:
               instanceId: i-1234567890abcdef0
             azureVmInstance:
+              instanceId: instanceId
+            gcpVmInstance:
               instanceId: instanceId
             awsEbsVolume:
               volumeId: vol-1234567890abcdef0
@@ -11997,6 +12027,8 @@ components:
                 instanceId: i-1234567890abcdef0
               azureVmInstance:
                 instanceId: instanceId
+              gcpVmInstance:
+                instanceId: instanceId
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
             region: us-east-1
@@ -12045,6 +12077,8 @@ components:
               awsEc2Instance:
                 instanceId: i-1234567890abcdef0
               azureVmInstance:
+                instanceId: instanceId
+              gcpVmInstance:
                 instanceId: instanceId
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
@@ -12118,6 +12152,8 @@ components:
               awsEc2Instance:
                 instanceId: i-1234567890abcdef0
               azureVmInstance:
+                instanceId: instanceId
+              gcpVmInstance:
                 instanceId: instanceId
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
@@ -12508,6 +12544,7 @@ components:
       - HIGH_FREQUENCY
       - PITR
       - AWS_NATIVE_PITR
+      - BIGQUERY_NATIVE_PITR
       example: STANDARD
       type: string
       x-enum-varnames:
@@ -12517,6 +12554,7 @@ components:
       - BACKUP_POLICY_TYPE_HIGH_FREQUENCY
       - BACKUP_POLICY_TYPE_PITR
       - BACKUP_POLICY_TYPE_AWS_NATIVE_PITR
+      - BACKUP_POLICY_TYPE_BIGQUERY_NATIVE_PITR
     StandardBackupScheduleFrequency:
       description: |
         Backup frequency.
