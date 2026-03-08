@@ -10954,6 +10954,8 @@ components:
       - GCP_CLOUD_STORAGE_BACKUP
       - GCP_CLOUD_SQL_BACKUP
       - GCP_BIGQUERY_BACKUP
+      - GCP_SAP_HANA_VM_BACKUP
+      - AZURE_SAP_HANA_VM_BACKUP
       - ATLAS_MONGODB_CLUSTER_BACKUP
       example: AWS_EC2_BACKUP
       type: string
