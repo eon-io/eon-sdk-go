@@ -35,6 +35,8 @@ type AwsDatabaseDestination struct {
 	DbInstanceClass *string `json:"dbInstanceClass,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
+	// When true, restores cluster members with their original instance names from the snapshot. If `restoredName` is empty, it will be set to the original cluster identifier from the snapshot. Only applies to Aurora clusters. Off by default. 
+	PreserveInstanceNames *bool `json:"preserveInstanceNames,omitempty"`
 }
 
 type _AwsDatabaseDestination AwsDatabaseDestination
@@ -48,6 +50,8 @@ func NewAwsDatabaseDestination(restoreRegion string, encryptionKeyId string, res
 	this.RestoreRegion = restoreRegion
 	this.EncryptionKeyId = encryptionKeyId
 	this.RestoredName = restoredName
+	var preserveInstanceNames bool = false
+	this.PreserveInstanceNames = &preserveInstanceNames
 	return &this
 }
 
@@ -56,6 +60,8 @@ func NewAwsDatabaseDestination(restoreRegion string, encryptionKeyId string, res
 // but it doesn't guarantee that properties required by API are set
 func NewAwsDatabaseDestinationWithDefaults() *AwsDatabaseDestination {
 	this := AwsDatabaseDestination{}
+	var preserveInstanceNames bool = false
+	this.PreserveInstanceNames = &preserveInstanceNames
 	return &this
 }
 
@@ -259,6 +265,38 @@ func (o *AwsDatabaseDestination) SetTags(v map[string]string) {
 	o.Tags = &v
 }
 
+// GetPreserveInstanceNames returns the PreserveInstanceNames field value if set, zero value otherwise.
+func (o *AwsDatabaseDestination) GetPreserveInstanceNames() bool {
+	if o == nil || IsNil(o.PreserveInstanceNames) {
+		var ret bool
+		return ret
+	}
+	return *o.PreserveInstanceNames
+}
+
+// GetPreserveInstanceNamesOk returns a tuple with the PreserveInstanceNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsDatabaseDestination) GetPreserveInstanceNamesOk() (*bool, bool) {
+	if o == nil || IsNil(o.PreserveInstanceNames) {
+		return nil, false
+	}
+	return o.PreserveInstanceNames, true
+}
+
+// HasPreserveInstanceNames returns a boolean if a field has been set.
+func (o *AwsDatabaseDestination) HasPreserveInstanceNames() bool {
+	if o != nil && !IsNil(o.PreserveInstanceNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreserveInstanceNames gets a reference to the given bool and assigns it to the PreserveInstanceNames field.
+func (o *AwsDatabaseDestination) SetPreserveInstanceNames(v bool) {
+	o.PreserveInstanceNames = &v
+}
+
 func (o AwsDatabaseDestination) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -283,6 +321,9 @@ func (o AwsDatabaseDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
+	}
+	if !IsNil(o.PreserveInstanceNames) {
+		toSerialize["preserveInstanceNames"] = o.PreserveInstanceNames
 	}
 	return toSerialize, nil
 }

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **SubnetGroup** | Pointer to **string** | Subnet group ID to associate with the restored resource. Must be in the same VPC of &#x60;securityGroup&#x60;.  | [optional] 
 **DbInstanceClass** | Pointer to **string** | Instance class to use for the restored resource. | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**PreserveInstanceNames** | Pointer to **bool** | When true, restores cluster members with their original instance names from the snapshot. If &#x60;restoredName&#x60; is empty, it will be set to the original cluster identifier from the snapshot. Only applies to Aurora clusters. Off by default.  | [optional] [default to false]
 
 ## Methods
 
@@ -190,6 +191,31 @@ SetTags sets Tags field to given value.
 `func (o *AwsDatabaseDestination) HasTags() bool`
 
 HasTags returns a boolean if a field has been set.
+
+### GetPreserveInstanceNames
+
+`func (o *AwsDatabaseDestination) GetPreserveInstanceNames() bool`
+
+GetPreserveInstanceNames returns the PreserveInstanceNames field if non-nil, zero value otherwise.
+
+### GetPreserveInstanceNamesOk
+
+`func (o *AwsDatabaseDestination) GetPreserveInstanceNamesOk() (*bool, bool)`
+
+GetPreserveInstanceNamesOk returns a tuple with the PreserveInstanceNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreserveInstanceNames
+
+`func (o *AwsDatabaseDestination) SetPreserveInstanceNames(v bool)`
+
+SetPreserveInstanceNames sets PreserveInstanceNames field to given value.
+
+### HasPreserveInstanceNames
+
+`func (o *AwsDatabaseDestination) HasPreserveInstanceNames() bool`
+
+HasPreserveInstanceNames returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

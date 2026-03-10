@@ -16128,6 +16128,7 @@ components:
         securityGroups:
         - securityGroups
         - securityGroups
+        preserveInstanceNames: false
         restoredName: my-restored-db
         tags:
           eon_api_restore: "true"
@@ -16171,6 +16172,13 @@ components:
           example:
             eon_api_restore: "true"
           type: object
+        preserveInstanceNames:
+          default: false
+          description: |
+            When true, restores cluster members with their original instance names from the snapshot.
+            If `restoredName` is empty, it will be set to the original cluster identifier from the snapshot.
+            Only applies to Aurora clusters. Off by default.
+          type: boolean
       required:
       - encryptionKeyId
       - restoreRegion
@@ -16187,6 +16195,7 @@ components:
           securityGroups:
           - securityGroups
           - securityGroups
+          preserveInstanceNames: false
           restoredName: my-restored-db
           tags:
             eon_api_restore: "true"
@@ -16206,6 +16215,7 @@ components:
             securityGroups:
             - securityGroups
             - securityGroups
+            preserveInstanceNames: false
             restoredName: my-restored-db
             tags:
               eon_api_restore: "true"
