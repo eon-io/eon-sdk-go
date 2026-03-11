@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Aws** | Pointer to [**NullableAwsSourceAccountAttributesInput**](AwsSourceAccountAttributesInput.md) |  | [optional] 
 **Azure** | Pointer to [**NullableAzureSourceAccountAttributesInput**](AzureSourceAccountAttributesInput.md) |  | [optional] 
 **Gcp** | Pointer to [**NullableGcpSourceAccountAttributesInput**](GcpSourceAccountAttributesInput.md) |  | [optional] 
-**MongoAtlas** | Pointer to [**NullableMongoAtlasSourceAccountAttributesInput**](MongoAtlasSourceAccountAttributesInput.md) |  | [optional] 
 
 ## Methods
 
@@ -154,41 +153,6 @@ HasGcp returns a boolean if a field has been set.
 `func (o *SourceAccountAttributesInput) UnsetGcp()`
 
 UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
-### GetMongoAtlas
-
-`func (o *SourceAccountAttributesInput) GetMongoAtlas() MongoAtlasSourceAccountAttributesInput`
-
-GetMongoAtlas returns the MongoAtlas field if non-nil, zero value otherwise.
-
-### GetMongoAtlasOk
-
-`func (o *SourceAccountAttributesInput) GetMongoAtlasOk() (*MongoAtlasSourceAccountAttributesInput, bool)`
-
-GetMongoAtlasOk returns a tuple with the MongoAtlas field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMongoAtlas
-
-`func (o *SourceAccountAttributesInput) SetMongoAtlas(v MongoAtlasSourceAccountAttributesInput)`
-
-SetMongoAtlas sets MongoAtlas field to given value.
-
-### HasMongoAtlas
-
-`func (o *SourceAccountAttributesInput) HasMongoAtlas() bool`
-
-HasMongoAtlas returns a boolean if a field has been set.
-
-### SetMongoAtlasNil
-
-`func (o *SourceAccountAttributesInput) SetMongoAtlasNil(b bool)`
-
- SetMongoAtlasNil sets the value for MongoAtlas to be an explicit nil
-
-### UnsetMongoAtlas
-`func (o *SourceAccountAttributesInput) UnsetMongoAtlas()`
-
-UnsetMongoAtlas ensures that no value is present for MongoAtlas, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

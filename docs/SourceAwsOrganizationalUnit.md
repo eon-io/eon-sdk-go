@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Eon-assigned organizational unit ID. | 
 **RoleArn** | **string** | ARN of the role Eon assumes to access the organizational unit in AWS. | 
-**Name** | **string** | The organizational unit display name in Eon. | 
-**ProviderOrganizationalUnitId** | **string** | AWS Organizational Unit ID. | 
-**ProviderManagementAccountId** | **string** | AWS Organization management account ID. | 
+**Name** | **string** | Organizational unit display name in Eon. | 
+**ProviderOrganizationalUnitId** | **string** | AWS-assigned organizational unit ID. | 
+**ProviderManagementAccountId** | **string** | AWS-assigned ID of the organization&#39;s management account. | 
 **Status** | [**AccountState**](AccountState.md) |  | 
 
 ## Methods

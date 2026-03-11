@@ -39,12 +39,11 @@ func (r ApiCreateIdpGroupRequest) Execute() (*CreateIdpGroupResponse, *http.Resp
 }
 
 /*
-CreateIdpGroup Create IDP Group
+CreateIdpGroup Create IdP Group Role Assignment
 
-Description: Creates a new IDP group and assigns roles to it.<br/>
+Description: Maps an identity provider group to one or more Eon roles.<br/>
 
-An IDP group represents a group from your Identity Provider and maps it to one or more roles in Eon.
-When users authenticate via SAML and belong to this group, they will receive the assigned roles.
+When users authenticate via SAML and belong to the specified group, they're granted the assigned roles.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -299,15 +298,15 @@ func (r ApiDeleteIdpGroupRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteIdpGroup Delete IDP Group
+DeleteIdpGroup Delete IdP Group Role Assignment
 
-Description: Deletes an IDP group and all its role assignments.<br/>
+Description: Deletes an IdP group role assignment.<br/>
 
-After deletion, users who belong to this group in the Identity Provider will no longer receive roles from this mapping.
+After deletion, users are no longer assigned roles from their membership in the specified group.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId IDP Group ID.
+ @param groupId Eon-assigned IdP group role assignment ID.
  @return ApiDeleteIdpGroupRequest
 */
 func (a *IamAPIService) DeleteIdpGroup(ctx context.Context, groupId string) ApiDeleteIdpGroupRequest {
@@ -528,12 +527,12 @@ func (r ApiGetIdpGroupRequest) Execute() (*GetIdpGroupResponse, *http.Response, 
 }
 
 /*
-GetIdpGroup Get IDP Group
+GetIdpGroup Get IdP Group Role Assignment
 
-Description: Retrieves an IDP group by its ID.
+Description: Retrieves an IdP group role assignment by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId IDP Group ID.
+ @param groupId Eon-assigned IdP group role assignment ID.
  @return ApiGetIdpGroupRequest
 */
 func (a *IamAPIService) GetIdpGroup(ctx context.Context, groupId string) ApiGetIdpGroupRequest {
@@ -789,9 +788,9 @@ func (r ApiListIdpGroupsRequest) Execute() (*ListIdpGroupsResponse, *http.Respon
 }
 
 /*
-ListIdpGroups List IDP Groups
+ListIdpGroups List IdP Group Role Assignments
 
-Description: Retrieves a list of IDP groups for the account.
+Description: Retrieves a list of IdP group role assignments mapped in your Eon account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListIdpGroupsRequest
@@ -934,7 +933,7 @@ func (r ApiListIdpsRequest) Execute() (*ListIdpsResponse, *http.Response, error)
 /*
 ListIdps List Identity Providers
 
-Description: Retrieves a list of Identity Providers (IDPs) for the account.
+Description: Retrieves a list of identity providers for the account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListIdpsRequest
@@ -1321,7 +1320,6 @@ type ApiUpdateIdpGroupRequest struct {
 	updateIdpGroupRequest *UpdateIdpGroupRequest
 }
 
-// The request body for updating an IDP group
 func (r ApiUpdateIdpGroupRequest) UpdateIdpGroupRequest(updateIdpGroupRequest UpdateIdpGroupRequest) ApiUpdateIdpGroupRequest {
 	r.updateIdpGroupRequest = &updateIdpGroupRequest
 	return r
@@ -1332,9 +1330,9 @@ func (r ApiUpdateIdpGroupRequest) Execute() (*UpdateIdpGroupResponse, *http.Resp
 }
 
 /*
-UpdateIdpGroup Update IDP Group
+UpdateIdpGroup Update IdP Group Role Assignment
 
-Description: Updates the role assignments for an IDP group.<br/>
+Description: Updates the roles assigned to an IdP group.<br/>
 
 This operation replaces all existing role assignments with the provided list.
 To add a role, include all existing roles plus the new one.
@@ -1342,7 +1340,7 @@ To remove a role, include all roles except the one to remove.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId IDP Group ID.
+ @param groupId Eon-assigned IdP group role assignment ID.
  @return ApiUpdateIdpGroupRequest
 */
 func (a *IamAPIService) UpdateIdpGroup(ctx context.Context, groupId string) ApiUpdateIdpGroupRequest {

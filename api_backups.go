@@ -52,7 +52,7 @@ You can follow the progress of the backup job by calling [Get Backup Job](/api/a
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Eon-assigned ID of the resource to back up.
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiTakeSnapshotRequest
 */
 func (a *BackupsAPIService) TakeSnapshot(ctx context.Context, id string, projectId string) ApiTakeSnapshotRequest {

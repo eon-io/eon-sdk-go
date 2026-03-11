@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Groups** | [**[]IdpGroup**](IdpGroup.md) | List of IDP groups. | 
-**TotalCount** | Pointer to **int32** | Total number of IDP groups. | [optional] 
-**NextToken** | Pointer to **string** | Token to retrieve the next page of results. | [optional] 
+**Groups** | [**[]IdpGroup**](IdpGroup.md) | List of IdP group role assignments. | 
+**TotalCount** | Pointer to **int32** | Total number of IdP group role assignments. | [optional] 
+**NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 
 ## Methods
 

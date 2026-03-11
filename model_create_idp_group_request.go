@@ -21,11 +21,11 @@ var _ MappedNullable = &CreateIdpGroupRequest{}
 
 // CreateIdpGroupRequest struct for CreateIdpGroupRequest
 type CreateIdpGroupRequest struct {
-	// The ID of the Identity Provider this group belongs to.
+	// [ID of the identity provider](./list-idps) the group belongs to.
 	IdpId string `json:"idpId"`
-	// The group identifier from the Identity Provider.
+	// Identity-provider-assigned group ID. Must match the exact group ID passed by the identity provider to Eon during SAML sign-on. 
 	ProviderGroupId string `json:"providerGroupId"`
-	// List of role IDs to assign to this IDP group.
+	// List of [role IDs](../roles/list-roles) to assign to the group.
 	RoleIds []string `json:"roleIds"`
 }
 

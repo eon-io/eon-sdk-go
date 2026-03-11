@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateIdpGroupRequest{}
 
 // UpdateIdpGroupRequest struct for UpdateIdpGroupRequest
 type UpdateIdpGroupRequest struct {
-	// List of role IDs to assign to this IDP group. This replaces all existing role assignments. 
+	// List of [role IDs](../roles/list-roles) to assign to the group. This replaces all existing role assignments. 
 	RoleIds []string `json:"roleIds"`
 }
 

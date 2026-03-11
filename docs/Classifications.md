@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **DataClassesDetails** | Pointer to [**DataClassesDetails**](DataClassesDetails.md) |  | [optional] 
 **EnvironmentDetails** | Pointer to [**EnvironmentDetails**](EnvironmentDetails.md) |  | [optional] 
 **AppsDetails** | Pointer to [**AppsDetails**](AppsDetails.md) |  | [optional] 
-**SensitivityAnnotationsDetails** | Pointer to [**SensitivityAnnotationsDetails**](SensitivityAnnotationsDetails.md) |  | [optional] 
 
 ## Methods
 
@@ -102,31 +101,6 @@ SetAppsDetails sets AppsDetails field to given value.
 `func (o *Classifications) HasAppsDetails() bool`
 
 HasAppsDetails returns a boolean if a field has been set.
-
-### GetSensitivityAnnotationsDetails
-
-`func (o *Classifications) GetSensitivityAnnotationsDetails() SensitivityAnnotationsDetails`
-
-GetSensitivityAnnotationsDetails returns the SensitivityAnnotationsDetails field if non-nil, zero value otherwise.
-
-### GetSensitivityAnnotationsDetailsOk
-
-`func (o *Classifications) GetSensitivityAnnotationsDetailsOk() (*SensitivityAnnotationsDetails, bool)`
-
-GetSensitivityAnnotationsDetailsOk returns a tuple with the SensitivityAnnotationsDetails field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSensitivityAnnotationsDetails
-
-`func (o *Classifications) SetSensitivityAnnotationsDetails(v SensitivityAnnotationsDetails)`
-
-SetSensitivityAnnotationsDetails sets SensitivityAnnotationsDetails field to given value.
-
-### HasSensitivityAnnotationsDetails
-
-`func (o *Classifications) HasSensitivityAnnotationsDetails() bool`
-
-HasSensitivityAnnotationsDetails returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

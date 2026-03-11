@@ -30,7 +30,7 @@ import (
 
 func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource to back up.
-	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	takeSnapshotRequest := *openapiclient.NewTakeSnapshotRequest("0d79d713-78df-5870-882f-0089d05396b6", int32(30)) // TakeSnapshotRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **id** | **string** | Eon-assigned ID of the resource to back up. | 
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 

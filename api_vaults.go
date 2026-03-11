@@ -56,7 +56,7 @@ If you use self-managed vault keys, you assume responsibility for securing them 
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiCreateVaultRequest
 */
 func (a *VaultsAPIService) CreateVault(ctx context.Context, projectId string) ApiCreateVaultRequest {
@@ -198,7 +198,7 @@ Description: Retrieves a vault.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param vaultId ID of the vault to retrieve.
- @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiGetVaultRequest
 */
 func (a *VaultsAPIService) GetVault(ctx context.Context, vaultId string, projectId string) ApiGetVaultRequest {
@@ -338,7 +338,7 @@ ListVaults List Vaults
 Description: Retrieves a list of vaults in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiListVaultsRequest
 */
 func (a *VaultsAPIService) ListVaults(ctx context.Context, projectId string) ApiListVaultsRequest {
@@ -479,7 +479,7 @@ Description: Updates a vault's display name.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param vaultId ID of the vault to update.
- @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiUpdateVaultRequest
 */
 func (a *VaultsAPIService) UpdateVault(ctx context.Context, vaultId string, projectId string) ApiUpdateVaultRequest {

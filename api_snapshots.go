@@ -41,7 +41,7 @@ Description: Retrieves an Eon snapshot.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID of the Eon snapshot to retrieve.
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiGetSnapshotRequest
 */
 func (a *SnapshotsAPIService) GetSnapshot(ctx context.Context, id string, projectId string) ApiGetSnapshotRequest {
@@ -175,7 +175,7 @@ Point-in-time recovery (PiTR) snapshots can't be placed on hold.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID of the Eon snapshot.
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiHoldSnapshotRequest
 */
 func (a *SnapshotsAPIService) HoldSnapshot(ctx context.Context, id string, projectId string) ApiHoldSnapshotRequest {
@@ -325,7 +325,7 @@ Description: Retrieves a list of Eon snapshots for the given resource.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Eon-assigned ID of the resource whose Eon snapshots you want to retrieve.
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiListResourceSnapshotsRequest
 */
 func (a *SnapshotsAPIService) ListResourceSnapshots(ctx context.Context, id string, projectId string) ApiListResourceSnapshotsRequest {
@@ -469,7 +469,7 @@ If the snapshot is past its expiration time, it's marked for removal as soon as 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID of the Eon snapshot.
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiRemoveSnapshotHoldRequest
 */
 func (a *SnapshotsAPIService) RemoveSnapshotHold(ctx context.Context, id string, projectId string) ApiRemoveSnapshotHoldRequest {
@@ -611,7 +611,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureDiskRequest
@@ -760,7 +760,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureSqlDatabaseRequest
@@ -908,7 +908,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureVmInstanceRequest
@@ -1056,7 +1056,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreBigQueryDatasetRequest
@@ -1204,7 +1204,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreBucketRequest
@@ -1352,7 +1352,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreDatabaseRequest
@@ -1500,7 +1500,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreDynamoDBTableRequest
@@ -1648,7 +1648,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreEbsVolumeRequest
@@ -1799,7 +1799,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreEc2InstanceRequest
@@ -1947,7 +1947,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreFilesRequest
@@ -2098,7 +2098,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpCloudSqlRequest
@@ -2249,7 +2249,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpDiskRequest
@@ -2400,7 +2400,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpVmInstanceRequest
@@ -2548,7 +2548,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+ @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
  @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreToEbsSnapshotRequest

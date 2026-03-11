@@ -22,7 +22,6 @@ type Classifications struct {
 	DataClassesDetails *DataClassesDetails `json:"dataClassesDetails,omitempty"`
 	EnvironmentDetails *EnvironmentDetails `json:"environmentDetails,omitempty"`
 	AppsDetails *AppsDetails `json:"appsDetails,omitempty"`
-	SensitivityAnnotationsDetails *SensitivityAnnotationsDetails `json:"sensitivityAnnotationsDetails,omitempty"`
 }
 
 // NewClassifications instantiates a new Classifications object
@@ -138,38 +137,6 @@ func (o *Classifications) SetAppsDetails(v AppsDetails) {
 	o.AppsDetails = &v
 }
 
-// GetSensitivityAnnotationsDetails returns the SensitivityAnnotationsDetails field value if set, zero value otherwise.
-func (o *Classifications) GetSensitivityAnnotationsDetails() SensitivityAnnotationsDetails {
-	if o == nil || IsNil(o.SensitivityAnnotationsDetails) {
-		var ret SensitivityAnnotationsDetails
-		return ret
-	}
-	return *o.SensitivityAnnotationsDetails
-}
-
-// GetSensitivityAnnotationsDetailsOk returns a tuple with the SensitivityAnnotationsDetails field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Classifications) GetSensitivityAnnotationsDetailsOk() (*SensitivityAnnotationsDetails, bool) {
-	if o == nil || IsNil(o.SensitivityAnnotationsDetails) {
-		return nil, false
-	}
-	return o.SensitivityAnnotationsDetails, true
-}
-
-// HasSensitivityAnnotationsDetails returns a boolean if a field has been set.
-func (o *Classifications) HasSensitivityAnnotationsDetails() bool {
-	if o != nil && !IsNil(o.SensitivityAnnotationsDetails) {
-		return true
-	}
-
-	return false
-}
-
-// SetSensitivityAnnotationsDetails gets a reference to the given SensitivityAnnotationsDetails and assigns it to the SensitivityAnnotationsDetails field.
-func (o *Classifications) SetSensitivityAnnotationsDetails(v SensitivityAnnotationsDetails) {
-	o.SensitivityAnnotationsDetails = &v
-}
-
 func (o Classifications) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -188,9 +155,6 @@ func (o Classifications) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AppsDetails) {
 		toSerialize["appsDetails"] = o.AppsDetails
-	}
-	if !IsNil(o.SensitivityAnnotationsDetails) {
-		toSerialize["sensitivityAnnotationsDetails"] = o.SensitivityAnnotationsDetails
 	}
 	return toSerialize, nil
 }

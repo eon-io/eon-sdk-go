@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Idps** | [**[]Idp**](Idp.md) | List of Identity Providers. | 
-**TotalCount** | **int32** | Total number of IDPs. | 
-**NextToken** | Pointer to **string** | Token to retrieve the next page of results. | [optional] 
+**Idps** | [**[]Idp**](Idp.md) | List of identity providers. | 
+**TotalCount** | **int32** | Total number of identity providers. | 
+**NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 
 ## Methods
 

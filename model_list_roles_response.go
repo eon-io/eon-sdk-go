@@ -24,6 +24,7 @@ type ListRolesResponse struct {
 	Roles []Role `json:"roles"`
 	// Total number of roles.
 	TotalCount *int32 `json:"totalCount,omitempty"`
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 }
 

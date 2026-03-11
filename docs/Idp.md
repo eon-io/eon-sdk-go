@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | System-generated unique identifier for the IDP. | 
-**ProviderName** | **string** | The name of the identity provider. | 
+**Id** | **string** | Eon-assigned identity provider ID. | 
+**ProviderName** | **string** | Identity provider display name. | 
 
 ## Methods
 

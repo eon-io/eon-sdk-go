@@ -25,11 +25,11 @@ type SourceAwsOrganizationalUnit struct {
 	Id string `json:"id"`
 	// ARN of the role Eon assumes to access the organizational unit in AWS.
 	RoleArn string `json:"roleArn"`
-	// The organizational unit display name in Eon.
+	// Organizational unit display name in Eon.
 	Name string `json:"name"`
-	// AWS Organizational Unit ID.
+	// AWS-assigned organizational unit ID.
 	ProviderOrganizationalUnitId string `json:"providerOrganizationalUnitId"`
-	// AWS Organization management account ID.
+	// AWS-assigned ID of the organization's management account.
 	ProviderManagementAccountId string `json:"providerManagementAccountId"`
 	Status AccountState `json:"status"`
 }

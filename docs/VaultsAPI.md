@@ -32,7 +32,7 @@ import (
 )
 
 func main() {
-	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	createVaultRequest := *openapiclient.NewCreateVaultRequest("EU central", "eu-central-1", *openapiclient.NewVaultProviderAttributesInput(openapiclient.Provider("AWS"))) // CreateVaultRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the vault is created in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -105,7 +105,7 @@ import (
 
 func main() {
 	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to retrieve.
-	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **vaultId** | **string** | ID of the vault to retrieve. | 
-**projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -177,7 +177,7 @@ import (
 )
 
 func main() {
-	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 
@@ -199,7 +199,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -252,7 +252,7 @@ import (
 
 func main() {
 	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to update.
-	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	updateVaultRequest := *openapiclient.NewUpdateVaultRequest("My new vault name") // UpdateVaultRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **vaultId** | **string** | ID of the vault to update. | 
-**projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 

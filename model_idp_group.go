@@ -19,15 +19,15 @@ import (
 // checks if the IdpGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IdpGroup{}
 
-// IdpGroup An IDP Group with its associated role assignments.
+// IdpGroup IdP group role assignment.
 type IdpGroup struct {
-	// System-generated unique identifier for the IDP group.
+	// Eon-assigned group ID.
 	Id string `json:"id"`
-	// The ID of the Identity Provider this group belongs to.
+	// [ID of the identity provider](./list-idps) the group belongs to. 
 	IdpId string `json:"idpId"`
-	// The group identifier from the Identity Provider.
+	// Identity-provider-assigned group ID. Must match the exact group ID passed by the identity provider to Eon during SAML sign-on. 
 	ProviderGroupId string `json:"providerGroupId"`
-	// List of role IDs assigned to this IDP group.
+	// List of [role IDs](../roles/list-roles) assigned to the group.
 	RoleIds []string `json:"roleIds"`
 }
 

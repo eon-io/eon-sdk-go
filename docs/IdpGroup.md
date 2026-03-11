@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | System-generated unique identifier for the IDP group. | 
-**IdpId** | **string** | The ID of the Identity Provider this group belongs to. | 
-**ProviderGroupId** | **string** | The group identifier from the Identity Provider. | 
-**RoleIds** | **[]string** | List of role IDs assigned to this IDP group. | 
+**Id** | **string** | Eon-assigned group ID. | 
+**IdpId** | **string** | [ID of the identity provider](./list-idps) the group belongs to.  | 
+**ProviderGroupId** | **string** | Identity-provider-assigned group ID. Must match the exact group ID passed by the identity provider to Eon during SAML sign-on.  | 
+**RoleIds** | **[]string** | List of [role IDs](../roles/list-roles) assigned to the group. | 
 
 ## Methods
 

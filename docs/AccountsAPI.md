@@ -49,7 +49,7 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	connectRestoreAccountRequest := *openapiclient.NewConnectRestoreAccountRequest(*openapiclient.NewRestoreAccountAttributesInput(openapiclient.Provider("AWS"))) // ConnectRestoreAccountRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -70,7 +70,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -121,7 +121,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	connectSourceAccountRequest := *openapiclient.NewConnectSourceAccountRequest(*openapiclient.NewSourceAccountAttributesInput(openapiclient.Provider("AWS"))) // ConnectSourceAccountRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -142,7 +142,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -193,8 +193,8 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
-	connectSourceAwsOrganizationalUnitRequest := *openapiclient.NewConnectSourceAwsOrganizationalUnitRequest("arn:aws:iam::123412341234:role/EonSourceAccountRole", "ou-xxxx-xxxxxxxx") // ConnectSourceAwsOrganizationalUnitRequest | 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	connectSourceAwsOrganizationalUnitRequest := *openapiclient.NewConnectSourceAwsOrganizationalUnitRequest("arn:aws:iam::123412341234:role/EonSourceAccountRole", "ou-a1b2-f6g7h111") // ConnectSourceAwsOrganizationalUnitRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -214,7 +214,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -266,7 +266,7 @@ import (
 
 func main() {
 	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the restore account. | 
-**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -337,7 +337,7 @@ import (
 
 func main() {
 	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the restore account. | 
-**projectId** | **string** | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -408,7 +408,7 @@ import (
 
 func main() {
 	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
-	projectId := "d593811b-bfbc-515b-a21d-9fb95eb1071b" // string | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "d593811b-bfbc-515b-a21d-9fb95eb1071b" // string | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the source account. | 
-**projectId** | **string** | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -478,7 +478,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	accountId := "64a698c5-540d-5d09-80f7-f4c39c7045c1" // string | Eon-assigned ID of the restore account to disconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -499,7 +499,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **accountId** | **string** | Eon-assigned ID of the restore account to disconnect. | 
 
 ### Other Parameters
@@ -551,7 +551,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the source account to disconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -572,7 +572,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **accountId** | **string** | Eon-assigned ID of the source account to disconnect. | 
 
 ### Other Parameters
@@ -624,7 +624,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose AWS organizational unit you want to disconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose AWS organizational unit you want to disconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	organizationalUnitId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the AWS organizational unit to disconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -645,7 +645,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose AWS organizational unit you want to disconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose AWS organizational unit you want to disconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **organizationalUnitId** | **string** | Eon-assigned ID of the AWS organizational unit to disconnect. | 
 
 ### Other Parameters
@@ -698,7 +698,7 @@ import (
 
 func main() {
 	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	enableRestoreAccountMetricsConfigRequest := *openapiclient.NewEnableRestoreAccountMetricsConfigRequest() // EnableRestoreAccountMetricsConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -720,7 +720,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the restore account. | 
-**projectId** | **string** | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -773,7 +773,7 @@ import (
 
 func main() {
 	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
-	projectId := "b9c79c3f-399c-5e32-a8fb-762f87bebd7b" // string | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "b9c79c3f-399c-5e32-a8fb-762f87bebd7b" // string | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	enableSourceAccountMetricsConfigRequest := *openapiclient.NewEnableSourceAccountMetricsConfigRequest() // EnableSourceAccountMetricsConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -795,7 +795,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the source account. | 
-**projectId** | **string** | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -848,7 +848,7 @@ import (
 
 func main() {
 	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -869,7 +869,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the restore account. | 
-**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -921,7 +921,7 @@ import (
 
 func main() {
 	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
-	projectId := "4bd9ca0f-b6cd-5a00-b6ce-76960e76c4ba" // string | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "4bd9ca0f-b6cd-5a00-b6ce-76960e76c4ba" // string | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -942,7 +942,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the restore account. | 
-**projectId** | **string** | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -994,7 +994,7 @@ import (
 
 func main() {
 	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1015,7 +1015,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | Eon-assigned ID of the source account. | 
-**projectId** | **string** | ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -1066,7 +1066,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 	listRestoreAccountsRequest := *openapiclient.NewListRestoreAccountsRequest() // ListRestoreAccountsRequest | Filter options.  (optional)
@@ -1089,7 +1089,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -1142,7 +1142,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 	listSourceAccountsRequest := *openapiclient.NewListSourceAccountsRequest() // ListSourceAccountsRequest | Filter options.  (optional)
@@ -1165,7 +1165,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -1218,7 +1218,7 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 
@@ -1240,7 +1240,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -1292,7 +1292,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the restore account to reconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -1313,7 +1313,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **accountId** | **string** | Eon-assigned ID of the restore account to reconnect. | 
 
 ### Other Parameters
@@ -1365,7 +1365,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the source account to reconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -1386,7 +1386,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **accountId** | **string** | Eon-assigned ID of the source account to reconnect. | 
 
 ### Other Parameters
@@ -1438,7 +1438,7 @@ import (
 )
 
 func main() {
-	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose AWS organizational unit you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose AWS organizational unit you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	organizationalUnitId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the AWS organizational unit to reconnect.
 
 	configuration := openapiclient.NewConfiguration()
@@ -1459,7 +1459,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose AWS organizational unit you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose AWS organizational unit you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **organizationalUnitId** | **string** | Eon-assigned ID of the AWS organizational unit to reconnect. | 
 
 ### Other Parameters
@@ -1512,7 +1512,7 @@ import (
 
 func main() {
 	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings. 
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	updateRestoreAccountConnectivityConfigRequest := *openapiclient.NewUpdateRestoreAccountConnectivityConfigRequest() // UpdateRestoreAccountConnectivityConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -1534,7 +1534,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string** | ID of the restore account | 
-**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.  | 
+**projectId** | **string** | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 

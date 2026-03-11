@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IdpId** | **string** | The ID of the Identity Provider this group belongs to. | 
-**ProviderGroupId** | **string** | The group identifier from the Identity Provider. | 
-**RoleIds** | **[]string** | List of role IDs to assign to this IDP group. | 
+**IdpId** | **string** | [ID of the identity provider](./list-idps) the group belongs to. | 
+**ProviderGroupId** | **string** | Identity-provider-assigned group ID. Must match the exact group ID passed by the identity provider to Eon during SAML sign-on.  | 
+**RoleIds** | **[]string** | List of [role IDs](../roles/list-roles) to assign to the group. | 
 
 ## Methods
 

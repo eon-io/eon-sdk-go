@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Roles** | [**[]Role**](Role.md) |  | 
 **TotalCount** | Pointer to **int32** | Total number of roles. | [optional] 
-**NextToken** | Pointer to **string** |  | [optional] 
+**NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 
 ## Methods
 

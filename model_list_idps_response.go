@@ -21,11 +21,11 @@ var _ MappedNullable = &ListIdpsResponse{}
 
 // ListIdpsResponse struct for ListIdpsResponse
 type ListIdpsResponse struct {
-	// List of Identity Providers.
+	// List of identity providers.
 	Idps []Idp `json:"idps"`
-	// Total number of IDPs.
+	// Total number of identity providers.
 	TotalCount int32 `json:"totalCount"`
-	// Token to retrieve the next page of results.
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 }
 

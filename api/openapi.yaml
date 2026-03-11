@@ -74,12 +74,13 @@ paths:
     post:
       description: |
         Description: Connects an AWS organizational unit to the given project.
-        All AWS accounts within the organizational unit (and its nested OUs) will be automatically discovered and available for backup.
+
+        All descendant AWS accounts within the organizational unit will be discovered and available for backup.
       operationId: connectSourceAwsOrganizationalUnit
       parameters:
       - description: |
           ID of the project you want to connect the AWS organizational unit to.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -142,7 +143,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose AWS organizational units you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -211,12 +212,12 @@ paths:
   /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/reconnect:
     post:
       description: |
-        Description: Reconnects a previously disconnected AWS organizational unit and its accounts to the given project.
+        Description: Reconnects a previously disconnected AWS organizational unit and its descendant accounts to the given project.
       operationId: reconnectSourceAwsOrganizationalUnit
       parameters:
       - description: |
           ID of the project whose AWS organizational unit you want to reconnect.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -276,16 +277,16 @@ paths:
   /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/disconnect:
     post:
       description: |
-        Description: Disconnects an AWS organizational unit and its accounts from the given project.
+        Description: Disconnects an AWS organizational unit (OU) and its accounts from the given project.
 
-        After disconnecting, resources in the organizational unit's accounts will no longer be backed up.
+        After disconnecting, resources in the OU descendant accounts will no longer be backed up.
         Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
         Resources with no remaining snapshots are removed from the inventory.
       operationId: disconnectSourceAwsOrganizationalUnit
       parameters:
       - description: |
           ID of the project whose AWS organizational unit you want to disconnect.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -655,8 +656,7 @@ paths:
           key: roleId
   /v1/idps/list:
     post:
-      description: "Description: Retrieves a list of Identity Providers (IDPs) for\
-        \ the account."
+      description: "Description: Retrieves a list of identity providers for the account."
       operationId: listIdps
       parameters:
       - allowEmptyValue: true
@@ -690,7 +690,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListIdpsResponse'
-          description: Identity Providers retrieved.
+          description: Identity providers retrieved.
         "1XX":
           description: Informational
         "3XX":
@@ -720,10 +720,9 @@ paths:
   /v1/idp-groups:
     post:
       description: |
-        Description: Creates a new IDP group and assigns roles to it.<br/>
+        Description: Maps an identity provider group to one or more Eon roles.<br/>
 
-        An IDP group represents a group from your Identity Provider and maps it to one or more roles in Eon.
-        When users authenticate via SAML and belong to this group, they will receive the assigned roles.
+        When users authenticate via SAML and belong to the specified group, they're granted the assigned roles.
       operationId: createIdpGroup
       requestBody:
         content:
@@ -736,14 +735,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateIdpGroupResponse'
-          description: IDP group created.
+          description: IdP group role assignment created.
         "400":
           description: Validation error.
         "404":
           description: Identity provider not found.
         "409":
-          description: An IDP group with the same provider group ID already exists
-            for this IDP.
+          description: A group with the same provider-assigned group ID already exists
+            for the specified identity provider.
         "1XX":
           description: Informational
         "3XX":
@@ -760,7 +759,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Create IDP Group
+      summary: Create IdP Group Role Assignment
       tags:
       - iam
       x-internal: false
@@ -776,7 +775,8 @@ paths:
           key: group.idpId
   /v1/idp-groups/list:
     post:
-      description: "Description: Retrieves a list of IDP groups for the account."
+      description: "Description: Retrieves a list of IdP group role assignments mapped\
+        \ in your Eon account."
       operationId: listIdpGroups
       parameters:
       - allowEmptyValue: true
@@ -810,7 +810,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListIdpGroupsResponse'
-          description: IDP groups retrieved.
+          description: IdP group role assignments retrieved.
         "1XX":
           description: Informational
         "3XX":
@@ -827,7 +827,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: List IDP Groups
+      summary: List IdP Group Role Assignments
       tags:
       - iam
       x-internal: false
@@ -840,12 +840,12 @@ paths:
   /v1/idp-groups/{groupId}:
     delete:
       description: |
-        Description: Deletes an IDP group and all its role assignments.<br/>
+        Description: Deletes an IdP group role assignment.<br/>
 
-        After deletion, users who belong to this group in the Identity Provider will no longer receive roles from this mapping.
+        After deletion, users are no longer assigned roles from their membership in the specified group.
       operationId: deleteIdpGroup
       parameters:
-      - description: IDP Group ID.
+      - description: Eon-assigned IdP group role assignment ID.
         example: ceaf2281-bf04-542d-a801-a6a4865373ad
         explode: false
         in: path
@@ -857,9 +857,9 @@ paths:
         style: simple
       responses:
         "204":
-          description: IDP group deleted successfully.
+          description: IdP group role assignment deleted.
         "404":
-          description: IDP group not found.
+          description: IdP group role assignment wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -876,7 +876,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Delete IDP Group
+      summary: Delete IdP Group Role Assignment
       tags:
       - iam
       x-internal: false
@@ -891,10 +891,10 @@ paths:
           in: path
           key: groupId
     get:
-      description: "Description: Retrieves an IDP group by its ID."
+      description: "Description: Retrieves an IdP group role assignment by ID."
       operationId: getIdpGroup
       parameters:
-      - description: IDP Group ID.
+      - description: Eon-assigned IdP group role assignment ID.
         example: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         explode: false
         in: path
@@ -910,9 +910,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetIdpGroupResponse'
-          description: IDP group retrieved.
+          description: IdP group role assignment retrieved.
         "404":
-          description: IDP group not found.
+          description: IdP group role assignment wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -929,7 +929,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Get IDP Group
+      summary: Get IdP Group Role Assignment
       tags:
       - iam
       x-internal: false
@@ -941,14 +941,14 @@ paths:
         excluded: true
     put:
       description: |
-        Description: Updates the role assignments for an IDP group.<br/>
+        Description: Updates the roles assigned to an IdP group.<br/>
 
         This operation replaces all existing role assignments with the provided list.
         To add a role, include all existing roles plus the new one.
         To remove a role, include all roles except the one to remove.
       operationId: updateIdpGroup
       parameters:
-      - description: IDP Group ID.
+      - description: Eon-assigned IdP group role assignment ID.
         explode: false
         in: path
         name: groupId
@@ -962,7 +962,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateIdpGroupRequest'
-        description: The request body for updating an IDP group
         required: true
       responses:
         "200":
@@ -970,9 +969,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateIdpGroupResponse'
-          description: IDP group updated successfully.
+          description: IdP group role assignment updated.
         "404":
-          description: IDP group not found.
+          description: IdP group role assignment wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -989,7 +988,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Update IDP Group
+      summary: Update IdP Group Role Assignment
       tags:
       - iam
       x-internal: false
@@ -1010,7 +1009,7 @@ paths:
       parameters:
       - description: |
           ID of the project you want to connect the source account to.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -1073,7 +1072,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose source accounts you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -1160,7 +1159,7 @@ paths:
       parameters:
       - description: |
           ID of the project.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -1225,7 +1224,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose source account you want to reconnect.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -1300,7 +1299,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose source account metrics configuration you want to disable.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: d593811b-bfbc-515b-a21d-9fb95eb1071b
         explode: false
         in: path
@@ -1362,7 +1361,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose source account metrics configuration you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -1423,7 +1422,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose source account metrics you want to configure.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: b9c79c3f-399c-5e32-a8fb-762f87bebd7b
         explode: false
         in: path
@@ -1486,7 +1485,7 @@ paths:
       parameters:
       - description: |
           ID of the project you want to connect the source account to.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 733888d8-2573-5f9a-b81d-21f051d24fda
         explode: false
         in: path
@@ -1549,7 +1548,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore accounts you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -1635,7 +1634,7 @@ paths:
       parameters:
       - description: |
           ID of the project.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -1700,7 +1699,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore account you want to reconnect.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
         explode: false
         in: path
@@ -1774,7 +1773,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to delete.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -1834,7 +1833,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -1894,7 +1893,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to update.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -1966,7 +1965,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account metrics you want to disable.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -2027,7 +2026,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account metrics configuration you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 4bd9ca0f-b6cd-5a00-b6ce-76960e76c4ba
         explode: false
         in: path
@@ -2089,7 +2088,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose restore account metrics you want to configure.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -2150,7 +2149,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore jobs you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -2242,7 +2241,7 @@ paths:
         style: simple
       - description: |
           ID of the project the job is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2299,7 +2298,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose restore jobs you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -2392,7 +2391,7 @@ paths:
         style: simple
       - description: |
           ID of the project the job is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2463,7 +2462,7 @@ paths:
         style: simple
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2533,7 +2532,7 @@ paths:
       parameters:
       - description: |
           ID of the project you want to create a backup policy in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 733888d8-2573-5f9a-b81d-21f051d24fda
         explode: false
         in: path
@@ -2594,7 +2593,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose backup policies you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -2653,7 +2652,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose backup policy you want to delete.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -2713,7 +2712,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose backup policy you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -2773,7 +2772,7 @@ paths:
         style: simple
       - description: |
           ID of the project whose backup policy you want to update.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce
         explode: false
         in: path
@@ -2847,7 +2846,7 @@ paths:
       parameters:
       - description: |
           ID of the project the vault is created in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2924,7 +2923,7 @@ paths:
         style: simple
       - description: |
           ID of the project the vault is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -2985,7 +2984,7 @@ paths:
         style: simple
       - description: |
           ID of the project the vault is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3047,7 +3046,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose vaults you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3127,7 +3126,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3225,7 +3224,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3323,7 +3322,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3421,7 +3420,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3519,7 +3518,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3617,7 +3616,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3718,7 +3717,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3816,7 +3815,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -3914,7 +3913,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4012,7 +4011,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4114,7 +4113,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4215,7 +4214,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4316,7 +4315,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4417,7 +4416,7 @@ paths:
       parameters:
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4522,8 +4521,8 @@ paths:
       operationId: runQuery
       parameters:
       - description: "ID of the project that contains the database snapshot you want\
-          \ to retrieve.\nYou can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials)\
-          \ page in your global settings. \n"
+          \ to retrieve.\nYou can see your project ID in the [API Credentials](https://console.eon.io/global-management/api-credentials)\
+          \ page in your global management console. \n"
         example: 330e9e09-6cb8-52af-b532-a476f598cf94
         explode: false
         in: path
@@ -4614,8 +4613,8 @@ paths:
       operationId: getQueryStatus
       parameters:
       - description: "ID of the project that contains the query status you want to\
-          \ retrieve.\nYou can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials)\
-          \ page in your global settings. \n"
+          \ retrieve.\nYou can see your project ID in the [API Credentials](https://console.eon.io/global-management/api-credentials)\
+          \ page in your global management console. \n"
         example: 330e9e09-6cb8-52af-b532-a476f598cf94
         explode: false
         in: path
@@ -4686,8 +4685,8 @@ paths:
       operationId: getQueryResult
       parameters:
       - description: "ID of the project that contains the query you want to retrieve.\n\
-          You can see your project ID in the [API Credentials](https://console.eon.io/global-settings/api-credentials)\
-          \ page in your global settings. \n"
+          You can see your project ID in the [API Credentials](https://console.eon.io/global-management/api-credentials)\
+          \ page in your global management console. \n"
         example: 330e9e09-6cb8-52af-b532-a476f598cf94
         explode: false
         in: path
@@ -4776,7 +4775,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose resources you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: f9304613-dddb-52fe-b883-f5e671a868a3
         explode: false
         in: path
@@ -4866,7 +4865,7 @@ paths:
         style: simple
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -4923,7 +4922,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -4991,7 +4990,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -5068,7 +5067,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -5136,7 +5135,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -5215,7 +5214,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -5286,7 +5285,7 @@ paths:
       parameters:
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
         in: path
@@ -5367,7 +5366,7 @@ paths:
         style: simple
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -5439,7 +5438,7 @@ paths:
         style: simple
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -5515,7 +5514,7 @@ paths:
         style: simple
       - description: |
           ID of the project the snapshot is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -5584,7 +5583,7 @@ paths:
         style: simple
       - description: |
           ID of the project the resource is in.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -5997,7 +5996,7 @@ paths:
       parameters:
       - description: |
           ID of the project whose daily storage summaries you want to retrieve.
-          You can get your project ID from the [API Credentials](https://console.eon.io/global-settings/api-credentials) page in your global settings.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: f9304613-dddb-52fe-b883-f5e671a868a3
         explode: false
         in: path
@@ -6062,7 +6061,7 @@ components:
   schemas:
     ConnectSourceAwsOrganizationalUnitRequest:
       example:
-        providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+        providerOrganizationalUnitId: ou-a1b2-f6g7h111
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       properties:
         roleArn:
@@ -6071,8 +6070,8 @@ components:
           example: arn:aws:iam::123412341234:role/EonSourceAccountRole
           type: string
         providerOrganizationalUnitId:
-          description: AWS Organizational Unit ID.
-          example: ou-xxxx-xxxxxxxx
+          description: AWS-assigned organizational unit ID.
+          example: ou-a1b2-f6g7h111
           type: string
       required:
       - providerOrganizationalUnitId
@@ -6096,7 +6095,7 @@ components:
       - ACCOUNT_STATE_UNSPECIFIED
     SourceAwsOrganizationalUnit:
       example:
-        providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+        providerOrganizationalUnitId: ou-a1b2-f6g7h111
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         name: prod-eu organizational unit
         id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -6113,15 +6112,15 @@ components:
           example: arn:aws:iam::123412341234:role/EonSourceAccountRole
           type: string
         name:
-          description: The organizational unit display name in Eon.
+          description: Organizational unit display name in Eon.
           example: prod-eu organizational unit
           type: string
         providerOrganizationalUnitId:
-          description: AWS Organizational Unit ID.
-          example: ou-xxxx-xxxxxxxx
+          description: AWS-assigned organizational unit ID.
+          example: ou-a1b2-f6g7h111
           type: string
         providerManagementAccountId:
-          description: AWS Organization management account ID.
+          description: AWS-assigned ID of the organization's management account.
           example: "123456789012"
           type: string
         status:
@@ -6137,7 +6136,7 @@ components:
     ConnectSourceAwsOrganizationalUnitResponse:
       example:
         organizationalUnit:
-          providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          providerOrganizationalUnitId: ou-a1b2-f6g7h111
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -6151,15 +6150,15 @@ components:
       type: object
     ListSourceAwsOrganizationalUnitsResponse:
       example:
-        nextToken: nextToken
+        nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         organizationalUnits:
-        - providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+        - providerOrganizationalUnitId: ou-a1b2-f6g7h111
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           providerManagementAccountId: "123456789012"
           status: CONNECTED
-        - providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+        - providerOrganizationalUnitId: ou-a1b2-f6g7h111
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -6176,6 +6175,7 @@ components:
           description: |
             Cursor that points to the first record of the next page of results.
             Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
           type: string
         totalCount:
           description: Total number of AWS organizational units that matched the filter
@@ -6188,7 +6188,7 @@ components:
     ReconnectSourceAwsOrganizationalUnitResponse:
       example:
         organizationalUnit:
-          providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          providerOrganizationalUnitId: ou-a1b2-f6g7h111
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -6203,7 +6203,7 @@ components:
     DisconnectSourceAwsOrganizationalUnitResponse:
       example:
         organizationalUnit:
-          providerOrganizationalUnitId: ou-xxxx-xxxxxxxx
+          providerOrganizationalUnitId: ou-a1b2-f6g7h111
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -7234,7 +7234,7 @@ components:
           permission: inventory.view
         - accessConditionId: Non-PII only.
           permission: inventory.view
-        isBuiltInRole: true
+        isBuiltInRole: false
         name: My custom role
         accessConditions:
         - expression:
@@ -7429,6 +7429,7 @@ components:
             Whether the role is a default role.
             If `true`, the role is a default role provided by Eon and can't be modified or deleted.
             If `false`, the role is a custom, user-created role.
+          example: false
           type: boolean
         permissionGrants:
           description: List of permissions granted by the role.
@@ -7458,7 +7459,7 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
-          isBuiltInRole: true
+          isBuiltInRole: false
           name: My custom role
           accessConditions:
           - expression:
@@ -7646,14 +7647,14 @@ components:
       type: object
     ListRolesResponse:
       example:
-        nextToken: nextToken
+        nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         roles:
         - permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
-          isBuiltInRole: true
+          isBuiltInRole: false
           name: My custom role
           accessConditions:
           - expression:
@@ -7838,7 +7839,7 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
-          isBuiltInRole: true
+          isBuiltInRole: false
           name: My custom role
           accessConditions:
           - expression:
@@ -8028,6 +8029,10 @@ components:
           description: Total number of roles.
           type: integer
         nextToken:
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
           type: string
       required:
       - roles
@@ -8040,7 +8045,7 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
-          isBuiltInRole: true
+          isBuiltInRole: false
           name: My custom role
           accessConditions:
           - expression:
@@ -8437,7 +8442,7 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
-          isBuiltInRole: true
+          isBuiltInRole: false
           name: My custom role
           accessConditions:
           - expression:
@@ -8624,18 +8629,18 @@ components:
       - role
       type: object
     Idp:
-      description: An Identity Provider (IDP) configuration.
+      description: Identity provider.
       example:
         id: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
         providerName: okta-prod
       properties:
         id:
-          description: System-generated unique identifier for the IDP.
+          description: Eon-assigned identity provider ID.
           example: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           format: uuid
           type: string
         providerName:
-          description: The name of the identity provider.
+          description: Identity provider display name.
           example: okta-prod
           type: string
       required:
@@ -8653,16 +8658,18 @@ components:
           providerName: okta-prod
       properties:
         idps:
-          description: List of Identity Providers.
+          description: List of identity providers.
           items:
             $ref: '#/components/schemas/Idp'
           type: array
         totalCount:
-          description: Total number of IDPs.
+          description: Total number of identity providers.
           example: 5
           type: integer
         nextToken:
-          description: Token to retrieve the next page of results.
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
           example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
           type: string
       required:
@@ -8673,22 +8680,27 @@ components:
       example:
         roleIds:
         - 550e8400-e29b-41d4-a716-446655440000
+        - 72bc42a0-e169-533f-b95a-4a434574756b
         providerGroupId: engineering-team
         idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
       properties:
         idpId:
-          description: The ID of the Identity Provider this group belongs to.
+          description: "[ID of the identity provider](./list-idps) the group belongs\
+            \ to."
           example: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           format: uuid
           type: string
         providerGroupId:
-          description: The group identifier from the Identity Provider.
+          description: |
+            Identity-provider-assigned group ID.
+            Must match the exact group ID passed by the identity provider to Eon during SAML sign-on.
           example: engineering-team
           type: string
         roleIds:
-          description: List of role IDs to assign to this IDP group.
+          description: "List of [role IDs](../roles/list-roles) to assign to the group."
           example:
           - 550e8400-e29b-41d4-a716-446655440000
+          - 72bc42a0-e169-533f-b95a-4a434574756b
           items:
             format: uuid
             type: string
@@ -8699,34 +8711,37 @@ components:
       - roleIds
       type: object
     IdpGroup:
-      description: An IDP Group with its associated role assignments.
+      description: IdP group role assignment.
       example:
         roleIds:
         - 550e8400-e29b-41d4-a716-446655440000
-        - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+        - 72bc42a0-e169-533f-b95a-4a434574756b
         providerGroupId: engineering-team
         idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
         id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         id:
-          description: System-generated unique identifier for the IDP group.
+          description: Eon-assigned group ID.
           example: daa42222-6ad2-5d37-bb26-4f2a9cba73da
           format: uuid
           type: string
         idpId:
-          description: The ID of the Identity Provider this group belongs to.
+          description: |
+            [ID of the identity provider](./list-idps) the group belongs to.
           example: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           format: uuid
           type: string
         providerGroupId:
-          description: The group identifier from the Identity Provider.
+          description: |
+            Identity-provider-assigned group ID.
+            Must match the exact group ID passed by the identity provider to Eon during SAML sign-on.
           example: engineering-team
           type: string
         roleIds:
-          description: List of role IDs assigned to this IDP group.
+          description: "List of [role IDs](../roles/list-roles) assigned to the group."
           example:
           - 550e8400-e29b-41d4-a716-446655440000
-          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          - 72bc42a0-e169-533f-b95a-4a434574756b
           items:
             format: uuid
             type: string
@@ -8742,7 +8757,7 @@ components:
         group:
           roleIds:
           - 550e8400-e29b-41d4-a716-446655440000
-          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
@@ -8754,32 +8769,35 @@ components:
       type: object
     ListIdpGroupsResponse:
       example:
-        nextToken: nextToken
+        nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         groups:
         - roleIds:
           - 550e8400-e29b-41d4-a716-446655440000
-          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         - roleIds:
           - 550e8400-e29b-41d4-a716-446655440000
-          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         totalCount: 0
       properties:
         groups:
-          description: List of IDP groups.
+          description: List of IdP group role assignments.
           items:
             $ref: '#/components/schemas/IdpGroup'
           type: array
         totalCount:
-          description: Total number of IDP groups.
+          description: Total number of IdP group role assignments.
           type: integer
         nextToken:
-          description: Token to retrieve the next page of results.
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
           type: string
       required:
       - groups
@@ -8789,7 +8807,7 @@ components:
         group:
           roleIds:
           - 550e8400-e29b-41d4-a716-446655440000
-          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
@@ -8807,7 +8825,7 @@ components:
       properties:
         roleIds:
           description: |
-            List of role IDs to assign to this IDP group.
+            List of [role IDs](../roles/list-roles) to assign to the group.
             This replaces all existing role assignments.
           example:
           - 550e8400-e29b-41d4-a716-446655440000
@@ -8824,7 +8842,7 @@ components:
         group:
           roleIds:
           - 550e8400-e29b-41d4-a716-446655440000
-          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
@@ -8895,31 +8913,6 @@ components:
       required:
       - serviceAccount
       type: object
-    MongoAtlasSourceAccountAttributesInput:
-      description: |
-        MongoDB Atlas project configuration.
-        Applicable if `cloudProvider` is set to `MONGO_ATLAS`.
-      example:
-        apiPublicKey: apiPublicKey
-        atlasProjectId: atlasProjectId
-        apiPrivateKey: apiPrivateKey
-      nullable: true
-      properties:
-        apiPublicKey:
-          description: Public key of the MongoDB Atlas API key with Organization Read
-            Only permissions.
-          type: string
-        apiPrivateKey:
-          description: Private key of the MongoDB Atlas API key.
-          type: string
-        atlasProjectId:
-          description: The MongoDB Atlas project ID to onboard.
-          type: string
-      required:
-      - apiPrivateKey
-      - apiPublicKey
-      - atlasProjectId
-      type: object
     SourceAccountAttributesInput:
       example:
         gcp:
@@ -8931,10 +8924,6 @@ components:
           tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
           eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
-        mongoAtlas:
-          apiPublicKey: apiPublicKey
-          atlasProjectId: atlasProjectId
-          apiPrivateKey: apiPrivateKey
       properties:
         cloudProvider:
           $ref: '#/components/schemas/Provider'
@@ -8944,8 +8933,6 @@ components:
           $ref: '#/components/schemas/AzureSourceAccountAttributesInput'
         gcp:
           $ref: '#/components/schemas/GcpSourceAccountAttributesInput'
-        mongoAtlas:
-          $ref: '#/components/schemas/MongoAtlasSourceAccountAttributesInput'
       required:
       - cloudProvider
       type: object
@@ -8962,10 +8949,6 @@ components:
             tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
             eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
-          mongoAtlas:
-            apiPublicKey: apiPublicKey
-            atlasProjectId: atlasProjectId
-            apiPrivateKey: apiPrivateKey
       properties:
         name:
           description: Account display name in Eon.
@@ -18357,26 +18340,9 @@ components:
             If `false`, the apps are automatically detected and listed by Eon.
           type: boolean
       type: object
-    SensitivityAnnotationsDetails:
-      description: Details about the resource's sensitivity annotations.
-      example:
-        isOverridden: true
-        hasSensitivityAnnotations: true
-      properties:
-        hasSensitivityAnnotations:
-          description: Whether the resource has sensitivity annotations detected.
-          type: boolean
-        isOverridden:
-          description: Whether the sensitivity annotations status has been manually
-            overridden.
-          type: boolean
-      type: object
     Classifications:
       description: Resource classification details.
       example:
-        sensitivityAnnotationsDetails:
-          isOverridden: true
-          hasSensitivityAnnotations: true
         appsDetails:
           isOverridden: true
           apps:
@@ -18403,8 +18369,6 @@ components:
           $ref: '#/components/schemas/EnvironmentDetails'
         appsDetails:
           $ref: '#/components/schemas/AppsDetails'
-        sensitivityAnnotationsDetails:
-          $ref: '#/components/schemas/SensitivityAnnotationsDetails'
       type: object
     SnapshotStorage:
       description: Details about backup snapshot storage.
@@ -18653,9 +18617,6 @@ components:
           app: web
         providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
         classifications:
-          sensitivityAnnotationsDetails:
-            isOverridden: true
-            hasSensitivityAnnotations: true
           appsDetails:
             isOverridden: true
             apps:
@@ -18798,7 +18759,7 @@ components:
       type: object
     ListResourcesResponse:
       example:
-        nextToken: nextToken
+        nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         resources:
         - resourceProperties:
             awsEc2:
@@ -18838,9 +18799,6 @@ components:
             app: web
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           classifications:
-            sensitivityAnnotationsDetails:
-              isOverridden: true
-              hasSensitivityAnnotations: true
             appsDetails:
               isOverridden: true
               apps:
@@ -18920,9 +18878,6 @@ components:
             app: web
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           classifications:
-            sensitivityAnnotationsDetails:
-              isOverridden: true
-              hasSensitivityAnnotations: true
             appsDetails:
               isOverridden: true
               apps:
@@ -18975,6 +18930,7 @@ components:
           description: |
             Cursor that points to the first record of the next page of results.
             Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
           type: string
         totalCount:
           description: Total number of resources that matched the filter options.
@@ -19024,9 +18980,6 @@ components:
             app: web
           providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
           classifications:
-            sensitivityAnnotationsDetails:
-              isOverridden: true
-              hasSensitivityAnnotations: true
             appsDetails:
               isOverridden: true
               apps:

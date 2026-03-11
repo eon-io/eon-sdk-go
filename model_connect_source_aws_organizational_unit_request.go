@@ -23,7 +23,7 @@ var _ MappedNullable = &ConnectSourceAwsOrganizationalUnitRequest{}
 type ConnectSourceAwsOrganizationalUnitRequest struct {
 	// ARN of the role Eon assumes to access the organizational unit in AWS.
 	RoleArn string `json:"roleArn"`
-	// AWS Organizational Unit ID.
+	// AWS-assigned organizational unit ID.
 	ProviderOrganizationalUnitId string `json:"providerOrganizationalUnitId"`
 }
 

@@ -21,11 +21,11 @@ var _ MappedNullable = &ListIdpGroupsResponse{}
 
 // ListIdpGroupsResponse struct for ListIdpGroupsResponse
 type ListIdpGroupsResponse struct {
-	// List of IDP groups.
+	// List of IdP group role assignments.
 	Groups []IdpGroup `json:"groups"`
-	// Total number of IDP groups.
+	// Total number of IdP group role assignments.
 	TotalCount *int32 `json:"totalCount,omitempty"`
-	// Token to retrieve the next page of results.
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
 }
 

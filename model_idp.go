@@ -19,11 +19,11 @@ import (
 // checks if the Idp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Idp{}
 
-// Idp An Identity Provider (IDP) configuration.
+// Idp Identity provider.
 type Idp struct {
-	// System-generated unique identifier for the IDP.
+	// Eon-assigned identity provider ID.
 	Id string `json:"id"`
-	// The name of the identity provider.
+	// Identity provider display name.
 	ProviderName string `json:"providerName"`
 }
 

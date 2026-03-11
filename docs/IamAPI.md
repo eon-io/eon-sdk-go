@@ -4,17 +4,17 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIdpGroup**](IamAPI.md#CreateIdpGroup) | **Post** /v1/idp-groups | Create IDP Group
+[**CreateIdpGroup**](IamAPI.md#CreateIdpGroup) | **Post** /v1/idp-groups | Create IdP Group Role Assignment
 [**CreateRole**](IamAPI.md#CreateRole) | **Post** /v1/roles | Create Role
-[**DeleteIdpGroup**](IamAPI.md#DeleteIdpGroup) | **Delete** /v1/idp-groups/{groupId} | Delete IDP Group
+[**DeleteIdpGroup**](IamAPI.md#DeleteIdpGroup) | **Delete** /v1/idp-groups/{groupId} | Delete IdP Group Role Assignment
 [**DeleteRole**](IamAPI.md#DeleteRole) | **Delete** /v1/roles/{roleId} | Delete Role
-[**GetIdpGroup**](IamAPI.md#GetIdpGroup) | **Get** /v1/idp-groups/{groupId} | Get IDP Group
+[**GetIdpGroup**](IamAPI.md#GetIdpGroup) | **Get** /v1/idp-groups/{groupId} | Get IdP Group Role Assignment
 [**GetRole**](IamAPI.md#GetRole) | **Get** /v1/roles/{roleId} | Get Role
-[**ListIdpGroups**](IamAPI.md#ListIdpGroups) | **Post** /v1/idp-groups/list | List IDP Groups
+[**ListIdpGroups**](IamAPI.md#ListIdpGroups) | **Post** /v1/idp-groups/list | List IdP Group Role Assignments
 [**ListIdps**](IamAPI.md#ListIdps) | **Post** /v1/idps/list | List Identity Providers
 [**ListPermissions**](IamAPI.md#ListPermissions) | **Get** /v1/permissions | List Permissions
 [**ListRoles**](IamAPI.md#ListRoles) | **Post** /v1/roles/list | List Roles
-[**UpdateIdpGroup**](IamAPI.md#UpdateIdpGroup) | **Put** /v1/idp-groups/{groupId} | Update IDP Group
+[**UpdateIdpGroup**](IamAPI.md#UpdateIdpGroup) | **Put** /v1/idp-groups/{groupId} | Update IdP Group Role Assignment
 [**UpdateRole**](IamAPI.md#UpdateRole) | **Put** /v1/roles/{roleId} | Update Role
 
 
@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 > CreateIdpGroupResponse CreateIdpGroup(ctx).CreateIdpGroupRequest(createIdpGroupRequest).Execute()
 
-Create IDP Group
+Create IdP Group Role Assignment
 
 
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 > DeleteIdpGroup(ctx, groupId).Execute()
 
-Delete IDP Group
+Delete IdP Group Role Assignment
 
 
 
@@ -172,7 +172,7 @@ import (
 )
 
 func main() {
-	groupId := "ceaf2281-bf04-542d-a801-a6a4865373ad" // string | IDP Group ID.
+	groupId := "ceaf2281-bf04-542d-a801-a6a4865373ad" // string | Eon-assigned IdP group role assignment ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -190,7 +190,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | IDP Group ID. | 
+**groupId** | **string** | Eon-assigned IdP group role assignment ID. | 
 
 ### Other Parameters
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 > GetIdpGroupResponse GetIdpGroup(ctx, groupId).Execute()
 
-Get IDP Group
+Get IdP Group Role Assignment
 
 
 
@@ -308,7 +308,7 @@ import (
 )
 
 func main() {
-	groupId := "daa42222-6ad2-5d37-bb26-4f2a9cba73da" // string | IDP Group ID.
+	groupId := "daa42222-6ad2-5d37-bb26-4f2a9cba73da" // string | Eon-assigned IdP group role assignment ID.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -328,7 +328,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | IDP Group ID. | 
+**groupId** | **string** | Eon-assigned IdP group role assignment ID. | 
 
 ### Other Parameters
 
@@ -431,7 +431,7 @@ Name | Type | Description  | Notes
 
 > ListIdpGroupsResponse ListIdpGroups(ctx).PageToken(pageToken).PageSize(pageSize).Execute()
 
-List IDP Groups
+List IdP Group Role Assignments
 
 
 
@@ -696,7 +696,7 @@ Name | Type | Description  | Notes
 
 > UpdateIdpGroupResponse UpdateIdpGroup(ctx, groupId).UpdateIdpGroupRequest(updateIdpGroupRequest).Execute()
 
-Update IDP Group
+Update IdP Group Role Assignment
 
 
 
@@ -713,8 +713,8 @@ import (
 )
 
 func main() {
-	groupId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | IDP Group ID.
-	updateIdpGroupRequest := *openapiclient.NewUpdateIdpGroupRequest([]string{"RoleIds_example"}) // UpdateIdpGroupRequest | The request body for updating an IDP group
+	groupId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned IdP group role assignment ID.
+	updateIdpGroupRequest := *openapiclient.NewUpdateIdpGroupRequest([]string{"RoleIds_example"}) // UpdateIdpGroupRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -734,7 +734,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | IDP Group ID. | 
+**groupId** | **string** | Eon-assigned IdP group role assignment ID. | 
 
 ### Other Parameters
 
@@ -744,7 +744,7 @@ Other parameters are passed through a pointer to a apiUpdateIdpGroupRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateIdpGroupRequest** | [**UpdateIdpGroupRequest**](UpdateIdpGroupRequest.md) | The request body for updating an IDP group | 
+ **updateIdpGroupRequest** | [**UpdateIdpGroupRequest**](UpdateIdpGroupRequest.md) |  | 
 
 ### Return type
 

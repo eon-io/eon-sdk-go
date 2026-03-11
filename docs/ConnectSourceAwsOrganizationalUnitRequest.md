@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RoleArn** | **string** | ARN of the role Eon assumes to access the organizational unit in AWS. | 
-**ProviderOrganizationalUnitId** | **string** | AWS Organizational Unit ID. | 
+**ProviderOrganizationalUnitId** | **string** | AWS-assigned organizational unit ID. | 
 
 ## Methods
 
