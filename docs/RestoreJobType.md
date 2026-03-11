@@ -95,6 +95,10 @@
 
 * `GCP_SAP_HANA_VM_INSTANCE_RESTORE` (value: `"GCP_SAP_HANA_VM_INSTANCE_RESTORE"`)
 
+* `ATLAS_CLUSTER_RESTORE` (value: `"ATLAS_CLUSTER_RESTORE"`)
+
+* `ATLAS_CLUSTER_RECORD_RESTORE` (value: `"ATLAS_CLUSTER_RECORD_RESTORE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
