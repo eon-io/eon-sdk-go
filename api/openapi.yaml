@@ -444,6 +444,63 @@ paths:
       - admin:idp_configs
       x-audit-log:
         excluded: true
+  /v1/oauth-apps:
+    post:
+      description: |
+        Description: Registers a new OAuth 2.0 App Client in the tenant's Cognito user pool.
+
+        Use `type: "gcp-gemini"` to auto-configure a GCP Agent Marketplace integration
+        (name and callback URL are pre-filled).
+
+        The returned `clientSecret` is only available at creation time and cannot be retrieved later.
+      operationId: createOAuthApp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOAuthAppRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOAuthAppResponse'
+          description: OAuth app created successfully.
+        "400":
+          description: Invalid request.
+        "401":
+          description: Unauthorized.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create an OAuth App
+      tags:
+      - oauthApps
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:all
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: oauth_app
+          in: resBody
+          key: oauthApp.clientId
   /v1/idp-groups:
     post:
       description: |
@@ -8519,6 +8576,71 @@ components:
       required:
       - idps
       - totalCount
+      type: object
+    CreateOAuthAppRequest:
+      example:
+        type: gcp-gemini
+      properties:
+        type:
+          description: |
+            Preset type. Use "gcp-gemini" to auto-configure a GCP Agent Marketplace
+            integration (name and callback URL are pre-filled).
+          enum:
+          - gcp-gemini
+          example: gcp-gemini
+          type: string
+      required:
+      - type
+      type: object
+    OAuthApp:
+      example:
+        authUrl: authUrl
+        clientId: clientId
+        tokenUrl: tokenUrl
+        name: name
+        callbackURLs:
+        - callbackURLs
+        - callbackURLs
+      properties:
+        clientId:
+          description: The Cognito App Client ID.
+          type: string
+        name:
+          description: Display name of the OAuth app.
+          type: string
+        callbackURLs:
+          description: Allowed redirect URIs.
+          items:
+            type: string
+          type: array
+        authUrl:
+          description: Cognito hosted UI authorization endpoint URL.
+          type: string
+        tokenUrl:
+          description: Cognito token endpoint URL.
+          type: string
+      type: object
+    CreateOAuthAppResponse:
+      example:
+        oauthApp:
+          authUrl: authUrl
+          clientId: clientId
+          tokenUrl: tokenUrl
+          name: name
+          callbackURLs:
+          - callbackURLs
+          - callbackURLs
+        clientSecret: clientSecret
+      properties:
+        oauthApp:
+          $ref: '#/components/schemas/OAuthApp'
+        clientSecret:
+          description: The client secret. Only returned at creation time — store it
+            securely.
+          type: string
+      required:
+      - clientSecret
+      - oauthApp
       type: object
     CreateIdpGroupRequest:
       example:
