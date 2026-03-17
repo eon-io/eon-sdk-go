@@ -6452,6 +6452,7 @@ components:
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
       - AWS_REDSHIFT
+      - AWS_DOCUMENTDB
       - AZURE_VIRTUAL_MACHINE
       - AZURE_FILE_SHARE
       - AZURE_STORAGE_ACCOUNT
@@ -6474,6 +6475,7 @@ components:
       - GCP_CLOUD_FIRESTORE
       - GCP_DISK
       - GCP_SAP_HANA_VM
+      - MICROSOFT_365_SHAREPOINT_SITE
       - RESOURCE_TYPE_UNSPECIFIED
       example: AWS_EC2
       type: string
@@ -6599,6 +6601,7 @@ components:
       - AZURE
       - GCP
       - MONGO_ATLAS
+      - MICROSOFT_365
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string
@@ -11747,6 +11750,7 @@ components:
       - AZURE_SQL_DATABASE_RESTORE
       - AZURE_SQL_VM_INSTANCE_RESTORE
       - AZURE_SQL_VM_RECORD_RESTORE
+      - AZURE_POSTGRESQL_RECORD_RESTORE
       - AZURE_SAP_HANA_VM_INSTANCE_RESTORE
       - GCP_CLOUD_STORAGE_BUCKET_RESTORE
       - GCP_CLOUD_STORAGE_OBJECT_RESTORE
@@ -13093,6 +13097,7 @@ components:
             - AWS_DYNAMO_DB
             - GCP_CLOUD_STORAGE_BUCKET
             - AWS_EC2
+            - AWS_RDS
             - RESOURCE_TYPE_UNSPECIFIED
             type: string
           example: AWS_S3

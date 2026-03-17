@@ -272,6 +272,17 @@ func parameterToJson(obj interface{}) (string, error) {
 	return string(jsonBuf), err
 }
 
+// isTransientNginxError checks if a response is a transient error from nginx
+// (e.g. during ingress controller reload) rather than a real API validation error.
+// Nginx returns bare HTML 400 pages, while the API gateway returns JSON.
+func isTransientNginxError(resp *http.Response) bool {
+	if resp.StatusCode != http.StatusBadRequest {
+		return false
+	}
+	ct := resp.Header.Get("Content-Type")
+	return !strings.Contains(ct, "application/json")
+}
+
 // callAPI do the request.
 func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	if c.cfg.Debug {
@@ -292,7 +303,7 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 			return resp, err
 		}
 
-		if err == nil && resp.StatusCode != 401 &&(resp.StatusCode < 500 || resp.StatusCode >= 600) {
+		if err == nil && resp.StatusCode != 401 && (resp.StatusCode < 500 || resp.StatusCode >= 600) && !isTransientNginxError(resp) {
 			success = true
 			break
 		}

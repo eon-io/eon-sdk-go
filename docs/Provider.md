@@ -11,6 +11,8 @@
 
 * `MONGO_ATLAS` (value: `"MONGO_ATLAS"`)
 
+* `MICROSOFT_365` (value: `"MICROSOFT_365"`)
+
 * `PROVIDER_UNSPECIFIED` (value: `"PROVIDER_UNSPECIFIED"`)
 
 
