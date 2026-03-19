@@ -57,6 +57,7 @@ const (
 	RANSOMWARE_DETECTION_MANAGE PermissionType = "ransomware_detection.manage"
 	NOTIFICATION_POLICIES_MANAGE PermissionType = "notification_policies.manage"
 	STORAGE_GATEWAY_MANAGE PermissionType = "storage_gateway.manage"
+	OAUTH_APPS_MANAGE PermissionType = "oauth_apps.manage"
 )
 
 // All allowed values of PermissionType enum
@@ -98,6 +99,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"ransomware_detection.manage",
 	"notification_policies.manage",
 	"storage_gateway.manage",
+	"oauth_apps.manage",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

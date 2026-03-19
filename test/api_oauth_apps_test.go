@@ -34,4 +34,16 @@ func Test_eon_OauthAppsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test OauthAppsAPIService ListOAuthApps", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.OauthAppsAPI.ListOAuthApps(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }

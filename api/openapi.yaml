@@ -445,6 +445,46 @@ paths:
       x-audit-log:
         excluded: true
   /v1/oauth-apps:
+    get:
+      description: |
+        Description: Lists all OAuth 2.0 App Clients registered in the tenant's Cognito user pool.
+        Returns app metadata without client secrets.
+      operationId: listOAuthApps
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOAuthAppsResponse'
+          description: OAuth apps listed successfully.
+        "401":
+          description: Unauthorized.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List OAuth Apps
+      tags:
+      - oauthApps
+      x-internal: false
+      x-audit-log:
+        excluded: true
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:oauth_apps
     post:
       description: |
         Description: Registers a new OAuth 2.0 App Client in the tenant's Cognito user pool.
@@ -494,7 +534,7 @@ paths:
       x-data-access:
         excluded: true
       x-permissions:
-      - admin:all
+      - create:oauth_apps
       x-audit-log:
         action: create
         entityRefs:
@@ -6156,6 +6196,7 @@ components:
       - ransomware_detection.manage
       - notification_policies.manage
       - storage_gateway.manage
+      - oauth_apps.manage
       example: inventory.view
       type: string
     Permission:
@@ -8580,21 +8621,6 @@ components:
       - idps
       - totalCount
       type: object
-    CreateOAuthAppRequest:
-      example:
-        type: gcp-gemini
-      properties:
-        type:
-          description: |
-            Preset type. Use "gcp-gemini" to auto-configure a GCP Agent Marketplace
-            integration (name and callback URL are pre-filled).
-          enum:
-          - gcp-gemini
-          example: gcp-gemini
-          type: string
-      required:
-      - type
-      type: object
     OAuthApp:
       example:
         authUrl: authUrl
@@ -8604,6 +8630,7 @@ components:
         callbackURLs:
         - callbackURLs
         - callbackURLs
+        type: gcp-gemini
       properties:
         clientId:
           description: The Cognito App Client ID.
@@ -8622,6 +8649,55 @@ components:
         tokenUrl:
           description: Cognito token endpoint URL.
           type: string
+        type:
+          description: The OAuth app type.
+          enum:
+          - gcp-gemini
+          type: string
+      type: object
+    ListOAuthAppsResponse:
+      example:
+        oauthApps:
+        - authUrl: authUrl
+          clientId: clientId
+          tokenUrl: tokenUrl
+          name: name
+          callbackURLs:
+          - callbackURLs
+          - callbackURLs
+          type: gcp-gemini
+        - authUrl: authUrl
+          clientId: clientId
+          tokenUrl: tokenUrl
+          name: name
+          callbackURLs:
+          - callbackURLs
+          - callbackURLs
+          type: gcp-gemini
+      properties:
+        oauthApps:
+          description: List of OAuth apps registered in the tenant's Cognito user
+            pool.
+          items:
+            $ref: '#/components/schemas/OAuthApp'
+          type: array
+      required:
+      - oauthApps
+      type: object
+    CreateOAuthAppRequest:
+      example:
+        type: gcp-gemini
+      properties:
+        type:
+          description: |
+            Preset type. Use "gcp-gemini" to auto-configure a GCP Agent Marketplace
+            integration (name and callback URL are pre-filled).
+          enum:
+          - gcp-gemini
+          example: gcp-gemini
+          type: string
+      required:
+      - type
       type: object
     CreateOAuthAppResponse:
       example:
@@ -8633,6 +8709,7 @@ components:
           callbackURLs:
           - callbackURLs
           - callbackURLs
+          type: gcp-gemini
         clientSecret: clientSecret
       properties:
         oauthApp:
@@ -15995,6 +16072,8 @@ components:
         selectedTables:
         - users
         - orders
+        labels:
+          key: labels
       properties:
         datasetId:
           description: |
@@ -16018,6 +16097,14 @@ components:
           items:
             type: string
           type: array
+        labels:
+          additionalProperties:
+            type: string
+          description: |
+            Labels to apply to the restored BigQuery dataset as key-value pairs, where key and value are both strings.
+
+            **Example:** `{"eon-restore": "true"}`
+          type: object
       required:
       - datasetId
       type: object
@@ -16030,6 +16117,8 @@ components:
           selectedTables:
           - users
           - orders
+          labels:
+            key: labels
       properties:
         restoreAccountId:
           description: Eon-assigned ID of the restore account.

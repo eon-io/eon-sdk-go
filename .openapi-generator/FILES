@@ -206,6 +206,7 @@ docs/ListIdpsResponse.md
 docs/ListInventoryRequest.md
 docs/ListInventorySnapshotsRequest.md
 docs/ListInventorySnapshotsResponse.md
+docs/ListOAuthAppsResponse.md
 docs/ListOperators.md
 docs/ListPermissionsResponse.md
 docs/ListResourcesResponse.md
@@ -546,6 +547,7 @@ model_list_idps_response.go
 model_list_inventory_request.go
 model_list_inventory_snapshots_request.go
 model_list_inventory_snapshots_response.go
+model_list_o_auth_apps_response.go
 model_list_operators.go
 model_list_permissions_response.go
 model_list_resources_response.go

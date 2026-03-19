@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CallbackURLs** | Pointer to **[]string** | Allowed redirect URIs. | [optional] 
 **AuthUrl** | Pointer to **string** | Cognito hosted UI authorization endpoint URL. | [optional] 
 **TokenUrl** | Pointer to **string** | Cognito token endpoint URL. | [optional] 
+**Type** | Pointer to **string** | The OAuth app type. | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetTokenUrl sets TokenUrl field to given value.
 `func (o *OAuthApp) HasTokenUrl() bool`
 
 HasTokenUrl returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *OAuthApp) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *OAuthApp) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *OAuthApp) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *OAuthApp) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
