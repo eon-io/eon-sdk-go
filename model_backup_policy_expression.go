@@ -34,6 +34,7 @@ type BackupPolicyExpression struct {
 	ResourceId NullableResourceIdCondition `json:"resourceId,omitempty"`
 	TagKeys NullableTagKeysCondition `json:"tagKeys,omitempty"`
 	TagKeyValues NullableTagKeyValuesCondition `json:"tagKeyValues,omitempty"`
+	GlobalClusterIdentifier NullableGlobalClusterIdentifierCondition `json:"globalClusterIdentifier,omitempty"`
 }
 
 // NewBackupPolicyExpression instantiates a new BackupPolicyExpression object
@@ -683,6 +684,48 @@ func (o *BackupPolicyExpression) UnsetTagKeyValues() {
 	o.TagKeyValues.Unset()
 }
 
+// GetGlobalClusterIdentifier returns the GlobalClusterIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BackupPolicyExpression) GetGlobalClusterIdentifier() GlobalClusterIdentifierCondition {
+	if o == nil || IsNil(o.GlobalClusterIdentifier.Get()) {
+		var ret GlobalClusterIdentifierCondition
+		return ret
+	}
+	return *o.GlobalClusterIdentifier.Get()
+}
+
+// GetGlobalClusterIdentifierOk returns a tuple with the GlobalClusterIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BackupPolicyExpression) GetGlobalClusterIdentifierOk() (*GlobalClusterIdentifierCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GlobalClusterIdentifier.Get(), o.GlobalClusterIdentifier.IsSet()
+}
+
+// HasGlobalClusterIdentifier returns a boolean if a field has been set.
+func (o *BackupPolicyExpression) HasGlobalClusterIdentifier() bool {
+	if o != nil && o.GlobalClusterIdentifier.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGlobalClusterIdentifier gets a reference to the given NullableGlobalClusterIdentifierCondition and assigns it to the GlobalClusterIdentifier field.
+func (o *BackupPolicyExpression) SetGlobalClusterIdentifier(v GlobalClusterIdentifierCondition) {
+	o.GlobalClusterIdentifier.Set(&v)
+}
+// SetGlobalClusterIdentifierNil sets the value for GlobalClusterIdentifier to be an explicit nil
+func (o *BackupPolicyExpression) SetGlobalClusterIdentifierNil() {
+	o.GlobalClusterIdentifier.Set(nil)
+}
+
+// UnsetGlobalClusterIdentifier ensures that no value is present for GlobalClusterIdentifier, not even an explicit nil
+func (o *BackupPolicyExpression) UnsetGlobalClusterIdentifier() {
+	o.GlobalClusterIdentifier.Unset()
+}
+
 func (o BackupPolicyExpression) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -737,6 +780,9 @@ func (o BackupPolicyExpression) ToMap() (map[string]interface{}, error) {
 	}
 	if o.TagKeyValues.IsSet() {
 		toSerialize["tagKeyValues"] = o.TagKeyValues.Get()
+	}
+	if o.GlobalClusterIdentifier.IsSet() {
+		toSerialize["globalClusterIdentifier"] = o.GlobalClusterIdentifier.Get()
 	}
 	return toSerialize, nil
 }

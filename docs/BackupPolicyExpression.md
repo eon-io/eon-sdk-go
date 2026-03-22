@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **ResourceId** | Pointer to [**NullableResourceIdCondition**](ResourceIdCondition.md) |  | [optional] 
 **TagKeys** | Pointer to [**NullableTagKeysCondition**](TagKeysCondition.md) |  | [optional] 
 **TagKeyValues** | Pointer to [**NullableTagKeyValuesCondition**](TagKeyValuesCondition.md) |  | [optional] 
+**GlobalClusterIdentifier** | Pointer to [**NullableGlobalClusterIdentifierCondition**](GlobalClusterIdentifierCondition.md) |  | [optional] 
 
 ## Methods
 
@@ -564,6 +565,41 @@ HasTagKeyValues returns a boolean if a field has been set.
 `func (o *BackupPolicyExpression) UnsetTagKeyValues()`
 
 UnsetTagKeyValues ensures that no value is present for TagKeyValues, not even an explicit nil
+### GetGlobalClusterIdentifier
+
+`func (o *BackupPolicyExpression) GetGlobalClusterIdentifier() GlobalClusterIdentifierCondition`
+
+GetGlobalClusterIdentifier returns the GlobalClusterIdentifier field if non-nil, zero value otherwise.
+
+### GetGlobalClusterIdentifierOk
+
+`func (o *BackupPolicyExpression) GetGlobalClusterIdentifierOk() (*GlobalClusterIdentifierCondition, bool)`
+
+GetGlobalClusterIdentifierOk returns a tuple with the GlobalClusterIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGlobalClusterIdentifier
+
+`func (o *BackupPolicyExpression) SetGlobalClusterIdentifier(v GlobalClusterIdentifierCondition)`
+
+SetGlobalClusterIdentifier sets GlobalClusterIdentifier field to given value.
+
+### HasGlobalClusterIdentifier
+
+`func (o *BackupPolicyExpression) HasGlobalClusterIdentifier() bool`
+
+HasGlobalClusterIdentifier returns a boolean if a field has been set.
+
+### SetGlobalClusterIdentifierNil
+
+`func (o *BackupPolicyExpression) SetGlobalClusterIdentifierNil(b bool)`
+
+ SetGlobalClusterIdentifierNil sets the value for GlobalClusterIdentifier to be an explicit nil
+
+### UnsetGlobalClusterIdentifier
+`func (o *BackupPolicyExpression) UnsetGlobalClusterIdentifier()`
+
+UnsetGlobalClusterIdentifier ensures that no value is present for GlobalClusterIdentifier, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

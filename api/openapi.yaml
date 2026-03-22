@@ -12476,6 +12476,11 @@ components:
           - PII
           - PII
           operator: CONTAINS_ANY_OF
+        globalClusterIdentifier:
+          operator: IN
+          globalClusterIdentifier:
+          - globalClusterIdentifier
+          - globalClusterIdentifier
         accountId:
           accountIds:
           - accountIds
@@ -12563,6 +12568,8 @@ components:
           $ref: '#/components/schemas/TagKeysCondition'
         tagKeyValues:
           $ref: '#/components/schemas/TagKeyValuesCondition'
+        globalClusterIdentifier:
+          $ref: '#/components/schemas/GlobalClusterIdentifierCondition'
       type: object
     BackupPolicyGroupCondition:
       description: |
@@ -12610,6 +12617,26 @@ components:
       - operands
       - operator
       type: object
+    GlobalClusterIdentifierCondition:
+      example:
+        operator: IN
+        globalClusterIdentifier:
+        - globalClusterIdentifier
+        - globalClusterIdentifier
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        globalClusterIdentifier:
+          items:
+            maxLength: 255
+            pattern: "^[A-Za-z0-9-]+$"
+            type: string
+          type: array
+      required:
+      - globalClusterIdentifier
+      - operator
+      type: object
     BackupPolicyResourceSelector:
       example:
         expression:
@@ -12643,6 +12670,11 @@ components:
             - PII
             - PII
             operator: CONTAINS_ANY_OF
+          globalClusterIdentifier:
+            operator: IN
+            globalClusterIdentifier:
+            - globalClusterIdentifier
+            - globalClusterIdentifier
           accountId:
             accountIds:
             - accountIds
@@ -13774,6 +13806,11 @@ components:
               - PII
               - PII
               operator: CONTAINS_ANY_OF
+            globalClusterIdentifier:
+              operator: IN
+              globalClusterIdentifier:
+              - globalClusterIdentifier
+              - globalClusterIdentifier
             accountId:
               accountIds:
               - accountIds
@@ -14045,6 +14082,11 @@ components:
               - PII
               - PII
               operator: CONTAINS_ANY_OF
+            globalClusterIdentifier:
+              operator: IN
+              globalClusterIdentifier:
+              - globalClusterIdentifier
+              - globalClusterIdentifier
             accountId:
               accountIds:
               - accountIds
@@ -14322,6 +14364,11 @@ components:
                 - PII
                 - PII
                 operator: CONTAINS_ANY_OF
+              globalClusterIdentifier:
+                operator: IN
+                globalClusterIdentifier:
+                - globalClusterIdentifier
+                - globalClusterIdentifier
               accountId:
                 accountIds:
                 - accountIds
@@ -14582,6 +14629,11 @@ components:
                 - PII
                 - PII
                 operator: CONTAINS_ANY_OF
+              globalClusterIdentifier:
+                operator: IN
+                globalClusterIdentifier:
+                - globalClusterIdentifier
+                - globalClusterIdentifier
               accountId:
                 accountIds:
                 - accountIds
@@ -14832,6 +14884,11 @@ components:
                 - PII
                 - PII
                 operator: CONTAINS_ANY_OF
+              globalClusterIdentifier:
+                operator: IN
+                globalClusterIdentifier:
+                - globalClusterIdentifier
+                - globalClusterIdentifier
               accountId:
                 accountIds:
                 - accountIds
@@ -15102,6 +15159,11 @@ components:
                 - PII
                 - PII
                 operator: CONTAINS_ANY_OF
+              globalClusterIdentifier:
+                operator: IN
+                globalClusterIdentifier:
+                - globalClusterIdentifier
+                - globalClusterIdentifier
               accountId:
                 accountIds:
                 - accountIds
@@ -15359,6 +15421,11 @@ components:
               - PII
               - PII
               operator: CONTAINS_ANY_OF
+            globalClusterIdentifier:
+              operator: IN
+              globalClusterIdentifier:
+              - globalClusterIdentifier
+              - globalClusterIdentifier
             accountId:
               accountIds:
               - accountIds
@@ -15631,6 +15698,11 @@ components:
                 - PII
                 - PII
                 operator: CONTAINS_ANY_OF
+              globalClusterIdentifier:
+                operator: IN
+                globalClusterIdentifier:
+                - globalClusterIdentifier
+                - globalClusterIdentifier
               accountId:
                 accountIds:
                 - accountIds

@@ -177,6 +177,7 @@ docs/GetRoleResponse.md
 docs/GetSnapshotResponse.md
 docs/GetSourceAccountMetricsConfigResponse.md
 docs/GetVaultResponse.md
+docs/GlobalClusterIdentifierCondition.md
 docs/HighFrequencyBackupPolicyPlan.md
 docs/HighFrequencyBackupResourceType.md
 docs/HighFrequencyBackupScheduleConfig.md
@@ -520,6 +521,7 @@ model_get_role_response.go
 model_get_snapshot_response.go
 model_get_source_account_metrics_config_response.go
 model_get_vault_response.go
+model_global_cluster_identifier_condition.go
 model_high_frequency_backup_policy_plan.go
 model_high_frequency_backup_resource_type.go
 model_high_frequency_backup_schedule_config.go
