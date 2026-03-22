@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 ## GetSnapshot
 
-> GetSnapshotResponse GetSnapshot(ctx, id, projectId).Execute()
+> GetSnapshotResponse GetSnapshot(ctx, projectId, id).Execute()
 
 Get Snapshot
 
@@ -46,12 +46,12 @@ import (
 )
 
 func main() {
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot to retrieve.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot to retrieve.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.GetSnapshot(context.Background(), id, projectId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.GetSnapshot(context.Background(), projectId, id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.GetSnapshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -67,8 +67,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | ID of the Eon snapshot to retrieve. | 
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | ID of the Eon snapshot to retrieve. | 
 
 ### Other Parameters
 
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ## HoldSnapshot
 
-> map[string]interface{} HoldSnapshot(ctx, id, projectId).Execute()
+> map[string]interface{} HoldSnapshot(ctx, projectId, id).Execute()
 
 Hold Snapshot
 
@@ -119,12 +119,12 @@ import (
 )
 
 func main() {
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), id, projectId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), projectId, id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.HoldSnapshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -140,8 +140,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | ID of the Eon snapshot. | 
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | ID of the Eon snapshot. | 
 
 ### Other Parameters
 
@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 
 ## ListResourceSnapshots
 
-> ListInventorySnapshotsResponse ListResourceSnapshots(ctx, id, projectId).PageToken(pageToken).PageSize(pageSize).ListInventorySnapshotsRequest(listInventorySnapshotsRequest).Execute()
+> ListInventorySnapshotsResponse ListResourceSnapshots(ctx, projectId, id).PageToken(pageToken).PageSize(pageSize).ListInventorySnapshotsRequest(listInventorySnapshotsRequest).Execute()
 
 List Resource Snapshots
 
@@ -192,15 +192,15 @@ import (
 )
 
 func main() {
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource whose Eon snapshots you want to retrieve.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource whose Eon snapshots you want to retrieve.
 	pageToken := "OGRjZmRkNjYtZjJiMy00MmQ3LWIyMjMtNzU2M2NmMThiYWM2fDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 	listInventorySnapshotsRequest := *openapiclient.NewListInventorySnapshotsRequest() // ListInventorySnapshotsRequest | Filter options. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.ListResourceSnapshots(context.Background(), id, projectId).PageToken(pageToken).PageSize(pageSize).ListInventorySnapshotsRequest(listInventorySnapshotsRequest).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.ListResourceSnapshots(context.Background(), projectId, id).PageToken(pageToken).PageSize(pageSize).ListInventorySnapshotsRequest(listInventorySnapshotsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.ListResourceSnapshots``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -216,8 +216,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Eon-assigned ID of the resource whose Eon snapshots you want to retrieve. | 
 **projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | Eon-assigned ID of the resource whose Eon snapshots you want to retrieve. | 
 
 ### Other Parameters
 
@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 ## RemoveSnapshotHold
 
-> map[string]interface{} RemoveSnapshotHold(ctx, id, projectId).Execute()
+> map[string]interface{} RemoveSnapshotHold(ctx, projectId, id).Execute()
 
 Remove Snapshot Hold
 
@@ -271,12 +271,12 @@ import (
 )
 
 func main() {
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), id, projectId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), projectId, id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RemoveSnapshotHold``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -292,8 +292,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | ID of the Eon snapshot. | 
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | ID of the Eon snapshot. | 
 
 ### Other Parameters
 

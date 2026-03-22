@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetBackupJob
 
-> GetBackupJobResponse GetBackupJob(ctx, jobId, projectId).Execute()
+> GetBackupJobResponse GetBackupJob(ctx, projectId, jobId).Execute()
 
 Get Backup Job
 
@@ -32,12 +32,12 @@ import (
 )
 
 func main() {
-	jobId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | ID of the job to retrieve.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	jobId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | ID of the job to retrieve.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.JobsAPI.GetBackupJob(context.Background(), jobId, projectId).Execute()
+	resp, r, err := apiClient.JobsAPI.GetBackupJob(context.Background(), projectId, jobId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `JobsAPI.GetBackupJob``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -53,8 +53,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** | ID of the job to retrieve. | 
 **projectId** | **string** | ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**jobId** | **string** | ID of the job to retrieve. | 
 
 ### Other Parameters
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## GetRestoreJob
 
-> GetRestoreJobResponse GetRestoreJob(ctx, jobId, projectId).Execute()
+> GetRestoreJobResponse GetRestoreJob(ctx, projectId, jobId).Execute()
 
 Get Restore Job
 
@@ -105,12 +105,12 @@ import (
 )
 
 func main() {
-	jobId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | ID of the job to retrieve.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	jobId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | ID of the job to retrieve.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.JobsAPI.GetRestoreJob(context.Background(), jobId, projectId).Execute()
+	resp, r, err := apiClient.JobsAPI.GetRestoreJob(context.Background(), projectId, jobId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `JobsAPI.GetRestoreJob``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,8 +126,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** | ID of the job to retrieve. | 
 **projectId** | **string** | ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**jobId** | **string** | ID of the job to retrieve. | 
 
 ### Other Parameters
 

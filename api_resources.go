@@ -286,8 +286,8 @@ func (a *ResourcesAPIService) ExcludeResourceFromBackupExecute(r ApiExcludeResou
 type ApiGetResourceRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
-	id string
 	projectId string
+	id string
 }
 
 func (r ApiGetResourceRequest) Execute() (*GetResourceResponse, *http.Response, error) {
@@ -300,16 +300,16 @@ GetResource Get Resource
 Description: Retrieves a resource by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Eon-assigned ID of the resource to retrieve.
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id Eon-assigned ID of the resource to retrieve.
  @return ApiGetResourceRequest
 */
-func (a *ResourcesAPIService) GetResource(ctx context.Context, id string, projectId string) ApiGetResourceRequest {
+func (a *ResourcesAPIService) GetResource(ctx context.Context, projectId string, id string) ApiGetResourceRequest {
 	return ApiGetResourceRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		projectId: projectId,
+		id: id,
 	}
 }
 
@@ -329,8 +329,8 @@ func (a *ResourcesAPIService) GetResourceExecute(r ApiGetResourceRequest) (*GetR
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

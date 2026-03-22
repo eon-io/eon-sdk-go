@@ -26,8 +26,8 @@ type JobsAPIService service
 type ApiGetBackupJobRequest struct {
 	ctx context.Context
 	ApiService *JobsAPIService
-	jobId string
 	projectId string
+	jobId string
 }
 
 func (r ApiGetBackupJobRequest) Execute() (*GetBackupJobResponse, *http.Response, error) {
@@ -40,16 +40,16 @@ GetBackupJob Get Backup Job
 Description: Retrieves a backup job by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId ID of the job to retrieve.
  @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param jobId ID of the job to retrieve.
  @return ApiGetBackupJobRequest
 */
-func (a *JobsAPIService) GetBackupJob(ctx context.Context, jobId string, projectId string) ApiGetBackupJobRequest {
+func (a *JobsAPIService) GetBackupJob(ctx context.Context, projectId string, jobId string) ApiGetBackupJobRequest {
 	return ApiGetBackupJobRequest{
 		ApiService: a,
 		ctx: ctx,
-		jobId: jobId,
 		projectId: projectId,
+		jobId: jobId,
 	}
 }
 
@@ -69,8 +69,8 @@ func (a *JobsAPIService) GetBackupJobExecute(r ApiGetBackupJobRequest) (*GetBack
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/backup-jobs/{jobId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterValueToString(r.jobId, "jobId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterValueToString(r.jobId, "jobId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -154,8 +154,8 @@ func (a *JobsAPIService) GetBackupJobExecute(r ApiGetBackupJobRequest) (*GetBack
 type ApiGetRestoreJobRequest struct {
 	ctx context.Context
 	ApiService *JobsAPIService
-	jobId string
 	projectId string
+	jobId string
 }
 
 func (r ApiGetRestoreJobRequest) Execute() (*GetRestoreJobResponse, *http.Response, error) {
@@ -168,16 +168,16 @@ GetRestoreJob Get Restore Job
 Description: Retrieves a restore job by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId ID of the job to retrieve.
  @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param jobId ID of the job to retrieve.
  @return ApiGetRestoreJobRequest
 */
-func (a *JobsAPIService) GetRestoreJob(ctx context.Context, jobId string, projectId string) ApiGetRestoreJobRequest {
+func (a *JobsAPIService) GetRestoreJob(ctx context.Context, projectId string, jobId string) ApiGetRestoreJobRequest {
 	return ApiGetRestoreJobRequest{
 		ApiService: a,
 		ctx: ctx,
-		jobId: jobId,
 		projectId: projectId,
+		jobId: jobId,
 	}
 }
 
@@ -197,8 +197,8 @@ func (a *JobsAPIService) GetRestoreJobExecute(r ApiGetRestoreJobRequest) (*GetRe
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/restore-jobs/{jobId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterValueToString(r.jobId, "jobId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterValueToString(r.jobId, "jobId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 ## DeleteRestoreAccountConnectivityConfig
 
-> DeleteRestoreAccountConnectivityConfig(ctx, accountId, projectId).Execute()
+> DeleteRestoreAccountConnectivityConfig(ctx, projectId, accountId).Execute()
 
 Delete Restore Account Connectivity Configuration
 
@@ -265,12 +265,12 @@ import (
 )
 
 func main() {
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
 	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AccountsAPI.DeleteRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+	r, err := apiClient.AccountsAPI.DeleteRestoreAccountConnectivityConfig(context.Background(), projectId, accountId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.DeleteRestoreAccountConnectivityConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -284,8 +284,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the restore account. | 
 **projectId** | **string** | ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
 
 ### Other Parameters
 
@@ -317,7 +317,7 @@ Name | Type | Description  | Notes
 
 ## DisableRestoreAccountMetricsConfig
 
-> DisableRestoreAccountMetricsConfig(ctx, accountId, projectId).Execute()
+> DisableRestoreAccountMetricsConfig(ctx, projectId, accountId).Execute()
 
 Disable Restore Account Metrics
 
@@ -336,12 +336,12 @@ import (
 )
 
 func main() {
-	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
 	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AccountsAPI.DisableRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+	r, err := apiClient.AccountsAPI.DisableRestoreAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.DisableRestoreAccountMetricsConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -355,8 +355,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the restore account. | 
 **projectId** | **string** | ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
 
 ### Other Parameters
 
@@ -388,7 +388,7 @@ Name | Type | Description  | Notes
 
 ## DisableSourceAccountMetricsConfig
 
-> DisableSourceAccountMetricsConfig(ctx, accountId, projectId).Execute()
+> DisableSourceAccountMetricsConfig(ctx, projectId, accountId).Execute()
 
 Disable Source Account Metrics
 
@@ -407,12 +407,12 @@ import (
 )
 
 func main() {
-	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
 	projectId := "d593811b-bfbc-515b-a21d-9fb95eb1071b" // string | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AccountsAPI.DisableSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+	r, err := apiClient.AccountsAPI.DisableSourceAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.DisableSourceAccountMetricsConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -426,8 +426,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the source account. | 
 **projectId** | **string** | ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the source account. | 
 
 ### Other Parameters
 
@@ -678,7 +678,7 @@ Name | Type | Description  | Notes
 
 ## EnableRestoreAccountMetricsConfig
 
-> EnableRestoreAccountMetricsConfigResponse EnableRestoreAccountMetricsConfig(ctx, accountId, projectId).EnableRestoreAccountMetricsConfigRequest(enableRestoreAccountMetricsConfigRequest).Execute()
+> EnableRestoreAccountMetricsConfigResponse EnableRestoreAccountMetricsConfig(ctx, projectId, accountId).EnableRestoreAccountMetricsConfigRequest(enableRestoreAccountMetricsConfigRequest).Execute()
 
 Configure Restore Account Metrics
 
@@ -697,13 +697,13 @@ import (
 )
 
 func main() {
-	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
 	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
 	enableRestoreAccountMetricsConfigRequest := *openapiclient.NewEnableRestoreAccountMetricsConfigRequest() // EnableRestoreAccountMetricsConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.EnableRestoreAccountMetricsConfig(context.Background(), accountId, projectId).EnableRestoreAccountMetricsConfigRequest(enableRestoreAccountMetricsConfigRequest).Execute()
+	resp, r, err := apiClient.AccountsAPI.EnableRestoreAccountMetricsConfig(context.Background(), projectId, accountId).EnableRestoreAccountMetricsConfigRequest(enableRestoreAccountMetricsConfigRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.EnableRestoreAccountMetricsConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -719,8 +719,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the restore account. | 
 **projectId** | **string** | ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
 
 ### Other Parameters
 
@@ -753,7 +753,7 @@ Name | Type | Description  | Notes
 
 ## EnableSourceAccountMetricsConfig
 
-> EnableSourceAccountMetricsConfigResponse EnableSourceAccountMetricsConfig(ctx, accountId, projectId).EnableSourceAccountMetricsConfigRequest(enableSourceAccountMetricsConfigRequest).Execute()
+> EnableSourceAccountMetricsConfigResponse EnableSourceAccountMetricsConfig(ctx, projectId, accountId).EnableSourceAccountMetricsConfigRequest(enableSourceAccountMetricsConfigRequest).Execute()
 
 Configure Source Account Metrics
 
@@ -772,13 +772,13 @@ import (
 )
 
 func main() {
-	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
 	projectId := "b9c79c3f-399c-5e32-a8fb-762f87bebd7b" // string | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
 	enableSourceAccountMetricsConfigRequest := *openapiclient.NewEnableSourceAccountMetricsConfigRequest() // EnableSourceAccountMetricsConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.EnableSourceAccountMetricsConfig(context.Background(), accountId, projectId).EnableSourceAccountMetricsConfigRequest(enableSourceAccountMetricsConfigRequest).Execute()
+	resp, r, err := apiClient.AccountsAPI.EnableSourceAccountMetricsConfig(context.Background(), projectId, accountId).EnableSourceAccountMetricsConfigRequest(enableSourceAccountMetricsConfigRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.EnableSourceAccountMetricsConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -794,8 +794,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the source account. | 
 **projectId** | **string** | ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the source account. | 
 
 ### Other Parameters
 
@@ -828,7 +828,7 @@ Name | Type | Description  | Notes
 
 ## GetRestoreAccountConnectivityConfig
 
-> GetRestoreAccountConnectivityConfigResponse GetRestoreAccountConnectivityConfig(ctx, accountId, projectId).Execute()
+> GetRestoreAccountConnectivityConfigResponse GetRestoreAccountConnectivityConfig(ctx, projectId, accountId).Execute()
 
 Get Restore Account Connectivity Configuration
 
@@ -847,12 +847,12 @@ import (
 )
 
 func main() {
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
 	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.GetRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+	resp, r, err := apiClient.AccountsAPI.GetRestoreAccountConnectivityConfig(context.Background(), projectId, accountId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetRestoreAccountConnectivityConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -868,8 +868,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the restore account. | 
 **projectId** | **string** | ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
 
 ### Other Parameters
 
@@ -901,7 +901,7 @@ Name | Type | Description  | Notes
 
 ## GetRestoreAccountMetricsConfig
 
-> GetRestoreAccountMetricsConfigResponse GetRestoreAccountMetricsConfig(ctx, accountId, projectId).Execute()
+> GetRestoreAccountMetricsConfigResponse GetRestoreAccountMetricsConfig(ctx, projectId, accountId).Execute()
 
 Get Restore Account Metrics Configuration
 
@@ -920,12 +920,12 @@ import (
 )
 
 func main() {
-	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
 	projectId := "4bd9ca0f-b6cd-5a00-b6ce-76960e76c4ba" // string | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the restore account.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.GetRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+	resp, r, err := apiClient.AccountsAPI.GetRestoreAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetRestoreAccountMetricsConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -941,8 +941,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the restore account. | 
 **projectId** | **string** | ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
 
 ### Other Parameters
 
@@ -974,7 +974,7 @@ Name | Type | Description  | Notes
 
 ## GetSourceAccountMetricsConfig
 
-> GetSourceAccountMetricsConfigResponse GetSourceAccountMetricsConfig(ctx, accountId, projectId).Execute()
+> GetSourceAccountMetricsConfigResponse GetSourceAccountMetricsConfig(ctx, projectId, accountId).Execute()
 
 Get Source Account Metrics Configuration
 
@@ -993,12 +993,12 @@ import (
 )
 
 func main() {
-	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
 	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "806f6781-1d66-4c7d-9f0e-e7da04e12541" // string | Eon-assigned ID of the source account.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.GetSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+	resp, r, err := apiClient.AccountsAPI.GetSourceAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetSourceAccountMetricsConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1014,8 +1014,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | Eon-assigned ID of the source account. | 
 **projectId** | **string** | ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the source account. | 
 
 ### Other Parameters
 
@@ -1492,7 +1492,7 @@ Name | Type | Description  | Notes
 
 ## UpdateRestoreAccountConnectivityConfig
 
-> UpdateRestoreAccountConnectivityConfigResponse UpdateRestoreAccountConnectivityConfig(ctx, accountId, projectId).UpdateRestoreAccountConnectivityConfigRequest(updateRestoreAccountConnectivityConfigRequest).Execute()
+> UpdateRestoreAccountConnectivityConfigResponse UpdateRestoreAccountConnectivityConfig(ctx, projectId, accountId).UpdateRestoreAccountConnectivityConfigRequest(updateRestoreAccountConnectivityConfigRequest).Execute()
 
 Update Restore Account Connectivity Configuration
 
@@ -1511,13 +1511,13 @@ import (
 )
 
 func main() {
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
 	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
 	updateRestoreAccountConnectivityConfigRequest := *openapiclient.NewUpdateRestoreAccountConnectivityConfigRequest() // UpdateRestoreAccountConnectivityConfigRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.UpdateRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).UpdateRestoreAccountConnectivityConfigRequest(updateRestoreAccountConnectivityConfigRequest).Execute()
+	resp, r, err := apiClient.AccountsAPI.UpdateRestoreAccountConnectivityConfig(context.Background(), projectId, accountId).UpdateRestoreAccountConnectivityConfigRequest(updateRestoreAccountConnectivityConfigRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.UpdateRestoreAccountConnectivityConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1533,8 +1533,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** | ID of the restore account | 
 **projectId** | **string** | ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | ID of the restore account | 
 
 ### Other Parameters
 

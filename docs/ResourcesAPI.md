@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ## GetResource
 
-> GetResourceResponse GetResource(ctx, id, projectId).Execute()
+> GetResourceResponse GetResource(ctx, projectId, id).Execute()
 
 Get Resource
 
@@ -182,12 +182,12 @@ import (
 )
 
 func main() {
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource to retrieve.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource to retrieve.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.GetResource(context.Background(), id, projectId).Execute()
+	resp, r, err := apiClient.ResourcesAPI.GetResource(context.Background(), projectId, id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResource``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -203,8 +203,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Eon-assigned ID of the resource to retrieve. | 
 **projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | Eon-assigned ID of the resource to retrieve. | 
 
 ### Other Parameters
 

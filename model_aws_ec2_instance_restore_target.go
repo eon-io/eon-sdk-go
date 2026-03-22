@@ -33,7 +33,7 @@ type AwsEc2InstanceRestoreTarget struct {
 	Tags *map[string]string `json:"tags,omitempty"`
 	// Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot. The root volume must be present in the list. 
 	VolumeRestoreParameters []RestoreInstanceVolumeInput `json:"volumeRestoreParameters"`
-	// Whether to start the EC2 instance after restoring it. If set to `false`, the instance will be left in a stopped state. 
+	// Whether to start the EC2 instance after restoring it. If set to `false`, the instance remains in a stopped state. 
 	StartInstanceAfterRestore *bool `json:"startInstanceAfterRestore,omitempty"`
 }
 

@@ -68,10 +68,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		httpRes, err := apiClient.AccountsAPI.DeleteRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+		httpRes, err := apiClient.AccountsAPI.DeleteRestoreAccountConnectivityConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -82,10 +82,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		httpRes, err := apiClient.AccountsAPI.DisableRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+		httpRes, err := apiClient.AccountsAPI.DisableRestoreAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -96,10 +96,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		httpRes, err := apiClient.AccountsAPI.DisableSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+		httpRes, err := apiClient.AccountsAPI.DisableSourceAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -155,10 +155,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		resp, httpRes, err := apiClient.AccountsAPI.EnableRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+		resp, httpRes, err := apiClient.AccountsAPI.EnableRestoreAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -170,10 +170,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		resp, httpRes, err := apiClient.AccountsAPI.EnableSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+		resp, httpRes, err := apiClient.AccountsAPI.EnableSourceAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -185,10 +185,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		resp, httpRes, err := apiClient.AccountsAPI.GetRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+		resp, httpRes, err := apiClient.AccountsAPI.GetRestoreAccountConnectivityConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -200,10 +200,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		resp, httpRes, err := apiClient.AccountsAPI.GetRestoreAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+		resp, httpRes, err := apiClient.AccountsAPI.GetRestoreAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -215,10 +215,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		resp, httpRes, err := apiClient.AccountsAPI.GetSourceAccountMetricsConfig(context.Background(), accountId, projectId).Execute()
+		resp, httpRes, err := apiClient.AccountsAPI.GetSourceAccountMetricsConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -317,10 +317,10 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var accountId string
 		var projectId string
+		var accountId string
 
-		resp, httpRes, err := apiClient.AccountsAPI.UpdateRestoreAccountConnectivityConfig(context.Background(), accountId, projectId).Execute()
+		resp, httpRes, err := apiClient.AccountsAPI.UpdateRestoreAccountConnectivityConfig(context.Background(), projectId, accountId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

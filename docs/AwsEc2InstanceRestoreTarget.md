@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **SecurityGroupIds** | Pointer to **[]string** | List of security group IDs to associate with the restored instance. | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **VolumeRestoreParameters** | [**[]RestoreInstanceVolumeInput**](RestoreInstanceVolumeInput.md) | Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where &#x60;providerVolumeId&#x60; matches the volume&#39;s ID at the time of the snapshot. The root volume must be present in the list.  | 
-**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the EC2 instance after restoring it. If set to &#x60;false&#x60;, the instance will be left in a stopped state.  | [optional] [default to true]
+**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the EC2 instance after restoring it. If set to &#x60;false&#x60;, the instance remains in a stopped state.  | [optional] [default to true]
 
 ## Methods
 

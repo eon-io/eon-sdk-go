@@ -26,8 +26,8 @@ type BackupsAPIService service
 type ApiTakeSnapshotRequest struct {
 	ctx context.Context
 	ApiService *BackupsAPIService
-	id string
 	projectId string
+	id string
 	takeSnapshotRequest *TakeSnapshotRequest
 }
 
@@ -51,16 +51,16 @@ You can follow the progress of the backup job by calling [Get Backup Job](/api/a
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Eon-assigned ID of the resource to back up.
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id Eon-assigned ID of the resource to back up.
  @return ApiTakeSnapshotRequest
 */
-func (a *BackupsAPIService) TakeSnapshot(ctx context.Context, id string, projectId string) ApiTakeSnapshotRequest {
+func (a *BackupsAPIService) TakeSnapshot(ctx context.Context, projectId string, id string) ApiTakeSnapshotRequest {
 	return ApiTakeSnapshotRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		projectId: projectId,
+		id: id,
 	}
 }
 
@@ -80,8 +80,8 @@ func (a *BackupsAPIService) TakeSnapshotExecute(r ApiTakeSnapshotRequest) (*Take
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/take-snapshot"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

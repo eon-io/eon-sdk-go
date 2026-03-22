@@ -37,7 +37,7 @@ type GcpVmInstanceRestoreTarget struct {
 	Labels *map[string]string `json:"labels,omitempty"`
 	// Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot. The boot disk must be in the list. 
 	Disks []RestoreGcpInstanceDiskInput `json:"disks"`
-	// Whether to start the VM instance after restoring it. If set to `false`, the VM will be created in a stopped state. 
+	// Whether to start the VM instance after restoring it. If set to `false`, the VM is created in a stopped state. 
 	StartInstanceAfterRestore *bool `json:"startInstanceAfterRestore,omitempty"`
 }
 

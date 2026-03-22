@@ -40,10 +40,10 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var backupPolicyId string
 		var projectId string
+		var backupPolicyId string
 
-		httpRes, err := apiClient.BackupPoliciesAPI.DeleteBackupPolicy(context.Background(), backupPolicyId, projectId).Execute()
+		httpRes, err := apiClient.BackupPoliciesAPI.DeleteBackupPolicy(context.Background(), projectId, backupPolicyId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -54,10 +54,10 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var backupPolicyId string
 		var projectId string
+		var backupPolicyId string
 
-		resp, httpRes, err := apiClient.BackupPoliciesAPI.GetBackupPolicy(context.Background(), backupPolicyId, projectId).Execute()
+		resp, httpRes, err := apiClient.BackupPoliciesAPI.GetBackupPolicy(context.Background(), projectId, backupPolicyId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -83,10 +83,10 @@ func Test_eon_BackupPoliciesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var backupPolicyId string
 		var projectId string
+		var backupPolicyId string
 
-		resp, httpRes, err := apiClient.BackupPoliciesAPI.UpdateBackupPolicy(context.Background(), backupPolicyId, projectId).Execute()
+		resp, httpRes, err := apiClient.BackupPoliciesAPI.UpdateBackupPolicy(context.Background(), projectId, backupPolicyId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

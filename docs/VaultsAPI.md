@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## GetVault
 
-> GetVaultResponse GetVault(ctx, vaultId, projectId).Execute()
+> GetVaultResponse GetVault(ctx, projectId, vaultId).Execute()
 
 Get Vault
 
@@ -104,12 +104,12 @@ import (
 )
 
 func main() {
-	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to retrieve.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to retrieve.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VaultsAPI.GetVault(context.Background(), vaultId, projectId).Execute()
+	resp, r, err := apiClient.VaultsAPI.GetVault(context.Background(), projectId, vaultId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VaultsAPI.GetVault``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -125,8 +125,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vaultId** | **string** | ID of the vault to retrieve. | 
 **projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**vaultId** | **string** | ID of the vault to retrieve. | 
 
 ### Other Parameters
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## UpdateVault
 
-> UpdateVaultResponse UpdateVault(ctx, vaultId, projectId).UpdateVaultRequest(updateVaultRequest).Execute()
+> UpdateVaultResponse UpdateVault(ctx, projectId, vaultId).UpdateVaultRequest(updateVaultRequest).Execute()
 
 Update Vault
 
@@ -251,13 +251,13 @@ import (
 )
 
 func main() {
-	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to update.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	vaultId := "36388572-9c69-5309-b362-04e7d85ae503" // string | ID of the vault to update.
 	updateVaultRequest := *openapiclient.NewUpdateVaultRequest("My new vault name") // UpdateVaultRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VaultsAPI.UpdateVault(context.Background(), vaultId, projectId).UpdateVaultRequest(updateVaultRequest).Execute()
+	resp, r, err := apiClient.VaultsAPI.UpdateVault(context.Background(), projectId, vaultId).UpdateVaultRequest(updateVaultRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VaultsAPI.UpdateVault``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -273,8 +273,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vaultId** | **string** | ID of the vault to update. | 
 **projectId** | **string** | ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**vaultId** | **string** | ID of the vault to update. | 
 
 ### Other Parameters
 

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network.  | [optional] 
 **Labels** | Pointer to **map[string]string** | Labels to apply to the restored VM as key-value pairs, where key and value are both strings. These labels are always applied: &#x60;\&quot;eon-restore\&quot;: \&quot;true\&quot;&#x60;.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **Disks** | [**[]RestoreGcpInstanceDiskInput**](RestoreGcpInstanceDiskInput.md) | Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where &#x60;providerDiskId&#x60; matches the disk&#39;s ID at the time of the snapshot. The boot disk must be in the list.  | 
-**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM will be created in a stopped state.  | [optional] [default to true]
+**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM is created in a stopped state.  | [optional] [default to true]
 
 ## Methods
 

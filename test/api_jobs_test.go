@@ -26,10 +26,10 @@ func Test_eon_JobsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var jobId string
 		var projectId string
+		var jobId string
 
-		resp, httpRes, err := apiClient.JobsAPI.GetBackupJob(context.Background(), jobId, projectId).Execute()
+		resp, httpRes, err := apiClient.JobsAPI.GetBackupJob(context.Background(), projectId, jobId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -41,10 +41,10 @@ func Test_eon_JobsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var jobId string
 		var projectId string
+		var jobId string
 
-		resp, httpRes, err := apiClient.JobsAPI.GetRestoreJob(context.Background(), jobId, projectId).Execute()
+		resp, httpRes, err := apiClient.JobsAPI.GetRestoreJob(context.Background(), projectId, jobId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

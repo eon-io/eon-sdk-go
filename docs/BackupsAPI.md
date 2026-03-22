@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## TakeSnapshot
 
-> TakeSnapshotResponse TakeSnapshot(ctx, id, projectId).TakeSnapshotRequest(takeSnapshotRequest).Execute()
+> TakeSnapshotResponse TakeSnapshot(ctx, projectId, id).TakeSnapshotRequest(takeSnapshotRequest).Execute()
 
 Take Snapshot
 
@@ -29,13 +29,13 @@ import (
 )
 
 func main() {
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource to back up.
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource to back up.
 	takeSnapshotRequest := *openapiclient.NewTakeSnapshotRequest("0d79d713-78df-5870-882f-0089d05396b6", int32(30)) // TakeSnapshotRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BackupsAPI.TakeSnapshot(context.Background(), id, projectId).TakeSnapshotRequest(takeSnapshotRequest).Execute()
+	resp, r, err := apiClient.BackupsAPI.TakeSnapshot(context.Background(), projectId, id).TakeSnapshotRequest(takeSnapshotRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupsAPI.TakeSnapshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -51,8 +51,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Eon-assigned ID of the resource to back up. | 
 **projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | Eon-assigned ID of the resource to back up. | 
 
 ### Other Parameters
 

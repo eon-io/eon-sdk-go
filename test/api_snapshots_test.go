@@ -26,10 +26,10 @@ func Test_eon_SnapshotsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
 		var projectId string
+		var id string
 
-		resp, httpRes, err := apiClient.SnapshotsAPI.GetSnapshot(context.Background(), id, projectId).Execute()
+		resp, httpRes, err := apiClient.SnapshotsAPI.GetSnapshot(context.Background(), projectId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -41,10 +41,10 @@ func Test_eon_SnapshotsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
 		var projectId string
+		var id string
 
-		resp, httpRes, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), id, projectId).Execute()
+		resp, httpRes, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), projectId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -56,10 +56,10 @@ func Test_eon_SnapshotsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
 		var projectId string
+		var id string
 
-		resp, httpRes, err := apiClient.SnapshotsAPI.ListResourceSnapshots(context.Background(), id, projectId).Execute()
+		resp, httpRes, err := apiClient.SnapshotsAPI.ListResourceSnapshots(context.Background(), projectId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -71,10 +71,10 @@ func Test_eon_SnapshotsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
 		var projectId string
+		var id string
 
-		resp, httpRes, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), id, projectId).Execute()
+		resp, httpRes, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), projectId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

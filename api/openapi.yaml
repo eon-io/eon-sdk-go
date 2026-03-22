@@ -240,7 +240,7 @@ paths:
         style: simple
       responses:
         "204":
-          description: Role deleted successfully
+          description: Role deleted.
         "404":
           description: Role not found
         "1XX":
@@ -348,7 +348,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateRoleResponse'
-          description: Role updated successfully
+          description: Role updated.
         "404":
           description: Role not found
         "1XX":
@@ -976,8 +976,8 @@ paths:
       description: |
         Description: Disconnects a source account from the given project.
 
-        After disconnecting, resources in the source account will no longer be backed up.
-        Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
+        After disconnecting, resources in the source account are no longer backed up.
+        Resources with snapshots continue to be displayed in the inventory, and you can still explore, query, and restore them.
         Resources with no remaining snapshots are removed from the inventory.
       operationId: DisconnectSourceAccount
       parameters:
@@ -1111,16 +1111,6 @@ paths:
         Description: Disables metrics for the specified source account.
       operationId: disableSourceAccountMetricsConfig
       parameters:
-      - description: Eon-assigned ID of the source account.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose source account metrics configuration you want to disable.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -1128,6 +1118,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the source account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -1173,22 +1173,22 @@ paths:
         Description: Retrieves the metrics configuration of the specified source account.
       operationId: getSourceAccountMetricsConfig
       parameters:
-      - description: Eon-assigned ID of the source account.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose source account metrics configuration you want to retrieve.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the source account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -1234,16 +1234,6 @@ paths:
         Description: Enables or updates the metrics configuration of the specified source account.
       operationId: enableSourceAccountMetricsConfig
       parameters:
-      - description: Eon-assigned ID of the source account.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose source account metrics you want to configure.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -1251,6 +1241,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the source account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -1306,7 +1306,7 @@ paths:
       description: |
         Description: Connects an AWS organizational unit to the given project.
 
-        All descendant AWS accounts within the organizational unit will be discovered and available for backup.
+        All current and future descendant AWS accounts within the organizational unit are discovered and available for backup.
       operationId: connectSourceAwsOrganizationalUnit
       parameters:
       - description: |
@@ -1474,7 +1474,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReconnectSourceAwsOrganizationalUnitResponse'
-          description: AWS organizational unit reconnected successfully.
+          description: AWS organizational unit reconnected.
         "1XX":
           description: Informational
         "3XX":
@@ -1510,8 +1510,8 @@ paths:
       description: |
         Description: Disconnects an AWS organizational unit (OU) and its accounts from the given project.
 
-        After disconnecting, resources in the OU descendant accounts will no longer be backed up.
-        Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
+        After disconnecting, resources in the OU descendant accounts are no longer backed up.
+        Resources with snapshots continue to be shown in the inventory, and you can still explore, query, and restore them.
         Resources with no remaining snapshots are removed from the inventory.
       operationId: disconnectSourceAwsOrganizationalUnit
       parameters:
@@ -1543,7 +1543,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DisconnectSourceAwsOrganizationalUnitResponse'
-          description: AWS organizational unit disconnected successfully.
+          description: AWS organizational unit disconnected.
         "1XX":
           description: Informational
         "3XX":
@@ -1726,7 +1726,7 @@ paths:
       description: |
         Description: Disconnects a restore account from the given project.
 
-        After disconnecting, data and resources can no longer be restored to the restore account.
+        After disconnecting, resources can no longer be restored to the restore account.
       operationId: DisconnectRestoreAccount
       parameters:
       - description: |
@@ -1859,21 +1859,21 @@ paths:
         Description: Deletes the restore account connectivity configuration, reverting to the default settings.
       operationId: deleteRestoreAccountConnectivityConfig
       parameters:
-      - description: Eon-assigned ID of the restore account.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to delete.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account.
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -1919,21 +1919,21 @@ paths:
         Description: Retrieves the connectivity configuration of the specified restore account.
       operationId: getRestoreAccountConnectivityConfig
       parameters:
-      - description: Eon-assigned ID of the restore account.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to retrieve.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account.
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -1979,21 +1979,21 @@ paths:
         Description: Updates the connectivity configuration of the specified restore account.
       operationId: updateRestoreAccountConnectivityConfig
       parameters:
-      - description: ID of the restore account
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose restore account connectivity configuration you want to update.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -2050,22 +2050,22 @@ paths:
         Description: Disables metrics for the specified restore account.
       operationId: disableRestoreAccountMetricsConfig
       parameters:
-      - description: Eon-assigned ID of the restore account.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose restore account metrics you want to disable.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -2111,16 +2111,6 @@ paths:
         Description: Retrieves the metrics configuration of the specified restore account.
       operationId: getRestoreAccountMetricsConfig
       parameters:
-      - description: Eon-assigned ID of the restore account.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose restore account metrics configuration you want to retrieve.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -2128,6 +2118,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -2173,22 +2173,22 @@ paths:
         Description: Enables or updates the metrics configuration of the specified restore account.
       operationId: enableRestoreAccountMetricsConfig
       parameters:
-      - description: Eon-assigned ID of the restore account.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose restore account metrics you want to configure.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: accountId
         required: true
         schema:
           format: uuid
@@ -2326,16 +2326,6 @@ paths:
       description: "Description: Retrieves a backup job by ID."
       operationId: getBackupJob
       parameters:
-      - description: ID of the job to retrieve.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: jobId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the job is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -2343,6 +2333,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the job to retrieve.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: jobId
         required: true
         schema:
           format: uuid
@@ -2476,16 +2476,6 @@ paths:
       description: "Description: Retrieves a restore job by ID."
       operationId: getRestoreJob
       parameters:
-      - description: ID of the job to retrieve.
-        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
-        explode: false
-        in: path
-        name: jobId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the job is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -2493,6 +2483,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the job to retrieve.
+        example: 806f6781-1d66-4c7d-9f0e-e7da04e12541
+        explode: false
+        in: path
+        name: jobId
         required: true
         schema:
           format: uuid
@@ -2547,16 +2547,6 @@ paths:
         You can follow the progress of the backup job by calling [Get Backup Job](/api/api-reference/jobs/backup-jobs/get-backup-job) with the job ID.
       operationId: takeSnapshot
       parameters:
-      - description: Eon-assigned ID of the resource to back up.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the resource is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -2564,6 +2554,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to back up.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
         required: true
         schema:
           format: uuid
@@ -2738,15 +2738,6 @@ paths:
       description: "Description: Deletes a backup policy."
       operationId: deleteBackupPolicy
       parameters:
-      - description: ID of the backup policy to delete
-        explode: false
-        in: path
-        name: backupPolicyId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose backup policy you want to delete.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -2754,6 +2745,15 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the backup policy to delete
+        explode: false
+        in: path
+        name: backupPolicyId
         required: true
         schema:
           format: uuid
@@ -2798,15 +2798,6 @@ paths:
       description: "Description: Retrieves a backup policy."
       operationId: getBackupPolicy
       parameters:
-      - description: ID of the backup policy to retrieve
-        explode: false
-        in: path
-        name: backupPolicyId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose backup policy you want to retrieve.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -2814,6 +2805,15 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the backup policy to retrieve
+        explode: false
+        in: path
+        name: backupPolicyId
         required: true
         schema:
           format: uuid
@@ -2858,15 +2858,6 @@ paths:
       description: "Description: Updates a backup policy."
       operationId: updateBackupPolicy
       parameters:
-      - description: ID of the backup policy to update
-        explode: false
-        in: path
-        name: backupPolicyId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project whose backup policy you want to update.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -2874,6 +2865,15 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the backup policy to update
+        explode: false
+        in: path
+        name: backupPolicyId
         required: true
         schema:
           format: uuid
@@ -3008,16 +3008,6 @@ paths:
       description: "Description: Retrieves a vault."
       operationId: getVault
       parameters:
-      - description: ID of the vault to retrieve.
-        example: 36388572-9c69-5309-b362-04e7d85ae503
-        explode: false
-        in: path
-        name: vaultId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the vault is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -3025,6 +3015,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the vault to retrieve.
+        example: 36388572-9c69-5309-b362-04e7d85ae503
+        explode: false
+        in: path
+        name: vaultId
         required: true
         schema:
           format: uuid
@@ -3069,16 +3069,6 @@ paths:
       description: "Description: Updates a vault's display name."
       operationId: updateVault
       parameters:
-      - description: ID of the vault to update.
-        example: 36388572-9c69-5309-b362-04e7d85ae503
-        explode: false
-        in: path
-        name: vaultId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the vault is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -3086,6 +3076,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the vault to update.
+        example: 36388572-9c69-5309-b362-04e7d85ae503
+        explode: false
+        in: path
+        name: vaultId
         required: true
         schema:
           format: uuid
@@ -4253,7 +4253,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestoreJobInitiationResponse'
-          description: Operation successfully triggered
+          description: Restore job started.
         "404":
           description: "Volume, snapshot, or restore account wasn't found."
         "1XX":
@@ -4832,9 +4832,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QueryDBResultResponse'
-          description: Successful operation
+          description: Query results retrieved.
         "404":
-          description: Query/Token not found
+          description: Query wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -4950,16 +4950,6 @@ paths:
       description: "Description: Retrieves a resource by ID."
       operationId: getResource
       parameters:
-      - description: Eon-assigned ID of the resource to retrieve.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the resource is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -4967,6 +4957,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource to retrieve.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
         required: true
         schema:
           format: uuid
@@ -5451,16 +5451,6 @@ paths:
       description: "Description: Retrieves an Eon snapshot."
       operationId: getSnapshot
       parameters:
-      - description: ID of the Eon snapshot to retrieve.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the snapshot is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -5468,6 +5458,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the Eon snapshot to retrieve.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
         required: true
         schema:
           format: uuid
@@ -5523,16 +5523,6 @@ paths:
         </Note>
       operationId: holdSnapshot
       parameters:
-      - description: ID of the Eon snapshot.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the snapshot is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -5540,6 +5530,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the Eon snapshot.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
         required: true
         schema:
           format: uuid
@@ -5599,16 +5599,6 @@ paths:
         </Warning>
       operationId: removeSnapshotHold
       parameters:
-      - description: ID of the Eon snapshot.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the snapshot is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -5616,6 +5606,16 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the Eon snapshot.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
         required: true
         schema:
           format: uuid
@@ -5667,17 +5667,6 @@ paths:
         Description: Retrieves a list of Eon snapshots for the given resource.
       operationId: listResourceSnapshots
       parameters:
-      - description: Eon-assigned ID of the resource whose Eon snapshots you want
-          to retrieve.
-        example: 043090df-9fe5-4f89-9859-45db589c2936
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
       - description: |
           ID of the project the resource is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
@@ -5685,6 +5674,17 @@ paths:
         explode: false
         in: path
         name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the resource whose Eon snapshots you want
+          to retrieve.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
         required: true
         schema:
           format: uuid
@@ -5770,7 +5770,7 @@ paths:
 
         Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
         However, access tokens that were issued before the rotation remain valid until they expire.
-        This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+        This means there is an effective grace period of up to 12 hours where previously issued access tokens continue to work, even though the client secret used to obtain them has been rotated.
 
         [Rotate Current API Client Secret]: ./rotate-current-api-client-secret
       operationId: rotateApiClientSecret
@@ -5834,7 +5834,7 @@ paths:
 
         Once replaced, the old client secret can't be used to authenticate or obtain new tokens.
         However, access tokens that were issued before the rotation remain valid until they expire.
-        This means there is an effective grace period of up to 12 hours where previously issued access tokens will continue to work, even though the client secret used to obtain them has been rotated.
+        This means there is an effective grace period of up to 12 hours where previously issued access tokens continue to work, even though the client secret used to obtain them has been rotated.
 
         [Rotate API Client Secret]: ./rotate-api-client-secret
       operationId: rotateCurrentApiClientSecret
@@ -6127,7 +6127,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DailyStorageSummaries'
-          description: Successful operation
+          description: Daily storage summaries retrieved.
         "1XX":
           description: Informational
         "3XX":
@@ -16550,7 +16550,7 @@ components:
           default: true
           description: |
             Whether to start the EC2 instance after restoring it.
-            If set to `false`, the instance will be left in a stopped state.
+            If set to `false`, the instance remains in a stopped state.
           type: boolean
       required:
       - instanceType
@@ -16972,7 +16972,7 @@ components:
           default: true
           description: |
             Whether to start the VM instance after restoring it.
-            If set to `false`, the VM will be created in a stopped state.
+            If set to `false`, the VM is created in a stopped state.
           type: boolean
       required:
       - disks
@@ -17479,7 +17479,7 @@ components:
           default: true
           description: |
             Whether to start the VM instance after restoring it.
-            If set to `false`, the VM will be created in a stopped state.
+            If set to `false`, the VM is created in a stopped state.
           type: boolean
       required:
       - disks

@@ -40,10 +40,10 @@ func Test_eon_VaultsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var vaultId string
 		var projectId string
+		var vaultId string
 
-		resp, httpRes, err := apiClient.VaultsAPI.GetVault(context.Background(), vaultId, projectId).Execute()
+		resp, httpRes, err := apiClient.VaultsAPI.GetVault(context.Background(), projectId, vaultId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -69,10 +69,10 @@ func Test_eon_VaultsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var vaultId string
 		var projectId string
+		var vaultId string
 
-		resp, httpRes, err := apiClient.VaultsAPI.UpdateVault(context.Background(), vaultId, projectId).Execute()
+		resp, httpRes, err := apiClient.VaultsAPI.UpdateVault(context.Background(), projectId, vaultId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

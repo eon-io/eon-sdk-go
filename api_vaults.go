@@ -183,8 +183,8 @@ func (a *VaultsAPIService) CreateVaultExecute(r ApiCreateVaultRequest) (*CreateV
 type ApiGetVaultRequest struct {
 	ctx context.Context
 	ApiService *VaultsAPIService
-	vaultId string
 	projectId string
+	vaultId string
 }
 
 func (r ApiGetVaultRequest) Execute() (*GetVaultResponse, *http.Response, error) {
@@ -197,16 +197,16 @@ GetVault Get Vault
 Description: Retrieves a vault.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param vaultId ID of the vault to retrieve.
  @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param vaultId ID of the vault to retrieve.
  @return ApiGetVaultRequest
 */
-func (a *VaultsAPIService) GetVault(ctx context.Context, vaultId string, projectId string) ApiGetVaultRequest {
+func (a *VaultsAPIService) GetVault(ctx context.Context, projectId string, vaultId string) ApiGetVaultRequest {
 	return ApiGetVaultRequest{
 		ApiService: a,
 		ctx: ctx,
-		vaultId: vaultId,
 		projectId: projectId,
+		vaultId: vaultId,
 	}
 }
 
@@ -226,8 +226,8 @@ func (a *VaultsAPIService) GetVaultExecute(r ApiGetVaultRequest) (*GetVaultRespo
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/vaults/{vaultId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"vaultId"+"}", url.PathEscape(parameterValueToString(r.vaultId, "vaultId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"vaultId"+"}", url.PathEscape(parameterValueToString(r.vaultId, "vaultId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -458,8 +458,8 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ListBacku
 type ApiUpdateVaultRequest struct {
 	ctx context.Context
 	ApiService *VaultsAPIService
-	vaultId string
 	projectId string
+	vaultId string
 	updateVaultRequest *UpdateVaultRequest
 }
 
@@ -478,16 +478,16 @@ UpdateVault Update Vault
 Description: Updates a vault's display name.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param vaultId ID of the vault to update.
  @param projectId ID of the project the vault is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param vaultId ID of the vault to update.
  @return ApiUpdateVaultRequest
 */
-func (a *VaultsAPIService) UpdateVault(ctx context.Context, vaultId string, projectId string) ApiUpdateVaultRequest {
+func (a *VaultsAPIService) UpdateVault(ctx context.Context, projectId string, vaultId string) ApiUpdateVaultRequest {
 	return ApiUpdateVaultRequest{
 		ApiService: a,
 		ctx: ctx,
-		vaultId: vaultId,
 		projectId: projectId,
+		vaultId: vaultId,
 	}
 }
 
@@ -507,8 +507,8 @@ func (a *VaultsAPIService) UpdateVaultExecute(r ApiUpdateVaultRequest) (*UpdateV
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/vaults/{vaultId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"vaultId"+"}", url.PathEscape(parameterValueToString(r.vaultId, "vaultId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"vaultId"+"}", url.PathEscape(parameterValueToString(r.vaultId, "vaultId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

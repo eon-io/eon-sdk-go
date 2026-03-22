@@ -315,7 +315,7 @@ ConnectSourceAwsOrganizationalUnit Connect Source AWS Organizational Unit
 
 Description: Connects an AWS organizational unit to the given project.
 
-All descendant AWS accounts within the organizational unit will be discovered and available for backup.
+All current and future descendant AWS accounts within the organizational unit are discovered and available for backup.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -435,8 +435,8 @@ func (a *AccountsAPIService) ConnectSourceAwsOrganizationalUnitExecute(r ApiConn
 type ApiDeleteRestoreAccountConnectivityConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 }
 
 func (r ApiDeleteRestoreAccountConnectivityConfigRequest) Execute() (*http.Response, error) {
@@ -450,16 +450,16 @@ Description: Deletes the restore account connectivity configuration, reverting t
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the restore account.
  @param projectId ID of the project whose restore account connectivity configuration you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
  @return ApiDeleteRestoreAccountConnectivityConfigRequest
 */
-func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiDeleteRestoreAccountConnectivityConfigRequest {
+func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfig(ctx context.Context, projectId string, accountId string) ApiDeleteRestoreAccountConnectivityConfigRequest {
 	return ApiDeleteRestoreAccountConnectivityConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -477,8 +477,8 @@ func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfigExecute(r Api
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -553,8 +553,8 @@ func (a *AccountsAPIService) DeleteRestoreAccountConnectivityConfigExecute(r Api
 type ApiDisableRestoreAccountMetricsConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 }
 
 func (r ApiDisableRestoreAccountMetricsConfigRequest) Execute() (*http.Response, error) {
@@ -568,16 +568,16 @@ Description: Disables metrics for the specified restore account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the restore account.
  @param projectId ID of the project whose restore account metrics you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
  @return ApiDisableRestoreAccountMetricsConfigRequest
 */
-func (a *AccountsAPIService) DisableRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiDisableRestoreAccountMetricsConfigRequest {
+func (a *AccountsAPIService) DisableRestoreAccountMetricsConfig(ctx context.Context, projectId string, accountId string) ApiDisableRestoreAccountMetricsConfigRequest {
 	return ApiDisableRestoreAccountMetricsConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -595,8 +595,8 @@ func (a *AccountsAPIService) DisableRestoreAccountMetricsConfigExecute(r ApiDisa
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -671,8 +671,8 @@ func (a *AccountsAPIService) DisableRestoreAccountMetricsConfigExecute(r ApiDisa
 type ApiDisableSourceAccountMetricsConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 }
 
 func (r ApiDisableSourceAccountMetricsConfigRequest) Execute() (*http.Response, error) {
@@ -686,16 +686,16 @@ Description: Disables metrics for the specified source account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the source account.
  @param projectId ID of the project whose source account metrics configuration you want to disable. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the source account.
  @return ApiDisableSourceAccountMetricsConfigRequest
 */
-func (a *AccountsAPIService) DisableSourceAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiDisableSourceAccountMetricsConfigRequest {
+func (a *AccountsAPIService) DisableSourceAccountMetricsConfig(ctx context.Context, projectId string, accountId string) ApiDisableSourceAccountMetricsConfigRequest {
 	return ApiDisableSourceAccountMetricsConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -713,8 +713,8 @@ func (a *AccountsAPIService) DisableSourceAccountMetricsConfigExecute(r ApiDisab
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/source-accounts/{accountId}/metrics-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -802,7 +802,7 @@ DisconnectRestoreAccount Disconnect Restore Account
 
 Description: Disconnects a restore account from the given project.
 
-After disconnecting, data and resources can no longer be restored to the restore account.
+After disconnecting, resources can no longer be restored to the restore account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -933,8 +933,8 @@ DisconnectSourceAccount Disconnect Source Account
 
 Description: Disconnects a source account from the given project.
 
-After disconnecting, resources in the source account will no longer be backed up.
-Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
+After disconnecting, resources in the source account are no longer backed up.
+Resources with snapshots continue to be displayed in the inventory, and you can still explore, query, and restore them.
 Resources with no remaining snapshots are removed from the inventory.
 
 
@@ -1066,8 +1066,8 @@ DisconnectSourceAwsOrganizationalUnit Disconnect Source AWS Organizational Unit
 
 Description: Disconnects an AWS organizational unit (OU) and its accounts from the given project.
 
-After disconnecting, resources in the OU descendant accounts will no longer be backed up.
-Resources with snapshots will continue to be displayed in the inventory, and you can still explore, query, and restore them.
+After disconnecting, resources in the OU descendant accounts are no longer backed up.
+Resources with snapshots continue to be shown in the inventory, and you can still explore, query, and restore them.
 Resources with no remaining snapshots are removed from the inventory.
 
 
@@ -1186,8 +1186,8 @@ func (a *AccountsAPIService) DisconnectSourceAwsOrganizationalUnitExecute(r ApiD
 type ApiEnableRestoreAccountMetricsConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 	enableRestoreAccountMetricsConfigRequest *EnableRestoreAccountMetricsConfigRequest
 }
 
@@ -1207,16 +1207,16 @@ Description: Enables or updates the metrics configuration of the specified resto
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the restore account.
  @param projectId ID of the project whose restore account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
  @return ApiEnableRestoreAccountMetricsConfigRequest
 */
-func (a *AccountsAPIService) EnableRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiEnableRestoreAccountMetricsConfigRequest {
+func (a *AccountsAPIService) EnableRestoreAccountMetricsConfig(ctx context.Context, projectId string, accountId string) ApiEnableRestoreAccountMetricsConfigRequest {
 	return ApiEnableRestoreAccountMetricsConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -1236,8 +1236,8 @@ func (a *AccountsAPIService) EnableRestoreAccountMetricsConfigExecute(r ApiEnabl
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1326,8 +1326,8 @@ func (a *AccountsAPIService) EnableRestoreAccountMetricsConfigExecute(r ApiEnabl
 type ApiEnableSourceAccountMetricsConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 	enableSourceAccountMetricsConfigRequest *EnableSourceAccountMetricsConfigRequest
 }
 
@@ -1347,16 +1347,16 @@ Description: Enables or updates the metrics configuration of the specified sourc
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the source account.
  @param projectId ID of the project whose source account metrics you want to configure. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the source account.
  @return ApiEnableSourceAccountMetricsConfigRequest
 */
-func (a *AccountsAPIService) EnableSourceAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiEnableSourceAccountMetricsConfigRequest {
+func (a *AccountsAPIService) EnableSourceAccountMetricsConfig(ctx context.Context, projectId string, accountId string) ApiEnableSourceAccountMetricsConfigRequest {
 	return ApiEnableSourceAccountMetricsConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -1376,8 +1376,8 @@ func (a *AccountsAPIService) EnableSourceAccountMetricsConfigExecute(r ApiEnable
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/source-accounts/{accountId}/metrics-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1466,8 +1466,8 @@ func (a *AccountsAPIService) EnableSourceAccountMetricsConfigExecute(r ApiEnable
 type ApiGetRestoreAccountConnectivityConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 }
 
 func (r ApiGetRestoreAccountConnectivityConfigRequest) Execute() (*GetRestoreAccountConnectivityConfigResponse, *http.Response, error) {
@@ -1481,16 +1481,16 @@ Description: Retrieves the connectivity configuration of the specified restore a
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the restore account.
  @param projectId ID of the project whose restore account connectivity configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
  @return ApiGetRestoreAccountConnectivityConfigRequest
 */
-func (a *AccountsAPIService) GetRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiGetRestoreAccountConnectivityConfigRequest {
+func (a *AccountsAPIService) GetRestoreAccountConnectivityConfig(ctx context.Context, projectId string, accountId string) ApiGetRestoreAccountConnectivityConfigRequest {
 	return ApiGetRestoreAccountConnectivityConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -1510,8 +1510,8 @@ func (a *AccountsAPIService) GetRestoreAccountConnectivityConfigExecute(r ApiGet
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1595,8 +1595,8 @@ func (a *AccountsAPIService) GetRestoreAccountConnectivityConfigExecute(r ApiGet
 type ApiGetRestoreAccountMetricsConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 }
 
 func (r ApiGetRestoreAccountMetricsConfigRequest) Execute() (*GetRestoreAccountMetricsConfigResponse, *http.Response, error) {
@@ -1610,16 +1610,16 @@ Description: Retrieves the metrics configuration of the specified restore accoun
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the restore account.
  @param projectId ID of the project whose restore account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
  @return ApiGetRestoreAccountMetricsConfigRequest
 */
-func (a *AccountsAPIService) GetRestoreAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiGetRestoreAccountMetricsConfigRequest {
+func (a *AccountsAPIService) GetRestoreAccountMetricsConfig(ctx context.Context, projectId string, accountId string) ApiGetRestoreAccountMetricsConfigRequest {
 	return ApiGetRestoreAccountMetricsConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -1639,8 +1639,8 @@ func (a *AccountsAPIService) GetRestoreAccountMetricsConfigExecute(r ApiGetResto
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1724,8 +1724,8 @@ func (a *AccountsAPIService) GetRestoreAccountMetricsConfigExecute(r ApiGetResto
 type ApiGetSourceAccountMetricsConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 }
 
 func (r ApiGetSourceAccountMetricsConfigRequest) Execute() (*GetSourceAccountMetricsConfigResponse, *http.Response, error) {
@@ -1739,16 +1739,16 @@ Description: Retrieves the metrics configuration of the specified source account
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId Eon-assigned ID of the source account.
  @param projectId ID of the project whose source account metrics configuration you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the source account.
  @return ApiGetSourceAccountMetricsConfigRequest
 */
-func (a *AccountsAPIService) GetSourceAccountMetricsConfig(ctx context.Context, accountId string, projectId string) ApiGetSourceAccountMetricsConfigRequest {
+func (a *AccountsAPIService) GetSourceAccountMetricsConfig(ctx context.Context, projectId string, accountId string) ApiGetSourceAccountMetricsConfigRequest {
 	return ApiGetSourceAccountMetricsConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -1768,8 +1768,8 @@ func (a *AccountsAPIService) GetSourceAccountMetricsConfigExecute(r ApiGetSource
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/source-accounts/{accountId}/metrics-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2699,8 +2699,8 @@ func (a *AccountsAPIService) ReconnectSourceAwsOrganizationalUnitExecute(r ApiRe
 type ApiUpdateRestoreAccountConnectivityConfigRequest struct {
 	ctx context.Context
 	ApiService *AccountsAPIService
-	accountId string
 	projectId string
+	accountId string
 	updateRestoreAccountConnectivityConfigRequest *UpdateRestoreAccountConnectivityConfigRequest
 }
 
@@ -2720,16 +2720,16 @@ Description: Updates the connectivity configuration of the specified restore acc
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param accountId ID of the restore account
  @param projectId ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId ID of the restore account
  @return ApiUpdateRestoreAccountConnectivityConfigRequest
 */
-func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfig(ctx context.Context, accountId string, projectId string) ApiUpdateRestoreAccountConnectivityConfigRequest {
+func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfig(ctx context.Context, projectId string, accountId string) ApiUpdateRestoreAccountConnectivityConfigRequest {
 	return ApiUpdateRestoreAccountConnectivityConfigRequest{
 		ApiService: a,
 		ctx: ctx,
-		accountId: accountId,
 		projectId: projectId,
+		accountId: accountId,
 	}
 }
 
@@ -2749,8 +2749,8 @@ func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfigExecute(r Api
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterValueToString(r.accountId, "accountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

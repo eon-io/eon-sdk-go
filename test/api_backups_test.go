@@ -26,10 +26,10 @@ func Test_eon_BackupsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id string
 		var projectId string
+		var id string
 
-		resp, httpRes, err := apiClient.BackupsAPI.TakeSnapshot(context.Background(), id, projectId).Execute()
+		resp, httpRes, err := apiClient.BackupsAPI.TakeSnapshot(context.Background(), projectId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

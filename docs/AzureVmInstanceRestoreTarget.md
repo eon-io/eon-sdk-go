@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **NetworkInterfaceConfig** | Pointer to [**NetworkInterfaceConfig**](NetworkInterfaceConfig.md) |  | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **Disks** | [**[]RestoreAzureInstanceDiskInput**](RestoreAzureInstanceDiskInput.md) |  | 
-**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM will be created in a stopped state.  | [optional] [default to true]
+**StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM is created in a stopped state.  | [optional] [default to true]
 
 ## Methods
 

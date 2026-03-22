@@ -35,7 +35,7 @@ type AzureVmInstanceRestoreTarget struct {
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 	Disks []RestoreAzureInstanceDiskInput `json:"disks"`
-	// Whether to start the VM instance after restoring it. If set to `false`, the VM will be created in a stopped state. 
+	// Whether to start the VM instance after restoring it. If set to `false`, the VM is created in a stopped state. 
 	StartInstanceAfterRestore *bool `json:"startInstanceAfterRestore,omitempty"`
 }
 

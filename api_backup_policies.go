@@ -161,8 +161,8 @@ func (a *BackupPoliciesAPIService) CreateBackupPolicyExecute(r ApiCreateBackupPo
 type ApiDeleteBackupPolicyRequest struct {
 	ctx context.Context
 	ApiService *BackupPoliciesAPIService
-	backupPolicyId string
 	projectId string
+	backupPolicyId string
 }
 
 func (r ApiDeleteBackupPolicyRequest) Execute() (*http.Response, error) {
@@ -175,16 +175,16 @@ DeleteBackupPolicy Delete Backup Policy
 Description: Deletes a backup policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param backupPolicyId ID of the backup policy to delete
  @param projectId ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param backupPolicyId ID of the backup policy to delete
  @return ApiDeleteBackupPolicyRequest
 */
-func (a *BackupPoliciesAPIService) DeleteBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiDeleteBackupPolicyRequest {
+func (a *BackupPoliciesAPIService) DeleteBackupPolicy(ctx context.Context, projectId string, backupPolicyId string) ApiDeleteBackupPolicyRequest {
 	return ApiDeleteBackupPolicyRequest{
 		ApiService: a,
 		ctx: ctx,
-		backupPolicyId: backupPolicyId,
 		projectId: projectId,
+		backupPolicyId: backupPolicyId,
 	}
 }
 
@@ -202,8 +202,8 @@ func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPo
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/backup-policies/{backupPolicyId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"backupPolicyId"+"}", url.PathEscape(parameterValueToString(r.backupPolicyId, "backupPolicyId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"backupPolicyId"+"}", url.PathEscape(parameterValueToString(r.backupPolicyId, "backupPolicyId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -278,8 +278,8 @@ func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPo
 type ApiGetBackupPolicyRequest struct {
 	ctx context.Context
 	ApiService *BackupPoliciesAPIService
-	backupPolicyId string
 	projectId string
+	backupPolicyId string
 }
 
 func (r ApiGetBackupPolicyRequest) Execute() (*GetBackupPolicyResponse, *http.Response, error) {
@@ -292,16 +292,16 @@ GetBackupPolicy Get Backup Policy
 Description: Retrieves a backup policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param backupPolicyId ID of the backup policy to retrieve
  @param projectId ID of the project whose backup policy you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param backupPolicyId ID of the backup policy to retrieve
  @return ApiGetBackupPolicyRequest
 */
-func (a *BackupPoliciesAPIService) GetBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiGetBackupPolicyRequest {
+func (a *BackupPoliciesAPIService) GetBackupPolicy(ctx context.Context, projectId string, backupPolicyId string) ApiGetBackupPolicyRequest {
 	return ApiGetBackupPolicyRequest{
 		ApiService: a,
 		ctx: ctx,
-		backupPolicyId: backupPolicyId,
 		projectId: projectId,
+		backupPolicyId: backupPolicyId,
 	}
 }
 
@@ -321,8 +321,8 @@ func (a *BackupPoliciesAPIService) GetBackupPolicyExecute(r ApiGetBackupPolicyRe
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/backup-policies/{backupPolicyId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"backupPolicyId"+"}", url.PathEscape(parameterValueToString(r.backupPolicyId, "backupPolicyId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"backupPolicyId"+"}", url.PathEscape(parameterValueToString(r.backupPolicyId, "backupPolicyId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -531,8 +531,8 @@ func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoli
 type ApiUpdateBackupPolicyRequest struct {
 	ctx context.Context
 	ApiService *BackupPoliciesAPIService
-	backupPolicyId string
 	projectId string
+	backupPolicyId string
 	updateBackupPolicyRequest *UpdateBackupPolicyRequest
 }
 
@@ -552,16 +552,16 @@ UpdateBackupPolicy Update Backup Policy
 Description: Updates a backup policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param backupPolicyId ID of the backup policy to update
  @param projectId ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param backupPolicyId ID of the backup policy to update
  @return ApiUpdateBackupPolicyRequest
 */
-func (a *BackupPoliciesAPIService) UpdateBackupPolicy(ctx context.Context, backupPolicyId string, projectId string) ApiUpdateBackupPolicyRequest {
+func (a *BackupPoliciesAPIService) UpdateBackupPolicy(ctx context.Context, projectId string, backupPolicyId string) ApiUpdateBackupPolicyRequest {
 	return ApiUpdateBackupPolicyRequest{
 		ApiService: a,
 		ctx: ctx,
-		backupPolicyId: backupPolicyId,
 		projectId: projectId,
+		backupPolicyId: backupPolicyId,
 	}
 }
 
@@ -581,8 +581,8 @@ func (a *BackupPoliciesAPIService) UpdateBackupPolicyExecute(r ApiUpdateBackupPo
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/backup-policies/{backupPolicyId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"backupPolicyId"+"}", url.PathEscape(parameterValueToString(r.backupPolicyId, "backupPolicyId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"backupPolicyId"+"}", url.PathEscape(parameterValueToString(r.backupPolicyId, "backupPolicyId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

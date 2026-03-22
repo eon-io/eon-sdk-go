@@ -26,8 +26,8 @@ type SnapshotsAPIService service
 type ApiGetSnapshotRequest struct {
 	ctx context.Context
 	ApiService *SnapshotsAPIService
-	id string
 	projectId string
+	id string
 }
 
 func (r ApiGetSnapshotRequest) Execute() (*GetSnapshotResponse, *http.Response, error) {
@@ -40,16 +40,16 @@ GetSnapshot Get Snapshot
 Description: Retrieves an Eon snapshot.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the Eon snapshot to retrieve.
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id ID of the Eon snapshot to retrieve.
  @return ApiGetSnapshotRequest
 */
-func (a *SnapshotsAPIService) GetSnapshot(ctx context.Context, id string, projectId string) ApiGetSnapshotRequest {
+func (a *SnapshotsAPIService) GetSnapshot(ctx context.Context, projectId string, id string) ApiGetSnapshotRequest {
 	return ApiGetSnapshotRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		projectId: projectId,
+		id: id,
 	}
 }
 
@@ -69,8 +69,8 @@ func (a *SnapshotsAPIService) GetSnapshotExecute(r ApiGetSnapshotRequest) (*GetS
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/snapshots/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -154,8 +154,8 @@ func (a *SnapshotsAPIService) GetSnapshotExecute(r ApiGetSnapshotRequest) (*GetS
 type ApiHoldSnapshotRequest struct {
 	ctx context.Context
 	ApiService *SnapshotsAPIService
-	id string
 	projectId string
+	id string
 }
 
 func (r ApiHoldSnapshotRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -174,16 +174,16 @@ Point-in-time recovery (PiTR) snapshots can't be placed on hold.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the Eon snapshot.
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id ID of the Eon snapshot.
  @return ApiHoldSnapshotRequest
 */
-func (a *SnapshotsAPIService) HoldSnapshot(ctx context.Context, id string, projectId string) ApiHoldSnapshotRequest {
+func (a *SnapshotsAPIService) HoldSnapshot(ctx context.Context, projectId string, id string) ApiHoldSnapshotRequest {
 	return ApiHoldSnapshotRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		projectId: projectId,
+		id: id,
 	}
 }
 
@@ -203,8 +203,8 @@ func (a *SnapshotsAPIService) HoldSnapshotExecute(r ApiHoldSnapshotRequest) (map
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/snapshots/{id}/hold"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -288,8 +288,8 @@ func (a *SnapshotsAPIService) HoldSnapshotExecute(r ApiHoldSnapshotRequest) (map
 type ApiListResourceSnapshotsRequest struct {
 	ctx context.Context
 	ApiService *SnapshotsAPIService
-	id string
 	projectId string
+	id string
 	pageToken *string
 	pageSize *int32
 	listInventorySnapshotsRequest *ListInventorySnapshotsRequest
@@ -324,16 +324,16 @@ Description: Retrieves a list of Eon snapshots for the given resource.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Eon-assigned ID of the resource whose Eon snapshots you want to retrieve.
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id Eon-assigned ID of the resource whose Eon snapshots you want to retrieve.
  @return ApiListResourceSnapshotsRequest
 */
-func (a *SnapshotsAPIService) ListResourceSnapshots(ctx context.Context, id string, projectId string) ApiListResourceSnapshotsRequest {
+func (a *SnapshotsAPIService) ListResourceSnapshots(ctx context.Context, projectId string, id string) ApiListResourceSnapshotsRequest {
 	return ApiListResourceSnapshotsRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		projectId: projectId,
+		id: id,
 	}
 }
 
@@ -353,8 +353,8 @@ func (a *SnapshotsAPIService) ListResourceSnapshotsExecute(r ApiListResourceSnap
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/snapshots"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -449,8 +449,8 @@ func (a *SnapshotsAPIService) ListResourceSnapshotsExecute(r ApiListResourceSnap
 type ApiRemoveSnapshotHoldRequest struct {
 	ctx context.Context
 	ApiService *SnapshotsAPIService
-	id string
 	projectId string
+	id string
 }
 
 func (r ApiRemoveSnapshotHoldRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -468,16 +468,16 @@ If the snapshot is past its expiration time, it's marked for removal as soon as 
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the Eon snapshot.
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id ID of the Eon snapshot.
  @return ApiRemoveSnapshotHoldRequest
 */
-func (a *SnapshotsAPIService) RemoveSnapshotHold(ctx context.Context, id string, projectId string) ApiRemoveSnapshotHoldRequest {
+func (a *SnapshotsAPIService) RemoveSnapshotHold(ctx context.Context, projectId string, id string) ApiRemoveSnapshotHoldRequest {
 	return ApiRemoveSnapshotHoldRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		projectId: projectId,
+		id: id,
 	}
 }
 
@@ -497,8 +497,8 @@ func (a *SnapshotsAPIService) RemoveSnapshotHoldExecute(r ApiRemoveSnapshotHoldR
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/snapshots/{id}/remove-hold"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
