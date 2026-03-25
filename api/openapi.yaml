@@ -1134,7 +1134,7 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
+        "204":
           description: Metrics disabled.
         "404":
           description: Source account wasn't found.
@@ -1880,7 +1880,7 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
+        "204":
           description: Restore account connectivity configuration deleted.
         "404":
           description: Restore account not found.
@@ -2072,7 +2072,7 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
+        "204":
           description: Metrics disabled.
         "404":
           description: Restore account wasn't found.
@@ -2760,7 +2760,7 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
+        "204":
           description: Backup policy deleted.
         "404":
           description: Backup policy wasn't found.
