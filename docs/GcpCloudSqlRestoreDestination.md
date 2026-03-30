@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GcpCloudSql** | Pointer to [**GcpCloudSqlTarget**](GcpCloudSqlTarget.md) |  | [optional] 
+**GcpCloudSql** | Pointer to [**NullableGcpCloudSqlTarget**](GcpCloudSqlTarget.md) |  | [optional] 
 
 ## Methods
 
@@ -50,6 +50,16 @@ SetGcpCloudSql sets GcpCloudSql field to given value.
 
 HasGcpCloudSql returns a boolean if a field has been set.
 
+### SetGcpCloudSqlNil
+
+`func (o *GcpCloudSqlRestoreDestination) SetGcpCloudSqlNil(b bool)`
+
+ SetGcpCloudSqlNil sets the value for GcpCloudSql to be an explicit nil
+
+### UnsetGcpCloudSql
+`func (o *GcpCloudSqlRestoreDestination) UnsetGcpCloudSql()`
+
+UnsetGcpCloudSql ensures that no value is present for GcpCloudSql, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

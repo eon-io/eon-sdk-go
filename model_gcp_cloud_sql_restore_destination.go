@@ -19,7 +19,7 @@ var _ MappedNullable = &GcpCloudSqlRestoreDestination{}
 
 // GcpCloudSqlRestoreDestination struct for GcpCloudSqlRestoreDestination
 type GcpCloudSqlRestoreDestination struct {
-	GcpCloudSql *GcpCloudSqlTarget `json:"gcpCloudSql,omitempty"`
+	GcpCloudSql NullableGcpCloudSqlTarget `json:"gcpCloudSql,omitempty"`
 }
 
 // NewGcpCloudSqlRestoreDestination instantiates a new GcpCloudSqlRestoreDestination object
@@ -39,36 +39,46 @@ func NewGcpCloudSqlRestoreDestinationWithDefaults() *GcpCloudSqlRestoreDestinati
 	return &this
 }
 
-// GetGcpCloudSql returns the GcpCloudSql field value if set, zero value otherwise.
+// GetGcpCloudSql returns the GcpCloudSql field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GcpCloudSqlRestoreDestination) GetGcpCloudSql() GcpCloudSqlTarget {
-	if o == nil || IsNil(o.GcpCloudSql) {
+	if o == nil || IsNil(o.GcpCloudSql.Get()) {
 		var ret GcpCloudSqlTarget
 		return ret
 	}
-	return *o.GcpCloudSql
+	return *o.GcpCloudSql.Get()
 }
 
 // GetGcpCloudSqlOk returns a tuple with the GcpCloudSql field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GcpCloudSqlRestoreDestination) GetGcpCloudSqlOk() (*GcpCloudSqlTarget, bool) {
-	if o == nil || IsNil(o.GcpCloudSql) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GcpCloudSql, true
+	return o.GcpCloudSql.Get(), o.GcpCloudSql.IsSet()
 }
 
 // HasGcpCloudSql returns a boolean if a field has been set.
 func (o *GcpCloudSqlRestoreDestination) HasGcpCloudSql() bool {
-	if o != nil && !IsNil(o.GcpCloudSql) {
+	if o != nil && o.GcpCloudSql.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGcpCloudSql gets a reference to the given GcpCloudSqlTarget and assigns it to the GcpCloudSql field.
+// SetGcpCloudSql gets a reference to the given NullableGcpCloudSqlTarget and assigns it to the GcpCloudSql field.
 func (o *GcpCloudSqlRestoreDestination) SetGcpCloudSql(v GcpCloudSqlTarget) {
-	o.GcpCloudSql = &v
+	o.GcpCloudSql.Set(&v)
+}
+// SetGcpCloudSqlNil sets the value for GcpCloudSql to be an explicit nil
+func (o *GcpCloudSqlRestoreDestination) SetGcpCloudSqlNil() {
+	o.GcpCloudSql.Set(nil)
+}
+
+// UnsetGcpCloudSql ensures that no value is present for GcpCloudSql, not even an explicit nil
+func (o *GcpCloudSqlRestoreDestination) UnsetGcpCloudSql() {
+	o.GcpCloudSql.Unset()
 }
 
 func (o GcpCloudSqlRestoreDestination) MarshalJSON() ([]byte, error) {
@@ -81,8 +91,8 @@ func (o GcpCloudSqlRestoreDestination) MarshalJSON() ([]byte, error) {
 
 func (o GcpCloudSqlRestoreDestination) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GcpCloudSql) {
-		toSerialize["gcpCloudSql"] = o.GcpCloudSql
+	if o.GcpCloudSql.IsSet() {
+		toSerialize["gcpCloudSql"] = o.GcpCloudSql.Get()
 	}
 	return toSerialize, nil
 }

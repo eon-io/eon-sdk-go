@@ -67,8 +67,6 @@ type APIClient struct {
 
 	JobsAPI *JobsAPIService
 
-	OauthAppsAPI *OauthAppsAPIService
-
 	ResourcesAPI *ResourcesAPIService
 
 	SnapshotsAPI *SnapshotsAPIService
@@ -101,7 +99,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DatabaseSnapshotsAPI = (*DatabaseSnapshotsAPIService)(&c.common)
 	c.IamAPI = (*IamAPIService)(&c.common)
 	c.JobsAPI = (*JobsAPIService)(&c.common)
-	c.OauthAppsAPI = (*OauthAppsAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
 	c.SnapshotsAPI = (*SnapshotsAPIService)(&c.common)
 	c.VaultsAPI = (*VaultsAPIService)(&c.common)
