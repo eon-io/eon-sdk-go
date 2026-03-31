@@ -6420,7 +6420,6 @@ components:
       - GCP_CLOUD_FIRESTORE
       - GCP_DISK
       - GCP_SAP_HANA_VM
-      - MICROSOFT_365_SHAREPOINT_SITE
       - RESOURCE_TYPE_UNSPECIFIED
       example: AWS_EC2
       type: string
@@ -6546,7 +6545,6 @@ components:
       - AZURE
       - GCP
       - MONGO_ATLAS
-      - MICROSOFT_365
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string
