@@ -58,6 +58,7 @@ const (
 	NOTIFICATION_POLICIES_MANAGE PermissionType = "notification_policies.manage"
 	STORAGE_GATEWAY_MANAGE PermissionType = "storage_gateway.manage"
 	OAUTH_APPS_MANAGE PermissionType = "oauth_apps.manage"
+	ZERO_ETL_POLICIES_MANAGE PermissionType = "zero_etl_policies.manage"
 )
 
 // All allowed values of PermissionType enum
@@ -100,6 +101,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"notification_policies.manage",
 	"storage_gateway.manage",
 	"oauth_apps.manage",
+	"zero_etl_policies.manage",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

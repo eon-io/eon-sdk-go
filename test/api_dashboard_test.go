@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
 )
 
 func Test_eon_DashboardAPIService(t *testing.T) {

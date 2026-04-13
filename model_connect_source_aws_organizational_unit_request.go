@@ -25,8 +25,6 @@ type ConnectSourceAwsOrganizationalUnitRequest struct {
 	RoleArn string `json:"roleArn"`
 	// AWS-assigned organizational unit ID.
 	ProviderOrganizationalUnitId string `json:"providerOrganizationalUnitId"`
-	// Optional list of AWS account IDs to selectively onboard. When provided, only these accounts within the OU will be discovered and backed up. When omitted, all accounts in the OU are onboarded (legacy behavior). 
-	SelectedAccountIds []string `json:"selectedAccountIds,omitempty"`
 }
 
 type _ConnectSourceAwsOrganizationalUnitRequest ConnectSourceAwsOrganizationalUnitRequest
@@ -98,38 +96,6 @@ func (o *ConnectSourceAwsOrganizationalUnitRequest) SetProviderOrganizationalUni
 	o.ProviderOrganizationalUnitId = v
 }
 
-// GetSelectedAccountIds returns the SelectedAccountIds field value if set, zero value otherwise.
-func (o *ConnectSourceAwsOrganizationalUnitRequest) GetSelectedAccountIds() []string {
-	if o == nil || IsNil(o.SelectedAccountIds) {
-		var ret []string
-		return ret
-	}
-	return o.SelectedAccountIds
-}
-
-// GetSelectedAccountIdsOk returns a tuple with the SelectedAccountIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectSourceAwsOrganizationalUnitRequest) GetSelectedAccountIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.SelectedAccountIds) {
-		return nil, false
-	}
-	return o.SelectedAccountIds, true
-}
-
-// HasSelectedAccountIds returns a boolean if a field has been set.
-func (o *ConnectSourceAwsOrganizationalUnitRequest) HasSelectedAccountIds() bool {
-	if o != nil && !IsNil(o.SelectedAccountIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetSelectedAccountIds gets a reference to the given []string and assigns it to the SelectedAccountIds field.
-func (o *ConnectSourceAwsOrganizationalUnitRequest) SetSelectedAccountIds(v []string) {
-	o.SelectedAccountIds = v
-}
-
 func (o ConnectSourceAwsOrganizationalUnitRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -142,9 +108,6 @@ func (o ConnectSourceAwsOrganizationalUnitRequest) ToMap() (map[string]interface
 	toSerialize := map[string]interface{}{}
 	toSerialize["roleArn"] = o.RoleArn
 	toSerialize["providerOrganizationalUnitId"] = o.ProviderOrganizationalUnitId
-	if !IsNil(o.SelectedAccountIds) {
-		toSerialize["selectedAccountIds"] = o.SelectedAccountIds
-	}
 	return toSerialize, nil
 }
 

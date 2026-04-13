@@ -6100,6 +6100,7 @@ components:
       - notification_policies.manage
       - storage_gateway.manage
       - oauth_apps.manage
+      - zero_etl_policies.manage
       example: inventory.view
       type: string
     Permission:
@@ -9553,9 +9554,6 @@ components:
       type: object
     ConnectSourceAwsOrganizationalUnitRequest:
       example:
-        selectedAccountIds:
-        - "111111111111"
-        - "222222222222"
         providerOrganizationalUnitId: ou-a1b2-f6g7h111
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       properties:
@@ -9568,17 +9566,6 @@ components:
           description: AWS-assigned organizational unit ID.
           example: ou-a1b2-f6g7h111
           type: string
-        selectedAccountIds:
-          description: |
-            Optional list of AWS account IDs to selectively onboard.
-            When provided, only these accounts within the OU will be discovered and backed up.
-            When omitted, all accounts in the OU are onboarded (legacy behavior).
-          example:
-          - "111111111111"
-          - "222222222222"
-          items:
-            type: string
-          type: array
       required:
       - providerOrganizationalUnitId
       - roleArn

@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RoleArn** | **string** | ARN of the role Eon assumes to access the organizational unit in AWS. | 
 **ProviderOrganizationalUnitId** | **string** | AWS-assigned organizational unit ID. | 
-**SelectedAccountIds** | Pointer to **[]string** | Optional list of AWS account IDs to selectively onboard. When provided, only these accounts within the OU will be discovered and backed up. When omitted, all accounts in the OU are onboarded (legacy behavior).  | [optional] 
 
 ## Methods
 
@@ -66,31 +65,6 @@ and a boolean to check if the value has been set.
 
 SetProviderOrganizationalUnitId sets ProviderOrganizationalUnitId field to given value.
 
-
-### GetSelectedAccountIds
-
-`func (o *ConnectSourceAwsOrganizationalUnitRequest) GetSelectedAccountIds() []string`
-
-GetSelectedAccountIds returns the SelectedAccountIds field if non-nil, zero value otherwise.
-
-### GetSelectedAccountIdsOk
-
-`func (o *ConnectSourceAwsOrganizationalUnitRequest) GetSelectedAccountIdsOk() (*[]string, bool)`
-
-GetSelectedAccountIdsOk returns a tuple with the SelectedAccountIds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSelectedAccountIds
-
-`func (o *ConnectSourceAwsOrganizationalUnitRequest) SetSelectedAccountIds(v []string)`
-
-SetSelectedAccountIds sets SelectedAccountIds field to given value.
-
-### HasSelectedAccountIds
-
-`func (o *ConnectSourceAwsOrganizationalUnitRequest) HasSelectedAccountIds() bool`
-
-HasSelectedAccountIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

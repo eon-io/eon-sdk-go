@@ -25,7 +25,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eon.io/eon-service/services/frontend/api-gateway/sdk/external-go"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
 )
 
 func main() {

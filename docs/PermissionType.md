@@ -79,6 +79,8 @@
 
 * `OAUTH_APPS_MANAGE` (value: `"oauth_apps.manage"`)
 
+* `ZERO_ETL_POLICIES_MANAGE` (value: `"zero_etl_policies.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
