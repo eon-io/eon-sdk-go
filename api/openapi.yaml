@@ -3198,6 +3198,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_file
       x-audit-log:
@@ -3296,6 +3299,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -3394,6 +3400,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -3492,6 +3501,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -3590,6 +3602,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -3688,6 +3703,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -3789,6 +3807,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -3887,6 +3908,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -3985,6 +4009,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -4084,6 +4111,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -4185,6 +4215,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -4286,6 +4319,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -4387,6 +4423,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -4488,6 +4527,9 @@ paths:
         - in: path
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:restore_resource
       x-audit-log:
@@ -4582,6 +4624,9 @@ paths:
         - in: query
           entityType: snapshot
           key: snapshotId
+        - in: reqBody
+          entityType: restore_account
+          key: restoreAccountId
       x-permissions:
       - create:db
       x-audit-log:
@@ -9926,6 +9971,7 @@ components:
         providerAccountId: "123412341234"
         name: prod-eu
         connectedTime: 2024-08-29T13:24:03Z
+        isRestoreAllowed: true
         id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
         providerAccountName: providerAccountName
         version:
@@ -9960,6 +10006,11 @@ components:
           type: string
         restoreAccountAttributes:
           $ref: '#/components/schemas/RestoreAccountCloudAttributes'
+        isRestoreAllowed:
+          description: "Whether the current user's role permits restoring to this\
+            \ account, based on the role's restore account access condition."
+          type: boolean
+          x-internal: false
       required:
       - id
       - name
@@ -9986,6 +10037,7 @@ components:
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
+          isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
@@ -10149,6 +10201,7 @@ components:
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
+          isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
@@ -10172,6 +10225,7 @@ components:
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
+          isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
@@ -10219,6 +10273,7 @@ components:
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
+          isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
@@ -10251,6 +10306,7 @@ components:
           providerAccountId: "123412341234"
           name: prod-eu
           connectedTime: 2024-08-29T13:24:03Z
+          isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
           providerAccountName: providerAccountName
           version:
@@ -10935,6 +10991,7 @@ components:
       - AWS_DYNAMO_DB_BACKUP
       - AWS_DYNAMO_DB_BACKUP_FULL
       - AWS_EKS_NAMESPACE_BACKUP
+      - AWS_KEYSPACES_BACKUP_FULL
       - AZURE_STORAGE_ACCOUNT_BACKUP
       - AZURE_VM_BACKUP
       - AZURE_VM_RESTORE_POINT_CONVERSION
@@ -10952,6 +11009,7 @@ components:
       - GCP_SAP_HANA_VM_BACKUP
       - AZURE_SAP_HANA_VM_BACKUP
       - ATLAS_MONGODB_CLUSTER_BACKUP
+      - ATLAS_MONGODB_CLUSTER_BACKUP_FULL
       example: AWS_EC2_BACKUP
       type: string
     BackupJobTypeFilters:
@@ -20144,6 +20202,7 @@ components:
       - GCP_CLOUD_SQL_MYSQL_METERING_DIMENSION
       - GCP_CLOUD_SQL_SQL_SERVER_METERING_DIMENSION
       - GCP_BIG_QUERY_METERING_DIMENSION
+      - MONGO_ATLAS_CLUSTER_METERING_DIMENSION
       - DATA_TRANSFER_METERING_DIMENSION
       - AWS_EC2_TO_AZURE_VAULT_METERING_DIMENSION
       - AWS_S3_TO_AZURE_VAULT_METERING_DIMENSION

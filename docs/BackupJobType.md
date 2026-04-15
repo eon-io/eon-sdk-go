@@ -33,6 +33,8 @@
 
 * `AWS_EKS_NAMESPACE_BACKUP` (value: `"AWS_EKS_NAMESPACE_BACKUP"`)
 
+* `AWS_KEYSPACES_BACKUP_FULL` (value: `"AWS_KEYSPACES_BACKUP_FULL"`)
+
 * `AZURE_STORAGE_ACCOUNT_BACKUP` (value: `"AZURE_STORAGE_ACCOUNT_BACKUP"`)
 
 * `AZURE_VM_BACKUP` (value: `"AZURE_VM_BACKUP"`)
@@ -66,6 +68,8 @@
 * `AZURE_SAP_HANA_VM_BACKUP` (value: `"AZURE_SAP_HANA_VM_BACKUP"`)
 
 * `ATLAS_MONGODB_CLUSTER_BACKUP` (value: `"ATLAS_MONGODB_CLUSTER_BACKUP"`)
+
+* `ATLAS_MONGODB_CLUSTER_BACKUP_FULL` (value: `"ATLAS_MONGODB_CLUSTER_BACKUP_FULL"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

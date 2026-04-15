@@ -35,6 +35,8 @@ type RestoreAccount struct {
 	// Date and time the account was connected to Eon.
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
 	RestoreAccountAttributes RestoreAccountCloudAttributes `json:"restoreAccountAttributes"`
+	// Whether the current user's role permits restoring to this account, based on the role's restore account access condition.
+	IsRestoreAllowed *bool `json:"isRestoreAllowed,omitempty"`
 }
 
 type _RestoreAccount RestoreAccount
@@ -277,6 +279,38 @@ func (o *RestoreAccount) SetRestoreAccountAttributes(v RestoreAccountCloudAttrib
 	o.RestoreAccountAttributes = v
 }
 
+// GetIsRestoreAllowed returns the IsRestoreAllowed field value if set, zero value otherwise.
+func (o *RestoreAccount) GetIsRestoreAllowed() bool {
+	if o == nil || IsNil(o.IsRestoreAllowed) {
+		var ret bool
+		return ret
+	}
+	return *o.IsRestoreAllowed
+}
+
+// GetIsRestoreAllowedOk returns a tuple with the IsRestoreAllowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreAccount) GetIsRestoreAllowedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsRestoreAllowed) {
+		return nil, false
+	}
+	return o.IsRestoreAllowed, true
+}
+
+// HasIsRestoreAllowed returns a boolean if a field has been set.
+func (o *RestoreAccount) HasIsRestoreAllowed() bool {
+	if o != nil && !IsNil(o.IsRestoreAllowed) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsRestoreAllowed gets a reference to the given bool and assigns it to the IsRestoreAllowed field.
+func (o *RestoreAccount) SetIsRestoreAllowed(v bool) {
+	o.IsRestoreAllowed = &v
+}
+
 func (o RestoreAccount) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -301,6 +335,9 @@ func (o RestoreAccount) ToMap() (map[string]interface{}, error) {
 		toSerialize["connectedTime"] = o.ConnectedTime
 	}
 	toSerialize["restoreAccountAttributes"] = o.RestoreAccountAttributes
+	if !IsNil(o.IsRestoreAllowed) {
+		toSerialize["isRestoreAllowed"] = o.IsRestoreAllowed
+	}
 	return toSerialize, nil
 }
 
