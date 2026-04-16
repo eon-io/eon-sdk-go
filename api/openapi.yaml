@@ -5394,6 +5394,169 @@ paths:
         - in: path
           entityType: resource
           key: id
+  /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/exclude:
+    patch:
+      description: |
+        Description: Excludes a specific EBS volume of an EC2 instance from being backed up by Eon.
+        Root volumes cannot be excluded.
+
+        You can cancel this action by calling [Cancel Volume Backup Exclusion](cancel-volume-backup-exclusion) for the same volume.
+      operationId: excludeVolumeFromBackup
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the EC2 resource.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: AWS EBS volume ID (`vol-…`) of the volume to exclude from backup.
+          The volume must be attached to this EC2 instance and must not be the root
+          volume.
+        example: vol-049df61146c064d1c
+        explode: false
+        in: path
+        name: volumeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Volume excluded from backup.
+        "400":
+          description: "Invalid request (e.g., root volume or non-EBS volume)."
+        "404":
+          description: Resource or volume not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Exclude Volume from Backup
+      tags:
+      - resources
+      x-permissions:
+      - update:exclude_resource
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+  /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/include:
+    patch:
+      description: |
+        Description: Cancels the backup exclusion of a specific EBS volume, so it will be included in future backups of the EC2 instance.
+        By default, all EBS volumes are included in backups. This endpoint is only relevant for volumes that were previously excluded using [Exclude Volume from Backup](exclude-volume-from-backup).
+      operationId: cancelVolumeBackupExclusion
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the EC2 resource.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: AWS EBS volume ID (`vol-…`) of the volume to include back in
+          backup. The volume must be attached to this EC2 instance.
+        example: vol-049df61146c064d1c
+        explode: false
+        in: path
+        name: volumeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Volume backup exclusion cancelled.
+        "400":
+          description: "Invalid request (e.g., non-EC2 resource or non-EBS volume)."
+        "404":
+          description: Resource or volume not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Cancel Volume Backup Exclusion
+      tags:
+      - resources
+      x-permissions:
+      - update:exclude_resource
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+      x-internal: false
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
   /v1/projects/{projectId}/snapshots/{id}:
     get:
       description: "Description: Retrieves an Eon snapshot."
@@ -13318,9 +13481,47 @@ components:
       - backupSchedules
       - resourceTypes
       type: object
+    AwsNativePitrBackupResourceType:
+      example:
+        resourceType: AWS_RDS
+      properties:
+        resourceType:
+          allOf:
+          - $ref: '#/components/schemas/ResourceType'
+          - enum:
+            - AWS_RDS
+            - RESOURCE_TYPE_UNSPECIFIED
+            type: string
+          example: AWS_RDS
+      type: object
+    AwsNativePitrBackupPolicyPlan:
+      example:
+        retentionDays: 7
+        resourceType:
+          resourceType: AWS_RDS
+      nullable: true
+      properties:
+        retentionDays:
+          description: |
+            Number of days to retain continuous backups using AWS Backup.
+            AWS allows 1-35 days for RDS/Aurora continuous backups.
+          example: 7
+          maximum: 35
+          minimum: 1
+          type: integer
+        resourceType:
+          $ref: '#/components/schemas/AwsNativePitrBackupResourceType'
+      required:
+      - resourceType
+      - retentionDays
+      type: object
     BackupPolicyPlan:
       example:
         backupPolicyType: STANDARD
+        awsNativePitrPlan:
+          retentionDays: 7
+          resourceType:
+            resourceType: AWS_RDS
         highFrequencyPlan:
           resourceTypes:
           - resourceType: AWS_S3
@@ -13479,6 +13680,8 @@ components:
           $ref: '#/components/schemas/StandardBackupPolicyPlan'
         highFrequencyPlan:
           $ref: '#/components/schemas/HighFrequencyBackupPolicyPlan'
+        awsNativePitrPlan:
+          $ref: '#/components/schemas/AwsNativePitrBackupPolicyPlan'
       required:
       - backupPolicyType
       type: object
@@ -13487,6 +13690,10 @@ components:
         name: Production with PII
         backupPlan:
           backupPolicyType: STANDARD
+          awsNativePitrPlan:
+            retentionDays: 7
+            resourceType:
+              resourceType: AWS_RDS
           highFrequencyPlan:
             resourceTypes:
             - resourceType: AWS_S3
@@ -13762,6 +13969,10 @@ components:
         name: Production with PII
         backupPlan:
           backupPolicyType: STANDARD
+          awsNativePitrPlan:
+            retentionDays: 7
+            resourceType:
+              resourceType: AWS_RDS
           highFrequencyPlan:
             resourceTypes:
             - resourceType: AWS_S3
@@ -14044,6 +14255,10 @@ components:
           name: Production with PII
           backupPlan:
             backupPolicyType: STANDARD
+            awsNativePitrPlan:
+              retentionDays: 7
+              resourceType:
+                resourceType: AWS_RDS
             highFrequencyPlan:
               resourceTypes:
               - resourceType: AWS_S3
@@ -14309,6 +14524,10 @@ components:
         - name: Production with PII
           backupPlan:
             backupPolicyType: STANDARD
+            awsNativePitrPlan:
+              retentionDays: 7
+              resourceType:
+                resourceType: AWS_RDS
             highFrequencyPlan:
               resourceTypes:
               - resourceType: AWS_S3
@@ -14564,6 +14783,10 @@ components:
         - name: Production with PII
           backupPlan:
             backupPolicyType: STANDARD
+            awsNativePitrPlan:
+              retentionDays: 7
+              resourceType:
+                resourceType: AWS_RDS
             highFrequencyPlan:
               resourceTypes:
               - resourceType: AWS_S3
@@ -14839,6 +15062,10 @@ components:
           name: Production with PII
           backupPlan:
             backupPolicyType: STANDARD
+            awsNativePitrPlan:
+              retentionDays: 7
+              resourceType:
+                resourceType: AWS_RDS
             highFrequencyPlan:
               resourceTypes:
               - resourceType: AWS_S3
@@ -15102,6 +15329,10 @@ components:
         name: Production with PII
         backupPlan:
           backupPolicyType: STANDARD
+          awsNativePitrPlan:
+            retentionDays: 7
+            resourceType:
+              resourceType: AWS_RDS
           highFrequencyPlan:
             resourceTypes:
             - resourceType: AWS_S3
@@ -15378,6 +15609,10 @@ components:
           name: Production with PII
           backupPlan:
             backupPolicyType: STANDARD
+            awsNativePitrPlan:
+              retentionDays: 7
+              resourceType:
+                resourceType: AWS_RDS
             highFrequencyPlan:
               resourceTypes:
               - resourceType: AWS_S3

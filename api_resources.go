@@ -152,6 +152,129 @@ func (a *ResourcesAPIService) CancelResourceBackupExclusionExecute(r ApiCancelRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCancelVolumeBackupExclusionRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	projectId string
+	id string
+	volumeId string
+}
+
+func (r ApiCancelVolumeBackupExclusionRequest) Execute() (*http.Response, error) {
+	return r.ApiService.CancelVolumeBackupExclusionExecute(r)
+}
+
+/*
+CancelVolumeBackupExclusion Cancel Volume Backup Exclusion
+
+Description: Cancels the backup exclusion of a specific EBS volume, so it will be included in future backups of the EC2 instance.
+By default, all EBS volumes are included in backups. This endpoint is only relevant for volumes that were previously excluded using [Exclude Volume from Backup](exclude-volume-from-backup).
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id Eon-assigned ID of the EC2 resource.
+ @param volumeId AWS EBS volume ID (`vol-…`) of the volume to include back in backup. The volume must be attached to this EC2 instance.
+ @return ApiCancelVolumeBackupExclusionRequest
+*/
+func (a *ResourcesAPIService) CancelVolumeBackupExclusion(ctx context.Context, projectId string, id string, volumeId string) ApiCancelVolumeBackupExclusionRequest {
+	return ApiCancelVolumeBackupExclusionRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		id: id,
+		volumeId: volumeId,
+	}
+}
+
+// Execute executes the request
+func (a *ResourcesAPIService) CancelVolumeBackupExclusionExecute(r ApiCancelVolumeBackupExclusionRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.CancelVolumeBackupExclusion")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/include"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"volumeId"+"}", url.PathEscape(parameterValueToString(r.volumeId, "volumeId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiExcludeResourceFromBackupRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
@@ -281,6 +404,131 @@ func (a *ResourcesAPIService) ExcludeResourceFromBackupExecute(r ApiExcludeResou
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiExcludeVolumeFromBackupRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	projectId string
+	id string
+	volumeId string
+}
+
+func (r ApiExcludeVolumeFromBackupRequest) Execute() (*http.Response, error) {
+	return r.ApiService.ExcludeVolumeFromBackupExecute(r)
+}
+
+/*
+ExcludeVolumeFromBackup Exclude Volume from Backup
+
+Description: Excludes a specific EBS volume of an EC2 instance from being backed up by Eon.
+Root volumes cannot be excluded.
+
+You can cancel this action by calling [Cancel Volume Backup Exclusion](cancel-volume-backup-exclusion) for the same volume.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param id Eon-assigned ID of the EC2 resource.
+ @param volumeId AWS EBS volume ID (`vol-…`) of the volume to exclude from backup. The volume must be attached to this EC2 instance and must not be the root volume.
+ @return ApiExcludeVolumeFromBackupRequest
+*/
+func (a *ResourcesAPIService) ExcludeVolumeFromBackup(ctx context.Context, projectId string, id string, volumeId string) ApiExcludeVolumeFromBackupRequest {
+	return ApiExcludeVolumeFromBackupRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		id: id,
+		volumeId: volumeId,
+	}
+}
+
+// Execute executes the request
+func (a *ResourcesAPIService) ExcludeVolumeFromBackupExecute(r ApiExcludeVolumeFromBackupRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.ExcludeVolumeFromBackup")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/exclude"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"volumeId"+"}", url.PathEscape(parameterValueToString(r.volumeId, "volumeId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetResourceRequest struct {

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **BackupPolicyType** | [**BackupPolicyType**](BackupPolicyType.md) |  | 
 **StandardPlan** | Pointer to [**NullableStandardBackupPolicyPlan**](StandardBackupPolicyPlan.md) |  | [optional] 
 **HighFrequencyPlan** | Pointer to [**NullableHighFrequencyBackupPolicyPlan**](HighFrequencyBackupPolicyPlan.md) |  | [optional] 
+**AwsNativePitrPlan** | Pointer to [**NullableAwsNativePitrBackupPolicyPlan**](AwsNativePitrBackupPolicyPlan.md) |  | [optional] 
 
 ## Methods
 
@@ -117,6 +118,41 @@ HasHighFrequencyPlan returns a boolean if a field has been set.
 `func (o *BackupPolicyPlan) UnsetHighFrequencyPlan()`
 
 UnsetHighFrequencyPlan ensures that no value is present for HighFrequencyPlan, not even an explicit nil
+### GetAwsNativePitrPlan
+
+`func (o *BackupPolicyPlan) GetAwsNativePitrPlan() AwsNativePitrBackupPolicyPlan`
+
+GetAwsNativePitrPlan returns the AwsNativePitrPlan field if non-nil, zero value otherwise.
+
+### GetAwsNativePitrPlanOk
+
+`func (o *BackupPolicyPlan) GetAwsNativePitrPlanOk() (*AwsNativePitrBackupPolicyPlan, bool)`
+
+GetAwsNativePitrPlanOk returns a tuple with the AwsNativePitrPlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsNativePitrPlan
+
+`func (o *BackupPolicyPlan) SetAwsNativePitrPlan(v AwsNativePitrBackupPolicyPlan)`
+
+SetAwsNativePitrPlan sets AwsNativePitrPlan field to given value.
+
+### HasAwsNativePitrPlan
+
+`func (o *BackupPolicyPlan) HasAwsNativePitrPlan() bool`
+
+HasAwsNativePitrPlan returns a boolean if a field has been set.
+
+### SetAwsNativePitrPlanNil
+
+`func (o *BackupPolicyPlan) SetAwsNativePitrPlanNil(b bool)`
+
+ SetAwsNativePitrPlanNil sets the value for AwsNativePitrPlan to be an explicit nil
+
+### UnsetAwsNativePitrPlan
+`func (o *BackupPolicyPlan) UnsetAwsNativePitrPlan()`
+
+UnsetAwsNativePitrPlan ensures that no value is present for AwsNativePitrPlan, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -5,7 +5,9 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CancelResourceBackupExclusion**](ResourcesAPI.md#CancelResourceBackupExclusion) | **Patch** /v1/projects/{projectId}/resources/{id}/include | Cancel Resource Backup Exclusion
+[**CancelVolumeBackupExclusion**](ResourcesAPI.md#CancelVolumeBackupExclusion) | **Patch** /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/include | Cancel Volume Backup Exclusion
 [**ExcludeResourceFromBackup**](ResourcesAPI.md#ExcludeResourceFromBackup) | **Patch** /v1/projects/{projectId}/resources/{id}/exclude | Exclude Resource from Backup
+[**ExcludeVolumeFromBackup**](ResourcesAPI.md#ExcludeVolumeFromBackup) | **Patch** /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/exclude | Exclude Volume from Backup
 [**GetResource**](ResourcesAPI.md#GetResource) | **Get** /v1/projects/{projectId}/resources/{id} | Get Resource
 [**ListResources**](ResourcesAPI.md#ListResources) | **Post** /v1/projects/{projectId}/resources | List Resources
 [**OverrideDataClasses**](ResourcesAPI.md#OverrideDataClasses) | **Patch** /v1/projects/{projectId}/resources/{id}/data-classifications | Override Data Classes
@@ -88,6 +90,80 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CancelVolumeBackupExclusion
+
+> CancelVolumeBackupExclusion(ctx, projectId, id, volumeId).Execute()
+
+Cancel Volume Backup Exclusion
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the EC2 resource.
+	volumeId := "vol-049df61146c064d1c" // string | AWS EBS volume ID (`vol-…`) of the volume to include back in backup. The volume must be attached to this EC2 instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ResourcesAPI.CancelVolumeBackupExclusion(context.Background(), projectId, id, volumeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.CancelVolumeBackupExclusion``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | Eon-assigned ID of the EC2 resource. | 
+**volumeId** | **string** | AWS EBS volume ID (&#x60;vol-…&#x60;) of the volume to include back in backup. The volume must be attached to this EC2 instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelVolumeBackupExclusionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ExcludeResourceFromBackup
 
 > ExcludeFromBackupResponse ExcludeResourceFromBackup(ctx, projectId, id).Execute()
@@ -146,6 +222,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ExcludeFromBackupResponse**](ExcludeFromBackupResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ExcludeVolumeFromBackup
+
+> ExcludeVolumeFromBackup(ctx, projectId, id, volumeId).Execute()
+
+Exclude Volume from Backup
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the EC2 resource.
+	volumeId := "vol-049df61146c064d1c" // string | AWS EBS volume ID (`vol-…`) of the volume to exclude from backup. The volume must be attached to this EC2 instance and must not be the root volume.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ResourcesAPI.ExcludeVolumeFromBackup(context.Background(), projectId, id, volumeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.ExcludeVolumeFromBackup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | Eon-assigned ID of the EC2 resource. | 
+**volumeId** | **string** | AWS EBS volume ID (&#x60;vol-…&#x60;) of the volume to exclude from backup. The volume must be attached to this EC2 instance and must not be the root volume. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiExcludeVolumeFromBackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 
