@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ## CancelVolumeBackupExclusion
 
-> CancelVolumeBackupExclusion(ctx, projectId, id, volumeId).Execute()
+> CancelExclusionFromBackupResponse CancelVolumeBackupExclusion(ctx, projectId, id, volumeId).Execute()
 
 Cancel Volume Backup Exclusion
 
@@ -117,11 +117,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ResourcesAPI.CancelVolumeBackupExclusion(context.Background(), projectId, id, volumeId).Execute()
+	resp, r, err := apiClient.ResourcesAPI.CancelVolumeBackupExclusion(context.Background(), projectId, id, volumeId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.CancelVolumeBackupExclusion``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `CancelVolumeBackupExclusion`: CancelExclusionFromBackupResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.CancelVolumeBackupExclusion`: %v\n", resp)
 }
 ```
 
@@ -148,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**CancelExclusionFromBackupResponse**](CancelExclusionFromBackupResponse.md)
 
 ### Authorization
 
@@ -239,7 +241,7 @@ Name | Type | Description  | Notes
 
 ## ExcludeVolumeFromBackup
 
-> ExcludeVolumeFromBackup(ctx, projectId, id, volumeId).Execute()
+> ExcludeFromBackupResponse ExcludeVolumeFromBackup(ctx, projectId, id, volumeId).Execute()
 
 Exclude Volume from Backup
 
@@ -264,11 +266,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ResourcesAPI.ExcludeVolumeFromBackup(context.Background(), projectId, id, volumeId).Execute()
+	resp, r, err := apiClient.ResourcesAPI.ExcludeVolumeFromBackup(context.Background(), projectId, id, volumeId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.ExcludeVolumeFromBackup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `ExcludeVolumeFromBackup`: ExcludeFromBackupResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.ExcludeVolumeFromBackup`: %v\n", resp)
 }
 ```
 
@@ -295,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ExcludeFromBackupResponse**](ExcludeFromBackupResponse.md)
 
 ### Authorization
 

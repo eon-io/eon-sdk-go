@@ -277,6 +277,7 @@ docs/RestoreAzureVmInstanceRequest.md
 docs/RestoreBigQueryDatasetRequest.md
 docs/RestoreBucketRequest.md
 docs/RestoreDbToRdsInstanceRequest.md
+docs/RestoreDestinationLimits.md
 docs/RestoreDynamoDBTableRequest.md
 docs/RestoreFilesRequest.md
 docs/RestoreGcpCloudSqlRequest.md
@@ -342,6 +343,7 @@ docs/TimeFrame.md
 docs/TimeOfDay.md
 docs/TimeOfYear.md
 docs/TokenResponse.md
+docs/UpdateAwsSourceAccountAttributes.md
 docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
 docs/UpdateIdpGroupRequest.md
@@ -350,6 +352,9 @@ docs/UpdateRestoreAccountConnectivityConfigRequest.md
 docs/UpdateRestoreAccountConnectivityConfigResponse.md
 docs/UpdateRoleRequest.md
 docs/UpdateRoleResponse.md
+docs/UpdateSourceAccountAttributesInput.md
+docs/UpdateSourceAccountRequest.md
+docs/UpdateSourceAccountResponse.md
 docs/UpdateVaultRequest.md
 docs/UpdateVaultResponse.md
 docs/Usage.md
@@ -612,6 +617,7 @@ model_restore_azure_vm_instance_request.go
 model_restore_big_query_dataset_request.go
 model_restore_bucket_request.go
 model_restore_db_to_rds_instance_request.go
+model_restore_destination_limits.go
 model_restore_dynamo_db_table_request.go
 model_restore_files_request.go
 model_restore_gcp_cloud_sql_request.go
@@ -676,6 +682,7 @@ model_time_frame.go
 model_time_of_day.go
 model_time_of_year.go
 model_token_response.go
+model_update_aws_source_account_attributes.go
 model_update_backup_policy_request.go
 model_update_backup_policy_response.go
 model_update_idp_group_request.go
@@ -684,6 +691,9 @@ model_update_restore_account_connectivity_config_request.go
 model_update_restore_account_connectivity_config_response.go
 model_update_role_request.go
 model_update_role_response.go
+model_update_source_account_attributes_input.go
+model_update_source_account_request.go
+model_update_source_account_response.go
 model_update_vault_request.go
 model_update_vault_response.go
 model_usage.go

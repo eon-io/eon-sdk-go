@@ -328,4 +328,19 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService UpdateSourceAccount", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var accountId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.UpdateSourceAccount(context.Background(), projectId, accountId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }

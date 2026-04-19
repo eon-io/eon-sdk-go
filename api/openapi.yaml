@@ -874,6 +874,77 @@ paths:
       x-permissions: []
       x-audit-log:
         excluded: true
+  /v1/projects/{projectId}/source-accounts/{accountId}:
+    patch:
+      description: |
+        Description: Updates source account fields. Editable fields depend on the account's cloud provider.
+        For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
+      operationId: updateSourceAccount
+      parameters:
+      - description: ID of the project.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the source account to update.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSourceAccountRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSourceAccountResponse'
+          description: Source account updated.
+        "400":
+          description: Invalid request.
+        "404":
+          description: Source account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update Source Account
+      tags:
+      - accounts
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:source_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: source_cloud_account
+          in: path
+          key: accountId
   /v1/projects/{projectId}/source-accounts/{accountId}/disconnect:
     post:
       description: |
@@ -5438,6 +5509,10 @@ paths:
         style: simple
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExcludeFromBackupResponse'
           description: Volume excluded from backup.
         "400":
           description: "Invalid request (e.g., root volume or non-EBS volume)."
@@ -5518,6 +5593,10 @@ paths:
         style: simple
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelExclusionFromBackupResponse'
           description: Volume backup exclusion cancelled.
         "400":
           description: "Invalid request (e.g., non-EC2 resource or non-EBS volume)."
@@ -7057,8 +7136,35 @@ components:
       - expression
       - id
       type: object
+    RestoreDestinationLimits:
+      example:
+        effect: INCLUSIVE
+        restoreAccountProviderIds:
+        - restoreAccountProviderIds
+        - restoreAccountProviderIds
+      nullable: true
+      properties:
+        effect:
+          $ref: '#/components/schemas/AccessConditionEffect'
+        restoreAccountProviderIds:
+          description: |
+            List of restore account provider IDs to match against.
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - effect
+      - restoreAccountProviderIds
+      type: object
+      x-internal: false
     CreateRoleRequest:
       example:
+        restoreDestinationLimits:
+          effect: INCLUSIVE
+          restoreAccountProviderIds:
+          - restoreAccountProviderIds
+          - restoreAccountProviderIds
         permissionGrants:
         - accessConditionId: Non-PII only.
           permission: inventory.view
@@ -7261,6 +7367,8 @@ components:
           items:
             $ref: '#/components/schemas/AccessCondition'
           type: array
+        restoreDestinationLimits:
+          $ref: '#/components/schemas/RestoreDestinationLimits'
       required:
       - name
       - permissionGrants
@@ -7285,6 +7393,11 @@ components:
     Role:
       description: Role.
       example:
+        restoreDestinationLimits:
+          effect: INCLUSIVE
+          restoreAccountProviderIds:
+          - restoreAccountProviderIds
+          - restoreAccountProviderIds
         permissionGrants:
         - accessConditionId: Non-PII only.
           permission: inventory.view
@@ -7500,6 +7613,8 @@ components:
           items:
             $ref: '#/components/schemas/AccessCondition'
           type: array
+        restoreDestinationLimits:
+          $ref: '#/components/schemas/RestoreDestinationLimits'
       required:
       - id
       - isBuiltInRole
@@ -7510,6 +7625,11 @@ components:
     CreateRoleResponse:
       example:
         role:
+          restoreDestinationLimits:
+            effect: INCLUSIVE
+            restoreAccountProviderIds:
+            - restoreAccountProviderIds
+            - restoreAccountProviderIds
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -7705,7 +7825,12 @@ components:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         roles:
-        - permissionGrants:
+        - restoreDestinationLimits:
+            effect: INCLUSIVE
+            restoreAccountProviderIds:
+            - restoreAccountProviderIds
+            - restoreAccountProviderIds
+          permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
           - accessConditionId: Non-PII only.
@@ -7890,7 +8015,12 @@ components:
             effect: INCLUSIVE
             id: Non-PII only
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
-        - permissionGrants:
+        - restoreDestinationLimits:
+            effect: INCLUSIVE
+            restoreAccountProviderIds:
+            - restoreAccountProviderIds
+            - restoreAccountProviderIds
+          permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
           - accessConditionId: Non-PII only.
@@ -8096,6 +8226,11 @@ components:
     GetRoleResponse:
       example:
         role:
+          restoreDestinationLimits:
+            effect: INCLUSIVE
+            restoreAccountProviderIds:
+            - restoreAccountProviderIds
+            - restoreAccountProviderIds
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -8289,6 +8424,11 @@ components:
       type: object
     UpdateRoleRequest:
       example:
+        restoreDestinationLimits:
+          effect: INCLUSIVE
+          restoreAccountProviderIds:
+          - restoreAccountProviderIds
+          - restoreAccountProviderIds
         permissionGrants:
         - accessConditionId: Non-PII only.
           permission: inventory.view
@@ -8486,6 +8626,8 @@ components:
           items:
             $ref: '#/components/schemas/AccessCondition'
           type: array
+        restoreDestinationLimits:
+          $ref: '#/components/schemas/RestoreDestinationLimits'
       required:
       - name
       - permissionGrants
@@ -8493,6 +8635,11 @@ components:
     UpdateRoleResponse:
       example:
         role:
+          restoreDestinationLimits:
+            effect: INCLUSIVE
+            restoreAccountProviderIds:
+            - restoreAccountProviderIds
+            - restoreAccountProviderIds
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -9615,6 +9762,82 @@ components:
       - accounts
       - totalCount
       type: object
+    UpdateAwsSourceAccountAttributes:
+      description: |
+        Updatable AWS account fields.
+        Applicable when the source account's cloud provider is `AWS`.
+      example:
+        roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+      nullable: true
+      properties:
+        roleArn:
+          description: |
+            ARN of the role Eon assumes to access the account in AWS.
+            Only the role name portion of the ARN can be changed; the AWS account ID must remain the same.
+            To use a different AWS account, disconnect and connect a new source account.
+          example: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          type: string
+          x-nullable: true
+      type: object
+    UpdateSourceAccountAttributesInput:
+      description: |
+        Cloud-provider-specific fields to update.
+        Only the key matching the account's cloud provider should be set.
+      example:
+        aws:
+          roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+      properties:
+        aws:
+          $ref: '#/components/schemas/UpdateAwsSourceAccountAttributes'
+      type: object
+    UpdateSourceAccountRequest:
+      example:
+        name: name
+        sourceAccountAttributes:
+          aws:
+            roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+      properties:
+        name:
+          description: Display name for the source account in Eon.
+          type: string
+          x-internal: false
+          x-nullable: true
+        sourceAccountAttributes:
+          $ref: '#/components/schemas/UpdateSourceAccountAttributesInput'
+      type: object
+    UpdateSourceAccountResponse:
+      example:
+        sourceAccount:
+          providerAccountId: "123412341234"
+          name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          sourceAccountAttributes:
+            gcp:
+              organizationId: "123456789012"
+              serviceAccount: serviceAccount
+              folderId: "987654321098"
+            cloudProvider: AWS
+            aws:
+              organizationId: o-1234567890
+              roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
+              eonInternalResourceGroupName: eon-source-internal-rg
+              subscriptionId: 12345678-1234-1234-1234-123456789012
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: 1.2.0
+          status: CONNECTED
+      properties:
+        sourceAccount:
+          $ref: '#/components/schemas/SourceAccount'
+      required:
+      - sourceAccount
+      type: object
     DisconnectSourceAccountResponse:
       example:
         sourceAccount:
@@ -10171,11 +10394,12 @@ components:
           $ref: '#/components/schemas/RestoreAccountCloudAttributes'
         isRestoreAllowed:
           description: "Whether the current user's role permits restoring to this\
-            \ account, based on the role's restore account access condition."
+            \ account, based on the role's restore destination limits."
           type: boolean
           x-internal: false
       required:
       - id
+      - isRestoreAllowed
       - name
       - providerAccountId
       - restoreAccountAttributes

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of the role | 
 **PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | The permissions of the role | 
 **AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | The condition of the role, keyed by name | [optional] 
+**RestoreDestinationLimits** | Pointer to [**NullableRestoreDestinationLimits**](RestoreDestinationLimits.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +93,41 @@ SetAccessConditions sets AccessConditions field to given value.
 
 HasAccessConditions returns a boolean if a field has been set.
 
+### GetRestoreDestinationLimits
+
+`func (o *UpdateRoleRequest) GetRestoreDestinationLimits() RestoreDestinationLimits`
+
+GetRestoreDestinationLimits returns the RestoreDestinationLimits field if non-nil, zero value otherwise.
+
+### GetRestoreDestinationLimitsOk
+
+`func (o *UpdateRoleRequest) GetRestoreDestinationLimitsOk() (*RestoreDestinationLimits, bool)`
+
+GetRestoreDestinationLimitsOk returns a tuple with the RestoreDestinationLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreDestinationLimits
+
+`func (o *UpdateRoleRequest) SetRestoreDestinationLimits(v RestoreDestinationLimits)`
+
+SetRestoreDestinationLimits sets RestoreDestinationLimits field to given value.
+
+### HasRestoreDestinationLimits
+
+`func (o *UpdateRoleRequest) HasRestoreDestinationLimits() bool`
+
+HasRestoreDestinationLimits returns a boolean if a field has been set.
+
+### SetRestoreDestinationLimitsNil
+
+`func (o *UpdateRoleRequest) SetRestoreDestinationLimitsNil(b bool)`
+
+ SetRestoreDestinationLimitsNil sets the value for RestoreDestinationLimits to be an explicit nil
+
+### UnsetRestoreDestinationLimits
+`func (o *UpdateRoleRequest) UnsetRestoreDestinationLimits()`
+
+UnsetRestoreDestinationLimits ensures that no value is present for RestoreDestinationLimits, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

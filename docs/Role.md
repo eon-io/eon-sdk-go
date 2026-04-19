@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **IsBuiltInRole** | **bool** | Whether the role is a default role. If &#x60;true&#x60;, the role is a default role provided by Eon and can&#39;t be modified or deleted. If &#x60;false&#x60;, the role is a custom, user-created role.  | 
 **PermissionGrants** | [**[]PermissionGrant**](PermissionGrant.md) | List of permissions granted by the role. | 
 **AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | Sets of access conditions that restrict the resources a permission is granted for. IDs are set by you and are applied to the relevant permission in &#x60;permissionGrants&#x60;. An access condition can be applied to more than one permission grant.  | [optional] 
+**RestoreDestinationLimits** | Pointer to [**NullableRestoreDestinationLimits**](RestoreDestinationLimits.md) |  | [optional] 
 
 ## Methods
 
@@ -134,6 +135,41 @@ SetAccessConditions sets AccessConditions field to given value.
 
 HasAccessConditions returns a boolean if a field has been set.
 
+### GetRestoreDestinationLimits
+
+`func (o *Role) GetRestoreDestinationLimits() RestoreDestinationLimits`
+
+GetRestoreDestinationLimits returns the RestoreDestinationLimits field if non-nil, zero value otherwise.
+
+### GetRestoreDestinationLimitsOk
+
+`func (o *Role) GetRestoreDestinationLimitsOk() (*RestoreDestinationLimits, bool)`
+
+GetRestoreDestinationLimitsOk returns a tuple with the RestoreDestinationLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreDestinationLimits
+
+`func (o *Role) SetRestoreDestinationLimits(v RestoreDestinationLimits)`
+
+SetRestoreDestinationLimits sets RestoreDestinationLimits field to given value.
+
+### HasRestoreDestinationLimits
+
+`func (o *Role) HasRestoreDestinationLimits() bool`
+
+HasRestoreDestinationLimits returns a boolean if a field has been set.
+
+### SetRestoreDestinationLimitsNil
+
+`func (o *Role) SetRestoreDestinationLimitsNil(b bool)`
+
+ SetRestoreDestinationLimitsNil sets the value for RestoreDestinationLimits to be an explicit nil
+
+### UnsetRestoreDestinationLimits
+`func (o *Role) UnsetRestoreDestinationLimits()`
+
+UnsetRestoreDestinationLimits ensures that no value is present for RestoreDestinationLimits, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

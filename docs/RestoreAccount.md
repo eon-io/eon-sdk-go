@@ -12,13 +12,13 @@ Name | Type | Description | Notes
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
 **ConnectedTime** | Pointer to **time.Time** | Date and time the account was connected to Eon. | [optional] 
 **RestoreAccountAttributes** | [**RestoreAccountCloudAttributes**](RestoreAccountCloudAttributes.md) |  | 
-**IsRestoreAllowed** | Pointer to **bool** | Whether the current user&#39;s role permits restoring to this account, based on the role&#39;s restore account access condition. | [optional] 
+**IsRestoreAllowed** | **bool** | Whether the current user&#39;s role permits restoring to this account, based on the role&#39;s restore destination limits. | 
 
 ## Methods
 
 ### NewRestoreAccount
 
-`func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, restoreAccountAttributes RestoreAccountCloudAttributes, ) *RestoreAccount`
+`func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, restoreAccountAttributes RestoreAccountCloudAttributes, isRestoreAllowed bool, ) *RestoreAccount`
 
 NewRestoreAccount instantiates a new RestoreAccount object
 This constructor will assign default values to properties that have it defined,
@@ -227,11 +227,6 @@ and a boolean to check if the value has been set.
 
 SetIsRestoreAllowed sets IsRestoreAllowed field to given value.
 
-### HasIsRestoreAllowed
-
-`func (o *RestoreAccount) HasIsRestoreAllowed() bool`
-
-HasIsRestoreAllowed returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

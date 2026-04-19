@@ -35,8 +35,8 @@ type RestoreAccount struct {
 	// Date and time the account was connected to Eon.
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
 	RestoreAccountAttributes RestoreAccountCloudAttributes `json:"restoreAccountAttributes"`
-	// Whether the current user's role permits restoring to this account, based on the role's restore account access condition.
-	IsRestoreAllowed *bool `json:"isRestoreAllowed,omitempty"`
+	// Whether the current user's role permits restoring to this account, based on the role's restore destination limits.
+	IsRestoreAllowed bool `json:"isRestoreAllowed"`
 }
 
 type _RestoreAccount RestoreAccount
@@ -45,13 +45,14 @@ type _RestoreAccount RestoreAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, restoreAccountAttributes RestoreAccountCloudAttributes) *RestoreAccount {
+func NewRestoreAccount(id string, providerAccountId string, name string, status AccountState, restoreAccountAttributes RestoreAccountCloudAttributes, isRestoreAllowed bool) *RestoreAccount {
 	this := RestoreAccount{}
 	this.Id = id
 	this.ProviderAccountId = providerAccountId
 	this.Name = name
 	this.Status = status
 	this.RestoreAccountAttributes = restoreAccountAttributes
+	this.IsRestoreAllowed = isRestoreAllowed
 	return &this
 }
 
@@ -279,36 +280,28 @@ func (o *RestoreAccount) SetRestoreAccountAttributes(v RestoreAccountCloudAttrib
 	o.RestoreAccountAttributes = v
 }
 
-// GetIsRestoreAllowed returns the IsRestoreAllowed field value if set, zero value otherwise.
+// GetIsRestoreAllowed returns the IsRestoreAllowed field value
 func (o *RestoreAccount) GetIsRestoreAllowed() bool {
-	if o == nil || IsNil(o.IsRestoreAllowed) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsRestoreAllowed
+
+	return o.IsRestoreAllowed
 }
 
-// GetIsRestoreAllowedOk returns a tuple with the IsRestoreAllowed field value if set, nil otherwise
+// GetIsRestoreAllowedOk returns a tuple with the IsRestoreAllowed field value
 // and a boolean to check if the value has been set.
 func (o *RestoreAccount) GetIsRestoreAllowedOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsRestoreAllowed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsRestoreAllowed, true
+	return &o.IsRestoreAllowed, true
 }
 
-// HasIsRestoreAllowed returns a boolean if a field has been set.
-func (o *RestoreAccount) HasIsRestoreAllowed() bool {
-	if o != nil && !IsNil(o.IsRestoreAllowed) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsRestoreAllowed gets a reference to the given bool and assigns it to the IsRestoreAllowed field.
+// SetIsRestoreAllowed sets field value
 func (o *RestoreAccount) SetIsRestoreAllowed(v bool) {
-	o.IsRestoreAllowed = &v
+	o.IsRestoreAllowed = v
 }
 
 func (o RestoreAccount) MarshalJSON() ([]byte, error) {
@@ -335,9 +328,7 @@ func (o RestoreAccount) ToMap() (map[string]interface{}, error) {
 		toSerialize["connectedTime"] = o.ConnectedTime
 	}
 	toSerialize["restoreAccountAttributes"] = o.RestoreAccountAttributes
-	if !IsNil(o.IsRestoreAllowed) {
-		toSerialize["isRestoreAllowed"] = o.IsRestoreAllowed
-	}
+	toSerialize["isRestoreAllowed"] = o.IsRestoreAllowed
 	return toSerialize, nil
 }
 
@@ -351,6 +342,7 @@ func (o *RestoreAccount) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"status",
 		"restoreAccountAttributes",
+		"isRestoreAllowed",
 	}
 
 	allProperties := make(map[string]interface{})

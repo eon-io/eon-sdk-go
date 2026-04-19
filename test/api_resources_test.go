@@ -45,9 +45,10 @@ func Test_eon_ResourcesAPIService(t *testing.T) {
 		var id string
 		var volumeId string
 
-		httpRes, err := apiClient.ResourcesAPI.CancelVolumeBackupExclusion(context.Background(), projectId, id, volumeId).Execute()
+		resp, httpRes, err := apiClient.ResourcesAPI.CancelVolumeBackupExclusion(context.Background(), projectId, id, volumeId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -75,9 +76,10 @@ func Test_eon_ResourcesAPIService(t *testing.T) {
 		var id string
 		var volumeId string
 
-		httpRes, err := apiClient.ResourcesAPI.ExcludeVolumeFromBackup(context.Background(), projectId, id, volumeId).Execute()
+		resp, httpRes, err := apiClient.ResourcesAPI.ExcludeVolumeFromBackup(context.Background(), projectId, id, volumeId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

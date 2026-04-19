@@ -27,6 +27,7 @@ type UpdateRoleRequest struct {
 	PermissionGrants []PermissionGrantInput `json:"permissionGrants"`
 	// The condition of the role, keyed by name
 	AccessConditions []AccessCondition `json:"accessConditions,omitempty"`
+	RestoreDestinationLimits NullableRestoreDestinationLimits `json:"restoreDestinationLimits,omitempty"`
 }
 
 type _UpdateRoleRequest UpdateRoleRequest
@@ -130,6 +131,48 @@ func (o *UpdateRoleRequest) SetAccessConditions(v []AccessCondition) {
 	o.AccessConditions = v
 }
 
+// GetRestoreDestinationLimits returns the RestoreDestinationLimits field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateRoleRequest) GetRestoreDestinationLimits() RestoreDestinationLimits {
+	if o == nil || IsNil(o.RestoreDestinationLimits.Get()) {
+		var ret RestoreDestinationLimits
+		return ret
+	}
+	return *o.RestoreDestinationLimits.Get()
+}
+
+// GetRestoreDestinationLimitsOk returns a tuple with the RestoreDestinationLimits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateRoleRequest) GetRestoreDestinationLimitsOk() (*RestoreDestinationLimits, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RestoreDestinationLimits.Get(), o.RestoreDestinationLimits.IsSet()
+}
+
+// HasRestoreDestinationLimits returns a boolean if a field has been set.
+func (o *UpdateRoleRequest) HasRestoreDestinationLimits() bool {
+	if o != nil && o.RestoreDestinationLimits.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreDestinationLimits gets a reference to the given NullableRestoreDestinationLimits and assigns it to the RestoreDestinationLimits field.
+func (o *UpdateRoleRequest) SetRestoreDestinationLimits(v RestoreDestinationLimits) {
+	o.RestoreDestinationLimits.Set(&v)
+}
+// SetRestoreDestinationLimitsNil sets the value for RestoreDestinationLimits to be an explicit nil
+func (o *UpdateRoleRequest) SetRestoreDestinationLimitsNil() {
+	o.RestoreDestinationLimits.Set(nil)
+}
+
+// UnsetRestoreDestinationLimits ensures that no value is present for RestoreDestinationLimits, not even an explicit nil
+func (o *UpdateRoleRequest) UnsetRestoreDestinationLimits() {
+	o.RestoreDestinationLimits.Unset()
+}
+
 func (o UpdateRoleRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -144,6 +187,9 @@ func (o UpdateRoleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["permissionGrants"] = o.PermissionGrants
 	if !IsNil(o.AccessConditions) {
 		toSerialize["accessConditions"] = o.AccessConditions
+	}
+	if o.RestoreDestinationLimits.IsSet() {
+		toSerialize["restoreDestinationLimits"] = o.RestoreDestinationLimits.Get()
 	}
 	return toSerialize, nil
 }

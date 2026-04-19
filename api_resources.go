@@ -160,7 +160,7 @@ type ApiCancelVolumeBackupExclusionRequest struct {
 	volumeId string
 }
 
-func (r ApiCancelVolumeBackupExclusionRequest) Execute() (*http.Response, error) {
+func (r ApiCancelVolumeBackupExclusionRequest) Execute() (*CancelExclusionFromBackupResponse, *http.Response, error) {
 	return r.ApiService.CancelVolumeBackupExclusionExecute(r)
 }
 
@@ -188,16 +188,18 @@ func (a *ResourcesAPIService) CancelVolumeBackupExclusion(ctx context.Context, p
 }
 
 // Execute executes the request
-func (a *ResourcesAPIService) CancelVolumeBackupExclusionExecute(r ApiCancelVolumeBackupExclusionRequest) (*http.Response, error) {
+//  @return CancelExclusionFromBackupResponse
+func (a *ResourcesAPIService) CancelVolumeBackupExclusionExecute(r ApiCancelVolumeBackupExclusionRequest) (*CancelExclusionFromBackupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *CancelExclusionFromBackupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.CancelVolumeBackupExclusion")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/include"
@@ -228,19 +230,19 @@ func (a *ResourcesAPIService) CancelVolumeBackupExclusionExecute(r ApiCancelVolu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -253,26 +255,35 @@ func (a *ResourcesAPIService) CancelVolumeBackupExclusionExecute(r ApiCancelVolu
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiExcludeResourceFromBackupRequest struct {
@@ -414,7 +425,7 @@ type ApiExcludeVolumeFromBackupRequest struct {
 	volumeId string
 }
 
-func (r ApiExcludeVolumeFromBackupRequest) Execute() (*http.Response, error) {
+func (r ApiExcludeVolumeFromBackupRequest) Execute() (*ExcludeFromBackupResponse, *http.Response, error) {
 	return r.ApiService.ExcludeVolumeFromBackupExecute(r)
 }
 
@@ -444,16 +455,18 @@ func (a *ResourcesAPIService) ExcludeVolumeFromBackup(ctx context.Context, proje
 }
 
 // Execute executes the request
-func (a *ResourcesAPIService) ExcludeVolumeFromBackupExecute(r ApiExcludeVolumeFromBackupRequest) (*http.Response, error) {
+//  @return ExcludeFromBackupResponse
+func (a *ResourcesAPIService) ExcludeVolumeFromBackupExecute(r ApiExcludeVolumeFromBackupRequest) (*ExcludeFromBackupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *ExcludeFromBackupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.ExcludeVolumeFromBackup")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/exclude"
@@ -484,19 +497,19 @@ func (a *ResourcesAPIService) ExcludeVolumeFromBackupExecute(r ApiExcludeVolumeF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -509,26 +522,35 @@ func (a *ResourcesAPIService) ExcludeVolumeFromBackupExecute(r ApiExcludeVolumeF
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode >= 500 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceRequest struct {

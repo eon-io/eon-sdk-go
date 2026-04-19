@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**ReconnectSourceAccount**](AccountsAPI.md#ReconnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts/{accountId}/reconnect | Reconnect Source Account
 [**ReconnectSourceAwsOrganizationalUnit**](AccountsAPI.md#ReconnectSourceAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/reconnect | Reconnect Source AWS Organizational Unit
 [**UpdateRestoreAccountConnectivityConfig**](AccountsAPI.md#UpdateRestoreAccountConnectivityConfig) | **Put** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Update Restore Account Connectivity Configuration
+[**UpdateSourceAccount**](AccountsAPI.md#UpdateSourceAccount) | **Patch** /v1/projects/{projectId}/source-accounts/{accountId} | Update Source Account
 
 
 
@@ -1550,6 +1551,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateRestoreAccountConnectivityConfigResponse**](UpdateRestoreAccountConnectivityConfigResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateSourceAccount
+
+> UpdateSourceAccountResponse UpdateSourceAccount(ctx, projectId, accountId).UpdateSourceAccountRequest(updateSourceAccountRequest).Execute()
+
+Update Source Account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project.
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the source account to update.
+	updateSourceAccountRequest := *openapiclient.NewUpdateSourceAccountRequest() // UpdateSourceAccountRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.UpdateSourceAccount(context.Background(), projectId, accountId).UpdateSourceAccountRequest(updateSourceAccountRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.UpdateSourceAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateSourceAccount`: UpdateSourceAccountResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.UpdateSourceAccount`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project. | 
+**accountId** | **string** | Eon-assigned ID of the source account to update. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateSourceAccountRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateSourceAccountRequest** | [**UpdateSourceAccountRequest**](UpdateSourceAccountRequest.md) |  | 
+
+### Return type
+
+[**UpdateSourceAccountResponse**](UpdateSourceAccountResponse.md)
 
 ### Authorization
 
