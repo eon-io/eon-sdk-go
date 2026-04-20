@@ -875,6 +875,61 @@ paths:
       x-audit-log:
         excluded: true
   /v1/projects/{projectId}/source-accounts/{accountId}:
+    get:
+      description: "Description: Retrieve the details of a source account by its ID."
+      operationId: getSourceAccount
+      parameters:
+      - description: ID of the project.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the source account.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSourceAccountResponse'
+          description: Source account details.
+        "404":
+          description: Source account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Source Account
+      tags:
+      - accounts
+      x-data-access:
+        excluded: true
+      x-permissions: []
+      x-audit-log:
+        excluded: true
     patch:
       description: |
         Description: Updates source account fields. Editable fields depend on the account's cloud provider.
@@ -2648,6 +2703,10 @@ paths:
       x-internal: false
       x-data-access:
         excluded: true
+        entityRefs:
+        - entityType: backup_policy_retention
+          in: reqBody
+          key: backupPlan
       x-permissions:
       - create:policies
       x-audit-log:
@@ -2891,6 +2950,10 @@ paths:
       x-internal: false
       x-data-access:
         excluded: true
+        entityRefs:
+        - entityType: backup_policy_retention
+          in: reqBody
+          key: backupPlan
       x-permissions:
       - update:policies
       x-audit-log:
@@ -9761,6 +9824,39 @@ components:
       required:
       - accounts
       - totalCount
+      type: object
+    GetSourceAccountResponse:
+      example:
+        sourceAccount:
+          providerAccountId: "123412341234"
+          name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          sourceAccountAttributes:
+            gcp:
+              organizationId: "123456789012"
+              serviceAccount: serviceAccount
+              folderId: "987654321098"
+            cloudProvider: AWS
+            aws:
+              organizationId: o-1234567890
+              roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
+              eonInternalResourceGroupName: eon-source-internal-rg
+              subscriptionId: 12345678-1234-1234-1234-123456789012
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: 1.2.0
+          status: CONNECTED
+      properties:
+        sourceAccount:
+          $ref: '#/components/schemas/SourceAccount'
+      required:
+      - sourceAccount
       type: object
     UpdateAwsSourceAccountAttributes:
       description: |
