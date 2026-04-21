@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ## ListBackupPolicies
 
-> ListBackupPoliciesResponse ListBackupPolicies(ctx, projectId).Execute()
+> ListBackupPoliciesResponse ListBackupPolicies(ctx, projectId).PageToken(pageToken).PageSize(pageSize).Execute()
 
 List Backup Policies
 
@@ -250,10 +250,12 @@ import (
 
 func main() {
 	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policies you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
+	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BackupPoliciesAPI.ListBackupPolicies(context.Background(), projectId).Execute()
+	resp, r, err := apiClient.BackupPoliciesAPI.ListBackupPolicies(context.Background(), projectId).PageToken(pageToken).PageSize(pageSize).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupPoliciesAPI.ListBackupPolicies``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -279,6 +281,8 @@ Other parameters are passed through a pointer to a apiListBackupPoliciesRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
+ **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
 
 ### Return type
 

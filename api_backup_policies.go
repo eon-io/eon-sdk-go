@@ -407,6 +407,20 @@ type ApiListBackupPoliciesRequest struct {
 	ctx context.Context
 	ApiService *BackupPoliciesAPIService
 	projectId string
+	pageToken *string
+	pageSize *int32
+}
+
+// Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
+func (r ApiListBackupPoliciesRequest) PageToken(pageToken string) ApiListBackupPoliciesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// Maximum number of items to return in the response.
+func (r ApiListBackupPoliciesRequest) PageSize(pageSize int32) ApiListBackupPoliciesRequest {
+	r.pageSize = &pageSize
+	return r
 }
 
 func (r ApiListBackupPoliciesRequest) Execute() (*ListBackupPoliciesResponse, *http.Response, error) {
@@ -453,6 +467,15 @@ func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoli
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 50
+		r.pageSize = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

@@ -1750,6 +1750,72 @@ paths:
       - read:restore_accounts
       x-audit-log:
         excluded: true
+  /v1/projects/{projectId}/restore-accounts/{accountId}:
+    delete:
+      description: |
+        Description: Removes a restore account from the project. The account must not be in a connected state.
+      operationId: DeleteRestoreAccountV1
+      parameters:
+      - description: |
+          ID of the project.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account to delete.
+        example: 64a698c5-540d-5d09-80f7-f4c39c7045c1
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Restore account deleted.
+        "404":
+          description: Restore account not found.
+        "409":
+          description: Restore account is connected and cannot be deleted. Disconnect
+            it first.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete Restore Account
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:restore_accounts
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: account
+          in: path
+          key: accountId
   /v1/projects/{projectId}/restore-accounts/{accountId}/disconnect:
     post:
       description: |
@@ -2733,6 +2799,31 @@ paths:
           format: uuid
           type: string
         style: simple
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+          To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.
+        example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
       responses:
         "200":
           content:

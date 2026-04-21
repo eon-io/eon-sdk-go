@@ -78,6 +78,20 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService DeleteRestoreAccountV1", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var accountId string
+
+		httpRes, err := apiClient.AccountsAPI.DeleteRestoreAccountV1(context.Background(), projectId, accountId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService DisableRestoreAccountMetricsConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
