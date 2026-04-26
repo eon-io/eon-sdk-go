@@ -109,6 +109,8 @@
 
 * `ATLAS_CLUSTER_RECORD_RESTORE` (value: `"ATLAS_CLUSTER_RECORD_RESTORE"`)
 
+* `EXPORT_ACCESS_DENIED_ITEMS` (value: `"EXPORT_ACCESS_DENIED_ITEMS"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

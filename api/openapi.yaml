@@ -12433,6 +12433,7 @@ components:
       - AWS_KEYSPACES_RECORD_RESTORE
       - ATLAS_CLUSTER_RESTORE
       - ATLAS_CLUSTER_RECORD_RESTORE
+      - EXPORT_ACCESS_DENIED_ITEMS
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
     RestoreJobTypeFilters:
