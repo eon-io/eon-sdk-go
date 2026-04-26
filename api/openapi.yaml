@@ -1816,6 +1816,76 @@ paths:
         - entityType: account
           in: path
           key: accountId
+    patch:
+      description: |
+        Description: Updates restore account fields. Editable fields depend on the account's cloud provider.
+        For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
+      operationId: updateRestoreAccount
+      parameters:
+      - description: ID of the project.
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account to update.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRestoreAccountRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRestoreAccountResponse'
+          description: Restore account updated.
+        "400":
+          description: Invalid request.
+        "404":
+          description: Restore account not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update Restore Account
+      tags:
+      - accounts
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:restore_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: restore_cloud_account
+          in: path
+          key: accountId
   /v1/projects/{projectId}/restore-accounts/{accountId}/disconnect:
     post:
       description: |
@@ -10827,6 +10897,82 @@ components:
       required:
       - accounts
       - totalCount
+      type: object
+    UpdateAwsRestoreAccountAttributes:
+      description: |
+        Updatable AWS account fields.
+        Applicable when the restore account's cloud provider is `AWS`.
+      example:
+        roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+      nullable: true
+      properties:
+        roleArn:
+          description: |
+            ARN of the role Eon assumes to access the account in AWS.
+            Only the role name portion of the ARN can be changed; the AWS account ID must remain the same.
+            To use a different AWS account, disconnect and connect a new restore account.
+          example: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          type: string
+          x-nullable: true
+      type: object
+    UpdateRestoreAccountAttributesInput:
+      description: |
+        Cloud-provider-specific fields to update.
+        Only the key matching the account's cloud provider should be set.
+      example:
+        aws:
+          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+      properties:
+        aws:
+          $ref: '#/components/schemas/UpdateAwsRestoreAccountAttributes'
+      type: object
+    UpdateRestoreAccountRequest:
+      example:
+        restoreAccountAttributes:
+          aws:
+            roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+        name: name
+      properties:
+        name:
+          description: Display name for the restore account in Eon.
+          type: string
+          x-internal: false
+          x-nullable: true
+        restoreAccountAttributes:
+          $ref: '#/components/schemas/UpdateRestoreAccountAttributesInput'
+      type: object
+    UpdateRestoreAccountResponse:
+      example:
+        restoreAccount:
+          restoreAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
+            cloudProvider: AWS
+            aws:
+              organizationId: o-1234567890
+              roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              resourceGroupName: my-resource-group
+              tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-restore-internal-rg
+              subscriptionId: 12345678-1234-1234-1234-123456789012
+          providerAccountId: "123412341234"
+          name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
+          isRestoreAllowed: true
+          id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: 1.2.0
+          status: CONNECTED
+      properties:
+        restoreAccount:
+          $ref: '#/components/schemas/RestoreAccount'
+      required:
+      - restoreAccount
       type: object
     DisconnectRestoreAccountResponse:
       example:
