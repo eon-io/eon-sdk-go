@@ -925,6 +925,7 @@ paths:
       summary: Get Source Account
       tags:
       - accounts
+      x-internal: false
       x-data-access:
         excluded: true
       x-permissions: []
@@ -990,6 +991,7 @@ paths:
       summary: Update Source Account
       tags:
       - accounts
+      x-internal: false
       x-data-access:
         excluded: true
       x-permissions:
@@ -1876,6 +1878,7 @@ paths:
       summary: Update Restore Account
       tags:
       - accounts
+      x-internal: false
       x-data-access:
         excluded: true
       x-permissions:
@@ -6612,6 +6615,9 @@ components:
       - storage_gateway.manage
       - oauth_apps.manage
       - zero_etl_policies.manage
+      - mpa_policies.manage
+      - mpa_policies.view
+      - mpa_requests.manage
       example: inventory.view
       type: string
     Permission:
@@ -7057,6 +7063,7 @@ components:
       - AZURE
       - GCP
       - MONGO_ATLAS
+      - GOOGLE_WORKSPACE
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string

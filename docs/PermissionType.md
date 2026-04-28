@@ -81,6 +81,12 @@
 
 * `ZERO_ETL_POLICIES_MANAGE` (value: `"zero_etl_policies.manage"`)
 
+* `MPA_POLICIES_MANAGE` (value: `"mpa_policies.manage"`)
+
+* `MPA_POLICIES_VIEW` (value: `"mpa_policies.view"`)
+
+* `MPA_REQUESTS_MANAGE` (value: `"mpa_requests.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
