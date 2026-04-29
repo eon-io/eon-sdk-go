@@ -348,6 +348,8 @@ docs/UpdateAwsRestoreAccountAttributes.md
 docs/UpdateAwsSourceAccountAttributes.md
 docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
+docs/UpdateGcpRestoreAccountAttributes.md
+docs/UpdateGcpSourceAccountAttributes.md
 docs/UpdateIdpGroupRequest.md
 docs/UpdateIdpGroupResponse.md
 docs/UpdateRestoreAccountAttributesInput.md
@@ -692,6 +694,8 @@ model_update_aws_restore_account_attributes.go
 model_update_aws_source_account_attributes.go
 model_update_backup_policy_request.go
 model_update_backup_policy_response.go
+model_update_gcp_restore_account_attributes.go
+model_update_gcp_source_account_attributes.go
 model_update_idp_group_request.go
 model_update_idp_group_response.go
 model_update_restore_account_attributes_input.go

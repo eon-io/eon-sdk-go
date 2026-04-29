@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Aws** | Pointer to [**NullableUpdateAwsSourceAccountAttributes**](UpdateAwsSourceAccountAttributes.md) |  | [optional] 
+**Gcp** | Pointer to [**NullableUpdateGcpSourceAccountAttributes**](UpdateGcpSourceAccountAttributes.md) |  | [optional] 
 
 ## Methods
 
@@ -60,6 +61,41 @@ HasAws returns a boolean if a field has been set.
 `func (o *UpdateSourceAccountAttributesInput) UnsetAws()`
 
 UnsetAws ensures that no value is present for Aws, not even an explicit nil
+### GetGcp
+
+`func (o *UpdateSourceAccountAttributesInput) GetGcp() UpdateGcpSourceAccountAttributes`
+
+GetGcp returns the Gcp field if non-nil, zero value otherwise.
+
+### GetGcpOk
+
+`func (o *UpdateSourceAccountAttributesInput) GetGcpOk() (*UpdateGcpSourceAccountAttributes, bool)`
+
+GetGcpOk returns a tuple with the Gcp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcp
+
+`func (o *UpdateSourceAccountAttributesInput) SetGcp(v UpdateGcpSourceAccountAttributes)`
+
+SetGcp sets Gcp field to given value.
+
+### HasGcp
+
+`func (o *UpdateSourceAccountAttributesInput) HasGcp() bool`
+
+HasGcp returns a boolean if a field has been set.
+
+### SetGcpNil
+
+`func (o *UpdateSourceAccountAttributesInput) SetGcpNil(b bool)`
+
+ SetGcpNil sets the value for Gcp to be an explicit nil
+
+### UnsetGcp
+`func (o *UpdateSourceAccountAttributesInput) UnsetGcp()`
+
+UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

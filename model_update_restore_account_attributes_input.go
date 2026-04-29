@@ -20,6 +20,7 @@ var _ MappedNullable = &UpdateRestoreAccountAttributesInput{}
 // UpdateRestoreAccountAttributesInput Cloud-provider-specific fields to update. Only the key matching the account's cloud provider should be set. 
 type UpdateRestoreAccountAttributesInput struct {
 	Aws NullableUpdateAwsRestoreAccountAttributes `json:"aws,omitempty"`
+	Gcp NullableUpdateGcpRestoreAccountAttributes `json:"gcp,omitempty"`
 }
 
 // NewUpdateRestoreAccountAttributesInput instantiates a new UpdateRestoreAccountAttributesInput object
@@ -81,6 +82,48 @@ func (o *UpdateRestoreAccountAttributesInput) UnsetAws() {
 	o.Aws.Unset()
 }
 
+// GetGcp returns the Gcp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateRestoreAccountAttributesInput) GetGcp() UpdateGcpRestoreAccountAttributes {
+	if o == nil || IsNil(o.Gcp.Get()) {
+		var ret UpdateGcpRestoreAccountAttributes
+		return ret
+	}
+	return *o.Gcp.Get()
+}
+
+// GetGcpOk returns a tuple with the Gcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateRestoreAccountAttributesInput) GetGcpOk() (*UpdateGcpRestoreAccountAttributes, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Gcp.Get(), o.Gcp.IsSet()
+}
+
+// HasGcp returns a boolean if a field has been set.
+func (o *UpdateRestoreAccountAttributesInput) HasGcp() bool {
+	if o != nil && o.Gcp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGcp gets a reference to the given NullableUpdateGcpRestoreAccountAttributes and assigns it to the Gcp field.
+func (o *UpdateRestoreAccountAttributesInput) SetGcp(v UpdateGcpRestoreAccountAttributes) {
+	o.Gcp.Set(&v)
+}
+// SetGcpNil sets the value for Gcp to be an explicit nil
+func (o *UpdateRestoreAccountAttributesInput) SetGcpNil() {
+	o.Gcp.Set(nil)
+}
+
+// UnsetGcp ensures that no value is present for Gcp, not even an explicit nil
+func (o *UpdateRestoreAccountAttributesInput) UnsetGcp() {
+	o.Gcp.Unset()
+}
+
 func (o UpdateRestoreAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -93,6 +136,9 @@ func (o UpdateRestoreAccountAttributesInput) ToMap() (map[string]interface{}, er
 	toSerialize := map[string]interface{}{}
 	if o.Aws.IsSet() {
 		toSerialize["aws"] = o.Aws.Get()
+	}
+	if o.Gcp.IsSet() {
+		toSerialize["gcp"] = o.Gcp.Get()
 	}
 	return toSerialize, nil
 }

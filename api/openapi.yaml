@@ -935,6 +935,7 @@ paths:
       description: |
         Description: Updates source account fields. Editable fields depend on the account's cloud provider.
         For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
+        For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
       operationId: updateSourceAccount
       parameters:
       - description: ID of the project.
@@ -1707,7 +1708,6 @@ paths:
         name: pageSize
         required: false
         schema:
-          default: 50
           minimum: 1
           type: integer
         style: form
@@ -1822,6 +1822,7 @@ paths:
       description: |
         Description: Updates restore account fields. Editable fields depend on the account's cloud provider.
         For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
+        For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
       operationId: updateRestoreAccount
       parameters:
       - description: ID of the project.
@@ -3397,7 +3398,6 @@ paths:
         name: pageSize
         required: false
         schema:
-          default: 50
           minimum: 1
           type: integer
         style: form
@@ -10065,21 +10065,46 @@ components:
           type: string
           x-nullable: true
       type: object
+      x-nullable: true
+    UpdateGcpSourceAccountAttributes:
+      description: |
+        Updatable GCP account fields.
+        Applicable when the source account's cloud provider is `GCP`.
+      example:
+        serviceAccount: eon-source@my-project.iam.gserviceaccount.com
+      nullable: true
+      properties:
+        serviceAccount:
+          description: |
+            Email of the service account Eon impersonates to access the GCP project.
+            Only the service account name portion can be changed; the GCP project ID must remain the same.
+            To use a different GCP project, disconnect and connect a new source account.
+          example: eon-source@my-project.iam.gserviceaccount.com
+          type: string
+          x-nullable: true
+      type: object
+      x-nullable: true
     UpdateSourceAccountAttributesInput:
       description: |
         Cloud-provider-specific fields to update.
         Only the key matching the account's cloud provider should be set.
       example:
+        gcp:
+          serviceAccount: eon-source@my-project.iam.gserviceaccount.com
         aws:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       properties:
         aws:
           $ref: '#/components/schemas/UpdateAwsSourceAccountAttributes'
+        gcp:
+          $ref: '#/components/schemas/UpdateGcpSourceAccountAttributes'
       type: object
     UpdateSourceAccountRequest:
       example:
         name: name
         sourceAccountAttributes:
+          gcp:
+            serviceAccount: eon-source@my-project.iam.gserviceaccount.com
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       properties:
@@ -10944,20 +10969,45 @@ components:
           type: string
           x-nullable: true
       type: object
+      x-nullable: true
+    UpdateGcpRestoreAccountAttributes:
+      description: |
+        Updatable GCP account fields.
+        Applicable when the restore account's cloud provider is `GCP`.
+      example:
+        serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
+      nullable: true
+      properties:
+        serviceAccount:
+          description: |
+            Email of the service account Eon impersonates to access the GCP project.
+            Only the service account name portion can be changed; the GCP project ID must remain the same.
+            To use a different GCP project, disconnect and connect a new restore account.
+          example: eon-restore@my-project.iam.gserviceaccount.com
+          type: string
+          x-nullable: true
+      type: object
+      x-nullable: true
     UpdateRestoreAccountAttributesInput:
       description: |
         Cloud-provider-specific fields to update.
         Only the key matching the account's cloud provider should be set.
       example:
+        gcp:
+          serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
         aws:
           roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
       properties:
         aws:
           $ref: '#/components/schemas/UpdateAwsRestoreAccountAttributes'
+        gcp:
+          $ref: '#/components/schemas/UpdateGcpRestoreAccountAttributes'
       type: object
     UpdateRestoreAccountRequest:
       example:
         restoreAccountAttributes:
+          gcp:
+            serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
           aws:
             roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
         name: name
@@ -19110,6 +19160,7 @@ components:
             If `false`, the data classes are automatically detected and listed by Eon.
           type: boolean
       type: object
+      x-nullable: true
     EnvironmentDetails:
       description: Details about the resource's environment.
       example:
@@ -19125,6 +19176,7 @@ components:
             If `false`, the environment is automatically detected and set by Eon.
           type: boolean
       type: object
+      x-nullable: true
     App:
       example:
         paths:
@@ -19177,6 +19229,7 @@ components:
             If `false`, the apps are automatically detected and listed by Eon.
           type: boolean
       type: object
+      x-nullable: true
     Classifications:
       description: Resource classification details.
       example:

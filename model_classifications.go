@@ -19,9 +19,9 @@ var _ MappedNullable = &Classifications{}
 
 // Classifications Resource classification details.
 type Classifications struct {
-	DataClassesDetails *DataClassesDetails `json:"dataClassesDetails,omitempty"`
-	EnvironmentDetails *EnvironmentDetails `json:"environmentDetails,omitempty"`
-	AppsDetails *AppsDetails `json:"appsDetails,omitempty"`
+	DataClassesDetails NullableDataClassesDetails `json:"dataClassesDetails,omitempty"`
+	EnvironmentDetails NullableEnvironmentDetails `json:"environmentDetails,omitempty"`
+	AppsDetails NullableAppsDetails `json:"appsDetails,omitempty"`
 }
 
 // NewClassifications instantiates a new Classifications object
@@ -41,100 +41,130 @@ func NewClassificationsWithDefaults() *Classifications {
 	return &this
 }
 
-// GetDataClassesDetails returns the DataClassesDetails field value if set, zero value otherwise.
+// GetDataClassesDetails returns the DataClassesDetails field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Classifications) GetDataClassesDetails() DataClassesDetails {
-	if o == nil || IsNil(o.DataClassesDetails) {
+	if o == nil || IsNil(o.DataClassesDetails.Get()) {
 		var ret DataClassesDetails
 		return ret
 	}
-	return *o.DataClassesDetails
+	return *o.DataClassesDetails.Get()
 }
 
 // GetDataClassesDetailsOk returns a tuple with the DataClassesDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Classifications) GetDataClassesDetailsOk() (*DataClassesDetails, bool) {
-	if o == nil || IsNil(o.DataClassesDetails) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DataClassesDetails, true
+	return o.DataClassesDetails.Get(), o.DataClassesDetails.IsSet()
 }
 
 // HasDataClassesDetails returns a boolean if a field has been set.
 func (o *Classifications) HasDataClassesDetails() bool {
-	if o != nil && !IsNil(o.DataClassesDetails) {
+	if o != nil && o.DataClassesDetails.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDataClassesDetails gets a reference to the given DataClassesDetails and assigns it to the DataClassesDetails field.
+// SetDataClassesDetails gets a reference to the given NullableDataClassesDetails and assigns it to the DataClassesDetails field.
 func (o *Classifications) SetDataClassesDetails(v DataClassesDetails) {
-	o.DataClassesDetails = &v
+	o.DataClassesDetails.Set(&v)
+}
+// SetDataClassesDetailsNil sets the value for DataClassesDetails to be an explicit nil
+func (o *Classifications) SetDataClassesDetailsNil() {
+	o.DataClassesDetails.Set(nil)
 }
 
-// GetEnvironmentDetails returns the EnvironmentDetails field value if set, zero value otherwise.
+// UnsetDataClassesDetails ensures that no value is present for DataClassesDetails, not even an explicit nil
+func (o *Classifications) UnsetDataClassesDetails() {
+	o.DataClassesDetails.Unset()
+}
+
+// GetEnvironmentDetails returns the EnvironmentDetails field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Classifications) GetEnvironmentDetails() EnvironmentDetails {
-	if o == nil || IsNil(o.EnvironmentDetails) {
+	if o == nil || IsNil(o.EnvironmentDetails.Get()) {
 		var ret EnvironmentDetails
 		return ret
 	}
-	return *o.EnvironmentDetails
+	return *o.EnvironmentDetails.Get()
 }
 
 // GetEnvironmentDetailsOk returns a tuple with the EnvironmentDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Classifications) GetEnvironmentDetailsOk() (*EnvironmentDetails, bool) {
-	if o == nil || IsNil(o.EnvironmentDetails) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EnvironmentDetails, true
+	return o.EnvironmentDetails.Get(), o.EnvironmentDetails.IsSet()
 }
 
 // HasEnvironmentDetails returns a boolean if a field has been set.
 func (o *Classifications) HasEnvironmentDetails() bool {
-	if o != nil && !IsNil(o.EnvironmentDetails) {
+	if o != nil && o.EnvironmentDetails.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEnvironmentDetails gets a reference to the given EnvironmentDetails and assigns it to the EnvironmentDetails field.
+// SetEnvironmentDetails gets a reference to the given NullableEnvironmentDetails and assigns it to the EnvironmentDetails field.
 func (o *Classifications) SetEnvironmentDetails(v EnvironmentDetails) {
-	o.EnvironmentDetails = &v
+	o.EnvironmentDetails.Set(&v)
+}
+// SetEnvironmentDetailsNil sets the value for EnvironmentDetails to be an explicit nil
+func (o *Classifications) SetEnvironmentDetailsNil() {
+	o.EnvironmentDetails.Set(nil)
 }
 
-// GetAppsDetails returns the AppsDetails field value if set, zero value otherwise.
+// UnsetEnvironmentDetails ensures that no value is present for EnvironmentDetails, not even an explicit nil
+func (o *Classifications) UnsetEnvironmentDetails() {
+	o.EnvironmentDetails.Unset()
+}
+
+// GetAppsDetails returns the AppsDetails field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Classifications) GetAppsDetails() AppsDetails {
-	if o == nil || IsNil(o.AppsDetails) {
+	if o == nil || IsNil(o.AppsDetails.Get()) {
 		var ret AppsDetails
 		return ret
 	}
-	return *o.AppsDetails
+	return *o.AppsDetails.Get()
 }
 
 // GetAppsDetailsOk returns a tuple with the AppsDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Classifications) GetAppsDetailsOk() (*AppsDetails, bool) {
-	if o == nil || IsNil(o.AppsDetails) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AppsDetails, true
+	return o.AppsDetails.Get(), o.AppsDetails.IsSet()
 }
 
 // HasAppsDetails returns a boolean if a field has been set.
 func (o *Classifications) HasAppsDetails() bool {
-	if o != nil && !IsNil(o.AppsDetails) {
+	if o != nil && o.AppsDetails.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAppsDetails gets a reference to the given AppsDetails and assigns it to the AppsDetails field.
+// SetAppsDetails gets a reference to the given NullableAppsDetails and assigns it to the AppsDetails field.
 func (o *Classifications) SetAppsDetails(v AppsDetails) {
-	o.AppsDetails = &v
+	o.AppsDetails.Set(&v)
+}
+// SetAppsDetailsNil sets the value for AppsDetails to be an explicit nil
+func (o *Classifications) SetAppsDetailsNil() {
+	o.AppsDetails.Set(nil)
+}
+
+// UnsetAppsDetails ensures that no value is present for AppsDetails, not even an explicit nil
+func (o *Classifications) UnsetAppsDetails() {
+	o.AppsDetails.Unset()
 }
 
 func (o Classifications) MarshalJSON() ([]byte, error) {
@@ -147,14 +177,14 @@ func (o Classifications) MarshalJSON() ([]byte, error) {
 
 func (o Classifications) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DataClassesDetails) {
-		toSerialize["dataClassesDetails"] = o.DataClassesDetails
+	if o.DataClassesDetails.IsSet() {
+		toSerialize["dataClassesDetails"] = o.DataClassesDetails.Get()
 	}
-	if !IsNil(o.EnvironmentDetails) {
-		toSerialize["environmentDetails"] = o.EnvironmentDetails
+	if o.EnvironmentDetails.IsSet() {
+		toSerialize["environmentDetails"] = o.EnvironmentDetails.Get()
 	}
-	if !IsNil(o.AppsDetails) {
-		toSerialize["appsDetails"] = o.AppsDetails
+	if o.AppsDetails.IsSet() {
+		toSerialize["appsDetails"] = o.AppsDetails.Get()
 	}
 	return toSerialize, nil
 }

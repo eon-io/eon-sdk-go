@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DataClassesDetails** | Pointer to [**DataClassesDetails**](DataClassesDetails.md) |  | [optional] 
-**EnvironmentDetails** | Pointer to [**EnvironmentDetails**](EnvironmentDetails.md) |  | [optional] 
-**AppsDetails** | Pointer to [**AppsDetails**](AppsDetails.md) |  | [optional] 
+**DataClassesDetails** | Pointer to [**NullableDataClassesDetails**](DataClassesDetails.md) |  | [optional] 
+**EnvironmentDetails** | Pointer to [**NullableEnvironmentDetails**](EnvironmentDetails.md) |  | [optional] 
+**AppsDetails** | Pointer to [**NullableAppsDetails**](AppsDetails.md) |  | [optional] 
 
 ## Methods
 
@@ -52,6 +52,16 @@ SetDataClassesDetails sets DataClassesDetails field to given value.
 
 HasDataClassesDetails returns a boolean if a field has been set.
 
+### SetDataClassesDetailsNil
+
+`func (o *Classifications) SetDataClassesDetailsNil(b bool)`
+
+ SetDataClassesDetailsNil sets the value for DataClassesDetails to be an explicit nil
+
+### UnsetDataClassesDetails
+`func (o *Classifications) UnsetDataClassesDetails()`
+
+UnsetDataClassesDetails ensures that no value is present for DataClassesDetails, not even an explicit nil
 ### GetEnvironmentDetails
 
 `func (o *Classifications) GetEnvironmentDetails() EnvironmentDetails`
@@ -77,6 +87,16 @@ SetEnvironmentDetails sets EnvironmentDetails field to given value.
 
 HasEnvironmentDetails returns a boolean if a field has been set.
 
+### SetEnvironmentDetailsNil
+
+`func (o *Classifications) SetEnvironmentDetailsNil(b bool)`
+
+ SetEnvironmentDetailsNil sets the value for EnvironmentDetails to be an explicit nil
+
+### UnsetEnvironmentDetails
+`func (o *Classifications) UnsetEnvironmentDetails()`
+
+UnsetEnvironmentDetails ensures that no value is present for EnvironmentDetails, not even an explicit nil
 ### GetAppsDetails
 
 `func (o *Classifications) GetAppsDetails() AppsDetails`
@@ -102,6 +122,16 @@ SetAppsDetails sets AppsDetails field to given value.
 
 HasAppsDetails returns a boolean if a field has been set.
 
+### SetAppsDetailsNil
+
+`func (o *Classifications) SetAppsDetailsNil(b bool)`
+
+ SetAppsDetailsNil sets the value for AppsDetails to be an explicit nil
+
+### UnsetAppsDetails
+`func (o *Classifications) UnsetAppsDetails()`
+
+UnsetAppsDetails ensures that no value is present for AppsDetails, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

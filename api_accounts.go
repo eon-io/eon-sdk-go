@@ -2171,9 +2171,6 @@ func (a *AccountsAPIService) ListRestoreAccountsExecute(r ApiListRestoreAccounts
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
-	} else {
-		var defaultValue int32 = 50
-		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -2964,6 +2961,7 @@ UpdateRestoreAccount Update Restore Account
 
 Description: Updates restore account fields. Editable fields depend on the account's cloud provider.
 For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
+For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -3245,6 +3243,7 @@ UpdateSourceAccount Update Source Account
 
 Description: Updates source account fields. Editable fields depend on the account's cloud provider.
 For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
+For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

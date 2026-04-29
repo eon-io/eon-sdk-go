@@ -1216,7 +1216,7 @@ import (
 func main() {
 	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
-	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
+	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional)
 	listRestoreAccountsRequest := *openapiclient.NewListRestoreAccountsRequest() // ListRestoreAccountsRequest | Filter options.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1248,7 +1248,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
- **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
+ **pageSize** | **int32** | Maximum number of items to return in the response. | 
  **listRestoreAccountsRequest** | [**ListRestoreAccountsRequest**](ListRestoreAccountsRequest.md) | Filter options.  | 
 
 ### Return type
