@@ -2959,8 +2959,28 @@ paths:
       responses:
         "200":
           description: Backup policy deleted.
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+                x-nullable: true
+          description: |
+            The project is protected by an MPA policy. An MPA approval request was created on
+            behalf of the caller and the deletion did not run. The deletion will be replayed
+            once enough reviewers approve the request.
+        "403":
+          description: |
+            The caller does not have permission to delete backup policies in this project,
+            or the X-MPA-Request-Id header refers to an MPA request created by a different user.
         "404":
-          description: Backup policy wasn't found.
+          description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
+            \ was not found."
+        "409":
+          description: |
+            The MPA request id in X-MPA-Request-Id is not in APPROVED status, has already been
+            executed, has expired, or its captured method/path/body no longer matches the
+            incoming request.
         "1XX":
           description: Informational
         "3XX":
@@ -2991,6 +3011,8 @@ paths:
         - entityType: backup_policy
           in: path
           key: backupPolicyId
+      x-mpa:
+        operation: MPA_OPERATION_DELETE_BACKUP_POLICY
     get:
       description: "Description: Retrieves a backup policy."
       operationId: getBackupPolicy
@@ -20988,6 +21010,7 @@ components:
       - AWS_EC2_METERING_DIMENSION
       - AWS_EC2_NATIVE_METERING_DIMENSION
       - AWS_RDS_METERING_DIMENSION
+      - AWS_RDS_ORACLE_METERING_DIMENSION
       - AWS_S3_METERING_DIMENSION
       - AWS_S3_DLSG_METERING_DIMENSION
       - AWS_DYNAMO_DB_METERING_DIMENSION
