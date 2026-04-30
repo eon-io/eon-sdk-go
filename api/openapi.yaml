@@ -13434,21 +13434,23 @@ components:
       enum:
       - UNSPECIFIED
       - STANDARD
-      - NATIVE_STANDARD
+      - AWS_NATIVE_STANDARD
       - HIGH_FREQUENCY
       - PITR
       - AWS_NATIVE_PITR
       - BIGQUERY_NATIVE_PITR
+      - AZURE_NATIVE_STANDARD
       example: STANDARD
       type: string
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
-      - BACKUP_POLICY_TYPE_NATIVE_STANDARD
+      - BACKUP_POLICY_TYPE_AWS_NATIVE_STANDARD
       - BACKUP_POLICY_TYPE_HIGH_FREQUENCY
       - BACKUP_POLICY_TYPE_PITR
       - BACKUP_POLICY_TYPE_AWS_NATIVE_PITR
       - BACKUP_POLICY_TYPE_BIGQUERY_NATIVE_PITR
+      - BACKUP_POLICY_TYPE_AZURE_NATIVE_STANDARD
     StandardBackupScheduleFrequency:
       description: |
         Backup frequency.
