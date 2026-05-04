@@ -441,7 +441,7 @@ paths:
       x-data-access:
         excluded: true
       x-permissions:
-      - admin:idp_configs
+      - read:idp_configs
       x-audit-log:
         excluded: true
   /v1/idp-groups:
@@ -2960,16 +2960,6 @@ paths:
       responses:
         "200":
           description: Backup policy deleted.
-        "201":
-          content:
-            application/json:
-              schema:
-                type: object
-                x-nullable: true
-          description: |
-            The project is protected by an MPA policy. An MPA approval request was created on
-            behalf of the caller and the deletion did not run. The deletion will be replayed
-            once enough reviewers approve the request.
         "403":
           description: |
             The caller does not have permission to delete backup policies in this project,
@@ -2977,11 +2967,6 @@ paths:
         "404":
           description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
             \ was not found."
-        "409":
-          description: |
-            The MPA request id in X-MPA-Request-Id is not in APPROVED status, has already been
-            executed, has expired, or its captured method/path/body no longer matches the
-            incoming request.
         "1XX":
           description: Informational
         "3XX":
@@ -3014,6 +2999,7 @@ paths:
           key: backupPolicyId
       x-mpa:
         operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+        resourceIdParam: backupPolicyId
     get:
       description: "Description: Retrieves a backup policy."
       operationId: getBackupPolicy
@@ -3624,6 +3610,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -3725,6 +3713,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -3826,6 +3816,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -3927,6 +3919,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4028,6 +4022,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4132,6 +4128,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4233,6 +4231,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4334,6 +4334,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4436,6 +4438,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4540,6 +4544,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4644,6 +4650,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4748,6 +4756,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4852,6 +4862,8 @@ paths:
           key: restoreAccountId
       x-permissions:
       - create:restore_resource
+      x-mpa:
+        operation: MPA_OPERATION_RESTORE_RESOURCE
       x-audit-log:
         action: trigger
         entityRefs:
