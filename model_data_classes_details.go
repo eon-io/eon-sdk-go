@@ -20,7 +20,7 @@ var _ MappedNullable = &DataClassesDetails{}
 // DataClassesDetails Details about the resource's data classes.
 type DataClassesDetails struct {
 	// List of data classes.
-	DataClasses []DataClass `json:"dataClasses,omitempty"`
+	DataClasses []string `json:"dataClasses,omitempty"`
 	// Whether the data classes are manually overridden. If `true`, the list of data classes is user-defined and remains static. If `false`, the data classes are automatically detected and listed by Eon. 
 	IsOverridden *bool `json:"isOverridden,omitempty"`
 }
@@ -43,9 +43,9 @@ func NewDataClassesDetailsWithDefaults() *DataClassesDetails {
 }
 
 // GetDataClasses returns the DataClasses field value if set, zero value otherwise.
-func (o *DataClassesDetails) GetDataClasses() []DataClass {
+func (o *DataClassesDetails) GetDataClasses() []string {
 	if o == nil || IsNil(o.DataClasses) {
-		var ret []DataClass
+		var ret []string
 		return ret
 	}
 	return o.DataClasses
@@ -53,7 +53,7 @@ func (o *DataClassesDetails) GetDataClasses() []DataClass {
 
 // GetDataClassesOk returns a tuple with the DataClasses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataClassesDetails) GetDataClassesOk() ([]DataClass, bool) {
+func (o *DataClassesDetails) GetDataClassesOk() ([]string, bool) {
 	if o == nil || IsNil(o.DataClasses) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *DataClassesDetails) HasDataClasses() bool {
 	return false
 }
 
-// SetDataClasses gets a reference to the given []DataClass and assigns it to the DataClasses field.
-func (o *DataClassesDetails) SetDataClasses(v []DataClass) {
+// SetDataClasses gets a reference to the given []string and assigns it to the DataClasses field.
+func (o *DataClassesDetails) SetDataClasses(v []string) {
 	o.DataClasses = v
 }
 

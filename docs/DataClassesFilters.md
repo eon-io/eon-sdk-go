@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ContainsAnyOf** | Pointer to [**[]DataClass**](DataClass.md) | Matches if any value in this list is in the &#x60;dataClasses&#x60; list. | [optional] 
-**ContainsNoneOf** | Pointer to [**[]DataClass**](DataClass.md) | Matches if none of the values in this list are in the &#x60;dataClasses&#x60; list. | [optional] 
+**ContainsAnyOf** | Pointer to **[]string** | Matches if any value in this list is in the &#x60;dataClasses&#x60; list. | [optional] 
+**ContainsNoneOf** | Pointer to **[]string** | Matches if none of the values in this list are in the &#x60;dataClasses&#x60; list. | [optional] 
 **ContainsAllOf** | Pointer to **[]string** | Matches if all values in this list are in the &#x60;dataClasses&#x60; list. | [optional] 
 
 ## Methods
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetContainsAnyOf
 
-`func (o *DataClassesFilters) GetContainsAnyOf() []DataClass`
+`func (o *DataClassesFilters) GetContainsAnyOf() []string`
 
 GetContainsAnyOf returns the ContainsAnyOf field if non-nil, zero value otherwise.
 
 ### GetContainsAnyOfOk
 
-`func (o *DataClassesFilters) GetContainsAnyOfOk() (*[]DataClass, bool)`
+`func (o *DataClassesFilters) GetContainsAnyOfOk() (*[]string, bool)`
 
 GetContainsAnyOfOk returns a tuple with the ContainsAnyOf field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContainsAnyOf
 
-`func (o *DataClassesFilters) SetContainsAnyOf(v []DataClass)`
+`func (o *DataClassesFilters) SetContainsAnyOf(v []string)`
 
 SetContainsAnyOf sets ContainsAnyOf field to given value.
 
@@ -54,20 +54,20 @@ HasContainsAnyOf returns a boolean if a field has been set.
 
 ### GetContainsNoneOf
 
-`func (o *DataClassesFilters) GetContainsNoneOf() []DataClass`
+`func (o *DataClassesFilters) GetContainsNoneOf() []string`
 
 GetContainsNoneOf returns the ContainsNoneOf field if non-nil, zero value otherwise.
 
 ### GetContainsNoneOfOk
 
-`func (o *DataClassesFilters) GetContainsNoneOfOk() (*[]DataClass, bool)`
+`func (o *DataClassesFilters) GetContainsNoneOfOk() (*[]string, bool)`
 
 GetContainsNoneOfOk returns a tuple with the ContainsNoneOf field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContainsNoneOf
 
-`func (o *DataClassesFilters) SetContainsNoneOf(v []DataClass)`
+`func (o *DataClassesFilters) SetContainsNoneOf(v []string)`
 
 SetContainsNoneOf sets ContainsNoneOf field to given value.
 

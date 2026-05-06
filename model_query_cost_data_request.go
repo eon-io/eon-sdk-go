@@ -27,6 +27,8 @@ type QueryCostDataRequest struct {
 	Granularity *CostGranularity `json:"granularity,omitempty"`
 	Filters *CostDataFilters `json:"filters,omitempty"`
 	GroupBy *CostDataGroupBy `json:"groupBy,omitempty"`
+	// With a resource-level `groupBy`, keeps the top-N groups by total cost and folds the rest into synthetic \"Others\" records (no `dimensions`, one per time bucket) appended to `records`. 
+	TopN *int32 `json:"topN,omitempty"`
 }
 
 type _QueryCostDataRequest QueryCostDataRequest
@@ -249,6 +251,38 @@ func (o *QueryCostDataRequest) SetGroupBy(v CostDataGroupBy) {
 	o.GroupBy = &v
 }
 
+// GetTopN returns the TopN field value if set, zero value otherwise.
+func (o *QueryCostDataRequest) GetTopN() int32 {
+	if o == nil || IsNil(o.TopN) {
+		var ret int32
+		return ret
+	}
+	return *o.TopN
+}
+
+// GetTopNOk returns a tuple with the TopN field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryCostDataRequest) GetTopNOk() (*int32, bool) {
+	if o == nil || IsNil(o.TopN) {
+		return nil, false
+	}
+	return o.TopN, true
+}
+
+// HasTopN returns a boolean if a field has been set.
+func (o *QueryCostDataRequest) HasTopN() bool {
+	if o != nil && !IsNil(o.TopN) {
+		return true
+	}
+
+	return false
+}
+
+// SetTopN gets a reference to the given int32 and assigns it to the TopN field.
+func (o *QueryCostDataRequest) SetTopN(v int32) {
+	o.TopN = &v
+}
+
 func (o QueryCostDataRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -274,6 +308,9 @@ func (o QueryCostDataRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.GroupBy) {
 		toSerialize["groupBy"] = o.GroupBy
+	}
+	if !IsNil(o.TopN) {
+		toSerialize["topN"] = o.TopN
 	}
 	return toSerialize, nil
 }

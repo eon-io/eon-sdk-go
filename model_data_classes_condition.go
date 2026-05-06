@@ -22,7 +22,7 @@ var _ MappedNullable = &DataClassesCondition{}
 // DataClassesCondition struct for DataClassesCondition
 type DataClassesCondition struct {
 	Operator ListOperators `json:"operator"`
-	DataClasses []DataClass `json:"dataClasses"`
+	DataClasses []string `json:"dataClasses"`
 }
 
 type _DataClassesCondition DataClassesCondition
@@ -31,7 +31,7 @@ type _DataClassesCondition DataClassesCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDataClassesCondition(operator ListOperators, dataClasses []DataClass) *DataClassesCondition {
+func NewDataClassesCondition(operator ListOperators, dataClasses []string) *DataClassesCondition {
 	this := DataClassesCondition{}
 	this.Operator = operator
 	this.DataClasses = dataClasses
@@ -71,9 +71,9 @@ func (o *DataClassesCondition) SetOperator(v ListOperators) {
 }
 
 // GetDataClasses returns the DataClasses field value
-func (o *DataClassesCondition) GetDataClasses() []DataClass {
+func (o *DataClassesCondition) GetDataClasses() []string {
 	if o == nil {
-		var ret []DataClass
+		var ret []string
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *DataClassesCondition) GetDataClasses() []DataClass {
 
 // GetDataClassesOk returns a tuple with the DataClasses field value
 // and a boolean to check if the value has been set.
-func (o *DataClassesCondition) GetDataClassesOk() ([]DataClass, bool) {
+func (o *DataClassesCondition) GetDataClassesOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *DataClassesCondition) GetDataClassesOk() ([]DataClass, bool) {
 }
 
 // SetDataClasses sets field value
-func (o *DataClassesCondition) SetDataClasses(v []DataClass) {
+func (o *DataClassesCondition) SetDataClasses(v []string) {
 	o.DataClasses = v
 }
 

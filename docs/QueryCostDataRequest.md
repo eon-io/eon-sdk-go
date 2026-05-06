@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Granularity** | Pointer to [**CostGranularity**](CostGranularity.md) |  | [optional] [default to COST_GRANULARITY_MONTHLY]
 **Filters** | Pointer to [**CostDataFilters**](CostDataFilters.md) |  | [optional] 
 **GroupBy** | Pointer to [**CostDataGroupBy**](CostDataGroupBy.md) |  | [optional] [default to COST_GROUP_BY_SOURCE_ACCOUNT]
+**TopN** | Pointer to **int32** | With a resource-level &#x60;groupBy&#x60;, keeps the top-N groups by total cost and folds the rest into synthetic \&quot;Others\&quot; records (no &#x60;dimensions&#x60;, one per time bucket) appended to &#x60;records&#x60;.  | [optional] 
 
 ## Methods
 
@@ -174,6 +175,31 @@ SetGroupBy sets GroupBy field to given value.
 `func (o *QueryCostDataRequest) HasGroupBy() bool`
 
 HasGroupBy returns a boolean if a field has been set.
+
+### GetTopN
+
+`func (o *QueryCostDataRequest) GetTopN() int32`
+
+GetTopN returns the TopN field if non-nil, zero value otherwise.
+
+### GetTopNOk
+
+`func (o *QueryCostDataRequest) GetTopNOk() (*int32, bool)`
+
+GetTopNOk returns a tuple with the TopN field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTopN
+
+`func (o *QueryCostDataRequest) SetTopN(v int32)`
+
+SetTopN sets TopN field to given value.
+
+### HasTopN
+
+`func (o *QueryCostDataRequest) HasTopN() bool`
+
+HasTopN returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

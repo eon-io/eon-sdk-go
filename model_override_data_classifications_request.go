@@ -20,7 +20,7 @@ var _ MappedNullable = &OverrideDataClassificationsRequest{}
 // OverrideDataClassificationsRequest struct for OverrideDataClassificationsRequest
 type OverrideDataClassificationsRequest struct {
 	// List of data classes to set.
-	DataClasses []DataClass `json:"dataClasses,omitempty"`
+	DataClasses []string `json:"dataClasses,omitempty"`
 }
 
 // NewOverrideDataClassificationsRequest instantiates a new OverrideDataClassificationsRequest object
@@ -41,9 +41,9 @@ func NewOverrideDataClassificationsRequestWithDefaults() *OverrideDataClassifica
 }
 
 // GetDataClasses returns the DataClasses field value if set, zero value otherwise.
-func (o *OverrideDataClassificationsRequest) GetDataClasses() []DataClass {
+func (o *OverrideDataClassificationsRequest) GetDataClasses() []string {
 	if o == nil || IsNil(o.DataClasses) {
-		var ret []DataClass
+		var ret []string
 		return ret
 	}
 	return o.DataClasses
@@ -51,7 +51,7 @@ func (o *OverrideDataClassificationsRequest) GetDataClasses() []DataClass {
 
 // GetDataClassesOk returns a tuple with the DataClasses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OverrideDataClassificationsRequest) GetDataClassesOk() ([]DataClass, bool) {
+func (o *OverrideDataClassificationsRequest) GetDataClassesOk() ([]string, bool) {
 	if o == nil || IsNil(o.DataClasses) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *OverrideDataClassificationsRequest) HasDataClasses() bool {
 	return false
 }
 
-// SetDataClasses gets a reference to the given []DataClass and assigns it to the DataClasses field.
-func (o *OverrideDataClassificationsRequest) SetDataClasses(v []DataClass) {
+// SetDataClasses gets a reference to the given []string and assigns it to the DataClasses field.
+func (o *OverrideDataClassificationsRequest) SetDataClasses(v []string) {
 	o.DataClasses = v
 }
 

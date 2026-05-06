@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DataClasses** | Pointer to [**[]DataClass**](DataClass.md) | List of data classes that were overridden.. | [optional] 
+**DataClasses** | Pointer to **[]string** | List of data classes that were overridden.. | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDataClasses
 
-`func (o *OverrideDataClassificationsResponse) GetDataClasses() []DataClass`
+`func (o *OverrideDataClassificationsResponse) GetDataClasses() []string`
 
 GetDataClasses returns the DataClasses field if non-nil, zero value otherwise.
 
 ### GetDataClassesOk
 
-`func (o *OverrideDataClassificationsResponse) GetDataClassesOk() (*[]DataClass, bool)`
+`func (o *OverrideDataClassificationsResponse) GetDataClassesOk() (*[]string, bool)`
 
 GetDataClassesOk returns a tuple with the DataClasses field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDataClasses
 
-`func (o *OverrideDataClassificationsResponse) SetDataClasses(v []DataClass)`
+`func (o *OverrideDataClassificationsResponse) SetDataClasses(v []string)`
 
 SetDataClasses sets DataClasses field to given value.
 

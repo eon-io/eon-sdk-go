@@ -27,7 +27,7 @@ const (
 	BACKUP_POLICY_TYPE_PITR BackupPolicyType = "PITR"
 	BACKUP_POLICY_TYPE_AWS_NATIVE_PITR BackupPolicyType = "AWS_NATIVE_PITR"
 	BACKUP_POLICY_TYPE_BIGQUERY_NATIVE_PITR BackupPolicyType = "BIGQUERY_NATIVE_PITR"
-	BACKUP_POLICY_TYPE_AZURE_NATIVE_STANDARD BackupPolicyType = "AZURE_NATIVE_STANDARD"
+	BACKUP_POLICY_TYPE_AZURE_FILES BackupPolicyType = "AZURE_FILES_STANDARD"
 )
 
 // All allowed values of BackupPolicyType enum
@@ -39,7 +39,7 @@ var AllowedBackupPolicyTypeEnumValues = []BackupPolicyType{
 	"PITR",
 	"AWS_NATIVE_PITR",
 	"BIGQUERY_NATIVE_PITR",
-	"AZURE_NATIVE_STANDARD",
+	"AZURE_FILES_STANDARD",
 }
 
 func (v *BackupPolicyType) UnmarshalJSON(src []byte) error {

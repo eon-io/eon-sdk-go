@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DataClasses** | Pointer to [**[]DataClass**](DataClass.md) | List of data classes to set. | [optional] 
+**DataClasses** | Pointer to **[]string** | List of data classes to set. | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDataClasses
 
-`func (o *OverrideDataClassificationsRequest) GetDataClasses() []DataClass`
+`func (o *OverrideDataClassificationsRequest) GetDataClasses() []string`
 
 GetDataClasses returns the DataClasses field if non-nil, zero value otherwise.
 
 ### GetDataClassesOk
 
-`func (o *OverrideDataClassificationsRequest) GetDataClassesOk() (*[]DataClass, bool)`
+`func (o *OverrideDataClassificationsRequest) GetDataClassesOk() (*[]string, bool)`
 
 GetDataClassesOk returns a tuple with the DataClasses field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDataClasses
 
-`func (o *OverrideDataClassificationsRequest) SetDataClasses(v []DataClass)`
+`func (o *OverrideDataClassificationsRequest) SetDataClasses(v []string)`
 
 SetDataClasses sets DataClasses field to given value.
 

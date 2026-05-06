@@ -17,7 +17,7 @@
 
 * `BACKUP_POLICY_TYPE_BIGQUERY_NATIVE_PITR` (value: `"BIGQUERY_NATIVE_PITR"`)
 
-* `BACKUP_POLICY_TYPE_AZURE_NATIVE_STANDARD` (value: `"AZURE_NATIVE_STANDARD"`)
+* `BACKUP_POLICY_TYPE_AZURE_FILES` (value: `"AZURE_FILES_STANDARD"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

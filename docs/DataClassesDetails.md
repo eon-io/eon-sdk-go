@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DataClasses** | Pointer to [**[]DataClass**](DataClass.md) | List of data classes. | [optional] 
+**DataClasses** | Pointer to **[]string** | List of data classes. | [optional] 
 **IsOverridden** | Pointer to **bool** | Whether the data classes are manually overridden. If &#x60;true&#x60;, the list of data classes is user-defined and remains static. If &#x60;false&#x60;, the data classes are automatically detected and listed by Eon.  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDataClasses
 
-`func (o *DataClassesDetails) GetDataClasses() []DataClass`
+`func (o *DataClassesDetails) GetDataClasses() []string`
 
 GetDataClasses returns the DataClasses field if non-nil, zero value otherwise.
 
 ### GetDataClassesOk
 
-`func (o *DataClassesDetails) GetDataClassesOk() (*[]DataClass, bool)`
+`func (o *DataClassesDetails) GetDataClassesOk() (*[]string, bool)`
 
 GetDataClassesOk returns a tuple with the DataClasses field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDataClasses
 
-`func (o *DataClassesDetails) SetDataClasses(v []DataClass)`
+`func (o *DataClassesDetails) SetDataClasses(v []string)`
 
 SetDataClasses sets DataClasses field to given value.
 

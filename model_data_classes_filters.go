@@ -20,9 +20,9 @@ var _ MappedNullable = &DataClassesFilters{}
 // DataClassesFilters struct for DataClassesFilters
 type DataClassesFilters struct {
 	// Matches if any value in this list is in the `dataClasses` list.
-	ContainsAnyOf []DataClass `json:"containsAnyOf,omitempty"`
+	ContainsAnyOf []string `json:"containsAnyOf,omitempty"`
 	// Matches if none of the values in this list are in the `dataClasses` list.
-	ContainsNoneOf []DataClass `json:"containsNoneOf,omitempty"`
+	ContainsNoneOf []string `json:"containsNoneOf,omitempty"`
 	// Matches if all values in this list are in the `dataClasses` list.
 	ContainsAllOf []string `json:"containsAllOf,omitempty"`
 }
@@ -45,9 +45,9 @@ func NewDataClassesFiltersWithDefaults() *DataClassesFilters {
 }
 
 // GetContainsAnyOf returns the ContainsAnyOf field value if set, zero value otherwise.
-func (o *DataClassesFilters) GetContainsAnyOf() []DataClass {
+func (o *DataClassesFilters) GetContainsAnyOf() []string {
 	if o == nil || IsNil(o.ContainsAnyOf) {
-		var ret []DataClass
+		var ret []string
 		return ret
 	}
 	return o.ContainsAnyOf
@@ -55,7 +55,7 @@ func (o *DataClassesFilters) GetContainsAnyOf() []DataClass {
 
 // GetContainsAnyOfOk returns a tuple with the ContainsAnyOf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataClassesFilters) GetContainsAnyOfOk() ([]DataClass, bool) {
+func (o *DataClassesFilters) GetContainsAnyOfOk() ([]string, bool) {
 	if o == nil || IsNil(o.ContainsAnyOf) {
 		return nil, false
 	}
@@ -71,15 +71,15 @@ func (o *DataClassesFilters) HasContainsAnyOf() bool {
 	return false
 }
 
-// SetContainsAnyOf gets a reference to the given []DataClass and assigns it to the ContainsAnyOf field.
-func (o *DataClassesFilters) SetContainsAnyOf(v []DataClass) {
+// SetContainsAnyOf gets a reference to the given []string and assigns it to the ContainsAnyOf field.
+func (o *DataClassesFilters) SetContainsAnyOf(v []string) {
 	o.ContainsAnyOf = v
 }
 
 // GetContainsNoneOf returns the ContainsNoneOf field value if set, zero value otherwise.
-func (o *DataClassesFilters) GetContainsNoneOf() []DataClass {
+func (o *DataClassesFilters) GetContainsNoneOf() []string {
 	if o == nil || IsNil(o.ContainsNoneOf) {
-		var ret []DataClass
+		var ret []string
 		return ret
 	}
 	return o.ContainsNoneOf
@@ -87,7 +87,7 @@ func (o *DataClassesFilters) GetContainsNoneOf() []DataClass {
 
 // GetContainsNoneOfOk returns a tuple with the ContainsNoneOf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataClassesFilters) GetContainsNoneOfOk() ([]DataClass, bool) {
+func (o *DataClassesFilters) GetContainsNoneOfOk() ([]string, bool) {
 	if o == nil || IsNil(o.ContainsNoneOf) {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *DataClassesFilters) HasContainsNoneOf() bool {
 	return false
 }
 
-// SetContainsNoneOf gets a reference to the given []DataClass and assigns it to the ContainsNoneOf field.
-func (o *DataClassesFilters) SetContainsNoneOf(v []DataClass) {
+// SetContainsNoneOf gets a reference to the given []string and assigns it to the ContainsNoneOf field.
+func (o *DataClassesFilters) SetContainsNoneOf(v []string) {
 	o.ContainsNoneOf = v
 }
 

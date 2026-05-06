@@ -3099,8 +3099,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateBackupPolicyResponse'
           description: Backup policy updated.
+        "403":
+          description: |
+            The caller does not have permission to update backup policies in this project,
+            or the X-MPA-Request-Id header refers to an MPA request created by a different user.
         "404":
-          description: Backup policy wasn't found.
+          description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
+            \ was not found."
         "1XX":
           description: Informational
         "3XX":
@@ -3135,6 +3140,9 @@ paths:
         - entityType: backup_policy
           in: path
           key: backupPolicyId
+      x-mpa:
+        operation: MPA_OPERATION_UPDATE_BACKUP_POLICY
+        resourceIdParam: backupPolicyId
   /v1/projects/{projectId}/vaults:
     post:
       description: |
@@ -3612,6 +3620,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -3715,6 +3724,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -3818,6 +3828,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -3921,6 +3932,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4024,6 +4036,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4130,6 +4143,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4233,6 +4247,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4336,6 +4351,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4440,6 +4456,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4546,6 +4563,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4652,6 +4670,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4758,6 +4777,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4864,6 +4884,7 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
+        resourceIdParam: id
       x-audit-log:
         action: trigger
         entityRefs:
@@ -6972,6 +6993,7 @@ components:
       - GCP_CLOUD_FIRESTORE
       - GCP_DISK
       - GCP_SAP_HANA_VM
+      - GOOGLE_WORKSPACE_RESOURCE
       - RESOURCE_TYPE_UNSPECIFIED
       example: AWS_EC2
       type: string
@@ -7015,12 +7037,6 @@ components:
     DataClass:
       description: |
         Data classes.
-        `DATA_CLASS_UNSPECIFIED` is supported only in responses.
-      enum:
-      - FI
-      - PHI
-      - PII
-      - DATA_CLASS_UNSPECIFIED
       example: PII
       type: string
     DataClassesCondition:
@@ -13451,7 +13467,7 @@ components:
       - PITR
       - AWS_NATIVE_PITR
       - BIGQUERY_NATIVE_PITR
-      - AZURE_NATIVE_STANDARD
+      - AZURE_FILES_STANDARD
       example: STANDARD
       type: string
       x-enum-varnames:
@@ -13462,7 +13478,7 @@ components:
       - BACKUP_POLICY_TYPE_PITR
       - BACKUP_POLICY_TYPE_AWS_NATIVE_PITR
       - BACKUP_POLICY_TYPE_BIGQUERY_NATIVE_PITR
-      - BACKUP_POLICY_TYPE_AZURE_NATIVE_STANDARD
+      - BACKUP_POLICY_TYPE_AZURE_FILES
     StandardBackupScheduleFrequency:
       description: |
         Backup frequency.
@@ -21026,6 +21042,7 @@ components:
         timeFrame:
           startTime: 2025-01-01T00:00:00Z
           endTime: 2025-01-31T23:59:59Z
+        topN: 1
       properties:
         costUnit:
           $ref: '#/components/schemas/CostUnit'
@@ -21039,6 +21056,11 @@ components:
           $ref: '#/components/schemas/CostDataFilters'
         groupBy:
           $ref: '#/components/schemas/CostDataGroupBy'
+        topN:
+          description: |
+            With a resource-level `groupBy`, keeps the top-N groups by total cost and folds the rest into synthetic "Others" records (no `dimensions`, one per time bucket) appended to `records`.
+          minimum: 1
+          type: integer
       required:
       - timeFrame
       type: object
@@ -21087,6 +21109,7 @@ components:
       - AZURE_SQL_VIRTUAL_MACHINE_METERING_DIMENSION
       - AZURE_SQL_DATABASE_METERING_DIMENSION
       - GCP_VM_INSTANCE_METERING_DIMENSION
+      - GCP_VM_NATIVE_METERING_DIMENSION
       - GCP_CLOUD_STORAGE_METERING_DIMENSION
       - GCP_CLOUD_SQL_POSTGRES_SQL_METERING_DIMENSION
       - GCP_CLOUD_SQL_MYSQL_METERING_DIMENSION

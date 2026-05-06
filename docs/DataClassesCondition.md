@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ListOperators**](ListOperators.md) |  | 
-**DataClasses** | [**[]DataClass**](DataClass.md) |  | 
+**DataClasses** | **[]string** |  | 
 
 ## Methods
 
 ### NewDataClassesCondition
 
-`func NewDataClassesCondition(operator ListOperators, dataClasses []DataClass, ) *DataClassesCondition`
+`func NewDataClassesCondition(operator ListOperators, dataClasses []string, ) *DataClassesCondition`
 
 NewDataClassesCondition instantiates a new DataClassesCondition object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetOperator sets Operator field to given value.
 
 ### GetDataClasses
 
-`func (o *DataClassesCondition) GetDataClasses() []DataClass`
+`func (o *DataClassesCondition) GetDataClasses() []string`
 
 GetDataClasses returns the DataClasses field if non-nil, zero value otherwise.
 
 ### GetDataClassesOk
 
-`func (o *DataClassesCondition) GetDataClassesOk() (*[]DataClass, bool)`
+`func (o *DataClassesCondition) GetDataClassesOk() (*[]string, bool)`
 
 GetDataClassesOk returns a tuple with the DataClasses field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDataClasses
 
-`func (o *DataClassesCondition) SetDataClasses(v []DataClass)`
+`func (o *DataClassesCondition) SetDataClasses(v []string)`
 
 SetDataClasses sets DataClasses field to given value.
 

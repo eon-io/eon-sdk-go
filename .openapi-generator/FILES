@@ -119,7 +119,6 @@ docs/DailyConfig.md
 docs/DailyStorageSummaries.md
 docs/DailyStorageSummary.md
 docs/DashboardAPI.md
-docs/DataClass.md
 docs/DataClassesCondition.md
 docs/DataClassesDetails.md
 docs/DataClassesFilters.md
@@ -470,7 +469,6 @@ model_create_vault_response.go
 model_daily_config.go
 model_daily_storage_summaries.go
 model_daily_storage_summary.go
-model_data_class.go
 model_data_classes_condition.go
 model_data_classes_details.go
 model_data_classes_filters.go
