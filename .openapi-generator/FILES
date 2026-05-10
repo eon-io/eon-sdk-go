@@ -218,6 +218,8 @@ docs/ListSourceAccountsRequest.md
 docs/ListSourceAccountsResponse.md
 docs/ListSourceAwsOrganizationalUnitsResponse.md
 docs/LogicalOperator.md
+docs/MPAInterceptedResponse.md
+docs/MPAInterceptedResponseMpaPolicies.md
 docs/MeteringDimension.md
 docs/MonthlyConfig.md
 docs/Oauth2TokenResponse.md
@@ -567,6 +569,8 @@ model_list_source_aws_organizational_units_response.go
 model_logical_operator.go
 model_metering_dimension.go
 model_monthly_config.go
+model_mpa_intercepted_response.go
+model_mpa_intercepted_response_mpa_policies.go
 model_oauth2_token_response.go
 model_object_storage_destination.go
 model_override_data_classifications_request.go

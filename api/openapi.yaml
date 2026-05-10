@@ -1663,6 +1663,8 @@ paths:
         excluded: true
       x-permissions:
       - create:restore_accounts
+      x-mpa:
+        operation: MPA_OPERATION_ADD_RESTORE_ACCOUNT
       x-audit-log:
         action: create
         entityRefs:
@@ -2016,6 +2018,8 @@ paths:
         excluded: true
       x-permissions:
       - update:restore_accounts
+      x-mpa:
+        operation: MPA_OPERATION_ADD_RESTORE_ACCOUNT
       x-audit-log:
         action: update
         entityRefs:
@@ -6127,6 +6131,9 @@ paths:
         excluded: true
       x-permissions:
       - create:jobs
+      x-mpa:
+        operation: MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+        resourceIdParam: id
       x-audit-log:
         action: update
         entityRefs:
@@ -6628,6 +6635,31 @@ paths:
         excluded: true
 components:
   schemas:
+    MPAInterceptedResponse:
+      description: Body returned when an operation is intercepted by an MPA policy.
+      properties:
+        mpaRequest:
+          required:
+          - createdAt
+          - currentApprovals
+          - id
+          - mpaPolicyIds
+          - operation
+          - requestMethod
+          - requestPath
+          - requesterEmail
+          - requesterUserId
+          - requiredApprovals
+          - status
+          type: object
+          x-nullable: true
+        mpaPolicies:
+          $ref: '#/components/schemas/MPAInterceptedResponse_mpaPolicies'
+      required:
+      - mpaPolicies
+      - mpaRequest
+      type: object
+      x-nullable: true
     PermissionType:
       description: User permission.
       enum:
@@ -12505,6 +12537,7 @@ components:
       - AWS_EKS_FILE_RESTORE
       - AWS_DYNAMO_DB_TABLE_RESTORE
       - AWS_DYNAMO_DB_TABLE_TO_EXISTING_TABLE_RESTORE
+      - AWS_DYNAMO_DB_RESTORE_TO_S3
       - AWS_DYNAMO_DB_RECORD_RESTORE
       - AZURE_STORAGE_ACCOUNT_RESTORE
       - AZURE_STORAGE_ACCOUNT_BLOB_RESTORE
@@ -21377,6 +21410,31 @@ components:
       required:
       - data
       type: object
+    MPARequest:
+      required:
+      - createdAt
+      - currentApprovals
+      - id
+      - mpaPolicyIds
+      - operation
+      - requestMethod
+      - requestPath
+      - requesterEmail
+      - requesterUserId
+      - requiredApprovals
+      - status
+      type: object
+      x-nullable: true
+    MPAPolicy:
+      required:
+      - approvalWindowHours
+      - executionWindowHours
+      - id
+      - operation
+      - projectId
+      - requiredApprovals
+      type: object
+      x-nullable: true
     createVault_409_response:
       example:
         error: error
@@ -21393,6 +21451,16 @@ components:
           format: tobedefined
           type: string
       type: object
+    MPAInterceptedResponse_mpaPolicies:
+      properties:
+        policies:
+          items:
+            $ref: '#/components/schemas/MPAPolicy'
+          type: array
+      required:
+      - policies
+      type: object
+      x-nullable: true
   securitySchemes:
     ApiKeyAuth:
       bearerFormat: JWT
