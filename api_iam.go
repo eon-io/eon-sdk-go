@@ -769,6 +769,7 @@ type ApiListIdpGroupsRequest struct {
 	ApiService *IamAPIService
 	pageToken *string
 	pageSize *int32
+	body *map[string]interface{}
 }
 
 // Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
@@ -780,6 +781,12 @@ func (r ApiListIdpGroupsRequest) PageToken(pageToken string) ApiListIdpGroupsReq
 // Maximum number of items to return in the response.
 func (r ApiListIdpGroupsRequest) PageSize(pageSize int32) ApiListIdpGroupsRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// Optional filters. When &#x60;permissionType&#x60; is set, only IdP groups assigned to at least one role containing the specified permission are returned. 
+func (r ApiListIdpGroupsRequest) Body(body map[string]interface{}) ApiListIdpGroupsRequest {
+	r.body = &body
 	return r
 }
 
@@ -833,7 +840,7 @@ func (a *IamAPIService) ListIdpGroupsExecute(r ApiListIdpGroupsRequest) (*ListId
 		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -849,6 +856,8 @@ func (a *IamAPIService) ListIdpGroupsExecute(r ApiListIdpGroupsRequest) (*ListId
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

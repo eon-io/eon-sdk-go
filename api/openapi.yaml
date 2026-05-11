@@ -531,6 +531,15 @@ paths:
           minimum: 1
           type: integer
         style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListIdpGroupsRequest'
+        description: |
+          Optional filters. When `permissionType` is set, only IdP groups assigned to
+          at least one role containing the specified permission are returned.
+        required: false
       responses:
         "200":
           content:
@@ -9284,6 +9293,9 @@ components:
       required:
       - group
       type: object
+    ListIdpGroupsRequest:
+      nullable: true
+      type: object
     ListIdpGroupsResponse:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
@@ -12075,6 +12087,7 @@ components:
       enum:
       - INTERNAL_JOB_ERROR
       - JOB_CANCELED_ERROR
+      - CLOUD_OPERATION_FAILED
       - FAILED_TO_GET_RESOURCE_INFORMATION
       - RESOURCE_IS_TERMINATED
       - INVALID_RESOURCE_STATE
@@ -17199,6 +17212,32 @@ components:
       - providerVolumeId
       - restoreAccountId
       type: object
+    RdsPasswordConfig:
+      description: |
+        Configuration for RDS database password management during restore.
+      example:
+        password: password
+        secretsManagerKmsKeyId: secretsManagerKmsKeyId
+        passwordManagementType: AWS_SECRETS_MANAGER
+      nullable: true
+      properties:
+        passwordManagementType:
+          description: |
+            Password management type for the restored database.
+          enum:
+          - AWS_SECRETS_MANAGER
+          - SELF_MANAGED
+          type: string
+        password:
+          description: |
+            Customer-managed password (required when passwordManagementType is SELF_MANAGED).
+          type: string
+          writeOnly: true
+        secretsManagerKmsKeyId:
+          description: |
+            KMS key ARN used to encrypt the Secrets Manager secret that stores the database master password. Only applicable when passwordManagementType is AWS_SECRETS_MANAGER. This is distinct from encryptionKeyId which controls RDS storage encryption.
+          type: string
+      type: object
     AwsDatabaseDestination:
       description: Configuration for restoring to RDS.
       example:
@@ -17210,6 +17249,10 @@ components:
         - securityGroups
         - securityGroups
         preserveInstanceNames: false
+        passwordConfig:
+          password: password
+          secretsManagerKmsKeyId: secretsManagerKmsKeyId
+          passwordManagementType: AWS_SECRETS_MANAGER
         restoredName: my-restored-db
         tags:
           eon_api_restore: "true"
@@ -17253,6 +17296,8 @@ components:
           example:
             eon_api_restore: "true"
           type: object
+        passwordConfig:
+          $ref: '#/components/schemas/RdsPasswordConfig'
         preserveInstanceNames:
           default: false
           description: |
@@ -17277,6 +17322,10 @@ components:
           - securityGroups
           - securityGroups
           preserveInstanceNames: false
+          passwordConfig:
+            password: password
+            secretsManagerKmsKeyId: secretsManagerKmsKeyId
+            passwordManagementType: AWS_SECRETS_MANAGER
           restoredName: my-restored-db
           tags:
             eon_api_restore: "true"
@@ -17297,6 +17346,10 @@ components:
             - securityGroups
             - securityGroups
             preserveInstanceNames: false
+            passwordConfig:
+              password: password
+              secretsManagerKmsKeyId: secretsManagerKmsKeyId
+              passwordManagementType: AWS_SECRETS_MANAGER
             restoredName: my-restored-db
             tags:
               eon_api_restore: "true"

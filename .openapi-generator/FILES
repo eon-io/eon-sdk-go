@@ -244,6 +244,7 @@ docs/QueryDBRestoreDestination.md
 docs/QueryDBResultResponse.md
 docs/QueryDBStatus.md
 docs/QueryDBStatusResponse.md
+docs/RdsPasswordConfig.md
 docs/ReconnectRestoreAccountResponse.md
 docs/ReconnectSourceAccountResponse.md
 docs/ReconnectSourceAwsOrganizationalUnitResponse.md
@@ -593,6 +594,7 @@ model_query_db_restore_destination.go
 model_query_db_result_response.go
 model_query_db_status.go
 model_query_db_status_response.go
+model_rds_password_config.go
 model_reconnect_restore_account_response.go
 model_reconnect_source_account_response.go
 model_reconnect_source_aws_organizational_unit_response.go

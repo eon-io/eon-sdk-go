@@ -35,6 +35,7 @@ type AwsDatabaseDestination struct {
 	DbInstanceClass *string `json:"dbInstanceClass,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
+	PasswordConfig NullableRdsPasswordConfig `json:"passwordConfig,omitempty"`
 	// When true, restores cluster members with their original instance names from the snapshot. If `restoredName` is empty, it will be set to the original cluster identifier from the snapshot. Only applies to Aurora clusters. Off by default. 
 	PreserveInstanceNames *bool `json:"preserveInstanceNames,omitempty"`
 }
@@ -265,6 +266,48 @@ func (o *AwsDatabaseDestination) SetTags(v map[string]string) {
 	o.Tags = &v
 }
 
+// GetPasswordConfig returns the PasswordConfig field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AwsDatabaseDestination) GetPasswordConfig() RdsPasswordConfig {
+	if o == nil || IsNil(o.PasswordConfig.Get()) {
+		var ret RdsPasswordConfig
+		return ret
+	}
+	return *o.PasswordConfig.Get()
+}
+
+// GetPasswordConfigOk returns a tuple with the PasswordConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AwsDatabaseDestination) GetPasswordConfigOk() (*RdsPasswordConfig, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PasswordConfig.Get(), o.PasswordConfig.IsSet()
+}
+
+// HasPasswordConfig returns a boolean if a field has been set.
+func (o *AwsDatabaseDestination) HasPasswordConfig() bool {
+	if o != nil && o.PasswordConfig.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPasswordConfig gets a reference to the given NullableRdsPasswordConfig and assigns it to the PasswordConfig field.
+func (o *AwsDatabaseDestination) SetPasswordConfig(v RdsPasswordConfig) {
+	o.PasswordConfig.Set(&v)
+}
+// SetPasswordConfigNil sets the value for PasswordConfig to be an explicit nil
+func (o *AwsDatabaseDestination) SetPasswordConfigNil() {
+	o.PasswordConfig.Set(nil)
+}
+
+// UnsetPasswordConfig ensures that no value is present for PasswordConfig, not even an explicit nil
+func (o *AwsDatabaseDestination) UnsetPasswordConfig() {
+	o.PasswordConfig.Unset()
+}
+
 // GetPreserveInstanceNames returns the PreserveInstanceNames field value if set, zero value otherwise.
 func (o *AwsDatabaseDestination) GetPreserveInstanceNames() bool {
 	if o == nil || IsNil(o.PreserveInstanceNames) {
@@ -321,6 +364,9 @@ func (o AwsDatabaseDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
+	}
+	if o.PasswordConfig.IsSet() {
+		toSerialize["passwordConfig"] = o.PasswordConfig.Get()
 	}
 	if !IsNil(o.PreserveInstanceNames) {
 		toSerialize["preserveInstanceNames"] = o.PreserveInstanceNames
