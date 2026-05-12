@@ -6654,7 +6654,7 @@ components:
           - id
           - mpaPolicyIds
           - operation
-          - policyApprovalProgress
+          - policyDetails
           - requestMethod
           - requestPath
           - requesterEmail
@@ -21471,7 +21471,7 @@ components:
       - id
       - mpaPolicyIds
       - operation
-      - policyApprovalProgress
+      - policyDetails
       - requestMethod
       - requestPath
       - requesterEmail
