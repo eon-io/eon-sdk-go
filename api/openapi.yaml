@@ -531,15 +531,6 @@ paths:
           minimum: 1
           type: integer
         style: form
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ListIdpGroupsRequest'
-        description: |
-          Optional filters. When `permissionType` is set, only IdP groups assigned to
-          at least one role containing the specified permission are returned.
-        required: false
       responses:
         "200":
           content:
@@ -9293,9 +9284,6 @@ components:
       required:
       - group
       type: object
-    ListIdpGroupsRequest:
-      nullable: true
-      type: object
     ListIdpGroupsResponse:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
@@ -11785,6 +11773,7 @@ components:
       - JOB_FAILED
       - JOB_PARTIAL
       - JOB_CANCELED
+      - JOB_RESULT_READY
       example: JOB_PENDING
       type: string
       x-enum-varnames:
@@ -11795,6 +11784,7 @@ components:
       - JOB_FAILED
       - JOB_PARTIAL
       - JOB_CANCELED
+      - JOB_RESULT_READY
     JobStatusFilters:
       additionalProperties: false
       example:

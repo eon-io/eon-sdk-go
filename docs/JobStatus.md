@@ -17,6 +17,8 @@
 
 * `JOB_CANCELED` (value: `"JOB_CANCELED"`)
 
+* `JOB_RESULT_READY` (value: `"JOB_RESULT_READY"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

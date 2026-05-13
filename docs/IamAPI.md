@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 ## ListIdpGroups
 
-> ListIdpGroupsResponse ListIdpGroups(ctx).PageToken(pageToken).PageSize(pageSize).Body(body).Execute()
+> ListIdpGroupsResponse ListIdpGroups(ctx).PageToken(pageToken).PageSize(pageSize).Execute()
 
 List IdP Group Role Assignments
 
@@ -450,11 +450,10 @@ import (
 func main() {
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
-	body := map[string]interface{}{ ... } // map[string]interface{} | Optional filters. When `permissionType` is set, only IdP groups assigned to at least one role containing the specified permission are returned.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.IamAPI.ListIdpGroups(context.Background()).PageToken(pageToken).PageSize(pageSize).Body(body).Execute()
+	resp, r, err := apiClient.IamAPI.ListIdpGroups(context.Background()).PageToken(pageToken).PageSize(pageSize).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `IamAPI.ListIdpGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -477,7 +476,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
  **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
- **body** | **map[string]interface{}** | Optional filters. When &#x60;permissionType&#x60; is set, only IdP groups assigned to at least one role containing the specified permission are returned.  | 
 
 ### Return type
 
@@ -489,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
