@@ -27,6 +27,16 @@
 
 * `OLDEST_SNAPSHOT_TIME` (value: `"oldestSnapshotTime"`)
 
+* `DATE_DISCOVERED` (value: `"dateDiscovered"`)
+
+* `CREATED_TIME` (value: `"createdTime"`)
+
+* `RESOURCE_GROUP_NAME` (value: `"resourceGroupName"`)
+
+* `CLUSTER_NAME` (value: `"clusterName"`)
+
+* `GLOBAL_CLUSTER_IDENTIFIER` (value: `"globalClusterIdentifier"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

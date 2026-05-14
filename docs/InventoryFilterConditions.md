@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to [**IdFilters**](IdFilters.md) |  | [optional] 
+**CloudProvider** | Pointer to [**CloudProviderFilters**](CloudProviderFilters.md) |  | [optional] 
 **ProviderResourceId** | Pointer to [**ResourceIdFilters**](ResourceIdFilters.md) |  | [optional] 
 **ResourceName** | Pointer to [**ResourceNameFilters**](ResourceNameFilters.md) |  | [optional] 
 **ResourceType** | Pointer to [**ResourceTypeFilters**](ResourceTypeFilters.md) |  | [optional] 
@@ -60,6 +61,31 @@ SetId sets Id field to given value.
 `func (o *InventoryFilterConditions) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetCloudProvider
+
+`func (o *InventoryFilterConditions) GetCloudProvider() CloudProviderFilters`
+
+GetCloudProvider returns the CloudProvider field if non-nil, zero value otherwise.
+
+### GetCloudProviderOk
+
+`func (o *InventoryFilterConditions) GetCloudProviderOk() (*CloudProviderFilters, bool)`
+
+GetCloudProviderOk returns a tuple with the CloudProvider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudProvider
+
+`func (o *InventoryFilterConditions) SetCloudProvider(v CloudProviderFilters)`
+
+SetCloudProvider sets CloudProvider field to given value.
+
+### HasCloudProvider
+
+`func (o *InventoryFilterConditions) HasCloudProvider() bool`
+
+HasCloudProvider returns a boolean if a field has been set.
 
 ### GetProviderResourceId
 

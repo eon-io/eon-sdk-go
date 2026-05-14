@@ -20,6 +20,7 @@ var _ MappedNullable = &InventoryFilterConditions{}
 // InventoryFilterConditions struct for InventoryFilterConditions
 type InventoryFilterConditions struct {
 	Id *IdFilters `json:"id,omitempty"`
+	CloudProvider *CloudProviderFilters `json:"cloudProvider,omitempty"`
 	ProviderResourceId *ResourceIdFilters `json:"providerResourceId,omitempty"`
 	ResourceName *ResourceNameFilters `json:"resourceName,omitempty"`
 	ResourceType *ResourceTypeFilters `json:"resourceType,omitempty"`
@@ -80,6 +81,38 @@ func (o *InventoryFilterConditions) HasId() bool {
 // SetId gets a reference to the given IdFilters and assigns it to the Id field.
 func (o *InventoryFilterConditions) SetId(v IdFilters) {
 	o.Id = &v
+}
+
+// GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
+func (o *InventoryFilterConditions) GetCloudProvider() CloudProviderFilters {
+	if o == nil || IsNil(o.CloudProvider) {
+		var ret CloudProviderFilters
+		return ret
+	}
+	return *o.CloudProvider
+}
+
+// GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryFilterConditions) GetCloudProviderOk() (*CloudProviderFilters, bool) {
+	if o == nil || IsNil(o.CloudProvider) {
+		return nil, false
+	}
+	return o.CloudProvider, true
+}
+
+// HasCloudProvider returns a boolean if a field has been set.
+func (o *InventoryFilterConditions) HasCloudProvider() bool {
+	if o != nil && !IsNil(o.CloudProvider) {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudProvider gets a reference to the given CloudProviderFilters and assigns it to the CloudProvider field.
+func (o *InventoryFilterConditions) SetCloudProvider(v CloudProviderFilters) {
+	o.CloudProvider = &v
 }
 
 // GetProviderResourceId returns the ProviderResourceId field value if set, zero value otherwise.
@@ -446,6 +479,9 @@ func (o InventoryFilterConditions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.CloudProvider) {
+		toSerialize["cloudProvider"] = o.CloudProvider
 	}
 	if !IsNil(o.ProviderResourceId) {
 		toSerialize["providerResourceId"] = o.ProviderResourceId

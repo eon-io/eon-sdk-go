@@ -32,6 +32,11 @@ const (
 	NON_EON_SNAPSHOT_COUNT ResourceSortField = "nonEonSnapshotCount"
 	LATEST_SNAPSHOT_TIME ResourceSortField = "latestSnapshotTime"
 	OLDEST_SNAPSHOT_TIME ResourceSortField = "oldestSnapshotTime"
+	DATE_DISCOVERED ResourceSortField = "dateDiscovered"
+	CREATED_TIME ResourceSortField = "createdTime"
+	RESOURCE_GROUP_NAME ResourceSortField = "resourceGroupName"
+	CLUSTER_NAME ResourceSortField = "clusterName"
+	GLOBAL_CLUSTER_IDENTIFIER ResourceSortField = "globalClusterIdentifier"
 )
 
 // All allowed values of ResourceSortField enum
@@ -48,6 +53,11 @@ var AllowedResourceSortFieldEnumValues = []ResourceSortField{
 	"nonEonSnapshotCount",
 	"latestSnapshotTime",
 	"oldestSnapshotTime",
+	"dateDiscovered",
+	"createdTime",
+	"resourceGroupName",
+	"clusterName",
+	"globalClusterIdentifier",
 }
 
 func (v *ResourceSortField) UnmarshalJSON(src []byte) error {

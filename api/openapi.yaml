@@ -6641,16 +6641,13 @@ components:
         mpaRequest:
           required:
           - createdAt
-          - currentApprovals
           - id
-          - mpaPolicyIds
           - operation
           - policyDetails
           - requestMethod
           - requestPath
           - requesterEmail
           - requesterUserId
-          - requiredApprovals
           - status
           type: object
           x-nullable: true
@@ -18636,6 +18633,11 @@ components:
       - nonEonSnapshotCount
       - latestSnapshotTime
       - oldestSnapshotTime
+      - dateDiscovered
+      - createdTime
+      - resourceGroupName
+      - clusterName
+      - globalClusterIdentifier
       example: latestSnapshotTime
       type: string
     SortResourceBy:
@@ -19014,6 +19016,34 @@ components:
     InventoryFilterConditions:
       additionalProperties: false
       example:
+        tagKeys:
+          containsAllOf:
+          - environment
+          - app
+          containsNoneOf:
+          - environment
+          - app
+          containsAnyOf:
+          - environment
+          - app
+        resourceName:
+          contains:
+          - app-server-2
+          in:
+          - db-server
+          notContains:
+          - db-workflows-1
+          notIn:
+          - customers
+        dataClasses:
+          containsAllOf:
+          - PHI
+          - PII
+          containsNoneOf:
+          - PHI
+          containsAnyOf:
+          - PII
+          - PHI
         providerResourceId:
           in:
           - i-0f600a1b15b035105
@@ -19047,25 +19077,12 @@ components:
           containsAnyOf:
           - environment=production
           - app=web
-        tagKeys:
-          containsAllOf:
-          - environment
-          - app
-          containsNoneOf:
-          - environment
-          - app
-          containsAnyOf:
-          - environment
-          - app
-        resourceName:
-          contains:
-          - app-server-2
+        cloudProvider:
           in:
-          - db-server
-          notContains:
-          - db-workflows-1
+          - AWS
+          - AZURE
           notIn:
-          - customers
+          - GCP
         subnets:
           containsAllOf:
           - subnet-57c92df5
@@ -19081,15 +19098,6 @@ components:
           - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
           notIn:
           - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
-        dataClasses:
-          containsAllOf:
-          - PHI
-          - PII
-          containsNoneOf:
-          - PHI
-          containsAnyOf:
-          - PII
-          - PHI
         resourceType:
           in:
           - AWS_EC2
@@ -19109,6 +19117,8 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/IdFilters'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderFilters'
         providerResourceId:
           $ref: '#/components/schemas/ResourceIdFilters'
         resourceName:
@@ -19136,6 +19146,34 @@ components:
       additionalProperties: false
       example:
         filters:
+          tagKeys:
+            containsAllOf:
+            - environment
+            - app
+            containsNoneOf:
+            - environment
+            - app
+            containsAnyOf:
+            - environment
+            - app
+          resourceName:
+            contains:
+            - app-server-2
+            in:
+            - db-server
+            notContains:
+            - db-workflows-1
+            notIn:
+            - customers
+          dataClasses:
+            containsAllOf:
+            - PHI
+            - PII
+            containsNoneOf:
+            - PHI
+            containsAnyOf:
+            - PII
+            - PHI
           providerResourceId:
             in:
             - i-0f600a1b15b035105
@@ -19169,25 +19207,12 @@ components:
             containsAnyOf:
             - environment=production
             - app=web
-          tagKeys:
-            containsAllOf:
-            - environment
-            - app
-            containsNoneOf:
-            - environment
-            - app
-            containsAnyOf:
-            - environment
-            - app
-          resourceName:
-            contains:
-            - app-server-2
+          cloudProvider:
             in:
-            - db-server
-            notContains:
-            - db-workflows-1
+            - AWS
+            - AZURE
             notIn:
-            - customers
+            - GCP
           subnets:
             containsAllOf:
             - subnet-57c92df5
@@ -19203,15 +19228,6 @@ components:
             - 2ff45ed6-1b8d-5f67-b931-028482f16e0e
             notIn:
             - 6aecc4b5-9d75-4787-88ab-fa6ab98933e0
-          dataClasses:
-            containsAllOf:
-            - PHI
-            - PII
-            containsNoneOf:
-            - PHI
-            containsAnyOf:
-            - PII
-            - PHI
           resourceType:
             in:
             - AWS_EC2
@@ -19748,10 +19764,10 @@ components:
       - region
       - resourceName
       - resourceType
-      - securityAssignmentStatus
       - snapshotStorage
       - sourceStorage
       - tags
+      - threatDetection
       - vaults
       type: object
     ListResourcesResponse:
@@ -21457,16 +21473,13 @@ components:
     MPARequest:
       required:
       - createdAt
-      - currentApprovals
       - id
-      - mpaPolicyIds
       - operation
       - policyDetails
       - requestMethod
       - requestPath
       - requesterEmail
       - requesterUserId
-      - requiredApprovals
       - status
       type: object
       x-nullable: true
