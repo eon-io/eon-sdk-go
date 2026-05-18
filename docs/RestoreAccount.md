@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
 **ConnectedTime** | Pointer to **time.Time** | Date and time the account was connected to Eon. | [optional] 
 **RestoreAccountAttributes** | [**RestoreAccountCloudAttributes**](RestoreAccountCloudAttributes.md) |  | 
-**IsRestoreAllowed** | **bool** | Whether the current user&#39;s role permits restoring to this account, based on the role&#39;s restore destination limits. | 
+**IsRestoreAllowed** | **bool** | Whether the current role&#39;s restore destination limits permit restoring to the restore account.  | 
 
 ## Methods
 

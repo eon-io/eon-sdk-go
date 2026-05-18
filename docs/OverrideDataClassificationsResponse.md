@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DataClasses** | Pointer to **[]string** | List of data classes that were overridden.. | [optional] 
+**DataClasses** | Pointer to **[]string** | List of data classes that were overridden. | [optional] 
 
 ## Methods
 

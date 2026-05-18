@@ -35,7 +35,7 @@ type RestoreAccount struct {
 	// Date and time the account was connected to Eon.
 	ConnectedTime *time.Time `json:"connectedTime,omitempty"`
 	RestoreAccountAttributes RestoreAccountCloudAttributes `json:"restoreAccountAttributes"`
-	// Whether the current user's role permits restoring to this account, based on the role's restore destination limits.
+	// Whether the current role's restore destination limits permit restoring to the restore account. 
 	IsRestoreAllowed bool `json:"isRestoreAllowed"`
 }
 

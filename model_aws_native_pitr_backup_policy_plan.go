@@ -21,7 +21,7 @@ var _ MappedNullable = &AwsNativePitrBackupPolicyPlan{}
 
 // AwsNativePitrBackupPolicyPlan struct for AwsNativePitrBackupPolicyPlan
 type AwsNativePitrBackupPolicyPlan struct {
-	// Number of days to retain continuous backups using AWS Backup. AWS allows 1-35 days for RDS/Aurora continuous backups. 
+	// Number of days to retain continuous backups with AWS Backup. AWS allows 1 to 35 days for RDS and Aurora continuous backups. 
 	RetentionDays int32 `json:"retentionDays"`
 	ResourceType AwsNativePitrBackupResourceType `json:"resourceType"`
 }

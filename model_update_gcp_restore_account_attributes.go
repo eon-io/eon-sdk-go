@@ -17,9 +17,9 @@ import (
 // checks if the UpdateGcpRestoreAccountAttributes type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateGcpRestoreAccountAttributes{}
 
-// UpdateGcpRestoreAccountAttributes Updatable GCP account fields. Applicable when the restore account's cloud provider is `GCP`. 
+// UpdateGcpRestoreAccountAttributes Updatable GCP account fields. 
 type UpdateGcpRestoreAccountAttributes struct {
-	// Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed; the GCP project ID must remain the same. To use a different GCP project, disconnect and connect a new restore account. 
+	// Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed. The GCP project ID must remain the same. 
 	ServiceAccount NullableString `json:"serviceAccount,omitempty"`
 }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RetentionDays** | **int32** | Number of days to retain continuous backups using AWS Backup. AWS allows 1-35 days for RDS/Aurora continuous backups.  | 
+**RetentionDays** | **int32** | Number of days to retain continuous backups with AWS Backup. AWS allows 1 to 35 days for RDS and Aurora continuous backups.  | 
 **ResourceType** | [**AwsNativePitrBackupResourceType**](AwsNativePitrBackupResourceType.md) |  | 
 
 ## Methods

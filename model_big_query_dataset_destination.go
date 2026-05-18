@@ -21,11 +21,11 @@ var _ MappedNullable = &BigQueryDatasetDestination{}
 
 // BigQueryDatasetDestination Destination configuration for BigQuery dataset restore.
 type BigQueryDatasetDestination struct {
-	// Target dataset ID for the restore. If the dataset doesn't exist, it will be created. 
+	// Destination dataset ID. If the dataset doesn't exist, it's created. 
 	DatasetId string `json:"datasetId"`
-	// BigQuery location for the dataset (e.g., \"US\", \"EU\", \"us-central1\"). Defaults to the original dataset location if not specified. 
+	// BigQuery location for the dataset. Defaults to the original dataset location.  For multi-region, set to `US` or `EU`. 
 	Location *string `json:"location,omitempty"`
-	// List of table names to restore. If empty or not specified, all tables in the snapshot will be restored. 
+	// List of table names to restore. If empty or not specified, all tables in the snapshot are restored. 
 	SelectedTables []string `json:"selectedTables,omitempty"`
 	// Labels to apply to the restored BigQuery dataset as key-value pairs, where key and value are both strings.  **Example:** `{\"eon-restore\": \"true\"}` 
 	Labels *map[string]string `json:"labels,omitempty"`

@@ -36,7 +36,7 @@ type AwsDatabaseDestination struct {
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 	PasswordConfig NullableRdsPasswordConfig `json:"passwordConfig,omitempty"`
-	// When true, restores cluster members with their original instance names from the snapshot. If `restoredName` is empty, it will be set to the original cluster identifier from the snapshot. Only applies to Aurora clusters. Off by default. 
+	// When true, restores cluster members with their original instance names from the snapshot. If `restoredName` is empty, name is set to the original cluster identifier from the snapshot. Applies only to Aurora clusters. 
 	PreserveInstanceNames *bool `json:"preserveInstanceNames,omitempty"`
 }
 

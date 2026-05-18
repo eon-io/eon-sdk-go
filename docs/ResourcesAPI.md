@@ -111,9 +111,9 @@ import (
 )
 
 func main() {
-	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the EC2 instance is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the EC2 resource.
-	volumeId := "vol-049df61146c064d1c" // string | AWS EBS volume ID (`vol-…`) of the volume to include back in backup. The volume must be attached to this EC2 instance.
+	volumeId := "vol-049df61146c064d1c" // string | AWS-assigned ID of the EBS volume to include in backup. The volume must be attached to the instance specified in `id`. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -133,9 +133,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**projectId** | **string** | ID of the project the EC2 instance is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned ID of the EC2 resource. | 
-**volumeId** | **string** | AWS EBS volume ID (&#x60;vol-…&#x60;) of the volume to include back in backup. The volume must be attached to this EC2 instance. | 
+**volumeId** | **string** | AWS-assigned ID of the EBS volume to include in backup. The volume must be attached to the instance specified in &#x60;id&#x60;.  | 
 
 ### Other Parameters
 
@@ -261,8 +261,8 @@ import (
 
 func main() {
 	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
-	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the EC2 resource.
-	volumeId := "vol-049df61146c064d1c" // string | AWS EBS volume ID (`vol-…`) of the volume to exclude from backup. The volume must be attached to this EC2 instance and must not be the root volume.
+	id := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | Eon-assigned ID of the EC2 instance the volume is attached to.
+	volumeId := "vol-049df61146c064d1c" // string | AWS-assigned ID of the EBS volume to exclude from backup. The volume must be attached to the instance specified in `id` and must not be the root volume. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -283,8 +283,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
-**id** | **string** | Eon-assigned ID of the EC2 resource. | 
-**volumeId** | **string** | AWS EBS volume ID (&#x60;vol-…&#x60;) of the volume to exclude from backup. The volume must be attached to this EC2 instance and must not be the root volume. | 
+**id** | **string** | Eon-assigned ID of the EC2 instance the volume is attached to. | 
+**volumeId** | **string** | AWS-assigned ID of the EBS volume to exclude from backup. The volume must be attached to the instance specified in &#x60;id&#x60; and must not be the root volume.  | 
 
 ### Other Parameters
 

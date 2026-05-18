@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DatasetId** | **string** | Target dataset ID for the restore. If the dataset doesn&#39;t exist, it will be created.  | 
-**Location** | Pointer to **string** | BigQuery location for the dataset (e.g., \&quot;US\&quot;, \&quot;EU\&quot;, \&quot;us-central1\&quot;). Defaults to the original dataset location if not specified.  | [optional] 
-**SelectedTables** | Pointer to **[]string** | List of table names to restore. If empty or not specified, all tables in the snapshot will be restored.  | [optional] 
+**DatasetId** | **string** | Destination dataset ID. If the dataset doesn&#39;t exist, it&#39;s created.  | 
+**Location** | Pointer to **string** | BigQuery location for the dataset. Defaults to the original dataset location.  For multi-region, set to &#x60;US&#x60; or &#x60;EU&#x60;.  | [optional] 
+**SelectedTables** | Pointer to **[]string** | List of table names to restore. If empty or not specified, all tables in the snapshot are restored.  | [optional] 
 **Labels** | Pointer to **map[string]string** | Labels to apply to the restored BigQuery dataset as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon-restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 
 ## Methods

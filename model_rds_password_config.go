@@ -12,27 +12,32 @@ package eon
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the RdsPasswordConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RdsPasswordConfig{}
 
-// RdsPasswordConfig Configuration for RDS database password management during restore. 
+// RdsPasswordConfig Password management configuration for the restored RDS database. 
 type RdsPasswordConfig struct {
-	// Password management type for the restored database. 
-	PasswordManagementType *string `json:"passwordManagementType,omitempty"`
-	// Customer-managed password (required when passwordManagementType is SELF_MANAGED). 
+	// Password management type to apply to the restored database. 
+	PasswordManagementType string `json:"passwordManagementType"`
+	// Customer-managed password. Required when password management type is `SELF_MANAGED`. 
 	Password *string `json:"password,omitempty"`
-	// KMS key ARN used to encrypt the Secrets Manager secret that stores the database master password. Only applicable when passwordManagementType is AWS_SECRETS_MANAGER. This is distinct from encryptionKeyId which controls RDS storage encryption. 
+	// ARN of a KMS key to encrypt the secret that stores the database master password. The secret is managed through Amazon Secrets Manager. Required when password management type is `AWS_SECRETS_MANAGER`.  This is distinct from `encryptionKeyId`, which controls RDS storage encryption. 
 	SecretsManagerKmsKeyId *string `json:"secretsManagerKmsKeyId,omitempty"`
 }
+
+type _RdsPasswordConfig RdsPasswordConfig
 
 // NewRdsPasswordConfig instantiates a new RdsPasswordConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRdsPasswordConfig() *RdsPasswordConfig {
+func NewRdsPasswordConfig(passwordManagementType string) *RdsPasswordConfig {
 	this := RdsPasswordConfig{}
+	this.PasswordManagementType = passwordManagementType
 	return &this
 }
 
@@ -44,36 +49,28 @@ func NewRdsPasswordConfigWithDefaults() *RdsPasswordConfig {
 	return &this
 }
 
-// GetPasswordManagementType returns the PasswordManagementType field value if set, zero value otherwise.
+// GetPasswordManagementType returns the PasswordManagementType field value
 func (o *RdsPasswordConfig) GetPasswordManagementType() string {
-	if o == nil || IsNil(o.PasswordManagementType) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PasswordManagementType
+
+	return o.PasswordManagementType
 }
 
-// GetPasswordManagementTypeOk returns a tuple with the PasswordManagementType field value if set, nil otherwise
+// GetPasswordManagementTypeOk returns a tuple with the PasswordManagementType field value
 // and a boolean to check if the value has been set.
 func (o *RdsPasswordConfig) GetPasswordManagementTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.PasswordManagementType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PasswordManagementType, true
+	return &o.PasswordManagementType, true
 }
 
-// HasPasswordManagementType returns a boolean if a field has been set.
-func (o *RdsPasswordConfig) HasPasswordManagementType() bool {
-	if o != nil && !IsNil(o.PasswordManagementType) {
-		return true
-	}
-
-	return false
-}
-
-// SetPasswordManagementType gets a reference to the given string and assigns it to the PasswordManagementType field.
+// SetPasswordManagementType sets field value
 func (o *RdsPasswordConfig) SetPasswordManagementType(v string) {
-	o.PasswordManagementType = &v
+	o.PasswordManagementType = v
 }
 
 // GetPassword returns the Password field value if set, zero value otherwise.
@@ -150,9 +147,7 @@ func (o RdsPasswordConfig) MarshalJSON() ([]byte, error) {
 
 func (o RdsPasswordConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PasswordManagementType) {
-		toSerialize["passwordManagementType"] = o.PasswordManagementType
-	}
+	toSerialize["passwordManagementType"] = o.PasswordManagementType
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password
 	}
@@ -160,6 +155,43 @@ func (o RdsPasswordConfig) ToMap() (map[string]interface{}, error) {
 		toSerialize["secretsManagerKmsKeyId"] = o.SecretsManagerKmsKeyId
 	}
 	return toSerialize, nil
+}
+
+func (o *RdsPasswordConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"passwordManagementType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRdsPasswordConfig := _RdsPasswordConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	//decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRdsPasswordConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RdsPasswordConfig(varRdsPasswordConfig)
+
+	return err
 }
 
 type NullableRdsPasswordConfig struct {

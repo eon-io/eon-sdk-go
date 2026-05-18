@@ -19,10 +19,10 @@ import (
 // checks if the RestoreDestinationLimits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RestoreDestinationLimits{}
 
-// RestoreDestinationLimits struct for RestoreDestinationLimits
+// RestoreDestinationLimits Limits the restore accounts that can be used as restore destinations for operations granted by the role. 
 type RestoreDestinationLimits struct {
 	Effect AccessConditionEffect `json:"effect"`
-	// List of restore account provider IDs to match against. 
+	// List of cloud-provider-assigned restore account IDs to match against. 
 	RestoreAccountProviderIds []string `json:"restoreAccountProviderIds"`
 }
 

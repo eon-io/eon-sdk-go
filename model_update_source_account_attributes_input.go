@@ -17,7 +17,7 @@ import (
 // checks if the UpdateSourceAccountAttributesInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateSourceAccountAttributesInput{}
 
-// UpdateSourceAccountAttributesInput Cloud-provider-specific fields to update. Only the key matching the account's cloud provider should be set. 
+// UpdateSourceAccountAttributesInput Cloud-provider-specific fields to update. One of: `aws`, `gcp`. 
 type UpdateSourceAccountAttributesInput struct {
 	Aws NullableUpdateAwsSourceAccountAttributes `json:"aws,omitempty"`
 	Gcp NullableUpdateGcpSourceAccountAttributes `json:"gcp,omitempty"`

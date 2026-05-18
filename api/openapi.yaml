@@ -876,10 +876,11 @@ paths:
         excluded: true
   /v1/projects/{projectId}/source-accounts/{accountId}:
     get:
-      description: "Description: Retrieve the details of a source account by its ID."
+      description: "Description: Retrieve a source account by ID."
       operationId: getSourceAccount
       parameters:
       - description: ID of the project.
+        example: 512010dd-8eaa-5b68-ab64-287458195d44
         explode: false
         in: path
         name: projectId
@@ -889,6 +890,7 @@ paths:
           type: string
         style: simple
       - description: Eon-assigned ID of the source account.
+        example: 0fa724c4-9251-5bcb-94ae-b5dd5bcb7a93
         explode: false
         in: path
         name: accountId
@@ -903,9 +905,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetSourceAccountResponse'
-          description: Source account details.
+          description: Source account retrieved.
         "404":
-          description: Source account not found.
+          description: Source account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -933,12 +935,11 @@ paths:
         excluded: true
     patch:
       description: |
-        Description: Updates source account fields. Editable fields depend on the account's cloud provider.
-        For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
-        For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
+        Description: Updates source account properties.
       operationId: updateSourceAccount
       parameters:
       - description: ID of the project.
+        example: 8b4655a7-5669-51d2-83b3-038e9bf6f12f
         explode: false
         in: path
         name: projectId
@@ -948,6 +949,7 @@ paths:
           type: string
         style: simple
       - description: Eon-assigned ID of the source account to update.
+        example: fc495499-9796-5fc9-ade7-1ba924cbcc42
         explode: false
         in: path
         name: accountId
@@ -970,9 +972,11 @@ paths:
                 $ref: '#/components/schemas/UpdateSourceAccountResponse'
           description: Source account updated.
         "400":
-          description: Invalid request.
+          description: |
+            Invalid request.
+            Typically this indicates invalid JSON, invalid or changed source account ID, or the cloud provider did not accept verification of the updated role or service account.
         "404":
-          description: Source account not found.
+          description: Source account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -1757,7 +1761,10 @@ paths:
   /v1/projects/{projectId}/restore-accounts/{accountId}:
     delete:
       description: |
-        Description: Removes a restore account from the project. The account must not be in a connected state.
+        Description: Deletes a restore account from the project.
+
+        This option is available only for restore accounts whose status is `DISCONNECTED` or `INSUFFICIENT_PERMISSIONS`.
+        Restore accounts with `CONNECTED` status must be disconnected before they can be deleted.
       operationId: DeleteRestoreAccountV1
       parameters:
       - description: |
@@ -1786,10 +1793,9 @@ paths:
         "200":
           description: Restore account deleted.
         "404":
-          description: Restore account not found.
+          description: Restore account wasn't found.
         "409":
-          description: Restore account is connected and cannot be deleted. Disconnect
-            it first.
+          description: Restore account is connected and can't be deleted.
         "1XX":
           description: Informational
         "3XX":
@@ -1822,9 +1828,7 @@ paths:
           key: accountId
     patch:
       description: |
-        Description: Updates restore account fields. Editable fields depend on the account's cloud provider.
-        For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
-        For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
+        Description: Updates restore account properties.
       operationId: updateRestoreAccount
       parameters:
       - description: ID of the project.
@@ -1859,9 +1863,11 @@ paths:
                 $ref: '#/components/schemas/UpdateRestoreAccountResponse'
           description: Restore account updated.
         "400":
-          description: Invalid request.
+          description: |
+            Invalid request.
+            Typically this indicates invalid JSON, invalid or changed restore account ID, or the cloud provider did not accept verification of the updated role or service account.
         "404":
-          description: Restore account not found.
+          description: Restore account wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -2964,13 +2970,10 @@ paths:
       responses:
         "200":
           description: Backup policy deleted.
-        "403":
-          description: |
-            The caller does not have permission to delete backup policies in this project,
-            or the X-MPA-Request-Id header refers to an MPA request created by a different user.
         "404":
           description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
             \ was not found."
+          x-docs-public-description: Backup policy wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -3103,13 +3106,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateBackupPolicyResponse'
           description: Backup policy updated.
-        "403":
-          description: |
-            The caller does not have permission to update backup policies in this project,
-            or the X-MPA-Request-Id header refers to an MPA request created by a different user.
         "404":
           description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
             \ was not found."
+          x-docs-public-description: Backup policy wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -5754,10 +5754,11 @@ paths:
   /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/exclude:
     patch:
       description: |
-        Description: Excludes a specific EBS volume of an EC2 instance from being backed up by Eon.
-        Root volumes cannot be excluded.
+        Description: Excludes an EC2-attached EBS volume from being backed up by Eon.
 
         You can cancel this action by calling [Cancel Volume Backup Exclusion](cancel-volume-backup-exclusion) for the same volume.
+
+        Root volumes can't be excluded.
       operationId: excludeVolumeFromBackup
       parameters:
       - description: |
@@ -5772,7 +5773,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: Eon-assigned ID of the EC2 resource.
+      - description: Eon-assigned ID of the EC2 instance the volume is attached to.
         example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         explode: false
         in: path
@@ -5782,9 +5783,9 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: AWS EBS volume ID (`vol-…`) of the volume to exclude from backup.
-          The volume must be attached to this EC2 instance and must not be the root
-          volume.
+      - description: |
+          AWS-assigned ID of the EBS volume to exclude from backup.
+          The volume must be attached to the instance specified in `id` and must not be the root volume.
         example: vol-049df61146c064d1c
         explode: false
         in: path
@@ -5801,9 +5802,11 @@ paths:
                 $ref: '#/components/schemas/ExcludeFromBackupResponse'
           description: Volume excluded from backup.
         "400":
-          description: "Invalid request (e.g., root volume or non-EBS volume)."
+          description: |
+            Invalid request.
+            Typically this indicates invalid ID formats, or that a non-EC2 resource, non-EBS volume, or root volume was specified in the request.
         "404":
-          description: Resource or volume not found.
+          description: Resource or volume wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -5841,12 +5844,14 @@ paths:
   /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/include:
     patch:
       description: |
-        Description: Cancels the backup exclusion of a specific EBS volume, so it will be included in future backups of the EC2 instance.
-        By default, all EBS volumes are included in backups. This endpoint is only relevant for volumes that were previously excluded using [Exclude Volume from Backup](exclude-volume-from-backup).
+        Description: Allows an EC2-attached EBS volume to be backed up by Eon.
+
+        By default, all EBS volumes are included in backups.
+        It's not necessary to cancel a volume exclusion unless the volume was previously [excluded from backup](exclude-volume-from-backup).
       operationId: cancelVolumeBackupExclusion
       parameters:
       - description: |
-          ID of the project the resource is in.
+          ID of the project the EC2 instance is in.
           You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         example: 043090df-9fe5-4f89-9859-45db589c2936
         explode: false
@@ -5867,8 +5872,9 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: AWS EBS volume ID (`vol-…`) of the volume to include back in
-          backup. The volume must be attached to this EC2 instance.
+      - description: |
+          AWS-assigned ID of the EBS volume to include in backup.
+          The volume must be attached to the instance specified in `id`.
         example: vol-049df61146c064d1c
         explode: false
         in: path
@@ -5883,11 +5889,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CancelExclusionFromBackupResponse'
-          description: Volume backup exclusion cancelled.
+          description: Volume backup exclusion canceled.
         "400":
-          description: "Invalid request (e.g., non-EC2 resource or non-EBS volume)."
+          description: |
+            Invalid request.
+            Typically this indicates invalid ID formats, or that a non-EC2 resource or non-EBS volume was specified in the request.
         "404":
-          description: Resource or volume not found.
+          description: Resource or volume wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -6635,29 +6643,6 @@ paths:
         excluded: true
 components:
   schemas:
-    MPAInterceptedResponse:
-      description: Body returned when an operation is intercepted by an MPA policy.
-      properties:
-        mpaRequest:
-          required:
-          - createdAt
-          - id
-          - operation
-          - policyDetails
-          - requestMethod
-          - requestPath
-          - requesterEmail
-          - requesterUserId
-          - status
-          type: object
-          x-nullable: true
-        mpaPolicies:
-          $ref: '#/components/schemas/MPAInterceptedResponse_mpaPolicies'
-      required:
-      - mpaPolicies
-      - mpaRequest
-      type: object
-      x-nullable: true
     PermissionType:
       description: User permission.
       enum:
@@ -6705,6 +6690,11 @@ components:
       - mpa_requests.manage
       example: inventory.view
       type: string
+      x-docs-internal-enum:
+      - zero_etl_policies.manage
+      - mpa_policies.manage
+      - mpa_policies.view
+      - mpa_requests.manage
     Permission:
       example:
         permissionType: inventory.view
@@ -7027,6 +7017,20 @@ components:
       - RESOURCE_TYPE_UNSPECIFIED
       example: AWS_EC2
       type: string
+      x-docs-internal-enum:
+      - AWS_EBS_VOLUME
+      - AWS_KEYSPACES_TABLE
+      - AWS_REDSHIFT
+      - AWS_DOCUMENTDB
+      - AWS_NEPTUNE
+      - AZURE_SAP_HANA_VM
+      - AZURE_AKS_NAMESPACE
+      - GCP_GKE_NAMESPACE
+      - GCP_BIG_QUERY
+      - GCP_CLOUD_FIRESTORE
+      - GCP_DISK
+      - GCP_SAP_HANA_VM
+      - GOOGLE_WORKSPACE_RESOURCE
     ResourceTypeCondition:
       example:
         resourceTypes:
@@ -7067,6 +7071,8 @@ components:
     DataClass:
       description: |
         Data classes.
+
+        Allowed values: `FI`, `PHI`, `PII`
       example: PII
       type: string
     DataClassesCondition:
@@ -7147,6 +7153,8 @@ components:
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string
+      x-docs-internal-enum:
+      - GOOGLE_WORKSPACE
     CloudProviderCondition:
       example:
         cloudProviders:
@@ -7448,6 +7456,8 @@ components:
       - id
       type: object
     RestoreDestinationLimits:
+      description: |
+        Limits the restore accounts that can be used as restore destinations for operations granted by the role.
       example:
         effect: INCLUSIVE
         restoreAccountProviderIds:
@@ -7459,7 +7469,7 @@ components:
           $ref: '#/components/schemas/AccessConditionEffect'
         restoreAccountProviderIds:
           description: |
-            List of restore account provider IDs to match against.
+            List of cloud-provider-assigned restore account IDs to match against.
           items:
             type: string
           minItems: 1
@@ -10109,7 +10119,6 @@ components:
     UpdateAwsSourceAccountAttributes:
       description: |
         Updatable AWS account fields.
-        Applicable when the source account's cloud provider is `AWS`.
       example:
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
@@ -10117,8 +10126,8 @@ components:
         roleArn:
           description: |
             ARN of the role Eon assumes to access the account in AWS.
-            Only the role name portion of the ARN can be changed; the AWS account ID must remain the same.
-            To use a different AWS account, disconnect and connect a new source account.
+            Only the role name portion of the ARN can be changed.
+            The AWS account ID must remain the same.
           example: arn:aws:iam::123412341234:role/EonSourceAccountRole
           type: string
           x-nullable: true
@@ -10127,7 +10136,6 @@ components:
     UpdateGcpSourceAccountAttributes:
       description: |
         Updatable GCP account fields.
-        Applicable when the source account's cloud provider is `GCP`.
       example:
         serviceAccount: eon-source@my-project.iam.gserviceaccount.com
       nullable: true
@@ -10135,8 +10143,8 @@ components:
         serviceAccount:
           description: |
             Email of the service account Eon impersonates to access the GCP project.
-            Only the service account name portion can be changed; the GCP project ID must remain the same.
-            To use a different GCP project, disconnect and connect a new source account.
+            Only the service account name portion can be changed.
+            The GCP project ID must remain the same.
           example: eon-source@my-project.iam.gserviceaccount.com
           type: string
           x-nullable: true
@@ -10145,7 +10153,7 @@ components:
     UpdateSourceAccountAttributesInput:
       description: |
         Cloud-provider-specific fields to update.
-        Only the key matching the account's cloud provider should be set.
+        One of: `aws`, `gcp`.
       example:
         gcp:
           serviceAccount: eon-source@my-project.iam.gserviceaccount.com
@@ -10762,8 +10770,8 @@ components:
         restoreAccountAttributes:
           $ref: '#/components/schemas/RestoreAccountCloudAttributes'
         isRestoreAllowed:
-          description: "Whether the current user's role permits restoring to this\
-            \ account, based on the role's restore destination limits."
+          description: |
+            Whether the current role's restore destination limits permit restoring to the restore account.
           type: boolean
           x-internal: false
       required:
@@ -11013,7 +11021,6 @@ components:
     UpdateAwsRestoreAccountAttributes:
       description: |
         Updatable AWS account fields.
-        Applicable when the restore account's cloud provider is `AWS`.
       example:
         roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
       nullable: true
@@ -11021,8 +11028,8 @@ components:
         roleArn:
           description: |
             ARN of the role Eon assumes to access the account in AWS.
-            Only the role name portion of the ARN can be changed; the AWS account ID must remain the same.
-            To use a different AWS account, disconnect and connect a new restore account.
+            Only the role name portion of the ARN can be changed.
+            The AWS account ID must remain the same.
           example: arn:aws:iam::123412341234:role/EonRestoreAccountRole
           type: string
           x-nullable: true
@@ -11031,7 +11038,6 @@ components:
     UpdateGcpRestoreAccountAttributes:
       description: |
         Updatable GCP account fields.
-        Applicable when the restore account's cloud provider is `GCP`.
       example:
         serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
       nullable: true
@@ -11039,8 +11045,8 @@ components:
         serviceAccount:
           description: |
             Email of the service account Eon impersonates to access the GCP project.
-            Only the service account name portion can be changed; the GCP project ID must remain the same.
-            To use a different GCP project, disconnect and connect a new restore account.
+            Only the service account name portion can be changed.
+            The GCP project ID must remain the same.
           example: eon-restore@my-project.iam.gserviceaccount.com
           type: string
           x-nullable: true
@@ -11049,7 +11055,7 @@ components:
     UpdateRestoreAccountAttributesInput:
       description: |
         Cloud-provider-specific fields to update.
-        Only the key matching the account's cloud provider should be set.
+        One of: `aws`, `gcp`.
       example:
         gcp:
           serviceAccount: eon-restore@my-project.iam.gserviceaccount.com
@@ -11773,6 +11779,8 @@ components:
       - JOB_RESULT_READY
       example: JOB_PENDING
       type: string
+      x-docs-internal-enum:
+      - JOB_RESULT_READY
       x-enum-varnames:
       - JOB_UNSPECIFIED
       - JOB_PENDING
@@ -11869,8 +11877,21 @@ components:
       - AZURE_SAP_HANA_VM_BACKUP
       - ATLAS_MONGODB_CLUSTER_BACKUP
       - ATLAS_MONGODB_CLUSTER_BACKUP_FULL
+      - GOOGLE_WORKSPACE_BACKUP
       example: AWS_EC2_BACKUP
       type: string
+      x-docs-internal-enum:
+      - AWS_EBS_VOLUME_BACKUP
+      - AWS_S3_LLG_BACKUP
+      - AWS_REDSHIFT_BACKUP
+      - AWS_DOCUMENTDB_BACKUP
+      - AWS_NEPTUNE_BACKUP
+      - AWS_KEYSPACES_BACKUP_FULL
+      - AZURE_VM_RESTORE_POINT_CONVERSION
+      - GCP_DISK_BACKUP
+      - GCP_SAP_HANA_VM_BACKUP
+      - AZURE_SAP_HANA_VM_BACKUP
+      - GOOGLE_WORKSPACE_BACKUP
     BackupJobTypeFilters:
       additionalProperties: false
       example:
@@ -12577,6 +12598,19 @@ components:
       - EXPORT_ACCESS_DENIED_ITEMS
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
+      x-docs-internal-enum:
+      - AWS_EBS_VOLUME_RESTORE
+      - AWS_EBS_SNAPSHOT_CONVERT
+      - AWS_DYNAMO_DB_RESTORE_TO_S3
+      - AZURE_POSTGRESQL_RECORD_RESTORE
+      - AZURE_SAP_HANA_VM_INSTANCE_RESTORE
+      - AWS_REDSHIFT_RESTORE
+      - AWS_DOCUMENTDB_RESTORE
+      - AWS_NEPTUNE_RESTORE
+      - GCP_SAP_HANA_VM_INSTANCE_RESTORE
+      - AWS_KEYSPACES_TABLE_RESTORE
+      - AWS_KEYSPACES_RECORD_RESTORE
+      - EXPORT_ACCESS_DENIED_ITEMS
     RestoreJobTypeFilters:
       additionalProperties: false
       example:
@@ -13504,6 +13538,10 @@ components:
       - AZURE_FILES_STANDARD
       example: STANDARD
       type: string
+      x-docs-internal-enum:
+      - AWS_NATIVE_STANDARD
+      - BIGQUERY_NATIVE_PITR
+      - AZURE_FILES_STANDARD
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
@@ -14204,8 +14242,8 @@ components:
       properties:
         retentionDays:
           description: |
-            Number of days to retain continuous backups using AWS Backup.
-            AWS allows 1-35 days for RDS/Aurora continuous backups.
+            Number of days to retain continuous backups with AWS Backup.
+            AWS allows 1 to 35 days for RDS and Aurora continuous backups.
           example: 7
           maximum: 35
           minimum: 1
@@ -16940,7 +16978,7 @@ components:
       description: Destination configuration for BigQuery dataset restore.
       example:
         datasetId: restored_dataset
-        location: US
+        location: us-central1
         selectedTables:
         - users
         - orders
@@ -16949,20 +16987,22 @@ components:
       properties:
         datasetId:
           description: |
-            Target dataset ID for the restore.
-            If the dataset doesn't exist, it will be created.
+            Destination dataset ID.
+            If the dataset doesn't exist, it's created.
           example: restored_dataset
           type: string
         location:
           description: |
-            BigQuery location for the dataset (e.g., "US", "EU", "us-central1").
-            Defaults to the original dataset location if not specified.
-          example: US
+            BigQuery location for the dataset.
+            Defaults to the original dataset location.
+
+            For multi-region, set to `US` or `EU`.
+          example: us-central1
           type: string
         selectedTables:
           description: |
             List of table names to restore.
-            If empty or not specified, all tables in the snapshot will be restored.
+            If empty or not specified, all tables in the snapshot are restored.
           example:
           - users
           - orders
@@ -16985,7 +17025,7 @@ components:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
           datasetId: restored_dataset
-          location: US
+          location: us-central1
           selectedTables:
           - users
           - orders
@@ -17201,7 +17241,7 @@ components:
       type: object
     RdsPasswordConfig:
       description: |
-        Configuration for RDS database password management during restore.
+        Password management configuration for the restored RDS database.
       example:
         password: password
         secretsManagerKmsKeyId: secretsManagerKmsKeyId
@@ -17210,20 +17250,36 @@ components:
       properties:
         passwordManagementType:
           description: |
-            Password management type for the restored database.
+            Password management type to apply to the restored database.
           enum:
           - AWS_SECRETS_MANAGER
           - SELF_MANAGED
           type: string
+          x-fern-enum:
+            AWS_SECRETS_MANAGER:
+              description: |
+                Manage password through AWS Secrets Manager.
+                Use with `secretsManagerKmsKeyId`.
+            SELF_MANAGED:
+              description: |
+                Set a master user password on the database.
+                Use with `password`.
         password:
           description: |
-            Customer-managed password (required when passwordManagementType is SELF_MANAGED).
+            Customer-managed password.
+            Required when password management type is `SELF_MANAGED`.
           type: string
           writeOnly: true
         secretsManagerKmsKeyId:
           description: |
-            KMS key ARN used to encrypt the Secrets Manager secret that stores the database master password. Only applicable when passwordManagementType is AWS_SECRETS_MANAGER. This is distinct from encryptionKeyId which controls RDS storage encryption.
+            ARN of a KMS key to encrypt the secret that stores the database master password.
+            The secret is managed through Amazon Secrets Manager.
+            Required when password management type is `AWS_SECRETS_MANAGER`.
+
+            This is distinct from `encryptionKeyId`, which controls RDS storage encryption.
           type: string
+      required:
+      - passwordManagementType
       type: object
     AwsDatabaseDestination:
       description: Configuration for restoring to RDS.
@@ -17289,8 +17345,8 @@ components:
           default: false
           description: |
             When true, restores cluster members with their original instance names from the snapshot.
-            If `restoredName` is empty, it will be set to the original cluster identifier from the snapshot.
-            Only applies to Aurora clusters. Off by default.
+            If `restoredName` is empty, name is set to the original cluster identifier from the snapshot.
+            Applies only to Aurora clusters.
           type: boolean
       required:
       - encryptionKeyId
@@ -18368,9 +18424,13 @@ components:
       - GCP_NETWORK_TYPE_PRIVATE
     GcpCloudSqlTarget:
       example:
+        networkHostProject: my-shared-vpc-project
         zone: us-east1-b
         name: my-restored-instance
-        networkType: PUBLIC
+        networkName: default
+        networkType: PRIVATE
+        labels:
+          eon_api_restore: "true"
       nullable: true
       properties:
         zone:
@@ -18379,7 +18439,7 @@ components:
           type: string
         name:
           description: Instance name.
-          example: my-instance
+          example: my-restored-instance
           type: string
         networkType:
           $ref: '#/components/schemas/GcpNetworkType'
@@ -18412,9 +18472,13 @@ components:
     GcpCloudSqlRestoreDestination:
       example:
         gcpCloudSql:
+          networkHostProject: my-shared-vpc-project
           zone: us-east1-b
           name: my-restored-instance
-          networkType: PUBLIC
+          networkName: default
+          networkType: PRIVATE
+          labels:
+            eon_api_restore: "true"
       properties:
         gcpCloudSql:
           $ref: '#/components/schemas/GcpCloudSqlTarget'
@@ -18424,9 +18488,13 @@ components:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
         destination:
           gcpCloudSql:
+            networkHostProject: my-shared-vpc-project
             zone: us-east1-b
             name: my-restored-instance
-            networkType: PUBLIC
+            networkName: default
+            networkType: PRIVATE
+            labels:
+              eon_api_restore: "true"
       properties:
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
@@ -18491,6 +18559,9 @@ components:
             Either `query` or `lucene` must be provided.
           example: SELECT * FROM customers LIMIT 50;
           type: string
+          x-docs-public-description: |
+            SQL query to run against the database.
+            Support is limited to Athena [`SELECT` queries](https://docs.aws.amazon.com/athena/latest/ug/select.html).
         restoreAccountId:
           description: "Eon-assigned ID of the [restore account](./list-restore-accounts)."
           example: 1e0b9aa3-a942-5e86-afe6-57606e952622
@@ -18640,6 +18711,16 @@ components:
       - globalClusterIdentifier
       example: latestSnapshotTime
       type: string
+      x-docs-internal-enum:
+      - id
+      - backupStatus
+      - accountId
+      - environment
+      - providerResourceId
+      - sizeBytes
+      - snapshotStorageSizeBytes
+      - eonSnapshotCount
+      - nonEonSnapshotCount
     SortResourceBy:
       description: |
         List of sorting options.
@@ -18906,6 +18987,9 @@ components:
       - LIMIT_EXCEEDED
       example: VIOLATIONS_DETECTED
       type: string
+      x-docs-internal-enum:
+      - DLSG
+      - LIMIT_EXCEEDED
     BackupStatusFilters:
       additionalProperties: false
       example:
@@ -20059,7 +20143,7 @@ components:
         - PII
       properties:
         dataClasses:
-          description: List of data classes that were overridden..
+          description: List of data classes that were overridden.
           example:
           - PII
           items:
@@ -21151,7 +21235,14 @@ components:
           $ref: '#/components/schemas/CostDataGroupBy'
         topN:
           description: |
-            With a resource-level `groupBy`, keeps the top-N groups by total cost and folds the rest into synthetic "Others" records (no `dimensions`, one per time bucket) appended to `records`.
+            Limits the response to the top _n_ resources by total cost over `timeFrame`, and folds all other matching resources into one aggregated record per time period in `granularity`.
+            Use this when a resource-level query would return too many records—for example, to build an efficient top-spenders chart without requesting every resource for every period.
+
+            Applies only when grouping by `RESOURCE` or `RESOURCE_AND_VAULT`.
+            Otherwise, ignored.
+            Omit to return all matching resources.
+
+            Aggregated records have no dimensions and typically have `resourceCount` greater than 1.
           minimum: 1
           type: integer
       required:
@@ -21239,6 +21330,19 @@ components:
       - RANSOMWARE_PROTECTED_STORAGE_METERING_DIMENSION
       example: AWS_EC2_METERING_DIMENSION
       type: string
+      x-docs-internal-enum:
+      - AWS_RDS_ORACLE_METERING_DIMENSION
+      - AWS_S3_DLSG_METERING_DIMENSION
+      - GCP_VM_NATIVE_METERING_DIMENSION
+      - GCP_CLOUD_SQL_POSTGRES_TO_AZURE_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_MYSQL_TO_AZURE_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_SQL_SERVER_TO_AZURE_VAULT_METERING_DIMENSION
+      - AWS_RDS_TO_GCP_VAULT_METERING_DIMENSION
+      - AWS_DYNAMO_DB_TO_GCP_VAULT_METERING_DIMENSION
+      - AZURE_SQL_VIRTUAL_MACHINE_TO_GCP_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_POSTGRES_TO_AWS_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_MYSQL_TO_AWS_VAULT_METERING_DIMENSION
+      - GCP_CLOUD_SQL_SQL_SERVER_TO_AWS_VAULT_METERING_DIMENSION
     Cost:
       example:
         amount: 150.75
@@ -21470,29 +21574,6 @@ components:
       required:
       - data
       type: object
-    MPARequest:
-      required:
-      - createdAt
-      - id
-      - operation
-      - policyDetails
-      - requestMethod
-      - requestPath
-      - requesterEmail
-      - requesterUserId
-      - status
-      type: object
-      x-nullable: true
-    MPAPolicy:
-      required:
-      - approvalWindowHours
-      - executionWindowHours
-      - id
-      - operation
-      - projectId
-      - requiredApprovals
-      type: object
-      x-nullable: true
     createVault_409_response:
       example:
         error: error
@@ -21509,16 +21590,6 @@ components:
           format: tobedefined
           type: string
       type: object
-    MPAInterceptedResponse_mpaPolicies:
-      properties:
-        policies:
-          items:
-            $ref: '#/components/schemas/MPAPolicy'
-          type: array
-      required:
-      - policies
-      type: object
-      x-nullable: true
   securitySchemes:
     ApiKeyAuth:
       bearerFormat: JWT

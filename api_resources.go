@@ -167,14 +167,16 @@ func (r ApiCancelVolumeBackupExclusionRequest) Execute() (*CancelExclusionFromBa
 /*
 CancelVolumeBackupExclusion Cancel Volume Backup Exclusion
 
-Description: Cancels the backup exclusion of a specific EBS volume, so it will be included in future backups of the EC2 instance.
-By default, all EBS volumes are included in backups. This endpoint is only relevant for volumes that were previously excluded using [Exclude Volume from Backup](exclude-volume-from-backup).
+Description: Allows an EC2-attached EBS volume to be backed up by Eon.
+
+By default, all EBS volumes are included in backups.
+It's not necessary to cancel a volume exclusion unless the volume was previously [excluded from backup](exclude-volume-from-backup).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param projectId ID of the project the EC2 instance is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned ID of the EC2 resource.
- @param volumeId AWS EBS volume ID (`vol-…`) of the volume to include back in backup. The volume must be attached to this EC2 instance.
+ @param volumeId AWS-assigned ID of the EBS volume to include in backup. The volume must be attached to the instance specified in `id`. 
  @return ApiCancelVolumeBackupExclusionRequest
 */
 func (a *ResourcesAPIService) CancelVolumeBackupExclusion(ctx context.Context, projectId string, id string, volumeId string) ApiCancelVolumeBackupExclusionRequest {
@@ -432,16 +434,17 @@ func (r ApiExcludeVolumeFromBackupRequest) Execute() (*ExcludeFromBackupResponse
 /*
 ExcludeVolumeFromBackup Exclude Volume from Backup
 
-Description: Excludes a specific EBS volume of an EC2 instance from being backed up by Eon.
-Root volumes cannot be excluded.
+Description: Excludes an EC2-attached EBS volume from being backed up by Eon.
 
 You can cancel this action by calling [Cancel Volume Backup Exclusion](cancel-volume-backup-exclusion) for the same volume.
+
+Root volumes can't be excluded.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
- @param id Eon-assigned ID of the EC2 resource.
- @param volumeId AWS EBS volume ID (`vol-…`) of the volume to exclude from backup. The volume must be attached to this EC2 instance and must not be the root volume.
+ @param id Eon-assigned ID of the EC2 instance the volume is attached to.
+ @param volumeId AWS-assigned ID of the EBS volume to exclude from backup. The volume must be attached to the instance specified in `id` and must not be the root volume. 
  @return ApiExcludeVolumeFromBackupRequest
 */
 func (a *ResourcesAPIService) ExcludeVolumeFromBackup(ctx context.Context, projectId string, id string, volumeId string) ApiExcludeVolumeFromBackupRequest {

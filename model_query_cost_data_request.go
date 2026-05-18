@@ -27,7 +27,7 @@ type QueryCostDataRequest struct {
 	Granularity *CostGranularity `json:"granularity,omitempty"`
 	Filters *CostDataFilters `json:"filters,omitempty"`
 	GroupBy *CostDataGroupBy `json:"groupBy,omitempty"`
-	// With a resource-level `groupBy`, keeps the top-N groups by total cost and folds the rest into synthetic \"Others\" records (no `dimensions`, one per time bucket) appended to `records`. 
+	// Limits the response to the top _n_ resources by total cost over `timeFrame`, and folds all other matching resources into one aggregated record per time period in `granularity`. Use this when a resource-level query would return too many records—for example, to build an efficient top-spenders chart without requesting every resource for every period.  Applies only when grouping by `RESOURCE` or `RESOURCE_AND_VAULT`. Otherwise, ignored. Omit to return all matching resources.  Aggregated records have no dimensions and typically have `resourceCount` greater than 1. 
 	TopN *int32 `json:"topN,omitempty"`
 }
 

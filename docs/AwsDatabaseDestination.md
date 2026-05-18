@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **DbInstanceClass** | Pointer to **string** | Instance class to use for the restored resource. | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **PasswordConfig** | Pointer to [**NullableRdsPasswordConfig**](RdsPasswordConfig.md) |  | [optional] 
-**PreserveInstanceNames** | Pointer to **bool** | When true, restores cluster members with their original instance names from the snapshot. If &#x60;restoredName&#x60; is empty, it will be set to the original cluster identifier from the snapshot. Only applies to Aurora clusters. Off by default.  | [optional] [default to false]
+**PreserveInstanceNames** | Pointer to **bool** | When true, restores cluster members with their original instance names from the snapshot. If &#x60;restoredName&#x60; is empty, name is set to the original cluster identifier from the snapshot. Applies only to Aurora clusters.  | [optional] [default to false]
 
 ## Methods
 

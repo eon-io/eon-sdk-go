@@ -17,9 +17,9 @@ import (
 // checks if the UpdateAwsSourceAccountAttributes type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateAwsSourceAccountAttributes{}
 
-// UpdateAwsSourceAccountAttributes Updatable AWS account fields. Applicable when the source account's cloud provider is `AWS`. 
+// UpdateAwsSourceAccountAttributes Updatable AWS account fields. 
 type UpdateAwsSourceAccountAttributes struct {
-	// ARN of the role Eon assumes to access the account in AWS. Only the role name portion of the ARN can be changed; the AWS account ID must remain the same. To use a different AWS account, disconnect and connect a new source account. 
+	// ARN of the role Eon assumes to access the account in AWS. Only the role name portion of the ARN can be changed. The AWS account ID must remain the same. 
 	RoleArn NullableString `json:"roleArn,omitempty"`
 }
 

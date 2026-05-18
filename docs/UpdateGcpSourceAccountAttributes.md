@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ServiceAccount** | Pointer to **NullableString** | Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed; the GCP project ID must remain the same. To use a different GCP project, disconnect and connect a new source account.  | [optional] 
+**ServiceAccount** | Pointer to **NullableString** | Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed. The GCP project ID must remain the same.  | [optional] 
 
 ## Methods
 

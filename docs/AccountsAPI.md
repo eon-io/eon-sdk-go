@@ -1068,8 +1068,8 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project.
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the source account.
+	projectId := "512010dd-8eaa-5b68-ab64-287458195d44" // string | ID of the project.
+	accountId := "0fa724c4-9251-5bcb-94ae-b5dd5bcb7a93" // string | Eon-assigned ID of the source account.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1809,8 +1809,8 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project.
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the source account to update.
+	projectId := "8b4655a7-5669-51d2-83b3-038e9bf6f12f" // string | ID of the project.
+	accountId := "fc495499-9796-5fc9-ade7-1ba924cbcc42" // string | Eon-assigned ID of the source account to update.
 	updateSourceAccountRequest := *openapiclient.NewUpdateSourceAccountRequest() // UpdateSourceAccountRequest | 
 
 	configuration := openapiclient.NewConfiguration()

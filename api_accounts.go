@@ -564,7 +564,10 @@ func (r ApiDeleteRestoreAccountV1Request) Execute() (*http.Response, error) {
 /*
 DeleteRestoreAccountV1 Delete Restore Account
 
-Description: Removes a restore account from the project. The account must not be in a connected state.
+Description: Deletes a restore account from the project.
+
+This option is available only for restore accounts whose status is `DISCONNECTED` or `INSUFFICIENT_PERMISSIONS`.
+Restore accounts with `CONNECTED` status must be disconnected before they can be deleted.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1853,7 +1856,7 @@ func (r ApiGetSourceAccountRequest) Execute() (*GetSourceAccountResponse, *http.
 /*
 GetSourceAccount Get Source Account
 
-Description: Retrieve the details of a source account by its ID.
+Description: Retrieve a source account by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project.
@@ -2959,9 +2962,7 @@ func (r ApiUpdateRestoreAccountRequest) Execute() (*UpdateRestoreAccountResponse
 /*
 UpdateRestoreAccount Update Restore Account
 
-Description: Updates restore account fields. Editable fields depend on the account's cloud provider.
-For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
-For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
+Description: Updates restore account properties.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -3241,9 +3242,7 @@ func (r ApiUpdateSourceAccountRequest) Execute() (*UpdateSourceAccountResponse, 
 /*
 UpdateSourceAccount Update Source Account
 
-Description: Updates source account fields. Editable fields depend on the account's cloud provider.
-For AWS accounts, the role ARN can be updated but must remain within the same AWS account (only the role name can change).
-For GCP accounts, the service account email can be updated but must remain within the same GCP project (only the service account name can change).
+Description: Updates source account properties.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

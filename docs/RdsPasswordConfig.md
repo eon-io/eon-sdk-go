@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PasswordManagementType** | Pointer to **string** | Password management type for the restored database.  | [optional] 
-**Password** | Pointer to **string** | Customer-managed password (required when passwordManagementType is SELF_MANAGED).  | [optional] 
-**SecretsManagerKmsKeyId** | Pointer to **string** | KMS key ARN used to encrypt the Secrets Manager secret that stores the database master password. Only applicable when passwordManagementType is AWS_SECRETS_MANAGER. This is distinct from encryptionKeyId which controls RDS storage encryption.  | [optional] 
+**PasswordManagementType** | **string** | Password management type to apply to the restored database.  | 
+**Password** | Pointer to **string** | Customer-managed password. Required when password management type is &#x60;SELF_MANAGED&#x60;.  | [optional] 
+**SecretsManagerKmsKeyId** | Pointer to **string** | ARN of a KMS key to encrypt the secret that stores the database master password. The secret is managed through Amazon Secrets Manager. Required when password management type is &#x60;AWS_SECRETS_MANAGER&#x60;.  This is distinct from &#x60;encryptionKeyId&#x60;, which controls RDS storage encryption.  | [optional] 
 
 ## Methods
 
 ### NewRdsPasswordConfig
 
-`func NewRdsPasswordConfig() *RdsPasswordConfig`
+`func NewRdsPasswordConfig(passwordManagementType string, ) *RdsPasswordConfig`
 
 NewRdsPasswordConfig instantiates a new RdsPasswordConfig object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetPasswordManagementType sets PasswordManagementType field to given value.
 
-### HasPasswordManagementType
-
-`func (o *RdsPasswordConfig) HasPasswordManagementType() bool`
-
-HasPasswordManagementType returns a boolean if a field has been set.
 
 ### GetPassword
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RoleArn** | Pointer to **NullableString** | ARN of the role Eon assumes to access the account in AWS. Only the role name portion of the ARN can be changed; the AWS account ID must remain the same. To use a different AWS account, disconnect and connect a new restore account.  | [optional] 
+**RoleArn** | Pointer to **NullableString** | ARN of the role Eon assumes to access the account in AWS. Only the role name portion of the ARN can be changed. The AWS account ID must remain the same.  | [optional] 
 
 ## Methods
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Granularity** | Pointer to [**CostGranularity**](CostGranularity.md) |  | [optional] [default to COST_GRANULARITY_MONTHLY]
 **Filters** | Pointer to [**CostDataFilters**](CostDataFilters.md) |  | [optional] 
 **GroupBy** | Pointer to [**CostDataGroupBy**](CostDataGroupBy.md) |  | [optional] [default to COST_GROUP_BY_SOURCE_ACCOUNT]
-**TopN** | Pointer to **int32** | With a resource-level &#x60;groupBy&#x60;, keeps the top-N groups by total cost and folds the rest into synthetic \&quot;Others\&quot; records (no &#x60;dimensions&#x60;, one per time bucket) appended to &#x60;records&#x60;.  | [optional] 
+**TopN** | Pointer to **int32** | Limits the response to the top _n_ resources by total cost over &#x60;timeFrame&#x60;, and folds all other matching resources into one aggregated record per time period in &#x60;granularity&#x60;. Use this when a resource-level query would return too many records—for example, to build an efficient top-spenders chart without requesting every resource for every period.  Applies only when grouping by &#x60;RESOURCE&#x60; or &#x60;RESOURCE_AND_VAULT&#x60;. Otherwise, ignored. Omit to return all matching resources.  Aggregated records have no dimensions and typically have &#x60;resourceCount&#x60; greater than 1.  | [optional] 
 
 ## Methods
 

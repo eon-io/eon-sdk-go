@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Effect** | [**AccessConditionEffect**](AccessConditionEffect.md) |  | 
-**RestoreAccountProviderIds** | **[]string** | List of restore account provider IDs to match against.  | 
+**RestoreAccountProviderIds** | **[]string** | List of cloud-provider-assigned restore account IDs to match against.  | 
 
 ## Methods
 

@@ -19,7 +19,7 @@ var _ MappedNullable = &OverrideDataClassificationsResponse{}
 
 // OverrideDataClassificationsResponse struct for OverrideDataClassificationsResponse
 type OverrideDataClassificationsResponse struct {
-	// List of data classes that were overridden..
+	// List of data classes that were overridden.
 	DataClasses []string `json:"dataClasses,omitempty"`
 }
 
