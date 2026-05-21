@@ -6688,6 +6688,11 @@ components:
       - mpa_policies.manage
       - mpa_policies.view
       - mpa_requests.manage
+      - restore_templates.create
+      - restore_templates.read
+      - restore_templates.update
+      - restore_templates.delete
+      - restore_templates.attach
       example: inventory.view
       type: string
       x-docs-internal-enum:
@@ -6695,6 +6700,11 @@ components:
       - mpa_policies.manage
       - mpa_policies.view
       - mpa_requests.manage
+      - restore_templates.create
+      - restore_templates.read
+      - restore_templates.update
+      - restore_templates.delete
+      - restore_templates.attach
     Permission:
       example:
         permissionType: inventory.view

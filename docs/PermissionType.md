@@ -87,6 +87,16 @@
 
 * `MPA_REQUESTS_MANAGE` (value: `"mpa_requests.manage"`)
 
+* `RESTORE_TEMPLATES_CREATE` (value: `"restore_templates.create"`)
+
+* `RESTORE_TEMPLATES_READ` (value: `"restore_templates.read"`)
+
+* `RESTORE_TEMPLATES_UPDATE` (value: `"restore_templates.update"`)
+
+* `RESTORE_TEMPLATES_DELETE` (value: `"restore_templates.delete"`)
+
+* `RESTORE_TEMPLATES_ATTACH` (value: `"restore_templates.attach"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
