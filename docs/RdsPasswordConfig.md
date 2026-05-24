@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PasswordManagementType** | **string** | Password management type to apply to the restored database.  | 
 **Password** | Pointer to **string** | Customer-managed password. Required when password management type is &#x60;SELF_MANAGED&#x60;.  | [optional] 
-**SecretsManagerKmsKeyId** | Pointer to **string** | ARN of a KMS key to encrypt the secret that stores the database master password. The secret is managed through Amazon Secrets Manager. Required when password management type is &#x60;AWS_SECRETS_MANAGER&#x60;.  This is distinct from &#x60;encryptionKeyId&#x60;, which controls RDS storage encryption.  | [optional] 
+**SecretsManagerKmsKeyId** | Pointer to **string** | ARN of a KMS key to encrypt the secret that stores the database master password. The secret is managed through Amazon Secrets Manager. Applicable when password management type is &#x60;AWS_SECRETS_MANAGER&#x60;.  If omitted, AWS defaults to the &#x60;aws/secretsmanager&#x60; key.  This is distinct from &#x60;encryptionKeyId&#x60;, which controls RDS storage encryption.  | [optional] 
 
 ## Methods
 

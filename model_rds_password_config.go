@@ -25,7 +25,7 @@ type RdsPasswordConfig struct {
 	PasswordManagementType string `json:"passwordManagementType"`
 	// Customer-managed password. Required when password management type is `SELF_MANAGED`. 
 	Password *string `json:"password,omitempty"`
-	// ARN of a KMS key to encrypt the secret that stores the database master password. The secret is managed through Amazon Secrets Manager. Required when password management type is `AWS_SECRETS_MANAGER`.  This is distinct from `encryptionKeyId`, which controls RDS storage encryption. 
+	// ARN of a KMS key to encrypt the secret that stores the database master password. The secret is managed through Amazon Secrets Manager. Applicable when password management type is `AWS_SECRETS_MANAGER`.  If omitted, AWS defaults to the `aws/secretsmanager` key.  This is distinct from `encryptionKeyId`, which controls RDS storage encryption. 
 	SecretsManagerKmsKeyId *string `json:"secretsManagerKmsKeyId,omitempty"`
 }
 
