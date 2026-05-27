@@ -6572,6 +6572,7 @@ paths:
       summary: Query Cost Data
       tags:
       - billing
+      x-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
