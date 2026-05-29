@@ -25,6 +25,7 @@ const (
 	GCP Provider = "GCP"
 	MONGO_ATLAS Provider = "MONGO_ATLAS"
 	GOOGLE_WORKSPACE Provider = "GOOGLE_WORKSPACE"
+	MICROSOFT_365 Provider = "MICROSOFT_365"
 	PROVIDER_UNSPECIFIED Provider = "PROVIDER_UNSPECIFIED"
 )
 
@@ -35,6 +36,7 @@ var AllowedProviderEnumValues = []Provider{
 	"GCP",
 	"MONGO_ATLAS",
 	"GOOGLE_WORKSPACE",
+	"MICROSOFT_365",
 	"PROVIDER_UNSPECIFIED",
 }
 

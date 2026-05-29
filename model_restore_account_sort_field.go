@@ -22,12 +22,14 @@ type RestoreAccountSortField string
 const (
 	RESTORE_ACCOUNT_SORT_ACCOUNT_NAME RestoreAccountSortField = "accountName"
 	RESTORE_ACCOUNT_SORT_INSTALLED_VERSION RestoreAccountSortField = "installedVersion"
+	RESTORE_ACCOUNT_SORT_FIRST_CONNECTED RestoreAccountSortField = "createdAt"
 )
 
 // All allowed values of RestoreAccountSortField enum
 var AllowedRestoreAccountSortFieldEnumValues = []RestoreAccountSortField{
 	"accountName",
 	"installedVersion",
+	"createdAt",
 }
 
 func (v *RestoreAccountSortField) UnmarshalJSON(src []byte) error {

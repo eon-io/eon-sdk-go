@@ -8,65 +8,39 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- description: Operations related to Eon API.
+- description: The Eon.io REST API.
   name: eonApi
-- description: |
-    The Auth API allows you to manage API client credentials and generate access tokens, which you'll use to authenticate all other API calls.
+- description: Authentication and access token management.
   name: auth
   x-displayName: Auth
-- description: The Projects API allows you to retrieve information about your projects.
+- description: Manage projects that organize backups and resources.
   name: projects
   x-displayName: Projects
-- description: The Connected Accounts API allows you to manage the source and restore
-    accounts connected to your Eon account.
+- description: Manage connected cloud accounts onboarded to Eon.
   name: accounts
   x-displayName: Connected Accounts
-- description: "The Resources API allows you to read your resources, override resource\
-    \ classification, and exclude resources from backup."
+- description: Discover and manage protected cloud resources.
   name: resources
   x-displayName: Resources
-- description: "The Vaults API allows you to manage your vaults, which are where your\
-    \ Eon snapshots are stored when your resources are backed up."
+- description: Manage backup vaults that store snapshots.
   name: vaults
   x-displayName: Vaults
-- description: The Snapshots API allows you to retrieve and restore from Eon snapshots.
+- description: Manage resource snapshots and point-in-time recovery points.
   name: snapshots
   x-displayName: Snapshots
-- description: |
-    The Database Snapshots API allows you to run SQL queries and retrieve records from Eon snapshots for database resources.
-
-    This API is asynchronous and is designed to follow this sequence:
-
-    1. Use [Run Query] to send your SQL query and receive a query ID.
-
-    2. Use [Get Query Status] to check the status.
-      If the query completed, you'll receive a link to a CSV of the results, which you can share or download.
-
-    3. Use [Get Query Result] to retrieve the results as JSON for additional processing or handling.
-
-    For more detailed instructions with code examples, see [Query Database Snapshots].
-    For an explanation and support notes on querying your backed-up databases, see [About Querying].
-
-    [Run Query]: ./run-query
-    [Get Query Status]: ./get-query-status
-    [Get Query Result]: ./get-query-result
-    [About Querying]: /user-guide/searching-exploring-and-querying/query/about-querying
-    [Query Database Snapshots]: /user-guide/searching-exploring-and-querying/query/query-database-snapshots?interface=api
+- description: Manage database snapshots and their recovery points.
   name: databaseSnapshots
   x-displayName: Database Snapshots
-- description: The Backup Policies API allows you to manage your project's backup
-    policies.
+- description: Define and manage backup policies and schedules.
   name: backupPolicies
   x-displayName: Backup Policies
-- description: The Jobs API allows you to read and monitor asynchronous backup and
-    restore jobs.
+- description: "Track backup, restore, and other asynchronous jobs."
   name: jobs
   x-displayName: Jobs
-- description: The Audit Logs API allows you to monitor Eon account activity.
+- description: Query audit logs of account activity.
   name: auditLogs
   x-displayName: Audit Logs
-- description: The Billing API allows you to monitor your Eon account usage and billing
-    information.
+- description: Access billing and usage metering information.
   name: billing
   x-displayName: Billing
 paths:
@@ -877,6 +851,73 @@ paths:
       x-audit-log:
         excluded: true
   /v1/projects/{projectId}/source-accounts/{accountId}:
+    delete:
+      description: |
+        Description: Deletes a source account from the project.
+
+        This option is available only for source accounts whose status is `DISCONNECTED` or `INSUFFICIENT_PERMISSIONS`.
+        Source accounts with `CONNECTED` status must be disconnected before they can be deleted.
+      operationId: deleteSourceAccount
+      parameters:
+      - description: |
+          ID of the project.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the source account to delete.
+        example: 64a698c5-540d-5d09-80f7-f4c39c7045c1
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Source account deleted.
+        "404":
+          description: Source account wasn't found.
+        "409":
+          description: Source account is connected and can't be deleted.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete Source Account
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:source_accounts
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: source_cloud_account
+          in: path
+          key: accountId
     get:
       description: "Description: Retrieve a source account by ID."
       operationId: getSourceAccount
@@ -7039,6 +7080,7 @@ components:
       - GCP_DISK
       - GCP_SAP_HANA_VM
       - GOOGLE_WORKSPACE_RESOURCE
+      - MICROSOFT_365_RESOURCE
       - RESOURCE_TYPE_UNSPECIFIED
       example: AWS_EC2
       type: string
@@ -7056,6 +7098,7 @@ components:
       - GCP_DISK
       - GCP_SAP_HANA_VM
       - GOOGLE_WORKSPACE_RESOURCE
+      - MICROSOFT_365_RESOURCE
     ResourceTypeCondition:
       example:
         resourceTypes:
@@ -7175,11 +7218,13 @@ components:
       - GCP
       - MONGO_ATLAS
       - GOOGLE_WORKSPACE
+      - MICROSOFT_365
       - PROVIDER_UNSPECIFIED
       example: AWS
       type: string
       x-docs-internal-enum:
       - GOOGLE_WORKSPACE
+      - MICROSOFT_365
     CloudProviderCondition:
       example:
         cloudProviders:
@@ -9954,12 +9999,14 @@ components:
       - accountName
       - installedVersion
       - parentIdentifier
+      - createdAt
       example: accountName
       type: string
       x-enum-varnames:
       - SOURCE_ACCOUNT_SORT_ACCOUNT_NAME
       - SOURCE_ACCOUNT_SORT_INSTALLED_VERSION
       - SOURCE_ACCOUNT_SORT_PARENT_IDENTIFIER
+      - SOURCE_ACCOUNT_SORT_FIRST_CONNECTED
     SortOrder:
       description: Sort order. Use `ASC` for ascending order and `DESC` for descending
         order.
@@ -10898,11 +10945,13 @@ components:
       enum:
       - accountName
       - installedVersion
+      - createdAt
       example: accountName
       type: string
       x-enum-varnames:
       - RESTORE_ACCOUNT_SORT_ACCOUNT_NAME
       - RESTORE_ACCOUNT_SORT_INSTALLED_VERSION
+      - RESTORE_ACCOUNT_SORT_FIRST_CONNECTED
     SortRestoreAccountsBy:
       description: |
         List of sorting options.
@@ -11903,6 +11952,7 @@ components:
       - ATLAS_MONGODB_CLUSTER_BACKUP
       - ATLAS_MONGODB_CLUSTER_BACKUP_FULL
       - GOOGLE_WORKSPACE_BACKUP
+      - MICROSOFT_365_BACKUP
       example: AWS_EC2_BACKUP
       type: string
       x-docs-internal-enum:
@@ -11917,6 +11967,7 @@ components:
       - GCP_SAP_HANA_VM_BACKUP
       - AZURE_SAP_HANA_VM_BACKUP
       - GOOGLE_WORKSPACE_BACKUP
+      - MICROSOFT_365_BACKUP
     BackupJobTypeFilters:
       additionalProperties: false
       example:
@@ -12620,6 +12671,7 @@ components:
       - AWS_KEYSPACES_RECORD_RESTORE
       - ATLAS_CLUSTER_RESTORE
       - ATLAS_CLUSTER_RECORD_RESTORE
+      - MICROSOFT_365_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
@@ -12635,6 +12687,7 @@ components:
       - GCP_SAP_HANA_VM_INSTANCE_RESTORE
       - AWS_KEYSPACES_TABLE_RESTORE
       - AWS_KEYSPACES_RECORD_RESTORE
+      - MICROSOFT_365_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS
     RestoreJobTypeFilters:
       additionalProperties: false

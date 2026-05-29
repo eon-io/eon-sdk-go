@@ -23,6 +23,7 @@ const (
 	SOURCE_ACCOUNT_SORT_ACCOUNT_NAME SourceAccountSortField = "accountName"
 	SOURCE_ACCOUNT_SORT_INSTALLED_VERSION SourceAccountSortField = "installedVersion"
 	SOURCE_ACCOUNT_SORT_PARENT_IDENTIFIER SourceAccountSortField = "parentIdentifier"
+	SOURCE_ACCOUNT_SORT_FIRST_CONNECTED SourceAccountSortField = "createdAt"
 )
 
 // All allowed values of SourceAccountSortField enum
@@ -30,6 +31,7 @@ var AllowedSourceAccountSortFieldEnumValues = []SourceAccountSortField{
 	"accountName",
 	"installedVersion",
 	"parentIdentifier",
+	"createdAt",
 }
 
 func (v *SourceAccountSortField) UnmarshalJSON(src []byte) error {
