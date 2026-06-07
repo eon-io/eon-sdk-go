@@ -62,11 +62,9 @@ const (
 	MPA_POLICIES_MANAGE PermissionType = "mpa_policies.manage"
 	MPA_POLICIES_VIEW PermissionType = "mpa_policies.view"
 	MPA_REQUESTS_MANAGE PermissionType = "mpa_requests.manage"
-	RESTORE_TEMPLATES_CREATE PermissionType = "restore_templates.create"
-	RESTORE_TEMPLATES_READ PermissionType = "restore_templates.read"
-	RESTORE_TEMPLATES_UPDATE PermissionType = "restore_templates.update"
-	RESTORE_TEMPLATES_DELETE PermissionType = "restore_templates.delete"
-	RESTORE_TEMPLATES_ATTACH PermissionType = "restore_templates.attach"
+	RESTORE_TEMPLATES_MANAGE PermissionType = "restore_templates.manage"
+	DATALAKE_VIEW PermissionType = "datalake.view"
+	DATALAKE_OPERATE PermissionType = "datalake.operate"
 )
 
 // All allowed values of PermissionType enum
@@ -113,11 +111,9 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"mpa_policies.manage",
 	"mpa_policies.view",
 	"mpa_requests.manage",
-	"restore_templates.create",
-	"restore_templates.read",
-	"restore_templates.update",
-	"restore_templates.delete",
-	"restore_templates.attach",
+	"restore_templates.manage",
+	"datalake.view",
+	"datalake.operate",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

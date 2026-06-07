@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RestoreAccountId** | **string** | Eon-assigned ID of the restore account. | 
 **Destination** | [**AwsEc2InstanceRestoreDestination**](AwsEc2InstanceRestoreDestination.md) |  | 
+**TemplateId** | Pointer to **string** | When set, the restore service re-evaluates this restore template at submit time and applies the resolved params onto the request before restoring.  | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetDestination sets Destination field to given value.
 
+
+### GetTemplateId
+
+`func (o *RestoreAwsEc2InstanceRequest) GetTemplateId() string`
+
+GetTemplateId returns the TemplateId field if non-nil, zero value otherwise.
+
+### GetTemplateIdOk
+
+`func (o *RestoreAwsEc2InstanceRequest) GetTemplateIdOk() (*string, bool)`
+
+GetTemplateIdOk returns a tuple with the TemplateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateId
+
+`func (o *RestoreAwsEc2InstanceRequest) SetTemplateId(v string)`
+
+SetTemplateId sets TemplateId field to given value.
+
+### HasTemplateId
+
+`func (o *RestoreAwsEc2InstanceRequest) HasTemplateId() bool`
+
+HasTemplateId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

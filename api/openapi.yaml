@@ -6744,11 +6744,9 @@ components:
       - mpa_policies.manage
       - mpa_policies.view
       - mpa_requests.manage
-      - restore_templates.create
-      - restore_templates.read
-      - restore_templates.update
-      - restore_templates.delete
-      - restore_templates.attach
+      - restore_templates.manage
+      - datalake.view
+      - datalake.operate
       example: inventory.view
       type: string
       x-docs-internal-enum:
@@ -6756,11 +6754,9 @@ components:
       - mpa_policies.manage
       - mpa_policies.view
       - mpa_requests.manage
-      - restore_templates.create
-      - restore_templates.read
-      - restore_templates.update
-      - restore_templates.delete
-      - restore_templates.attach
+      - restore_templates.manage
+      - datalake.view
+      - datalake.operate
     Permission:
       example:
         permissionType: inventory.view
@@ -7054,7 +7050,6 @@ components:
       - AWS_DYNAMO_DB
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
-      - AWS_REDSHIFT
       - AWS_DOCUMENTDB
       - AWS_NEPTUNE
       - AZURE_VIRTUAL_MACHINE
@@ -7087,7 +7082,6 @@ components:
       x-docs-internal-enum:
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
-      - AWS_REDSHIFT
       - AWS_DOCUMENTDB
       - AWS_NEPTUNE
       - AZURE_SAP_HANA_VM
@@ -11926,7 +11920,6 @@ components:
       - AWS_S3_LLG_BACKUP
       - AWS_FSX_BACKUP
       - AWS_EFS_BACKUP
-      - AWS_REDSHIFT_BACKUP
       - AWS_DOCUMENTDB_BACKUP
       - AWS_NEPTUNE_BACKUP
       - AWS_DYNAMO_DB_BACKUP
@@ -11958,7 +11951,6 @@ components:
       x-docs-internal-enum:
       - AWS_EBS_VOLUME_BACKUP
       - AWS_S3_LLG_BACKUP
-      - AWS_REDSHIFT_BACKUP
       - AWS_DOCUMENTDB_BACKUP
       - AWS_NEPTUNE_BACKUP
       - AWS_KEYSPACES_BACKUP_FULL
@@ -12663,7 +12655,6 @@ components:
       - GCP_BIGQUERY_NATIVE_RESTORE_TABLE
       - RDS_NATIVE_PITR_RESTORE
       - AWS_FSX_RESTORE
-      - AWS_REDSHIFT_RESTORE
       - AWS_DOCUMENTDB_RESTORE
       - AWS_NEPTUNE_RESTORE
       - GCP_SAP_HANA_VM_INSTANCE_RESTORE
@@ -12682,7 +12673,6 @@ components:
       - AWS_DYNAMO_DB_RESTORE_TO_S3
       - AZURE_POSTGRESQL_RECORD_RESTORE
       - AZURE_SAP_HANA_VM_INSTANCE_RESTORE
-      - AWS_REDSHIFT_RESTORE
       - AWS_DOCUMENTDB_RESTORE
       - AWS_NEPTUNE_RESTORE
       - GCP_SAP_HANA_VM_INSTANCE_RESTORE
@@ -13616,12 +13606,16 @@ components:
       - AWS_NATIVE_PITR
       - BIGQUERY_NATIVE_PITR
       - AZURE_FILES_STANDARD
+      - AZURE_SQL_DATABASE_NATIVE_PITR
+      - GOOGLE_WORKSPACE
       example: STANDARD
       type: string
       x-docs-internal-enum:
       - AWS_NATIVE_STANDARD
       - BIGQUERY_NATIVE_PITR
       - AZURE_FILES_STANDARD
+      - AZURE_SQL_DATABASE_NATIVE_PITR
+      - GOOGLE_WORKSPACE
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
@@ -13631,6 +13625,8 @@ components:
       - BACKUP_POLICY_TYPE_AWS_NATIVE_PITR
       - BACKUP_POLICY_TYPE_BIGQUERY_NATIVE_PITR
       - BACKUP_POLICY_TYPE_AZURE_FILES
+      - BACKUP_POLICY_TYPE_AZURE_SQL_DATABASE_NATIVE_PITR
+      - BACKUP_POLICY_TYPE_GOOGLE_WORKSPACE
     StandardBackupScheduleFrequency:
       description: |
         Backup frequency.
@@ -17043,12 +17039,19 @@ components:
             bucketName: my-restore-bucket-12345
             encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
             prefix: my-restore-prefix
+        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         destination:
           $ref: '#/components/schemas/ObjectStorageDestination'
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type: string
+        templateId:
+          description: |
+            When set, the restore service re-evaluates this restore template at submit
+            time and applies the resolved params onto the request before restoring.
+          format: uuid
           type: string
       required:
       - destination
@@ -17680,6 +17683,7 @@ components:
             region: us-east-1
             tags:
               key: tags
+        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
@@ -17687,6 +17691,12 @@ components:
           type: string
         destination:
           $ref: '#/components/schemas/AwsEc2InstanceRestoreDestination'
+        templateId:
+          description: |
+            When set, the restore service re-evaluates this restore template at submit
+            time and applies the resolved params onto the request before restoring.
+          format: uuid
+          type: string
       required:
       - destination
       - restoreAccountId

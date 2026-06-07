@@ -87,15 +87,11 @@
 
 * `MPA_REQUESTS_MANAGE` (value: `"mpa_requests.manage"`)
 
-* `RESTORE_TEMPLATES_CREATE` (value: `"restore_templates.create"`)
+* `RESTORE_TEMPLATES_MANAGE` (value: `"restore_templates.manage"`)
 
-* `RESTORE_TEMPLATES_READ` (value: `"restore_templates.read"`)
+* `DATALAKE_VIEW` (value: `"datalake.view"`)
 
-* `RESTORE_TEMPLATES_UPDATE` (value: `"restore_templates.update"`)
-
-* `RESTORE_TEMPLATES_DELETE` (value: `"restore_templates.delete"`)
-
-* `RESTORE_TEMPLATES_ATTACH` (value: `"restore_templates.attach"`)
+* `DATALAKE_OPERATE` (value: `"datalake.operate"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

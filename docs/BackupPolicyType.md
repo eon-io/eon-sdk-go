@@ -19,6 +19,10 @@
 
 * `BACKUP_POLICY_TYPE_AZURE_FILES` (value: `"AZURE_FILES_STANDARD"`)
 
+* `BACKUP_POLICY_TYPE_AZURE_SQL_DATABASE_NATIVE_PITR` (value: `"AZURE_SQL_DATABASE_NATIVE_PITR"`)
+
+* `BACKUP_POLICY_TYPE_GOOGLE_WORKSPACE` (value: `"GOOGLE_WORKSPACE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

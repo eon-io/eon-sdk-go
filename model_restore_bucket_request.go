@@ -24,6 +24,8 @@ type RestoreBucketRequest struct {
 	Destination ObjectStorageDestination `json:"destination"`
 	// Eon-assigned ID of the restore account.
 	RestoreAccountId string `json:"restoreAccountId"`
+	// When set, the restore service re-evaluates this restore template at submit time and applies the resolved params onto the request before restoring. 
+	TemplateId *string `json:"templateId,omitempty"`
 }
 
 type _RestoreBucketRequest RestoreBucketRequest
@@ -95,6 +97,38 @@ func (o *RestoreBucketRequest) SetRestoreAccountId(v string) {
 	o.RestoreAccountId = v
 }
 
+// GetTemplateId returns the TemplateId field value if set, zero value otherwise.
+func (o *RestoreBucketRequest) GetTemplateId() string {
+	if o == nil || IsNil(o.TemplateId) {
+		var ret string
+		return ret
+	}
+	return *o.TemplateId
+}
+
+// GetTemplateIdOk returns a tuple with the TemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreBucketRequest) GetTemplateIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TemplateId) {
+		return nil, false
+	}
+	return o.TemplateId, true
+}
+
+// HasTemplateId returns a boolean if a field has been set.
+func (o *RestoreBucketRequest) HasTemplateId() bool {
+	if o != nil && !IsNil(o.TemplateId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateId gets a reference to the given string and assigns it to the TemplateId field.
+func (o *RestoreBucketRequest) SetTemplateId(v string) {
+	o.TemplateId = &v
+}
+
 func (o RestoreBucketRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -107,6 +141,9 @@ func (o RestoreBucketRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["destination"] = o.Destination
 	toSerialize["restoreAccountId"] = o.RestoreAccountId
+	if !IsNil(o.TemplateId) {
+		toSerialize["templateId"] = o.TemplateId
+	}
 	return toSerialize, nil
 }
 

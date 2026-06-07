@@ -21,8 +21,6 @@
 
 * `AWS_KEYSPACES_TABLE` (value: `"AWS_KEYSPACES_TABLE"`)
 
-* `AWS_REDSHIFT` (value: `"AWS_REDSHIFT"`)
-
 * `AWS_DOCUMENTDB` (value: `"AWS_DOCUMENTDB"`)
 
 * `AWS_NEPTUNE` (value: `"AWS_NEPTUNE"`)
