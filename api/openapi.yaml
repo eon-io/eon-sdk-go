@@ -6727,6 +6727,7 @@ components:
       - data_classes.override
       - environments.override
       - detected_apps.override
+      - network_classification.override
       - control_violations.mute
       - backup_exclusion.manage
       - vaults.manage

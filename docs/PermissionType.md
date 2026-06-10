@@ -53,6 +53,8 @@
 
 * `DETECTED_APPS_OVERRIDE` (value: `"detected_apps.override"`)
 
+* `NETWORK_CLASSIFICATION_OVERRIDE` (value: `"network_classification.override"`)
+
 * `CONTROL_VIOLATIONS_MUTE` (value: `"control_violations.mute"`)
 
 * `BACKUP_EXCLUSION_MANAGE` (value: `"backup_exclusion.manage"`)
