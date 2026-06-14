@@ -23,6 +23,8 @@
 
 * `BACKUP_POLICY_TYPE_GOOGLE_WORKSPACE` (value: `"GOOGLE_WORKSPACE"`)
 
+* `BACKUP_POLICY_TYPE_MICROSOFT_365` (value: `"MICROSOFT_365"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
