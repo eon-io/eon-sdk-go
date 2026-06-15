@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NetworkHostProject** | Pointer to **string** | ID of the project that hosts the VPC network. Applicable only when restoring to a shared VPC network.  | [optional] 
 **Labels** | Pointer to **map[string]string** | Labels to apply to the restored VM as key-value pairs, where key and value are both strings. These labels are always applied: &#x60;\&quot;eon-restore\&quot;: \&quot;true\&quot;&#x60;.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **Disks** | [**[]RestoreGcpInstanceDiskInput**](RestoreGcpInstanceDiskInput.md) | Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where &#x60;providerDiskId&#x60; matches the disk&#39;s ID at the time of the snapshot. The boot disk must be in the list.  | 
+**InternalIp** | Pointer to **string** | Optional internal (private) IPv4 address for the restored VM, e.g. \&quot;10.0.0.10\&quot;. Must fall within the selected subnet&#39;s primary CIDR range. Leave empty to let GCP auto-assign an address.  | [optional] 
 **StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the VM instance after restoring it. If set to &#x60;false&#x60;, the VM is created in a stopped state.  | [optional] [default to true]
 
 ## Methods
@@ -202,6 +203,31 @@ and a boolean to check if the value has been set.
 
 SetDisks sets Disks field to given value.
 
+
+### GetInternalIp
+
+`func (o *GcpVmInstanceRestoreTarget) GetInternalIp() string`
+
+GetInternalIp returns the InternalIp field if non-nil, zero value otherwise.
+
+### GetInternalIpOk
+
+`func (o *GcpVmInstanceRestoreTarget) GetInternalIpOk() (*string, bool)`
+
+GetInternalIpOk returns a tuple with the InternalIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalIp
+
+`func (o *GcpVmInstanceRestoreTarget) SetInternalIp(v string)`
+
+SetInternalIp sets InternalIp field to given value.
+
+### HasInternalIp
+
+`func (o *GcpVmInstanceRestoreTarget) HasInternalIp() bool`
+
+HasInternalIp returns a boolean if a field has been set.
 
 ### GetStartInstanceAfterRestore
 

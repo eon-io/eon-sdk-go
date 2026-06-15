@@ -37,6 +37,8 @@ type GcpVmInstanceRestoreTarget struct {
 	Labels *map[string]string `json:"labels,omitempty"`
 	// Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot. The boot disk must be in the list. 
 	Disks []RestoreGcpInstanceDiskInput `json:"disks"`
+	// Optional internal (private) IPv4 address for the restored VM, e.g. \"10.0.0.10\". Must fall within the selected subnet's primary CIDR range. Leave empty to let GCP auto-assign an address. 
+	InternalIp *string `json:"internalIp,omitempty"`
 	// Whether to start the VM instance after restoring it. If set to `false`, the VM is created in a stopped state. 
 	StartInstanceAfterRestore *bool `json:"startInstanceAfterRestore,omitempty"`
 }
@@ -278,6 +280,38 @@ func (o *GcpVmInstanceRestoreTarget) SetDisks(v []RestoreGcpInstanceDiskInput) {
 	o.Disks = v
 }
 
+// GetInternalIp returns the InternalIp field value if set, zero value otherwise.
+func (o *GcpVmInstanceRestoreTarget) GetInternalIp() string {
+	if o == nil || IsNil(o.InternalIp) {
+		var ret string
+		return ret
+	}
+	return *o.InternalIp
+}
+
+// GetInternalIpOk returns a tuple with the InternalIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GcpVmInstanceRestoreTarget) GetInternalIpOk() (*string, bool) {
+	if o == nil || IsNil(o.InternalIp) {
+		return nil, false
+	}
+	return o.InternalIp, true
+}
+
+// HasInternalIp returns a boolean if a field has been set.
+func (o *GcpVmInstanceRestoreTarget) HasInternalIp() bool {
+	if o != nil && !IsNil(o.InternalIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalIp gets a reference to the given string and assigns it to the InternalIp field.
+func (o *GcpVmInstanceRestoreTarget) SetInternalIp(v string) {
+	o.InternalIp = &v
+}
+
 // GetStartInstanceAfterRestore returns the StartInstanceAfterRestore field value if set, zero value otherwise.
 func (o *GcpVmInstanceRestoreTarget) GetStartInstanceAfterRestore() bool {
 	if o == nil || IsNil(o.StartInstanceAfterRestore) {
@@ -332,6 +366,9 @@ func (o GcpVmInstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 		toSerialize["labels"] = o.Labels
 	}
 	toSerialize["disks"] = o.Disks
+	if !IsNil(o.InternalIp) {
+		toSerialize["internalIp"] = o.InternalIp
+	}
 	if !IsNil(o.StartInstanceAfterRestore) {
 		toSerialize["startInstanceAfterRestore"] = o.StartInstanceAfterRestore
 	}

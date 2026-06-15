@@ -17043,19 +17043,12 @@ components:
             bucketName: my-restore-bucket-12345
             encryptionKeyId: arn:aws:kms:eu-central-1:151435873114:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
             prefix: my-restore-prefix
-        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         destination:
           $ref: '#/components/schemas/ObjectStorageDestination'
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          type: string
-        templateId:
-          description: |
-            When set, the restore service re-evaluates this restore template at submit
-            time and applies the resolved params onto the request before restoring.
-          format: uuid
           type: string
       required:
       - destination
@@ -18352,6 +18345,7 @@ components:
         zone: us-east1-b
         name: my-vm-12345
         networkName: default
+        internalIp: 10.0.0.10
         machineType: e2-medium
         subnetName: default
         labels:
@@ -18403,6 +18397,13 @@ components:
           items:
             $ref: '#/components/schemas/RestoreGcpInstanceDiskInput'
           type: array
+        internalIp:
+          description: |
+            Optional internal (private) IPv4 address for the restored VM, e.g. "10.0.0.10".
+            Must fall within the selected subnet's primary CIDR range.
+            Leave empty to let GCP auto-assign an address.
+          example: 10.0.0.10
+          type: string
         startInstanceAfterRestore:
           default: true
           description: |
@@ -18448,6 +18449,7 @@ components:
           zone: us-east1-b
           name: my-vm-12345
           networkName: default
+          internalIp: 10.0.0.10
           machineType: e2-medium
           subnetName: default
           labels:
@@ -18489,6 +18491,7 @@ components:
             zone: us-east1-b
             name: my-vm-12345
             networkName: default
+            internalIp: 10.0.0.10
             machineType: e2-medium
             subnetName: default
             labels:
