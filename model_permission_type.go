@@ -66,6 +66,7 @@ const (
 	RESTORE_TEMPLATES_MANAGE PermissionType = "restore_templates.manage"
 	DATALAKE_VIEW PermissionType = "datalake.view"
 	DATALAKE_OPERATE PermissionType = "datalake.operate"
+	COMPLIANCE_VIEW PermissionType = "compliance.view"
 )
 
 // All allowed values of PermissionType enum
@@ -116,6 +117,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"restore_templates.manage",
 	"datalake.view",
 	"datalake.operate",
+	"compliance.view",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

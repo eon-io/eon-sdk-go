@@ -6748,6 +6748,7 @@ components:
       - restore_templates.manage
       - datalake.view
       - datalake.operate
+      - compliance.view
       example: inventory.view
       type: string
       x-docs-internal-enum:
@@ -6758,6 +6759,7 @@ components:
       - restore_templates.manage
       - datalake.view
       - datalake.operate
+      - compliance.view
     Permission:
       example:
         permissionType: inventory.view
