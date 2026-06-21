@@ -1671,6 +1671,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1684,6 +1697,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConnectRestoreAccountResponse'
           description: Restore account connected.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "409":
           description: Restore account already connected to the project.
         "1XX":
@@ -2036,6 +2058,19 @@ paths:
           format: tobedefined
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -2043,6 +2078,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReconnectRestoreAccountResponse'
           description: Restore account reconnected.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "1XX":
           description: Informational
         "3XX":
@@ -3016,9 +3060,31 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       responses:
         "200":
           description: Backup policy deleted.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "404":
           description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
             \ was not found."
@@ -3142,6 +3208,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3156,6 +3235,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateBackupPolicyResponse'
           description: Backup policy updated.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "404":
           description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
             \ was not found."
@@ -3627,6 +3715,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3634,6 +3735,15 @@ paths:
               $ref: '#/components/schemas/RestoreBucketRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -3731,6 +3841,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3738,6 +3861,15 @@ paths:
               $ref: '#/components/schemas/RestoreBigQueryDatasetRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -3835,6 +3967,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3842,6 +3987,15 @@ paths:
               $ref: '#/components/schemas/RestoreVolumeToEbsRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -3939,6 +4093,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3946,6 +4113,15 @@ paths:
               $ref: '#/components/schemas/RestoreVolumeToEbsSnapshotRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4043,6 +4219,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4050,6 +4239,15 @@ paths:
               $ref: '#/components/schemas/RestoreDbToRdsInstanceRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4150,6 +4348,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4157,6 +4368,15 @@ paths:
               $ref: '#/components/schemas/RestoreAwsEc2InstanceRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4254,6 +4474,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4261,6 +4494,15 @@ paths:
               $ref: '#/components/schemas/RestoreDynamoDBTableRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4358,6 +4600,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4365,6 +4620,15 @@ paths:
               $ref: '#/components/schemas/RestoreAzureVmInstanceRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4462,6 +4726,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4470,6 +4747,15 @@ paths:
         description: The request body for restoring the instance
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4570,6 +4856,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4577,6 +4876,15 @@ paths:
               $ref: '#/components/schemas/RestoreAzureDiskRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4677,6 +4985,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4684,6 +5005,15 @@ paths:
               $ref: '#/components/schemas/RestoreGcpDiskRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4784,6 +5114,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4791,6 +5134,15 @@ paths:
               $ref: '#/components/schemas/RestoreGcpVmInstanceRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -4891,6 +5243,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4898,6 +5263,15 @@ paths:
               $ref: '#/components/schemas/RestoreGcpCloudSqlRequest'
         required: true
       responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "202":
           content:
             application/json:
@@ -6159,6 +6533,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -6167,6 +6554,15 @@ paths:
                 properties: {}
                 type: object
           description: User hold removed from snapshot.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "404":
           description: Snapshot wasn't found.
         "1XX":
@@ -6697,8 +7093,299 @@ paths:
       - read:dashboard
       x-audit-log:
         excluded: true
+  /v1/projects/{projectId}/mpa/my-requests/{requestId}:
+    get:
+      description: "Description: Retrieves details of a specific action approval request\
+        \ submitted by the current user."
+      operationId: getMyActionApprovalRequest
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The action approval request ID
+        explode: false
+        in: path
+        name: requestId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMPARequestResponse'
+          description: Successful operation
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not authorized because the action approval request was created
+            by another user or API caller.
+        "404":
+          description: Action approval request wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get My Action Approval Request
+      tags:
+      - mpa
+      x-internal: false
+      x-permissions: []
+      x-audit-log:
+        excluded: true
+      x-data-access:
+        excluded: true
+  /v1/projects/{projectId}/mpa/my-requests/{requestId}/cancel:
+    post:
+      description: "Description: Cancel an action approval request created by the\
+        \ current user. Only allowed while the request is in PENDING_APPROVAL or APPROVED\
+        \ status."
+      operationId: cancelActionApprovalRequest
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Action approval request ID.
+        explode: false
+        in: path
+        name: requestId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelMyMPARequestResponse'
+          description: Request canceled.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not authorized (only the requester can cancel their own request)
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action approval request wasn't found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Request can't be canceled in its current status.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Cancel Action Approval Request
+      tags:
+      - mpa
+      x-internal: false
+      x-permissions: []
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: mpa_request
+          in: path
+          key: requestId
+      x-data-access:
+        excluded: true
+  /v1/projects/{projectId}/mpa/my-requests/{requestId}/submit:
+    post:
+      description: "Description: Confirm or discard a CREATED action approval request.\
+        \ CONFIRM transitions to PENDING_APPROVAL and starts the approval timer. DISCARD\
+        \ transitions to DISCARDED."
+      operationId: createActionApprovalRequest
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Action approval request ID.
+        explode: false
+        in: path
+        name: requestId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitMyMPARequestRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitMyMPARequestResponse'
+          description: Request submitted successfully
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not authorized (only the requester can submit their own request)
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action approval request wasn't found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Request cannot be submitted in its current status
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create Action Approval Request
+      tags:
+      - mpa
+      x-internal: false
+      x-permissions: []
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: mpa_request
+          in: path
+          key: requestId
+      x-data-access:
+        excluded: true
 components:
+  parameters:
+    MpaRequestIdHeader:
+      description: |
+        ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+        validates the request envelope still matches the captured one and atomically
+        marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+        that are not MPA-protected.
+      explode: false
+      in: header
+      name: X-MPA-Request-Id
+      required: false
+      schema:
+        format: uuid
+        type: string
+      style: simple
+  responses:
+    MpaIntercepted:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MPAInterceptedResponse'
+      description: |
+        The operation is MPA-protected. An MPA request was created in CREATED status.
+        The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+        or discard (action DISCARD). The operation did not run.
   schemas:
+    MPAInterceptedResponse:
+      description: Body returned when an operation is intercepted by an MPA policy.
+      example:
+        mpaRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
+      properties:
+        mpaRequest:
+          $ref: '#/components/schemas/MPARequest'
+      required:
+      - mpaPolicies
+      - mpaRequest
+      type: object
+      x-nullable: true
     PermissionType:
       description: User permission.
       enum:
@@ -10884,6 +11571,200 @@ components:
       required:
       - restoreAccount
       type: object
+    MPAOperationType:
+      description: Operation that requires action approval before it can be completed.
+      enum:
+      - MPA_OPERATION_TYPE_UNSPECIFIED
+      - MPA_OPERATION_ADD_RESTORE_ACCOUNT
+      - MPA_OPERATION_RESTORE_RESOURCE
+      - MPA_OPERATION_UPDATE_BACKUP_POLICY
+      - MPA_OPERATION_DELETE_BACKUP_POLICY
+      - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+      example: MPA_OPERATION_DELETE_BACKUP_POLICY
+      type: string
+      x-docs-internal-enum:
+      - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+      x-enum-varnames:
+      - MPA_OPERATION_TYPE_UNSPECIFIED
+      - MPA_OPERATION_TYPE_MPA_OPERATION_ADD_RESTORE_ACCOUNT
+      - MPA_OPERATION_TYPE_MPA_OPERATION_RESTORE_RESOURCE
+      - MPA_OPERATION_TYPE_MPA_OPERATION_UPDATE_BACKUP_POLICY
+      - MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_BACKUP_POLICY
+      - MPA_OPERATION_TYPE_MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+    MPARequestStatus:
+      description: |
+        Lifecycle state of an action approval request from creation through resolution. DISCARDED means the requester abandoned a draft before it was submitted for approval.
+      enum:
+      - MPA_REQUEST_STATUS_UNSPECIFIED
+      - CREATED
+      - PENDING_APPROVAL
+      - APPROVED
+      - DENIED
+      - EXPIRED_PENDING_APPROVAL
+      - EXPIRED_APPROVED
+      - EXECUTED
+      - CANCELED_PENDING_APPROVAL
+      - CANCELED_APPROVED
+      - DISCARDED
+      example: PENDING_APPROVAL
+      type: string
+      x-enum-varnames:
+      - MPA_REQUEST_STATUS_UNSPECIFIED
+      - MPA_REQUEST_STATUS_CREATED
+      - MPA_REQUEST_STATUS_PENDING_APPROVAL
+      - MPA_REQUEST_STATUS_APPROVED
+      - MPA_REQUEST_STATUS_DENIED
+      - MPA_REQUEST_STATUS_EXPIRED_PENDING_APPROVAL
+      - MPA_REQUEST_STATUS_EXPIRED_APPROVED
+      - MPA_REQUEST_STATUS_EXECUTED
+      - MPA_REQUEST_STATUS_CANCELLED_PENDING_APPROVAL
+      - MPA_REQUEST_STATUS_CANCELLED_APPROVED
+      - MPA_REQUEST_STATUS_DISCARDED
+    MPARequestPolicyDetail:
+      example:
+        approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+        requiredApprovals: 2
+        approverProviderGroupId: platform-admins
+        executionWindowHours: 4
+        description: Require approval before deleting backup policies.
+        approvalWindowHours: 24
+        currentApprovals: 1
+      properties:
+        requiredApprovals:
+          description: Number of approvals required by this policy.
+          example: 2
+          type: integer
+        currentApprovals:
+          description: Number of qualifying approvals received for this policy.
+          example: 1
+          type: integer
+        executionWindowHours:
+          description: Hours the requester has to execute the approved action after
+            full approval.
+          example: 4
+          type: integer
+        approvalWindowHours:
+          description: Hours allowed for gathering all required approvals after submission.
+          example: 24
+          type: integer
+        description:
+          description: Human-readable description of the policy.
+          example: Require approval before deleting backup policies.
+          type: string
+        approverIdpId:
+          description: UUID of the SAML identity provider connection this approver
+            group belongs to.
+          example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+          format: uuid
+          nullable: true
+          type: string
+        approverProviderGroupId:
+          description: Provider group identifier from the IdP.
+          example: platform-admins
+          nullable: true
+          type: string
+      required:
+      - approvalWindowHours
+      - currentApprovals
+      - executionWindowHours
+      - mpaPolicyId
+      - requiredApprovals
+      type: object
+      x-nullable: true
+    MPARequest:
+      example:
+        requesterEmail: requester@example.com
+        resolvedTime: 2026-05-05T02:10:12Z
+        requesterName: Riley Chen
+        approvalExpirationTime: 2026-05-05T03:00:05Z
+        executionExpirationTime: 2026-05-05T07:00:05Z
+        createdTime: 2026-05-04T23:00:05Z
+        comment: Removing a backup policy that has been replaced.
+        id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+        policyDetails:
+        - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+          requiredApprovals: 2
+          approverProviderGroupId: platform-admins
+          executionWindowHours: 4
+          description: Require approval before deleting backup policies.
+          approvalWindowHours: 24
+          currentApprovals: 1
+        - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+          requiredApprovals: 2
+          approverProviderGroupId: platform-admins
+          executionWindowHours: 4
+          description: Require approval before deleting backup policies.
+          approvalWindowHours: 24
+          currentApprovals: 1
+        operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+        status: PENDING_APPROVAL
+      properties:
+        id:
+          description: Unique identifier of the action approval request.
+          example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          format: uuid
+          type: string
+        operation:
+          $ref: '#/components/schemas/MPAOperationType'
+        requesterEmail:
+          description: Email address of the requester who created the approval request.
+          example: requester@example.com
+          type: string
+        requesterName:
+          description: Display name of the requester at the time the request was created.
+          example: Riley Chen
+          type: string
+        comment:
+          description: Optional comment from the requester explaining why this operation
+            is needed.
+          example: Removing a backup policy that has been replaced.
+          type: string
+        status:
+          $ref: '#/components/schemas/MPARequestStatus'
+        policyDetails:
+          description: Per-policy configuration and approval progress.
+          items:
+            $ref: '#/components/schemas/MPARequestPolicyDetail'
+          type: array
+        approvalExpirationTime:
+          description: Deadline for gathering approvals. Set when the request is confirmed
+            (submitted). Null for requests in CREATED or DISCARDED status.
+          example: 2026-05-05T03:00:05Z
+          format: date-time
+          nullable: true
+          type: string
+        executionExpirationTime:
+          description: Deadline for executing the approved action. Set when the request
+            is approved.
+          example: 2026-05-05T07:00:05Z
+          format: date-time
+          nullable: true
+          type: string
+        resolvedTime:
+          description: "Time when the request reached a terminal state, such as executed,\
+            \ expired, canceled, denied, or discarded. Null while the request is still\
+            \ active."
+          example: 2026-05-05T02:10:12Z
+          format: date-time
+          nullable: true
+          type: string
+        createdTime:
+          description: Time when the approval request was created.
+          example: 2026-05-04T23:00:05Z
+          format: date-time
+          type: string
+      required:
+      - createdTime
+      - id
+      - operation
+      - policyDetails
+      - requestMethod
+      - requestPath
+      - requesterEmail
+      - requesterId
+      - status
+      type: object
+      x-nullable: true
     RestoreAccountsFilterConditions:
       additionalProperties: false
       description: |
@@ -21674,6 +22555,253 @@ components:
           type: array
       required:
       - data
+      type: object
+    MPADecision:
+      description: |
+        Decision on an MPA review record as returned on read APIs. APPROVED and DENIED come from reviewer actions; CANCELLED is written by the system (for example when the policy is deleted while requests are still pending).
+      enum:
+      - APPROVED
+      - DENIED
+      - CANCELLED
+      example: APPROVED
+      type: string
+      x-enum-varnames:
+      - MPA_REVIEW_DECISION_APPROVED
+      - MPA_REVIEW_DECISION_DENIED
+      - MPA_REVIEW_DECISION_CANCELLED
+    MPAReview:
+      example:
+        reviewerName: Pat Lee
+        decision: APPROVED
+        reviewedTime: 2026-05-04T23:30:00Z
+        reviewerEmail: reviewer@example.com
+        comment: Approved after confirming the request with the application owner.
+        id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
+      properties:
+        id:
+          description: Unique identifier of the review.
+          example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
+          format: uuid
+          type: string
+        reviewerEmail:
+          description: Email address of the reviewer who submitted this review.
+          example: reviewer@example.com
+          type: string
+        reviewerName:
+          description: Display name of the reviewer at the time the review was submitted.
+          example: Pat Lee
+          type: string
+        decision:
+          $ref: '#/components/schemas/MPADecision'
+        comment:
+          description: Optional reviewer comment explaining the decision.
+          example: Approved after confirming the request with the application owner.
+          type: string
+        reviewedTime:
+          description: Time when the review was submitted.
+          example: 2026-05-04T23:30:00Z
+          format: date-time
+          type: string
+      required:
+      - decision
+      - id
+      - requestId
+      - reviewedTime
+      - reviewerEmail
+      - reviewerId
+      type: object
+      x-nullable: true
+    MPARequestDetail:
+      example:
+        request:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
+        reviews:
+        - reviewerName: Pat Lee
+          decision: APPROVED
+          reviewedTime: 2026-05-04T23:30:00Z
+          reviewerEmail: reviewer@example.com
+          comment: Approved after confirming the request with the application owner.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
+        - reviewerName: Pat Lee
+          decision: APPROVED
+          reviewedTime: 2026-05-04T23:30:00Z
+          reviewerEmail: reviewer@example.com
+          comment: Approved after confirming the request with the application owner.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
+      properties:
+        request:
+          $ref: '#/components/schemas/MPARequest'
+        reviews:
+          items:
+            $ref: '#/components/schemas/MPAReview'
+          type: array
+      required:
+      - request
+      - reviews
+      type: object
+      x-nullable: true
+    GetMPARequestResponse:
+      example:
+        mpaRequestDetail:
+          request:
+            requesterEmail: requester@example.com
+            resolvedTime: 2026-05-05T02:10:12Z
+            requesterName: Riley Chen
+            approvalExpirationTime: 2026-05-05T03:00:05Z
+            executionExpirationTime: 2026-05-05T07:00:05Z
+            createdTime: 2026-05-04T23:00:05Z
+            comment: Removing a backup policy that has been replaced.
+            id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+            policyDetails:
+            - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+              requiredApprovals: 2
+              approverProviderGroupId: platform-admins
+              executionWindowHours: 4
+              description: Require approval before deleting backup policies.
+              approvalWindowHours: 24
+              currentApprovals: 1
+            - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+              requiredApprovals: 2
+              approverProviderGroupId: platform-admins
+              executionWindowHours: 4
+              description: Require approval before deleting backup policies.
+              approvalWindowHours: 24
+              currentApprovals: 1
+            operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+            status: PENDING_APPROVAL
+          reviews:
+          - reviewerName: Pat Lee
+            decision: APPROVED
+            reviewedTime: 2026-05-04T23:30:00Z
+            reviewerEmail: reviewer@example.com
+            comment: Approved after confirming the request with the application owner.
+            id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
+          - reviewerName: Pat Lee
+            decision: APPROVED
+            reviewedTime: 2026-05-04T23:30:00Z
+            reviewerEmail: reviewer@example.com
+            comment: Approved after confirming the request with the application owner.
+            id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
+      properties:
+        mpaRequestDetail:
+          $ref: '#/components/schemas/MPARequestDetail'
+      required:
+      - mpaRequestDetail
+      type: object
+    CancelMyMPARequestResponse:
+      example:
+        mpaRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
+      properties:
+        mpaRequest:
+          $ref: '#/components/schemas/MPARequest'
+      required:
+      - mpaRequest
+      type: object
+    MPASubmitAction:
+      description: Action to take on a CREATED MPA request.
+      enum:
+      - MPA_SUBMIT_ACTION_UNSPECIFIED
+      - CONFIRM
+      - DISCARD
+      example: CONFIRM
+      type: string
+      x-enum-varnames:
+      - MPA_SUBMIT_ACTION_UNSPECIFIED
+      - MPA_SUBMIT_ACTION_CONFIRM
+      - MPA_SUBMIT_ACTION_DISCARD
+    SubmitMyMPARequestRequest:
+      example:
+        action: CONFIRM
+        comment: comment
+      properties:
+        action:
+          $ref: '#/components/schemas/MPASubmitAction'
+        comment:
+          description: Optional comment to set on the request alongside the action.
+          type: string
+      required:
+      - action
+      type: object
+    SubmitMyMPARequestResponse:
+      example:
+        mpaRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
+      properties:
+        mpaRequest:
+          $ref: '#/components/schemas/MPARequest'
       type: object
     createVault_409_response:
       example:

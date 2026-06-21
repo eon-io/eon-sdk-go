@@ -28,10 +28,17 @@ type ApiConnectRestoreAccountRequest struct {
 	ApiService *AccountsAPIService
 	projectId string
 	connectRestoreAccountRequest *ConnectRestoreAccountRequest
+	xMPARequestId *string
 }
 
 func (r ApiConnectRestoreAccountRequest) ConnectRestoreAccountRequest(connectRestoreAccountRequest ConnectRestoreAccountRequest) ApiConnectRestoreAccountRequest {
 	r.connectRestoreAccountRequest = &connectRestoreAccountRequest
+	return r
+}
+
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiConnectRestoreAccountRequest) XMPARequestId(xMPARequestId string) ApiConnectRestoreAccountRequest {
+	r.xMPARequestId = &xMPARequestId
 	return r
 }
 
@@ -98,6 +105,9 @@ func (a *AccountsAPIService) ConnectRestoreAccountExecute(r ApiConnectRestoreAcc
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.connectRestoreAccountRequest
@@ -2681,6 +2691,13 @@ type ApiReconnectRestoreAccountRequest struct {
 	ApiService *AccountsAPIService
 	projectId string
 	accountId string
+	xMPARequestId *string
+}
+
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiReconnectRestoreAccountRequest) XMPARequestId(xMPARequestId string) ApiReconnectRestoreAccountRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
 }
 
 func (r ApiReconnectRestoreAccountRequest) Execute() (*ReconnectRestoreAccountResponse, *http.Response, error) {
@@ -2746,6 +2763,9 @@ func (a *AccountsAPIService) ReconnectRestoreAccountExecute(r ApiReconnectRestor
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

@@ -163,6 +163,13 @@ type ApiDeleteBackupPolicyRequest struct {
 	ApiService *BackupPoliciesAPIService
 	projectId string
 	backupPolicyId string
+	xMPARequestId *string
+}
+
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiDeleteBackupPolicyRequest) XMPARequestId(xMPARequestId string) ApiDeleteBackupPolicyRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
 }
 
 func (r ApiDeleteBackupPolicyRequest) Execute() (*http.Response, error) {
@@ -225,6 +232,9 @@ func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPo
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -557,11 +567,18 @@ type ApiUpdateBackupPolicyRequest struct {
 	projectId string
 	backupPolicyId string
 	updateBackupPolicyRequest *UpdateBackupPolicyRequest
+	xMPARequestId *string
 }
 
 // The request body for updating a policy
 func (r ApiUpdateBackupPolicyRequest) UpdateBackupPolicyRequest(updateBackupPolicyRequest UpdateBackupPolicyRequest) ApiUpdateBackupPolicyRequest {
 	r.updateBackupPolicyRequest = &updateBackupPolicyRequest
+	return r
+}
+
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiUpdateBackupPolicyRequest) XMPARequestId(xMPARequestId string) ApiUpdateBackupPolicyRequest {
+	r.xMPARequestId = &xMPARequestId
 	return r
 }
 
@@ -630,6 +647,9 @@ func (a *BackupPoliciesAPIService) UpdateBackupPolicyExecute(r ApiUpdateBackupPo
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.updateBackupPolicyRequest

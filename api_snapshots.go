@@ -451,6 +451,13 @@ type ApiRemoveSnapshotHoldRequest struct {
 	ApiService *SnapshotsAPIService
 	projectId string
 	id string
+	xMPARequestId *string
+}
+
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRemoveSnapshotHoldRequest) XMPARequestId(xMPARequestId string) ApiRemoveSnapshotHoldRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
 }
 
 func (r ApiRemoveSnapshotHoldRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -521,6 +528,9 @@ func (a *SnapshotsAPIService) RemoveSnapshotHoldExecute(r ApiRemoveSnapshotHoldR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -586,6 +596,7 @@ type ApiRestoreAzureDiskRequest struct {
 	id string
 	snapshotId string
 	restoreAzureDiskRequest *RestoreAzureDiskRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreAzureDiskRequest) RestoreAzureDiskRequest(restoreAzureDiskRequest RestoreAzureDiskRequest) ApiRestoreAzureDiskRequest {
@@ -593,7 +604,13 @@ func (r ApiRestoreAzureDiskRequest) RestoreAzureDiskRequest(restoreAzureDiskRequ
 	return r
 }
 
-func (r ApiRestoreAzureDiskRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreAzureDiskRequest) XMPARequestId(xMPARequestId string) ApiRestoreAzureDiskRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreAzureDiskRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreAzureDiskExecute(r)
 }
 
@@ -627,13 +644,13 @@ func (a *SnapshotsAPIService) RestoreAzureDisk(ctx context.Context, projectId st
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureDisk")
@@ -669,6 +686,9 @@ func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskReque
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAzureDiskRequest
@@ -737,6 +757,7 @@ type ApiRestoreAzureSqlDatabaseRequest struct {
 	id string
 	snapshotId string
 	restoreAzureSqlDatabaseRequest *RestoreAzureSqlDatabaseRequest
+	xMPARequestId *string
 }
 
 // The request body for restoring the instance
@@ -745,7 +766,13 @@ func (r ApiRestoreAzureSqlDatabaseRequest) RestoreAzureSqlDatabaseRequest(restor
 	return r
 }
 
-func (r ApiRestoreAzureSqlDatabaseRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreAzureSqlDatabaseRequest) XMPARequestId(xMPARequestId string) ApiRestoreAzureSqlDatabaseRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreAzureSqlDatabaseRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreAzureSqlDatabaseExecute(r)
 }
 
@@ -776,13 +803,13 @@ func (a *SnapshotsAPIService) RestoreAzureSqlDatabase(ctx context.Context, proje
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreAzureSqlDatabaseExecute(r ApiRestoreAzureSqlDatabaseRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreAzureSqlDatabaseExecute(r ApiRestoreAzureSqlDatabaseRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureSqlDatabase")
@@ -818,6 +845,9 @@ func (a *SnapshotsAPIService) RestoreAzureSqlDatabaseExecute(r ApiRestoreAzureSq
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAzureSqlDatabaseRequest
@@ -886,6 +916,7 @@ type ApiRestoreAzureVmInstanceRequest struct {
 	id string
 	snapshotId string
 	restoreAzureVmInstanceRequest *RestoreAzureVmInstanceRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreAzureVmInstanceRequest) RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest RestoreAzureVmInstanceRequest) ApiRestoreAzureVmInstanceRequest {
@@ -893,7 +924,13 @@ func (r ApiRestoreAzureVmInstanceRequest) RestoreAzureVmInstanceRequest(restoreA
 	return r
 }
 
-func (r ApiRestoreAzureVmInstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreAzureVmInstanceRequest) XMPARequestId(xMPARequestId string) ApiRestoreAzureVmInstanceRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreAzureVmInstanceRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreAzureVmInstanceExecute(r)
 }
 
@@ -924,13 +961,13 @@ func (a *SnapshotsAPIService) RestoreAzureVmInstance(ctx context.Context, projec
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmInstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmInstanceRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureVmInstance")
@@ -966,6 +1003,9 @@ func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmI
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAzureVmInstanceRequest
@@ -1034,6 +1074,7 @@ type ApiRestoreBigQueryDatasetRequest struct {
 	id string
 	snapshotId string
 	restoreBigQueryDatasetRequest *RestoreBigQueryDatasetRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreBigQueryDatasetRequest) RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest RestoreBigQueryDatasetRequest) ApiRestoreBigQueryDatasetRequest {
@@ -1041,7 +1082,13 @@ func (r ApiRestoreBigQueryDatasetRequest) RestoreBigQueryDatasetRequest(restoreB
 	return r
 }
 
-func (r ApiRestoreBigQueryDatasetRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreBigQueryDatasetRequest) XMPARequestId(xMPARequestId string) ApiRestoreBigQueryDatasetRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreBigQueryDatasetRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreBigQueryDatasetExecute(r)
 }
 
@@ -1072,13 +1119,13 @@ func (a *SnapshotsAPIService) RestoreBigQueryDataset(ctx context.Context, projec
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreBigQueryDatasetExecute(r ApiRestoreBigQueryDatasetRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreBigQueryDatasetExecute(r ApiRestoreBigQueryDatasetRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreBigQueryDataset")
@@ -1114,6 +1161,9 @@ func (a *SnapshotsAPIService) RestoreBigQueryDatasetExecute(r ApiRestoreBigQuery
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreBigQueryDatasetRequest
@@ -1182,6 +1232,7 @@ type ApiRestoreBucketRequest struct {
 	id string
 	snapshotId string
 	restoreBucketRequest *RestoreBucketRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreBucketRequest) RestoreBucketRequest(restoreBucketRequest RestoreBucketRequest) ApiRestoreBucketRequest {
@@ -1189,7 +1240,13 @@ func (r ApiRestoreBucketRequest) RestoreBucketRequest(restoreBucketRequest Resto
 	return r
 }
 
-func (r ApiRestoreBucketRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreBucketRequest) XMPARequestId(xMPARequestId string) ApiRestoreBucketRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreBucketRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreBucketExecute(r)
 }
 
@@ -1220,13 +1277,13 @@ func (a *SnapshotsAPIService) RestoreBucket(ctx context.Context, projectId strin
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreBucketExecute(r ApiRestoreBucketRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreBucketExecute(r ApiRestoreBucketRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreBucket")
@@ -1262,6 +1319,9 @@ func (a *SnapshotsAPIService) RestoreBucketExecute(r ApiRestoreBucketRequest) (*
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreBucketRequest
@@ -1330,6 +1390,7 @@ type ApiRestoreDatabaseRequest struct {
 	id string
 	snapshotId string
 	restoreDbToRdsInstanceRequest *RestoreDbToRdsInstanceRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreDatabaseRequest) RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest RestoreDbToRdsInstanceRequest) ApiRestoreDatabaseRequest {
@@ -1337,7 +1398,13 @@ func (r ApiRestoreDatabaseRequest) RestoreDbToRdsInstanceRequest(restoreDbToRdsI
 	return r
 }
 
-func (r ApiRestoreDatabaseRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreDatabaseRequest) XMPARequestId(xMPARequestId string) ApiRestoreDatabaseRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreDatabaseRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreDatabaseExecute(r)
 }
 
@@ -1368,13 +1435,13 @@ func (a *SnapshotsAPIService) RestoreDatabase(ctx context.Context, projectId str
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreDatabaseExecute(r ApiRestoreDatabaseRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreDatabaseExecute(r ApiRestoreDatabaseRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreDatabase")
@@ -1410,6 +1477,9 @@ func (a *SnapshotsAPIService) RestoreDatabaseExecute(r ApiRestoreDatabaseRequest
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreDbToRdsInstanceRequest
@@ -1478,6 +1548,7 @@ type ApiRestoreDynamoDBTableRequest struct {
 	id string
 	snapshotId string
 	restoreDynamoDBTableRequest *RestoreDynamoDBTableRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreDynamoDBTableRequest) RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest RestoreDynamoDBTableRequest) ApiRestoreDynamoDBTableRequest {
@@ -1485,7 +1556,13 @@ func (r ApiRestoreDynamoDBTableRequest) RestoreDynamoDBTableRequest(restoreDynam
 	return r
 }
 
-func (r ApiRestoreDynamoDBTableRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreDynamoDBTableRequest) XMPARequestId(xMPARequestId string) ApiRestoreDynamoDBTableRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreDynamoDBTableRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreDynamoDBTableExecute(r)
 }
 
@@ -1516,13 +1593,13 @@ func (a *SnapshotsAPIService) RestoreDynamoDBTable(ctx context.Context, projectI
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTableRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTableRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreDynamoDBTable")
@@ -1558,6 +1635,9 @@ func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTa
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreDynamoDBTableRequest
@@ -1626,6 +1706,7 @@ type ApiRestoreEbsVolumeRequest struct {
 	id string
 	snapshotId string
 	restoreVolumeToEbsRequest *RestoreVolumeToEbsRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreEbsVolumeRequest) RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest RestoreVolumeToEbsRequest) ApiRestoreEbsVolumeRequest {
@@ -1633,7 +1714,13 @@ func (r ApiRestoreEbsVolumeRequest) RestoreVolumeToEbsRequest(restoreVolumeToEbs
 	return r
 }
 
-func (r ApiRestoreEbsVolumeRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreEbsVolumeRequest) XMPARequestId(xMPARequestId string) ApiRestoreEbsVolumeRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreEbsVolumeRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreEbsVolumeExecute(r)
 }
 
@@ -1664,13 +1751,13 @@ func (a *SnapshotsAPIService) RestoreEbsVolume(ctx context.Context, projectId st
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreEbsVolumeExecute(r ApiRestoreEbsVolumeRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreEbsVolumeExecute(r ApiRestoreEbsVolumeRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreEbsVolume")
@@ -1706,6 +1793,9 @@ func (a *SnapshotsAPIService) RestoreEbsVolumeExecute(r ApiRestoreEbsVolumeReque
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreVolumeToEbsRequest
@@ -1774,6 +1864,7 @@ type ApiRestoreEc2InstanceRequest struct {
 	id string
 	snapshotId string
 	restoreAwsEc2InstanceRequest *RestoreAwsEc2InstanceRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreEc2InstanceRequest) RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest RestoreAwsEc2InstanceRequest) ApiRestoreEc2InstanceRequest {
@@ -1781,7 +1872,13 @@ func (r ApiRestoreEc2InstanceRequest) RestoreAwsEc2InstanceRequest(restoreAwsEc2
 	return r
 }
 
-func (r ApiRestoreEc2InstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreEc2InstanceRequest) XMPARequestId(xMPARequestId string) ApiRestoreEc2InstanceRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreEc2InstanceRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreEc2InstanceExecute(r)
 }
 
@@ -1815,13 +1912,13 @@ func (a *SnapshotsAPIService) RestoreEc2Instance(ctx context.Context, projectId 
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreEc2Instance")
@@ -1857,6 +1954,9 @@ func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceR
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAwsEc2InstanceRequest
@@ -2073,6 +2173,7 @@ type ApiRestoreGcpCloudSqlRequest struct {
 	id string
 	snapshotId string
 	restoreGcpCloudSqlRequest *RestoreGcpCloudSqlRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreGcpCloudSqlRequest) RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest RestoreGcpCloudSqlRequest) ApiRestoreGcpCloudSqlRequest {
@@ -2080,7 +2181,13 @@ func (r ApiRestoreGcpCloudSqlRequest) RestoreGcpCloudSqlRequest(restoreGcpCloudS
 	return r
 }
 
-func (r ApiRestoreGcpCloudSqlRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreGcpCloudSqlRequest) XMPARequestId(xMPARequestId string) ApiRestoreGcpCloudSqlRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreGcpCloudSqlRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreGcpCloudSqlExecute(r)
 }
 
@@ -2114,13 +2221,13 @@ func (a *SnapshotsAPIService) RestoreGcpCloudSql(ctx context.Context, projectId 
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreGcpCloudSqlExecute(r ApiRestoreGcpCloudSqlRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreGcpCloudSqlExecute(r ApiRestoreGcpCloudSqlRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpCloudSql")
@@ -2156,6 +2263,9 @@ func (a *SnapshotsAPIService) RestoreGcpCloudSqlExecute(r ApiRestoreGcpCloudSqlR
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreGcpCloudSqlRequest
@@ -2224,6 +2334,7 @@ type ApiRestoreGcpDiskRequest struct {
 	id string
 	snapshotId string
 	restoreGcpDiskRequest *RestoreGcpDiskRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreGcpDiskRequest) RestoreGcpDiskRequest(restoreGcpDiskRequest RestoreGcpDiskRequest) ApiRestoreGcpDiskRequest {
@@ -2231,7 +2342,13 @@ func (r ApiRestoreGcpDiskRequest) RestoreGcpDiskRequest(restoreGcpDiskRequest Re
 	return r
 }
 
-func (r ApiRestoreGcpDiskRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreGcpDiskRequest) XMPARequestId(xMPARequestId string) ApiRestoreGcpDiskRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreGcpDiskRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreGcpDiskExecute(r)
 }
 
@@ -2265,13 +2382,13 @@ func (a *SnapshotsAPIService) RestoreGcpDisk(ctx context.Context, projectId stri
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreGcpDiskExecute(r ApiRestoreGcpDiskRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreGcpDiskExecute(r ApiRestoreGcpDiskRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpDisk")
@@ -2307,6 +2424,9 @@ func (a *SnapshotsAPIService) RestoreGcpDiskExecute(r ApiRestoreGcpDiskRequest) 
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreGcpDiskRequest
@@ -2375,6 +2495,7 @@ type ApiRestoreGcpVmInstanceRequest struct {
 	id string
 	snapshotId string
 	restoreGcpVmInstanceRequest *RestoreGcpVmInstanceRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreGcpVmInstanceRequest) RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest RestoreGcpVmInstanceRequest) ApiRestoreGcpVmInstanceRequest {
@@ -2382,7 +2503,13 @@ func (r ApiRestoreGcpVmInstanceRequest) RestoreGcpVmInstanceRequest(restoreGcpVm
 	return r
 }
 
-func (r ApiRestoreGcpVmInstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreGcpVmInstanceRequest) XMPARequestId(xMPARequestId string) ApiRestoreGcpVmInstanceRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreGcpVmInstanceRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreGcpVmInstanceExecute(r)
 }
 
@@ -2416,13 +2543,13 @@ func (a *SnapshotsAPIService) RestoreGcpVmInstance(ctx context.Context, projectI
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreGcpVmInstanceExecute(r ApiRestoreGcpVmInstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreGcpVmInstanceExecute(r ApiRestoreGcpVmInstanceRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpVmInstance")
@@ -2458,6 +2585,9 @@ func (a *SnapshotsAPIService) RestoreGcpVmInstanceExecute(r ApiRestoreGcpVmInsta
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreGcpVmInstanceRequest
@@ -2526,6 +2656,7 @@ type ApiRestoreToEbsSnapshotRequest struct {
 	id string
 	snapshotId string
 	restoreVolumeToEbsSnapshotRequest *RestoreVolumeToEbsSnapshotRequest
+	xMPARequestId *string
 }
 
 func (r ApiRestoreToEbsSnapshotRequest) RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest RestoreVolumeToEbsSnapshotRequest) ApiRestoreToEbsSnapshotRequest {
@@ -2533,7 +2664,13 @@ func (r ApiRestoreToEbsSnapshotRequest) RestoreVolumeToEbsSnapshotRequest(restor
 	return r
 }
 
-func (r ApiRestoreToEbsSnapshotRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
+// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
+func (r ApiRestoreToEbsSnapshotRequest) XMPARequestId(xMPARequestId string) ApiRestoreToEbsSnapshotRequest {
+	r.xMPARequestId = &xMPARequestId
+	return r
+}
+
+func (r ApiRestoreToEbsSnapshotRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
 	return r.ApiService.RestoreToEbsSnapshotExecute(r)
 }
 
@@ -2564,13 +2701,13 @@ func (a *SnapshotsAPIService) RestoreToEbsSnapshot(ctx context.Context, projectI
 }
 
 // Execute executes the request
-//  @return RestoreJobInitiationResponse
-func (a *SnapshotsAPIService) RestoreToEbsSnapshotExecute(r ApiRestoreToEbsSnapshotRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
+//  @return MPAInterceptedResponse
+func (a *SnapshotsAPIService) RestoreToEbsSnapshotExecute(r ApiRestoreToEbsSnapshotRequest) (*MPAInterceptedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RestoreJobInitiationResponse
+		localVarReturnValue  *MPAInterceptedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreToEbsSnapshot")
@@ -2606,6 +2743,9 @@ func (a *SnapshotsAPIService) RestoreToEbsSnapshotExecute(r ApiRestoreToEbsSnaps
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xMPARequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreVolumeToEbsSnapshotRequest

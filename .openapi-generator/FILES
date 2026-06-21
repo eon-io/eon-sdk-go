@@ -11,6 +11,7 @@ api_dashboard.go
 api_database_snapshots.go
 api_iam.go
 api_jobs.go
+api_mpa.go
 api_resources.go
 api_snapshots.go
 api_vaults.go
@@ -88,6 +89,7 @@ docs/BackupsAPI.md
 docs/BigQueryDatasetDestination.md
 docs/BillingAPI.md
 docs/CancelExclusionFromBackupResponse.md
+docs/CancelMyMPARequestResponse.md
 docs/Classifications.md
 docs/CloudProviderCondition.md
 docs/CloudProviderFilters.md
@@ -167,6 +169,7 @@ docs/GcpVmInstanceRestoreTarget.md
 docs/GetBackupJobResponse.md
 docs/GetBackupPolicyResponse.md
 docs/GetIdpGroupResponse.md
+docs/GetMPARequestResponse.md
 docs/GetResourceResponse.md
 docs/GetRestoreAccountConnectivityConfigResponse.md
 docs/GetRestoreAccountMetricsConfigResponse.md
@@ -218,8 +221,18 @@ docs/ListSourceAccountsRequest.md
 docs/ListSourceAccountsResponse.md
 docs/ListSourceAwsOrganizationalUnitsResponse.md
 docs/LogicalOperator.md
+docs/MPADecision.md
+docs/MPAInterceptedResponse.md
+docs/MPAOperationType.md
+docs/MPARequest.md
+docs/MPARequestDetail.md
+docs/MPARequestPolicyDetail.md
+docs/MPARequestStatus.md
+docs/MPAReview.md
+docs/MPASubmitAction.md
 docs/MeteringDimension.md
 docs/MonthlyConfig.md
+docs/MpaAPI.md
 docs/Oauth2TokenResponse.md
 docs/ObjectStorageDestination.md
 docs/OverrideDataClassificationsRequest.md
@@ -330,6 +343,8 @@ docs/StandardBackupSchedules.md
 docs/StandardIntervalConfig.md
 docs/StartTimeDateFilters.md
 docs/StorageAccountRestoreTarget.md
+docs/SubmitMyMPARequestRequest.md
+docs/SubmitMyMPARequestResponse.md
 docs/SubnetFilters.md
 docs/SubnetPerAvailabilityZone.md
 docs/SubnetsCondition.md
@@ -440,6 +455,7 @@ model_backup_status_filters.go
 model_backup_vault.go
 model_big_query_dataset_destination.go
 model_cancel_exclusion_from_backup_response.go
+model_cancel_my_mpa_request_response.go
 model_classifications.go
 model_cloud_provider_condition.go
 model_cloud_provider_filters.go
@@ -517,6 +533,7 @@ model_gcs_restore_target.go
 model_get_backup_job_response.go
 model_get_backup_policy_response.go
 model_get_idp_group_response.go
+model_get_mpa_request_response.go
 model_get_resource_response.go
 model_get_restore_account_connectivity_config_response.go
 model_get_restore_account_metrics_config_response.go
@@ -568,6 +585,15 @@ model_list_source_aws_organizational_units_response.go
 model_logical_operator.go
 model_metering_dimension.go
 model_monthly_config.go
+model_mpa_decision.go
+model_mpa_intercepted_response.go
+model_mpa_operation_type.go
+model_mpa_request.go
+model_mpa_request_detail.go
+model_mpa_request_policy_detail.go
+model_mpa_request_status.go
+model_mpa_review.go
+model_mpa_submit_action.go
 model_oauth2_token_response.go
 model_object_storage_destination.go
 model_override_data_classifications_request.go
@@ -676,6 +702,8 @@ model_standard_backup_schedules.go
 model_standard_interval_config.go
 model_start_time_date_filters.go
 model_storage_account_restore_target.go
+model_submit_my_mpa_request_request.go
+model_submit_my_mpa_request_response.go
 model_subnet_filters.go
 model_subnet_per_availability_zone.go
 model_subnets_condition.go
@@ -727,6 +755,7 @@ test/api_dashboard_test.go
 test/api_database_snapshots_test.go
 test/api_iam_test.go
 test/api_jobs_test.go
+test/api_mpa_test.go
 test/api_resources_test.go
 test/api_snapshots_test.go
 test/api_vaults_test.go
