@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ConnectRestoreAccount**](AccountsAPI.md#ConnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts | Connect Restore Account
+[**ConnectRestoreAwsOrganizationalUnit**](AccountsAPI.md#ConnectRestoreAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/restore-aws-organizational-units | Connect Restore AWS Organizational Unit
 [**ConnectSourceAccount**](AccountsAPI.md#ConnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts | Connect Source Account
 [**ConnectSourceAwsOrganizationalUnit**](AccountsAPI.md#ConnectSourceAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/source-aws-organizational-units | Connect Source AWS Organizational Unit
 [**DeleteRestoreAccountConnectivityConfig**](AccountsAPI.md#DeleteRestoreAccountConnectivityConfig) | **Delete** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Delete Restore Account Connectivity Configuration
@@ -13,6 +14,7 @@ Method | HTTP request | Description
 [**DisableRestoreAccountMetricsConfig**](AccountsAPI.md#DisableRestoreAccountMetricsConfig) | **Delete** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Disable Restore Account Metrics
 [**DisableSourceAccountMetricsConfig**](AccountsAPI.md#DisableSourceAccountMetricsConfig) | **Delete** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Disable Source Account Metrics
 [**DisconnectRestoreAccount**](AccountsAPI.md#DisconnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts/{accountId}/disconnect | Disconnect Restore Account
+[**DisconnectRestoreAwsOrganizationalUnit**](AccountsAPI.md#DisconnectRestoreAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/restore-aws-organizational-units/{organizationalUnitId}/disconnect | Disconnect Restore AWS Organizational Unit
 [**DisconnectSourceAccount**](AccountsAPI.md#DisconnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts/{accountId}/disconnect | Disconnect Source Account
 [**DisconnectSourceAwsOrganizationalUnit**](AccountsAPI.md#DisconnectSourceAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/disconnect | Disconnect Source AWS Organizational Unit
 [**EnableRestoreAccountMetricsConfig**](AccountsAPI.md#EnableRestoreAccountMetricsConfig) | **Put** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Configure Restore Account Metrics
@@ -22,9 +24,11 @@ Method | HTTP request | Description
 [**GetSourceAccount**](AccountsAPI.md#GetSourceAccount) | **Get** /v1/projects/{projectId}/source-accounts/{accountId} | Get Source Account
 [**GetSourceAccountMetricsConfig**](AccountsAPI.md#GetSourceAccountMetricsConfig) | **Get** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Get Source Account Metrics Configuration
 [**ListRestoreAccounts**](AccountsAPI.md#ListRestoreAccounts) | **Post** /v1/projects/{projectId}/restore-accounts/list | List Restore Accounts
+[**ListRestoreAwsOrganizationalUnits**](AccountsAPI.md#ListRestoreAwsOrganizationalUnits) | **Post** /v1/projects/{projectId}/restore-aws-organizational-units/list | List Restore AWS Organizational Units
 [**ListSourceAccounts**](AccountsAPI.md#ListSourceAccounts) | **Post** /v1/projects/{projectId}/source-accounts/list | List Source Accounts
 [**ListSourceAwsOrganizationalUnits**](AccountsAPI.md#ListSourceAwsOrganizationalUnits) | **Post** /v1/projects/{projectId}/source-aws-organizational-units/list | List Source AWS Organizational Units
 [**ReconnectRestoreAccount**](AccountsAPI.md#ReconnectRestoreAccount) | **Post** /v1/projects/{projectId}/restore-accounts/{accountId}/reconnect | Reconnect Restore Account
+[**ReconnectRestoreAwsOrganizationalUnit**](AccountsAPI.md#ReconnectRestoreAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/restore-aws-organizational-units/{organizationalUnitId}/reconnect | Reconnect Restore AWS Organizational Unit
 [**ReconnectSourceAccount**](AccountsAPI.md#ReconnectSourceAccount) | **Post** /v1/projects/{projectId}/source-accounts/{accountId}/reconnect | Reconnect Source Account
 [**ReconnectSourceAwsOrganizationalUnit**](AccountsAPI.md#ReconnectSourceAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/reconnect | Reconnect Source AWS Organizational Unit
 [**UpdateRestoreAccount**](AccountsAPI.md#UpdateRestoreAccount) | **Patch** /v1/projects/{projectId}/restore-accounts/{accountId} | Update Restore Account
@@ -92,6 +96,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ConnectRestoreAccountResponse**](ConnectRestoreAccountResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ConnectRestoreAwsOrganizationalUnit
+
+> ConnectRestoreAwsOrganizationalUnitResponse ConnectRestoreAwsOrganizationalUnit(ctx, projectId).ConnectRestoreAwsOrganizationalUnitRequest(connectRestoreAwsOrganizationalUnitRequest).XMPARequestId(xMPARequestId).Execute()
+
+Connect Restore AWS Organizational Unit
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	connectRestoreAwsOrganizationalUnitRequest := *openapiclient.NewConnectRestoreAwsOrganizationalUnitRequest("arn:aws:iam::123412341234:role/EonRestoreAccountRole", "ou-a1b2-f6g7h111") // ConnectRestoreAwsOrganizationalUnitRequest | 
+	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ConnectRestoreAwsOrganizationalUnit(context.Background(), projectId).ConnectRestoreAwsOrganizationalUnitRequest(connectRestoreAwsOrganizationalUnitRequest).XMPARequestId(xMPARequestId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ConnectRestoreAwsOrganizationalUnit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ConnectRestoreAwsOrganizationalUnit`: ConnectRestoreAwsOrganizationalUnitResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ConnectRestoreAwsOrganizationalUnit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiConnectRestoreAwsOrganizationalUnitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **connectRestoreAwsOrganizationalUnitRequest** | [**ConnectRestoreAwsOrganizationalUnitRequest**](ConnectRestoreAwsOrganizationalUnitRequest.md) |  | 
+ **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+
+### Return type
+
+[**ConnectRestoreAwsOrganizationalUnitResponse**](ConnectRestoreAwsOrganizationalUnitResponse.md)
 
 ### Authorization
 
@@ -664,6 +742,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DisconnectRestoreAccountResponse**](DisconnectRestoreAccountResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DisconnectRestoreAwsOrganizationalUnit
+
+> DisconnectRestoreAwsOrganizationalUnitResponse DisconnectRestoreAwsOrganizationalUnit(ctx, projectId, organizationalUnitId).Execute()
+
+Disconnect Restore AWS Organizational Unit
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose AWS organizational unit you want to disconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	organizationalUnitId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the AWS organizational unit to disconnect.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.DisconnectRestoreAwsOrganizationalUnit(context.Background(), projectId, organizationalUnitId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.DisconnectRestoreAwsOrganizationalUnit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DisconnectRestoreAwsOrganizationalUnit`: DisconnectRestoreAwsOrganizationalUnitResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.DisconnectRestoreAwsOrganizationalUnit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project whose AWS organizational unit you want to disconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**organizationalUnitId** | **string** | Eon-assigned ID of the AWS organizational unit to disconnect. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDisconnectRestoreAwsOrganizationalUnitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**DisconnectRestoreAwsOrganizationalUnitResponse**](DisconnectRestoreAwsOrganizationalUnitResponse.md)
 
 ### Authorization
 
@@ -1343,6 +1494,80 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListRestoreAwsOrganizationalUnits
+
+> ListRestoreAwsOrganizationalUnitsResponse ListRestoreAwsOrganizationalUnits(ctx, projectId).PageToken(pageToken).PageSize(pageSize).Execute()
+
+List Restore AWS Organizational Units
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response.  (optional)
+	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ListRestoreAwsOrganizationalUnits(context.Background(), projectId).PageToken(pageToken).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ListRestoreAwsOrganizationalUnits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListRestoreAwsOrganizationalUnits`: ListRestoreAwsOrganizationalUnitsResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ListRestoreAwsOrganizationalUnits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListRestoreAwsOrganizationalUnitsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response.  | 
+ **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
+
+### Return type
+
+[**ListRestoreAwsOrganizationalUnitsResponse**](ListRestoreAwsOrganizationalUnitsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListSourceAccounts
 
 > ListSourceAccountsResponse ListSourceAccounts(ctx, projectId).PageToken(pageToken).PageSize(pageSize).ListSourceAccountsRequest(listSourceAccountsRequest).Execute()
@@ -1553,6 +1778,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ReconnectRestoreAccountResponse**](ReconnectRestoreAccountResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReconnectRestoreAwsOrganizationalUnit
+
+> ReconnectRestoreAwsOrganizationalUnitResponse ReconnectRestoreAwsOrganizationalUnit(ctx, projectId, organizationalUnitId).Execute()
+
+Reconnect Restore AWS Organizational Unit
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose AWS organizational unit you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	organizationalUnitId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the AWS organizational unit to reconnect.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.ReconnectRestoreAwsOrganizationalUnit(context.Background(), projectId, organizationalUnitId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ReconnectRestoreAwsOrganizationalUnit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReconnectRestoreAwsOrganizationalUnit`: ReconnectRestoreAwsOrganizationalUnitResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.ReconnectRestoreAwsOrganizationalUnit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project whose AWS organizational unit you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**organizationalUnitId** | **string** | Eon-assigned ID of the AWS organizational unit to reconnect. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReconnectRestoreAwsOrganizationalUnitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ReconnectRestoreAwsOrganizationalUnitResponse**](ReconnectRestoreAwsOrganizationalUnitResponse.md)
 
 ### Authorization
 

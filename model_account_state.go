@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// AccountState Connection status of the AWS account, Azure subscription, or GCP project. `ACCOUNT_STATUS_UNSPECIFIED` is supported only in responses. 
+// AccountState Connection status of the AWS account, Azure subscription, or GCP project. `NOT_READY` means the account was discovered but is not yet ready to be backed up; see `statusReason` for the specific cause. `NOT_READY` and `ACCOUNT_STATUS_UNSPECIFIED` are supported only in responses. 
 type AccountState string
 
 // List of AccountState
@@ -23,6 +23,7 @@ const (
 	ACCOUNT_STATE_CONNECTED AccountState = "CONNECTED"
 	ACCOUNT_STATE_DISCONNECTED AccountState = "DISCONNECTED"
 	ACCOUNT_STATE_INSUFFICIENT_PERMISSIONS AccountState = "INSUFFICIENT_PERMISSIONS"
+	ACCOUNT_STATE_NOT_READY AccountState = "NOT_READY"
 	ACCOUNT_STATE_UNSPECIFIED AccountState = "ACCOUNT_STATUS_UNSPECIFIED"
 )
 
@@ -31,6 +32,7 @@ var AllowedAccountStateEnumValues = []AccountState{
 	"CONNECTED",
 	"DISCONNECTED",
 	"INSUFFICIENT_PERMISSIONS",
+	"NOT_READY",
 	"ACCOUNT_STATUS_UNSPECIFIED",
 }
 

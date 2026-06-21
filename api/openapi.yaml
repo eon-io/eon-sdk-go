@@ -1653,6 +1653,302 @@ paths:
         - entityType: account
           in: path
           key: organizationalUnitId
+  /v1/projects/{projectId}/restore-aws-organizational-units:
+    post:
+      description: |
+        Description: Connects an AWS organizational unit to the given project as a restore target.
+
+        All current and future descendant AWS accounts within the organizational unit are discovered and available as restore accounts.
+      operationId: connectRestoreAwsOrganizationalUnit
+      parameters:
+      - description: |
+          ID of the project you want to connect the AWS organizational unit to.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not MPA-protected.
+        explode: false
+        in: header
+        name: X-MPA-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectRestoreAwsOrganizationalUnitRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectRestoreAwsOrganizationalUnitResponse'
+          description: AWS organizational unit connected.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
+        "409":
+          description: AWS organizational unit already exists in Eon.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Connect Restore AWS Organizational Unit
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:restore_accounts
+      x-mpa:
+        operation: MPA_OPERATION_ADD_RESTORE_ACCOUNT
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: restore_cloud_account
+          in: resBody
+          key: id
+  /v1/projects/{projectId}/restore-aws-organizational-units/list:
+    post:
+      description: "Description: Retrieves a list of AWS restore organizational units\
+        \ for the given project."
+      operationId: listRestoreAwsOrganizationalUnits
+      parameters:
+      - description: |
+          ID of the project whose AWS organizational units you want to retrieve.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response.
+        example: Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of items to return in the response.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRestoreAwsOrganizationalUnitsResponse'
+          description: AWS organizational units retrieved.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Restore AWS Organizational Units
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore_accounts
+      x-audit-log:
+        excluded: true
+  /v1/projects/{projectId}/restore-aws-organizational-units/{organizationalUnitId}/reconnect:
+    post:
+      description: |
+        Description: Reconnects a previously disconnected AWS restore organizational unit and its descendant accounts to the given project.
+      operationId: reconnectRestoreAwsOrganizationalUnit
+      parameters:
+      - description: |
+          ID of the project whose AWS organizational unit you want to reconnect.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the AWS organizational unit to reconnect.
+        example: 72d29280-a0be-59df-b33c-59f9015606c3
+        explode: false
+        in: path
+        name: organizationalUnitId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReconnectRestoreAwsOrganizationalUnitResponse'
+          description: AWS organizational unit reconnected.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Reconnect Restore AWS Organizational Unit
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:restore_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: restore_cloud_account
+          in: path
+          key: organizationalUnitId
+  /v1/projects/{projectId}/restore-aws-organizational-units/{organizationalUnitId}/disconnect:
+    post:
+      description: |
+        Description: Disconnects an AWS restore organizational unit (OU) and its accounts from the given project.
+
+        After disconnecting, the OU descendant accounts are no longer available as restore targets.
+      operationId: disconnectRestoreAwsOrganizationalUnit
+      parameters:
+      - description: |
+          ID of the project whose AWS organizational unit you want to disconnect.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: cc4fe8ee-0c62-56f2-9fda-f27bc7753e55
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the AWS organizational unit to disconnect.
+        example: 72d29280-a0be-59df-b33c-59f9015606c3
+        explode: false
+        in: path
+        name: organizationalUnitId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectRestoreAwsOrganizationalUnitResponse'
+          description: AWS organizational unit disconnected.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Disconnect Restore AWS Organizational Unit
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:restore_accounts
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: restore_cloud_account
+          in: path
+          key: organizationalUnitId
   /v1/projects/{projectId}/restore-accounts:
     post:
       description: |
@@ -10240,11 +10536,14 @@ components:
     AccountState:
       description: |
         Connection status of the AWS account, Azure subscription, or GCP project.
-        `ACCOUNT_STATUS_UNSPECIFIED` is supported only in responses.
+        `NOT_READY` means the account was discovered but is not yet ready to be backed up;
+        see `statusReason` for the specific cause.
+        `NOT_READY` and `ACCOUNT_STATUS_UNSPECIFIED` are supported only in responses.
       enum:
       - CONNECTED
       - DISCONNECTED
       - INSUFFICIENT_PERMISSIONS
+      - NOT_READY
       - ACCOUNT_STATUS_UNSPECIFIED
       example: CONNECTED
       type: string
@@ -10252,6 +10551,7 @@ components:
       - ACCOUNT_STATE_CONNECTED
       - ACCOUNT_STATE_DISCONNECTED
       - ACCOUNT_STATE_INSUFFICIENT_PERMISSIONS
+      - ACCOUNT_STATE_NOT_READY
       - ACCOUNT_STATE_UNSPECIFIED
     AccountInstallationMethod:
       default: UNSPECIFIED
@@ -11256,6 +11556,340 @@ components:
       required:
       - organizationalUnit
       type: object
+    ConnectRestoreAwsOrganizationalUnitRequest:
+      example:
+        providerOrganizationalUnitId: ou-a1b2-f6g7h111
+        roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+      properties:
+        roleArn:
+          description: ARN of the role Eon assumes to access the organizational unit
+            in AWS.
+          example: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          type: string
+        providerOrganizationalUnitId:
+          description: AWS-assigned organizational unit ID.
+          example: ou-a1b2-f6g7h111
+          type: string
+      required:
+      - providerOrganizationalUnitId
+      - roleArn
+      type: object
+    RestoreAwsOrganizationalUnit:
+      example:
+        providerOrganizationalUnitId: ou-a1b2-f6g7h111
+        roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+        name: dr-eu organizational unit
+        id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+        providerManagementAccountId: "123456789012"
+        status: CONNECTED
+      properties:
+        id:
+          description: Eon-assigned organizational unit ID.
+          example: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          type: string
+        roleArn:
+          description: ARN of the role Eon assumes to access the organizational unit
+            in AWS.
+          example: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          type: string
+        name:
+          description: Organizational unit display name in Eon.
+          example: dr-eu organizational unit
+          type: string
+        providerOrganizationalUnitId:
+          description: AWS-assigned organizational unit ID.
+          example: ou-a1b2-f6g7h111
+          type: string
+        providerManagementAccountId:
+          description: AWS-assigned ID of the organization's management account.
+          example: "123456789012"
+          type: string
+        status:
+          $ref: '#/components/schemas/AccountState'
+      required:
+      - id
+      - name
+      - providerManagementAccountId
+      - providerOrganizationalUnitId
+      - roleArn
+      - status
+      type: object
+    ConnectRestoreAwsOrganizationalUnitResponse:
+      example:
+        organizationalUnit:
+          providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          name: dr-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+      properties:
+        organizationalUnit:
+          $ref: '#/components/schemas/RestoreAwsOrganizationalUnit'
+      required:
+      - organizationalUnit
+      type: object
+    MPAOperationType:
+      description: Operation that requires action approval before it can be completed.
+      enum:
+      - MPA_OPERATION_TYPE_UNSPECIFIED
+      - MPA_OPERATION_ADD_RESTORE_ACCOUNT
+      - MPA_OPERATION_RESTORE_RESOURCE
+      - MPA_OPERATION_UPDATE_BACKUP_POLICY
+      - MPA_OPERATION_DELETE_BACKUP_POLICY
+      - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+      example: MPA_OPERATION_DELETE_BACKUP_POLICY
+      type: string
+      x-docs-internal-enum:
+      - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+      x-enum-varnames:
+      - MPA_OPERATION_TYPE_UNSPECIFIED
+      - MPA_OPERATION_TYPE_MPA_OPERATION_ADD_RESTORE_ACCOUNT
+      - MPA_OPERATION_TYPE_MPA_OPERATION_RESTORE_RESOURCE
+      - MPA_OPERATION_TYPE_MPA_OPERATION_UPDATE_BACKUP_POLICY
+      - MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_BACKUP_POLICY
+      - MPA_OPERATION_TYPE_MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+    MPARequestStatus:
+      description: |
+        Lifecycle state of an action approval request from creation through resolution. DISCARDED means the requester abandoned a draft before it was submitted for approval.
+      enum:
+      - MPA_REQUEST_STATUS_UNSPECIFIED
+      - CREATED
+      - PENDING_APPROVAL
+      - APPROVED
+      - DENIED
+      - EXPIRED_PENDING_APPROVAL
+      - EXPIRED_APPROVED
+      - EXECUTED
+      - CANCELED_PENDING_APPROVAL
+      - CANCELED_APPROVED
+      - DISCARDED
+      example: PENDING_APPROVAL
+      type: string
+      x-enum-varnames:
+      - MPA_REQUEST_STATUS_UNSPECIFIED
+      - MPA_REQUEST_STATUS_CREATED
+      - MPA_REQUEST_STATUS_PENDING_APPROVAL
+      - MPA_REQUEST_STATUS_APPROVED
+      - MPA_REQUEST_STATUS_DENIED
+      - MPA_REQUEST_STATUS_EXPIRED_PENDING_APPROVAL
+      - MPA_REQUEST_STATUS_EXPIRED_APPROVED
+      - MPA_REQUEST_STATUS_EXECUTED
+      - MPA_REQUEST_STATUS_CANCELLED_PENDING_APPROVAL
+      - MPA_REQUEST_STATUS_CANCELLED_APPROVED
+      - MPA_REQUEST_STATUS_DISCARDED
+    MPARequestPolicyDetail:
+      example:
+        approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+        requiredApprovals: 2
+        approverProviderGroupId: platform-admins
+        executionWindowHours: 4
+        description: Require approval before deleting backup policies.
+        approvalWindowHours: 24
+        currentApprovals: 1
+      properties:
+        requiredApprovals:
+          description: Number of approvals required by this policy.
+          example: 2
+          type: integer
+        currentApprovals:
+          description: Number of qualifying approvals received for this policy.
+          example: 1
+          type: integer
+        executionWindowHours:
+          description: Hours the requester has to execute the approved action after
+            full approval.
+          example: 4
+          type: integer
+        approvalWindowHours:
+          description: Hours allowed for gathering all required approvals after submission.
+          example: 24
+          type: integer
+        description:
+          description: Human-readable description of the policy.
+          example: Require approval before deleting backup policies.
+          type: string
+        approverIdpId:
+          description: UUID of the SAML identity provider connection this approver
+            group belongs to.
+          example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+          format: uuid
+          nullable: true
+          type: string
+        approverProviderGroupId:
+          description: Provider group identifier from the IdP.
+          example: platform-admins
+          nullable: true
+          type: string
+      required:
+      - approvalWindowHours
+      - currentApprovals
+      - executionWindowHours
+      - mpaPolicyId
+      - requiredApprovals
+      type: object
+      x-nullable: true
+    MPARequest:
+      example:
+        requesterEmail: requester@example.com
+        resolvedTime: 2026-05-05T02:10:12Z
+        requesterName: Riley Chen
+        approvalExpirationTime: 2026-05-05T03:00:05Z
+        executionExpirationTime: 2026-05-05T07:00:05Z
+        createdTime: 2026-05-04T23:00:05Z
+        comment: Removing a backup policy that has been replaced.
+        id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+        policyDetails:
+        - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+          requiredApprovals: 2
+          approverProviderGroupId: platform-admins
+          executionWindowHours: 4
+          description: Require approval before deleting backup policies.
+          approvalWindowHours: 24
+          currentApprovals: 1
+        - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+          requiredApprovals: 2
+          approverProviderGroupId: platform-admins
+          executionWindowHours: 4
+          description: Require approval before deleting backup policies.
+          approvalWindowHours: 24
+          currentApprovals: 1
+        operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+        status: PENDING_APPROVAL
+      properties:
+        id:
+          description: Unique identifier of the action approval request.
+          example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          format: uuid
+          type: string
+        operation:
+          $ref: '#/components/schemas/MPAOperationType'
+        requesterEmail:
+          description: Email address of the requester who created the approval request.
+          example: requester@example.com
+          type: string
+        requesterName:
+          description: Display name of the requester at the time the request was created.
+          example: Riley Chen
+          type: string
+        comment:
+          description: Optional comment from the requester explaining why this operation
+            is needed.
+          example: Removing a backup policy that has been replaced.
+          type: string
+        status:
+          $ref: '#/components/schemas/MPARequestStatus'
+        policyDetails:
+          description: Per-policy configuration and approval progress.
+          items:
+            $ref: '#/components/schemas/MPARequestPolicyDetail'
+          type: array
+        approvalExpirationTime:
+          description: Deadline for gathering approvals. Set when the request is confirmed
+            (submitted). Null for requests in CREATED or DISCARDED status.
+          example: 2026-05-05T03:00:05Z
+          format: date-time
+          nullable: true
+          type: string
+        executionExpirationTime:
+          description: Deadline for executing the approved action. Set when the request
+            is approved.
+          example: 2026-05-05T07:00:05Z
+          format: date-time
+          nullable: true
+          type: string
+        resolvedTime:
+          description: "Time when the request reached a terminal state, such as executed,\
+            \ expired, canceled, denied, or discarded. Null while the request is still\
+            \ active."
+          example: 2026-05-05T02:10:12Z
+          format: date-time
+          nullable: true
+          type: string
+        createdTime:
+          description: Time when the approval request was created.
+          example: 2026-05-04T23:00:05Z
+          format: date-time
+          type: string
+      required:
+      - createdTime
+      - id
+      - operation
+      - policyDetails
+      - requestMethod
+      - requestPath
+      - requesterEmail
+      - requesterId
+      - status
+      type: object
+      x-nullable: true
+    ListRestoreAwsOrganizationalUnitsResponse:
+      example:
+        nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+        organizationalUnits:
+        - providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          name: dr-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+        - providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          name: dr-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+        totalCount: 0
+      properties:
+        organizationalUnits:
+          description: List of AWS organizational units.
+          items:
+            $ref: '#/components/schemas/RestoreAwsOrganizationalUnit'
+          type: array
+        nextToken:
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+          type: string
+        totalCount:
+          description: Total number of AWS organizational units that matched the filter
+            options.
+          type: integer
+      required:
+      - organizationalUnits
+      - totalCount
+      type: object
+    ReconnectRestoreAwsOrganizationalUnitResponse:
+      example:
+        organizationalUnit:
+          providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          name: dr-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+      properties:
+        organizationalUnit:
+          $ref: '#/components/schemas/RestoreAwsOrganizationalUnit'
+      required:
+      - organizationalUnit
+      type: object
+    DisconnectRestoreAwsOrganizationalUnitResponse:
+      example:
+        organizationalUnit:
+          providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          name: dr-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+      properties:
+        organizationalUnit:
+          $ref: '#/components/schemas/RestoreAwsOrganizationalUnit'
+      required:
+      - organizationalUnit
+      type: object
     AwsRestoreAccountAttributesInput:
       description: |
         AWS account configuration.
@@ -11571,200 +12205,6 @@ components:
       required:
       - restoreAccount
       type: object
-    MPAOperationType:
-      description: Operation that requires action approval before it can be completed.
-      enum:
-      - MPA_OPERATION_TYPE_UNSPECIFIED
-      - MPA_OPERATION_ADD_RESTORE_ACCOUNT
-      - MPA_OPERATION_RESTORE_RESOURCE
-      - MPA_OPERATION_UPDATE_BACKUP_POLICY
-      - MPA_OPERATION_DELETE_BACKUP_POLICY
-      - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
-      example: MPA_OPERATION_DELETE_BACKUP_POLICY
-      type: string
-      x-docs-internal-enum:
-      - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
-      x-enum-varnames:
-      - MPA_OPERATION_TYPE_UNSPECIFIED
-      - MPA_OPERATION_TYPE_MPA_OPERATION_ADD_RESTORE_ACCOUNT
-      - MPA_OPERATION_TYPE_MPA_OPERATION_RESTORE_RESOURCE
-      - MPA_OPERATION_TYPE_MPA_OPERATION_UPDATE_BACKUP_POLICY
-      - MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_BACKUP_POLICY
-      - MPA_OPERATION_TYPE_MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
-    MPARequestStatus:
-      description: |
-        Lifecycle state of an action approval request from creation through resolution. DISCARDED means the requester abandoned a draft before it was submitted for approval.
-      enum:
-      - MPA_REQUEST_STATUS_UNSPECIFIED
-      - CREATED
-      - PENDING_APPROVAL
-      - APPROVED
-      - DENIED
-      - EXPIRED_PENDING_APPROVAL
-      - EXPIRED_APPROVED
-      - EXECUTED
-      - CANCELED_PENDING_APPROVAL
-      - CANCELED_APPROVED
-      - DISCARDED
-      example: PENDING_APPROVAL
-      type: string
-      x-enum-varnames:
-      - MPA_REQUEST_STATUS_UNSPECIFIED
-      - MPA_REQUEST_STATUS_CREATED
-      - MPA_REQUEST_STATUS_PENDING_APPROVAL
-      - MPA_REQUEST_STATUS_APPROVED
-      - MPA_REQUEST_STATUS_DENIED
-      - MPA_REQUEST_STATUS_EXPIRED_PENDING_APPROVAL
-      - MPA_REQUEST_STATUS_EXPIRED_APPROVED
-      - MPA_REQUEST_STATUS_EXECUTED
-      - MPA_REQUEST_STATUS_CANCELLED_PENDING_APPROVAL
-      - MPA_REQUEST_STATUS_CANCELLED_APPROVED
-      - MPA_REQUEST_STATUS_DISCARDED
-    MPARequestPolicyDetail:
-      example:
-        approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
-        requiredApprovals: 2
-        approverProviderGroupId: platform-admins
-        executionWindowHours: 4
-        description: Require approval before deleting backup policies.
-        approvalWindowHours: 24
-        currentApprovals: 1
-      properties:
-        requiredApprovals:
-          description: Number of approvals required by this policy.
-          example: 2
-          type: integer
-        currentApprovals:
-          description: Number of qualifying approvals received for this policy.
-          example: 1
-          type: integer
-        executionWindowHours:
-          description: Hours the requester has to execute the approved action after
-            full approval.
-          example: 4
-          type: integer
-        approvalWindowHours:
-          description: Hours allowed for gathering all required approvals after submission.
-          example: 24
-          type: integer
-        description:
-          description: Human-readable description of the policy.
-          example: Require approval before deleting backup policies.
-          type: string
-        approverIdpId:
-          description: UUID of the SAML identity provider connection this approver
-            group belongs to.
-          example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
-          format: uuid
-          nullable: true
-          type: string
-        approverProviderGroupId:
-          description: Provider group identifier from the IdP.
-          example: platform-admins
-          nullable: true
-          type: string
-      required:
-      - approvalWindowHours
-      - currentApprovals
-      - executionWindowHours
-      - mpaPolicyId
-      - requiredApprovals
-      type: object
-      x-nullable: true
-    MPARequest:
-      example:
-        requesterEmail: requester@example.com
-        resolvedTime: 2026-05-05T02:10:12Z
-        requesterName: Riley Chen
-        approvalExpirationTime: 2026-05-05T03:00:05Z
-        executionExpirationTime: 2026-05-05T07:00:05Z
-        createdTime: 2026-05-04T23:00:05Z
-        comment: Removing a backup policy that has been replaced.
-        id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
-        policyDetails:
-        - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
-          requiredApprovals: 2
-          approverProviderGroupId: platform-admins
-          executionWindowHours: 4
-          description: Require approval before deleting backup policies.
-          approvalWindowHours: 24
-          currentApprovals: 1
-        - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
-          requiredApprovals: 2
-          approverProviderGroupId: platform-admins
-          executionWindowHours: 4
-          description: Require approval before deleting backup policies.
-          approvalWindowHours: 24
-          currentApprovals: 1
-        operation: MPA_OPERATION_DELETE_BACKUP_POLICY
-        status: PENDING_APPROVAL
-      properties:
-        id:
-          description: Unique identifier of the action approval request.
-          example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
-          format: uuid
-          type: string
-        operation:
-          $ref: '#/components/schemas/MPAOperationType'
-        requesterEmail:
-          description: Email address of the requester who created the approval request.
-          example: requester@example.com
-          type: string
-        requesterName:
-          description: Display name of the requester at the time the request was created.
-          example: Riley Chen
-          type: string
-        comment:
-          description: Optional comment from the requester explaining why this operation
-            is needed.
-          example: Removing a backup policy that has been replaced.
-          type: string
-        status:
-          $ref: '#/components/schemas/MPARequestStatus'
-        policyDetails:
-          description: Per-policy configuration and approval progress.
-          items:
-            $ref: '#/components/schemas/MPARequestPolicyDetail'
-          type: array
-        approvalExpirationTime:
-          description: Deadline for gathering approvals. Set when the request is confirmed
-            (submitted). Null for requests in CREATED or DISCARDED status.
-          example: 2026-05-05T03:00:05Z
-          format: date-time
-          nullable: true
-          type: string
-        executionExpirationTime:
-          description: Deadline for executing the approved action. Set when the request
-            is approved.
-          example: 2026-05-05T07:00:05Z
-          format: date-time
-          nullable: true
-          type: string
-        resolvedTime:
-          description: "Time when the request reached a terminal state, such as executed,\
-            \ expired, canceled, denied, or discarded. Null while the request is still\
-            \ active."
-          example: 2026-05-05T02:10:12Z
-          format: date-time
-          nullable: true
-          type: string
-        createdTime:
-          description: Time when the approval request was created.
-          example: 2026-05-04T23:00:05Z
-          format: date-time
-          type: string
-      required:
-      - createdTime
-      - id
-      - operation
-      - policyDetails
-      - requestMethod
-      - requestPath
-      - requesterEmail
-      - requesterId
-      - status
-      type: object
-      x-nullable: true
     RestoreAccountsFilterConditions:
       additionalProperties: false
       description: |

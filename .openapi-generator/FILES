@@ -95,6 +95,8 @@ docs/CloudProviderCondition.md
 docs/CloudProviderFilters.md
 docs/ConnectRestoreAccountRequest.md
 docs/ConnectRestoreAccountResponse.md
+docs/ConnectRestoreAwsOrganizationalUnitRequest.md
+docs/ConnectRestoreAwsOrganizationalUnitResponse.md
 docs/ConnectSourceAccountRequest.md
 docs/ConnectSourceAccountResponse.md
 docs/ConnectSourceAwsOrganizationalUnitRequest.md
@@ -129,6 +131,7 @@ docs/DatabaseSnapshotsAPI.md
 docs/DayOfWeek.md
 docs/DestinationDetails.md
 docs/DisconnectRestoreAccountResponse.md
+docs/DisconnectRestoreAwsOrganizationalUnitResponse.md
 docs/DisconnectSourceAccountResponse.md
 docs/DisconnectSourceAwsOrganizationalUnitResponse.md
 docs/DynamodbTableRestoreDestination.md
@@ -214,6 +217,7 @@ docs/ListPermissionsResponse.md
 docs/ListResourcesResponse.md
 docs/ListRestoreAccountsRequest.md
 docs/ListRestoreAccountsResponse.md
+docs/ListRestoreAwsOrganizationalUnitsResponse.md
 docs/ListRestoreJobsRequest.md
 docs/ListRestoreJobsResponse.md
 docs/ListRolesResponse.md
@@ -257,6 +261,7 @@ docs/QueryDBStatus.md
 docs/QueryDBStatusResponse.md
 docs/RdsPasswordConfig.md
 docs/ReconnectRestoreAccountResponse.md
+docs/ReconnectRestoreAwsOrganizationalUnitResponse.md
 docs/ReconnectSourceAccountResponse.md
 docs/ReconnectSourceAwsOrganizationalUnitResponse.md
 docs/RegionCondition.md
@@ -284,6 +289,7 @@ docs/RestoreAccountMetricsConfig.md
 docs/RestoreAccountSortField.md
 docs/RestoreAccountsFilterConditions.md
 docs/RestoreAwsEc2InstanceRequest.md
+docs/RestoreAwsOrganizationalUnit.md
 docs/RestoreAzureDiskRequest.md
 docs/RestoreAzureInstanceDiskInput.md
 docs/RestoreAzureSqlDatabaseRequest.md
@@ -461,6 +467,8 @@ model_cloud_provider_condition.go
 model_cloud_provider_filters.go
 model_connect_restore_account_request.go
 model_connect_restore_account_response.go
+model_connect_restore_aws_organizational_unit_request.go
+model_connect_restore_aws_organizational_unit_response.go
 model_connect_source_account_request.go
 model_connect_source_account_response.go
 model_connect_source_aws_organizational_unit_request.go
@@ -493,6 +501,7 @@ model_database_destination.go
 model_day_of_week.go
 model_destination_details.go
 model_disconnect_restore_account_response.go
+model_disconnect_restore_aws_organizational_unit_response.go
 model_disconnect_source_account_response.go
 model_disconnect_source_aws_organizational_unit_response.go
 model_dynamodb_table_restore_destination.go
@@ -576,6 +585,7 @@ model_list_permissions_response.go
 model_list_resources_response.go
 model_list_restore_accounts_request.go
 model_list_restore_accounts_response.go
+model_list_restore_aws_organizational_units_response.go
 model_list_restore_jobs_request.go
 model_list_restore_jobs_response.go
 model_list_roles_response.go
@@ -618,6 +628,7 @@ model_query_db_status.go
 model_query_db_status_response.go
 model_rds_password_config.go
 model_reconnect_restore_account_response.go
+model_reconnect_restore_aws_organizational_unit_response.go
 model_reconnect_source_account_response.go
 model_reconnect_source_aws_organizational_unit_response.go
 model_region_condition.go
@@ -644,6 +655,7 @@ model_restore_account_metrics_config.go
 model_restore_account_sort_field.go
 model_restore_accounts_filter_conditions.go
 model_restore_aws_ec2_instance_request.go
+model_restore_aws_organizational_unit.go
 model_restore_azure_disk_request.go
 model_restore_azure_instance_disk_input.go
 model_restore_azure_sql_database_request.go

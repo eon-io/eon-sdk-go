@@ -36,6 +36,20 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService ConnectRestoreAwsOrganizationalUnit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.ConnectRestoreAwsOrganizationalUnit(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService ConnectSourceAccount", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -142,6 +156,21 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 		var accountId string
 
 		resp, httpRes, err := apiClient.AccountsAPI.DisconnectRestoreAccount(context.Background(), projectId, accountId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountsAPIService DisconnectRestoreAwsOrganizationalUnit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var organizationalUnitId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.DisconnectRestoreAwsOrganizationalUnit(context.Background(), projectId, organizationalUnitId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -283,6 +312,20 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountsAPIService ListRestoreAwsOrganizationalUnits", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.ListRestoreAwsOrganizationalUnits(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountsAPIService ListSourceAccounts", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -319,6 +362,21 @@ func Test_eon_AccountsAPIService(t *testing.T) {
 		var accountId string
 
 		resp, httpRes, err := apiClient.AccountsAPI.ReconnectRestoreAccount(context.Background(), projectId, accountId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountsAPIService ReconnectRestoreAwsOrganizationalUnit", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var organizationalUnitId string
+
+		resp, httpRes, err := apiClient.AccountsAPI.ReconnectRestoreAwsOrganizationalUnit(context.Background(), projectId, organizationalUnitId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
