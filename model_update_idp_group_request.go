@@ -23,6 +23,8 @@ var _ MappedNullable = &UpdateIdpGroupRequest{}
 type UpdateIdpGroupRequest struct {
 	// List of [role IDs](../roles/list-roles) to assign to the group. This replaces all existing role assignments. 
 	RoleIds []string `json:"roleIds"`
+	// Optional human-readable label for the group mapping. For display and management only; it is not used when matching SAML groups during sign-on. Omit (or send null) to leave the existing label unchanged; send an empty string to clear it. 
+	DisplayName NullableString `json:"displayName,omitempty"`
 }
 
 type _UpdateIdpGroupRequest UpdateIdpGroupRequest
@@ -69,6 +71,48 @@ func (o *UpdateIdpGroupRequest) SetRoleIds(v []string) {
 	o.RoleIds = v
 }
 
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateIdpGroupRequest) GetDisplayName() string {
+	if o == nil || IsNil(o.DisplayName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName.Get()
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateIdpGroupRequest) GetDisplayNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DisplayName.Get(), o.DisplayName.IsSet()
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *UpdateIdpGroupRequest) HasDisplayName() bool {
+	if o != nil && o.DisplayName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given NullableString and assigns it to the DisplayName field.
+func (o *UpdateIdpGroupRequest) SetDisplayName(v string) {
+	o.DisplayName.Set(&v)
+}
+// SetDisplayNameNil sets the value for DisplayName to be an explicit nil
+func (o *UpdateIdpGroupRequest) SetDisplayNameNil() {
+	o.DisplayName.Set(nil)
+}
+
+// UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
+func (o *UpdateIdpGroupRequest) UnsetDisplayName() {
+	o.DisplayName.Unset()
+}
+
 func (o UpdateIdpGroupRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +124,9 @@ func (o UpdateIdpGroupRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateIdpGroupRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["roleIds"] = o.RoleIds
+	if o.DisplayName.IsSet() {
+		toSerialize["displayName"] = o.DisplayName.Get()
+	}
 	return toSerialize, nil
 }
 

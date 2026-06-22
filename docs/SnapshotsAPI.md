@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 ## RemoveSnapshotHold
 
-> map[string]interface{} RemoveSnapshotHold(ctx, projectId, id).XMPARequestId(xMPARequestId).Execute()
+> map[string]interface{} RemoveSnapshotHold(ctx, projectId, id).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Remove Snapshot Hold
 
@@ -273,11 +273,11 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), projectId, id).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RemoveSnapshotHold(context.Background(), projectId, id).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RemoveSnapshotHold``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -327,7 +327,7 @@ Name | Type | Description  | Notes
 
 ## RestoreAzureDisk
 
-> MPAInterceptedResponse RestoreAzureDisk(ctx, projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreAzureDisk(ctx, projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Azure Disk
 
@@ -350,11 +350,11 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
 	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAzureDiskRequest := *openapiclient.NewRestoreAzureDiskRequest("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureDiskRestoreDestination()) // RestoreAzureDiskRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureDisk(context.Background(), projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureDisk(context.Background(), projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureDisk``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -385,7 +385,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAzureDiskRequest** | [**RestoreAzureDiskRequest**](RestoreAzureDiskRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 
 ## RestoreAzureSqlDatabase
 
-> MPAInterceptedResponse RestoreAzureSqlDatabase(ctx, projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreAzureSqlDatabase(ctx, projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Azure SQL Database
 
@@ -430,11 +430,11 @@ func main() {
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAzureSqlDatabaseRequest := *openapiclient.NewRestoreAzureSqlDatabaseRequest("RestoreAccountId_example", *openapiclient.NewAzureSqlDatabaseRestoreDestination()) // RestoreAzureSqlDatabaseRequest | The request body for restoring the instance
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureSqlDatabase(context.Background(), projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureSqlDatabase(context.Background(), projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureSqlDatabase``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -465,7 +465,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAzureSqlDatabaseRequest** | [**RestoreAzureSqlDatabaseRequest**](RestoreAzureSqlDatabaseRequest.md) | The request body for restoring the instance | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -487,7 +487,7 @@ Name | Type | Description  | Notes
 
 ## RestoreAzureVmInstance
 
-> MPAInterceptedResponse RestoreAzureVmInstance(ctx, projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreAzureVmInstance(ctx, projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Azure VM Instance
 
@@ -510,11 +510,11 @@ func main() {
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAzureVmInstanceRequest := *openapiclient.NewRestoreAzureVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureVmInstanceRestoreDestination()) // RestoreAzureVmInstanceRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureVmInstance(context.Background(), projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreAzureVmInstance(context.Background(), projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureVmInstance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -545,7 +545,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAzureVmInstanceRequest** | [**RestoreAzureVmInstanceRequest**](RestoreAzureVmInstanceRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -567,7 +567,7 @@ Name | Type | Description  | Notes
 
 ## RestoreBigQueryDataset
 
-> MPAInterceptedResponse RestoreBigQueryDataset(ctx, projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreBigQueryDataset(ctx, projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore BigQuery Dataset
 
@@ -590,11 +590,11 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
 	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreBigQueryDatasetRequest := *openapiclient.NewRestoreBigQueryDatasetRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewBigQueryDatasetDestination("restored_dataset")) // RestoreBigQueryDatasetRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreBigQueryDataset(context.Background(), projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreBigQueryDataset(context.Background(), projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreBigQueryDataset``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 
 
  **restoreBigQueryDatasetRequest** | [**RestoreBigQueryDatasetRequest**](RestoreBigQueryDatasetRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -647,7 +647,7 @@ Name | Type | Description  | Notes
 
 ## RestoreBucket
 
-> MPAInterceptedResponse RestoreBucket(ctx, projectId, id, snapshotId).RestoreBucketRequest(restoreBucketRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreBucket(ctx, projectId, id, snapshotId).RestoreBucketRequest(restoreBucketRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Bucket
 
@@ -670,11 +670,11 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
 	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreBucketRequest := *openapiclient.NewRestoreBucketRequest(*openapiclient.NewObjectStorageDestination(), "1ee34dc5-0a7c-4e56-a820-917371e05c8d") // RestoreBucketRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreBucket(context.Background(), projectId, id, snapshotId).RestoreBucketRequest(restoreBucketRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreBucket(context.Background(), projectId, id, snapshotId).RestoreBucketRequest(restoreBucketRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreBucket``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -705,7 +705,7 @@ Name | Type | Description  | Notes
 
 
  **restoreBucketRequest** | [**RestoreBucketRequest**](RestoreBucketRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -727,7 +727,7 @@ Name | Type | Description  | Notes
 
 ## RestoreDatabase
 
-> MPAInterceptedResponse RestoreDatabase(ctx, projectId, id, snapshotId).RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreDatabase(ctx, projectId, id, snapshotId).RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore RDS Instance
 
@@ -750,11 +750,11 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
 	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreDbToRdsInstanceRequest := *openapiclient.NewRestoreDbToRdsInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDatabaseDestination()) // RestoreDbToRdsInstanceRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreDatabase(context.Background(), projectId, id, snapshotId).RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreDatabase(context.Background(), projectId, id, snapshotId).RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreDatabase``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -785,7 +785,7 @@ Name | Type | Description  | Notes
 
 
  **restoreDbToRdsInstanceRequest** | [**RestoreDbToRdsInstanceRequest**](RestoreDbToRdsInstanceRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -807,7 +807,7 @@ Name | Type | Description  | Notes
 
 ## RestoreDynamoDBTable
 
-> MPAInterceptedResponse RestoreDynamoDBTable(ctx, projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreDynamoDBTable(ctx, projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore DynamoDB Table
 
@@ -830,11 +830,11 @@ func main() {
 	id := "2f97ca76-6a78-55d8-94d3-66c2f2cfff23" // string | Eon-assigned resource ID.
 	snapshotId := "ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreDynamoDBTableRequest := *openapiclient.NewRestoreDynamoDBTableRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDynamodbTableRestoreDestination()) // RestoreDynamoDBTableRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreDynamoDBTable(context.Background(), projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreDynamoDBTable(context.Background(), projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreDynamoDBTable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -865,7 +865,7 @@ Name | Type | Description  | Notes
 
 
  **restoreDynamoDBTableRequest** | [**RestoreDynamoDBTableRequest**](RestoreDynamoDBTableRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -887,7 +887,7 @@ Name | Type | Description  | Notes
 
 ## RestoreEbsVolume
 
-> MPAInterceptedResponse RestoreEbsVolume(ctx, projectId, id, snapshotId).RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreEbsVolume(ctx, projectId, id, snapshotId).RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore EBS Volume
 
@@ -910,11 +910,11 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
 	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreVolumeToEbsRequest := *openapiclient.NewRestoreVolumeToEbsRequest("vol-01a29e3ba811d4613", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewEbsRestoreDestination()) // RestoreVolumeToEbsRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreEbsVolume(context.Background(), projectId, id, snapshotId).RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreEbsVolume(context.Background(), projectId, id, snapshotId).RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreEbsVolume``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -945,7 +945,7 @@ Name | Type | Description  | Notes
 
 
  **restoreVolumeToEbsRequest** | [**RestoreVolumeToEbsRequest**](RestoreVolumeToEbsRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -967,7 +967,7 @@ Name | Type | Description  | Notes
 
 ## RestoreEc2Instance
 
-> MPAInterceptedResponse RestoreEc2Instance(ctx, projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreEc2Instance(ctx, projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore EC2 Instance
 
@@ -990,11 +990,11 @@ func main() {
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreAwsEc2InstanceRequest := *openapiclient.NewRestoreAwsEc2InstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAwsEc2InstanceRestoreDestination()) // RestoreAwsEc2InstanceRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreEc2Instance(context.Background(), projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreEc2Instance(context.Background(), projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreEc2Instance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1025,7 +1025,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAwsEc2InstanceRequest** | [**RestoreAwsEc2InstanceRequest**](RestoreAwsEc2InstanceRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -1125,7 +1125,7 @@ Name | Type | Description  | Notes
 
 ## RestoreGcpCloudSql
 
-> MPAInterceptedResponse RestoreGcpCloudSql(ctx, projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreGcpCloudSql(ctx, projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore GCP Cloud SQL Instance
 
@@ -1148,11 +1148,11 @@ func main() {
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreGcpCloudSqlRequest := *openapiclient.NewRestoreGcpCloudSqlRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpCloudSqlRestoreDestination()) // RestoreGcpCloudSqlRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpCloudSql(context.Background(), projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpCloudSql(context.Background(), projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpCloudSql``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1183,7 +1183,7 @@ Name | Type | Description  | Notes
 
 
  **restoreGcpCloudSqlRequest** | [**RestoreGcpCloudSqlRequest**](RestoreGcpCloudSqlRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -1205,7 +1205,7 @@ Name | Type | Description  | Notes
 
 ## RestoreGcpDisk
 
-> MPAInterceptedResponse RestoreGcpDisk(ctx, projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreGcpDisk(ctx, projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore GCP Disk
 
@@ -1228,11 +1228,11 @@ func main() {
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreGcpDiskRequest := *openapiclient.NewRestoreGcpDiskRequest("5178361631409150158", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpDiskRestoreDestination()) // RestoreGcpDiskRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpDisk(context.Background(), projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpDisk(context.Background(), projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpDisk``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1263,7 +1263,7 @@ Name | Type | Description  | Notes
 
 
  **restoreGcpDiskRequest** | [**RestoreGcpDiskRequest**](RestoreGcpDiskRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -1285,7 +1285,7 @@ Name | Type | Description  | Notes
 
 ## RestoreGcpVmInstance
 
-> MPAInterceptedResponse RestoreGcpVmInstance(ctx, projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreGcpVmInstance(ctx, projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore GCP VM Instance
 
@@ -1308,11 +1308,11 @@ func main() {
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreGcpVmInstanceRequest := *openapiclient.NewRestoreGcpVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpVmInstanceRestoreDestination()) // RestoreGcpVmInstanceRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpVmInstance(context.Background(), projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreGcpVmInstance(context.Background(), projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpVmInstance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1343,7 +1343,7 @@ Name | Type | Description  | Notes
 
 
  **restoreGcpVmInstanceRequest** | [**RestoreGcpVmInstanceRequest**](RestoreGcpVmInstanceRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -1365,7 +1365,7 @@ Name | Type | Description  | Notes
 
 ## RestoreToEbsSnapshot
 
-> MPAInterceptedResponse RestoreToEbsSnapshot(ctx, projectId, id, snapshotId).RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest).XMPARequestId(xMPARequestId).Execute()
+> MPAInterceptedResponse RestoreToEbsSnapshot(ctx, projectId, id, snapshotId).RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore to EBS Snapshot
 
@@ -1388,11 +1388,11 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
 	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
 	restoreVolumeToEbsSnapshotRequest := *openapiclient.NewRestoreVolumeToEbsSnapshotRequest("vol-01a29e3ba811d4613", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewEbsSnapshotRestoreDestination()) // RestoreVolumeToEbsSnapshotRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.RestoreToEbsSnapshot(context.Background(), projectId, id, snapshotId).RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.RestoreToEbsSnapshot(context.Background(), projectId, id, snapshotId).RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreToEbsSnapshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1423,7 +1423,7 @@ Name | Type | Description  | Notes
 
 
  **restoreVolumeToEbsSnapshotRequest** | [**RestoreVolumeToEbsSnapshotRequest**](RestoreVolumeToEbsSnapshotRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 

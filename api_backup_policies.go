@@ -163,12 +163,12 @@ type ApiDeleteBackupPolicyRequest struct {
 	ApiService *BackupPoliciesAPIService
 	projectId string
 	backupPolicyId string
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiDeleteBackupPolicyRequest) XMPARequestId(xMPARequestId string) ApiDeleteBackupPolicyRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiDeleteBackupPolicyRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiDeleteBackupPolicyRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -233,8 +233,8 @@ func (a *BackupPoliciesAPIService) DeleteBackupPolicyExecute(r ApiDeleteBackupPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -567,7 +567,7 @@ type ApiUpdateBackupPolicyRequest struct {
 	projectId string
 	backupPolicyId string
 	updateBackupPolicyRequest *UpdateBackupPolicyRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 // The request body for updating a policy
@@ -576,9 +576,9 @@ func (r ApiUpdateBackupPolicyRequest) UpdateBackupPolicyRequest(updateBackupPoli
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiUpdateBackupPolicyRequest) XMPARequestId(xMPARequestId string) ApiUpdateBackupPolicyRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiUpdateBackupPolicyRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiUpdateBackupPolicyRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -648,8 +648,8 @@ func (a *BackupPoliciesAPIService) UpdateBackupPolicyExecute(r ApiUpdateBackupPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.updateBackupPolicyRequest

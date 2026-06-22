@@ -39,7 +39,7 @@ Method | HTTP request | Description
 
 ## ConnectRestoreAccount
 
-> ConnectRestoreAccountResponse ConnectRestoreAccount(ctx, projectId).ConnectRestoreAccountRequest(connectRestoreAccountRequest).XMPARequestId(xMPARequestId).Execute()
+> ConnectRestoreAccountResponse ConnectRestoreAccount(ctx, projectId).ConnectRestoreAccountRequest(connectRestoreAccountRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Connect Restore Account
 
@@ -60,11 +60,11 @@ import (
 func main() {
 	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	connectRestoreAccountRequest := *openapiclient.NewConnectRestoreAccountRequest(*openapiclient.NewRestoreAccountAttributesInput(openapiclient.Provider("AWS"))) // ConnectRestoreAccountRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.ConnectRestoreAccount(context.Background(), projectId).ConnectRestoreAccountRequest(connectRestoreAccountRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.AccountsAPI.ConnectRestoreAccount(context.Background(), projectId).ConnectRestoreAccountRequest(connectRestoreAccountRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ConnectRestoreAccount``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **connectRestoreAccountRequest** | [**ConnectRestoreAccountRequest**](ConnectRestoreAccountRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 ## ConnectRestoreAwsOrganizationalUnit
 
-> ConnectRestoreAwsOrganizationalUnitResponse ConnectRestoreAwsOrganizationalUnit(ctx, projectId).ConnectRestoreAwsOrganizationalUnitRequest(connectRestoreAwsOrganizationalUnitRequest).XMPARequestId(xMPARequestId).Execute()
+> ConnectRestoreAwsOrganizationalUnitResponse ConnectRestoreAwsOrganizationalUnit(ctx, projectId).ConnectRestoreAwsOrganizationalUnitRequest(connectRestoreAwsOrganizationalUnitRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Connect Restore AWS Organizational Unit
 
@@ -134,11 +134,11 @@ import (
 func main() {
 	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	connectRestoreAwsOrganizationalUnitRequest := *openapiclient.NewConnectRestoreAwsOrganizationalUnitRequest("arn:aws:iam::123412341234:role/EonRestoreAccountRole", "ou-a1b2-f6g7h111") // ConnectRestoreAwsOrganizationalUnitRequest | 
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.ConnectRestoreAwsOrganizationalUnit(context.Background(), projectId).ConnectRestoreAwsOrganizationalUnitRequest(connectRestoreAwsOrganizationalUnitRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.AccountsAPI.ConnectRestoreAwsOrganizationalUnit(context.Background(), projectId).ConnectRestoreAwsOrganizationalUnitRequest(connectRestoreAwsOrganizationalUnitRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ConnectRestoreAwsOrganizationalUnit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **connectRestoreAwsOrganizationalUnitRequest** | [**ConnectRestoreAwsOrganizationalUnitRequest**](ConnectRestoreAwsOrganizationalUnitRequest.md) |  | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -1720,7 +1720,7 @@ Name | Type | Description  | Notes
 
 ## ReconnectRestoreAccount
 
-> ReconnectRestoreAccountResponse ReconnectRestoreAccount(ctx, projectId, accountId).XMPARequestId(xMPARequestId).Execute()
+> ReconnectRestoreAccountResponse ReconnectRestoreAccount(ctx, projectId, accountId).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Reconnect Restore Account
 
@@ -1741,11 +1741,11 @@ import (
 func main() {
 	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the restore account to reconnect.
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.ReconnectRestoreAccount(context.Background(), projectId, accountId).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.AccountsAPI.ReconnectRestoreAccount(context.Background(), projectId, accountId).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ReconnectRestoreAccount``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1773,7 +1773,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 

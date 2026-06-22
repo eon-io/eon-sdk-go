@@ -451,12 +451,12 @@ type ApiRemoveSnapshotHoldRequest struct {
 	ApiService *SnapshotsAPIService
 	projectId string
 	id string
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRemoveSnapshotHoldRequest) XMPARequestId(xMPARequestId string) ApiRemoveSnapshotHoldRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRemoveSnapshotHoldRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRemoveSnapshotHoldRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -528,8 +528,8 @@ func (a *SnapshotsAPIService) RemoveSnapshotHoldExecute(r ApiRemoveSnapshotHoldR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -596,7 +596,7 @@ type ApiRestoreAzureDiskRequest struct {
 	id string
 	snapshotId string
 	restoreAzureDiskRequest *RestoreAzureDiskRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreAzureDiskRequest) RestoreAzureDiskRequest(restoreAzureDiskRequest RestoreAzureDiskRequest) ApiRestoreAzureDiskRequest {
@@ -604,9 +604,9 @@ func (r ApiRestoreAzureDiskRequest) RestoreAzureDiskRequest(restoreAzureDiskRequ
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreAzureDiskRequest) XMPARequestId(xMPARequestId string) ApiRestoreAzureDiskRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreAzureDiskRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreAzureDiskRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -687,8 +687,8 @@ func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAzureDiskRequest
@@ -757,7 +757,7 @@ type ApiRestoreAzureSqlDatabaseRequest struct {
 	id string
 	snapshotId string
 	restoreAzureSqlDatabaseRequest *RestoreAzureSqlDatabaseRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 // The request body for restoring the instance
@@ -766,9 +766,9 @@ func (r ApiRestoreAzureSqlDatabaseRequest) RestoreAzureSqlDatabaseRequest(restor
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreAzureSqlDatabaseRequest) XMPARequestId(xMPARequestId string) ApiRestoreAzureSqlDatabaseRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreAzureSqlDatabaseRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreAzureSqlDatabaseRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -846,8 +846,8 @@ func (a *SnapshotsAPIService) RestoreAzureSqlDatabaseExecute(r ApiRestoreAzureSq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAzureSqlDatabaseRequest
@@ -916,7 +916,7 @@ type ApiRestoreAzureVmInstanceRequest struct {
 	id string
 	snapshotId string
 	restoreAzureVmInstanceRequest *RestoreAzureVmInstanceRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreAzureVmInstanceRequest) RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest RestoreAzureVmInstanceRequest) ApiRestoreAzureVmInstanceRequest {
@@ -924,9 +924,9 @@ func (r ApiRestoreAzureVmInstanceRequest) RestoreAzureVmInstanceRequest(restoreA
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreAzureVmInstanceRequest) XMPARequestId(xMPARequestId string) ApiRestoreAzureVmInstanceRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreAzureVmInstanceRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreAzureVmInstanceRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -1004,8 +1004,8 @@ func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAzureVmInstanceRequest
@@ -1074,7 +1074,7 @@ type ApiRestoreBigQueryDatasetRequest struct {
 	id string
 	snapshotId string
 	restoreBigQueryDatasetRequest *RestoreBigQueryDatasetRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreBigQueryDatasetRequest) RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest RestoreBigQueryDatasetRequest) ApiRestoreBigQueryDatasetRequest {
@@ -1082,9 +1082,9 @@ func (r ApiRestoreBigQueryDatasetRequest) RestoreBigQueryDatasetRequest(restoreB
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreBigQueryDatasetRequest) XMPARequestId(xMPARequestId string) ApiRestoreBigQueryDatasetRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreBigQueryDatasetRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreBigQueryDatasetRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -1162,8 +1162,8 @@ func (a *SnapshotsAPIService) RestoreBigQueryDatasetExecute(r ApiRestoreBigQuery
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreBigQueryDatasetRequest
@@ -1232,7 +1232,7 @@ type ApiRestoreBucketRequest struct {
 	id string
 	snapshotId string
 	restoreBucketRequest *RestoreBucketRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreBucketRequest) RestoreBucketRequest(restoreBucketRequest RestoreBucketRequest) ApiRestoreBucketRequest {
@@ -1240,9 +1240,9 @@ func (r ApiRestoreBucketRequest) RestoreBucketRequest(restoreBucketRequest Resto
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreBucketRequest) XMPARequestId(xMPARequestId string) ApiRestoreBucketRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreBucketRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreBucketRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -1320,8 +1320,8 @@ func (a *SnapshotsAPIService) RestoreBucketExecute(r ApiRestoreBucketRequest) (*
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreBucketRequest
@@ -1390,7 +1390,7 @@ type ApiRestoreDatabaseRequest struct {
 	id string
 	snapshotId string
 	restoreDbToRdsInstanceRequest *RestoreDbToRdsInstanceRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreDatabaseRequest) RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest RestoreDbToRdsInstanceRequest) ApiRestoreDatabaseRequest {
@@ -1398,9 +1398,9 @@ func (r ApiRestoreDatabaseRequest) RestoreDbToRdsInstanceRequest(restoreDbToRdsI
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreDatabaseRequest) XMPARequestId(xMPARequestId string) ApiRestoreDatabaseRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreDatabaseRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreDatabaseRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -1478,8 +1478,8 @@ func (a *SnapshotsAPIService) RestoreDatabaseExecute(r ApiRestoreDatabaseRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreDbToRdsInstanceRequest
@@ -1548,7 +1548,7 @@ type ApiRestoreDynamoDBTableRequest struct {
 	id string
 	snapshotId string
 	restoreDynamoDBTableRequest *RestoreDynamoDBTableRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreDynamoDBTableRequest) RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest RestoreDynamoDBTableRequest) ApiRestoreDynamoDBTableRequest {
@@ -1556,9 +1556,9 @@ func (r ApiRestoreDynamoDBTableRequest) RestoreDynamoDBTableRequest(restoreDynam
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreDynamoDBTableRequest) XMPARequestId(xMPARequestId string) ApiRestoreDynamoDBTableRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreDynamoDBTableRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreDynamoDBTableRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -1636,8 +1636,8 @@ func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreDynamoDBTableRequest
@@ -1706,7 +1706,7 @@ type ApiRestoreEbsVolumeRequest struct {
 	id string
 	snapshotId string
 	restoreVolumeToEbsRequest *RestoreVolumeToEbsRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreEbsVolumeRequest) RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest RestoreVolumeToEbsRequest) ApiRestoreEbsVolumeRequest {
@@ -1714,9 +1714,9 @@ func (r ApiRestoreEbsVolumeRequest) RestoreVolumeToEbsRequest(restoreVolumeToEbs
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreEbsVolumeRequest) XMPARequestId(xMPARequestId string) ApiRestoreEbsVolumeRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreEbsVolumeRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreEbsVolumeRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -1794,8 +1794,8 @@ func (a *SnapshotsAPIService) RestoreEbsVolumeExecute(r ApiRestoreEbsVolumeReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreVolumeToEbsRequest
@@ -1864,7 +1864,7 @@ type ApiRestoreEc2InstanceRequest struct {
 	id string
 	snapshotId string
 	restoreAwsEc2InstanceRequest *RestoreAwsEc2InstanceRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreEc2InstanceRequest) RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest RestoreAwsEc2InstanceRequest) ApiRestoreEc2InstanceRequest {
@@ -1872,9 +1872,9 @@ func (r ApiRestoreEc2InstanceRequest) RestoreAwsEc2InstanceRequest(restoreAwsEc2
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreEc2InstanceRequest) XMPARequestId(xMPARequestId string) ApiRestoreEc2InstanceRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreEc2InstanceRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreEc2InstanceRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -1955,8 +1955,8 @@ func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreAwsEc2InstanceRequest
@@ -2173,7 +2173,7 @@ type ApiRestoreGcpCloudSqlRequest struct {
 	id string
 	snapshotId string
 	restoreGcpCloudSqlRequest *RestoreGcpCloudSqlRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreGcpCloudSqlRequest) RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest RestoreGcpCloudSqlRequest) ApiRestoreGcpCloudSqlRequest {
@@ -2181,9 +2181,9 @@ func (r ApiRestoreGcpCloudSqlRequest) RestoreGcpCloudSqlRequest(restoreGcpCloudS
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreGcpCloudSqlRequest) XMPARequestId(xMPARequestId string) ApiRestoreGcpCloudSqlRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreGcpCloudSqlRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreGcpCloudSqlRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -2264,8 +2264,8 @@ func (a *SnapshotsAPIService) RestoreGcpCloudSqlExecute(r ApiRestoreGcpCloudSqlR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreGcpCloudSqlRequest
@@ -2334,7 +2334,7 @@ type ApiRestoreGcpDiskRequest struct {
 	id string
 	snapshotId string
 	restoreGcpDiskRequest *RestoreGcpDiskRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreGcpDiskRequest) RestoreGcpDiskRequest(restoreGcpDiskRequest RestoreGcpDiskRequest) ApiRestoreGcpDiskRequest {
@@ -2342,9 +2342,9 @@ func (r ApiRestoreGcpDiskRequest) RestoreGcpDiskRequest(restoreGcpDiskRequest Re
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreGcpDiskRequest) XMPARequestId(xMPARequestId string) ApiRestoreGcpDiskRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreGcpDiskRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreGcpDiskRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -2425,8 +2425,8 @@ func (a *SnapshotsAPIService) RestoreGcpDiskExecute(r ApiRestoreGcpDiskRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreGcpDiskRequest
@@ -2495,7 +2495,7 @@ type ApiRestoreGcpVmInstanceRequest struct {
 	id string
 	snapshotId string
 	restoreGcpVmInstanceRequest *RestoreGcpVmInstanceRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreGcpVmInstanceRequest) RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest RestoreGcpVmInstanceRequest) ApiRestoreGcpVmInstanceRequest {
@@ -2503,9 +2503,9 @@ func (r ApiRestoreGcpVmInstanceRequest) RestoreGcpVmInstanceRequest(restoreGcpVm
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreGcpVmInstanceRequest) XMPARequestId(xMPARequestId string) ApiRestoreGcpVmInstanceRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreGcpVmInstanceRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreGcpVmInstanceRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -2586,8 +2586,8 @@ func (a *SnapshotsAPIService) RestoreGcpVmInstanceExecute(r ApiRestoreGcpVmInsta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreGcpVmInstanceRequest
@@ -2656,7 +2656,7 @@ type ApiRestoreToEbsSnapshotRequest struct {
 	id string
 	snapshotId string
 	restoreVolumeToEbsSnapshotRequest *RestoreVolumeToEbsSnapshotRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiRestoreToEbsSnapshotRequest) RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest RestoreVolumeToEbsSnapshotRequest) ApiRestoreToEbsSnapshotRequest {
@@ -2664,9 +2664,9 @@ func (r ApiRestoreToEbsSnapshotRequest) RestoreVolumeToEbsSnapshotRequest(restor
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiRestoreToEbsSnapshotRequest) XMPARequestId(xMPARequestId string) ApiRestoreToEbsSnapshotRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiRestoreToEbsSnapshotRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreToEbsSnapshotRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -2744,8 +2744,8 @@ func (a *SnapshotsAPIService) RestoreToEbsSnapshotExecute(r ApiRestoreToEbsSnaps
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.restoreVolumeToEbsSnapshotRequest

@@ -83,6 +83,12 @@
 
 * `ZERO_ETL_POLICIES_MANAGE` (value: `"zero_etl_policies.manage"`)
 
+* `ACTION_APPROVAL_RULES_MANAGE` (value: `"action_approval_rules.manage"`)
+
+* `ACTION_APPROVAL_RULES_VIEW` (value: `"action_approval_rules.view"`)
+
+* `ACTION_APPROVAL_REQUESTS_MANAGE` (value: `"action_approval_requests.manage"`)
+
 * `MPA_POLICIES_MANAGE` (value: `"mpa_policies.manage"`)
 
 * `MPA_POLICIES_VIEW` (value: `"mpa_policies.view"`)

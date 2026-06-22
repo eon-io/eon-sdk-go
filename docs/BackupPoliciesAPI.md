@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## DeleteBackupPolicy
 
-> DeleteBackupPolicy(ctx, projectId, backupPolicyId).XMPARequestId(xMPARequestId).Execute()
+> DeleteBackupPolicy(ctx, projectId, backupPolicyId).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Delete Backup Policy
 
@@ -107,11 +107,11 @@ import (
 func main() {
 	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	backupPolicyId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the backup policy to delete.
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.BackupPoliciesAPI.DeleteBackupPolicy(context.Background(), projectId, backupPolicyId).XMPARequestId(xMPARequestId).Execute()
+	r, err := apiClient.BackupPoliciesAPI.DeleteBackupPolicy(context.Background(), projectId, backupPolicyId).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupPoliciesAPI.DeleteBackupPolicy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## UpdateBackupPolicy
 
-> UpdateBackupPolicyResponse UpdateBackupPolicy(ctx, projectId, backupPolicyId).UpdateBackupPolicyRequest(updateBackupPolicyRequest).XMPARequestId(xMPARequestId).Execute()
+> UpdateBackupPolicyResponse UpdateBackupPolicy(ctx, projectId, backupPolicyId).UpdateBackupPolicyRequest(updateBackupPolicyRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Update Backup Policy
 
@@ -328,11 +328,11 @@ func main() {
 	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	backupPolicyId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the backup policy to update.
 	updateBackupPolicyRequest := *openapiclient.NewUpdateBackupPolicyRequest("Production with PII", *openapiclient.NewBackupPolicyResourceSelector(openapiclient.ResourceSelectorMode("ALL")), *openapiclient.NewBackupPolicyPlan(openapiclient.BackupPolicyType("UNSPECIFIED"))) // UpdateBackupPolicyRequest | The request body for updating a policy
-	xMPARequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BackupPoliciesAPI.UpdateBackupPolicy(context.Background(), projectId, backupPolicyId).UpdateBackupPolicyRequest(updateBackupPolicyRequest).XMPARequestId(xMPARequestId).Execute()
+	resp, r, err := apiClient.BackupPoliciesAPI.UpdateBackupPolicy(context.Background(), projectId, backupPolicyId).UpdateBackupPolicyRequest(updateBackupPolicyRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupPoliciesAPI.UpdateBackupPolicy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 
 
  **updateBackupPolicyRequest** | [**UpdateBackupPolicyRequest**](UpdateBackupPolicyRequest.md) | The request body for updating a policy | 
- **xMPARequestId** | **string** | ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 

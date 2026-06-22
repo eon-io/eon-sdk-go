@@ -1674,13 +1674,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -1968,13 +1968,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -2355,13 +2355,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -3357,13 +3357,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -3382,8 +3382,8 @@ paths:
             The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
             or discard (action DISCARD). The operation did not run.
         "404":
-          description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
-            \ was not found."
+          description: "Backup policy wasn't found, or the action approval request\
+            \ id in X-Action-Approval-Request-Id was not found."
           x-docs-public-description: Backup policy wasn't found.
         "1XX":
           description: Informational
@@ -3505,13 +3505,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -3541,8 +3541,8 @@ paths:
             The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
             or discard (action DISCARD). The operation did not run.
         "404":
-          description: "Backup policy wasn't found, or the MPA request id in X-MPA-Request-Id\
-            \ was not found."
+          description: "Backup policy wasn't found, or the action approval request\
+            \ id in X-Action-Approval-Request-Id was not found."
           x-docs-public-description: Backup policy wasn't found.
         "1XX":
           description: Informational
@@ -4012,13 +4012,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -4138,13 +4138,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -4264,13 +4264,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -4390,13 +4390,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -4516,13 +4516,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -4645,13 +4645,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -4771,13 +4771,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -4897,13 +4897,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -5023,13 +5023,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -5153,13 +5153,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -5282,13 +5282,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -5411,13 +5411,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -5540,13 +5540,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -6830,13 +6830,13 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
           validates the request envelope still matches the captured one and atomically
           marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not MPA-protected.
+          that are not action-approval-protected.
         explode: false
         in: header
-        name: X-MPA-Request-Id
+        name: X-Action-Approval-Request-Id
         required: false
         schema:
           format: uuid
@@ -7389,7 +7389,7 @@ paths:
       - read:dashboard
       x-audit-log:
         excluded: true
-  /v1/projects/{projectId}/mpa/my-requests/{requestId}:
+  /v1/projects/{projectId}/action-approvals/my-requests/{requestId}:
     get:
       description: "Description: Retrieves details of a specific action approval request\
         \ submitted by the current user."
@@ -7447,14 +7447,14 @@ paths:
           description: Internal Server Error
       summary: Get My Action Approval Request
       tags:
-      - mpa
+      - actionApprovals
       x-internal: false
       x-permissions: []
       x-audit-log:
         excluded: true
       x-data-access:
         excluded: true
-  /v1/projects/{projectId}/mpa/my-requests/{requestId}/cancel:
+  /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/cancel:
     post:
       description: "Description: Cancel an action approval request created by the\
         \ current user. Only allowed while the request is in PENDING_APPROVAL or APPROVED\
@@ -7522,7 +7522,7 @@ paths:
           description: Internal Server Error
       summary: Cancel Action Approval Request
       tags:
-      - mpa
+      - actionApprovals
       x-internal: false
       x-permissions: []
       x-audit-log:
@@ -7533,7 +7533,7 @@ paths:
           key: requestId
       x-data-access:
         excluded: true
-  /v1/projects/{projectId}/mpa/my-requests/{requestId}/submit:
+  /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit:
     post:
       description: "Description: Confirm or discard a CREATED action approval request.\
         \ CONFIRM transitions to PENDING_APPROVAL and starts the approval timer. DISCARD\
@@ -7607,7 +7607,7 @@ paths:
           description: Internal Server Error
       summary: Create Action Approval Request
       tags:
-      - mpa
+      - actionApprovals
       x-internal: false
       x-permissions: []
       x-audit-log:
@@ -7622,13 +7622,13 @@ components:
   parameters:
     MpaRequestIdHeader:
       description: |
-        ID of an APPROVED MPA request authorizing this operation. When set, the gateway
+        ID of an APPROVED action approval request authorizing this operation. When set, the gateway
         validates the request envelope still matches the captured one and atomically
         marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-        that are not MPA-protected.
+        that are not action-approval-protected.
       explode: false
       in: header
-      name: X-MPA-Request-Id
+      name: X-Action-Approval-Request-Id
       required: false
       schema:
         format: uuid
@@ -7725,6 +7725,9 @@ components:
       - storage_gateway.manage
       - oauth_apps.manage
       - zero_etl_policies.manage
+      - action_approval_rules.manage
+      - action_approval_rules.view
+      - action_approval_requests.manage
       - mpa_policies.manage
       - mpa_policies.view
       - mpa_requests.manage
@@ -7736,6 +7739,9 @@ components:
       type: string
       x-docs-internal-enum:
       - zero_etl_policies.manage
+      - action_approval_rules.manage
+      - action_approval_rules.view
+      - action_approval_requests.manage
       - mpa_policies.manage
       - mpa_policies.view
       - mpa_requests.manage
@@ -10257,6 +10263,7 @@ components:
         - 72bc42a0-e169-533f-b95a-4a434574756b
         providerGroupId: engineering-team
         idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+        displayName: Engineering Team
       properties:
         idpId:
           description: "[ID of the identity provider](./list-idps) the group belongs\
@@ -10279,6 +10286,14 @@ components:
             format: uuid
             type: string
           type: array
+        displayName:
+          description: |
+            Optional human-readable label for the group mapping. For display and management only;
+            it is not used when matching SAML groups during sign-on.
+          example: Engineering Team
+          nullable: true
+          type: string
+          x-nullable: true
       required:
       - idpId
       - providerGroupId
@@ -10292,6 +10307,7 @@ components:
         - 72bc42a0-e169-533f-b95a-4a434574756b
         providerGroupId: engineering-team
         idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+        displayName: Engineering Team
         id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         id:
@@ -10320,6 +10336,12 @@ components:
             format: uuid
             type: string
           type: array
+        displayName:
+          description: |
+            Optional human-readable label for the group mapping. For display and management only;
+            it is not used when matching SAML groups during sign-on.
+          example: Engineering Team
+          type: string
       required:
       - id
       - idpId
@@ -10334,6 +10356,7 @@ components:
           - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          displayName: Engineering Team
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         group:
@@ -10350,12 +10373,14 @@ components:
           - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          displayName: Engineering Team
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         - roleIds:
           - 550e8400-e29b-41d4-a716-446655440000
           - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          displayName: Engineering Team
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         totalCount: 0
       properties:
@@ -10384,6 +10409,7 @@ components:
           - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          displayName: Engineering Team
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         group:
@@ -10396,6 +10422,7 @@ components:
         roleIds:
         - 550e8400-e29b-41d4-a716-446655440000
         - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+        displayName: Engineering Team
       properties:
         roleIds:
           description: |
@@ -10408,6 +10435,15 @@ components:
             format: uuid
             type: string
           type: array
+        displayName:
+          description: |
+            Optional human-readable label for the group mapping. For display and management only;
+            it is not used when matching SAML groups during sign-on.
+            Omit (or send null) to leave the existing label unchanged; send an empty string to clear it.
+          example: Engineering Team
+          nullable: true
+          type: string
+          x-nullable: true
       required:
       - roleIds
       type: object
@@ -10419,6 +10455,7 @@ components:
           - 72bc42a0-e169-533f-b95a-4a434574756b
           providerGroupId: engineering-team
           idpId: 8f14e45f-ceea-467f-a8dc-e5e47d61e5d7
+          displayName: Engineering Team
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         group:

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **IdpId** | **string** | [ID of the identity provider](./list-idps) the group belongs to.  | 
 **ProviderGroupId** | **string** | Identity-provider-assigned group ID. Must match the exact group ID passed by the identity provider to Eon during SAML sign-on.  | 
 **RoleIds** | **[]string** | List of [role IDs](../roles/list-roles) assigned to the group. | 
+**DisplayName** | Pointer to **string** | Optional human-readable label for the group mapping. For display and management only; it is not used when matching SAML groups during sign-on.  | [optional] 
 
 ## Methods
 
@@ -107,6 +108,31 @@ and a boolean to check if the value has been set.
 
 SetRoleIds sets RoleIds field to given value.
 
+
+### GetDisplayName
+
+`func (o *IdpGroup) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *IdpGroup) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *IdpGroup) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *IdpGroup) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

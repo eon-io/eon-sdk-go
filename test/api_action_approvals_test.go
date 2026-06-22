@@ -1,7 +1,7 @@
 /*
 Eon API
 
-Testing MpaAPIService
+Testing ActionApprovalsAPIService
 
 */
 
@@ -17,19 +17,19 @@ import (
 	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
 )
 
-func Test_eon_MpaAPIService(t *testing.T) {
+func Test_eon_ActionApprovalsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test MpaAPIService CancelActionApprovalRequest", func(t *testing.T) {
+	t.Run("Test ActionApprovalsAPIService CancelActionApprovalRequest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var projectId string
 		var requestId string
 
-		resp, httpRes, err := apiClient.MpaAPI.CancelActionApprovalRequest(context.Background(), projectId, requestId).Execute()
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.CancelActionApprovalRequest(context.Background(), projectId, requestId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -37,14 +37,14 @@ func Test_eon_MpaAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test MpaAPIService CreateActionApprovalRequest", func(t *testing.T) {
+	t.Run("Test ActionApprovalsAPIService CreateActionApprovalRequest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var projectId string
 		var requestId string
 
-		resp, httpRes, err := apiClient.MpaAPI.CreateActionApprovalRequest(context.Background(), projectId, requestId).Execute()
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.CreateActionApprovalRequest(context.Background(), projectId, requestId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -52,14 +52,14 @@ func Test_eon_MpaAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test MpaAPIService GetMyActionApprovalRequest", func(t *testing.T) {
+	t.Run("Test ActionApprovalsAPIService GetMyActionApprovalRequest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var projectId string
 		var requestId string
 
-		resp, httpRes, err := apiClient.MpaAPI.GetMyActionApprovalRequest(context.Background(), projectId, requestId).Execute()
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.GetMyActionApprovalRequest(context.Background(), projectId, requestId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

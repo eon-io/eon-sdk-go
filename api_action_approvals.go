@@ -20,12 +20,12 @@ import (
 )
 
 
-// MpaAPIService MpaAPI service
-type MpaAPIService service
+// ActionApprovalsAPIService ActionApprovalsAPI service
+type ActionApprovalsAPIService service
 
 type ApiCancelActionApprovalRequestRequest struct {
 	ctx context.Context
-	ApiService *MpaAPIService
+	ApiService *ActionApprovalsAPIService
 	projectId string
 	requestId string
 }
@@ -44,7 +44,7 @@ Description: Cancel an action approval request created by the current user. Only
  @param requestId Action approval request ID.
  @return ApiCancelActionApprovalRequestRequest
 */
-func (a *MpaAPIService) CancelActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiCancelActionApprovalRequestRequest {
+func (a *ActionApprovalsAPIService) CancelActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiCancelActionApprovalRequestRequest {
 	return ApiCancelActionApprovalRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -55,7 +55,7 @@ func (a *MpaAPIService) CancelActionApprovalRequest(ctx context.Context, project
 
 // Execute executes the request
 //  @return CancelMyMPARequestResponse
-func (a *MpaAPIService) CancelActionApprovalRequestExecute(r ApiCancelActionApprovalRequestRequest) (*CancelMyMPARequestResponse, *http.Response, error) {
+func (a *ActionApprovalsAPIService) CancelActionApprovalRequestExecute(r ApiCancelActionApprovalRequestRequest) (*CancelMyMPARequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -63,12 +63,12 @@ func (a *MpaAPIService) CancelActionApprovalRequestExecute(r ApiCancelActionAppr
 		localVarReturnValue  *CancelMyMPARequestResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MpaAPIService.CancelActionApprovalRequest")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionApprovalsAPIService.CancelActionApprovalRequest")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/projects/{projectId}/mpa/my-requests/{requestId}/cancel"
+	localVarPath := localBasePath + "/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/cancel"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"requestId"+"}", url.PathEscape(parameterValueToString(r.requestId, "requestId")), -1)
 
@@ -186,7 +186,7 @@ func (a *MpaAPIService) CancelActionApprovalRequestExecute(r ApiCancelActionAppr
 
 type ApiCreateActionApprovalRequestRequest struct {
 	ctx context.Context
-	ApiService *MpaAPIService
+	ApiService *ActionApprovalsAPIService
 	projectId string
 	requestId string
 	submitMyMPARequestRequest *SubmitMyMPARequestRequest
@@ -211,7 +211,7 @@ Description: Confirm or discard a CREATED action approval request. CONFIRM trans
  @param requestId Action approval request ID.
  @return ApiCreateActionApprovalRequestRequest
 */
-func (a *MpaAPIService) CreateActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiCreateActionApprovalRequestRequest {
+func (a *ActionApprovalsAPIService) CreateActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiCreateActionApprovalRequestRequest {
 	return ApiCreateActionApprovalRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -222,7 +222,7 @@ func (a *MpaAPIService) CreateActionApprovalRequest(ctx context.Context, project
 
 // Execute executes the request
 //  @return SubmitMyMPARequestResponse
-func (a *MpaAPIService) CreateActionApprovalRequestExecute(r ApiCreateActionApprovalRequestRequest) (*SubmitMyMPARequestResponse, *http.Response, error) {
+func (a *ActionApprovalsAPIService) CreateActionApprovalRequestExecute(r ApiCreateActionApprovalRequestRequest) (*SubmitMyMPARequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -230,12 +230,12 @@ func (a *MpaAPIService) CreateActionApprovalRequestExecute(r ApiCreateActionAppr
 		localVarReturnValue  *SubmitMyMPARequestResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MpaAPIService.CreateActionApprovalRequest")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionApprovalsAPIService.CreateActionApprovalRequest")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/projects/{projectId}/mpa/my-requests/{requestId}/submit"
+	localVarPath := localBasePath + "/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"requestId"+"}", url.PathEscape(parameterValueToString(r.requestId, "requestId")), -1)
 
@@ -358,7 +358,7 @@ func (a *MpaAPIService) CreateActionApprovalRequestExecute(r ApiCreateActionAppr
 
 type ApiGetMyActionApprovalRequestRequest struct {
 	ctx context.Context
-	ApiService *MpaAPIService
+	ApiService *ActionApprovalsAPIService
 	projectId string
 	requestId string
 }
@@ -377,7 +377,7 @@ Description: Retrieves details of a specific action approval request submitted b
  @param requestId The action approval request ID
  @return ApiGetMyActionApprovalRequestRequest
 */
-func (a *MpaAPIService) GetMyActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiGetMyActionApprovalRequestRequest {
+func (a *ActionApprovalsAPIService) GetMyActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiGetMyActionApprovalRequestRequest {
 	return ApiGetMyActionApprovalRequestRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -388,7 +388,7 @@ func (a *MpaAPIService) GetMyActionApprovalRequest(ctx context.Context, projectI
 
 // Execute executes the request
 //  @return GetMPARequestResponse
-func (a *MpaAPIService) GetMyActionApprovalRequestExecute(r ApiGetMyActionApprovalRequestRequest) (*GetMPARequestResponse, *http.Response, error) {
+func (a *ActionApprovalsAPIService) GetMyActionApprovalRequestExecute(r ApiGetMyActionApprovalRequestRequest) (*GetMPARequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -396,12 +396,12 @@ func (a *MpaAPIService) GetMyActionApprovalRequestExecute(r ApiGetMyActionApprov
 		localVarReturnValue  *GetMPARequestResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MpaAPIService.GetMyActionApprovalRequest")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionApprovalsAPIService.GetMyActionApprovalRequest")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/projects/{projectId}/mpa/my-requests/{requestId}"
+	localVarPath := localBasePath + "/v1/projects/{projectId}/action-approvals/my-requests/{requestId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"requestId"+"}", url.PathEscape(parameterValueToString(r.requestId, "requestId")), -1)
 

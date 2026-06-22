@@ -1,12 +1,12 @@
-# \MpaAPI
+# \ActionApprovalsAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelActionApprovalRequest**](MpaAPI.md#CancelActionApprovalRequest) | **Post** /v1/projects/{projectId}/mpa/my-requests/{requestId}/cancel | Cancel Action Approval Request
-[**CreateActionApprovalRequest**](MpaAPI.md#CreateActionApprovalRequest) | **Post** /v1/projects/{projectId}/mpa/my-requests/{requestId}/submit | Create Action Approval Request
-[**GetMyActionApprovalRequest**](MpaAPI.md#GetMyActionApprovalRequest) | **Get** /v1/projects/{projectId}/mpa/my-requests/{requestId} | Get My Action Approval Request
+[**CancelActionApprovalRequest**](ActionApprovalsAPI.md#CancelActionApprovalRequest) | **Post** /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/cancel | Cancel Action Approval Request
+[**CreateActionApprovalRequest**](ActionApprovalsAPI.md#CreateActionApprovalRequest) | **Post** /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit | Create Action Approval Request
+[**GetMyActionApprovalRequest**](ActionApprovalsAPI.md#GetMyActionApprovalRequest) | **Get** /v1/projects/{projectId}/action-approvals/my-requests/{requestId} | Get My Action Approval Request
 
 
 
@@ -36,13 +36,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MpaAPI.CancelActionApprovalRequest(context.Background(), projectId, requestId).Execute()
+	resp, r, err := apiClient.ActionApprovalsAPI.CancelActionApprovalRequest(context.Background(), projectId, requestId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MpaAPI.CancelActionApprovalRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ActionApprovalsAPI.CancelActionApprovalRequest``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CancelActionApprovalRequest`: CancelMyMPARequestResponse
-	fmt.Fprintf(os.Stdout, "Response from `MpaAPI.CancelActionApprovalRequest`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `ActionApprovalsAPI.CancelActionApprovalRequest`: %v\n", resp)
 }
 ```
 
@@ -110,13 +110,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MpaAPI.CreateActionApprovalRequest(context.Background(), projectId, requestId).SubmitMyMPARequestRequest(submitMyMPARequestRequest).Execute()
+	resp, r, err := apiClient.ActionApprovalsAPI.CreateActionApprovalRequest(context.Background(), projectId, requestId).SubmitMyMPARequestRequest(submitMyMPARequestRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MpaAPI.CreateActionApprovalRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ActionApprovalsAPI.CreateActionApprovalRequest``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateActionApprovalRequest`: SubmitMyMPARequestResponse
-	fmt.Fprintf(os.Stdout, "Response from `MpaAPI.CreateActionApprovalRequest`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `ActionApprovalsAPI.CreateActionApprovalRequest`: %v\n", resp)
 }
 ```
 
@@ -184,13 +184,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MpaAPI.GetMyActionApprovalRequest(context.Background(), projectId, requestId).Execute()
+	resp, r, err := apiClient.ActionApprovalsAPI.GetMyActionApprovalRequest(context.Background(), projectId, requestId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MpaAPI.GetMyActionApprovalRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ActionApprovalsAPI.GetMyActionApprovalRequest``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetMyActionApprovalRequest`: GetMPARequestResponse
-	fmt.Fprintf(os.Stdout, "Response from `MpaAPI.GetMyActionApprovalRequest`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `ActionApprovalsAPI.GetMyActionApprovalRequest`: %v\n", resp)
 }
 ```
 

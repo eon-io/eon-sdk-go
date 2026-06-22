@@ -29,6 +29,8 @@ type IdpGroup struct {
 	ProviderGroupId string `json:"providerGroupId"`
 	// List of [role IDs](../roles/list-roles) assigned to the group.
 	RoleIds []string `json:"roleIds"`
+	// Optional human-readable label for the group mapping. For display and management only; it is not used when matching SAML groups during sign-on. 
+	DisplayName *string `json:"displayName,omitempty"`
 }
 
 type _IdpGroup IdpGroup
@@ -150,6 +152,38 @@ func (o *IdpGroup) SetRoleIds(v []string) {
 	o.RoleIds = v
 }
 
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *IdpGroup) GetDisplayName() string {
+	if o == nil || IsNil(o.DisplayName) {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IdpGroup) GetDisplayNameOk() (*string, bool) {
+	if o == nil || IsNil(o.DisplayName) {
+		return nil, false
+	}
+	return o.DisplayName, true
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *IdpGroup) HasDisplayName() bool {
+	if o != nil && !IsNil(o.DisplayName) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *IdpGroup) SetDisplayName(v string) {
+	o.DisplayName = &v
+}
+
 func (o IdpGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -164,6 +198,9 @@ func (o IdpGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize["idpId"] = o.IdpId
 	toSerialize["providerGroupId"] = o.ProviderGroupId
 	toSerialize["roleIds"] = o.RoleIds
+	if !IsNil(o.DisplayName) {
+		toSerialize["displayName"] = o.DisplayName
+	}
 	return toSerialize, nil
 }
 

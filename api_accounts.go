@@ -28,7 +28,7 @@ type ApiConnectRestoreAccountRequest struct {
 	ApiService *AccountsAPIService
 	projectId string
 	connectRestoreAccountRequest *ConnectRestoreAccountRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiConnectRestoreAccountRequest) ConnectRestoreAccountRequest(connectRestoreAccountRequest ConnectRestoreAccountRequest) ApiConnectRestoreAccountRequest {
@@ -36,9 +36,9 @@ func (r ApiConnectRestoreAccountRequest) ConnectRestoreAccountRequest(connectRes
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiConnectRestoreAccountRequest) XMPARequestId(xMPARequestId string) ApiConnectRestoreAccountRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiConnectRestoreAccountRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiConnectRestoreAccountRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -106,8 +106,8 @@ func (a *AccountsAPIService) ConnectRestoreAccountExecute(r ApiConnectRestoreAcc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.connectRestoreAccountRequest
@@ -174,7 +174,7 @@ type ApiConnectRestoreAwsOrganizationalUnitRequest struct {
 	ApiService *AccountsAPIService
 	projectId string
 	connectRestoreAwsOrganizationalUnitRequest *ConnectRestoreAwsOrganizationalUnitRequest
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
 func (r ApiConnectRestoreAwsOrganizationalUnitRequest) ConnectRestoreAwsOrganizationalUnitRequest(connectRestoreAwsOrganizationalUnitRequest ConnectRestoreAwsOrganizationalUnitRequest) ApiConnectRestoreAwsOrganizationalUnitRequest {
@@ -182,9 +182,9 @@ func (r ApiConnectRestoreAwsOrganizationalUnitRequest) ConnectRestoreAwsOrganiza
 	return r
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiConnectRestoreAwsOrganizationalUnitRequest) XMPARequestId(xMPARequestId string) ApiConnectRestoreAwsOrganizationalUnitRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiConnectRestoreAwsOrganizationalUnitRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiConnectRestoreAwsOrganizationalUnitRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -254,8 +254,8 @@ func (a *AccountsAPIService) ConnectRestoreAwsOrganizationalUnitExecute(r ApiCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.connectRestoreAwsOrganizationalUnitRequest
@@ -3117,12 +3117,12 @@ type ApiReconnectRestoreAccountRequest struct {
 	ApiService *AccountsAPIService
 	projectId string
 	accountId string
-	xMPARequestId *string
+	xActionApprovalRequestId *string
 }
 
-// ID of an APPROVED MPA request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not MPA-protected. 
-func (r ApiReconnectRestoreAccountRequest) XMPARequestId(xMPARequestId string) ApiReconnectRestoreAccountRequest {
-	r.xMPARequestId = &xMPARequestId
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiReconnectRestoreAccountRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiReconnectRestoreAccountRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -3190,8 +3190,8 @@ func (a *AccountsAPIService) ReconnectRestoreAccountExecute(r ApiReconnectRestor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.xMPARequestId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-MPA-Request-Id", r.xMPARequestId, "")
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

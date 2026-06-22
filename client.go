@@ -51,6 +51,8 @@ type APIClient struct {
 
 	AccountsAPI *AccountsAPIService
 
+	ActionApprovalsAPI *ActionApprovalsAPIService
+
 	AuthAPI *AuthAPIService
 
 	BackupPoliciesAPI *BackupPoliciesAPIService
@@ -66,8 +68,6 @@ type APIClient struct {
 	IamAPI *IamAPIService
 
 	JobsAPI *JobsAPIService
-
-	MpaAPI *MpaAPIService
 
 	ResourcesAPI *ResourcesAPIService
 
@@ -93,6 +93,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AccountsAPI = (*AccountsAPIService)(&c.common)
+	c.ActionApprovalsAPI = (*ActionApprovalsAPIService)(&c.common)
 	c.AuthAPI = (*AuthAPIService)(&c.common)
 	c.BackupPoliciesAPI = (*BackupPoliciesAPIService)(&c.common)
 	c.BackupsAPI = (*BackupsAPIService)(&c.common)
@@ -101,7 +102,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DatabaseSnapshotsAPI = (*DatabaseSnapshotsAPIService)(&c.common)
 	c.IamAPI = (*IamAPIService)(&c.common)
 	c.JobsAPI = (*JobsAPIService)(&c.common)
-	c.MpaAPI = (*MpaAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
 	c.SnapshotsAPI = (*SnapshotsAPIService)(&c.common)
 	c.VaultsAPI = (*VaultsAPIService)(&c.common)

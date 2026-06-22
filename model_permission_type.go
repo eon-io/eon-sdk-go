@@ -60,6 +60,9 @@ const (
 	STORAGE_GATEWAY_MANAGE PermissionType = "storage_gateway.manage"
 	OAUTH_APPS_MANAGE PermissionType = "oauth_apps.manage"
 	ZERO_ETL_POLICIES_MANAGE PermissionType = "zero_etl_policies.manage"
+	ACTION_APPROVAL_RULES_MANAGE PermissionType = "action_approval_rules.manage"
+	ACTION_APPROVAL_RULES_VIEW PermissionType = "action_approval_rules.view"
+	ACTION_APPROVAL_REQUESTS_MANAGE PermissionType = "action_approval_requests.manage"
 	MPA_POLICIES_MANAGE PermissionType = "mpa_policies.manage"
 	MPA_POLICIES_VIEW PermissionType = "mpa_policies.view"
 	MPA_REQUESTS_MANAGE PermissionType = "mpa_requests.manage"
@@ -111,6 +114,9 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"storage_gateway.manage",
 	"oauth_apps.manage",
 	"zero_etl_policies.manage",
+	"action_approval_rules.manage",
+	"action_approval_rules.view",
+	"action_approval_requests.manage",
 	"mpa_policies.manage",
 	"mpa_policies.view",
 	"mpa_requests.manage",
