@@ -3171,6 +3171,7 @@ paths:
       tags:
       - backups
       x-internal: false
+      x-mcp: true
       x-permissions:
       - create:jobs
       x-audit-log:
