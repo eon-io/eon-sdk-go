@@ -3960,6 +3960,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -4086,6 +4089,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -4212,6 +4218,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -4338,6 +4347,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -4464,6 +4476,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -4596,6 +4611,9 @@ paths:
         - entityType: snapshot
           in: path
           key: snapshotId
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: restore_job
           in: resBody
           key: jobId
@@ -4725,6 +4743,9 @@ paths:
         - entityType: snapshot
           in: path
           key: snapshotId
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: restore_job
           in: resBody
           key: jobId
@@ -4845,6 +4866,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -4977,6 +5001,9 @@ paths:
         - entityType: snapshot
           in: path
           key: snapshotId
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: restore_job
           in: resBody
           key: jobId
@@ -5098,6 +5125,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -5227,6 +5257,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -5356,6 +5389,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -5491,6 +5527,9 @@ paths:
         - entityType: snapshot
           in: path
           key: snapshotId
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: restore_job
           in: resBody
           key: jobId
@@ -5614,6 +5653,9 @@ paths:
       x-audit-log:
         action: trigger
         entityRefs:
+        - entityType: restore_cloud_account
+          in: reqBody
+          key: restoreAccountId
         - entityType: cloud_resource
           in: path
           key: id
@@ -12082,6 +12124,7 @@ components:
       example:
         managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
         resourceGroupName: my-resource-group
+        enableM365Restore: false
         tenantId: 12345678-1234-1234-1234-123456789012
         eonInternalResourceGroupName: eon-restore-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12114,6 +12157,13 @@ components:
             to.
           example: 3eca9074-011f-5008-9605-a7ccf00aa93e
           type: string
+        enableM365Restore:
+          description: |
+            True if this Azure restore subscription is dedicated to Microsoft 365 restore
+            (onboarded via the M365 restore module). Such subscriptions are selectable only
+            for Microsoft 365 restore and are excluded from Azure-resource restore pickers.
+          example: false
+          type: boolean
       required:
       - subscriptionId
       - tenantId
@@ -12129,6 +12179,7 @@ components:
         azure:
           managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
           resourceGroupName: my-resource-group
+          enableM365Restore: false
           tenantId: 12345678-1234-1234-1234-123456789012
           eonInternalResourceGroupName: eon-restore-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12156,6 +12207,7 @@ components:
           azure:
             managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
             resourceGroupName: my-resource-group
+            enableM365Restore: false
             tenantId: 12345678-1234-1234-1234-123456789012
             eonInternalResourceGroupName: eon-restore-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12223,6 +12275,7 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
+              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12389,6 +12442,7 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
+              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12413,6 +12467,7 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
+              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12527,6 +12582,7 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
+              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12560,6 +12616,7 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
+              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -12593,6 +12650,7 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
+              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012

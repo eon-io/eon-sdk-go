@@ -31,6 +31,8 @@ type AzureRestoreAccountAttributes struct {
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 	// ID of the Azure management group the restore account is scoped to.
 	ManagementGroupId *string `json:"managementGroupId,omitempty"`
+	// True if this Azure restore subscription is dedicated to Microsoft 365 restore (onboarded via the M365 restore module). Such subscriptions are selectable only for Microsoft 365 restore and are excluded from Azure-resource restore pickers. 
+	EnableM365Restore *bool `json:"enableM365Restore,omitempty"`
 }
 
 type _AzureRestoreAccountAttributes AzureRestoreAccountAttributes
@@ -198,6 +200,38 @@ func (o *AzureRestoreAccountAttributes) SetManagementGroupId(v string) {
 	o.ManagementGroupId = &v
 }
 
+// GetEnableM365Restore returns the EnableM365Restore field value if set, zero value otherwise.
+func (o *AzureRestoreAccountAttributes) GetEnableM365Restore() bool {
+	if o == nil || IsNil(o.EnableM365Restore) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableM365Restore
+}
+
+// GetEnableM365RestoreOk returns a tuple with the EnableM365Restore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureRestoreAccountAttributes) GetEnableM365RestoreOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableM365Restore) {
+		return nil, false
+	}
+	return o.EnableM365Restore, true
+}
+
+// HasEnableM365Restore returns a boolean if a field has been set.
+func (o *AzureRestoreAccountAttributes) HasEnableM365Restore() bool {
+	if o != nil && !IsNil(o.EnableM365Restore) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableM365Restore gets a reference to the given bool and assigns it to the EnableM365Restore field.
+func (o *AzureRestoreAccountAttributes) SetEnableM365Restore(v bool) {
+	o.EnableM365Restore = &v
+}
+
 func (o AzureRestoreAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -218,6 +252,9 @@ func (o AzureRestoreAccountAttributes) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ManagementGroupId) {
 		toSerialize["managementGroupId"] = o.ManagementGroupId
+	}
+	if !IsNil(o.EnableM365Restore) {
+		toSerialize["enableM365Restore"] = o.EnableM365Restore
 	}
 	return toSerialize, nil
 }

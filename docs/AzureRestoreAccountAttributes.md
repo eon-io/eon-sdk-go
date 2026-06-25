@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ResourceGroupName** | Pointer to **string** | Name of the Azure resource group to scope permissions to. When provided, restoring is limited to this specific resource group. When omitted, permissions are scoped to the subscription.  | [optional] 
 **EonInternalResourceGroupName** | Pointer to **string** | Name of the Eon internal resource group for temporary restore resources.  | [optional] 
 **ManagementGroupId** | Pointer to **string** | ID of the Azure management group the restore account is scoped to. | [optional] 
+**EnableM365Restore** | Pointer to **bool** | True if this Azure restore subscription is dedicated to Microsoft 365 restore (onboarded via the M365 restore module). Such subscriptions are selectable only for Microsoft 365 restore and are excluded from Azure-resource restore pickers.  | [optional] 
 
 ## Methods
 
@@ -143,6 +144,31 @@ SetManagementGroupId sets ManagementGroupId field to given value.
 `func (o *AzureRestoreAccountAttributes) HasManagementGroupId() bool`
 
 HasManagementGroupId returns a boolean if a field has been set.
+
+### GetEnableM365Restore
+
+`func (o *AzureRestoreAccountAttributes) GetEnableM365Restore() bool`
+
+GetEnableM365Restore returns the EnableM365Restore field if non-nil, zero value otherwise.
+
+### GetEnableM365RestoreOk
+
+`func (o *AzureRestoreAccountAttributes) GetEnableM365RestoreOk() (*bool, bool)`
+
+GetEnableM365RestoreOk returns a tuple with the EnableM365Restore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableM365Restore
+
+`func (o *AzureRestoreAccountAttributes) SetEnableM365Restore(v bool)`
+
+SetEnableM365Restore sets EnableM365Restore field to given value.
+
+### HasEnableM365Restore
+
+`func (o *AzureRestoreAccountAttributes) HasEnableM365Restore() bool`
+
+HasEnableM365Restore returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
