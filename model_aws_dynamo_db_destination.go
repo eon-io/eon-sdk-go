@@ -24,7 +24,7 @@ type AwsDynamoDBDestination struct {
 	// Region to restore to.
 	RestoreRegion string `json:"restoreRegion"`
 	// ID of the key you want Eon to use for encrypting the restored resource.
-	EncryptionKeyId string `json:"encryptionKeyId"`
+	EncryptionKeyId *string `json:"encryptionKeyId,omitempty"`
 	// Name to assign to the restored resource.
 	RestoredName string `json:"restoredName"`
 	// Write capacity units for the restored table. Defaults to 5. 
@@ -39,10 +39,9 @@ type _AwsDynamoDBDestination AwsDynamoDBDestination
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAwsDynamoDBDestination(restoreRegion string, encryptionKeyId string, restoredName string) *AwsDynamoDBDestination {
+func NewAwsDynamoDBDestination(restoreRegion string, restoredName string) *AwsDynamoDBDestination {
 	this := AwsDynamoDBDestination{}
 	this.RestoreRegion = restoreRegion
-	this.EncryptionKeyId = encryptionKeyId
 	this.RestoredName = restoredName
 	return &this
 }
@@ -79,28 +78,36 @@ func (o *AwsDynamoDBDestination) SetRestoreRegion(v string) {
 	o.RestoreRegion = v
 }
 
-// GetEncryptionKeyId returns the EncryptionKeyId field value
+// GetEncryptionKeyId returns the EncryptionKeyId field value if set, zero value otherwise.
 func (o *AwsDynamoDBDestination) GetEncryptionKeyId() string {
-	if o == nil {
+	if o == nil || IsNil(o.EncryptionKeyId) {
 		var ret string
 		return ret
 	}
-
-	return o.EncryptionKeyId
+	return *o.EncryptionKeyId
 }
 
-// GetEncryptionKeyIdOk returns a tuple with the EncryptionKeyId field value
+// GetEncryptionKeyIdOk returns a tuple with the EncryptionKeyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AwsDynamoDBDestination) GetEncryptionKeyIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.EncryptionKeyId) {
 		return nil, false
 	}
-	return &o.EncryptionKeyId, true
+	return o.EncryptionKeyId, true
 }
 
-// SetEncryptionKeyId sets field value
+// HasEncryptionKeyId returns a boolean if a field has been set.
+func (o *AwsDynamoDBDestination) HasEncryptionKeyId() bool {
+	if o != nil && !IsNil(o.EncryptionKeyId) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionKeyId gets a reference to the given string and assigns it to the EncryptionKeyId field.
 func (o *AwsDynamoDBDestination) SetEncryptionKeyId(v string) {
-	o.EncryptionKeyId = v
+	o.EncryptionKeyId = &v
 }
 
 // GetRestoredName returns the RestoredName field value
@@ -202,7 +209,9 @@ func (o AwsDynamoDBDestination) MarshalJSON() ([]byte, error) {
 func (o AwsDynamoDBDestination) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["restoreRegion"] = o.RestoreRegion
-	toSerialize["encryptionKeyId"] = o.EncryptionKeyId
+	if !IsNil(o.EncryptionKeyId) {
+		toSerialize["encryptionKeyId"] = o.EncryptionKeyId
+	}
 	toSerialize["restoredName"] = o.RestoredName
 	if !IsNil(o.WriteCapacityUnits) {
 		toSerialize["writeCapacityUnits"] = o.WriteCapacityUnits
@@ -219,7 +228,6 @@ func (o *AwsDynamoDBDestination) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"restoreRegion",
-		"encryptionKeyId",
 		"restoredName",
 	}
 

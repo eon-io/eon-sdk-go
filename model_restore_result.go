@@ -24,6 +24,7 @@ type RestoreResult struct {
 	AzureDisk NullableAzureDiskRestoreResult `json:"azureDisk,omitempty"`
 	AzureVmInstance NullableAzureVmInstanceRestoreResult `json:"azureVmInstance,omitempty"`
 	GcpVmInstance NullableGcpVmInstanceRestoreResult `json:"gcpVmInstance,omitempty"`
+	GcpBigQuery NullableGcpBigQueryDatasetRestoreResult `json:"gcpBigQuery,omitempty"`
 }
 
 // NewRestoreResult instantiates a new RestoreResult object
@@ -253,6 +254,48 @@ func (o *RestoreResult) UnsetGcpVmInstance() {
 	o.GcpVmInstance.Unset()
 }
 
+// GetGcpBigQuery returns the GcpBigQuery field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RestoreResult) GetGcpBigQuery() GcpBigQueryDatasetRestoreResult {
+	if o == nil || IsNil(o.GcpBigQuery.Get()) {
+		var ret GcpBigQueryDatasetRestoreResult
+		return ret
+	}
+	return *o.GcpBigQuery.Get()
+}
+
+// GetGcpBigQueryOk returns a tuple with the GcpBigQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RestoreResult) GetGcpBigQueryOk() (*GcpBigQueryDatasetRestoreResult, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GcpBigQuery.Get(), o.GcpBigQuery.IsSet()
+}
+
+// HasGcpBigQuery returns a boolean if a field has been set.
+func (o *RestoreResult) HasGcpBigQuery() bool {
+	if o != nil && o.GcpBigQuery.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGcpBigQuery gets a reference to the given NullableGcpBigQueryDatasetRestoreResult and assigns it to the GcpBigQuery field.
+func (o *RestoreResult) SetGcpBigQuery(v GcpBigQueryDatasetRestoreResult) {
+	o.GcpBigQuery.Set(&v)
+}
+// SetGcpBigQueryNil sets the value for GcpBigQuery to be an explicit nil
+func (o *RestoreResult) SetGcpBigQueryNil() {
+	o.GcpBigQuery.Set(nil)
+}
+
+// UnsetGcpBigQuery ensures that no value is present for GcpBigQuery, not even an explicit nil
+func (o *RestoreResult) UnsetGcpBigQuery() {
+	o.GcpBigQuery.Unset()
+}
+
 func (o RestoreResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -277,6 +320,9 @@ func (o RestoreResult) ToMap() (map[string]interface{}, error) {
 	}
 	if o.GcpVmInstance.IsSet() {
 		toSerialize["gcpVmInstance"] = o.GcpVmInstance.Get()
+	}
+	if o.GcpBigQuery.IsSet() {
+		toSerialize["gcpBigQuery"] = o.GcpBigQuery.Get()
 	}
 	return toSerialize, nil
 }

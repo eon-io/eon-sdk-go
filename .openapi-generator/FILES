@@ -154,6 +154,7 @@ docs/ErrorCode.md
 docs/ExcludeFromBackupResponse.md
 docs/FilePath.md
 docs/GCSRestoreTarget.md
+docs/GcpBigQueryDatasetRestoreResult.md
 docs/GcpCloudSqlRestoreDestination.md
 docs/GcpCloudSqlTarget.md
 docs/GcpDiskRestoreDestination.md
@@ -523,6 +524,7 @@ model_error.go
 model_error_code.go
 model_exclude_from_backup_response.go
 model_file_path.go
+model_gcp_big_query_dataset_restore_result.go
 model_gcp_cloud_sql_restore_destination.go
 model_gcp_cloud_sql_target.go
 model_gcp_disk_restore_destination.go

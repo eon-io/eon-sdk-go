@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AzureDisk** | Pointer to [**NullableAzureDiskRestoreResult**](AzureDiskRestoreResult.md) |  | [optional] 
 **AzureVmInstance** | Pointer to [**NullableAzureVmInstanceRestoreResult**](AzureVmInstanceRestoreResult.md) |  | [optional] 
 **GcpVmInstance** | Pointer to [**NullableGcpVmInstanceRestoreResult**](GcpVmInstanceRestoreResult.md) |  | [optional] 
+**GcpBigQuery** | Pointer to [**NullableGcpBigQueryDatasetRestoreResult**](GcpBigQueryDatasetRestoreResult.md) |  | [optional] 
 
 ## Methods
 
@@ -204,6 +205,41 @@ HasGcpVmInstance returns a boolean if a field has been set.
 `func (o *RestoreResult) UnsetGcpVmInstance()`
 
 UnsetGcpVmInstance ensures that no value is present for GcpVmInstance, not even an explicit nil
+### GetGcpBigQuery
+
+`func (o *RestoreResult) GetGcpBigQuery() GcpBigQueryDatasetRestoreResult`
+
+GetGcpBigQuery returns the GcpBigQuery field if non-nil, zero value otherwise.
+
+### GetGcpBigQueryOk
+
+`func (o *RestoreResult) GetGcpBigQueryOk() (*GcpBigQueryDatasetRestoreResult, bool)`
+
+GetGcpBigQueryOk returns a tuple with the GcpBigQuery field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpBigQuery
+
+`func (o *RestoreResult) SetGcpBigQuery(v GcpBigQueryDatasetRestoreResult)`
+
+SetGcpBigQuery sets GcpBigQuery field to given value.
+
+### HasGcpBigQuery
+
+`func (o *RestoreResult) HasGcpBigQuery() bool`
+
+HasGcpBigQuery returns a boolean if a field has been set.
+
+### SetGcpBigQueryNil
+
+`func (o *RestoreResult) SetGcpBigQueryNil(b bool)`
+
+ SetGcpBigQueryNil sets the value for GcpBigQuery to be an explicit nil
+
+### UnsetGcpBigQuery
+`func (o *RestoreResult) UnsetGcpBigQuery()`
+
+UnsetGcpBigQuery ensures that no value is present for GcpBigQuery, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

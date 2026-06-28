@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RestoreRegion** | **string** | Region to restore to. | 
-**EncryptionKeyId** | **string** | ID of the key you want Eon to use for encrypting the restored resource. | 
+**EncryptionKeyId** | Pointer to **string** | ID of the key you want Eon to use for encrypting the restored resource. | [optional] 
 **RestoredName** | **string** | Name to assign to the restored resource. | 
 **WriteCapacityUnits** | Pointer to **int32** | Write capacity units for the restored table. Defaults to 5.  | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewAwsDynamoDBDestination
 
-`func NewAwsDynamoDBDestination(restoreRegion string, encryptionKeyId string, restoredName string, ) *AwsDynamoDBDestination`
+`func NewAwsDynamoDBDestination(restoreRegion string, restoredName string, ) *AwsDynamoDBDestination`
 
 NewAwsDynamoDBDestination instantiates a new AwsDynamoDBDestination object
 This constructor will assign default values to properties that have it defined,
@@ -68,6 +68,11 @@ and a boolean to check if the value has been set.
 
 SetEncryptionKeyId sets EncryptionKeyId field to given value.
 
+### HasEncryptionKeyId
+
+`func (o *AwsDynamoDBDestination) HasEncryptionKeyId() bool`
+
+HasEncryptionKeyId returns a boolean if a field has been set.
 
 ### GetRestoredName
 

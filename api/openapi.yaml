@@ -14380,6 +14380,18 @@ components:
       required:
       - instanceId
       type: object
+    GcpBigQueryDatasetRestoreResult:
+      example:
+        datasetId: my_restored_dataset
+      nullable: true
+      properties:
+        datasetId:
+          description: ID of the restored BigQuery dataset.
+          example: my_restored_dataset
+          type: string
+      required:
+      - datasetId
+      type: object
     RestoreResult:
       example:
         azureDisk:
@@ -14390,6 +14402,8 @@ components:
           instanceId: instanceId
         gcpVmInstance:
           instanceId: instanceId
+        gcpBigQuery:
+          datasetId: my_restored_dataset
         awsEbsVolume:
           volumeId: vol-1234567890abcdef0
       nullable: true
@@ -14404,6 +14418,8 @@ components:
           $ref: '#/components/schemas/AzureVmInstanceRestoreResult'
         gcpVmInstance:
           $ref: '#/components/schemas/GcpVmInstanceRestoreResult'
+        gcpBigQuery:
+          $ref: '#/components/schemas/GcpBigQueryDatasetRestoreResult'
       type: object
     DestinationDetails:
       example:
@@ -14419,6 +14435,8 @@ components:
             instanceId: instanceId
           gcpVmInstance:
             instanceId: instanceId
+          gcpBigQuery:
+            datasetId: my_restored_dataset
           awsEbsVolume:
             volumeId: vol-1234567890abcdef0
         region: us-east-1
@@ -14461,6 +14479,8 @@ components:
               instanceId: instanceId
             gcpVmInstance:
               instanceId: instanceId
+            gcpBigQuery:
+              datasetId: my_restored_dataset
             awsEbsVolume:
               volumeId: vol-1234567890abcdef0
           region: us-east-1
@@ -14534,6 +14554,8 @@ components:
                 instanceId: instanceId
               gcpVmInstance:
                 instanceId: instanceId
+              gcpBigQuery:
+                datasetId: my_restored_dataset
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
             region: us-east-1
@@ -14585,6 +14607,8 @@ components:
                 instanceId: instanceId
               gcpVmInstance:
                 instanceId: instanceId
+              gcpBigQuery:
+                datasetId: my_restored_dataset
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
             region: us-east-1
@@ -14660,6 +14684,8 @@ components:
                 instanceId: instanceId
               gcpVmInstance:
                 instanceId: instanceId
+              gcpBigQuery:
+                datasetId: my_restored_dataset
               awsEbsVolume:
                 volumeId: vol-1234567890abcdef0
             region: us-east-1
@@ -19214,7 +19240,6 @@ components:
             eon_api_restore: "true"
           type: object
       required:
-      - encryptionKeyId
       - restoreRegion
       - restoredName
       type: object
