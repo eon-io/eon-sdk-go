@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | The permissions of the role | 
 **AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | The condition of the role, keyed by name | [optional] 
 **RestoreDestinationLimits** | Pointer to [**NullableRestoreDestinationLimits**](RestoreDestinationLimits.md) |  | [optional] 
+**SameSourceAccountRestoreLimits** | Pointer to [**NullableSameSourceAccountRestoreLimits**](SameSourceAccountRestoreLimits.md) |  | [optional] 
 
 ## Methods
 
@@ -128,6 +129,41 @@ HasRestoreDestinationLimits returns a boolean if a field has been set.
 `func (o *UpdateRoleRequest) UnsetRestoreDestinationLimits()`
 
 UnsetRestoreDestinationLimits ensures that no value is present for RestoreDestinationLimits, not even an explicit nil
+### GetSameSourceAccountRestoreLimits
+
+`func (o *UpdateRoleRequest) GetSameSourceAccountRestoreLimits() SameSourceAccountRestoreLimits`
+
+GetSameSourceAccountRestoreLimits returns the SameSourceAccountRestoreLimits field if non-nil, zero value otherwise.
+
+### GetSameSourceAccountRestoreLimitsOk
+
+`func (o *UpdateRoleRequest) GetSameSourceAccountRestoreLimitsOk() (*SameSourceAccountRestoreLimits, bool)`
+
+GetSameSourceAccountRestoreLimitsOk returns a tuple with the SameSourceAccountRestoreLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSameSourceAccountRestoreLimits
+
+`func (o *UpdateRoleRequest) SetSameSourceAccountRestoreLimits(v SameSourceAccountRestoreLimits)`
+
+SetSameSourceAccountRestoreLimits sets SameSourceAccountRestoreLimits field to given value.
+
+### HasSameSourceAccountRestoreLimits
+
+`func (o *UpdateRoleRequest) HasSameSourceAccountRestoreLimits() bool`
+
+HasSameSourceAccountRestoreLimits returns a boolean if a field has been set.
+
+### SetSameSourceAccountRestoreLimitsNil
+
+`func (o *UpdateRoleRequest) SetSameSourceAccountRestoreLimitsNil(b bool)`
+
+ SetSameSourceAccountRestoreLimitsNil sets the value for SameSourceAccountRestoreLimits to be an explicit nil
+
+### UnsetSameSourceAccountRestoreLimits
+`func (o *UpdateRoleRequest) UnsetSameSourceAccountRestoreLimits()`
+
+UnsetSameSourceAccountRestoreLimits ensures that no value is present for SameSourceAccountRestoreLimits, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

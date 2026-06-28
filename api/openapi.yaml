@@ -8578,6 +8578,29 @@ components:
       - restoreAccountProviderIds
       type: object
       x-internal: false
+    SameSourceAccountRestoreLimits:
+      description: |
+        Restricts restores so a resource may only be restored back to its original source cloud account,
+        matched on the cloud-provider account ID (not the Eon account ID). When `dataAccessRuleId` is set
+        the restriction applies only to resources matching that access condition; otherwise it applies to
+        all resources granted by the role.
+      example:
+        dataAccessRuleId: dataAccessRuleId
+        enabled: true
+      nullable: true
+      properties:
+        enabled:
+          description: Whether the same-source-account restore restriction is active.
+          type: boolean
+        dataAccessRuleId:
+          description: |
+            Optional. The id of an access condition (an entry in `accessConditions`) that scopes which
+            resources the restriction applies to. Omit to apply the restriction to all resources.
+          type: string
+      required:
+      - enabled
+      type: object
+      x-internal: false
     CreateRoleRequest:
       example:
         restoreDestinationLimits:
@@ -8590,6 +8613,9 @@ components:
           permission: inventory.view
         - accessConditionId: Non-PII only.
           permission: inventory.view
+        sameSourceAccountRestoreLimits:
+          dataAccessRuleId: dataAccessRuleId
+          enabled: true
         name: name
         accessConditions:
         - expression:
@@ -8789,6 +8815,8 @@ components:
           type: array
         restoreDestinationLimits:
           $ref: '#/components/schemas/RestoreDestinationLimits'
+        sameSourceAccountRestoreLimits:
+          $ref: '#/components/schemas/SameSourceAccountRestoreLimits'
       required:
       - name
       - permissionGrants
@@ -8823,6 +8851,9 @@ components:
           permission: inventory.view
         - accessConditionId: Non-PII only.
           permission: inventory.view
+        sameSourceAccountRestoreLimits:
+          dataAccessRuleId: dataAccessRuleId
+          enabled: true
         isBuiltInRole: false
         name: My custom role
         accessConditions:
@@ -9035,6 +9066,8 @@ components:
           type: array
         restoreDestinationLimits:
           $ref: '#/components/schemas/RestoreDestinationLimits'
+        sameSourceAccountRestoreLimits:
+          $ref: '#/components/schemas/SameSourceAccountRestoreLimits'
       required:
       - id
       - isBuiltInRole
@@ -9055,6 +9088,9 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
+          sameSourceAccountRestoreLimits:
+            dataAccessRuleId: dataAccessRuleId
+            enabled: true
           isBuiltInRole: false
           name: My custom role
           accessConditions:
@@ -9255,6 +9291,9 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
+          sameSourceAccountRestoreLimits:
+            dataAccessRuleId: dataAccessRuleId
+            enabled: true
           isBuiltInRole: false
           name: My custom role
           accessConditions:
@@ -9445,6 +9484,9 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
+          sameSourceAccountRestoreLimits:
+            dataAccessRuleId: dataAccessRuleId
+            enabled: true
           isBuiltInRole: false
           name: My custom role
           accessConditions:
@@ -9656,6 +9698,9 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
+          sameSourceAccountRestoreLimits:
+            dataAccessRuleId: dataAccessRuleId
+            enabled: true
           isBuiltInRole: false
           name: My custom role
           accessConditions:
@@ -9854,6 +9899,9 @@ components:
           permission: inventory.view
         - accessConditionId: Non-PII only.
           permission: inventory.view
+        sameSourceAccountRestoreLimits:
+          dataAccessRuleId: dataAccessRuleId
+          enabled: true
         name: name
         accessConditions:
         - expression:
@@ -10048,6 +10096,8 @@ components:
           type: array
         restoreDestinationLimits:
           $ref: '#/components/schemas/RestoreDestinationLimits'
+        sameSourceAccountRestoreLimits:
+          $ref: '#/components/schemas/SameSourceAccountRestoreLimits'
       required:
       - name
       - permissionGrants
@@ -10065,6 +10115,9 @@ components:
             permission: inventory.view
           - accessConditionId: Non-PII only.
             permission: inventory.view
+          sameSourceAccountRestoreLimits:
+            dataAccessRuleId: dataAccessRuleId
+            enabled: true
           isBuiltInRole: false
           name: My custom role
           accessConditions:
@@ -13265,6 +13318,8 @@ components:
       - JOB_PARTIAL
       - JOB_CANCELED
       - JOB_RESULT_READY
+      - JOB_REJECTED
+      - JOB_SKIPPED
       example: JOB_PENDING
       type: string
       x-docs-internal-enum:
@@ -13278,6 +13333,8 @@ components:
       - JOB_PARTIAL
       - JOB_CANCELED
       - JOB_RESULT_READY
+      - JOB_REJECTED
+      - JOB_SKIPPED
     JobStatusFilters:
       additionalProperties: false
       example:

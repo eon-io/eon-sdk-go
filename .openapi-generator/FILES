@@ -318,6 +318,7 @@ docs/Role.md
 docs/RoleAccessGroupCondition.md
 docs/S3RestoreDestination.md
 docs/S3RestoreTarget.md
+docs/SameSourceAccountRestoreLimits.md
 docs/ScalarOperators.md
 docs/Snapshot.md
 docs/SnapshotDateFilters.md
@@ -684,6 +685,7 @@ model_role.go
 model_role_access_group_condition.go
 model_s3_restore_destination.go
 model_s3_restore_target.go
+model_same_source_account_restore_limits.go
 model_scalar_operators.go
 model_snapshot.go
 model_snapshot_date_filters.go

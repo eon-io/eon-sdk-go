@@ -28,6 +28,7 @@ type CreateRoleRequest struct {
 	// If present, the ID of the set of access conditions that restrict the resources the permission is granted for. The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions. If omitted, the permission is granted for all resources. 
 	AccessConditions []AccessCondition `json:"accessConditions,omitempty"`
 	RestoreDestinationLimits NullableRestoreDestinationLimits `json:"restoreDestinationLimits,omitempty"`
+	SameSourceAccountRestoreLimits NullableSameSourceAccountRestoreLimits `json:"sameSourceAccountRestoreLimits,omitempty"`
 }
 
 type _CreateRoleRequest CreateRoleRequest
@@ -173,6 +174,48 @@ func (o *CreateRoleRequest) UnsetRestoreDestinationLimits() {
 	o.RestoreDestinationLimits.Unset()
 }
 
+// GetSameSourceAccountRestoreLimits returns the SameSourceAccountRestoreLimits field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateRoleRequest) GetSameSourceAccountRestoreLimits() SameSourceAccountRestoreLimits {
+	if o == nil || IsNil(o.SameSourceAccountRestoreLimits.Get()) {
+		var ret SameSourceAccountRestoreLimits
+		return ret
+	}
+	return *o.SameSourceAccountRestoreLimits.Get()
+}
+
+// GetSameSourceAccountRestoreLimitsOk returns a tuple with the SameSourceAccountRestoreLimits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateRoleRequest) GetSameSourceAccountRestoreLimitsOk() (*SameSourceAccountRestoreLimits, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SameSourceAccountRestoreLimits.Get(), o.SameSourceAccountRestoreLimits.IsSet()
+}
+
+// HasSameSourceAccountRestoreLimits returns a boolean if a field has been set.
+func (o *CreateRoleRequest) HasSameSourceAccountRestoreLimits() bool {
+	if o != nil && o.SameSourceAccountRestoreLimits.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSameSourceAccountRestoreLimits gets a reference to the given NullableSameSourceAccountRestoreLimits and assigns it to the SameSourceAccountRestoreLimits field.
+func (o *CreateRoleRequest) SetSameSourceAccountRestoreLimits(v SameSourceAccountRestoreLimits) {
+	o.SameSourceAccountRestoreLimits.Set(&v)
+}
+// SetSameSourceAccountRestoreLimitsNil sets the value for SameSourceAccountRestoreLimits to be an explicit nil
+func (o *CreateRoleRequest) SetSameSourceAccountRestoreLimitsNil() {
+	o.SameSourceAccountRestoreLimits.Set(nil)
+}
+
+// UnsetSameSourceAccountRestoreLimits ensures that no value is present for SameSourceAccountRestoreLimits, not even an explicit nil
+func (o *CreateRoleRequest) UnsetSameSourceAccountRestoreLimits() {
+	o.SameSourceAccountRestoreLimits.Unset()
+}
+
 func (o CreateRoleRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -190,6 +233,9 @@ func (o CreateRoleRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.RestoreDestinationLimits.IsSet() {
 		toSerialize["restoreDestinationLimits"] = o.RestoreDestinationLimits.Get()
+	}
+	if o.SameSourceAccountRestoreLimits.IsSet() {
+		toSerialize["sameSourceAccountRestoreLimits"] = o.SameSourceAccountRestoreLimits.Get()
 	}
 	return toSerialize, nil
 }

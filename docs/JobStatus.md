@@ -19,6 +19,10 @@
 
 * `JOB_RESULT_READY` (value: `"JOB_RESULT_READY"`)
 
+* `JOB_REJECTED` (value: `"JOB_REJECTED"`)
+
+* `JOB_SKIPPED` (value: `"JOB_SKIPPED"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
