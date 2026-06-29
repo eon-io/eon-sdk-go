@@ -15112,6 +15112,7 @@ components:
       - AZURE_SQL_DATABASE_NATIVE_PITR
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
+      - CLASSIFICATION
       example: STANDARD
       type: string
       x-docs-internal-enum:
@@ -15121,6 +15122,7 @@ components:
       - AZURE_SQL_DATABASE_NATIVE_PITR
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
+      - CLASSIFICATION
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
@@ -15133,6 +15135,7 @@ components:
       - BACKUP_POLICY_TYPE_AZURE_SQL_DATABASE_NATIVE_PITR
       - BACKUP_POLICY_TYPE_GOOGLE_WORKSPACE
       - BACKUP_POLICY_TYPE_MICROSOFT_365
+      - BACKUP_POLICY_TYPE_CLASSIFICATION
     StandardBackupScheduleFrequency:
       description: |
         Backup frequency.

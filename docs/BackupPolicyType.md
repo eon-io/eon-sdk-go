@@ -25,6 +25,8 @@
 
 * `BACKUP_POLICY_TYPE_MICROSOFT_365` (value: `"MICROSOFT_365"`)
 
+* `BACKUP_POLICY_TYPE_CLASSIFICATION` (value: `"CLASSIFICATION"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -31,6 +31,7 @@ const (
 	BACKUP_POLICY_TYPE_AZURE_SQL_DATABASE_NATIVE_PITR BackupPolicyType = "AZURE_SQL_DATABASE_NATIVE_PITR"
 	BACKUP_POLICY_TYPE_GOOGLE_WORKSPACE BackupPolicyType = "GOOGLE_WORKSPACE"
 	BACKUP_POLICY_TYPE_MICROSOFT_365 BackupPolicyType = "MICROSOFT_365"
+	BACKUP_POLICY_TYPE_CLASSIFICATION BackupPolicyType = "CLASSIFICATION"
 )
 
 // All allowed values of BackupPolicyType enum
@@ -46,6 +47,7 @@ var AllowedBackupPolicyTypeEnumValues = []BackupPolicyType{
 	"AZURE_SQL_DATABASE_NATIVE_PITR",
 	"GOOGLE_WORKSPACE",
 	"MICROSOFT_365",
+	"CLASSIFICATION",
 }
 
 func (v *BackupPolicyType) UnmarshalJSON(src []byte) error {
