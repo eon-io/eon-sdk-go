@@ -588,7 +588,7 @@ paths:
       x-audit-log:
         action: delete
         entityRefs:
-        - entityType: idp
+        - entityType: idp_group
           in: path
           key: groupId
     get:
@@ -700,7 +700,7 @@ paths:
       x-audit-log:
         action: update
         entityRefs:
-        - entityType: idp
+        - entityType: idp_group
           in: path
           key: groupId
   /v1/projects/{projectId}/source-accounts:
