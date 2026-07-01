@@ -3253,7 +3253,7 @@ paths:
         entityRefs:
         - entityType: backup_policy
           in: resBody
-          key: id
+          key: backupPolicy.id
   /v1/projects/{projectId}/backup-policies/list:
     post:
       description: |
@@ -3659,7 +3659,7 @@ paths:
         entityRefs:
         - entityType: vault
           in: resBody
-          key: id
+          key: vault.id
   /v1/projects/{projectId}/vaults/{vaultId}:
     get:
       description: "Description: Retrieves a vault."
@@ -7691,7 +7691,7 @@ components:
     MPAInterceptedResponse:
       description: Body returned when an operation is intercepted by an MPA policy.
       example:
-        mpaRequest:
+        actionApprovalRequest:
           requesterEmail: requester@example.com
           resolvedTime: 2026-05-05T02:10:12Z
           requesterName: Riley Chen
@@ -7718,11 +7718,11 @@ components:
           operation: MPA_OPERATION_DELETE_BACKUP_POLICY
           status: PENDING_APPROVAL
       properties:
-        mpaRequest:
+        actionApprovalRequest:
           $ref: '#/components/schemas/MPARequest'
       required:
+      - actionApprovalRequest
       - mpaPolicies
-      - mpaRequest
       type: object
       x-nullable: true
     PermissionType:
@@ -13668,6 +13668,7 @@ components:
       - INVALID_INPUT_PARAMETERS
       - TOO_MANY_REQUESTS
       - BACKUP_CONFLICT
+      - CLASSIFICATION_CONFLICT
       - FAILED_TO_RUN_QUERY
       - OPERATION_DENIED_BY_CONFIGURATION
       - INSUFFICIENT_ENCRYPTION_PERMISSIONS
@@ -15112,7 +15113,6 @@ components:
       - AZURE_SQL_DATABASE_NATIVE_PITR
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
-      - CLASSIFICATION
       example: STANDARD
       type: string
       x-docs-internal-enum:
@@ -15122,7 +15122,6 @@ components:
       - AZURE_SQL_DATABASE_NATIVE_PITR
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
-      - CLASSIFICATION
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
@@ -15135,7 +15134,6 @@ components:
       - BACKUP_POLICY_TYPE_AZURE_SQL_DATABASE_NATIVE_PITR
       - BACKUP_POLICY_TYPE_GOOGLE_WORKSPACE
       - BACKUP_POLICY_TYPE_MICROSOFT_365
-      - BACKUP_POLICY_TYPE_CLASSIFICATION
     StandardBackupScheduleFrequency:
       description: |
         Backup frequency.
@@ -18569,6 +18567,7 @@ components:
         - orders
         labels:
           key: labels
+        overwriteExistingData: false
       properties:
         datasetId:
           description: |
@@ -18602,6 +18601,16 @@ components:
 
             **Example:** `{"eon-restore": "true"}`
           type: object
+        overwriteExistingData:
+          default: false
+          description: |
+            When set to `true`, existing tables and metadata (views, routines)
+            in the target dataset will be overwritten by the restored data.
+            Materialized views are never overwritten: an existing materialized view is left
+            as-is, since BigQuery has no `CREATE OR REPLACE MATERIALIZED VIEW`.
+            When `false` (default), the restore fails if any conflicting objects already exist
+            in the target dataset.
+          type: boolean
       required:
       - datasetId
       type: object
@@ -18616,6 +18625,7 @@ components:
           - orders
           labels:
             key: labels
+          overwriteExistingData: false
       properties:
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
@@ -19065,6 +19075,7 @@ components:
           tags:
             key: tags
         region: us-east-1
+        privateIpAddress: 10.0.0.50
         tags:
           key: tags
       properties:
@@ -19085,6 +19096,13 @@ components:
           items:
             type: string
           type: array
+        privateIpAddress:
+          description: |
+            Optional primary private IPv4 address for the restored instance, e.g. "10.0.0.50".
+            Must fall within the selected subnet's CIDR range.
+            Leave empty to let AWS auto-assign an address.
+          example: 10.0.0.50
+          type: string
         tags:
           additionalProperties:
             type: string
@@ -19144,6 +19162,7 @@ components:
             tags:
               key: tags
           region: us-east-1
+          privateIpAddress: 10.0.0.50
           tags:
             key: tags
       properties:
@@ -19183,6 +19202,7 @@ components:
               tags:
                 key: tags
             region: us-east-1
+            privateIpAddress: 10.0.0.50
             tags:
               key: tags
         templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -23335,7 +23355,7 @@ components:
       type: object
     CancelMyMPARequestResponse:
       example:
-        mpaRequest:
+        actionApprovalRequest:
           requesterEmail: requester@example.com
           resolvedTime: 2026-05-05T02:10:12Z
           requesterName: Riley Chen
@@ -23362,10 +23382,10 @@ components:
           operation: MPA_OPERATION_DELETE_BACKUP_POLICY
           status: PENDING_APPROVAL
       properties:
-        mpaRequest:
+        actionApprovalRequest:
           $ref: '#/components/schemas/MPARequest'
       required:
-      - mpaRequest
+      - actionApprovalRequest
       type: object
     MPASubmitAction:
       description: Action to take on a CREATED MPA request.
@@ -23394,7 +23414,7 @@ components:
       type: object
     SubmitMyMPARequestResponse:
       example:
-        mpaRequest:
+        actionApprovalRequest:
           requesterEmail: requester@example.com
           resolvedTime: 2026-05-05T02:10:12Z
           requesterName: Riley Chen
@@ -23421,7 +23441,7 @@ components:
           operation: MPA_OPERATION_DELETE_BACKUP_POLICY
           status: PENDING_APPROVAL
       properties:
-        mpaRequest:
+        actionApprovalRequest:
           $ref: '#/components/schemas/MPARequest'
       type: object
     createVault_409_response:

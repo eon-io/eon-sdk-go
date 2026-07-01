@@ -21,7 +21,7 @@ var _ MappedNullable = &MPAInterceptedResponse{}
 
 // MPAInterceptedResponse Body returned when an operation is intercepted by an MPA policy.
 type MPAInterceptedResponse struct {
-	MpaRequest NullableMPARequest `json:"mpaRequest"`
+	ActionApprovalRequest NullableMPARequest `json:"actionApprovalRequest"`
 }
 
 type _MPAInterceptedResponse MPAInterceptedResponse
@@ -30,9 +30,9 @@ type _MPAInterceptedResponse MPAInterceptedResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMPAInterceptedResponse(mpaRequest NullableMPARequest) *MPAInterceptedResponse {
+func NewMPAInterceptedResponse(actionApprovalRequest NullableMPARequest) *MPAInterceptedResponse {
 	this := MPAInterceptedResponse{}
-	this.MpaRequest = mpaRequest
+	this.ActionApprovalRequest = actionApprovalRequest
 	return &this
 }
 
@@ -44,30 +44,30 @@ func NewMPAInterceptedResponseWithDefaults() *MPAInterceptedResponse {
 	return &this
 }
 
-// GetMpaRequest returns the MpaRequest field value
+// GetActionApprovalRequest returns the ActionApprovalRequest field value
 // If the value is explicit nil, the zero value for MPARequest will be returned
-func (o *MPAInterceptedResponse) GetMpaRequest() MPARequest {
-	if o == nil || o.MpaRequest.Get() == nil {
+func (o *MPAInterceptedResponse) GetActionApprovalRequest() MPARequest {
+	if o == nil || o.ActionApprovalRequest.Get() == nil {
 		var ret MPARequest
 		return ret
 	}
 
-	return *o.MpaRequest.Get()
+	return *o.ActionApprovalRequest.Get()
 }
 
-// GetMpaRequestOk returns a tuple with the MpaRequest field value
+// GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MPAInterceptedResponse) GetMpaRequestOk() (*MPARequest, bool) {
+func (o *MPAInterceptedResponse) GetActionApprovalRequestOk() (*MPARequest, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.MpaRequest.Get(), o.MpaRequest.IsSet()
+	return o.ActionApprovalRequest.Get(), o.ActionApprovalRequest.IsSet()
 }
 
-// SetMpaRequest sets field value
-func (o *MPAInterceptedResponse) SetMpaRequest(v MPARequest) {
-	o.MpaRequest.Set(&v)
+// SetActionApprovalRequest sets field value
+func (o *MPAInterceptedResponse) SetActionApprovalRequest(v MPARequest) {
+	o.ActionApprovalRequest.Set(&v)
 }
 
 func (o MPAInterceptedResponse) MarshalJSON() ([]byte, error) {
@@ -80,7 +80,7 @@ func (o MPAInterceptedResponse) MarshalJSON() ([]byte, error) {
 
 func (o MPAInterceptedResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["mpaRequest"] = o.MpaRequest.Get()
+	toSerialize["actionApprovalRequest"] = o.ActionApprovalRequest.Get()
 	return toSerialize, nil
 }
 
@@ -89,7 +89,7 @@ func (o *MPAInterceptedResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"mpaRequest",
+		"actionApprovalRequest",
 	}
 
 	allProperties := make(map[string]interface{})

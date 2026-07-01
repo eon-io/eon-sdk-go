@@ -19,7 +19,7 @@ var _ MappedNullable = &SubmitMyMPARequestResponse{}
 
 // SubmitMyMPARequestResponse struct for SubmitMyMPARequestResponse
 type SubmitMyMPARequestResponse struct {
-	MpaRequest NullableMPARequest `json:"mpaRequest,omitempty"`
+	ActionApprovalRequest NullableMPARequest `json:"actionApprovalRequest,omitempty"`
 }
 
 // NewSubmitMyMPARequestResponse instantiates a new SubmitMyMPARequestResponse object
@@ -39,46 +39,46 @@ func NewSubmitMyMPARequestResponseWithDefaults() *SubmitMyMPARequestResponse {
 	return &this
 }
 
-// GetMpaRequest returns the MpaRequest field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SubmitMyMPARequestResponse) GetMpaRequest() MPARequest {
-	if o == nil || IsNil(o.MpaRequest.Get()) {
+// GetActionApprovalRequest returns the ActionApprovalRequest field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SubmitMyMPARequestResponse) GetActionApprovalRequest() MPARequest {
+	if o == nil || IsNil(o.ActionApprovalRequest.Get()) {
 		var ret MPARequest
 		return ret
 	}
-	return *o.MpaRequest.Get()
+	return *o.ActionApprovalRequest.Get()
 }
 
-// GetMpaRequestOk returns a tuple with the MpaRequest field value if set, nil otherwise
+// GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SubmitMyMPARequestResponse) GetMpaRequestOk() (*MPARequest, bool) {
+func (o *SubmitMyMPARequestResponse) GetActionApprovalRequestOk() (*MPARequest, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.MpaRequest.Get(), o.MpaRequest.IsSet()
+	return o.ActionApprovalRequest.Get(), o.ActionApprovalRequest.IsSet()
 }
 
-// HasMpaRequest returns a boolean if a field has been set.
-func (o *SubmitMyMPARequestResponse) HasMpaRequest() bool {
-	if o != nil && o.MpaRequest.IsSet() {
+// HasActionApprovalRequest returns a boolean if a field has been set.
+func (o *SubmitMyMPARequestResponse) HasActionApprovalRequest() bool {
+	if o != nil && o.ActionApprovalRequest.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMpaRequest gets a reference to the given NullableMPARequest and assigns it to the MpaRequest field.
-func (o *SubmitMyMPARequestResponse) SetMpaRequest(v MPARequest) {
-	o.MpaRequest.Set(&v)
+// SetActionApprovalRequest gets a reference to the given NullableMPARequest and assigns it to the ActionApprovalRequest field.
+func (o *SubmitMyMPARequestResponse) SetActionApprovalRequest(v MPARequest) {
+	o.ActionApprovalRequest.Set(&v)
 }
-// SetMpaRequestNil sets the value for MpaRequest to be an explicit nil
-func (o *SubmitMyMPARequestResponse) SetMpaRequestNil() {
-	o.MpaRequest.Set(nil)
+// SetActionApprovalRequestNil sets the value for ActionApprovalRequest to be an explicit nil
+func (o *SubmitMyMPARequestResponse) SetActionApprovalRequestNil() {
+	o.ActionApprovalRequest.Set(nil)
 }
 
-// UnsetMpaRequest ensures that no value is present for MpaRequest, not even an explicit nil
-func (o *SubmitMyMPARequestResponse) UnsetMpaRequest() {
-	o.MpaRequest.Unset()
+// UnsetActionApprovalRequest ensures that no value is present for ActionApprovalRequest, not even an explicit nil
+func (o *SubmitMyMPARequestResponse) UnsetActionApprovalRequest() {
+	o.ActionApprovalRequest.Unset()
 }
 
 func (o SubmitMyMPARequestResponse) MarshalJSON() ([]byte, error) {
@@ -91,8 +91,8 @@ func (o SubmitMyMPARequestResponse) MarshalJSON() ([]byte, error) {
 
 func (o SubmitMyMPARequestResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.MpaRequest.IsSet() {
-		toSerialize["mpaRequest"] = o.MpaRequest.Get()
+	if o.ActionApprovalRequest.IsSet() {
+		toSerialize["actionApprovalRequest"] = o.ActionApprovalRequest.Get()
 	}
 	return toSerialize, nil
 }

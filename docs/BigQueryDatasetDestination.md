@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Location** | Pointer to **string** | BigQuery location for the dataset. Defaults to the original dataset location.  For multi-region, set to &#x60;US&#x60; or &#x60;EU&#x60;.  | [optional] 
 **SelectedTables** | Pointer to **[]string** | List of table names to restore. If empty or not specified, all tables in the snapshot are restored.  | [optional] 
 **Labels** | Pointer to **map[string]string** | Labels to apply to the restored BigQuery dataset as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon-restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
+**OverwriteExistingData** | Pointer to **bool** | When set to &#x60;true&#x60;, existing tables and metadata (views, routines) in the target dataset will be overwritten by the restored data. Materialized views are never overwritten: an existing materialized view is left as-is, since BigQuery has no &#x60;CREATE OR REPLACE MATERIALIZED VIEW&#x60;. When &#x60;false&#x60; (default), the restore fails if any conflicting objects already exist in the target dataset.  | [optional] [default to false]
 
 ## Methods
 
@@ -122,6 +123,31 @@ SetLabels sets Labels field to given value.
 `func (o *BigQueryDatasetDestination) HasLabels() bool`
 
 HasLabels returns a boolean if a field has been set.
+
+### GetOverwriteExistingData
+
+`func (o *BigQueryDatasetDestination) GetOverwriteExistingData() bool`
+
+GetOverwriteExistingData returns the OverwriteExistingData field if non-nil, zero value otherwise.
+
+### GetOverwriteExistingDataOk
+
+`func (o *BigQueryDatasetDestination) GetOverwriteExistingDataOk() (*bool, bool)`
+
+GetOverwriteExistingDataOk returns a tuple with the OverwriteExistingData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverwriteExistingData
+
+`func (o *BigQueryDatasetDestination) SetOverwriteExistingData(v bool)`
+
+SetOverwriteExistingData sets OverwriteExistingData field to given value.
+
+### HasOverwriteExistingData
+
+`func (o *BigQueryDatasetDestination) HasOverwriteExistingData() bool`
+
+HasOverwriteExistingData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

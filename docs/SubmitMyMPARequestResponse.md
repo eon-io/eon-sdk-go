@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MpaRequest** | Pointer to [**NullableMPARequest**](MPARequest.md) |  | [optional] 
+**ActionApprovalRequest** | Pointer to [**NullableMPARequest**](MPARequest.md) |  | [optional] 
 
 ## Methods
 
@@ -25,41 +25,41 @@ NewSubmitMyMPARequestResponseWithDefaults instantiates a new SubmitMyMPARequestR
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetMpaRequest
+### GetActionApprovalRequest
 
-`func (o *SubmitMyMPARequestResponse) GetMpaRequest() MPARequest`
+`func (o *SubmitMyMPARequestResponse) GetActionApprovalRequest() MPARequest`
 
-GetMpaRequest returns the MpaRequest field if non-nil, zero value otherwise.
+GetActionApprovalRequest returns the ActionApprovalRequest field if non-nil, zero value otherwise.
 
-### GetMpaRequestOk
+### GetActionApprovalRequestOk
 
-`func (o *SubmitMyMPARequestResponse) GetMpaRequestOk() (*MPARequest, bool)`
+`func (o *SubmitMyMPARequestResponse) GetActionApprovalRequestOk() (*MPARequest, bool)`
 
-GetMpaRequestOk returns a tuple with the MpaRequest field if it's non-nil, zero value otherwise
+GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMpaRequest
+### SetActionApprovalRequest
 
-`func (o *SubmitMyMPARequestResponse) SetMpaRequest(v MPARequest)`
+`func (o *SubmitMyMPARequestResponse) SetActionApprovalRequest(v MPARequest)`
 
-SetMpaRequest sets MpaRequest field to given value.
+SetActionApprovalRequest sets ActionApprovalRequest field to given value.
 
-### HasMpaRequest
+### HasActionApprovalRequest
 
-`func (o *SubmitMyMPARequestResponse) HasMpaRequest() bool`
+`func (o *SubmitMyMPARequestResponse) HasActionApprovalRequest() bool`
 
-HasMpaRequest returns a boolean if a field has been set.
+HasActionApprovalRequest returns a boolean if a field has been set.
 
-### SetMpaRequestNil
+### SetActionApprovalRequestNil
 
-`func (o *SubmitMyMPARequestResponse) SetMpaRequestNil(b bool)`
+`func (o *SubmitMyMPARequestResponse) SetActionApprovalRequestNil(b bool)`
 
- SetMpaRequestNil sets the value for MpaRequest to be an explicit nil
+ SetActionApprovalRequestNil sets the value for ActionApprovalRequest to be an explicit nil
 
-### UnsetMpaRequest
-`func (o *SubmitMyMPARequestResponse) UnsetMpaRequest()`
+### UnsetActionApprovalRequest
+`func (o *SubmitMyMPARequestResponse) UnsetActionApprovalRequest()`
 
-UnsetMpaRequest ensures that no value is present for MpaRequest, not even an explicit nil
+UnsetActionApprovalRequest ensures that no value is present for ActionApprovalRequest, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

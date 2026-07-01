@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **InstanceType** | **string** | Instance type to use for the restored instance. | 
 **SubnetId** | **string** | Subnet ID to associate with the restored instance. | 
 **SecurityGroupIds** | Pointer to **[]string** | List of security group IDs to associate with the restored instance. | [optional] 
+**PrivateIpAddress** | Pointer to **string** | Optional primary private IPv4 address for the restored instance, e.g. \&quot;10.0.0.50\&quot;. Must fall within the selected subnet&#39;s CIDR range. Leave empty to let AWS auto-assign an address.  | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **VolumeRestoreParameters** | [**[]RestoreInstanceVolumeInput**](RestoreInstanceVolumeInput.md) | Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where &#x60;providerVolumeId&#x60; matches the volume&#39;s ID at the time of the snapshot. The root volume must be present in the list.  | 
 **StartInstanceAfterRestore** | Pointer to **bool** | Whether to start the EC2 instance after restoring it. If set to &#x60;false&#x60;, the instance remains in a stopped state.  | [optional] [default to true]
@@ -115,6 +116,31 @@ SetSecurityGroupIds sets SecurityGroupIds field to given value.
 `func (o *AwsEc2InstanceRestoreTarget) HasSecurityGroupIds() bool`
 
 HasSecurityGroupIds returns a boolean if a field has been set.
+
+### GetPrivateIpAddress
+
+`func (o *AwsEc2InstanceRestoreTarget) GetPrivateIpAddress() string`
+
+GetPrivateIpAddress returns the PrivateIpAddress field if non-nil, zero value otherwise.
+
+### GetPrivateIpAddressOk
+
+`func (o *AwsEc2InstanceRestoreTarget) GetPrivateIpAddressOk() (*string, bool)`
+
+GetPrivateIpAddressOk returns a tuple with the PrivateIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateIpAddress
+
+`func (o *AwsEc2InstanceRestoreTarget) SetPrivateIpAddress(v string)`
+
+SetPrivateIpAddress sets PrivateIpAddress field to given value.
+
+### HasPrivateIpAddress
+
+`func (o *AwsEc2InstanceRestoreTarget) HasPrivateIpAddress() bool`
+
+HasPrivateIpAddress returns a boolean if a field has been set.
 
 ### GetTags
 

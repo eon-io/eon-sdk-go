@@ -29,6 +29,8 @@ type AwsEc2InstanceRestoreTarget struct {
 	SubnetId string `json:"subnetId"`
 	// List of security group IDs to associate with the restored instance.
 	SecurityGroupIds []string `json:"securityGroupIds,omitempty"`
+	// Optional primary private IPv4 address for the restored instance, e.g. \"10.0.0.50\". Must fall within the selected subnet's CIDR range. Leave empty to let AWS auto-assign an address. 
+	PrivateIpAddress *string `json:"privateIpAddress,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 	// Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot. The root volume must be present in the list. 
@@ -168,6 +170,38 @@ func (o *AwsEc2InstanceRestoreTarget) SetSecurityGroupIds(v []string) {
 	o.SecurityGroupIds = v
 }
 
+// GetPrivateIpAddress returns the PrivateIpAddress field value if set, zero value otherwise.
+func (o *AwsEc2InstanceRestoreTarget) GetPrivateIpAddress() string {
+	if o == nil || IsNil(o.PrivateIpAddress) {
+		var ret string
+		return ret
+	}
+	return *o.PrivateIpAddress
+}
+
+// GetPrivateIpAddressOk returns a tuple with the PrivateIpAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsEc2InstanceRestoreTarget) GetPrivateIpAddressOk() (*string, bool) {
+	if o == nil || IsNil(o.PrivateIpAddress) {
+		return nil, false
+	}
+	return o.PrivateIpAddress, true
+}
+
+// HasPrivateIpAddress returns a boolean if a field has been set.
+func (o *AwsEc2InstanceRestoreTarget) HasPrivateIpAddress() bool {
+	if o != nil && !IsNil(o.PrivateIpAddress) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateIpAddress gets a reference to the given string and assigns it to the PrivateIpAddress field.
+func (o *AwsEc2InstanceRestoreTarget) SetPrivateIpAddress(v string) {
+	o.PrivateIpAddress = &v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *AwsEc2InstanceRestoreTarget) GetTags() map[string]string {
 	if o == nil || IsNil(o.Tags) {
@@ -271,6 +305,9 @@ func (o AwsEc2InstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize["subnetId"] = o.SubnetId
 	if !IsNil(o.SecurityGroupIds) {
 		toSerialize["securityGroupIds"] = o.SecurityGroupIds
+	}
+	if !IsNil(o.PrivateIpAddress) {
+		toSerialize["privateIpAddress"] = o.PrivateIpAddress
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
