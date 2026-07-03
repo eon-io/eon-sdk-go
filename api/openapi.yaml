@@ -7778,6 +7778,7 @@ components:
       - datalake.view
       - datalake.operate
       - compliance.view
+      - classification_policies.manage
       example: inventory.view
       type: string
       x-docs-internal-enum:
@@ -7792,6 +7793,7 @@ components:
       - datalake.view
       - datalake.operate
       - compliance.view
+      - classification_policies.manage
     Permission:
       example:
         permissionType: inventory.view
@@ -8085,6 +8087,9 @@ components:
       - AWS_DYNAMO_DB
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
+      - AWS_CASSANDRA_CLUSTER
+      - GCP_CASSANDRA_CLUSTER
+      - AZURE_CASSANDRA_CLUSTER
       - AWS_DOCUMENTDB
       - AWS_NEPTUNE
       - AZURE_VIRTUAL_MACHINE
@@ -8117,6 +8122,9 @@ components:
       x-docs-internal-enum:
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
+      - AWS_CASSANDRA_CLUSTER
+      - GCP_CASSANDRA_CLUSTER
+      - AZURE_CASSANDRA_CLUSTER
       - AWS_DOCUMENTDB
       - AWS_NEPTUNE
       - AZURE_SAP_HANA_VM
@@ -13317,13 +13325,10 @@ components:
       - JOB_FAILED
       - JOB_PARTIAL
       - JOB_CANCELED
-      - JOB_RESULT_READY
       - JOB_REJECTED
       - JOB_SKIPPED
       example: JOB_PENDING
       type: string
-      x-docs-internal-enum:
-      - JOB_RESULT_READY
       x-enum-varnames:
       - JOB_UNSPECIFIED
       - JOB_PENDING
@@ -13332,7 +13337,6 @@ components:
       - JOB_FAILED
       - JOB_PARTIAL
       - JOB_CANCELED
-      - JOB_RESULT_READY
       - JOB_REJECTED
       - JOB_SKIPPED
     JobStatusFilters:

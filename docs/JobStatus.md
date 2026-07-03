@@ -17,8 +17,6 @@
 
 * `JOB_CANCELED` (value: `"JOB_CANCELED"`)
 
-* `JOB_RESULT_READY` (value: `"JOB_RESULT_READY"`)
-
 * `JOB_REJECTED` (value: `"JOB_REJECTED"`)
 
 * `JOB_SKIPPED` (value: `"JOB_SKIPPED"`)

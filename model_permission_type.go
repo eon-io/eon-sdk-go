@@ -70,6 +70,7 @@ const (
 	DATALAKE_VIEW PermissionType = "datalake.view"
 	DATALAKE_OPERATE PermissionType = "datalake.operate"
 	COMPLIANCE_VIEW PermissionType = "compliance.view"
+	CLASSIFICATION_POLICIES_MANAGE PermissionType = "classification_policies.manage"
 )
 
 // All allowed values of PermissionType enum
@@ -124,6 +125,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"datalake.view",
 	"datalake.operate",
 	"compliance.view",
+	"classification_policies.manage",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

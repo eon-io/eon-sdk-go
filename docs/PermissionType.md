@@ -103,6 +103,8 @@
 
 * `COMPLIANCE_VIEW` (value: `"compliance.view"`)
 
+* `CLASSIFICATION_POLICIES_MANAGE` (value: `"classification_policies.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -27,7 +27,6 @@ const (
 	JOB_FAILED JobStatus = "JOB_FAILED"
 	JOB_PARTIAL JobStatus = "JOB_PARTIAL"
 	JOB_CANCELED JobStatus = "JOB_CANCELED"
-	JOB_RESULT_READY JobStatus = "JOB_RESULT_READY"
 	JOB_REJECTED JobStatus = "JOB_REJECTED"
 	JOB_SKIPPED JobStatus = "JOB_SKIPPED"
 )
@@ -41,7 +40,6 @@ var AllowedJobStatusEnumValues = []JobStatus{
 	"JOB_FAILED",
 	"JOB_PARTIAL",
 	"JOB_CANCELED",
-	"JOB_RESULT_READY",
 	"JOB_REJECTED",
 	"JOB_SKIPPED",
 }
