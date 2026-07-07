@@ -2187,6 +2187,65 @@ paths:
         - entityType: account
           in: path
           key: accountId
+    get:
+      description: "Description: Retrieve a restore account by ID."
+      operationId: getRestoreAccount
+      parameters:
+      - description: ID of the project.
+        example: 512010dd-8eaa-5b68-ab64-287458195d44
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the restore account.
+        example: 0fa724c4-9251-5bcb-94ae-b5dd5bcb7a93
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRestoreAccountResponse'
+          description: Restore account retrieved.
+        "404":
+          description: Restore account wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Restore Account
+      tags:
+      - accounts
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore_accounts
+      x-audit-log:
+        excluded: true
     patch:
       description: |
         Description: Updates restore account properties.
@@ -12565,6 +12624,40 @@ components:
       - accounts
       - totalCount
       type: object
+    GetRestoreAccountResponse:
+      example:
+        restoreAccount:
+          restoreAccountAttributes:
+            gcp:
+              serviceAccount: serviceAccount
+            cloudProvider: AWS
+            aws:
+              organizationId: o-1234567890
+              roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+            azure:
+              managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              resourceGroupName: my-resource-group
+              enableM365Restore: false
+              tenantId: 12345678-1234-1234-1234-123456789012
+              eonInternalResourceGroupName: eon-restore-internal-rg
+              subscriptionId: 12345678-1234-1234-1234-123456789012
+          providerAccountId: "123412341234"
+          name: prod-eu
+          connectedTime: 2024-08-29T13:24:03Z
+          isRestoreAllowed: true
+          id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
+          providerAccountName: providerAccountName
+          version:
+            installed: 1.0.0
+            installationMethod: TERRAFORM
+            latest: 1.2.0
+          status: CONNECTED
+      properties:
+        restoreAccount:
+          $ref: '#/components/schemas/RestoreAccount'
+      required:
+      - restoreAccount
+      type: object
     UpdateAwsRestoreAccountAttributes:
       description: |
         Updatable AWS account fields.
@@ -18570,6 +18663,9 @@ components:
         selectedTables:
         - users
         - orders
+        selectedViews:
+        - active_users_view
+        - order_summary_view
         labels:
           key: labels
         overwriteExistingData: false
@@ -18595,6 +18691,16 @@ components:
           example:
           - users
           - orders
+          items:
+            type: string
+          type: array
+        selectedViews:
+          description: |
+            List of view names to restore.
+            If empty or not specified, all views in the snapshot are restored.
+          example:
+          - active_users_view
+          - order_summary_view
           items:
             type: string
           type: array
@@ -18628,6 +18734,9 @@ components:
           selectedTables:
           - users
           - orders
+          selectedViews:
+          - active_users_view
+          - order_summary_view
           labels:
             key: labels
           overwriteExistingData: false
@@ -22638,18 +22747,25 @@ components:
     UsageUnit:
       default: BYTE_MONTHS
       description: |
-        Whether usage is returned in byte-months or raw bytes for the specified `timeFrame`.
+        Whether usage is returned in byte-months, raw bytes, operations, or object-months for the specified `timeFrame`.
         `UNSPECIFIED` is supported only in responses.
       enum:
       - BYTE_MONTHS
       - BYTES
       - UNSPECIFIED
+      - OPERATIONS
+      - OBJECT_MONTHS
       example: BYTES
       type: string
+      x-docs-internal-enum:
+      - OPERATIONS
+      - OBJECT_MONTHS
       x-enum-varnames:
       - USAGE_UNIT_BYTE_MONTHS
       - USAGE_UNIT_BYTES
       - USAGE_UNIT_UNSPECIFIED
+      - USAGE_UNIT_OPERATIONS
+      - USAGE_UNIT_OBJECT_MONTHS
     TimeFrame:
       example:
         startTime: 2025-01-01T00:00:00Z
@@ -22780,6 +22896,10 @@ components:
       description: |
         Dimension to group cost data by in the response.
       enum:
+      - PRODUCT
+      - USAGE_TYPE
+      - DSG_BUCKET
+      - DSG_ENVIRONMENT
       - SOURCE_ACCOUNT
       - CLOUD_PROVIDER
       - RESOURCE_TYPE
@@ -22787,7 +22907,16 @@ components:
       - RESOURCE_AND_VAULT
       example: SOURCE_ACCOUNT
       type: string
+      x-docs-internal-enum:
+      - PRODUCT
+      - USAGE_TYPE
+      - DSG_BUCKET
+      - DSG_ENVIRONMENT
       x-enum-varnames:
+      - COST_GROUP_BY_PRODUCT
+      - COST_GROUP_BY_USAGE_TYPE
+      - COST_GROUP_BY_DSG_BUCKET
+      - COST_GROUP_BY_DSG_ENVIRONMENT
       - COST_GROUP_BY_SOURCE_ACCOUNT
       - COST_GROUP_BY_CLOUD_PROVIDER
       - COST_GROUP_BY_RESOURCE_TYPE
@@ -22955,6 +23084,7 @@ components:
       - GCP_CLOUD_SQL_POSTGRES_TO_AWS_VAULT_METERING_DIMENSION
       - GCP_CLOUD_SQL_MYSQL_TO_AWS_VAULT_METERING_DIMENSION
       - GCP_CLOUD_SQL_SQL_SERVER_TO_AWS_VAULT_METERING_DIMENSION
+      - STORAGE_GATEWAY_METERING_DIMENSION
       - RANSOMWARE_PROTECTED_STORAGE_METERING_DIMENSION
       example: AWS_EC2_METERING_DIMENSION
       type: string
@@ -23011,7 +23141,7 @@ components:
       type: object
     CostDataRecordCost:
       description: |
-        Cost and usage breakdown for a specific metering dimension.
+        Cost and usage breakdown for a specific billable usage type.
       example:
         cost:
           amount: 150.75

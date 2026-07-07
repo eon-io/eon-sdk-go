@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **DatasetId** | **string** | Destination dataset ID. If the dataset doesn&#39;t exist, it&#39;s created.  | 
 **Location** | Pointer to **string** | BigQuery location for the dataset. Defaults to the original dataset location.  For multi-region, set to &#x60;US&#x60; or &#x60;EU&#x60;.  | [optional] 
 **SelectedTables** | Pointer to **[]string** | List of table names to restore. If empty or not specified, all tables in the snapshot are restored.  | [optional] 
+**SelectedViews** | Pointer to **[]string** | List of view names to restore. If empty or not specified, all views in the snapshot are restored.  | [optional] 
 **Labels** | Pointer to **map[string]string** | Labels to apply to the restored BigQuery dataset as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon-restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **OverwriteExistingData** | Pointer to **bool** | When set to &#x60;true&#x60;, existing tables and metadata (views, routines) in the target dataset will be overwritten by the restored data. Materialized views are never overwritten: an existing materialized view is left as-is, since BigQuery has no &#x60;CREATE OR REPLACE MATERIALIZED VIEW&#x60;. When &#x60;false&#x60; (default), the restore fails if any conflicting objects already exist in the target dataset.  | [optional] [default to false]
 
@@ -98,6 +99,31 @@ SetSelectedTables sets SelectedTables field to given value.
 `func (o *BigQueryDatasetDestination) HasSelectedTables() bool`
 
 HasSelectedTables returns a boolean if a field has been set.
+
+### GetSelectedViews
+
+`func (o *BigQueryDatasetDestination) GetSelectedViews() []string`
+
+GetSelectedViews returns the SelectedViews field if non-nil, zero value otherwise.
+
+### GetSelectedViewsOk
+
+`func (o *BigQueryDatasetDestination) GetSelectedViewsOk() (*[]string, bool)`
+
+GetSelectedViewsOk returns a tuple with the SelectedViews field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelectedViews
+
+`func (o *BigQueryDatasetDestination) SetSelectedViews(v []string)`
+
+SetSelectedViews sets SelectedViews field to given value.
+
+### HasSelectedViews
+
+`func (o *BigQueryDatasetDestination) HasSelectedViews() bool`
+
+HasSelectedViews returns a boolean if a field has been set.
 
 ### GetLabels
 

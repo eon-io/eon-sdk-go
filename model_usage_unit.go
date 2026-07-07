@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// UsageUnit Whether usage is returned in byte-months or raw bytes for the specified `timeFrame`. `UNSPECIFIED` is supported only in responses. 
+// UsageUnit Whether usage is returned in byte-months, raw bytes, operations, or object-months for the specified `timeFrame`. `UNSPECIFIED` is supported only in responses. 
 type UsageUnit string
 
 // List of UsageUnit
@@ -23,6 +23,8 @@ const (
 	USAGE_UNIT_BYTE_MONTHS UsageUnit = "BYTE_MONTHS"
 	USAGE_UNIT_BYTES UsageUnit = "BYTES"
 	USAGE_UNIT_UNSPECIFIED UsageUnit = "UNSPECIFIED"
+	USAGE_UNIT_OPERATIONS UsageUnit = "OPERATIONS"
+	USAGE_UNIT_OBJECT_MONTHS UsageUnit = "OBJECT_MONTHS"
 )
 
 // All allowed values of UsageUnit enum
@@ -30,6 +32,8 @@ var AllowedUsageUnitEnumValues = []UsageUnit{
 	"BYTE_MONTHS",
 	"BYTES",
 	"UNSPECIFIED",
+	"OPERATIONS",
+	"OBJECT_MONTHS",
 }
 
 func (v *UsageUnit) UnmarshalJSON(src []byte) error {

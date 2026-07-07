@@ -20,6 +20,10 @@ type CostDataGroupBy string
 
 // List of CostDataGroupBy
 const (
+	COST_GROUP_BY_PRODUCT CostDataGroupBy = "PRODUCT"
+	COST_GROUP_BY_USAGE_TYPE CostDataGroupBy = "USAGE_TYPE"
+	COST_GROUP_BY_DSG_BUCKET CostDataGroupBy = "DSG_BUCKET"
+	COST_GROUP_BY_DSG_ENVIRONMENT CostDataGroupBy = "DSG_ENVIRONMENT"
 	COST_GROUP_BY_SOURCE_ACCOUNT CostDataGroupBy = "SOURCE_ACCOUNT"
 	COST_GROUP_BY_CLOUD_PROVIDER CostDataGroupBy = "CLOUD_PROVIDER"
 	COST_GROUP_BY_RESOURCE_TYPE CostDataGroupBy = "RESOURCE_TYPE"
@@ -29,6 +33,10 @@ const (
 
 // All allowed values of CostDataGroupBy enum
 var AllowedCostDataGroupByEnumValues = []CostDataGroupBy{
+	"PRODUCT",
+	"USAGE_TYPE",
+	"DSG_BUCKET",
+	"DSG_ENVIRONMENT",
 	"SOURCE_ACCOUNT",
 	"CLOUD_PROVIDER",
 	"RESOURCE_TYPE",

@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**DisconnectSourceAwsOrganizationalUnit**](AccountsAPI.md#DisconnectSourceAwsOrganizationalUnit) | **Post** /v1/projects/{projectId}/source-aws-organizational-units/{organizationalUnitId}/disconnect | Disconnect Source AWS Organizational Unit
 [**EnableRestoreAccountMetricsConfig**](AccountsAPI.md#EnableRestoreAccountMetricsConfig) | **Put** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Configure Restore Account Metrics
 [**EnableSourceAccountMetricsConfig**](AccountsAPI.md#EnableSourceAccountMetricsConfig) | **Put** /v1/projects/{projectId}/source-accounts/{accountId}/metrics-config | Configure Source Account Metrics
+[**GetRestoreAccount**](AccountsAPI.md#GetRestoreAccount) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId} | Get Restore Account
 [**GetRestoreAccountConnectivityConfig**](AccountsAPI.md#GetRestoreAccountConnectivityConfig) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId}/connectivity-config | Get Restore Account Connectivity Configuration
 [**GetRestoreAccountMetricsConfig**](AccountsAPI.md#GetRestoreAccountMetricsConfig) | **Get** /v1/projects/{projectId}/restore-accounts/{accountId}/metrics-config | Get Restore Account Metrics Configuration
 [**GetSourceAccount**](AccountsAPI.md#GetSourceAccount) | **Get** /v1/projects/{projectId}/source-accounts/{accountId} | Get Source Account
@@ -1119,6 +1120,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRestoreAccount
+
+> GetRestoreAccountResponse GetRestoreAccount(ctx, projectId, accountId).Execute()
+
+Get Restore Account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "512010dd-8eaa-5b68-ab64-287458195d44" // string | ID of the project.
+	accountId := "0fa724c4-9251-5bcb-94ae-b5dd5bcb7a93" // string | Eon-assigned ID of the restore account.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountsAPI.GetRestoreAccount(context.Background(), projectId, accountId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.GetRestoreAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRestoreAccount`: GetRestoreAccountResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountsAPI.GetRestoreAccount`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project. | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRestoreAccountRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GetRestoreAccountResponse**](GetRestoreAccountResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

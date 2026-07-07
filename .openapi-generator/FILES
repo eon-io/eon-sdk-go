@@ -178,6 +178,7 @@ docs/GetMPARequestResponse.md
 docs/GetResourceResponse.md
 docs/GetRestoreAccountConnectivityConfigResponse.md
 docs/GetRestoreAccountMetricsConfigResponse.md
+docs/GetRestoreAccountResponse.md
 docs/GetRestoreJobResponse.md
 docs/GetRoleResponse.md
 docs/GetSnapshotResponse.md
@@ -549,6 +550,7 @@ model_get_mpa_request_response.go
 model_get_resource_response.go
 model_get_restore_account_connectivity_config_response.go
 model_get_restore_account_metrics_config_response.go
+model_get_restore_account_response.go
 model_get_restore_job_response.go
 model_get_role_response.go
 model_get_snapshot_response.go

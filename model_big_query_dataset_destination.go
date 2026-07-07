@@ -27,6 +27,8 @@ type BigQueryDatasetDestination struct {
 	Location *string `json:"location,omitempty"`
 	// List of table names to restore. If empty or not specified, all tables in the snapshot are restored. 
 	SelectedTables []string `json:"selectedTables,omitempty"`
+	// List of view names to restore. If empty or not specified, all views in the snapshot are restored. 
+	SelectedViews []string `json:"selectedViews,omitempty"`
 	// Labels to apply to the restored BigQuery dataset as key-value pairs, where key and value are both strings.  **Example:** `{\"eon-restore\": \"true\"}` 
 	Labels *map[string]string `json:"labels,omitempty"`
 	// When set to `true`, existing tables and metadata (views, routines) in the target dataset will be overwritten by the restored data. Materialized views are never overwritten: an existing materialized view is left as-is, since BigQuery has no `CREATE OR REPLACE MATERIALIZED VIEW`. When `false` (default), the restore fails if any conflicting objects already exist in the target dataset. 
@@ -145,6 +147,38 @@ func (o *BigQueryDatasetDestination) SetSelectedTables(v []string) {
 	o.SelectedTables = v
 }
 
+// GetSelectedViews returns the SelectedViews field value if set, zero value otherwise.
+func (o *BigQueryDatasetDestination) GetSelectedViews() []string {
+	if o == nil || IsNil(o.SelectedViews) {
+		var ret []string
+		return ret
+	}
+	return o.SelectedViews
+}
+
+// GetSelectedViewsOk returns a tuple with the SelectedViews field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BigQueryDatasetDestination) GetSelectedViewsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SelectedViews) {
+		return nil, false
+	}
+	return o.SelectedViews, true
+}
+
+// HasSelectedViews returns a boolean if a field has been set.
+func (o *BigQueryDatasetDestination) HasSelectedViews() bool {
+	if o != nil && !IsNil(o.SelectedViews) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectedViews gets a reference to the given []string and assigns it to the SelectedViews field.
+func (o *BigQueryDatasetDestination) SetSelectedViews(v []string) {
+	o.SelectedViews = v
+}
+
 // GetLabels returns the Labels field value if set, zero value otherwise.
 func (o *BigQueryDatasetDestination) GetLabels() map[string]string {
 	if o == nil || IsNil(o.Labels) {
@@ -225,6 +259,9 @@ func (o BigQueryDatasetDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SelectedTables) {
 		toSerialize["selectedTables"] = o.SelectedTables
+	}
+	if !IsNil(o.SelectedViews) {
+		toSerialize["selectedViews"] = o.SelectedViews
 	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
