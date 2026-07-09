@@ -84,6 +84,21 @@ func Test_eon_ResourcesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ResourcesAPIService GetObjectStoreScanMethod", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var id string
+
+		resp, httpRes, err := apiClient.ResourcesAPI.GetObjectStoreScanMethod(context.Background(), projectId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ResourcesAPIService GetResource", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -167,6 +182,21 @@ func Test_eon_ResourcesAPIService(t *testing.T) {
 		httpRes, err := apiClient.ResourcesAPI.RemoveEnvironmentOverride(context.Background(), projectId, id).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ResourcesAPIService UpdateObjectStoreScanMethod", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var id string
+
+		resp, httpRes, err := apiClient.ResourcesAPI.UpdateObjectStoreScanMethod(context.Background(), projectId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

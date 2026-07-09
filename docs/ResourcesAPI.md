@@ -8,12 +8,14 @@ Method | HTTP request | Description
 [**CancelVolumeBackupExclusion**](ResourcesAPI.md#CancelVolumeBackupExclusion) | **Patch** /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/include | Cancel Volume Backup Exclusion
 [**ExcludeResourceFromBackup**](ResourcesAPI.md#ExcludeResourceFromBackup) | **Patch** /v1/projects/{projectId}/resources/{id}/exclude | Exclude Resource from Backup
 [**ExcludeVolumeFromBackup**](ResourcesAPI.md#ExcludeVolumeFromBackup) | **Patch** /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/exclude | Exclude Volume from Backup
+[**GetObjectStoreScanMethod**](ResourcesAPI.md#GetObjectStoreScanMethod) | **Get** /v1/projects/{projectId}/resources/{id}/object-store-scan-method | Get object-store scan method
 [**GetResource**](ResourcesAPI.md#GetResource) | **Get** /v1/projects/{projectId}/resources/{id} | Get Resource
 [**ListResources**](ResourcesAPI.md#ListResources) | **Post** /v1/projects/{projectId}/resources | List Resources
 [**OverrideDataClasses**](ResourcesAPI.md#OverrideDataClasses) | **Patch** /v1/projects/{projectId}/resources/{id}/data-classifications | Override Data Classes
 [**OverrideEnvironment**](ResourcesAPI.md#OverrideEnvironment) | **Patch** /v1/projects/{projectId}/resources/{id}/environments | Override Environment
 [**RemoveDataClassesOverride**](ResourcesAPI.md#RemoveDataClassesOverride) | **Delete** /v1/projects/{projectId}/resources/{id}/data-classifications | Remove Data Classes Override
 [**RemoveEnvironmentOverride**](ResourcesAPI.md#RemoveEnvironmentOverride) | **Delete** /v1/projects/{projectId}/resources/{id}/environments | Remove Environment Override
+[**UpdateObjectStoreScanMethod**](ResourcesAPI.md#UpdateObjectStoreScanMethod) | **Patch** /v1/projects/{projectId}/resources/{id}/object-store-scan-method | Update object-store scan method
 
 
 
@@ -300,6 +302,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ExcludeFromBackupResponse**](ExcludeFromBackupResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetObjectStoreScanMethod
+
+> GetObjectStoreScanMethodResponse GetObjectStoreScanMethod(ctx, projectId, id).Execute()
+
+Get object-store scan method
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetObjectStoreScanMethod(context.Background(), projectId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetObjectStoreScanMethod``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetObjectStoreScanMethod`: GetObjectStoreScanMethodResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetObjectStoreScanMethod`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetObjectStoreScanMethodRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GetObjectStoreScanMethodResponse**](GetObjectStoreScanMethodResponse.md)
 
 ### Authorization
 
@@ -749,6 +824,81 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateObjectStoreScanMethod
+
+> UpdateObjectStoreScanMethodResponse UpdateObjectStoreScanMethod(ctx, projectId, id).UpdateObjectStoreScanMethodRequest(updateObjectStoreScanMethodRequest).Execute()
+
+Update object-store scan method
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource.
+	updateObjectStoreScanMethodRequest := *openapiclient.NewUpdateObjectStoreScanMethodRequest() // UpdateObjectStoreScanMethodRequest | Object-store scan method settings to update.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.UpdateObjectStoreScanMethod(context.Background(), projectId, id).UpdateObjectStoreScanMethodRequest(updateObjectStoreScanMethodRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.UpdateObjectStoreScanMethod``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateObjectStoreScanMethod`: UpdateObjectStoreScanMethodResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.UpdateObjectStoreScanMethod`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**id** | **string** | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateObjectStoreScanMethodRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateObjectStoreScanMethodRequest** | [**UpdateObjectStoreScanMethodRequest**](UpdateObjectStoreScanMethodRequest.md) | Object-store scan method settings to update. | 
+
+### Return type
+
+[**UpdateObjectStoreScanMethodResponse**](UpdateObjectStoreScanMethodResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

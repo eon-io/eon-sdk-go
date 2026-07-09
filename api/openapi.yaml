@@ -3248,6 +3248,162 @@ paths:
         - in: path
           entityType: resource
           key: id
+  /v1/projects/{projectId}/resources/{id}/object-store-scan-method:
+    get:
+      description: "Description: Retrieves object-store scan method settings for an\
+        \ AWS S3 bucket or GCP Cloud Storage bucket."
+      operationId: getObjectStoreScanMethod
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket
+          resource.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetObjectStoreScanMethodResponse'
+          description: Object-store scan method settings retrieved.
+        "400":
+          description: Resource type doesn't support object-store scan method settings.
+        "404":
+          description: Project or resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get object-store scan method
+      tags:
+      - resources
+      x-internal: false
+      x-permissions:
+      - read:inventory
+      x-audit-log:
+        excluded: true
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - in: path
+          entityType: resource
+          key: id
+    patch:
+      description: "Description: Updates object-store scan method settings for an\
+        \ AWS S3 bucket or GCP Cloud Storage bucket. Despite S3-oriented setting names,\
+        \ CDC and inventory settings apply to both AWS S3 buckets and GCP Cloud Storage\
+        \ buckets."
+      operationId: updateObjectStoreScanMethod
+      parameters:
+      - description: |
+          ID of the project the resource is in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket
+          resource.
+        example: 043090df-9fe5-4f89-9859-45db589c2936
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateObjectStoreScanMethodRequest'
+        description: Object-store scan method settings to update.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateObjectStoreScanMethodResponse'
+          description: Object-store scan method settings updated.
+        "400":
+          description: "Invalid request body, parameters, or unsupported resource\
+            \ type."
+        "403":
+          description: Insufficient permissions to update the requested object-store
+            scan method settings.
+        "404":
+          description: Project or resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update object-store scan method
+      tags:
+      - resources
+      x-internal: false
+      x-permissions:
+      - update:inventory
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: cloud_resource
+          in: path
+          key: id
+      x-data-access:
+        excluded: false
+        entityRefs:
+        - entityType: resource
+          in: path
+          key: id
   /v1/projects/{projectId}/backup-policies:
     post:
       description: "Description: Creates a backup policy."
@@ -8148,8 +8304,6 @@ components:
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
       - AWS_CASSANDRA_CLUSTER
-      - GCP_CASSANDRA_CLUSTER
-      - AZURE_CASSANDRA_CLUSTER
       - AWS_DOCUMENTDB
       - AWS_NEPTUNE
       - AZURE_VIRTUAL_MACHINE
@@ -8165,6 +8319,7 @@ components:
       - AZURE_COSMOSDB_MONGODB
       - AZURE_COSMOSDB_NOSQL
       - AZURE_AKS_NAMESPACE
+      - AZURE_CASSANDRA_CLUSTER
       - ATLAS_MONGODB_CLUSTER
       - GCP_COMPUTE_ENGINE_INSTANCE
       - GCP_CLOUD_SQL_INSTANCE
@@ -8174,6 +8329,7 @@ components:
       - GCP_CLOUD_FIRESTORE
       - GCP_DISK
       - GCP_SAP_HANA_VM
+      - GCP_CASSANDRA_CLUSTER
       - GOOGLE_WORKSPACE_RESOURCE
       - MICROSOFT_365_RESOURCE
       - RESOURCE_TYPE_UNSPECIFIED
@@ -14857,6 +15013,97 @@ components:
           type: string
       required:
       - jobId
+      type: object
+    ObjectStoreScanMethodSetting:
+      additionalProperties: false
+      description: "Object-store scan method setting. If systemControlled is true,\
+        \ Eon decides whether the method is enabled. If systemControlled is false,\
+        \ enabled is required."
+      example:
+        enabled: true
+        systemControlled: false
+      properties:
+        enabled:
+          description: Whether the scan method is enabled. Required only when systemControlled
+            is false.
+          example: true
+          nullable: true
+          type: boolean
+        systemControlled:
+          description: Whether Eon should decide when to use this scan method.
+          example: false
+          type: boolean
+      required:
+      - systemControlled
+      type: object
+    ObjectStoreScanMethod:
+      additionalProperties: false
+      description: Object-store scan method settings for an AWS S3 bucket or GCP Cloud
+        Storage bucket.
+      example:
+        inventoryBackup:
+          enabled: true
+          systemControlled: false
+        cdcBackup:
+          enabled: true
+          systemControlled: false
+      properties:
+        cdcBackup:
+          $ref: '#/components/schemas/ObjectStoreScanMethodSetting'
+        inventoryBackup:
+          $ref: '#/components/schemas/ObjectStoreScanMethodSetting'
+      required:
+      - cdcBackup
+      - inventoryBackup
+      type: object
+    GetObjectStoreScanMethodResponse:
+      additionalProperties: false
+      example:
+        objectStoreScanMethod:
+          inventoryBackup:
+            enabled: true
+            systemControlled: false
+          cdcBackup:
+            enabled: true
+            systemControlled: false
+      properties:
+        objectStoreScanMethod:
+          $ref: '#/components/schemas/ObjectStoreScanMethod'
+      required:
+      - objectStoreScanMethod
+      type: object
+    UpdateObjectStoreScanMethodRequest:
+      additionalProperties: false
+      description: Object-store scan method settings to update for an AWS S3 bucket
+        or GCP Cloud Storage bucket.
+      example:
+        inventoryBackup:
+          enabled: true
+          systemControlled: false
+        cdcBackup:
+          enabled: true
+          systemControlled: false
+      properties:
+        cdcBackup:
+          $ref: '#/components/schemas/ObjectStoreScanMethodSetting'
+        inventoryBackup:
+          $ref: '#/components/schemas/ObjectStoreScanMethodSetting'
+      type: object
+    UpdateObjectStoreScanMethodResponse:
+      additionalProperties: false
+      example:
+        objectStoreScanMethod:
+          inventoryBackup:
+            enabled: true
+            systemControlled: false
+          cdcBackup:
+            enabled: true
+            systemControlled: false
+      properties:
+        objectStoreScanMethod:
+          $ref: '#/components/schemas/ObjectStoreScanMethod'
+      required:
+      - objectStoreScanMethod
       type: object
     ResourceSelectorMode:
       enum:
