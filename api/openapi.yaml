@@ -3633,7 +3633,10 @@ paths:
           key: backupPolicyId
       x-mpa:
         operation: MPA_OPERATION_DELETE_BACKUP_POLICY
-        resourceIdParam: backupPolicyId
+        target:
+          entityType: backup_policy
+          in: path
+          key: backupPolicyId
     get:
       description: "Description: Retrieves a backup policy."
       operationId: getBackupPolicy
@@ -3796,7 +3799,10 @@ paths:
           key: backupPolicyId
       x-mpa:
         operation: MPA_OPERATION_UPDATE_BACKUP_POLICY
-        resourceIdParam: backupPolicyId
+        target:
+          entityType: backup_policy
+          in: path
+          key: backupPolicyId
   /v1/projects/{projectId}/vaults:
     post:
       description: |
@@ -4300,7 +4306,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4429,7 +4438,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4558,7 +4570,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4687,7 +4702,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4816,7 +4834,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -4948,7 +4969,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -5077,7 +5101,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -5206,7 +5233,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -5336,7 +5366,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -5468,7 +5501,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -5600,7 +5636,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -5732,7 +5771,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -5864,7 +5906,10 @@ paths:
       - create:restore_resource
       x-mpa:
         operation: MPA_OPERATION_RESTORE_RESOURCE
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: snapshotId
       x-audit-log:
         action: trigger
         entityRefs:
@@ -7145,7 +7190,10 @@ paths:
       - create:jobs
       x-mpa:
         operation: MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
-        resourceIdParam: id
+        target:
+          entityType: snapshot
+          in: path
+          key: id
       x-audit-log:
         action: update
         entityRefs:
