@@ -37,6 +37,8 @@
 
 * `GLOBAL_CLUSTER_IDENTIFIER` (value: `"globalClusterIdentifier"`)
 
+* `LAST_DATA_CLASSIFICATION_TIME` (value: `"lastDataClassificationTime"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

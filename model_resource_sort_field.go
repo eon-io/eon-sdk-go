@@ -37,6 +37,7 @@ const (
 	RESOURCE_GROUP_NAME ResourceSortField = "resourceGroupName"
 	CLUSTER_NAME ResourceSortField = "clusterName"
 	GLOBAL_CLUSTER_IDENTIFIER ResourceSortField = "globalClusterIdentifier"
+	LAST_DATA_CLASSIFICATION_TIME ResourceSortField = "lastDataClassificationTime"
 )
 
 // All allowed values of ResourceSortField enum
@@ -58,6 +59,7 @@ var AllowedResourceSortFieldEnumValues = []ResourceSortField{
 	"resourceGroupName",
 	"clusterName",
 	"globalClusterIdentifier",
+	"lastDataClassificationTime",
 }
 
 func (v *ResourceSortField) UnmarshalJSON(src []byte) error {

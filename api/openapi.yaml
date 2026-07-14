@@ -20741,6 +20741,7 @@ components:
       - resourceGroupName
       - clusterName
       - globalClusterIdentifier
+      - lastDataClassificationTime
       example: latestSnapshotTime
       type: string
       x-docs-internal-enum:
@@ -20753,6 +20754,7 @@ components:
       - snapshotStorageSizeBytes
       - eonSnapshotCount
       - nonEonSnapshotCount
+      - lastDataClassificationTime
     SortResourceBy:
       description: |
         List of sorting options.
