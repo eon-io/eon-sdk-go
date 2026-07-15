@@ -193,6 +193,7 @@ docs/HighFrequencyBackupScheduleConfig.md
 docs/HighFrequencyBackupScheduleFrequency.md
 docs/HighFrequencyBackupSchedules.md
 docs/HighFrequencyIntervalConfig.md
+docs/HoldSnapshotRequest.md
 docs/IamAPI.md
 docs/IdFilters.md
 docs/Idp.md
@@ -570,6 +571,7 @@ model_high_frequency_backup_schedule_config.go
 model_high_frequency_backup_schedule_frequency.go
 model_high_frequency_backup_schedules.go
 model_high_frequency_interval_config.go
+model_hold_snapshot_request.go
 model_id_filters.go
 model_idp.go
 model_idp_group.go

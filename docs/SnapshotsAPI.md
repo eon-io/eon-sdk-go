@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ## HoldSnapshot
 
-> map[string]interface{} HoldSnapshot(ctx, projectId, id).Execute()
+> map[string]interface{} HoldSnapshot(ctx, projectId, id).HoldSnapshotRequest(holdSnapshotRequest).Execute()
 
 Hold Snapshot
 
@@ -121,10 +121,11 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
+	holdSnapshotRequest := *openapiclient.NewHoldSnapshotRequest() // HoldSnapshotRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), projectId, id).Execute()
+	resp, r, err := apiClient.SnapshotsAPI.HoldSnapshot(context.Background(), projectId, id).HoldSnapshotRequest(holdSnapshotRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.HoldSnapshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -152,6 +153,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **holdSnapshotRequest** | [**HoldSnapshotRequest**](HoldSnapshotRequest.md) |  | 
 
 ### Return type
 
@@ -163,7 +165,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

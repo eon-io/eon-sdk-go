@@ -41,6 +41,8 @@ type Snapshot struct {
 	Resource *ResourceSnapshot `json:"resource,omitempty"`
 	// Whether the snapshot is on user hold.
 	OnHold *bool `json:"onHold,omitempty"`
+	// Free-text note explaining why the snapshot is on hold. Cleared when the hold is removed.
+	HoldDescription *string `json:"holdDescription,omitempty"`
 }
 
 type _Snapshot Snapshot
@@ -361,6 +363,38 @@ func (o *Snapshot) SetOnHold(v bool) {
 	o.OnHold = &v
 }
 
+// GetHoldDescription returns the HoldDescription field value if set, zero value otherwise.
+func (o *Snapshot) GetHoldDescription() string {
+	if o == nil || IsNil(o.HoldDescription) {
+		var ret string
+		return ret
+	}
+	return *o.HoldDescription
+}
+
+// GetHoldDescriptionOk returns a tuple with the HoldDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetHoldDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.HoldDescription) {
+		return nil, false
+	}
+	return o.HoldDescription, true
+}
+
+// HasHoldDescription returns a boolean if a field has been set.
+func (o *Snapshot) HasHoldDescription() bool {
+	if o != nil && !IsNil(o.HoldDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetHoldDescription gets a reference to the given string and assigns it to the HoldDescription field.
+func (o *Snapshot) SetHoldDescription(v string) {
+	o.HoldDescription = &v
+}
+
 func (o Snapshot) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -394,6 +428,9 @@ func (o Snapshot) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OnHold) {
 		toSerialize["onHold"] = o.OnHold
+	}
+	if !IsNil(o.HoldDescription) {
+		toSerialize["holdDescription"] = o.HoldDescription
 	}
 	return toSerialize, nil
 }
