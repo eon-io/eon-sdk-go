@@ -13709,6 +13709,7 @@ components:
       - AWS_NEPTUNE_BACKUP
       - AWS_DYNAMO_DB_BACKUP
       - AWS_DYNAMO_DB_BACKUP_FULL
+      - AWS_DYNAMO_DB_BACKUP_FULL_EXPORT
       - AWS_EKS_NAMESPACE_BACKUP
       - AWS_KEYSPACES_BACKUP_FULL
       - AZURE_STORAGE_ACCOUNT_BACKUP
@@ -13733,6 +13734,7 @@ components:
       - MICROSOFT_365_BACKUP
       example: AWS_EC2_BACKUP
       type: string
+      x-extensible-enum: true
       x-docs-internal-enum:
       - AWS_EBS_VOLUME_BACKUP
       - AWS_S3_LLG_BACKUP

@@ -33,6 +33,7 @@ const (
 	AWS_NEPTUNE_BACKUP BackupJobType = "AWS_NEPTUNE_BACKUP"
 	AWS_DYNAMO_DB_BACKUP BackupJobType = "AWS_DYNAMO_DB_BACKUP"
 	AWS_DYNAMO_DB_BACKUP_FULL BackupJobType = "AWS_DYNAMO_DB_BACKUP_FULL"
+	AWS_DYNAMO_DB_BACKUP_FULL_EXPORT BackupJobType = "AWS_DYNAMO_DB_BACKUP_FULL_EXPORT"
 	AWS_EKS_NAMESPACE_BACKUP BackupJobType = "AWS_EKS_NAMESPACE_BACKUP"
 	AWS_KEYSPACES_BACKUP_FULL BackupJobType = "AWS_KEYSPACES_BACKUP_FULL"
 	AZURE_STORAGE_ACCOUNT_BACKUP BackupJobType = "AZURE_STORAGE_ACCOUNT_BACKUP"
@@ -72,6 +73,7 @@ var AllowedBackupJobTypeEnumValues = []BackupJobType{
 	"AWS_NEPTUNE_BACKUP",
 	"AWS_DYNAMO_DB_BACKUP",
 	"AWS_DYNAMO_DB_BACKUP_FULL",
+	"AWS_DYNAMO_DB_BACKUP_FULL_EXPORT",
 	"AWS_EKS_NAMESPACE_BACKUP",
 	"AWS_KEYSPACES_BACKUP_FULL",
 	"AZURE_STORAGE_ACCOUNT_BACKUP",
@@ -102,15 +104,10 @@ func (v *BackupJobType) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := BackupJobType(value)
-	for _, existing := range AllowedBackupJobTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid BackupJobType", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = BackupJobType(value)
+	return nil
 }
 
 // NewBackupJobTypeFromValue returns a pointer to a valid BackupJobType
