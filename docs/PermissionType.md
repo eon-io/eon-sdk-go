@@ -105,6 +105,8 @@
 
 * `CLASSIFICATION_POLICIES_MANAGE` (value: `"classification_policies.manage"`)
 
+* `FILE_EXPLORER_DELETE` (value: `"file_explorer.delete"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

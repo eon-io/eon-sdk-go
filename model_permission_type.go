@@ -71,6 +71,7 @@ const (
 	DATALAKE_OPERATE PermissionType = "datalake.operate"
 	COMPLIANCE_VIEW PermissionType = "compliance.view"
 	CLASSIFICATION_POLICIES_MANAGE PermissionType = "classification_policies.manage"
+	FILE_EXPLORER_DELETE PermissionType = "file_explorer.delete"
 )
 
 // All allowed values of PermissionType enum
@@ -126,6 +127,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"datalake.operate",
 	"compliance.view",
 	"classification_policies.manage",
+	"file_explorer.delete",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {
@@ -134,15 +136,10 @@ func (v *PermissionType) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := PermissionType(value)
-	for _, existing := range AllowedPermissionTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid PermissionType", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = PermissionType(value)
+	return nil
 }
 
 // NewPermissionTypeFromValue returns a pointer to a valid PermissionType

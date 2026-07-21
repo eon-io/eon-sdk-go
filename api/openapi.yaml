@@ -8049,8 +8049,10 @@ components:
       - datalake.operate
       - compliance.view
       - classification_policies.manage
+      - file_explorer.delete
       example: inventory.view
       type: string
+      x-extensible-enum: true
       x-docs-internal-enum:
       - zero_etl_policies.manage
       - action_approval_rules.manage
