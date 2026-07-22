@@ -71,6 +71,7 @@ const (
 	GCP_SAP_HANA_VM_INSTANCE_RESTORE RestoreJobType = "GCP_SAP_HANA_VM_INSTANCE_RESTORE"
 	AWS_KEYSPACES_TABLE_RESTORE RestoreJobType = "AWS_KEYSPACES_TABLE_RESTORE"
 	AWS_KEYSPACES_RECORD_RESTORE RestoreJobType = "AWS_KEYSPACES_RECORD_RESTORE"
+	AWS_CASSANDRA_CLUSTER_RESTORE RestoreJobType = "AWS_CASSANDRA_CLUSTER_RESTORE"
 	ATLAS_CLUSTER_RESTORE RestoreJobType = "ATLAS_CLUSTER_RESTORE"
 	ATLAS_CLUSTER_RECORD_RESTORE RestoreJobType = "ATLAS_CLUSTER_RECORD_RESTORE"
 	MICROSOFT_365_RESTORE RestoreJobType = "MICROSOFT_365_RESTORE"
@@ -131,6 +132,7 @@ var AllowedRestoreJobTypeEnumValues = []RestoreJobType{
 	"GCP_SAP_HANA_VM_INSTANCE_RESTORE",
 	"AWS_KEYSPACES_TABLE_RESTORE",
 	"AWS_KEYSPACES_RECORD_RESTORE",
+	"AWS_CASSANDRA_CLUSTER_RESTORE",
 	"ATLAS_CLUSTER_RESTORE",
 	"ATLAS_CLUSTER_RECORD_RESTORE",
 	"MICROSOFT_365_RESTORE",
@@ -144,15 +146,10 @@ func (v *RestoreJobType) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := RestoreJobType(value)
-	for _, existing := range AllowedRestoreJobTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid RestoreJobType", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = RestoreJobType(value)
+	return nil
 }
 
 // NewRestoreJobTypeFromValue returns a pointer to a valid RestoreJobType
