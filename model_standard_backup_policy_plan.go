@@ -23,6 +23,7 @@ var _ MappedNullable = &StandardBackupPolicyPlan{}
 type StandardBackupPolicyPlan struct {
 	// List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault. 
 	BackupSchedules []StandardBackupSchedules `json:"backupSchedules"`
+	ScheduleTimezone *ScheduleTimezone `json:"scheduleTimezone,omitempty"`
 }
 
 type _StandardBackupPolicyPlan StandardBackupPolicyPlan
@@ -34,6 +35,8 @@ type _StandardBackupPolicyPlan StandardBackupPolicyPlan
 func NewStandardBackupPolicyPlan(backupSchedules []StandardBackupSchedules) *StandardBackupPolicyPlan {
 	this := StandardBackupPolicyPlan{}
 	this.BackupSchedules = backupSchedules
+	var scheduleTimezone ScheduleTimezone = SCHEDULE_TIMEZONE_UTC
+	this.ScheduleTimezone = &scheduleTimezone
 	return &this
 }
 
@@ -42,6 +45,8 @@ func NewStandardBackupPolicyPlan(backupSchedules []StandardBackupSchedules) *Sta
 // but it doesn't guarantee that properties required by API are set
 func NewStandardBackupPolicyPlanWithDefaults() *StandardBackupPolicyPlan {
 	this := StandardBackupPolicyPlan{}
+	var scheduleTimezone ScheduleTimezone = SCHEDULE_TIMEZONE_UTC
+	this.ScheduleTimezone = &scheduleTimezone
 	return &this
 }
 
@@ -69,6 +74,38 @@ func (o *StandardBackupPolicyPlan) SetBackupSchedules(v []StandardBackupSchedule
 	o.BackupSchedules = v
 }
 
+// GetScheduleTimezone returns the ScheduleTimezone field value if set, zero value otherwise.
+func (o *StandardBackupPolicyPlan) GetScheduleTimezone() ScheduleTimezone {
+	if o == nil || IsNil(o.ScheduleTimezone) {
+		var ret ScheduleTimezone
+		return ret
+	}
+	return *o.ScheduleTimezone
+}
+
+// GetScheduleTimezoneOk returns a tuple with the ScheduleTimezone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StandardBackupPolicyPlan) GetScheduleTimezoneOk() (*ScheduleTimezone, bool) {
+	if o == nil || IsNil(o.ScheduleTimezone) {
+		return nil, false
+	}
+	return o.ScheduleTimezone, true
+}
+
+// HasScheduleTimezone returns a boolean if a field has been set.
+func (o *StandardBackupPolicyPlan) HasScheduleTimezone() bool {
+	if o != nil && !IsNil(o.ScheduleTimezone) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduleTimezone gets a reference to the given ScheduleTimezone and assigns it to the ScheduleTimezone field.
+func (o *StandardBackupPolicyPlan) SetScheduleTimezone(v ScheduleTimezone) {
+	o.ScheduleTimezone = &v
+}
+
 func (o StandardBackupPolicyPlan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +117,9 @@ func (o StandardBackupPolicyPlan) MarshalJSON() ([]byte, error) {
 func (o StandardBackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["backupSchedules"] = o.BackupSchedules
+	if !IsNil(o.ScheduleTimezone) {
+		toSerialize["scheduleTimezone"] = o.ScheduleTimezone
+	}
 	return toSerialize, nil
 }
 

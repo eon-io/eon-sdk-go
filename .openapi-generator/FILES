@@ -326,6 +326,7 @@ docs/S3RestoreDestination.md
 docs/S3RestoreTarget.md
 docs/SameSourceAccountRestoreLimits.md
 docs/ScalarOperators.md
+docs/ScheduleTimezone.md
 docs/Snapshot.md
 docs/SnapshotDateFilters.md
 docs/SnapshotFilterConditions.md
@@ -701,6 +702,7 @@ model_s3_restore_destination.go
 model_s3_restore_target.go
 model_same_source_account_restore_limits.go
 model_scalar_operators.go
+model_schedule_timezone.go
 model_snapshot.go
 model_snapshot_date_filters.go
 model_snapshot_filter_conditions.go

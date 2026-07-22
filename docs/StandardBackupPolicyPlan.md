@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupSchedules** | [**[]StandardBackupSchedules**](StandardBackupSchedules.md) | List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault.  | 
+**ScheduleTimezone** | Pointer to [**ScheduleTimezone**](ScheduleTimezone.md) |  | [optional] [default to SCHEDULE_TIMEZONE_UTC]
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetBackupSchedules sets BackupSchedules field to given value.
 
+
+### GetScheduleTimezone
+
+`func (o *StandardBackupPolicyPlan) GetScheduleTimezone() ScheduleTimezone`
+
+GetScheduleTimezone returns the ScheduleTimezone field if non-nil, zero value otherwise.
+
+### GetScheduleTimezoneOk
+
+`func (o *StandardBackupPolicyPlan) GetScheduleTimezoneOk() (*ScheduleTimezone, bool)`
+
+GetScheduleTimezoneOk returns a tuple with the ScheduleTimezone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleTimezone
+
+`func (o *StandardBackupPolicyPlan) SetScheduleTimezone(v ScheduleTimezone)`
+
+SetScheduleTimezone sets ScheduleTimezone field to given value.
+
+### HasScheduleTimezone
+
+`func (o *StandardBackupPolicyPlan) HasScheduleTimezone() bool`
+
+HasScheduleTimezone returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

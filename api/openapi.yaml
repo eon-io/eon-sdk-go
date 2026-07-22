@@ -15866,6 +15866,23 @@ components:
       - scheduleConfig
       - vaultId
       type: object
+    ScheduleTimezone:
+      default: UTC
+      description: |
+        Time zone the policy's backup schedule windows are interpreted in.
+        Applies to every schedule on the policy.
+        `UTC` runs the windows at a fixed UTC hour; `RESOURCE` runs them at the same
+        local hour in each resource's own region time zone.
+        Defaults to `UTC` when omitted.
+      enum:
+      - UTC
+      - RESOURCE
+      example: UTC
+      type: string
+      x-extensible-enum: true
+      x-enum-varnames:
+      - SCHEDULE_TIMEZONE_UTC
+      - SCHEDULE_TIMEZONE_RESOURCE
     StandardBackupPolicyPlan:
       example:
         backupSchedules:
@@ -15941,6 +15958,7 @@ components:
                 minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
+        scheduleTimezone: UTC
       nullable: true
       properties:
         backupSchedules:
@@ -15950,6 +15968,8 @@ components:
           items:
             $ref: '#/components/schemas/StandardBackupSchedules'
           type: array
+        scheduleTimezone:
+          $ref: '#/components/schemas/ScheduleTimezone'
       required:
       - backupSchedules
       type: object
@@ -16193,6 +16213,7 @@ components:
                 minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
+        scheduleTimezone: UTC
       nullable: true
       properties:
         resourceTypes:
@@ -16207,6 +16228,8 @@ components:
           items:
             $ref: '#/components/schemas/HighFrequencyBackupSchedules'
           type: array
+        scheduleTimezone:
+          $ref: '#/components/schemas/ScheduleTimezone'
       required:
       - backupSchedules
       - resourceTypes
@@ -16329,6 +16352,7 @@ components:
                   minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
+          scheduleTimezone: UTC
         standardPlan:
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -16403,6 +16427,7 @@ components:
                   minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
+          scheduleTimezone: UTC
       properties:
         backupPolicyType:
           $ref: '#/components/schemas/BackupPolicyType'
@@ -16501,6 +16526,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            scheduleTimezone: UTC
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -16575,6 +16601,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            scheduleTimezone: UTC
         resourceSelector:
           expression:
             resourceId:
@@ -16780,6 +16807,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            scheduleTimezone: UTC
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -16854,6 +16882,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            scheduleTimezone: UTC
         id: de308488-df3d-5b82-8f37-477ef529f491
         resourceSelector:
           expression:
@@ -17066,6 +17095,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -17140,6 +17170,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -17335,6 +17366,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -17409,6 +17441,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -17594,6 +17627,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -17668,6 +17702,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -17873,6 +17908,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -17947,6 +17983,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -18140,6 +18177,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            scheduleTimezone: UTC
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -18214,6 +18252,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            scheduleTimezone: UTC
         resourceSelector:
           expression:
             resourceId:
@@ -18420,6 +18459,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -18494,6 +18534,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              scheduleTimezone: UTC
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
