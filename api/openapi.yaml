@@ -8191,7 +8191,7 @@ components:
           resourceNames:
           - resourceNames
           - resourceNames
-          operator: IN
+          operator: CONTAINS
         dataClasses:
           dataClasses:
           - PII
@@ -8642,16 +8642,42 @@ components:
       - operator
       - resourceGroupNames
       type: object
+    StringOperators:
+      description: |
+        Evaluates string values.
+        `UNSPECIFIED` is supported only in responses.
+      enum:
+      - IN
+      - NOT_IN
+      - CONTAINS
+      - NOT_CONTAINS
+      - STARTS_WITH
+      - NOT_STARTS_WITH
+      - ENDS_WITH
+      - NOT_ENDS_WITH
+      - UNSPECIFIED
+      example: CONTAINS
+      type: string
+      x-enum-varnames:
+      - STRING_IN_OPERATOR
+      - STRING_NOT_IN_OPERATOR
+      - STRING_CONTAINS_OPERATOR
+      - STRING_NOT_CONTAINS_OPERATOR
+      - STRING_STARTS_WITH_OPERATOR
+      - STRING_NOT_STARTS_WITH_OPERATOR
+      - STRING_ENDS_WITH_OPERATOR
+      - STRING_NOT_ENDS_WITH_OPERATOR
+      - STRING_OPERATOR_UNSPECIFIED
     ResourceNameCondition:
       example:
         resourceNames:
         - resourceNames
         - resourceNames
-        operator: IN
+        operator: CONTAINS
       nullable: true
       properties:
         operator:
-          $ref: '#/components/schemas/ScalarOperators'
+          $ref: '#/components/schemas/StringOperators'
         resourceNames:
           items:
             type: string
@@ -8755,7 +8781,7 @@ components:
             resourceNames:
             - resourceNames
             - resourceNames
-            operator: IN
+            operator: CONTAINS
           dataClasses:
             dataClasses:
             - PII
@@ -8923,7 +8949,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -9011,7 +9037,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -9162,7 +9188,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -9250,7 +9276,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -9399,7 +9425,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -9487,7 +9513,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -9602,7 +9628,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -9690,7 +9716,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -9795,7 +9821,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -9883,7 +9909,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -10009,7 +10035,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -10097,7 +10123,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -10209,7 +10235,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -10297,7 +10323,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -10426,7 +10452,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -10514,7 +10540,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -15212,7 +15238,7 @@ components:
           resourceNames:
           - resourceNames
           - resourceNames
-          operator: IN
+          operator: CONTAINS
         dataClasses:
           dataClasses:
           - PII
@@ -15406,7 +15432,7 @@ components:
             resourceNames:
             - resourceNames
             - resourceNames
-            operator: IN
+            operator: CONTAINS
           dataClasses:
             dataClasses:
             - PII
@@ -16628,7 +16654,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -16910,7 +16936,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -17198,7 +17224,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -17469,7 +17495,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -17730,7 +17756,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -18011,7 +18037,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII
@@ -18279,7 +18305,7 @@ components:
               resourceNames:
               - resourceNames
               - resourceNames
-              operator: IN
+              operator: CONTAINS
             dataClasses:
               dataClasses:
               - PII
@@ -18562,7 +18588,7 @@ components:
                 resourceNames:
                 - resourceNames
                 - resourceNames
-                operator: IN
+                operator: CONTAINS
               dataClasses:
                 dataClasses:
                 - PII

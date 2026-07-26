@@ -21,7 +21,7 @@ var _ MappedNullable = &ResourceNameCondition{}
 
 // ResourceNameCondition struct for ResourceNameCondition
 type ResourceNameCondition struct {
-	Operator ScalarOperators `json:"operator"`
+	Operator StringOperators `json:"operator"`
 	ResourceNames []string `json:"resourceNames"`
 }
 
@@ -31,7 +31,7 @@ type _ResourceNameCondition ResourceNameCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceNameCondition(operator ScalarOperators, resourceNames []string) *ResourceNameCondition {
+func NewResourceNameCondition(operator StringOperators, resourceNames []string) *ResourceNameCondition {
 	this := ResourceNameCondition{}
 	this.Operator = operator
 	this.ResourceNames = resourceNames
@@ -47,9 +47,9 @@ func NewResourceNameConditionWithDefaults() *ResourceNameCondition {
 }
 
 // GetOperator returns the Operator field value
-func (o *ResourceNameCondition) GetOperator() ScalarOperators {
+func (o *ResourceNameCondition) GetOperator() StringOperators {
 	if o == nil {
-		var ret ScalarOperators
+		var ret StringOperators
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *ResourceNameCondition) GetOperator() ScalarOperators {
 
 // GetOperatorOk returns a tuple with the Operator field value
 // and a boolean to check if the value has been set.
-func (o *ResourceNameCondition) GetOperatorOk() (*ScalarOperators, bool) {
+func (o *ResourceNameCondition) GetOperatorOk() (*StringOperators, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *ResourceNameCondition) GetOperatorOk() (*ScalarOperators, bool) {
 }
 
 // SetOperator sets field value
-func (o *ResourceNameCondition) SetOperator(v ScalarOperators) {
+func (o *ResourceNameCondition) SetOperator(v StringOperators) {
 	o.Operator = v
 }
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
+**Operator** | [**StringOperators**](StringOperators.md) |  | 
 **ResourceNames** | **[]string** |  | 
 
 ## Methods
 
 ### NewResourceNameCondition
 
-`func NewResourceNameCondition(operator ScalarOperators, resourceNames []string, ) *ResourceNameCondition`
+`func NewResourceNameCondition(operator StringOperators, resourceNames []string, ) *ResourceNameCondition`
 
 NewResourceNameCondition instantiates a new ResourceNameCondition object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOperator
 
-`func (o *ResourceNameCondition) GetOperator() ScalarOperators`
+`func (o *ResourceNameCondition) GetOperator() StringOperators`
 
 GetOperator returns the Operator field if non-nil, zero value otherwise.
 
 ### GetOperatorOk
 
-`func (o *ResourceNameCondition) GetOperatorOk() (*ScalarOperators, bool)`
+`func (o *ResourceNameCondition) GetOperatorOk() (*StringOperators, bool)`
 
 GetOperatorOk returns a tuple with the Operator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperator
 
-`func (o *ResourceNameCondition) SetOperator(v ScalarOperators)`
+`func (o *ResourceNameCondition) SetOperator(v StringOperators)`
 
 SetOperator sets Operator field to given value.
 

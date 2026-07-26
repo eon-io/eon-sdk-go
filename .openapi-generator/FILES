@@ -357,6 +357,7 @@ docs/StandardBackupSchedules.md
 docs/StandardIntervalConfig.md
 docs/StartTimeDateFilters.md
 docs/StorageAccountRestoreTarget.md
+docs/StringOperators.md
 docs/SubmitMyMPARequestRequest.md
 docs/SubmitMyMPARequestResponse.md
 docs/SubnetFilters.md
@@ -732,6 +733,7 @@ model_standard_backup_schedules.go
 model_standard_interval_config.go
 model_start_time_date_filters.go
 model_storage_account_restore_target.go
+model_string_operators.go
 model_submit_my_mpa_request_request.go
 model_submit_my_mpa_request_response.go
 model_subnet_filters.go
