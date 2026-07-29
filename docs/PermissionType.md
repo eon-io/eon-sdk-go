@@ -107,6 +107,10 @@
 
 * `FILE_EXPLORER_DELETE` (value: `"file_explorer.delete"`)
 
+* `STORAGE_GATEWAY_DATA_DOWNLOAD` (value: `"storage_gateway_data.download"`)
+
+* `STORAGE_GATEWAY_METADATA_VIEW` (value: `"storage_gateway_metadata.view"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

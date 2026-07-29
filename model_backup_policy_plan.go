@@ -25,6 +25,7 @@ type BackupPolicyPlan struct {
 	StandardPlan NullableStandardBackupPolicyPlan `json:"standardPlan,omitempty"`
 	HighFrequencyPlan NullableHighFrequencyBackupPolicyPlan `json:"highFrequencyPlan,omitempty"`
 	AwsNativePitrPlan NullableAwsNativePitrBackupPolicyPlan `json:"awsNativePitrPlan,omitempty"`
+	AwsNativeStandardPlan NullableAwsNativeStandardBackupPolicyPlan `json:"awsNativeStandardPlan,omitempty"`
 }
 
 type _BackupPolicyPlan BackupPolicyPlan
@@ -197,6 +198,48 @@ func (o *BackupPolicyPlan) UnsetAwsNativePitrPlan() {
 	o.AwsNativePitrPlan.Unset()
 }
 
+// GetAwsNativeStandardPlan returns the AwsNativeStandardPlan field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BackupPolicyPlan) GetAwsNativeStandardPlan() AwsNativeStandardBackupPolicyPlan {
+	if o == nil || IsNil(o.AwsNativeStandardPlan.Get()) {
+		var ret AwsNativeStandardBackupPolicyPlan
+		return ret
+	}
+	return *o.AwsNativeStandardPlan.Get()
+}
+
+// GetAwsNativeStandardPlanOk returns a tuple with the AwsNativeStandardPlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BackupPolicyPlan) GetAwsNativeStandardPlanOk() (*AwsNativeStandardBackupPolicyPlan, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AwsNativeStandardPlan.Get(), o.AwsNativeStandardPlan.IsSet()
+}
+
+// HasAwsNativeStandardPlan returns a boolean if a field has been set.
+func (o *BackupPolicyPlan) HasAwsNativeStandardPlan() bool {
+	if o != nil && o.AwsNativeStandardPlan.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsNativeStandardPlan gets a reference to the given NullableAwsNativeStandardBackupPolicyPlan and assigns it to the AwsNativeStandardPlan field.
+func (o *BackupPolicyPlan) SetAwsNativeStandardPlan(v AwsNativeStandardBackupPolicyPlan) {
+	o.AwsNativeStandardPlan.Set(&v)
+}
+// SetAwsNativeStandardPlanNil sets the value for AwsNativeStandardPlan to be an explicit nil
+func (o *BackupPolicyPlan) SetAwsNativeStandardPlanNil() {
+	o.AwsNativeStandardPlan.Set(nil)
+}
+
+// UnsetAwsNativeStandardPlan ensures that no value is present for AwsNativeStandardPlan, not even an explicit nil
+func (o *BackupPolicyPlan) UnsetAwsNativeStandardPlan() {
+	o.AwsNativeStandardPlan.Unset()
+}
+
 func (o BackupPolicyPlan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -216,6 +259,9 @@ func (o BackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AwsNativePitrPlan.IsSet() {
 		toSerialize["awsNativePitrPlan"] = o.AwsNativePitrPlan.Get()
+	}
+	if o.AwsNativeStandardPlan.IsSet() {
+		toSerialize["awsNativeStandardPlan"] = o.AwsNativeStandardPlan.Get()
 	}
 	return toSerialize, nil
 }

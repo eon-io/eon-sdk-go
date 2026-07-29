@@ -72,6 +72,8 @@ const (
 	COMPLIANCE_VIEW PermissionType = "compliance.view"
 	CLASSIFICATION_POLICIES_MANAGE PermissionType = "classification_policies.manage"
 	FILE_EXPLORER_DELETE PermissionType = "file_explorer.delete"
+	STORAGE_GATEWAY_DATA_DOWNLOAD PermissionType = "storage_gateway_data.download"
+	STORAGE_GATEWAY_METADATA_VIEW PermissionType = "storage_gateway_metadata.view"
 )
 
 // All allowed values of PermissionType enum
@@ -128,6 +130,8 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"compliance.view",
 	"classification_policies.manage",
 	"file_explorer.delete",
+	"storage_gateway_data.download",
+	"storage_gateway_metadata.view",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

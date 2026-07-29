@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **StandardPlan** | Pointer to [**NullableStandardBackupPolicyPlan**](StandardBackupPolicyPlan.md) |  | [optional] 
 **HighFrequencyPlan** | Pointer to [**NullableHighFrequencyBackupPolicyPlan**](HighFrequencyBackupPolicyPlan.md) |  | [optional] 
 **AwsNativePitrPlan** | Pointer to [**NullableAwsNativePitrBackupPolicyPlan**](AwsNativePitrBackupPolicyPlan.md) |  | [optional] 
+**AwsNativeStandardPlan** | Pointer to [**NullableAwsNativeStandardBackupPolicyPlan**](AwsNativeStandardBackupPolicyPlan.md) |  | [optional] 
 
 ## Methods
 
@@ -153,6 +154,41 @@ HasAwsNativePitrPlan returns a boolean if a field has been set.
 `func (o *BackupPolicyPlan) UnsetAwsNativePitrPlan()`
 
 UnsetAwsNativePitrPlan ensures that no value is present for AwsNativePitrPlan, not even an explicit nil
+### GetAwsNativeStandardPlan
+
+`func (o *BackupPolicyPlan) GetAwsNativeStandardPlan() AwsNativeStandardBackupPolicyPlan`
+
+GetAwsNativeStandardPlan returns the AwsNativeStandardPlan field if non-nil, zero value otherwise.
+
+### GetAwsNativeStandardPlanOk
+
+`func (o *BackupPolicyPlan) GetAwsNativeStandardPlanOk() (*AwsNativeStandardBackupPolicyPlan, bool)`
+
+GetAwsNativeStandardPlanOk returns a tuple with the AwsNativeStandardPlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsNativeStandardPlan
+
+`func (o *BackupPolicyPlan) SetAwsNativeStandardPlan(v AwsNativeStandardBackupPolicyPlan)`
+
+SetAwsNativeStandardPlan sets AwsNativeStandardPlan field to given value.
+
+### HasAwsNativeStandardPlan
+
+`func (o *BackupPolicyPlan) HasAwsNativeStandardPlan() bool`
+
+HasAwsNativeStandardPlan returns a boolean if a field has been set.
+
+### SetAwsNativeStandardPlanNil
+
+`func (o *BackupPolicyPlan) SetAwsNativeStandardPlanNil(b bool)`
+
+ SetAwsNativeStandardPlanNil sets the value for AwsNativeStandardPlan to be an explicit nil
+
+### UnsetAwsNativeStandardPlan
+`func (o *BackupPolicyPlan) UnsetAwsNativeStandardPlan()`
+
+UnsetAwsNativeStandardPlan ensures that no value is present for AwsNativeStandardPlan, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

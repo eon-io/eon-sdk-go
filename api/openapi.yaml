@@ -8050,6 +8050,8 @@ components:
       - compliance.view
       - classification_policies.manage
       - file_explorer.delete
+      - storage_gateway_data.download
+      - storage_gateway_metadata.view
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -15550,7 +15552,6 @@ components:
       example: STANDARD
       type: string
       x-docs-internal-enum:
-      - AWS_NATIVE_STANDARD
       - BIGQUERY_NATIVE_PITR
       - AZURE_FILES_STANDARD
       - AZURE_SQL_DATABASE_NATIVE_PITR
@@ -16294,6 +16295,236 @@ components:
       - resourceType
       - retentionDays
       type: object
+    AwsNativeStandardIntervalConfig:
+      example:
+        intervalHours: 4
+      nullable: true
+      properties:
+        intervalHours:
+          description: |
+            Backup frequency, in hours.
+          enum:
+          - 1
+          - 2
+          - 4
+          - 6
+          - 8
+          - 12
+          example: 4
+          type: integer
+      required:
+      - intervalHours
+      type: object
+    AwsNativeStandardBackupScheduleConfig:
+      example:
+        monthlyConfig:
+          startWindowMinutes: 240
+          daysOfMonth:
+          - 5
+          - 10
+          - 15
+          timeOfDay:
+            hour: 12
+            minute: 30
+        intervalConfig:
+          intervalHours: 4
+        weeklyConfig:
+          startWindowMinutes: 240
+          daysOfWeek:
+          - MON
+          - THU
+          timeOfDay:
+            hour: 12
+            minute: 30
+        annuallyConfig:
+          startWindowMinutes: 240
+          timeOfYear:
+            month: 5
+            dayOfMonth: 14
+          timeOfDay:
+            hour: 12
+            minute: 30
+        dailyConfig:
+          startWindowMinutes: 240
+          timeOfDay:
+            hour: 12
+            minute: 30
+        frequency: WEEKLY
+      properties:
+        frequency:
+          $ref: '#/components/schemas/StandardBackupScheduleFrequency'
+        intervalConfig:
+          $ref: '#/components/schemas/AwsNativeStandardIntervalConfig'
+        dailyConfig:
+          $ref: '#/components/schemas/DailyConfig'
+        weeklyConfig:
+          $ref: '#/components/schemas/WeeklyConfig'
+        monthlyConfig:
+          $ref: '#/components/schemas/MonthlyConfig'
+        annuallyConfig:
+          $ref: '#/components/schemas/AnnuallyConfig'
+      required:
+      - frequency
+      type: object
+    AwsNativeStandardBackupSchedules:
+      example:
+        scheduleConfig:
+          monthlyConfig:
+            startWindowMinutes: 240
+            daysOfMonth:
+            - 5
+            - 10
+            - 15
+            timeOfDay:
+              hour: 12
+              minute: 30
+          intervalConfig:
+            intervalHours: 4
+          weeklyConfig:
+            startWindowMinutes: 240
+            daysOfWeek:
+            - MON
+            - THU
+            timeOfDay:
+              hour: 12
+              minute: 30
+          annuallyConfig:
+            startWindowMinutes: 240
+            timeOfYear:
+              month: 5
+              dayOfMonth: 14
+            timeOfDay:
+              hour: 12
+              minute: 30
+          dailyConfig:
+            startWindowMinutes: 240
+            timeOfDay:
+              hour: 12
+              minute: 30
+          frequency: WEEKLY
+        backupRetentionDays: 30
+        targetRegion: us-east-1
+      properties:
+        targetRegion:
+          description: Target region for the native backup.
+          example: us-east-1
+          type: string
+        scheduleConfig:
+          $ref: '#/components/schemas/AwsNativeStandardBackupScheduleConfig'
+        backupRetentionDays:
+          description: "Backup retention period, in days."
+          example: 30
+          type: integer
+      required:
+      - backupRetentionDays
+      - scheduleConfig
+      - targetRegion
+      type: object
+    VaultProtectionMode:
+      description: |
+        Vault protection mode for an AWS native-standard backup policy.
+      enum:
+      - NONE
+      - VAULT_LOCK_GOVERNANCE
+      - VAULT_LOCK_COMPLIANCE
+      - LOGICALLY_AIR_GAPPED
+      example: NONE
+      type: string
+      x-enum-varnames:
+      - VAULT_PROTECTION_MODE_NONE
+      - VAULT_PROTECTION_MODE_VAULT_LOCK_GOVERNANCE
+      - VAULT_PROTECTION_MODE_VAULT_LOCK_COMPLIANCE
+      - VAULT_PROTECTION_MODE_LOGICALLY_AIR_GAPPED
+    AwsNativeStandardBackupPolicyPlan:
+      example:
+        backupSchedules:
+        - scheduleConfig:
+            monthlyConfig:
+              startWindowMinutes: 240
+              daysOfMonth:
+              - 5
+              - 10
+              - 15
+              timeOfDay:
+                hour: 12
+                minute: 30
+            intervalConfig:
+              intervalHours: 4
+            weeklyConfig:
+              startWindowMinutes: 240
+              daysOfWeek:
+              - MON
+              - THU
+              timeOfDay:
+                hour: 12
+                minute: 30
+            annuallyConfig:
+              startWindowMinutes: 240
+              timeOfYear:
+                month: 5
+                dayOfMonth: 14
+              timeOfDay:
+                hour: 12
+                minute: 30
+            dailyConfig:
+              startWindowMinutes: 240
+              timeOfDay:
+                hour: 12
+                minute: 30
+            frequency: WEEKLY
+          backupRetentionDays: 30
+          targetRegion: us-east-1
+        - scheduleConfig:
+            monthlyConfig:
+              startWindowMinutes: 240
+              daysOfMonth:
+              - 5
+              - 10
+              - 15
+              timeOfDay:
+                hour: 12
+                minute: 30
+            intervalConfig:
+              intervalHours: 4
+            weeklyConfig:
+              startWindowMinutes: 240
+              daysOfWeek:
+              - MON
+              - THU
+              timeOfDay:
+                hour: 12
+                minute: 30
+            annuallyConfig:
+              startWindowMinutes: 240
+              timeOfYear:
+                month: 5
+                dayOfMonth: 14
+              timeOfDay:
+                hour: 12
+                minute: 30
+            dailyConfig:
+              startWindowMinutes: 240
+              timeOfDay:
+                hour: 12
+                minute: 30
+            frequency: WEEKLY
+          backupRetentionDays: 30
+          targetRegion: us-east-1
+        vaultProtectionMode: NONE
+      nullable: true
+      properties:
+        backupSchedules:
+          description: |
+            List of backup schedules.
+            Each schedule specifies a backup frequency, retention period, and target region.
+          items:
+            $ref: '#/components/schemas/AwsNativeStandardBackupSchedules'
+          type: array
+        vaultProtectionMode:
+          $ref: '#/components/schemas/VaultProtectionMode'
+      required:
+      - backupSchedules
+      type: object
     BackupPolicyPlan:
       example:
         backupPolicyType: STANDARD
@@ -16454,6 +16685,81 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
           scheduleTimezone: UTC
+        awsNativeStandardPlan:
+          backupSchedules:
+          - scheduleConfig:
+              monthlyConfig:
+                startWindowMinutes: 240
+                daysOfMonth:
+                - 5
+                - 10
+                - 15
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              intervalConfig:
+                intervalHours: 4
+              weeklyConfig:
+                startWindowMinutes: 240
+                daysOfWeek:
+                - MON
+                - THU
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              annuallyConfig:
+                startWindowMinutes: 240
+                timeOfYear:
+                  month: 5
+                  dayOfMonth: 14
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              dailyConfig:
+                startWindowMinutes: 240
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              frequency: WEEKLY
+            backupRetentionDays: 30
+            targetRegion: us-east-1
+          - scheduleConfig:
+              monthlyConfig:
+                startWindowMinutes: 240
+                daysOfMonth:
+                - 5
+                - 10
+                - 15
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              intervalConfig:
+                intervalHours: 4
+              weeklyConfig:
+                startWindowMinutes: 240
+                daysOfWeek:
+                - MON
+                - THU
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              annuallyConfig:
+                startWindowMinutes: 240
+                timeOfYear:
+                  month: 5
+                  dayOfMonth: 14
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              dailyConfig:
+                startWindowMinutes: 240
+                timeOfDay:
+                  hour: 12
+                  minute: 30
+              frequency: WEEKLY
+            backupRetentionDays: 30
+            targetRegion: us-east-1
+          vaultProtectionMode: NONE
       properties:
         backupPolicyType:
           $ref: '#/components/schemas/BackupPolicyType'
@@ -16463,6 +16769,8 @@ components:
           $ref: '#/components/schemas/HighFrequencyBackupPolicyPlan'
         awsNativePitrPlan:
           $ref: '#/components/schemas/AwsNativePitrBackupPolicyPlan'
+        awsNativeStandardPlan:
+          $ref: '#/components/schemas/AwsNativeStandardBackupPolicyPlan'
       required:
       - backupPolicyType
       type: object
@@ -16628,6 +16936,81 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+          awsNativeStandardPlan:
+            backupSchedules:
+            - scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  daysOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 4
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MON
+                  - THU
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+              targetRegion: us-east-1
+            - scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  daysOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 4
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MON
+                  - THU
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+              targetRegion: us-east-1
+            vaultProtectionMode: NONE
         resourceSelector:
           expression:
             resourceId:
@@ -16909,6 +17292,81 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+          awsNativeStandardPlan:
+            backupSchedules:
+            - scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  daysOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 4
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MON
+                  - THU
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+              targetRegion: us-east-1
+            - scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  daysOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 4
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MON
+                  - THU
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+              targetRegion: us-east-1
+            vaultProtectionMode: NONE
         id: de308488-df3d-5b82-8f37-477ef529f491
         resourceSelector:
           expression:
@@ -17197,6 +17655,81 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+            awsNativeStandardPlan:
+              backupSchedules:
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              vaultProtectionMode: NONE
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -17468,6 +18001,81 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+            awsNativeStandardPlan:
+              backupSchedules:
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              vaultProtectionMode: NONE
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -17729,6 +18337,81 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+            awsNativeStandardPlan:
+              backupSchedules:
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              vaultProtectionMode: NONE
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -18010,6 +18693,81 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+            awsNativeStandardPlan:
+              backupSchedules:
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              vaultProtectionMode: NONE
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -18279,6 +19037,81 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+          awsNativeStandardPlan:
+            backupSchedules:
+            - scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  daysOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 4
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MON
+                  - THU
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+              targetRegion: us-east-1
+            - scheduleConfig:
+                monthlyConfig:
+                  startWindowMinutes: 240
+                  daysOfMonth:
+                  - 5
+                  - 10
+                  - 15
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                intervalConfig:
+                  intervalHours: 4
+                weeklyConfig:
+                  startWindowMinutes: 240
+                  daysOfWeek:
+                  - MON
+                  - THU
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                annuallyConfig:
+                  startWindowMinutes: 240
+                  timeOfYear:
+                    month: 5
+                    dayOfMonth: 14
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                dailyConfig:
+                  startWindowMinutes: 240
+                  timeOfDay:
+                    hour: 12
+                    minute: 30
+                frequency: WEEKLY
+              backupRetentionDays: 30
+              targetRegion: us-east-1
+            vaultProtectionMode: NONE
         resourceSelector:
           expression:
             resourceId:
@@ -18561,6 +19394,81 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+            awsNativeStandardPlan:
+              backupSchedules:
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              - scheduleConfig:
+                  monthlyConfig:
+                    startWindowMinutes: 240
+                    daysOfMonth:
+                    - 5
+                    - 10
+                    - 15
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  intervalConfig:
+                    intervalHours: 4
+                  weeklyConfig:
+                    startWindowMinutes: 240
+                    daysOfWeek:
+                    - MON
+                    - THU
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  annuallyConfig:
+                    startWindowMinutes: 240
+                    timeOfYear:
+                      month: 5
+                      dayOfMonth: 14
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  dailyConfig:
+                    startWindowMinutes: 240
+                    timeOfDay:
+                      hour: 12
+                      minute: 30
+                  frequency: WEEKLY
+                backupRetentionDays: 30
+                targetRegion: us-east-1
+              vaultProtectionMode: NONE
           id: de308488-df3d-5b82-8f37-477ef529f491
           resourceSelector:
             expression:
@@ -23462,6 +24370,7 @@ components:
       - GCP_BIG_QUERY_METERING_DIMENSION
       - MONGO_ATLAS_CLUSTER_METERING_DIMENSION
       - DATA_TRANSFER_METERING_DIMENSION
+      - CLASSIFICATION_METERING_DIMENSION
       - AWS_EC2_TO_AZURE_VAULT_METERING_DIMENSION
       - AWS_S3_TO_AZURE_VAULT_METERING_DIMENSION
       - AWS_RDS_TO_AZURE_VAULT_METERING_DIMENSION
