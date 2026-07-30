@@ -34,6 +34,8 @@ type BackupPolicyExpression struct {
 	ResourceId NullableResourceIdCondition `json:"resourceId,omitempty"`
 	TagKeys NullableTagKeysCondition `json:"tagKeys,omitempty"`
 	TagKeyValues NullableTagKeyValuesCondition `json:"tagKeyValues,omitempty"`
+	SourceAccountTagKeys NullableSourceAccountTagKeysCondition `json:"sourceAccountTagKeys,omitempty"`
+	SourceAccountTagKeyValues NullableSourceAccountTagKeyValuesCondition `json:"sourceAccountTagKeyValues,omitempty"`
 	GlobalClusterIdentifier NullableGlobalClusterIdentifierCondition `json:"globalClusterIdentifier,omitempty"`
 }
 
@@ -684,6 +686,90 @@ func (o *BackupPolicyExpression) UnsetTagKeyValues() {
 	o.TagKeyValues.Unset()
 }
 
+// GetSourceAccountTagKeys returns the SourceAccountTagKeys field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BackupPolicyExpression) GetSourceAccountTagKeys() SourceAccountTagKeysCondition {
+	if o == nil || IsNil(o.SourceAccountTagKeys.Get()) {
+		var ret SourceAccountTagKeysCondition
+		return ret
+	}
+	return *o.SourceAccountTagKeys.Get()
+}
+
+// GetSourceAccountTagKeysOk returns a tuple with the SourceAccountTagKeys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BackupPolicyExpression) GetSourceAccountTagKeysOk() (*SourceAccountTagKeysCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SourceAccountTagKeys.Get(), o.SourceAccountTagKeys.IsSet()
+}
+
+// HasSourceAccountTagKeys returns a boolean if a field has been set.
+func (o *BackupPolicyExpression) HasSourceAccountTagKeys() bool {
+	if o != nil && o.SourceAccountTagKeys.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceAccountTagKeys gets a reference to the given NullableSourceAccountTagKeysCondition and assigns it to the SourceAccountTagKeys field.
+func (o *BackupPolicyExpression) SetSourceAccountTagKeys(v SourceAccountTagKeysCondition) {
+	o.SourceAccountTagKeys.Set(&v)
+}
+// SetSourceAccountTagKeysNil sets the value for SourceAccountTagKeys to be an explicit nil
+func (o *BackupPolicyExpression) SetSourceAccountTagKeysNil() {
+	o.SourceAccountTagKeys.Set(nil)
+}
+
+// UnsetSourceAccountTagKeys ensures that no value is present for SourceAccountTagKeys, not even an explicit nil
+func (o *BackupPolicyExpression) UnsetSourceAccountTagKeys() {
+	o.SourceAccountTagKeys.Unset()
+}
+
+// GetSourceAccountTagKeyValues returns the SourceAccountTagKeyValues field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BackupPolicyExpression) GetSourceAccountTagKeyValues() SourceAccountTagKeyValuesCondition {
+	if o == nil || IsNil(o.SourceAccountTagKeyValues.Get()) {
+		var ret SourceAccountTagKeyValuesCondition
+		return ret
+	}
+	return *o.SourceAccountTagKeyValues.Get()
+}
+
+// GetSourceAccountTagKeyValuesOk returns a tuple with the SourceAccountTagKeyValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BackupPolicyExpression) GetSourceAccountTagKeyValuesOk() (*SourceAccountTagKeyValuesCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SourceAccountTagKeyValues.Get(), o.SourceAccountTagKeyValues.IsSet()
+}
+
+// HasSourceAccountTagKeyValues returns a boolean if a field has been set.
+func (o *BackupPolicyExpression) HasSourceAccountTagKeyValues() bool {
+	if o != nil && o.SourceAccountTagKeyValues.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceAccountTagKeyValues gets a reference to the given NullableSourceAccountTagKeyValuesCondition and assigns it to the SourceAccountTagKeyValues field.
+func (o *BackupPolicyExpression) SetSourceAccountTagKeyValues(v SourceAccountTagKeyValuesCondition) {
+	o.SourceAccountTagKeyValues.Set(&v)
+}
+// SetSourceAccountTagKeyValuesNil sets the value for SourceAccountTagKeyValues to be an explicit nil
+func (o *BackupPolicyExpression) SetSourceAccountTagKeyValuesNil() {
+	o.SourceAccountTagKeyValues.Set(nil)
+}
+
+// UnsetSourceAccountTagKeyValues ensures that no value is present for SourceAccountTagKeyValues, not even an explicit nil
+func (o *BackupPolicyExpression) UnsetSourceAccountTagKeyValues() {
+	o.SourceAccountTagKeyValues.Unset()
+}
+
 // GetGlobalClusterIdentifier returns the GlobalClusterIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BackupPolicyExpression) GetGlobalClusterIdentifier() GlobalClusterIdentifierCondition {
 	if o == nil || IsNil(o.GlobalClusterIdentifier.Get()) {
@@ -780,6 +866,12 @@ func (o BackupPolicyExpression) ToMap() (map[string]interface{}, error) {
 	}
 	if o.TagKeyValues.IsSet() {
 		toSerialize["tagKeyValues"] = o.TagKeyValues.Get()
+	}
+	if o.SourceAccountTagKeys.IsSet() {
+		toSerialize["sourceAccountTagKeys"] = o.SourceAccountTagKeys.Get()
+	}
+	if o.SourceAccountTagKeyValues.IsSet() {
+		toSerialize["sourceAccountTagKeyValues"] = o.SourceAccountTagKeyValues.Get()
 	}
 	if o.GlobalClusterIdentifier.IsSet() {
 		toSerialize["globalClusterIdentifier"] = o.GlobalClusterIdentifier.Get()

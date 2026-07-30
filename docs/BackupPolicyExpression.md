@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **ResourceId** | Pointer to [**NullableResourceIdCondition**](ResourceIdCondition.md) |  | [optional] 
 **TagKeys** | Pointer to [**NullableTagKeysCondition**](TagKeysCondition.md) |  | [optional] 
 **TagKeyValues** | Pointer to [**NullableTagKeyValuesCondition**](TagKeyValuesCondition.md) |  | [optional] 
+**SourceAccountTagKeys** | Pointer to [**NullableSourceAccountTagKeysCondition**](SourceAccountTagKeysCondition.md) |  | [optional] 
+**SourceAccountTagKeyValues** | Pointer to [**NullableSourceAccountTagKeyValuesCondition**](SourceAccountTagKeyValuesCondition.md) |  | [optional] 
 **GlobalClusterIdentifier** | Pointer to [**NullableGlobalClusterIdentifierCondition**](GlobalClusterIdentifierCondition.md) |  | [optional] 
 
 ## Methods
@@ -565,6 +567,76 @@ HasTagKeyValues returns a boolean if a field has been set.
 `func (o *BackupPolicyExpression) UnsetTagKeyValues()`
 
 UnsetTagKeyValues ensures that no value is present for TagKeyValues, not even an explicit nil
+### GetSourceAccountTagKeys
+
+`func (o *BackupPolicyExpression) GetSourceAccountTagKeys() SourceAccountTagKeysCondition`
+
+GetSourceAccountTagKeys returns the SourceAccountTagKeys field if non-nil, zero value otherwise.
+
+### GetSourceAccountTagKeysOk
+
+`func (o *BackupPolicyExpression) GetSourceAccountTagKeysOk() (*SourceAccountTagKeysCondition, bool)`
+
+GetSourceAccountTagKeysOk returns a tuple with the SourceAccountTagKeys field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAccountTagKeys
+
+`func (o *BackupPolicyExpression) SetSourceAccountTagKeys(v SourceAccountTagKeysCondition)`
+
+SetSourceAccountTagKeys sets SourceAccountTagKeys field to given value.
+
+### HasSourceAccountTagKeys
+
+`func (o *BackupPolicyExpression) HasSourceAccountTagKeys() bool`
+
+HasSourceAccountTagKeys returns a boolean if a field has been set.
+
+### SetSourceAccountTagKeysNil
+
+`func (o *BackupPolicyExpression) SetSourceAccountTagKeysNil(b bool)`
+
+ SetSourceAccountTagKeysNil sets the value for SourceAccountTagKeys to be an explicit nil
+
+### UnsetSourceAccountTagKeys
+`func (o *BackupPolicyExpression) UnsetSourceAccountTagKeys()`
+
+UnsetSourceAccountTagKeys ensures that no value is present for SourceAccountTagKeys, not even an explicit nil
+### GetSourceAccountTagKeyValues
+
+`func (o *BackupPolicyExpression) GetSourceAccountTagKeyValues() SourceAccountTagKeyValuesCondition`
+
+GetSourceAccountTagKeyValues returns the SourceAccountTagKeyValues field if non-nil, zero value otherwise.
+
+### GetSourceAccountTagKeyValuesOk
+
+`func (o *BackupPolicyExpression) GetSourceAccountTagKeyValuesOk() (*SourceAccountTagKeyValuesCondition, bool)`
+
+GetSourceAccountTagKeyValuesOk returns a tuple with the SourceAccountTagKeyValues field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceAccountTagKeyValues
+
+`func (o *BackupPolicyExpression) SetSourceAccountTagKeyValues(v SourceAccountTagKeyValuesCondition)`
+
+SetSourceAccountTagKeyValues sets SourceAccountTagKeyValues field to given value.
+
+### HasSourceAccountTagKeyValues
+
+`func (o *BackupPolicyExpression) HasSourceAccountTagKeyValues() bool`
+
+HasSourceAccountTagKeyValues returns a boolean if a field has been set.
+
+### SetSourceAccountTagKeyValuesNil
+
+`func (o *BackupPolicyExpression) SetSourceAccountTagKeyValuesNil(b bool)`
+
+ SetSourceAccountTagKeyValuesNil sets the value for SourceAccountTagKeyValues to be an explicit nil
+
+### UnsetSourceAccountTagKeyValues
+`func (o *BackupPolicyExpression) UnsetSourceAccountTagKeyValues()`
+
+UnsetSourceAccountTagKeyValues ensures that no value is present for SourceAccountTagKeyValues, not even an explicit nil
 ### GetGlobalClusterIdentifier
 
 `func (o *BackupPolicyExpression) GetGlobalClusterIdentifier() GlobalClusterIdentifierCondition`

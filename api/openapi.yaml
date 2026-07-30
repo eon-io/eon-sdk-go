@@ -6235,6 +6235,19 @@ paths:
           minimum: 1
           type: integer
         style: form
+      - description: |
+          Expensive detail groups to include in the response.
+          They are omitted by default to keep the response small.
+        explode: true
+        in: query
+        name: include
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/InventoryDetail'
+          type: array
+        style: form
+        x-internal: false
       requestBody:
         content:
           application/json:
@@ -6302,6 +6315,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          Expensive detail groups to include in the response.
+          They are omitted by default to keep the response small.
+        explode: true
+        in: query
+        name: include
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/InventoryDetail'
+          type: array
+        style: form
+        x-internal: false
       responses:
         "200":
           content:
@@ -15226,6 +15252,11 @@ components:
           - resourceGroupNames
           - resourceGroupNames
           operator: IN
+        sourceAccountTagKeys:
+          sourceAccountTagKeys:
+          - sourceAccountTagKeys
+          - sourceAccountTagKeys
+          operator: CONTAINS_ANY_OF
         tagKeys:
           tagKeys:
           - tagKeys
@@ -15306,6 +15337,13 @@ components:
           apps:
           - apps
           - apps
+        sourceAccountTagKeyValues:
+          operator: CONTAINS_ANY_OF
+          sourceAccountTagKeyValues:
+          - value: value
+            key: key
+          - value: value
+            key: key
       nullable: true
       properties:
         group:
@@ -15338,6 +15376,10 @@ components:
           $ref: '#/components/schemas/TagKeysCondition'
         tagKeyValues:
           $ref: '#/components/schemas/TagKeyValuesCondition'
+        sourceAccountTagKeys:
+          $ref: '#/components/schemas/SourceAccountTagKeysCondition'
+        sourceAccountTagKeyValues:
+          $ref: '#/components/schemas/SourceAccountTagKeyValuesCondition'
         globalClusterIdentifier:
           $ref: '#/components/schemas/GlobalClusterIdentifierCondition'
       type: object
@@ -15387,6 +15429,48 @@ components:
       - operands
       - operator
       type: object
+    SourceAccountTagKeysCondition:
+      description: "Matches resources by the tag keys of the cloud account they belong\
+        \ to, rather than the resource's own tags."
+      example:
+        sourceAccountTagKeys:
+        - sourceAccountTagKeys
+        - sourceAccountTagKeys
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        sourceAccountTagKeys:
+          items:
+            type: string
+          type: array
+      required:
+      - operator
+      - sourceAccountTagKeys
+      type: object
+    SourceAccountTagKeyValuesCondition:
+      description: "Matches resources by the tag key/value pairs of the cloud account\
+        \ they belong to, rather than the resource's own tags."
+      example:
+        operator: CONTAINS_ANY_OF
+        sourceAccountTagKeyValues:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        sourceAccountTagKeyValues:
+          items:
+            $ref: '#/components/schemas/TagKeyValue'
+          type: array
+      required:
+      - operator
+      - sourceAccountTagKeyValues
+      type: object
     GlobalClusterIdentifierCondition:
       example:
         operator: IN
@@ -15420,6 +15504,11 @@ components:
             - resourceGroupNames
             - resourceGroupNames
             operator: IN
+          sourceAccountTagKeys:
+            sourceAccountTagKeys:
+            - sourceAccountTagKeys
+            - sourceAccountTagKeys
+            operator: CONTAINS_ANY_OF
           tagKeys:
             tagKeys:
             - tagKeys
@@ -15500,6 +15589,13 @@ components:
             apps:
             - apps
             - apps
+          sourceAccountTagKeyValues:
+            operator: CONTAINS_ANY_OF
+            sourceAccountTagKeyValues:
+            - value: value
+              key: key
+            - value: value
+              key: key
         resourceSelectionMode: CONDITIONAL
         resourceExclusionOverride:
         - i-0b0f5b5ef75b1c009
@@ -17023,6 +17119,11 @@ components:
               - resourceGroupNames
               - resourceGroupNames
               operator: IN
+            sourceAccountTagKeys:
+              sourceAccountTagKeys:
+              - sourceAccountTagKeys
+              - sourceAccountTagKeys
+              operator: CONTAINS_ANY_OF
             tagKeys:
               tagKeys:
               - tagKeys
@@ -17103,6 +17204,13 @@ components:
               apps:
               - apps
               - apps
+            sourceAccountTagKeyValues:
+              operator: CONTAINS_ANY_OF
+              sourceAccountTagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
           resourceSelectionMode: CONDITIONAL
           resourceExclusionOverride:
           - i-0b0f5b5ef75b1c009
@@ -17380,6 +17488,11 @@ components:
               - resourceGroupNames
               - resourceGroupNames
               operator: IN
+            sourceAccountTagKeys:
+              sourceAccountTagKeys:
+              - sourceAccountTagKeys
+              - sourceAccountTagKeys
+              operator: CONTAINS_ANY_OF
             tagKeys:
               tagKeys:
               - tagKeys
@@ -17460,6 +17573,13 @@ components:
               apps:
               - apps
               - apps
+            sourceAccountTagKeyValues:
+              operator: CONTAINS_ANY_OF
+              sourceAccountTagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
           resourceSelectionMode: CONDITIONAL
           resourceExclusionOverride:
           - i-0b0f5b5ef75b1c009
@@ -17743,6 +17863,11 @@ components:
                 - resourceGroupNames
                 - resourceGroupNames
                 operator: IN
+              sourceAccountTagKeys:
+                sourceAccountTagKeys:
+                - sourceAccountTagKeys
+                - sourceAccountTagKeys
+                operator: CONTAINS_ANY_OF
               tagKeys:
                 tagKeys:
                 - tagKeys
@@ -17823,6 +17948,13 @@ components:
                 apps:
                 - apps
                 - apps
+              sourceAccountTagKeyValues:
+                operator: CONTAINS_ANY_OF
+                sourceAccountTagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
             resourceSelectionMode: CONDITIONAL
             resourceExclusionOverride:
             - i-0b0f5b5ef75b1c009
@@ -18089,6 +18221,11 @@ components:
                 - resourceGroupNames
                 - resourceGroupNames
                 operator: IN
+              sourceAccountTagKeys:
+                sourceAccountTagKeys:
+                - sourceAccountTagKeys
+                - sourceAccountTagKeys
+                operator: CONTAINS_ANY_OF
               tagKeys:
                 tagKeys:
                 - tagKeys
@@ -18169,6 +18306,13 @@ components:
                 apps:
                 - apps
                 - apps
+              sourceAccountTagKeyValues:
+                operator: CONTAINS_ANY_OF
+                sourceAccountTagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
             resourceSelectionMode: CONDITIONAL
             resourceExclusionOverride:
             - i-0b0f5b5ef75b1c009
@@ -18425,6 +18569,11 @@ components:
                 - resourceGroupNames
                 - resourceGroupNames
                 operator: IN
+              sourceAccountTagKeys:
+                sourceAccountTagKeys:
+                - sourceAccountTagKeys
+                - sourceAccountTagKeys
+                operator: CONTAINS_ANY_OF
               tagKeys:
                 tagKeys:
                 - tagKeys
@@ -18505,6 +18654,13 @@ components:
                 apps:
                 - apps
                 - apps
+              sourceAccountTagKeyValues:
+                operator: CONTAINS_ANY_OF
+                sourceAccountTagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
             resourceSelectionMode: CONDITIONAL
             resourceExclusionOverride:
             - i-0b0f5b5ef75b1c009
@@ -18781,6 +18937,11 @@ components:
                 - resourceGroupNames
                 - resourceGroupNames
                 operator: IN
+              sourceAccountTagKeys:
+                sourceAccountTagKeys:
+                - sourceAccountTagKeys
+                - sourceAccountTagKeys
+                operator: CONTAINS_ANY_OF
               tagKeys:
                 tagKeys:
                 - tagKeys
@@ -18861,6 +19022,13 @@ components:
                 apps:
                 - apps
                 - apps
+              sourceAccountTagKeyValues:
+                operator: CONTAINS_ANY_OF
+                sourceAccountTagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
             resourceSelectionMode: CONDITIONAL
             resourceExclusionOverride:
             - i-0b0f5b5ef75b1c009
@@ -19124,6 +19292,11 @@ components:
               - resourceGroupNames
               - resourceGroupNames
               operator: IN
+            sourceAccountTagKeys:
+              sourceAccountTagKeys:
+              - sourceAccountTagKeys
+              - sourceAccountTagKeys
+              operator: CONTAINS_ANY_OF
             tagKeys:
               tagKeys:
               - tagKeys
@@ -19204,6 +19377,13 @@ components:
               apps:
               - apps
               - apps
+            sourceAccountTagKeyValues:
+              operator: CONTAINS_ANY_OF
+              sourceAccountTagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
           resourceSelectionMode: CONDITIONAL
           resourceExclusionOverride:
           - i-0b0f5b5ef75b1c009
@@ -19482,6 +19662,11 @@ components:
                 - resourceGroupNames
                 - resourceGroupNames
                 operator: IN
+              sourceAccountTagKeys:
+                sourceAccountTagKeys:
+                - sourceAccountTagKeys
+                - sourceAccountTagKeys
+                operator: CONTAINS_ANY_OF
               tagKeys:
                 tagKeys:
                 - tagKeys
@@ -19562,6 +19747,13 @@ components:
                 apps:
                 - apps
                 - apps
+              sourceAccountTagKeyValues:
+                operator: CONTAINS_ANY_OF
+                sourceAccountTagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
             resourceSelectionMode: CONDITIONAL
             resourceExclusionOverride:
             - i-0b0f5b5ef75b1c009
@@ -21711,6 +21903,15 @@ components:
       - nextToken
       - records
       type: object
+    InventoryDetail:
+      description: |
+        Expensive detail group that a caller can explicitly request on inventory responses.
+      enum:
+      - DYNAMODB_INDEXES
+      example: DYNAMODB_INDEXES
+      type: string
+      x-enum-varnames:
+      - INVENTORY_DETAIL_DYNAMODB_INDEXES
     ResourceSortField:
       description: Field to sort by.
       enum:
@@ -22660,6 +22861,290 @@ components:
             $ref: '#/components/schemas/InventoryVolume'
           type: array
       type: object
+    DynamoDbBillingMode:
+      description: |
+        DynamoDB billing mode.
+      enum:
+      - UNSPECIFIED
+      - PAY_PER_REQUEST
+      - PROVISIONED
+      example: PROVISIONED
+      type: string
+      x-enum-varnames:
+      - DYNAMODB_BILLING_MODE_UNSPECIFIED
+      - DYNAMODB_BILLING_MODE_PAY_PER_REQUEST
+      - DYNAMODB_BILLING_MODE_PROVISIONED
+    DynamoDbKeyType:
+      description: |
+        Role of an attribute in a DynamoDB key schema.
+      enum:
+      - HASH
+      - RANGE
+      example: HASH
+      type: string
+      x-enum-varnames:
+      - DYNAMODB_KEY_TYPE_HASH
+      - DYNAMODB_KEY_TYPE_RANGE
+    DynamoDbIndexKeySchemaElement:
+      description: Element of a DynamoDB index key schema.
+      example:
+        name: userId
+        type: HASH
+      properties:
+        name:
+          description: Name of the key attribute.
+          example: userId
+          type: string
+        type:
+          $ref: '#/components/schemas/DynamoDbKeyType'
+      type: object
+      x-internal: false
+      x-nullable: true
+    DynamoDbProjectionType:
+      description: |
+        Set of attributes projected from a DynamoDB table into an index.
+      enum:
+      - ALL
+      - KEYS_ONLY
+      - INCLUDE
+      example: INCLUDE
+      type: string
+      x-enum-varnames:
+      - DYNAMODB_PROJECTION_TYPE_ALL
+      - DYNAMODB_PROJECTION_TYPE_KEYS_ONLY
+      - DYNAMODB_PROJECTION_TYPE_INCLUDE
+    DynamoDbIndexProjection:
+      description: Attributes that are copied (projected) from the table into a DynamoDB
+        index.
+      example:
+        nonKeyAttributes:
+        - email
+        projectionType: INCLUDE
+      properties:
+        projectionType:
+          $ref: '#/components/schemas/DynamoDbProjectionType'
+        nonKeyAttributes:
+          description: Non-key attribute names projected into the index.
+          example:
+          - email
+          items:
+            type: string
+          type: array
+      type: object
+      x-internal: false
+      x-nullable: true
+    DynamoDbIndexThroughput:
+      description: Throughput settings of a DynamoDB index.
+      example:
+        writeCapacityUnits: 100
+        readCapacityUnits: 100
+      properties:
+        readCapacityUnits:
+          description: Maximum number of strongly consistent reads consumed per second
+            before DynamoDB returns a ThrottlingException.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+        writeCapacityUnits:
+          description: Maximum number of writes consumed per second before DynamoDB
+            returns a ThrottlingException.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+      x-internal: false
+      x-nullable: true
+    DynamoDbGlobalSecondaryIndex:
+      description: Global secondary index of a DynamoDB table.
+      example:
+        indexSizeBytes: 1048576
+        warmThroughput:
+          writeCapacityUnits: 100
+          readCapacityUnits: 100
+        onDemandThroughput:
+          writeCapacityUnits: 100
+          readCapacityUnits: 100
+        indexName: userId-index
+        keySchema:
+        - name: userId
+          type: HASH
+        - name: userId
+          type: HASH
+        projection:
+          nonKeyAttributes:
+          - email
+          projectionType: INCLUDE
+        provisionedThroughput:
+          writeCapacityUnits: 100
+          readCapacityUnits: 100
+      properties:
+        indexName:
+          description: Name of the global secondary index.
+          example: userId-index
+          type: string
+        keySchema:
+          description: Complete key schema for the global secondary index.
+          items:
+            $ref: '#/components/schemas/DynamoDbIndexKeySchemaElement'
+          type: array
+        projection:
+          $ref: '#/components/schemas/DynamoDbIndexProjection'
+        onDemandThroughput:
+          $ref: '#/components/schemas/DynamoDbIndexThroughput'
+        provisionedThroughput:
+          $ref: '#/components/schemas/DynamoDbIndexThroughput'
+        warmThroughput:
+          $ref: '#/components/schemas/DynamoDbIndexThroughput'
+        indexSizeBytes:
+          description: "Total size of the index, in bytes."
+          example: 1048576
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+      x-internal: false
+      x-nullable: true
+    DynamoDbLocalSecondaryIndex:
+      description: Local secondary index of a DynamoDB table.
+      example:
+        indexSizeBytes: 1048576
+        indexName: createdAt-index
+        keySchema:
+        - name: userId
+          type: HASH
+        - name: userId
+          type: HASH
+        projection:
+          nonKeyAttributes:
+          - email
+          projectionType: INCLUDE
+      properties:
+        indexName:
+          description: Name of the local secondary index.
+          example: createdAt-index
+          type: string
+        keySchema:
+          description: Complete key schema for the local secondary index.
+          items:
+            $ref: '#/components/schemas/DynamoDbIndexKeySchemaElement'
+          type: array
+        projection:
+          $ref: '#/components/schemas/DynamoDbIndexProjection'
+        indexSizeBytes:
+          description: "Total size of the index, in bytes."
+          example: 1048576
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+      x-internal: false
+      x-nullable: true
+    AwsDynamoDbResource:
+      example:
+        globalSecondaryIndexes:
+        - indexSizeBytes: 1048576
+          warmThroughput:
+            writeCapacityUnits: 100
+            readCapacityUnits: 100
+          onDemandThroughput:
+            writeCapacityUnits: 100
+            readCapacityUnits: 100
+          indexName: userId-index
+          keySchema:
+          - name: userId
+            type: HASH
+          - name: userId
+            type: HASH
+          projection:
+            nonKeyAttributes:
+            - email
+            projectionType: INCLUDE
+          provisionedThroughput:
+            writeCapacityUnits: 100
+            readCapacityUnits: 100
+        - indexSizeBytes: 1048576
+          warmThroughput:
+            writeCapacityUnits: 100
+            readCapacityUnits: 100
+          onDemandThroughput:
+            writeCapacityUnits: 100
+            readCapacityUnits: 100
+          indexName: userId-index
+          keySchema:
+          - name: userId
+            type: HASH
+          - name: userId
+            type: HASH
+          projection:
+            nonKeyAttributes:
+            - email
+            projectionType: INCLUDE
+          provisionedThroughput:
+            writeCapacityUnits: 100
+            readCapacityUnits: 100
+        billingMode: PROVISIONED
+        writeCapacityUnits: 80000
+        readCapacityUnits: 80000
+        localSecondaryIndexes:
+        - indexSizeBytes: 1048576
+          indexName: createdAt-index
+          keySchema:
+          - name: userId
+            type: HASH
+          - name: userId
+            type: HASH
+          projection:
+            nonKeyAttributes:
+            - email
+            projectionType: INCLUDE
+        - indexSizeBytes: 1048576
+          indexName: createdAt-index
+          keySchema:
+          - name: userId
+            type: HASH
+          - name: userId
+            type: HASH
+          projection:
+            nonKeyAttributes:
+            - email
+            projectionType: INCLUDE
+      nullable: true
+      properties:
+        billingMode:
+          $ref: '#/components/schemas/DynamoDbBillingMode'
+        readCapacityUnits:
+          description: Provisioned read capacity units of the table.
+          example: 80000
+          format: int64
+          type: integer
+        writeCapacityUnits:
+          description: Provisioned write capacity units of the table.
+          example: 80000
+          format: int64
+          type: integer
+        globalSecondaryIndexes:
+          description: |
+            Global secondary indexes on the table.
+            Returned only when `include` contains `DYNAMODB_INDEXES`.
+          items:
+            $ref: '#/components/schemas/DynamoDbGlobalSecondaryIndex'
+          type: array
+          x-internal: false
+        localSecondaryIndexes:
+          description: |
+            Local secondary indexes on the table.
+            Returned only when `include` contains `DYNAMODB_INDEXES`.
+          items:
+            $ref: '#/components/schemas/DynamoDbLocalSecondaryIndex'
+          type: array
+          x-internal: false
+      required:
+      - billingMode
+      - readCapacityUnits
+      - writeCapacityUnits
+      type: object
     ResourceProperties:
       description: |
         Source resource properties.
@@ -22693,10 +23178,80 @@ components:
             availabilityZone: eu-central-1a
             tags:
               primary: ""
+        awsDynamoDb:
+          globalSecondaryIndexes:
+          - indexSizeBytes: 1048576
+            warmThroughput:
+              writeCapacityUnits: 100
+              readCapacityUnits: 100
+            onDemandThroughput:
+              writeCapacityUnits: 100
+              readCapacityUnits: 100
+            indexName: userId-index
+            keySchema:
+            - name: userId
+              type: HASH
+            - name: userId
+              type: HASH
+            projection:
+              nonKeyAttributes:
+              - email
+              projectionType: INCLUDE
+            provisionedThroughput:
+              writeCapacityUnits: 100
+              readCapacityUnits: 100
+          - indexSizeBytes: 1048576
+            warmThroughput:
+              writeCapacityUnits: 100
+              readCapacityUnits: 100
+            onDemandThroughput:
+              writeCapacityUnits: 100
+              readCapacityUnits: 100
+            indexName: userId-index
+            keySchema:
+            - name: userId
+              type: HASH
+            - name: userId
+              type: HASH
+            projection:
+              nonKeyAttributes:
+              - email
+              projectionType: INCLUDE
+            provisionedThroughput:
+              writeCapacityUnits: 100
+              readCapacityUnits: 100
+          billingMode: PROVISIONED
+          writeCapacityUnits: 80000
+          readCapacityUnits: 80000
+          localSecondaryIndexes:
+          - indexSizeBytes: 1048576
+            indexName: createdAt-index
+            keySchema:
+            - name: userId
+              type: HASH
+            - name: userId
+              type: HASH
+            projection:
+              nonKeyAttributes:
+              - email
+              projectionType: INCLUDE
+          - indexSizeBytes: 1048576
+            indexName: createdAt-index
+            keySchema:
+            - name: userId
+              type: HASH
+            - name: userId
+              type: HASH
+            projection:
+              nonKeyAttributes:
+              - email
+              projectionType: INCLUDE
       nullable: true
       properties:
         awsEc2:
           $ref: '#/components/schemas/AwsEc2Resource'
+        awsDynamoDb:
+          $ref: '#/components/schemas/AwsDynamoDbResource'
       type: object
     InventoryResource:
       example:
@@ -22729,6 +23284,74 @@ components:
               availabilityZone: eu-central-1a
               tags:
                 primary: ""
+          awsDynamoDb:
+            globalSecondaryIndexes:
+            - indexSizeBytes: 1048576
+              warmThroughput:
+                writeCapacityUnits: 100
+                readCapacityUnits: 100
+              onDemandThroughput:
+                writeCapacityUnits: 100
+                readCapacityUnits: 100
+              indexName: userId-index
+              keySchema:
+              - name: userId
+                type: HASH
+              - name: userId
+                type: HASH
+              projection:
+                nonKeyAttributes:
+                - email
+                projectionType: INCLUDE
+              provisionedThroughput:
+                writeCapacityUnits: 100
+                readCapacityUnits: 100
+            - indexSizeBytes: 1048576
+              warmThroughput:
+                writeCapacityUnits: 100
+                readCapacityUnits: 100
+              onDemandThroughput:
+                writeCapacityUnits: 100
+                readCapacityUnits: 100
+              indexName: userId-index
+              keySchema:
+              - name: userId
+                type: HASH
+              - name: userId
+                type: HASH
+              projection:
+                nonKeyAttributes:
+                - email
+                projectionType: INCLUDE
+              provisionedThroughput:
+                writeCapacityUnits: 100
+                readCapacityUnits: 100
+            billingMode: PROVISIONED
+            writeCapacityUnits: 80000
+            readCapacityUnits: 80000
+            localSecondaryIndexes:
+            - indexSizeBytes: 1048576
+              indexName: createdAt-index
+              keySchema:
+              - name: userId
+                type: HASH
+              - name: userId
+                type: HASH
+              projection:
+                nonKeyAttributes:
+                - email
+                projectionType: INCLUDE
+            - indexSizeBytes: 1048576
+              indexName: createdAt-index
+              keySchema:
+              - name: userId
+                type: HASH
+              - name: userId
+                type: HASH
+              projection:
+                nonKeyAttributes:
+                - email
+                projectionType: INCLUDE
         vpc: vpc-041d4426c201ee954
         resourceName: customers db
         oldestSnapshotTime: 2024-09-24T08:21:01Z
@@ -22911,6 +23534,74 @@ components:
                 availabilityZone: eu-central-1a
                 tags:
                   primary: ""
+            awsDynamoDb:
+              globalSecondaryIndexes:
+              - indexSizeBytes: 1048576
+                warmThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                onDemandThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                indexName: userId-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+                provisionedThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+              - indexSizeBytes: 1048576
+                warmThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                onDemandThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                indexName: userId-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+                provisionedThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+              billingMode: PROVISIONED
+              writeCapacityUnits: 80000
+              readCapacityUnits: 80000
+              localSecondaryIndexes:
+              - indexSizeBytes: 1048576
+                indexName: createdAt-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+              - indexSizeBytes: 1048576
+                indexName: createdAt-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
           vpc: vpc-041d4426c201ee954
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
@@ -22990,6 +23681,74 @@ components:
                 availabilityZone: eu-central-1a
                 tags:
                   primary: ""
+            awsDynamoDb:
+              globalSecondaryIndexes:
+              - indexSizeBytes: 1048576
+                warmThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                onDemandThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                indexName: userId-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+                provisionedThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+              - indexSizeBytes: 1048576
+                warmThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                onDemandThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                indexName: userId-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+                provisionedThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+              billingMode: PROVISIONED
+              writeCapacityUnits: 80000
+              readCapacityUnits: 80000
+              localSecondaryIndexes:
+              - indexSizeBytes: 1048576
+                indexName: createdAt-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+              - indexSizeBytes: 1048576
+                indexName: createdAt-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
           vpc: vpc-041d4426c201ee954
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
@@ -23092,6 +23851,74 @@ components:
                 availabilityZone: eu-central-1a
                 tags:
                   primary: ""
+            awsDynamoDb:
+              globalSecondaryIndexes:
+              - indexSizeBytes: 1048576
+                warmThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                onDemandThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                indexName: userId-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+                provisionedThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+              - indexSizeBytes: 1048576
+                warmThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                onDemandThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+                indexName: userId-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+                provisionedThroughput:
+                  writeCapacityUnits: 100
+                  readCapacityUnits: 100
+              billingMode: PROVISIONED
+              writeCapacityUnits: 80000
+              readCapacityUnits: 80000
+              localSecondaryIndexes:
+              - indexSizeBytes: 1048576
+                indexName: createdAt-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
+              - indexSizeBytes: 1048576
+                indexName: createdAt-index
+                keySchema:
+                - name: userId
+                  type: HASH
+                - name: userId
+                  type: HASH
+                projection:
+                  nonKeyAttributes:
+                  - email
+                  projectionType: INCLUDE
           vpc: vpc-041d4426c201ee954
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z

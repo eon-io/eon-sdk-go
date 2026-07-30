@@ -40,6 +40,7 @@ docs/AuthAPI.md
 docs/AwsAccountMetricsDestination.md
 docs/AwsDatabaseDestination.md
 docs/AwsDynamoDBDestination.md
+docs/AwsDynamoDbResource.md
 docs/AwsEbsVolumeRestoreResult.md
 docs/AwsEc2InstanceRestoreDestination.md
 docs/AwsEc2InstanceRestoreResult.md
@@ -139,6 +140,14 @@ docs/DisconnectRestoreAccountResponse.md
 docs/DisconnectRestoreAwsOrganizationalUnitResponse.md
 docs/DisconnectSourceAccountResponse.md
 docs/DisconnectSourceAwsOrganizationalUnitResponse.md
+docs/DynamoDbBillingMode.md
+docs/DynamoDbGlobalSecondaryIndex.md
+docs/DynamoDbIndexKeySchemaElement.md
+docs/DynamoDbIndexProjection.md
+docs/DynamoDbIndexThroughput.md
+docs/DynamoDbKeyType.md
+docs/DynamoDbLocalSecondaryIndex.md
+docs/DynamoDbProjectionType.md
 docs/DynamodbTableRestoreDestination.md
 docs/EbsRestoreDestination.md
 docs/EbsSnapshotRestoreDestination.md
@@ -202,6 +211,7 @@ docs/IamAPI.md
 docs/IdFilters.md
 docs/Idp.md
 docs/IdpGroup.md
+docs/InventoryDetail.md
 docs/InventoryFilterConditions.md
 docs/InventoryResource.md
 docs/InventorySnapshotVolume.md
@@ -351,6 +361,8 @@ docs/SourceAccountCloudAttributes.md
 docs/SourceAccountMetricsConfig.md
 docs/SourceAccountProviderIdFilters.md
 docs/SourceAccountSortField.md
+docs/SourceAccountTagKeyValuesCondition.md
+docs/SourceAccountTagKeysCondition.md
 docs/SourceAccountsFilterConditions.md
 docs/SourceAwsOrganizationalUnit.md
 docs/SourceStorage.md
@@ -430,6 +442,7 @@ model_apps_details.go
 model_aws_account_metrics_destination.go
 model_aws_database_destination.go
 model_aws_dynamo_db_destination.go
+model_aws_dynamo_db_resource.go
 model_aws_ebs_volume_restore_result.go
 model_aws_ec2_instance_restore_destination.go
 model_aws_ec2_instance_restore_result.go
@@ -524,6 +537,14 @@ model_disconnect_restore_account_response.go
 model_disconnect_restore_aws_organizational_unit_response.go
 model_disconnect_source_account_response.go
 model_disconnect_source_aws_organizational_unit_response.go
+model_dynamo_db_billing_mode.go
+model_dynamo_db_global_secondary_index.go
+model_dynamo_db_index_key_schema_element.go
+model_dynamo_db_index_projection.go
+model_dynamo_db_index_throughput.go
+model_dynamo_db_key_type.go
+model_dynamo_db_local_secondary_index.go
+model_dynamo_db_projection_type.go
 model_dynamodb_table_restore_destination.go
 model_ebs_restore_destination.go
 model_ebs_snapshot_restore_destination.go
@@ -586,6 +607,7 @@ model_hold_snapshot_request.go
 model_id_filters.go
 model_idp.go
 model_idp_group.go
+model_inventory_detail.go
 model_inventory_filter_conditions.go
 model_inventory_resource.go
 model_inventory_snapshot_volume.go
@@ -732,6 +754,8 @@ model_source_account_cloud_attributes.go
 model_source_account_metrics_config.go
 model_source_account_provider_id_filters.go
 model_source_account_sort_field.go
+model_source_account_tag_key_values_condition.go
+model_source_account_tag_keys_condition.go
 model_source_accounts_filter_conditions.go
 model_source_aws_organizational_unit.go
 model_source_storage.go

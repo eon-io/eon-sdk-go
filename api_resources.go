@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -689,6 +690,13 @@ type ApiGetResourceRequest struct {
 	ApiService *ResourcesAPIService
 	projectId string
 	id string
+	include *[]InventoryDetail
+}
+
+// Expensive detail groups to include in the response. They are omitted by default to keep the response small. 
+func (r ApiGetResourceRequest) Include(include []InventoryDetail) ApiGetResourceRequest {
+	r.include = &include
+	return r
 }
 
 func (r ApiGetResourceRequest) Execute() (*GetResourceResponse, *http.Response, error) {
@@ -737,6 +745,17 @@ func (a *ResourcesAPIService) GetResourceExecute(r ApiGetResourceRequest) (*GetR
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.include != nil {
+		t := *r.include
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "include", s.Index(i).Interface(), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "include", t, "multi")
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -818,6 +837,7 @@ type ApiListResourcesRequest struct {
 	projectId string
 	pageToken *string
 	pageSize *int32
+	include *[]InventoryDetail
 	listInventoryRequest *ListInventoryRequest
 }
 
@@ -830,6 +850,12 @@ func (r ApiListResourcesRequest) PageToken(pageToken string) ApiListResourcesReq
 // Maximum number of items to return in the response.
 func (r ApiListResourcesRequest) PageSize(pageSize int32) ApiListResourcesRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// Expensive detail groups to include in the response. They are omitted by default to keep the response small. 
+func (r ApiListResourcesRequest) Include(include []InventoryDetail) ApiListResourcesRequest {
+	r.include = &include
 	return r
 }
 
@@ -889,6 +915,17 @@ func (a *ResourcesAPIService) ListResourcesExecute(r ApiListResourcesRequest) (*
 	} else {
 		var defaultValue int32 = 50
 		r.pageSize = &defaultValue
+	}
+	if r.include != nil {
+		t := *r.include
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "include", s.Index(i).Interface(), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "include", t, "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

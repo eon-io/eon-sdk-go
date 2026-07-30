@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 
 ## GetResource
 
-> GetResourceResponse GetResource(ctx, projectId, id).Execute()
+> GetResourceResponse GetResource(ctx, projectId, id).Include(include).Execute()
 
 Get Resource
 
@@ -413,10 +413,11 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource to retrieve.
+	include := []openapiclient.InventoryDetail{openapiclient.InventoryDetail("DYNAMODB_INDEXES")} // []InventoryDetail | Expensive detail groups to include in the response. They are omitted by default to keep the response small.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.GetResource(context.Background(), projectId, id).Execute()
+	resp, r, err := apiClient.ResourcesAPI.GetResource(context.Background(), projectId, id).Include(include).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResource``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -444,6 +445,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **include** | [**[]InventoryDetail**](InventoryDetail.md) | Expensive detail groups to include in the response. They are omitted by default to keep the response small.  | 
 
 ### Return type
 
@@ -465,7 +467,7 @@ Name | Type | Description  | Notes
 
 ## ListResources
 
-> ListResourcesResponse ListResources(ctx, projectId).PageToken(pageToken).PageSize(pageSize).ListInventoryRequest(listInventoryRequest).Execute()
+> ListResourcesResponse ListResources(ctx, projectId).PageToken(pageToken).PageSize(pageSize).Include(include).ListInventoryRequest(listInventoryRequest).Execute()
 
 List Resources
 
@@ -487,11 +489,12 @@ func main() {
 	projectId := "f9304613-dddb-52fe-b883-f5e671a868a3" // string | ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "pageToken_example" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
+	include := []openapiclient.InventoryDetail{openapiclient.InventoryDetail("DYNAMODB_INDEXES")} // []InventoryDetail | Expensive detail groups to include in the response. They are omitted by default to keep the response small.  (optional)
 	listInventoryRequest := *openapiclient.NewListInventoryRequest() // ListInventoryRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.ListResources(context.Background(), projectId).PageToken(pageToken).PageSize(pageSize).ListInventoryRequest(listInventoryRequest).Execute()
+	resp, r, err := apiClient.ResourcesAPI.ListResources(context.Background(), projectId).PageToken(pageToken).PageSize(pageSize).Include(include).ListInventoryRequest(listInventoryRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.ListResources``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -519,6 +522,7 @@ Name | Type | Description  | Notes
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
  **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
+ **include** | [**[]InventoryDetail**](InventoryDetail.md) | Expensive detail groups to include in the response. They are omitted by default to keep the response small.  | 
  **listInventoryRequest** | [**ListInventoryRequest**](ListInventoryRequest.md) |  | 
 
 ### Return type

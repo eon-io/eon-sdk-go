@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AwsEc2** | Pointer to [**NullableAwsEc2Resource**](AwsEc2Resource.md) |  | [optional] 
+**AwsDynamoDb** | Pointer to [**NullableAwsDynamoDbResource**](AwsDynamoDbResource.md) |  | [optional] 
 
 ## Methods
 
@@ -60,6 +61,41 @@ HasAwsEc2 returns a boolean if a field has been set.
 `func (o *ResourceProperties) UnsetAwsEc2()`
 
 UnsetAwsEc2 ensures that no value is present for AwsEc2, not even an explicit nil
+### GetAwsDynamoDb
+
+`func (o *ResourceProperties) GetAwsDynamoDb() AwsDynamoDbResource`
+
+GetAwsDynamoDb returns the AwsDynamoDb field if non-nil, zero value otherwise.
+
+### GetAwsDynamoDbOk
+
+`func (o *ResourceProperties) GetAwsDynamoDbOk() (*AwsDynamoDbResource, bool)`
+
+GetAwsDynamoDbOk returns a tuple with the AwsDynamoDb field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsDynamoDb
+
+`func (o *ResourceProperties) SetAwsDynamoDb(v AwsDynamoDbResource)`
+
+SetAwsDynamoDb sets AwsDynamoDb field to given value.
+
+### HasAwsDynamoDb
+
+`func (o *ResourceProperties) HasAwsDynamoDb() bool`
+
+HasAwsDynamoDb returns a boolean if a field has been set.
+
+### SetAwsDynamoDbNil
+
+`func (o *ResourceProperties) SetAwsDynamoDbNil(b bool)`
+
+ SetAwsDynamoDbNil sets the value for AwsDynamoDb to be an explicit nil
+
+### UnsetAwsDynamoDb
+`func (o *ResourceProperties) UnsetAwsDynamoDb()`
+
+UnsetAwsDynamoDb ensures that no value is present for AwsDynamoDb, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

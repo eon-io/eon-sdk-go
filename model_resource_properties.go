@@ -20,6 +20,7 @@ var _ MappedNullable = &ResourceProperties{}
 // ResourceProperties Source resource properties. The properties present in this object change depending on the value set in `resourceType`. 
 type ResourceProperties struct {
 	AwsEc2 NullableAwsEc2Resource `json:"awsEc2,omitempty"`
+	AwsDynamoDb NullableAwsDynamoDbResource `json:"awsDynamoDb,omitempty"`
 }
 
 // NewResourceProperties instantiates a new ResourceProperties object
@@ -81,6 +82,48 @@ func (o *ResourceProperties) UnsetAwsEc2() {
 	o.AwsEc2.Unset()
 }
 
+// GetAwsDynamoDb returns the AwsDynamoDb field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourceProperties) GetAwsDynamoDb() AwsDynamoDbResource {
+	if o == nil || IsNil(o.AwsDynamoDb.Get()) {
+		var ret AwsDynamoDbResource
+		return ret
+	}
+	return *o.AwsDynamoDb.Get()
+}
+
+// GetAwsDynamoDbOk returns a tuple with the AwsDynamoDb field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourceProperties) GetAwsDynamoDbOk() (*AwsDynamoDbResource, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AwsDynamoDb.Get(), o.AwsDynamoDb.IsSet()
+}
+
+// HasAwsDynamoDb returns a boolean if a field has been set.
+func (o *ResourceProperties) HasAwsDynamoDb() bool {
+	if o != nil && o.AwsDynamoDb.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsDynamoDb gets a reference to the given NullableAwsDynamoDbResource and assigns it to the AwsDynamoDb field.
+func (o *ResourceProperties) SetAwsDynamoDb(v AwsDynamoDbResource) {
+	o.AwsDynamoDb.Set(&v)
+}
+// SetAwsDynamoDbNil sets the value for AwsDynamoDb to be an explicit nil
+func (o *ResourceProperties) SetAwsDynamoDbNil() {
+	o.AwsDynamoDb.Set(nil)
+}
+
+// UnsetAwsDynamoDb ensures that no value is present for AwsDynamoDb, not even an explicit nil
+func (o *ResourceProperties) UnsetAwsDynamoDb() {
+	o.AwsDynamoDb.Unset()
+}
+
 func (o ResourceProperties) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -93,6 +136,9 @@ func (o ResourceProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AwsEc2.IsSet() {
 		toSerialize["awsEc2"] = o.AwsEc2.Get()
+	}
+	if o.AwsDynamoDb.IsSet() {
+		toSerialize["awsDynamoDb"] = o.AwsDynamoDb.Get()
 	}
 	return toSerialize, nil
 }
