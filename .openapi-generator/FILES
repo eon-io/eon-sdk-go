@@ -6,6 +6,7 @@ api_accounts.go
 api_action_approvals.go
 api_auth.go
 api_backup_policies.go
+api_backup_posture_controls.go
 api_backups.go
 api_billing.go
 api_dashboard.go
@@ -88,6 +89,14 @@ docs/BackupPolicyGroupCondition.md
 docs/BackupPolicyPlan.md
 docs/BackupPolicyResourceSelector.md
 docs/BackupPolicyType.md
+docs/BackupPostureControl.md
+docs/BackupPostureControlExpression.md
+docs/BackupPostureControlGroupCondition.md
+docs/BackupPostureControlResourceSelector.md
+docs/BackupPostureControlRules.md
+docs/BackupPostureControlSort.md
+docs/BackupPostureControlSortField.md
+docs/BackupPostureControlsAPI.md
 docs/BackupStatus.md
 docs/BackupStatusFilters.md
 docs/BackupVault.md
@@ -118,6 +127,7 @@ docs/CostGranularity.md
 docs/CostUnit.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
+docs/CreateBackupPostureControlRequest.md
 docs/CreateIdpGroupRequest.md
 docs/CreateIdpGroupResponse.md
 docs/CreateRoleRequest.md
@@ -225,6 +235,8 @@ docs/JobsAPI.md
 docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
 docs/ListBackupPoliciesResponse.md
+docs/ListBackupPostureControlsRequest.md
+docs/ListBackupPostureControlsResponse.md
 docs/ListBackupVaultResponse.md
 docs/ListIdpGroupsResponse.md
 docs/ListIdpsResponse.md
@@ -253,8 +265,11 @@ docs/MPARequestPolicyDetail.md
 docs/MPARequestStatus.md
 docs/MPAReview.md
 docs/MPASubmitAction.md
+docs/MaxRetentionRule.md
 docs/MeteringDimension.md
+docs/MinRetentionRule.md
 docs/MonthlyConfig.md
+docs/NumberOfCopiesRule.md
 docs/Oauth2TokenResponse.md
 docs/ObjectStorageDestination.md
 docs/ObjectStoreScanMethod.md
@@ -341,6 +356,7 @@ docs/S3RestoreTarget.md
 docs/SameSourceAccountRestoreLimits.md
 docs/ScalarOperators.md
 docs/ScheduleTimezone.md
+docs/Severity.md
 docs/Snapshot.md
 docs/SnapshotDateFilters.md
 docs/SnapshotFilterConditions.md
@@ -394,6 +410,7 @@ docs/UpdateAwsRestoreAccountAttributes.md
 docs/UpdateAwsSourceAccountAttributes.md
 docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
+docs/UpdateBackupPostureControlRequest.md
 docs/UpdateGcpRestoreAccountAttributes.md
 docs/UpdateGcpSourceAccountAttributes.md
 docs/UpdateIdpGroupRequest.md
@@ -489,6 +506,13 @@ model_backup_policy_group_condition.go
 model_backup_policy_plan.go
 model_backup_policy_resource_selector.go
 model_backup_policy_type.go
+model_backup_posture_control.go
+model_backup_posture_control_expression.go
+model_backup_posture_control_group_condition.go
+model_backup_posture_control_resource_selector.go
+model_backup_posture_control_rules.go
+model_backup_posture_control_sort.go
+model_backup_posture_control_sort_field.go
 model_backup_status.go
 model_backup_status_filters.go
 model_backup_vault.go
@@ -517,6 +541,7 @@ model_cost_granularity.go
 model_cost_unit.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
+model_create_backup_posture_control_request.go
 model_create_idp_group_request.go
 model_create_idp_group_response.go
 model_create_role_request.go
@@ -620,6 +645,8 @@ model_job_status_filters.go
 model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
 model_list_backup_policies_response.go
+model_list_backup_posture_controls_request.go
+model_list_backup_posture_controls_response.go
 model_list_backup_vault_response.go
 model_list_idp_groups_response.go
 model_list_idps_response.go
@@ -639,7 +666,9 @@ model_list_source_accounts_request.go
 model_list_source_accounts_response.go
 model_list_source_aws_organizational_units_response.go
 model_logical_operator.go
+model_max_retention_rule.go
 model_metering_dimension.go
+model_min_retention_rule.go
 model_monthly_config.go
 model_mpa_decision.go
 model_mpa_intercepted_response.go
@@ -650,6 +679,7 @@ model_mpa_request_policy_detail.go
 model_mpa_request_status.go
 model_mpa_review.go
 model_mpa_submit_action.go
+model_number_of_copies_rule.go
 model_oauth2_token_response.go
 model_object_storage_destination.go
 model_object_store_scan_method.go
@@ -735,6 +765,7 @@ model_s3_restore_target.go
 model_same_source_account_restore_limits.go
 model_scalar_operators.go
 model_schedule_timezone.go
+model_severity.go
 model_snapshot.go
 model_snapshot_date_filters.go
 model_snapshot_filter_conditions.go
@@ -787,6 +818,7 @@ model_update_aws_restore_account_attributes.go
 model_update_aws_source_account_attributes.go
 model_update_backup_policy_request.go
 model_update_backup_policy_response.go
+model_update_backup_posture_control_request.go
 model_update_gcp_restore_account_attributes.go
 model_update_gcp_source_account_attributes.go
 model_update_idp_group_request.go
@@ -818,6 +850,7 @@ test/api_accounts_test.go
 test/api_action_approvals_test.go
 test/api_auth_test.go
 test/api_backup_policies_test.go
+test/api_backup_posture_controls_test.go
 test/api_backups_test.go
 test/api_billing_test.go
 test/api_dashboard_test.go

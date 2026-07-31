@@ -44,6 +44,339 @@ tags:
   name: billing
   x-displayName: Billing
 paths:
+  /v1/projects/{projectId}/backup-posture-controls:
+    post:
+      description: |
+        Description: Create a backup posture control in a project. The control's `resourceSelector`
+        selects which resources it applies to, and its `rules` define the backup
+        requirements those resources must meet. The created control, including its
+        server-assigned `id`, is returned.
+      operationId: createBackupPostureControl
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBackupPostureControlRequest'
+        description: The definition of the backup posture control to create.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupPostureControl'
+          description: Backup posture control created successfully
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create a backup posture control
+      tags:
+      - backupPostureControls
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - create:controls
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: control
+          in: resBody
+          key: id
+  /v1/projects/{projectId}/backup-posture-controls/list:
+    post:
+      description: |
+        Description: List the backup posture controls configured for a project. Each control
+        carries its severity, `resourceSelector`, and backup requirement `rules`.
+        Use `pageToken` and `pageSize` to page through results, and the request body
+        to sort.
+      operationId: listBackupPostureControls
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: |
+          Opaque cursor for the next page of results, returned as `nextPageToken`
+          by a previous call. Reuse the same request body for stable pagination.
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of backup posture controls to return.
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBackupPostureControlsRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBackupPostureControlsResponse'
+          description: Successful operation
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List backup posture controls
+      tags:
+      - backupPostureControls
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:controls
+      x-audit-log:
+        excluded: true
+  /v1/projects/{projectId}/backup-posture-controls/{controlId}:
+    delete:
+      description: |
+        Description: Delete a backup posture control by ID. System-provided controls cannot be
+        deleted.
+      operationId: deleteBackupPostureControl
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the backup posture control to delete
+        explode: false
+        in: path
+        name: controlId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Backup posture control deleted successfully
+        "404":
+          description: Backup posture control not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete a backup posture control
+      tags:
+      - backupPostureControls
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - delete:controls
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: control
+          in: path
+          key: controlId
+    get:
+      description: |
+        Description: Get a single backup posture control by ID, including its severity,
+        `resourceSelector`, and backup requirement `rules`.
+      operationId: getBackupPostureControl
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the backup posture control to retrieve
+        explode: false
+        in: path
+        name: controlId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupPostureControl'
+          description: Successful operation
+        "404":
+          description: Backup posture control not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get a backup posture control
+      tags:
+      - backupPostureControls
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:controls
+      x-audit-log:
+        excluded: true
+    put:
+      description: |
+        Description: Replace an existing backup posture control with the supplied definition. This
+        is a full replacement, not a partial update: send the complete control, since
+        any omitted field is reset. System-provided controls cannot be modified.
+      operationId: updateBackupPostureControl
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the backup posture control to update
+        explode: false
+        in: path
+        name: controlId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBackupPostureControlRequest'
+        description: The full desired state of the backup posture control.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupPostureControl'
+          description: Backup posture control updated successfully
+        "404":
+          description: Backup posture control not found
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update a backup posture control
+      tags:
+      - backupPostureControls
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - update:controls
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: control
+          in: path
+          key: controlId
   /v1/permissions:
     get:
       description: "Description: Retrieves a list of user permissions."
@@ -8021,158 +8354,26 @@ components:
       - mpaPolicies
       type: object
       x-nullable: true
-    PermissionType:
-      description: User permission.
+    Severity:
+      description: Severity assigned to a control and to the violations it raises.
       enum:
-      - permission_id_unspecified
-      - global_settings.view
-      - vault_accounts.manage
-      - cost_explorer.view
-      - user_access.manage
-      - saml_group_access.manage
-      - api_credentials.manage
-      - api_credentials.rotate_secret
-      - custom_roles.manage
-      - dashboard.view
-      - inventory.view
-      - jobs.view
-      - audit_logs.view
-      - backup_settings.view
-      - storage_gateway.view
-      - database_explorer.search
-      - file_explorer.search
-      - snapshots.take_or_convert
-      - resources.restore
-      - configuration.validate
-      - files.restore
-      - databases.query
-      - data_classes.override
-      - environments.override
-      - detected_apps.override
-      - network_classification.override
-      - control_violations.mute
-      - backup_exclusion.manage
-      - vaults.manage
-      - source_accounts.manage
-      - restore_accounts.manage
-      - backup_policies.manage
-      - discovery_configuration.manage
-      - backup_configuration.manage
-      - controls.manage
-      - ransomware_detection.manage
-      - notification_policies.manage
-      - storage_gateway.manage
-      - oauth_apps.manage
-      - zero_etl_policies.manage
-      - action_approval_rules.manage
-      - action_approval_rules.view
-      - action_approval_requests.manage
-      - mpa_policies.manage
-      - mpa_policies.view
-      - mpa_requests.manage
-      - restore_templates.manage
-      - datalake.view
-      - datalake.operate
-      - compliance.view
-      - classification_policies.manage
-      - file_explorer.delete
-      - storage_gateway_data.download
-      - storage_gateway_metadata.view
-      example: inventory.view
+      - HIGH
+      - MEDIUM
+      - LOW
+      example: HIGH
       type: string
       x-extensible-enum: true
-      x-docs-internal-enum:
-      - zero_etl_policies.manage
-      - action_approval_rules.manage
-      - action_approval_rules.view
-      - action_approval_requests.manage
-      - mpa_policies.manage
-      - mpa_policies.view
-      - mpa_requests.manage
-      - restore_templates.manage
-      - datalake.view
-      - datalake.operate
-      - compliance.view
-      - classification_policies.manage
-    Permission:
-      example:
-        permissionType: inventory.view
-        allowConditions: false
-        description: Can view resource details in the inventory.
-      properties:
-        permissionType:
-          $ref: '#/components/schemas/PermissionType'
-        description:
-          description: Description of the actions the permission allows.
-          example: Can view resource details in the inventory.
-          type: string
-        allowConditions:
-          default: false
-          description: |
-            Whether the permission can be restricted with access conditions.
-            Relevant when the permission is used in a user role.
-          type: boolean
-      required:
-      - allowConditions
-      - category
-      - description
-      - name
-      - permissionType
-      type: object
-    ListPermissionsResponse:
-      example:
-        permissions:
-        - permissionType: inventory.view
-          allowConditions: false
-          description: Can view resource details in the inventory.
-        - permissionType: inventory.view
-          allowConditions: false
-          description: Can view resource details in the inventory.
-      properties:
-        permissions:
-          description: List of available user permissions.
-          items:
-            $ref: '#/components/schemas/Permission'
-          type: array
-      required:
-      - permissions
-      type: object
-    PermissionGrantInput:
-      example:
-        accessConditionId: Non-PII only.
-        permission: inventory.view
-      properties:
-        permission:
-          $ref: '#/components/schemas/PermissionType'
-        accessConditionId:
-          description: |
-            If present, the ID of the set of access conditions that restrict the resources the permission is granted for.
-            The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions.
-            If omitted, the permission is granted for all resources.
-          example: Non-PII only.
-          type: string
-      required:
-      - permission
-      type: object
-    AccessConditionEffect:
-      description: |
-        Whether the data access condition is an allowlist or blocklist.
+    ResourceSelectorMode:
       enum:
-      - INCLUSIVE
-      - EXCLUSIVE
-      example: INCLUSIVE
+      - ALL
+      - NONE
+      - CONDITIONAL
+      example: CONDITIONAL
       type: string
       x-enum-varnames:
-      - RULE_EFFECT_INCLUSIVE
-      - RULE_EFFECT_EXCLUSIVE
-      x-fern-enum:
-        INCLUSIVE:
-          description: |
-            The permission is granted only to the resources that match the conditions.
-            All other resources are excluded from the permission.
-        EXCLUSIVE:
-          description: |
-            The permission is granted to all resources except those that match the conditions.
+      - RESOURCE_SELECTOR_MODE_ALL
+      - RESOURCE_SELECTOR_MODE_NONE
+      - RESOURCE_SELECTOR_MODE_CONDITIONAL
     LogicalOperator:
       description: |
         Logical operator to apply to the list of `operands`.
@@ -8187,13 +8388,11 @@ components:
       - AND_OPERATOR
       - OR_OPERATOR
       - LOGICAL_OPERATOR_UNSPECIFIED
-    AccessConditionalExpression:
+    BackupPostureControlExpression:
       description: |
-        Conditional expression to evaluate to determine which resources are accessible.
-
-        Only one of the expressions below can be used.
-        For multiple conditions using `AND` or `OR` logic, group expressions with `group`.
-        You can nest multiple groups to create more complex expressions.
+        Resource selector expression that determines which resources a backup posture
+        control applies to. Set exactly one of the properties below. For AND/OR logic
+        across multiple conditions, use `group`; groups can be nested.
       example:
         resourceId:
           operator: IN
@@ -8259,16 +8458,8 @@ components:
           operator: CONTAINS_ANY_OF
         group:
           operands:
-          - resourceType:
-              operator: IN
-              resourceTypes:
-              - AWS_EC2
-              - AWS_RDS
-          - environment:
-              operator: IN
-              environments:
-              - PROD
-              - PROD_INTERNAL
+          - null
+          - null
           operator: AND
         resourceType:
           resourceTypes:
@@ -8283,7 +8474,7 @@ components:
       nullable: true
       properties:
         group:
-          $ref: '#/components/schemas/RoleAccessGroupCondition'
+          $ref: '#/components/schemas/BackupPostureControlGroupCondition'
         resourceType:
           $ref: '#/components/schemas/ResourceTypeCondition'
         dataClasses:
@@ -8313,46 +8504,23 @@ components:
         tagKeyValues:
           $ref: '#/components/schemas/TagKeyValuesCondition'
       type: object
-    RoleAccessGroupCondition:
+    BackupPostureControlGroupCondition:
       description: |
-        Group of expressions to evaluate using the logical operator specified in `operator`.
-        Each item in the `operands` list can be either a single expression or a nested `group` expression.
+        A group of expressions combined with a logical operator (`AND`/`OR`). Each
+        operand can itself be a single condition or a nested group.
       example:
         operands:
-        - resourceType:
-            operator: IN
-            resourceTypes:
-            - AWS_EC2
-            - AWS_RDS
-        - environment:
-            operator: IN
-            environments:
-            - PROD
-            - PROD_INTERNAL
+        - null
+        - null
         operator: AND
       nullable: true
       properties:
         operator:
           $ref: '#/components/schemas/LogicalOperator'
         operands:
-          description: |
-            List of expressions to evaluate using the logical operator specified in `operator`.
-            Each item in the list can be either a single expression or a nested `group` expression.
-
-            Must contain at least 2 items.
-          example:
-          - resourceType:
-              operator: IN
-              resourceTypes:
-              - AWS_EC2
-              - AWS_RDS
-          - environment:
-              operator: IN
-              environments:
-              - PROD
-              - PROD_INTERNAL
+          description: The expressions to combine with `operator`.
           items:
-            $ref: '#/components/schemas/AccessConditionalExpression'
+            $ref: '#/components/schemas/BackupPostureControlExpression'
           minItems: 2
           type: array
       required:
@@ -8781,6 +8949,1123 @@ components:
       required:
       - operator
       - tagKeyValues
+      type: object
+    BackupPostureControlResourceSelector:
+      example:
+        expression:
+          resourceId:
+            operator: IN
+            resourceIds:
+            - resourceIds
+            - resourceIds
+          resourceGroupName:
+            resourceGroupNames:
+            - resourceGroupNames
+            - resourceGroupNames
+            operator: IN
+          tagKeys:
+            tagKeys:
+            - tagKeys
+            - tagKeys
+            operator: CONTAINS_ANY_OF
+          vpc:
+            vpcs:
+            - vpcs
+            - vpcs
+            operator: IN
+          resourceName:
+            resourceNames:
+            - resourceNames
+            - resourceNames
+            operator: CONTAINS
+          dataClasses:
+            dataClasses:
+            - PII
+            - PII
+            operator: CONTAINS_ANY_OF
+          accountId:
+            accountIds:
+            - accountIds
+            - accountIds
+            operator: IN
+          environment:
+            environments:
+            - PROD
+            - PROD
+            operator: IN
+          tagKeyValues:
+            tagKeyValues:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            operator: CONTAINS_ANY_OF
+          cloudProvider:
+            cloudProviders:
+            - AWS
+            - AWS
+            operator: IN
+          sourceRegion:
+            regions:
+            - regions
+            - regions
+            operator: IN
+          subnets:
+            subnets:
+            - subnets
+            - subnets
+            operator: CONTAINS_ANY_OF
+          group:
+            operands:
+            - null
+            - null
+            operator: AND
+          resourceType:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
+            operator: IN
+          apps:
+            operator: CONTAINS_ANY_OF
+            apps:
+            - apps
+            - apps
+        resourceSelectionMode: CONDITIONAL
+      properties:
+        resourceSelectionMode:
+          $ref: '#/components/schemas/ResourceSelectorMode'
+        expression:
+          $ref: '#/components/schemas/BackupPostureControlExpression'
+      required:
+      - resourceSelectionMode
+      type: object
+      x-nullable: true
+    MinRetentionRule:
+      example:
+        minimumRetention: 0
+        frequency: DAILY
+      properties:
+        minimumRetention:
+          description: "The minimum backup retention period, in days."
+          type: integer
+        frequency:
+          description: The backup cadence this minimum retention applies to.
+          enum:
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          - ANNUAL
+          type: string
+      required:
+      - frequency
+      - minimumRetention
+      type: object
+      x-nullable: true
+    MaxRetentionRule:
+      example:
+        maximumRetention: 6
+      properties:
+        maximumRetention:
+          description: "The maximum backup retention period, in days."
+          type: integer
+      required:
+      - maximumRetention
+      type: object
+      x-nullable: true
+    NumberOfCopiesRule:
+      example:
+        minCopies: 1
+      properties:
+        minCopies:
+          description: The minimum number of backup copies that must exist.
+          type: integer
+      required:
+      - minCopies
+      type: object
+      x-nullable: true
+    BackupPostureControlRules:
+      description: |
+        The backup requirements a resource must satisfy to pass the control. Every rule
+        is optional: a rule you set is evaluated, and one you omit is not. Omit a rule
+        to stop enforcing it.
+      example:
+        minimumRetention:
+        - minimumRetention: 0
+          frequency: DAILY
+        - minimumRetention: 0
+          frequency: DAILY
+        crossRegion: true
+        crossCloudProvider: true
+        maximumRetention:
+          maximumRetention: 6
+        numberOfCopies:
+          minCopies: 1
+        crossAccount: true
+      properties:
+        minimumRetention:
+          description: "Minimum retention required per backup frequency (daily, weekly,\
+            \ monthly, annual)."
+          items:
+            $ref: '#/components/schemas/MinRetentionRule'
+          type: array
+        maximumRetention:
+          $ref: '#/components/schemas/MaxRetentionRule'
+        numberOfCopies:
+          $ref: '#/components/schemas/NumberOfCopiesRule'
+        crossRegion:
+          description: Whether at least one backup copy must be stored in a different
+            region.
+          type: boolean
+        crossAccount:
+          description: Whether at least one backup copy must be stored in a different
+            cloud account.
+          type: boolean
+        crossCloudProvider:
+          description: Whether at least one backup copy must be stored in a different
+            cloud provider.
+          type: boolean
+      type: object
+      x-nullable: true
+    CreateBackupPostureControlRequest:
+      description: The definition of a new backup posture control.
+      example:
+        severity: HIGH
+        name: name
+        rules:
+          minimumRetention:
+          - minimumRetention: 0
+            frequency: DAILY
+          - minimumRetention: 0
+            frequency: DAILY
+          crossRegion: true
+          crossCloudProvider: true
+          maximumRetention:
+            maximumRetention: 6
+          numberOfCopies:
+            minCopies: 1
+          crossAccount: true
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: CONTAINS
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - null
+              - null
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+      properties:
+        name:
+          description: Human-readable name of the control.
+          type: string
+        severity:
+          $ref: '#/components/schemas/Severity'
+        resourceSelector:
+          $ref: '#/components/schemas/BackupPostureControlResourceSelector'
+        rules:
+          $ref: '#/components/schemas/BackupPostureControlRules'
+      required:
+      - name
+      - resourceSelector
+      - rules
+      - severity
+      type: object
+    BackupPostureControl:
+      example:
+        severity: HIGH
+        name: name
+        rules:
+          minimumRetention:
+          - minimumRetention: 0
+            frequency: DAILY
+          - minimumRetention: 0
+            frequency: DAILY
+          crossRegion: true
+          crossCloudProvider: true
+          maximumRetention:
+            maximumRetention: 6
+          numberOfCopies:
+            minCopies: 1
+          crossAccount: true
+        id: id
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: CONTAINS
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - null
+              - null
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+      properties:
+        id:
+          description: Server-assigned unique identifier of the control.
+          type: string
+        name:
+          description: Human-readable name of the control.
+          type: string
+        severity:
+          $ref: '#/components/schemas/Severity'
+        resourceSelector:
+          $ref: '#/components/schemas/BackupPostureControlResourceSelector'
+        rules:
+          $ref: '#/components/schemas/BackupPostureControlRules'
+      required:
+      - id
+      - name
+      - resourceSelector
+      - rules
+      - severity
+      type: object
+      x-nullable: true
+    BackupPostureControlSortField:
+      description: The field to sort controls by.
+      enum:
+      - NAME
+      - SEVERITY
+      example: NAME
+      type: string
+      x-enum-varnames:
+      - CONTROL_SORT_FIELD_NAME
+      - CONTROL_SORT_FIELD_SEVERITY
+    SortOrder:
+      description: Sort order. Use `ASC` for ascending order and `DESC` for descending
+        order.
+      enum:
+      - ASC
+      - DESC
+      example: ASC
+      type: string
+    BackupPostureControlSort:
+      description: A single sort instruction for listing controls.
+      example:
+        field: NAME
+        order: ASC
+      properties:
+        field:
+          $ref: '#/components/schemas/BackupPostureControlSortField'
+        order:
+          $ref: '#/components/schemas/SortOrder'
+      required:
+      - field
+      - order
+      type: object
+      x-nullable: true
+    ListBackupPostureControlsRequest:
+      additionalProperties: false
+      description: Sort options for listing backup posture controls. All properties
+        are optional.
+      example:
+        sorts:
+        - field: NAME
+          order: ASC
+        - field: NAME
+          order: ASC
+      properties:
+        sorts:
+          description: |
+            Sort instructions applied in order. When omitted, controls are returned
+            sorted by severity, most severe first.
+          items:
+            $ref: '#/components/schemas/BackupPostureControlSort'
+          type: array
+      type: object
+    ListBackupPostureControlsResponse:
+      example:
+        nextPageToken: nextPageToken
+        totalCount: 0
+        backupPostureControls:
+        - severity: HIGH
+          name: name
+          rules:
+            minimumRetention:
+            - minimumRetention: 0
+              frequency: DAILY
+            - minimumRetention: 0
+              frequency: DAILY
+            crossRegion: true
+            crossCloudProvider: true
+            maximumRetention:
+              maximumRetention: 6
+            numberOfCopies:
+              minCopies: 1
+            crossAccount: true
+          id: id
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: CONTAINS
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - null
+                - null
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+        - severity: HIGH
+          name: name
+          rules:
+            minimumRetention:
+            - minimumRetention: 0
+              frequency: DAILY
+            - minimumRetention: 0
+              frequency: DAILY
+            crossRegion: true
+            crossCloudProvider: true
+            maximumRetention:
+              maximumRetention: 6
+            numberOfCopies:
+              minCopies: 1
+            crossAccount: true
+          id: id
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: CONTAINS
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - null
+                - null
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+      properties:
+        backupPostureControls:
+          description: "The backup posture controls matching the request, for the\
+            \ current page."
+          items:
+            $ref: '#/components/schemas/BackupPostureControl'
+          type: array
+        totalCount:
+          description: Total number of backup posture controls matching the request
+            across all pages.
+          type: integer
+        nextPageToken:
+          description: |
+            Opaque cursor for the next page. Pass it as `pageToken` on the next request,
+            reusing the same body. Absent when there are no more results.
+          type: string
+      required:
+      - backupPostureControls
+      type: object
+    UpdateBackupPostureControlRequest:
+      description: |
+        The full desired state of an existing control. Update is a full replacement:
+        every field is written, so send the complete definition, not a partial patch.
+      example:
+        severity: HIGH
+        name: name
+        rules:
+          minimumRetention:
+          - minimumRetention: 0
+            frequency: DAILY
+          - minimumRetention: 0
+            frequency: DAILY
+          crossRegion: true
+          crossCloudProvider: true
+          maximumRetention:
+            maximumRetention: 6
+          numberOfCopies:
+            minCopies: 1
+          crossAccount: true
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: CONTAINS
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - null
+              - null
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+      properties:
+        name:
+          description: Human-readable name of the control.
+          type: string
+        severity:
+          $ref: '#/components/schemas/Severity'
+        resourceSelector:
+          $ref: '#/components/schemas/BackupPostureControlResourceSelector'
+        rules:
+          $ref: '#/components/schemas/BackupPostureControlRules'
+      required:
+      - name
+      - resourceSelector
+      - rules
+      - severity
+      type: object
+    PermissionType:
+      description: User permission.
+      enum:
+      - permission_id_unspecified
+      - global_settings.view
+      - vault_accounts.manage
+      - cost_explorer.view
+      - user_access.manage
+      - saml_group_access.manage
+      - api_credentials.manage
+      - api_credentials.rotate_secret
+      - custom_roles.manage
+      - dashboard.view
+      - inventory.view
+      - jobs.view
+      - audit_logs.view
+      - backup_settings.view
+      - storage_gateway.view
+      - database_explorer.search
+      - file_explorer.search
+      - snapshots.take_or_convert
+      - resources.restore
+      - configuration.validate
+      - files.restore
+      - databases.query
+      - data_classes.override
+      - environments.override
+      - detected_apps.override
+      - network_classification.override
+      - control_violations.mute
+      - backup_exclusion.manage
+      - vaults.manage
+      - source_accounts.manage
+      - restore_accounts.manage
+      - backup_policies.manage
+      - discovery_configuration.manage
+      - backup_configuration.manage
+      - controls.manage
+      - ransomware_detection.manage
+      - notification_policies.manage
+      - storage_gateway.manage
+      - oauth_apps.manage
+      - zero_etl_policies.manage
+      - action_approval_rules.manage
+      - action_approval_rules.view
+      - action_approval_requests.manage
+      - mpa_policies.manage
+      - mpa_policies.view
+      - mpa_requests.manage
+      - restore_templates.manage
+      - datalake.view
+      - datalake.operate
+      - compliance.view
+      - classification_policies.manage
+      - file_explorer.delete
+      - storage_gateway_data.download
+      - storage_gateway_metadata.view
+      example: inventory.view
+      type: string
+      x-extensible-enum: true
+      x-docs-internal-enum:
+      - zero_etl_policies.manage
+      - action_approval_rules.manage
+      - action_approval_rules.view
+      - action_approval_requests.manage
+      - mpa_policies.manage
+      - mpa_policies.view
+      - mpa_requests.manage
+      - restore_templates.manage
+      - datalake.view
+      - datalake.operate
+      - compliance.view
+      - classification_policies.manage
+    Permission:
+      example:
+        permissionType: inventory.view
+        allowConditions: false
+        description: Can view resource details in the inventory.
+      properties:
+        permissionType:
+          $ref: '#/components/schemas/PermissionType'
+        description:
+          description: Description of the actions the permission allows.
+          example: Can view resource details in the inventory.
+          type: string
+        allowConditions:
+          default: false
+          description: |
+            Whether the permission can be restricted with access conditions.
+            Relevant when the permission is used in a user role.
+          type: boolean
+      required:
+      - allowConditions
+      - category
+      - description
+      - name
+      - permissionType
+      type: object
+    ListPermissionsResponse:
+      example:
+        permissions:
+        - permissionType: inventory.view
+          allowConditions: false
+          description: Can view resource details in the inventory.
+        - permissionType: inventory.view
+          allowConditions: false
+          description: Can view resource details in the inventory.
+      properties:
+        permissions:
+          description: List of available user permissions.
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+      required:
+      - permissions
+      type: object
+    PermissionGrantInput:
+      example:
+        accessConditionId: Non-PII only.
+        permission: inventory.view
+      properties:
+        permission:
+          $ref: '#/components/schemas/PermissionType'
+        accessConditionId:
+          description: |
+            If present, the ID of the set of access conditions that restrict the resources the permission is granted for.
+            The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions.
+            If omitted, the permission is granted for all resources.
+          example: Non-PII only.
+          type: string
+      required:
+      - permission
+      type: object
+    AccessConditionEffect:
+      description: |
+        Whether the data access condition is an allowlist or blocklist.
+      enum:
+      - INCLUSIVE
+      - EXCLUSIVE
+      example: INCLUSIVE
+      type: string
+      x-enum-varnames:
+      - RULE_EFFECT_INCLUSIVE
+      - RULE_EFFECT_EXCLUSIVE
+      x-fern-enum:
+        INCLUSIVE:
+          description: |
+            The permission is granted only to the resources that match the conditions.
+            All other resources are excluded from the permission.
+        EXCLUSIVE:
+          description: |
+            The permission is granted to all resources except those that match the conditions.
+    AccessConditionalExpression:
+      description: |
+        Conditional expression to evaluate to determine which resources are accessible.
+
+        Only one of the expressions below can be used.
+        For multiple conditions using `AND` or `OR` logic, group expressions with `group`.
+        You can nest multiple groups to create more complex expressions.
+      example:
+        resourceId:
+          operator: IN
+          resourceIds:
+          - resourceIds
+          - resourceIds
+        resourceGroupName:
+          resourceGroupNames:
+          - resourceGroupNames
+          - resourceGroupNames
+          operator: IN
+        tagKeys:
+          tagKeys:
+          - tagKeys
+          - tagKeys
+          operator: CONTAINS_ANY_OF
+        vpc:
+          vpcs:
+          - vpcs
+          - vpcs
+          operator: IN
+        resourceName:
+          resourceNames:
+          - resourceNames
+          - resourceNames
+          operator: CONTAINS
+        dataClasses:
+          dataClasses:
+          - PII
+          - PII
+          operator: CONTAINS_ANY_OF
+        accountId:
+          accountIds:
+          - accountIds
+          - accountIds
+          operator: IN
+        environment:
+          environments:
+          - PROD
+          - PROD
+          operator: IN
+        tagKeyValues:
+          tagKeyValues:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          operator: CONTAINS_ANY_OF
+        cloudProvider:
+          cloudProviders:
+          - AWS
+          - AWS
+          operator: IN
+        sourceRegion:
+          regions:
+          - regions
+          - regions
+          operator: IN
+        subnets:
+          subnets:
+          - subnets
+          - subnets
+          operator: CONTAINS_ANY_OF
+        group:
+          operands:
+          - resourceType:
+              operator: IN
+              resourceTypes:
+              - AWS_EC2
+              - AWS_RDS
+          - environment:
+              operator: IN
+              environments:
+              - PROD
+              - PROD_INTERNAL
+          operator: AND
+        resourceType:
+          resourceTypes:
+          - AWS_EC2
+          - AWS_EC2
+          operator: IN
+        apps:
+          operator: CONTAINS_ANY_OF
+          apps:
+          - apps
+          - apps
+      nullable: true
+      properties:
+        group:
+          $ref: '#/components/schemas/RoleAccessGroupCondition'
+        resourceType:
+          $ref: '#/components/schemas/ResourceTypeCondition'
+        dataClasses:
+          $ref: '#/components/schemas/DataClassesCondition'
+        environment:
+          $ref: '#/components/schemas/EnvironmentCondition'
+        apps:
+          $ref: '#/components/schemas/AppsCondition'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderCondition'
+        accountId:
+          $ref: '#/components/schemas/AccountIdCondition'
+        sourceRegion:
+          $ref: '#/components/schemas/RegionCondition'
+        vpc:
+          $ref: '#/components/schemas/VpcCondition'
+        subnets:
+          $ref: '#/components/schemas/SubnetsCondition'
+        resourceGroupName:
+          $ref: '#/components/schemas/ResourceGroupNameCondition'
+        resourceName:
+          $ref: '#/components/schemas/ResourceNameCondition'
+        resourceId:
+          $ref: '#/components/schemas/ResourceIdCondition'
+        tagKeys:
+          $ref: '#/components/schemas/TagKeysCondition'
+        tagKeyValues:
+          $ref: '#/components/schemas/TagKeyValuesCondition'
+      type: object
+    RoleAccessGroupCondition:
+      description: |
+        Group of expressions to evaluate using the logical operator specified in `operator`.
+        Each item in the `operands` list can be either a single expression or a nested `group` expression.
+      example:
+        operands:
+        - resourceType:
+            operator: IN
+            resourceTypes:
+            - AWS_EC2
+            - AWS_RDS
+        - environment:
+            operator: IN
+            environments:
+            - PROD
+            - PROD_INTERNAL
+        operator: AND
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/LogicalOperator'
+        operands:
+          description: |
+            List of expressions to evaluate using the logical operator specified in `operator`.
+            Each item in the list can be either a single expression or a nested `group` expression.
+
+            Must contain at least 2 items.
+          example:
+          - resourceType:
+              operator: IN
+              resourceTypes:
+              - AWS_EC2
+              - AWS_RDS
+          - environment:
+              operator: IN
+              environments:
+              - PROD
+              - PROD_INTERNAL
+          items:
+            $ref: '#/components/schemas/AccessConditionalExpression'
+          minItems: 2
+          type: array
+      required:
+      - operands
+      - operator
       type: object
     AccessCondition:
       example:
@@ -11458,14 +12743,6 @@ components:
       - SOURCE_ACCOUNT_SORT_INSTALLED_VERSION
       - SOURCE_ACCOUNT_SORT_PARENT_IDENTIFIER
       - SOURCE_ACCOUNT_SORT_FIRST_CONNECTED
-    SortOrder:
-      description: Sort order. Use `ASC` for ascending order and `DESC` for descending
-        order.
-      enum:
-      - ASC
-      - DESC
-      example: ASC
-      type: string
     SortSourceAccountsBy:
       description: |
         List of sorting options.
@@ -13769,6 +15046,7 @@ components:
       - AWS_EKS_NAMESPACE_BACKUP
       - AWS_KEYSPACES_BACKUP_FULL
       - AWS_CASSANDRA_CLUSTER_BACKUP
+      - AWS_OPENSEARCH_BACKUP
       - AZURE_STORAGE_ACCOUNT_BACKUP
       - AZURE_VM_BACKUP
       - AZURE_VM_RESTORE_POINT_CONVERSION
@@ -13799,6 +15077,7 @@ components:
       - AWS_NEPTUNE_BACKUP
       - AWS_KEYSPACES_BACKUP_FULL
       - AWS_CASSANDRA_CLUSTER_BACKUP
+      - AWS_OPENSEARCH_BACKUP
       - AZURE_VM_RESTORE_POINT_CONVERSION
       - GCP_DISK_BACKUP
       - GCP_SAP_HANA_VM_BACKUP
@@ -15222,17 +16501,6 @@ components:
       required:
       - objectStoreScanMethod
       type: object
-    ResourceSelectorMode:
-      enum:
-      - ALL
-      - NONE
-      - CONDITIONAL
-      example: CONDITIONAL
-      type: string
-      x-enum-varnames:
-      - RESOURCE_SELECTOR_MODE_ALL
-      - RESOURCE_SELECTOR_MODE_NONE
-      - RESOURCE_SELECTOR_MODE_CONDITIONAL
     BackupPolicyExpression:
       description: |
         Conditional expression to evaulate to determine which resources are to included in the backup policy.
