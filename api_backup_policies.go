@@ -28,10 +28,17 @@ type ApiCreateBackupPolicyRequest struct {
 	ApiService *BackupPoliciesAPIService
 	projectId string
 	createBackupPolicyRequest *CreateBackupPolicyRequest
+	xActionApprovalRequestId *string
 }
 
 func (r ApiCreateBackupPolicyRequest) CreateBackupPolicyRequest(createBackupPolicyRequest CreateBackupPolicyRequest) ApiCreateBackupPolicyRequest {
 	r.createBackupPolicyRequest = &createBackupPolicyRequest
+	return r
+}
+
+// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+func (r ApiCreateBackupPolicyRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiCreateBackupPolicyRequest {
+	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
 }
 
@@ -97,6 +104,9 @@ func (a *BackupPoliciesAPIService) CreateBackupPolicyExecute(r ApiCreateBackupPo
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.xActionApprovalRequestId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Action-Approval-Request-Id", r.xActionApprovalRequestId, "")
 	}
 	// body params
 	localVarPostBody = r.createBackupPolicyRequest

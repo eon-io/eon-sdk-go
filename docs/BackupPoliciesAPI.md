@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateBackupPolicy
 
-> CreateBackupPolicyResponse CreateBackupPolicy(ctx, projectId).CreateBackupPolicyRequest(createBackupPolicyRequest).Execute()
+> CreateBackupPolicyResponse CreateBackupPolicy(ctx, projectId).CreateBackupPolicyRequest(createBackupPolicyRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Create Backup Policy
 
@@ -35,10 +35,11 @@ import (
 func main() {
 	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to create a backup policy in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	createBackupPolicyRequest := *openapiclient.NewCreateBackupPolicyRequest("Production with PII", *openapiclient.NewBackupPolicyResourceSelector(openapiclient.ResourceSelectorMode("ALL")), *openapiclient.NewBackupPolicyPlan(openapiclient.BackupPolicyType("UNSPECIFIED"))) // CreateBackupPolicyRequest | 
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BackupPoliciesAPI.CreateBackupPolicy(context.Background(), projectId).CreateBackupPolicyRequest(createBackupPolicyRequest).Execute()
+	resp, r, err := apiClient.BackupPoliciesAPI.CreateBackupPolicy(context.Background(), projectId).CreateBackupPolicyRequest(createBackupPolicyRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BackupPoliciesAPI.CreateBackupPolicy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **createBackupPolicyRequest** | [**CreateBackupPolicyRequest**](CreateBackupPolicyRequest.md) |  | 
+ **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
 
 ### Return type
 

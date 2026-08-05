@@ -3754,6 +3754,19 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: |
+          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
+          validates the request envelope still matches the captured one and atomically
+          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
+          that are not action-approval-protected.
+        explode: false
+        in: header
+        name: X-Action-Approval-Request-Id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3761,12 +3774,21 @@ paths:
               $ref: '#/components/schemas/CreateBackupPolicyRequest'
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateBackupPolicyResponse'
           description: Backup policy created.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MPAInterceptedResponse'
+          description: |
+            The operation is MPA-protected. An MPA request was created in CREATED status.
+            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
+            or discard (action DISCARD). The operation did not run.
         "1XX":
           description: Informational
         "3XX":
@@ -3802,6 +3824,8 @@ paths:
         - entityType: backup_policy
           in: resBody
           key: backupPolicy.id
+      x-mpa:
+        operation: MPA_OPERATION_CREATE_BACKUP_POLICY
   /v1/projects/{projectId}/backup-policies/list:
     post:
       description: |
@@ -9800,6 +9824,8 @@ components:
       - file_explorer.delete
       - storage_gateway_data.download
       - storage_gateway_metadata.view
+      - data_catalog.view
+      - discovery.trigger
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -13382,6 +13408,7 @@ components:
       - MPA_OPERATION_UPDATE_BACKUP_POLICY
       - MPA_OPERATION_DELETE_BACKUP_POLICY
       - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+      - MPA_OPERATION_CREATE_BACKUP_POLICY
       example: MPA_OPERATION_DELETE_BACKUP_POLICY
       type: string
       x-docs-internal-enum:
@@ -13393,6 +13420,7 @@ components:
       - MPA_OPERATION_TYPE_MPA_OPERATION_UPDATE_BACKUP_POLICY
       - MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_BACKUP_POLICY
       - MPA_OPERATION_TYPE_MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+      - MPA_OPERATION_TYPE_MPA_OPERATION_CREATE_BACKUP_POLICY
     MPARequestStatus:
       description: |
         Lifecycle state of an action approval request from creation through resolution. DISCARDED means the requester abandoned a draft before it was submitted for approval.
@@ -15786,6 +15814,7 @@ components:
       - AWS_KEYSPACES_TABLE_RESTORE
       - AWS_KEYSPACES_RECORD_RESTORE
       - AWS_CASSANDRA_CLUSTER_RESTORE
+      - AWS_OPENSEARCH_DOMAIN_RESTORE
       - ATLAS_CLUSTER_RESTORE
       - ATLAS_CLUSTER_RECORD_RESTORE
       - MICROSOFT_365_RESTORE
@@ -15806,6 +15835,7 @@ components:
       - AWS_KEYSPACES_TABLE_RESTORE
       - AWS_KEYSPACES_RECORD_RESTORE
       - AWS_CASSANDRA_CLUSTER_RESTORE
+      - AWS_OPENSEARCH_DOMAIN_RESTORE
       - MICROSOFT_365_RESTORE
       - GOOGLE_WORKSPACE_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS

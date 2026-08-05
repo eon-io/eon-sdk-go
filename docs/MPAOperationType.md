@@ -15,6 +15,8 @@
 
 * `MPA_OPERATION_TYPE_MPA_OPERATION_REMOVE_SNAPSHOT_HOLD` (value: `"MPA_OPERATION_REMOVE_SNAPSHOT_HOLD"`)
 
+* `MPA_OPERATION_TYPE_MPA_OPERATION_CREATE_BACKUP_POLICY` (value: `"MPA_OPERATION_CREATE_BACKUP_POLICY"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

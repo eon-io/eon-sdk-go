@@ -111,6 +111,10 @@
 
 * `STORAGE_GATEWAY_METADATA_VIEW` (value: `"storage_gateway_metadata.view"`)
 
+* `DATA_CATALOG_VIEW` (value: `"data_catalog.view"`)
+
+* `DISCOVERY_TRIGGER` (value: `"discovery.trigger"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
