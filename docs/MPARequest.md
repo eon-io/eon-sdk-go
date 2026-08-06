@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Unique identifier of the action approval request. | 
+**Id** | **string** | ID of the action request. | 
 **Operation** | [**MPAOperationType**](MPAOperationType.md) |  | 
-**RequesterEmail** | **string** | Email address of the requester who created the approval request. | 
+**RequesterEmail** | **string** | Email address of the requester. | 
 **RequesterName** | Pointer to **string** | Display name of the requester at the time the request was created. | [optional] 
-**Comment** | Pointer to **string** | Optional comment from the requester explaining why this operation is needed. | [optional] 
+**Comment** | Pointer to **string** | Comment from the requester explaining why they want to perform the action. | [optional] 
 **Status** | [**MPARequestStatus**](MPARequestStatus.md) |  | 
-**PolicyDetails** | [**[]MPARequestPolicyDetail**](MPARequestPolicyDetail.md) | Per-policy configuration and approval progress. | 
-**ApprovalExpirationTime** | Pointer to **NullableTime** | Deadline for gathering approvals. Set when the request is confirmed (submitted). Null for requests in CREATED or DISCARDED status. | [optional] 
-**ExecutionExpirationTime** | Pointer to **NullableTime** | Deadline for executing the approved action. Set when the request is approved. | [optional] 
-**ResolvedTime** | Pointer to **NullableTime** | Time when the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Null while the request is still active. | [optional] 
+**PolicyDetails** | [**[]MPARequestPolicyDetail**](MPARequestPolicyDetail.md) | List of the action request&#39;s approval rules. Each item contains the rule&#39;s configuration and approval progress.  | 
+**ApprovalExpirationTime** | Pointer to **NullableTime** | Deadline for gathering approvals. Omitted before the request is submitted or after it&#39;s discarded.  | [optional] 
+**ExecutionExpirationTime** | Pointer to **NullableTime** | Deadline for completing the approved action. Set when the request is approved.  | [optional] 
+**ResolvedTime** | Pointer to **NullableTime** | Time when the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Omitted while the request is still active.  | [optional] 
 **CreatedTime** | **time.Time** | Time when the approval request was created. | 
 
 ## Methods

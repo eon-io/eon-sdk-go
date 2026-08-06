@@ -693,7 +693,7 @@ type ApiGetResourceRequest struct {
 	include *[]InventoryDetail
 }
 
-// Expensive detail groups to include in the response. They are omitted by default to keep the response small. 
+// Whether to include indexes for AWS DynamoDB in the response. To minimize response size, these indexes are omitted by default. 
 func (r ApiGetResourceRequest) Include(include []InventoryDetail) ApiGetResourceRequest {
 	r.include = &include
 	return r
@@ -853,7 +853,7 @@ func (r ApiListResourcesRequest) PageSize(pageSize int32) ApiListResourcesReques
 	return r
 }
 
-// Expensive detail groups to include in the response. They are omitted by default to keep the response small. 
+// Whether to include indexes for AWS DynamoDB in the response. To minimize response size, these indexes are omitted by default. 
 func (r ApiListResourcesRequest) Include(include []InventoryDetail) ApiListResourcesRequest {
 	r.include = &include
 	return r
@@ -1532,7 +1532,7 @@ type ApiUpdateObjectStoreScanMethodRequest struct {
 	updateObjectStoreScanMethodRequest *UpdateObjectStoreScanMethodRequest
 }
 
-// Object-store scan method settings to update.
+// Object-store scan method settings to update. Eon ignores enabled when systemControlled is true. The enabled field is required when systemControlled is false.
 func (r ApiUpdateObjectStoreScanMethodRequest) UpdateObjectStoreScanMethodRequest(updateObjectStoreScanMethodRequest UpdateObjectStoreScanMethodRequest) ApiUpdateObjectStoreScanMethodRequest {
 	r.updateObjectStoreScanMethodRequest = &updateObjectStoreScanMethodRequest
 	return r

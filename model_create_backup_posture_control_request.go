@@ -19,9 +19,9 @@ import (
 // checks if the CreateBackupPostureControlRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateBackupPostureControlRequest{}
 
-// CreateBackupPostureControlRequest The definition of a new backup posture control.
+// CreateBackupPostureControlRequest struct for CreateBackupPostureControlRequest
 type CreateBackupPostureControlRequest struct {
-	// Human-readable name of the control.
+	// Display name of the control.
 	Name string `json:"name"`
 	Severity Severity `json:"severity"`
 	ResourceSelector NullableBackupPostureControlResourceSelector `json:"resourceSelector"`

@@ -21,11 +21,11 @@ var _ MappedNullable = &ListBackupPostureControlsResponse{}
 
 // ListBackupPostureControlsResponse struct for ListBackupPostureControlsResponse
 type ListBackupPostureControlsResponse struct {
-	// The backup posture controls matching the request, for the current page.
+	// List of retrieved backup posture controls.
 	BackupPostureControls []BackupPostureControl `json:"backupPostureControls"`
-	// Total number of backup posture controls matching the request across all pages.
+	// Total number of backup posture controls that matched the filter options.
 	TotalCount *int32 `json:"totalCount,omitempty"`
-	// Opaque cursor for the next page. Pass it as `pageToken` on the next request, reusing the same body. Absent when there are no more results. 
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 }
 

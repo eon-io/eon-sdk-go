@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Enabled** | **bool** | Whether the same-source-account restore restriction is active. | 
-**DataAccessRuleId** | Pointer to **string** | Optional. The id of an access condition (an entry in &#x60;accessConditions&#x60;) that scopes which resources the restriction applies to. Omit to apply the restriction to all resources.  | [optional] 
+**DataAccessRuleId** | Pointer to **string** | If present, ID of an access condition that scopes which resources the restriction applies to. Omit to apply the restriction to all resources.  | [optional] 
 
 ## Methods
 

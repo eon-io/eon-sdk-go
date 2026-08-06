@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MaximumRetention** | **int32** | The maximum backup retention period, in days. | 
+**MaximumRetention** | **int32** | Maximum backup retention period, in days. | 
 
 ## Methods
 

@@ -462,7 +462,7 @@ type ApiRemoveSnapshotHoldRequest struct {
 	xActionApprovalRequestId *string
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRemoveSnapshotHoldRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRemoveSnapshotHoldRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -612,7 +612,7 @@ func (r ApiRestoreAzureDiskRequest) RestoreAzureDiskRequest(restoreAzureDiskRequ
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreAzureDiskRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreAzureDiskRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -628,7 +628,7 @@ RestoreAzureDisk Restore Azure Disk
 Description: Restores an Azure disk from an Eon snapshot.
 
 When restoring a disk, you'll specify the configurations of the disk you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -638,7 +638,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureDiskRequest
 */
 func (a *SnapshotsAPIService) RestoreAzureDisk(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureDiskRequest {
@@ -774,7 +774,7 @@ func (r ApiRestoreAzureSqlDatabaseRequest) RestoreAzureSqlDatabaseRequest(restor
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreAzureSqlDatabaseRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreAzureSqlDatabaseRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -797,7 +797,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureSqlDatabaseRequest
 */
 func (a *SnapshotsAPIService) RestoreAzureSqlDatabase(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureSqlDatabaseRequest {
@@ -932,7 +932,7 @@ func (r ApiRestoreAzureVmInstanceRequest) RestoreAzureVmInstanceRequest(restoreA
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreAzureVmInstanceRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreAzureVmInstanceRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -955,7 +955,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreAzureVmInstanceRequest
 */
 func (a *SnapshotsAPIService) RestoreAzureVmInstance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreAzureVmInstanceRequest {
@@ -1090,7 +1090,7 @@ func (r ApiRestoreBigQueryDatasetRequest) RestoreBigQueryDatasetRequest(restoreB
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreBigQueryDatasetRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreBigQueryDatasetRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -1113,7 +1113,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreBigQueryDatasetRequest
 */
 func (a *SnapshotsAPIService) RestoreBigQueryDataset(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreBigQueryDatasetRequest {
@@ -1248,7 +1248,7 @@ func (r ApiRestoreBucketRequest) RestoreBucketRequest(restoreBucketRequest Resto
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreBucketRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreBucketRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -1271,7 +1271,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreBucketRequest
 */
 func (a *SnapshotsAPIService) RestoreBucket(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreBucketRequest {
@@ -1406,7 +1406,7 @@ func (r ApiRestoreDatabaseRequest) RestoreDbToRdsInstanceRequest(restoreDbToRdsI
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreDatabaseRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreDatabaseRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -1429,7 +1429,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreDatabaseRequest
 */
 func (a *SnapshotsAPIService) RestoreDatabase(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreDatabaseRequest {
@@ -1564,7 +1564,7 @@ func (r ApiRestoreDynamoDBTableRequest) RestoreDynamoDBTableRequest(restoreDynam
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreDynamoDBTableRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreDynamoDBTableRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -1587,7 +1587,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreDynamoDBTableRequest
 */
 func (a *SnapshotsAPIService) RestoreDynamoDBTable(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreDynamoDBTableRequest {
@@ -1722,7 +1722,7 @@ func (r ApiRestoreEbsVolumeRequest) RestoreVolumeToEbsRequest(restoreVolumeToEbs
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreEbsVolumeRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreEbsVolumeRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -1745,7 +1745,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreEbsVolumeRequest
 */
 func (a *SnapshotsAPIService) RestoreEbsVolume(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreEbsVolumeRequest {
@@ -1880,7 +1880,7 @@ func (r ApiRestoreEc2InstanceRequest) RestoreAwsEc2InstanceRequest(restoreAwsEc2
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreEc2InstanceRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreEc2InstanceRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -1896,7 +1896,7 @@ RestoreEc2Instance Restore EC2 Instance
 Description: Restores an EC2 instance from an Eon snapshot.
 
 When restoring an EC2 instance, you'll need to specify the configurations of the instance and each volume you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -1906,7 +1906,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreEc2InstanceRequest
 */
 func (a *SnapshotsAPIService) RestoreEc2Instance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreEc2InstanceRequest {
@@ -2057,7 +2057,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreFilesRequest
 */
 func (a *SnapshotsAPIService) RestoreFiles(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreFilesRequest {
@@ -2189,7 +2189,7 @@ func (r ApiRestoreGcpCloudSqlRequest) RestoreGcpCloudSqlRequest(restoreGcpCloudS
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreGcpCloudSqlRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreGcpCloudSqlRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -2205,7 +2205,7 @@ RestoreGcpCloudSql Restore GCP Cloud SQL Instance
 Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
 
 When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -2215,7 +2215,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpCloudSqlRequest
 */
 func (a *SnapshotsAPIService) RestoreGcpCloudSql(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpCloudSqlRequest {
@@ -2350,7 +2350,7 @@ func (r ApiRestoreGcpDiskRequest) RestoreGcpDiskRequest(restoreGcpDiskRequest Re
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreGcpDiskRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreGcpDiskRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -2366,7 +2366,7 @@ RestoreGcpDisk Restore GCP Disk
 Description: Restores a GCP disk from an Eon snapshot.
 
 When restoring a disk, you'll specify the configurations of the disk you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -2376,7 +2376,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpDiskRequest
 */
 func (a *SnapshotsAPIService) RestoreGcpDisk(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpDiskRequest {
@@ -2511,7 +2511,7 @@ func (r ApiRestoreGcpVmInstanceRequest) RestoreGcpVmInstanceRequest(restoreGcpVm
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreGcpVmInstanceRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreGcpVmInstanceRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -2527,7 +2527,7 @@ RestoreGcpVmInstance Restore GCP VM Instance
 Description: Restores a GCP VM instance from an Eon snapshot.
 
 When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
-You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
 This operation is asynchronous.
 It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -2537,7 +2537,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreGcpVmInstanceRequest
 */
 func (a *SnapshotsAPIService) RestoreGcpVmInstance(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreGcpVmInstanceRequest {
@@ -2672,7 +2672,7 @@ func (r ApiRestoreToEbsSnapshotRequest) RestoreVolumeToEbsSnapshotRequest(restor
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiRestoreToEbsSnapshotRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiRestoreToEbsSnapshotRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -2695,7 +2695,7 @@ You can follow the progress of the restore job by calling [Get Restore Job](/api
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param id Eon-assigned resource ID.
- @param snapshotId ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+ @param snapshotId ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
  @return ApiRestoreToEbsSnapshotRequest
 */
 func (a *SnapshotsAPIService) RestoreToEbsSnapshot(ctx context.Context, projectId string, id string, snapshotId string) ApiRestoreToEbsSnapshotRequest {

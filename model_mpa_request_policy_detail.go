@@ -21,19 +21,19 @@ var _ MappedNullable = &MPARequestPolicyDetail{}
 
 // MPARequestPolicyDetail struct for MPARequestPolicyDetail
 type MPARequestPolicyDetail struct {
-	// Number of approvals required by this policy.
+	// Count of approvals the rule requires.
 	RequiredApprovals int32 `json:"requiredApprovals"`
-	// Number of qualifying approvals received for this policy.
+	// Count of qualifying approvals received.
 	CurrentApprovals int32 `json:"currentApprovals"`
-	// Hours the requester has to execute the approved action after full approval.
+	// After all required approvals are received, number of hours the requester has to complete the action.
 	ExecutionWindowHours int32 `json:"executionWindowHours"`
-	// Hours allowed for gathering all required approvals after submission.
+	// After submitting the action request, number of hours allowed for gathering all required approvals.
 	ApprovalWindowHours int32 `json:"approvalWindowHours"`
-	// Human-readable description of the policy.
+	// Rule description.
 	Description *string `json:"description,omitempty"`
-	// UUID of the SAML identity provider connection this approver group belongs to.
+	// Eon-assigned ID of the SAML identity provider the approver group belongs to. Used in combination with `approverProviderGroupId`. 
 	ApproverIdpId NullableString `json:"approverIdpId,omitempty"`
-	// Provider group identifier from the IdP.
+	// Identity-provider-assigned ID of the group. Used in combination with `approverIdpId`. 
 	ApproverProviderGroupId NullableString `json:"approverProviderGroupId,omitempty"`
 }
 

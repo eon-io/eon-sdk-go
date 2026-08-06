@@ -4,9 +4,9 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelActionApprovalRequest**](ActionApprovalsAPI.md#CancelActionApprovalRequest) | **Post** /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/cancel | Cancel Action Approval Request
-[**CreateActionApprovalRequest**](ActionApprovalsAPI.md#CreateActionApprovalRequest) | **Post** /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit | Create Action Approval Request
-[**GetMyActionApprovalRequest**](ActionApprovalsAPI.md#GetMyActionApprovalRequest) | **Get** /v1/projects/{projectId}/action-approvals/my-requests/{requestId} | Get My Action Approval Request
+[**CancelActionApprovalRequest**](ActionApprovalsAPI.md#CancelActionApprovalRequest) | **Post** /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/cancel | Cancel My Action Request
+[**CreateActionApprovalRequest**](ActionApprovalsAPI.md#CreateActionApprovalRequest) | **Post** /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit | Submit My Action Request
+[**GetMyActionApprovalRequest**](ActionApprovalsAPI.md#GetMyActionApprovalRequest) | **Get** /v1/projects/{projectId}/action-approvals/my-requests/{requestId} | Get My Action Request
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > CancelMyMPARequestResponse CancelActionApprovalRequest(ctx, projectId, requestId).Execute()
 
-Cancel Action Approval Request
+Cancel My Action Request
 
 
 
@@ -31,8 +31,8 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	requestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Action approval request ID.
+	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project.
+	requestId := "0fc514a3-61fe-5d39-a079-9d0df1820956" // string | ID of the action request.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -52,8 +52,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The project ID | 
-**requestId** | **string** | Action approval request ID. | 
+**projectId** | **string** | ID of the project. | 
+**requestId** | **string** | ID of the action request. | 
 
 ### Other Parameters
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > SubmitMyMPARequestResponse CreateActionApprovalRequest(ctx, projectId, requestId).SubmitMyMPARequestRequest(submitMyMPARequestRequest).Execute()
 
-Create Action Approval Request
+Submit My Action Request
 
 
 
@@ -104,8 +104,8 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	requestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Action approval request ID.
+	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project.
+	requestId := "0fc514a3-61fe-5d39-a079-9d0df1820956" // string | ID of the action request.
 	submitMyMPARequestRequest := *openapiclient.NewSubmitMyMPARequestRequest(openapiclient.MPASubmitAction("MPA_SUBMIT_ACTION_UNSPECIFIED")) // SubmitMyMPARequestRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -126,8 +126,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The project ID | 
-**requestId** | **string** | Action approval request ID. | 
+**projectId** | **string** | ID of the project. | 
+**requestId** | **string** | ID of the action request. | 
 
 ### Other Parameters
 
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 > GetMPARequestResponse GetMyActionApprovalRequest(ctx, projectId, requestId).Execute()
 
-Get My Action Approval Request
+Get My Action Request
 
 
 
@@ -179,8 +179,8 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	requestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The action approval request ID
+	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project.
+	requestId := "0fc514a3-61fe-5d39-a079-9d0df1820956" // string | ID of the action request.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -200,8 +200,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The project ID | 
-**requestId** | **string** | The action approval request ID | 
+**projectId** | **string** | ID of the project. | 
+**requestId** | **string** | ID of the action request. | 
 
 ### Other Parameters
 

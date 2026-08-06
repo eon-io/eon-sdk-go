@@ -35,13 +35,16 @@ func (r ApiCancelActionApprovalRequestRequest) Execute() (*CancelMyMPARequestRes
 }
 
 /*
-CancelActionApprovalRequest Cancel Action Approval Request
+CancelActionApprovalRequest Cancel My Action Request
 
-Description: Cancel an action approval request created by the current user. Only allowed while the request is in PENDING_APPROVAL or APPROVED status.
+Description: Cancel an action request created using the current caller's credentials.
+
+Action requests can be canceled only while the request is approved or pending approval.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param requestId Action approval request ID.
+ @param projectId ID of the project.
+ @param requestId ID of the action request.
  @return ApiCancelActionApprovalRequestRequest
 */
 func (a *ActionApprovalsAPIService) CancelActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiCancelActionApprovalRequestRequest {
@@ -202,13 +205,19 @@ func (r ApiCreateActionApprovalRequestRequest) Execute() (*SubmitMyMPARequestRes
 }
 
 /*
-CreateActionApprovalRequest Create Action Approval Request
+CreateActionApprovalRequest Submit My Action Request
 
-Description: Confirm or discard a CREATED action approval request. CONFIRM transitions to PENDING_APPROVAL and starts the approval timer. DISCARD transitions to DISCARDED.
+Description: Submit or discard an action request that's in its initial `CREATED` status.
+
+When submitting, the action request status changes to pending approval.
+The approval window begins, and reviewers must approve before the window ends.
+
+When discarding, the action request is abandoned, and no further action can be taken.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param requestId Action approval request ID.
+ @param projectId ID of the project.
+ @param requestId ID of the action request.
  @return ApiCreateActionApprovalRequestRequest
 */
 func (a *ActionApprovalsAPIService) CreateActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiCreateActionApprovalRequestRequest {
@@ -368,13 +377,13 @@ func (r ApiGetMyActionApprovalRequestRequest) Execute() (*GetMPARequestResponse,
 }
 
 /*
-GetMyActionApprovalRequest Get My Action Approval Request
+GetMyActionApprovalRequest Get My Action Request
 
-Description: Retrieves details of a specific action approval request submitted by the current user.
+Description: Retrieves an action request that was created using the current caller's credentials.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param requestId The action approval request ID
+ @param projectId ID of the project.
+ @param requestId ID of the action request.
  @return ApiGetMyActionApprovalRequestRequest
 */
 func (a *ActionApprovalsAPIService) GetMyActionApprovalRequest(ctx context.Context, projectId string, requestId string) ApiGetMyActionApprovalRequestRequest {

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MinimumRetention** | **int32** | The minimum backup retention period, in days. | 
-**Frequency** | **string** | The backup cadence this minimum retention applies to. | 
+**MinimumRetention** | **int32** | Minimum backup retention period, in days. | 
+**Frequency** | **string** | Backup cadence the minimum retention applies to. | 
 
 ## Methods
 

@@ -61,7 +61,7 @@ import (
 func main() {
 	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to connect the source account to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	connectRestoreAccountRequest := *openapiclient.NewConnectRestoreAccountRequest(*openapiclient.NewRestoreAccountAttributesInput(openapiclient.Provider("AWS"))) // ConnectRestoreAccountRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **connectRestoreAccountRequest** | [**ConnectRestoreAccountRequest**](ConnectRestoreAccountRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -135,7 +135,7 @@ import (
 func main() {
 	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project you want to connect the AWS organizational unit to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	connectRestoreAwsOrganizationalUnitRequest := *openapiclient.NewConnectRestoreAwsOrganizationalUnitRequest("arn:aws:iam::123412341234:role/EonRestoreAccountRole", "ou-a1b2-f6g7h111") // ConnectRestoreAwsOrganizationalUnitRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **connectRestoreAwsOrganizationalUnitRequest** | [**ConnectRestoreAwsOrganizationalUnitRequest**](ConnectRestoreAwsOrganizationalUnitRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -1815,7 +1815,7 @@ import (
 func main() {
 	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose restore account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the restore account to reconnect.
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1847,7 +1847,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 

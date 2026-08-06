@@ -19,11 +19,11 @@ import (
 // checks if the ObjectStoreScanMethodSetting type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ObjectStoreScanMethodSetting{}
 
-// ObjectStoreScanMethodSetting Object-store scan method setting. If systemControlled is true, Eon decides whether the method is enabled. If systemControlled is false, enabled is required.
+// ObjectStoreScanMethodSetting Current object-store scan method setting.
 type ObjectStoreScanMethodSetting struct {
-	// Whether the scan method is enabled. Required only when systemControlled is false.
-	Enabled NullableBool `json:"enabled,omitempty"`
-	// Whether Eon should decide when to use this scan method.
+	// Whether this scan method is currently enabled.
+	Enabled bool `json:"enabled"`
+	// Whether Eon manages this scan method.
 	SystemControlled bool `json:"systemControlled"`
 }
 
@@ -33,8 +33,9 @@ type _ObjectStoreScanMethodSetting ObjectStoreScanMethodSetting
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewObjectStoreScanMethodSetting(systemControlled bool) *ObjectStoreScanMethodSetting {
+func NewObjectStoreScanMethodSetting(enabled bool, systemControlled bool) *ObjectStoreScanMethodSetting {
 	this := ObjectStoreScanMethodSetting{}
+	this.Enabled = enabled
 	this.SystemControlled = systemControlled
 	return &this
 }
@@ -47,46 +48,28 @@ func NewObjectStoreScanMethodSettingWithDefaults() *ObjectStoreScanMethodSetting
 	return &this
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEnabled returns the Enabled field value
 func (o *ObjectStoreScanMethodSetting) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled.Get()) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled.Get()
+
+	return o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ObjectStoreScanMethodSetting) GetEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Enabled.Get(), o.Enabled.IsSet()
+	return &o.Enabled, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *ObjectStoreScanMethodSetting) HasEnabled() bool {
-	if o != nil && o.Enabled.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given NullableBool and assigns it to the Enabled field.
+// SetEnabled sets field value
 func (o *ObjectStoreScanMethodSetting) SetEnabled(v bool) {
-	o.Enabled.Set(&v)
-}
-// SetEnabledNil sets the value for Enabled to be an explicit nil
-func (o *ObjectStoreScanMethodSetting) SetEnabledNil() {
-	o.Enabled.Set(nil)
-}
-
-// UnsetEnabled ensures that no value is present for Enabled, not even an explicit nil
-func (o *ObjectStoreScanMethodSetting) UnsetEnabled() {
-	o.Enabled.Unset()
+	o.Enabled = v
 }
 
 // GetSystemControlled returns the SystemControlled field value
@@ -123,9 +106,7 @@ func (o ObjectStoreScanMethodSetting) MarshalJSON() ([]byte, error) {
 
 func (o ObjectStoreScanMethodSetting) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Enabled.IsSet() {
-		toSerialize["enabled"] = o.Enabled.Get()
-	}
+	toSerialize["enabled"] = o.Enabled
 	toSerialize["systemControlled"] = o.SystemControlled
 	return toSerialize, nil
 }
@@ -135,6 +116,7 @@ func (o *ObjectStoreScanMethodSetting) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"enabled",
 		"systemControlled",
 	}
 

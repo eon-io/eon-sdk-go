@@ -19,9 +19,9 @@ import (
 // checks if the UpdateBackupPostureControlRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateBackupPostureControlRequest{}
 
-// UpdateBackupPostureControlRequest The full desired state of an existing control. Update is a full replacement: every field is written, so send the complete definition, not a partial patch. 
+// UpdateBackupPostureControlRequest struct for UpdateBackupPostureControlRequest
 type UpdateBackupPostureControlRequest struct {
-	// Human-readable name of the control.
+	// Display name of the control.
 	Name string `json:"name"`
 	Severity Severity `json:"severity"`
 	ResourceSelector NullableBackupPostureControlResourceSelector `json:"resourceSelector"`

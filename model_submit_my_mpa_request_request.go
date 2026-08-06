@@ -22,7 +22,7 @@ var _ MappedNullable = &SubmitMyMPARequestRequest{}
 // SubmitMyMPARequestRequest struct for SubmitMyMPARequestRequest
 type SubmitMyMPARequestRequest struct {
 	Action MPASubmitAction `json:"action"`
-	// Optional comment to set on the request alongside the action.
+	// Comment from the requester explaining why they want to perform the action.
 	Comment *string `json:"comment,omitempty"`
 }
 

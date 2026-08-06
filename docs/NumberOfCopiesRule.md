@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MinCopies** | **int32** | The minimum number of backup copies that must exist. | 
+**MinCopies** | **int32** | Minimum number of backup copies that must exist. | 
 
 ## Methods
 

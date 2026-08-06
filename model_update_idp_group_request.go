@@ -23,7 +23,7 @@ var _ MappedNullable = &UpdateIdpGroupRequest{}
 type UpdateIdpGroupRequest struct {
 	// List of [role IDs](../roles/list-roles) to assign to the group. This replaces all existing role assignments. 
 	RoleIds []string `json:"roleIds"`
-	// Optional human-readable label for the group mapping. For display and management only; it is not used when matching SAML groups during sign-on. Omit (or send null) to leave the existing label unchanged; send an empty string to clear it. 
+	// Display name for the group role assignment. Not used when matching SAML groups during sign-on.  Omit or send null to leave the existing display name unchanged. Send an empty string to clear it. 
 	DisplayName NullableString `json:"displayName,omitempty"`
 }
 

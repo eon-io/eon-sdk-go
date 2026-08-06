@@ -26,9 +26,9 @@ type AwsDynamoDbResource struct {
 	ReadCapacityUnits int64 `json:"readCapacityUnits"`
 	// Provisioned write capacity units of the table.
 	WriteCapacityUnits int64 `json:"writeCapacityUnits"`
-	// Global secondary indexes on the table. Returned only when `include` contains `DYNAMODB_INDEXES`. 
+	// Global secondary indexes on the table. To minimize response size, not returned by default.  To include in the response, set `include` to `DYNAMODB_INDEXES` in the request. 
 	GlobalSecondaryIndexes []DynamoDbGlobalSecondaryIndex `json:"globalSecondaryIndexes,omitempty"`
-	// Local secondary indexes on the table. Returned only when `include` contains `DYNAMODB_INDEXES`. 
+	// Local secondary indexes on the table. To minimize response size, not returned by default.  To include in the response, set `include` to `DYNAMODB_INDEXES` in the request. 
 	LocalSecondaryIndexes []DynamoDbLocalSecondaryIndex `json:"localSecondaryIndexes,omitempty"`
 }
 

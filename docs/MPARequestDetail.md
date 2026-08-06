@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Request** | [**NullableMPARequest**](MPARequest.md) |  | 
-**Reviews** | [**[]MPAReview**](MPAReview.md) |  | 
+**Reviews** | [**[]MPAReview**](MPAReview.md) | List of responses submitted by reviewers. | 
 
 ## Methods
 

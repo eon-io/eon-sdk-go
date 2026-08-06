@@ -22,14 +22,14 @@ var _ MappedNullable = &MPAReview{}
 
 // MPAReview struct for MPAReview
 type MPAReview struct {
-	// Unique identifier of the review.
+	// ID of the review.
 	Id string `json:"id"`
-	// Email address of the reviewer who submitted this review.
+	// Email address of the reviewer.
 	ReviewerEmail string `json:"reviewerEmail"`
 	// Display name of the reviewer at the time the review was submitted.
 	ReviewerName *string `json:"reviewerName,omitempty"`
 	Decision MPADecision `json:"decision"`
-	// Optional reviewer comment explaining the decision.
+	// Comment explaining the reviewer's decision.
 	Comment *string `json:"comment,omitempty"`
 	// Time when the review was submitted.
 	ReviewedTime time.Time `json:"reviewedTime"`

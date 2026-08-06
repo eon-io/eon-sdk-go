@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// BackupPostureControlSortField The field to sort controls by.
+// BackupPostureControlSortField Field to sort controls by.
 type BackupPostureControlSortField string
 
 // List of BackupPostureControlSortField

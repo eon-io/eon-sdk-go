@@ -17,7 +17,7 @@ import (
 // checks if the BackupPostureControlRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupPostureControlRules{}
 
-// BackupPostureControlRules The backup requirements a resource must satisfy to pass the control. Every rule is optional: a rule you set is evaluated, and one you omit is not. Omit a rule to stop enforcing it. 
+// BackupPostureControlRules Backup requirements a resource must satisfy. 
 type BackupPostureControlRules struct {
 	// Minimum retention required per backup frequency (daily, weekly, monthly, annual).
 	MinimumRetention []MinRetentionRule `json:"minimumRetention,omitempty"`

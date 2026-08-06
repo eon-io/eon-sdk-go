@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Human-readable name of the control. | 
+**Name** | **string** | Display name of the control. | 
 **Severity** | [**Severity**](Severity.md) |  | 
 **ResourceSelector** | [**NullableBackupPostureControlResourceSelector**](BackupPostureControlResourceSelector.md) |  | 
 **Rules** | [**NullableBackupPostureControlRules**](BackupPostureControlRules.md) |  | 

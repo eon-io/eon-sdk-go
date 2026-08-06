@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// InventoryDetail Expensive detail group that a caller can explicitly request on inventory responses. 
+// InventoryDetail the model 'InventoryDetail'
 type InventoryDetail string
 
 // List of InventoryDetail

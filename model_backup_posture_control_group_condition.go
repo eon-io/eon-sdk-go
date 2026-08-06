@@ -19,10 +19,10 @@ import (
 // checks if the BackupPostureControlGroupCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupPostureControlGroupCondition{}
 
-// BackupPostureControlGroupCondition A group of expressions combined with a logical operator (`AND`/`OR`). Each operand can itself be a single condition or a nested group. 
+// BackupPostureControlGroupCondition Group of expressions to evaluate using the logical operator specified in `operator`. Each item in the `operands` list can be either a single expression or a nested `group` expression. 
 type BackupPostureControlGroupCondition struct {
 	Operator LogicalOperator `json:"operator"`
-	// The expressions to combine with `operator`.
+	// List of expressions to evaluate using the logical operator specified in `operator`. Each item in the list can be either a single expression or a nested `group` expression.  Must contain at least 2 items. 
 	Operands []BackupPostureControlExpression `json:"operands"`
 }
 

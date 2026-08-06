@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// MPARequestStatus Lifecycle state of an action approval request from creation through resolution. DISCARDED means the requester abandoned a draft before it was submitted for approval. 
+// MPARequestStatus Action request status. For an explanation of statuses, see [Action Request Statuses](/user-guide/access-management/action-approvals/action-request-statuses). 
 type MPARequestStatus string
 
 // List of MPARequestStatus

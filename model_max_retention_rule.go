@@ -21,7 +21,7 @@ var _ MappedNullable = &MaxRetentionRule{}
 
 // MaxRetentionRule struct for MaxRetentionRule
 type MaxRetentionRule struct {
-	// The maximum backup retention period, in days.
+	// Maximum backup retention period, in days.
 	MaximumRetention int32 `json:"maximumRetention"`
 }
 

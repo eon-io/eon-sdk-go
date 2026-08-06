@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**LogicalOperator**](LogicalOperator.md) |  | 
-**Operands** | [**[]BackupPostureControlExpression**](BackupPostureControlExpression.md) | The expressions to combine with &#x60;operator&#x60;. | 
+**Operands** | [**[]BackupPostureControlExpression**](BackupPostureControlExpression.md) | List of expressions to evaluate using the logical operator specified in &#x60;operator&#x60;. Each item in the list can be either a single expression or a nested &#x60;group&#x60; expression.  Must contain at least 2 items.  | 
 
 ## Methods
 

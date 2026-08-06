@@ -20,25 +20,25 @@ import (
 // checks if the MPARequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MPARequest{}
 
-// MPARequest struct for MPARequest
+// MPARequest Action request details.
 type MPARequest struct {
-	// Unique identifier of the action approval request.
+	// ID of the action request.
 	Id string `json:"id"`
 	Operation MPAOperationType `json:"operation"`
-	// Email address of the requester who created the approval request.
+	// Email address of the requester.
 	RequesterEmail string `json:"requesterEmail"`
 	// Display name of the requester at the time the request was created.
 	RequesterName *string `json:"requesterName,omitempty"`
-	// Optional comment from the requester explaining why this operation is needed.
+	// Comment from the requester explaining why they want to perform the action.
 	Comment *string `json:"comment,omitempty"`
 	Status MPARequestStatus `json:"status"`
-	// Per-policy configuration and approval progress.
+	// List of the action request's approval rules. Each item contains the rule's configuration and approval progress. 
 	PolicyDetails []MPARequestPolicyDetail `json:"policyDetails"`
-	// Deadline for gathering approvals. Set when the request is confirmed (submitted). Null for requests in CREATED or DISCARDED status.
+	// Deadline for gathering approvals. Omitted before the request is submitted or after it's discarded. 
 	ApprovalExpirationTime NullableTime `json:"approvalExpirationTime,omitempty"`
-	// Deadline for executing the approved action. Set when the request is approved.
+	// Deadline for completing the approved action. Set when the request is approved. 
 	ExecutionExpirationTime NullableTime `json:"executionExpirationTime,omitempty"`
-	// Time when the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Null while the request is still active.
+	// Time when the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Omitted while the request is still active. 
 	ResolvedTime NullableTime `json:"resolvedTime,omitempty"`
 	// Time when the approval request was created.
 	CreatedTime time.Time `json:"createdTime"`

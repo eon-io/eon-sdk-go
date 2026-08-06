@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// MPADecision Decision on an MPA review record as returned on read APIs. APPROVED and DENIED come from reviewer actions; CANCELLED is written by the system (for example when the policy is deleted while requests are still pending). 
+// MPADecision Reviewer decision.
 type MPADecision string
 
 // List of MPADecision

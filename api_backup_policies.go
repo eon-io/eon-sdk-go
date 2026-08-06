@@ -36,7 +36,7 @@ func (r ApiCreateBackupPolicyRequest) CreateBackupPolicyRequest(createBackupPoli
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiCreateBackupPolicyRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiCreateBackupPolicyRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -176,7 +176,7 @@ type ApiDeleteBackupPolicyRequest struct {
 	xActionApprovalRequestId *string
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiDeleteBackupPolicyRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiDeleteBackupPolicyRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -586,7 +586,7 @@ func (r ApiUpdateBackupPolicyRequest) UpdateBackupPolicyRequest(updateBackupPoli
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiUpdateBackupPolicyRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiUpdateBackupPolicyRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r

@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **BillingMode** | [**DynamoDbBillingMode**](DynamoDbBillingMode.md) |  | 
 **ReadCapacityUnits** | **int64** | Provisioned read capacity units of the table. | 
 **WriteCapacityUnits** | **int64** | Provisioned write capacity units of the table. | 
-**GlobalSecondaryIndexes** | Pointer to [**[]DynamoDbGlobalSecondaryIndex**](DynamoDbGlobalSecondaryIndex.md) | Global secondary indexes on the table. Returned only when &#x60;include&#x60; contains &#x60;DYNAMODB_INDEXES&#x60;.  | [optional] 
-**LocalSecondaryIndexes** | Pointer to [**[]DynamoDbLocalSecondaryIndex**](DynamoDbLocalSecondaryIndex.md) | Local secondary indexes on the table. Returned only when &#x60;include&#x60; contains &#x60;DYNAMODB_INDEXES&#x60;.  | [optional] 
+**GlobalSecondaryIndexes** | Pointer to [**[]DynamoDbGlobalSecondaryIndex**](DynamoDbGlobalSecondaryIndex.md) | Global secondary indexes on the table. To minimize response size, not returned by default.  To include in the response, set &#x60;include&#x60; to &#x60;DYNAMODB_INDEXES&#x60; in the request.  | [optional] 
+**LocalSecondaryIndexes** | Pointer to [**[]DynamoDbLocalSecondaryIndex**](DynamoDbLocalSecondaryIndex.md) | Local secondary indexes on the table. To minimize response size, not returned by default.  To include in the response, set &#x60;include&#x60; to &#x60;DYNAMODB_INDEXES&#x60; in the request.  | [optional] 
 
 ## Methods
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** | [**MPASubmitAction**](MPASubmitAction.md) |  | 
-**Comment** | Pointer to **string** | Optional comment to set on the request alongside the action. | [optional] 
+**Comment** | Pointer to **string** | Comment from the requester explaining why they want to perform the action. | [optional] 
 
 ## Methods
 

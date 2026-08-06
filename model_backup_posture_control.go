@@ -21,9 +21,9 @@ var _ MappedNullable = &BackupPostureControl{}
 
 // BackupPostureControl struct for BackupPostureControl
 type BackupPostureControl struct {
-	// Server-assigned unique identifier of the control.
+	// ID of the backup posture control.
 	Id string `json:"id"`
-	// Human-readable name of the control.
+	// Display name of the control.
 	Name string `json:"name"`
 	Severity Severity `json:"severity"`
 	ResourceSelector NullableBackupPostureControlResourceSelector `json:"resourceSelector"`

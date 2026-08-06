@@ -19,7 +19,7 @@ var _ MappedNullable = &HoldSnapshotRequest{}
 
 // HoldSnapshotRequest struct for HoldSnapshotRequest
 type HoldSnapshotRequest struct {
-	// Optional free-text note explaining why the snapshot is being held. Shown on the snapshot's hold badge and cleared when the hold is removed. 
+	// Note explaining why the snapshot is being held. Cleared when the hold is removed. 
 	Description *string `json:"description,omitempty"`
 }
 

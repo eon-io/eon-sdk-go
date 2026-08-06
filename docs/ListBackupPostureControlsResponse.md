@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BackupPostureControls** | [**[]BackupPostureControl**](BackupPostureControl.md) | The backup posture controls matching the request, for the current page. | 
-**TotalCount** | Pointer to **int32** | Total number of backup posture controls matching the request across all pages. | [optional] 
-**NextPageToken** | Pointer to **string** | Opaque cursor for the next page. Pass it as &#x60;pageToken&#x60; on the next request, reusing the same body. Absent when there are no more results.  | [optional] 
+**BackupPostureControls** | [**[]BackupPostureControl**](BackupPostureControl.md) | List of retrieved backup posture controls. | 
+**TotalCount** | Pointer to **int32** | Total number of backup posture controls that matched the filter options. | [optional] 
+**NextPageToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 
 ## Methods
 

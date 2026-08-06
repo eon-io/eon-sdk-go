@@ -29,7 +29,7 @@ type IdpGroup struct {
 	ProviderGroupId string `json:"providerGroupId"`
 	// List of [role IDs](../roles/list-roles) assigned to the group.
 	RoleIds []string `json:"roleIds"`
-	// Optional human-readable label for the group mapping. For display and management only; it is not used when matching SAML groups during sign-on. 
+	// Display name for the group role assignment. Not used when matching SAML groups during sign-on. 
 	DisplayName *string `json:"displayName,omitempty"`
 }
 

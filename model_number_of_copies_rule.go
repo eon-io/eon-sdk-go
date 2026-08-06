@@ -21,7 +21,7 @@ var _ MappedNullable = &NumberOfCopiesRule{}
 
 // NumberOfCopiesRule struct for NumberOfCopiesRule
 type NumberOfCopiesRule struct {
-	// The minimum number of backup copies that must exist.
+	// Minimum number of backup copies that must exist.
 	MinCopies int32 `json:"minCopies"`
 }
 

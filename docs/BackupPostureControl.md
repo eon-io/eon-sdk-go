@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Server-assigned unique identifier of the control. | 
-**Name** | **string** | Human-readable name of the control. | 
+**Id** | **string** | ID of the backup posture control. | 
+**Name** | **string** | Display name of the control. | 
 **Severity** | [**Severity**](Severity.md) |  | 
 **ResourceSelector** | [**NullableBackupPostureControlResourceSelector**](BackupPostureControlResourceSelector.md) |  | 
 **Rules** | [**NullableBackupPostureControlRules**](BackupPostureControlRules.md) |  | 

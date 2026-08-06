@@ -275,7 +275,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | ID of the Eon snapshot.
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -350,9 +350,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreAzureDiskRequest := *openapiclient.NewRestoreAzureDiskRequest("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureDiskRestoreDestination()) // RestoreAzureDiskRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAzureDiskRequest** | [**RestoreAzureDiskRequest**](RestoreAzureDiskRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -430,9 +430,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreAzureSqlDatabaseRequest := *openapiclient.NewRestoreAzureSqlDatabaseRequest("RestoreAccountId_example", *openapiclient.NewAzureSqlDatabaseRestoreDestination()) // RestoreAzureSqlDatabaseRequest | The request body for restoring the instance
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -454,7 +454,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -467,7 +467,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAzureSqlDatabaseRequest** | [**RestoreAzureSqlDatabaseRequest**](RestoreAzureSqlDatabaseRequest.md) | The request body for restoring the instance | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -510,9 +510,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreAzureVmInstanceRequest := *openapiclient.NewRestoreAzureVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAzureVmInstanceRestoreDestination()) // RestoreAzureVmInstanceRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -534,7 +534,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -547,7 +547,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAzureVmInstanceRequest** | [**RestoreAzureVmInstanceRequest**](RestoreAzureVmInstanceRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -590,9 +590,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreBigQueryDatasetRequest := *openapiclient.NewRestoreBigQueryDatasetRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewBigQueryDatasetDestination("restored_dataset")) // RestoreBigQueryDatasetRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -614,7 +614,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -627,7 +627,7 @@ Name | Type | Description  | Notes
 
 
  **restoreBigQueryDatasetRequest** | [**RestoreBigQueryDatasetRequest**](RestoreBigQueryDatasetRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -670,9 +670,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreBucketRequest := *openapiclient.NewRestoreBucketRequest(*openapiclient.NewObjectStorageDestination(), "1ee34dc5-0a7c-4e56-a820-917371e05c8d") // RestoreBucketRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -694,7 +694,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 
 
  **restoreBucketRequest** | [**RestoreBucketRequest**](RestoreBucketRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -750,9 +750,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreDbToRdsInstanceRequest := *openapiclient.NewRestoreDbToRdsInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDatabaseDestination()) // RestoreDbToRdsInstanceRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -774,7 +774,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -787,7 +787,7 @@ Name | Type | Description  | Notes
 
 
  **restoreDbToRdsInstanceRequest** | [**RestoreDbToRdsInstanceRequest**](RestoreDbToRdsInstanceRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -830,9 +830,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "2f97ca76-6a78-55d8-94d3-66c2f2cfff23" // string | Eon-assigned resource ID.
-	snapshotId := "ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreDynamoDBTableRequest := *openapiclient.NewRestoreDynamoDBTableRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewDynamodbTableRestoreDestination()) // RestoreDynamoDBTableRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -854,7 +854,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -867,7 +867,7 @@ Name | Type | Description  | Notes
 
 
  **restoreDynamoDBTableRequest** | [**RestoreDynamoDBTableRequest**](RestoreDynamoDBTableRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -910,9 +910,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreVolumeToEbsRequest := *openapiclient.NewRestoreVolumeToEbsRequest("vol-01a29e3ba811d4613", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewEbsRestoreDestination()) // RestoreVolumeToEbsRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -934,7 +934,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -947,7 +947,7 @@ Name | Type | Description  | Notes
 
 
  **restoreVolumeToEbsRequest** | [**RestoreVolumeToEbsRequest**](RestoreVolumeToEbsRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -990,9 +990,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreAwsEc2InstanceRequest := *openapiclient.NewRestoreAwsEc2InstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewAwsEc2InstanceRestoreDestination()) // RestoreAwsEc2InstanceRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1014,7 +1014,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1027,7 +1027,7 @@ Name | Type | Description  | Notes
 
 
  **restoreAwsEc2InstanceRequest** | [**RestoreAwsEc2InstanceRequest**](RestoreAwsEc2InstanceRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -1070,7 +1070,7 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreFilesRequest := *openapiclient.NewRestoreFilesRequest(*openapiclient.NewObjectStorageDestination(), []openapiclient.FilePath{*openapiclient.NewFilePath("Path_example", false)}, "1ee34dc5-0a7c-4e56-a820-917371e05c8d") // RestoreFilesRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -1093,7 +1093,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1148,9 +1148,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreGcpCloudSqlRequest := *openapiclient.NewRestoreGcpCloudSqlRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpCloudSqlRestoreDestination()) // RestoreGcpCloudSqlRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1172,7 +1172,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1185,7 +1185,7 @@ Name | Type | Description  | Notes
 
 
  **restoreGcpCloudSqlRequest** | [**RestoreGcpCloudSqlRequest**](RestoreGcpCloudSqlRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -1228,9 +1228,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreGcpDiskRequest := *openapiclient.NewRestoreGcpDiskRequest("5178361631409150158", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpDiskRestoreDestination()) // RestoreGcpDiskRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1252,7 +1252,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1265,7 +1265,7 @@ Name | Type | Description  | Notes
 
 
  **restoreGcpDiskRequest** | [**RestoreGcpDiskRequest**](RestoreGcpDiskRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -1308,9 +1308,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
-	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreGcpVmInstanceRequest := *openapiclient.NewRestoreGcpVmInstanceRequest("1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewGcpVmInstanceRestoreDestination()) // RestoreGcpVmInstanceRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1332,7 +1332,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1345,7 +1345,7 @@ Name | Type | Description  | Notes
 
 
  **restoreGcpVmInstanceRequest** | [**RestoreGcpVmInstanceRequest**](RestoreGcpVmInstanceRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 
@@ -1388,9 +1388,9 @@ import (
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned resource ID.
-	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore.
+	snapshotId := "c11d3c11-7be5-4ee4-9eb8-2024d9c04904" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
 	restoreVolumeToEbsSnapshotRequest := *openapiclient.NewRestoreVolumeToEbsSnapshotRequest("vol-01a29e3ba811d4613", "1ee34dc5-0a7c-4e56-a820-917371e05c8d", *openapiclient.NewEbsSnapshotRestoreDestination()) // RestoreVolumeToEbsSnapshotRequest | 
-	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  (optional)
+	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1412,7 +1412,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **id** | **string** | Eon-assigned resource ID. | 
-**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) to restore. | 
+**snapshotId** | **string** | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore. | 
 
 ### Other Parameters
 
@@ -1425,7 +1425,7 @@ Name | Type | Description  | Notes
 
 
  **restoreVolumeToEbsSnapshotRequest** | [**RestoreVolumeToEbsSnapshotRequest**](RestoreVolumeToEbsSnapshotRequest.md) |  | 
- **xActionApprovalRequestId** | **string** | ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected.  | 
+ **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type
 

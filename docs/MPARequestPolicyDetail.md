@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RequiredApprovals** | **int32** | Number of approvals required by this policy. | 
-**CurrentApprovals** | **int32** | Number of qualifying approvals received for this policy. | 
-**ExecutionWindowHours** | **int32** | Hours the requester has to execute the approved action after full approval. | 
-**ApprovalWindowHours** | **int32** | Hours allowed for gathering all required approvals after submission. | 
-**Description** | Pointer to **string** | Human-readable description of the policy. | [optional] 
-**ApproverIdpId** | Pointer to **NullableString** | UUID of the SAML identity provider connection this approver group belongs to. | [optional] 
-**ApproverProviderGroupId** | Pointer to **NullableString** | Provider group identifier from the IdP. | [optional] 
+**RequiredApprovals** | **int32** | Count of approvals the rule requires. | 
+**CurrentApprovals** | **int32** | Count of qualifying approvals received. | 
+**ExecutionWindowHours** | **int32** | After all required approvals are received, number of hours the requester has to complete the action. | 
+**ApprovalWindowHours** | **int32** | After submitting the action request, number of hours allowed for gathering all required approvals. | 
+**Description** | Pointer to **string** | Rule description. | [optional] 
+**ApproverIdpId** | Pointer to **NullableString** | Eon-assigned ID of the SAML identity provider the approver group belongs to. Used in combination with &#x60;approverProviderGroupId&#x60;.  | [optional] 
+**ApproverProviderGroupId** | Pointer to **NullableString** | Identity-provider-assigned ID of the group. Used in combination with &#x60;approverIdpId&#x60;.  | [optional] 
 
 ## Methods
 

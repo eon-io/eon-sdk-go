@@ -36,7 +36,7 @@ func (r ApiConnectRestoreAccountRequest) ConnectRestoreAccountRequest(connectRes
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiConnectRestoreAccountRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiConnectRestoreAccountRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -182,7 +182,7 @@ func (r ApiConnectRestoreAwsOrganizationalUnitRequest) ConnectRestoreAwsOrganiza
 	return r
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiConnectRestoreAwsOrganizationalUnitRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiConnectRestoreAwsOrganizationalUnitRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r
@@ -195,7 +195,7 @@ func (r ApiConnectRestoreAwsOrganizationalUnitRequest) Execute() (*ConnectRestor
 /*
 ConnectRestoreAwsOrganizationalUnit Connect Restore AWS Organizational Unit
 
-Description: Connects an AWS organizational unit to the given project as a restore target.
+Description: Connects an AWS organizational unit to the given project as a restore destination.
 
 All current and future descendant AWS accounts within the organizational unit are discovered and available as restore accounts.
 
@@ -3248,7 +3248,7 @@ type ApiReconnectRestoreAccountRequest struct {
 	xActionApprovalRequestId *string
 }
 
-// ID of an APPROVED action approval request authorizing this operation. When set, the gateway validates the request envelope still matches the captured one and atomically marks it EXECUTED before letting the operation run. Single-use; ignored on routes that are not action-approval-protected. 
+// ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester. 
 func (r ApiReconnectRestoreAccountRequest) XActionApprovalRequestId(xActionApprovalRequestId string) ApiReconnectRestoreAccountRequest {
 	r.xActionApprovalRequestId = &xActionApprovalRequestId
 	return r

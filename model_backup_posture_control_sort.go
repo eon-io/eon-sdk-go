@@ -19,7 +19,7 @@ import (
 // checks if the BackupPostureControlSort type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupPostureControlSort{}
 
-// BackupPostureControlSort A single sort instruction for listing controls.
+// BackupPostureControlSort Single sort instruction for listing controls.
 type BackupPostureControlSort struct {
 	Field BackupPostureControlSortField `json:"field"`
 	Order SortOrder `json:"order"`

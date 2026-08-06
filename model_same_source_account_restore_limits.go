@@ -19,11 +19,11 @@ import (
 // checks if the SameSourceAccountRestoreLimits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SameSourceAccountRestoreLimits{}
 
-// SameSourceAccountRestoreLimits Restricts restores so a resource may only be restored back to its original source cloud account, matched on the cloud-provider account ID (not the Eon account ID). When `dataAccessRuleId` is set the restriction applies only to resources matching that access condition; otherwise it applies to all resources granted by the role. 
+// SameSourceAccountRestoreLimits Restricts restoring applicable resources only to the source account they were backed up from. 
 type SameSourceAccountRestoreLimits struct {
 	// Whether the same-source-account restore restriction is active.
 	Enabled bool `json:"enabled"`
-	// Optional. The id of an access condition (an entry in `accessConditions`) that scopes which resources the restriction applies to. Omit to apply the restriction to all resources. 
+	// If present, ID of an access condition that scopes which resources the restriction applies to. Omit to apply the restriction to all resources. 
 	DataAccessRuleId *string `json:"dataAccessRuleId,omitempty"`
 }
 

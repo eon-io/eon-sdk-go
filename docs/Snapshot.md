@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
 **Resource** | Pointer to [**ResourceSnapshot**](ResourceSnapshot.md) |  | [optional] 
 **OnHold** | Pointer to **bool** | Whether the snapshot is on user hold. | [optional] 
-**HoldDescription** | Pointer to **string** | Free-text note explaining why the snapshot is on hold. Cleared when the hold is removed. | [optional] 
+**HoldDescription** | Pointer to **string** | Note explaining why the snapshot is on hold. Cleared when the hold is removed.  | [optional] 
 
 ## Methods
 

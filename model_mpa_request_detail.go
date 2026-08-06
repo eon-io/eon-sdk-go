@@ -22,6 +22,7 @@ var _ MappedNullable = &MPARequestDetail{}
 // MPARequestDetail struct for MPARequestDetail
 type MPARequestDetail struct {
 	Request NullableMPARequest `json:"request"`
+	// List of responses submitted by reviewers.
 	Reviews []MPAReview `json:"reviews"`
 }
 

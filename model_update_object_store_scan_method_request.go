@@ -17,10 +17,10 @@ import (
 // checks if the UpdateObjectStoreScanMethodRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateObjectStoreScanMethodRequest{}
 
-// UpdateObjectStoreScanMethodRequest Object-store scan method settings to update for an AWS S3 bucket or GCP Cloud Storage bucket.
+// UpdateObjectStoreScanMethodRequest Object-store scan method settings to update for an AWS S3 bucket or GCP Cloud Storage bucket. Eon ignores enabled when systemControlled is true. The enabled field is required when systemControlled is false.
 type UpdateObjectStoreScanMethodRequest struct {
-	CdcBackup *ObjectStoreScanMethodSetting `json:"cdcBackup,omitempty"`
-	InventoryBackup *ObjectStoreScanMethodSetting `json:"inventoryBackup,omitempty"`
+	CdcBackup *UpdateObjectStoreScanMethodSetting `json:"cdcBackup,omitempty"`
+	InventoryBackup *UpdateObjectStoreScanMethodSetting `json:"inventoryBackup,omitempty"`
 }
 
 // NewUpdateObjectStoreScanMethodRequest instantiates a new UpdateObjectStoreScanMethodRequest object
@@ -41,9 +41,9 @@ func NewUpdateObjectStoreScanMethodRequestWithDefaults() *UpdateObjectStoreScanM
 }
 
 // GetCdcBackup returns the CdcBackup field value if set, zero value otherwise.
-func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackup() ObjectStoreScanMethodSetting {
+func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackup() UpdateObjectStoreScanMethodSetting {
 	if o == nil || IsNil(o.CdcBackup) {
-		var ret ObjectStoreScanMethodSetting
+		var ret UpdateObjectStoreScanMethodSetting
 		return ret
 	}
 	return *o.CdcBackup
@@ -51,7 +51,7 @@ func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackup() ObjectStoreScanMetho
 
 // GetCdcBackupOk returns a tuple with the CdcBackup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackupOk() (*ObjectStoreScanMethodSetting, bool) {
+func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackupOk() (*UpdateObjectStoreScanMethodSetting, bool) {
 	if o == nil || IsNil(o.CdcBackup) {
 		return nil, false
 	}
@@ -67,15 +67,15 @@ func (o *UpdateObjectStoreScanMethodRequest) HasCdcBackup() bool {
 	return false
 }
 
-// SetCdcBackup gets a reference to the given ObjectStoreScanMethodSetting and assigns it to the CdcBackup field.
-func (o *UpdateObjectStoreScanMethodRequest) SetCdcBackup(v ObjectStoreScanMethodSetting) {
+// SetCdcBackup gets a reference to the given UpdateObjectStoreScanMethodSetting and assigns it to the CdcBackup field.
+func (o *UpdateObjectStoreScanMethodRequest) SetCdcBackup(v UpdateObjectStoreScanMethodSetting) {
 	o.CdcBackup = &v
 }
 
 // GetInventoryBackup returns the InventoryBackup field value if set, zero value otherwise.
-func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackup() ObjectStoreScanMethodSetting {
+func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackup() UpdateObjectStoreScanMethodSetting {
 	if o == nil || IsNil(o.InventoryBackup) {
-		var ret ObjectStoreScanMethodSetting
+		var ret UpdateObjectStoreScanMethodSetting
 		return ret
 	}
 	return *o.InventoryBackup
@@ -83,7 +83,7 @@ func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackup() ObjectStoreSca
 
 // GetInventoryBackupOk returns a tuple with the InventoryBackup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackupOk() (*ObjectStoreScanMethodSetting, bool) {
+func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackupOk() (*UpdateObjectStoreScanMethodSetting, bool) {
 	if o == nil || IsNil(o.InventoryBackup) {
 		return nil, false
 	}
@@ -99,8 +99,8 @@ func (o *UpdateObjectStoreScanMethodRequest) HasInventoryBackup() bool {
 	return false
 }
 
-// SetInventoryBackup gets a reference to the given ObjectStoreScanMethodSetting and assigns it to the InventoryBackup field.
-func (o *UpdateObjectStoreScanMethodRequest) SetInventoryBackup(v ObjectStoreScanMethodSetting) {
+// SetInventoryBackup gets a reference to the given UpdateObjectStoreScanMethodSetting and assigns it to the InventoryBackup field.
+func (o *UpdateObjectStoreScanMethodRequest) SetInventoryBackup(v UpdateObjectStoreScanMethodSetting) {
 	o.InventoryBackup = &v
 }
 

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Unique identifier of the review. | 
-**ReviewerEmail** | **string** | Email address of the reviewer who submitted this review. | 
+**Id** | **string** | ID of the review. | 
+**ReviewerEmail** | **string** | Email address of the reviewer. | 
 **ReviewerName** | Pointer to **string** | Display name of the reviewer at the time the review was submitted. | [optional] 
 **Decision** | [**MPADecision**](MPADecision.md) |  | 
-**Comment** | Pointer to **string** | Optional reviewer comment explaining the decision. | [optional] 
+**Comment** | Pointer to **string** | Comment explaining the reviewer&#39;s decision. | [optional] 
 **ReviewedTime** | **time.Time** | Time when the review was submitted. | 
 
 ## Methods

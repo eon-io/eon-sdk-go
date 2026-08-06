@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CdcBackup** | Pointer to [**ObjectStoreScanMethodSetting**](ObjectStoreScanMethodSetting.md) |  | [optional] 
-**InventoryBackup** | Pointer to [**ObjectStoreScanMethodSetting**](ObjectStoreScanMethodSetting.md) |  | [optional] 
+**CdcBackup** | Pointer to [**UpdateObjectStoreScanMethodSetting**](UpdateObjectStoreScanMethodSetting.md) |  | [optional] 
+**InventoryBackup** | Pointer to [**UpdateObjectStoreScanMethodSetting**](UpdateObjectStoreScanMethodSetting.md) |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCdcBackup
 
-`func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackup() ObjectStoreScanMethodSetting`
+`func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackup() UpdateObjectStoreScanMethodSetting`
 
 GetCdcBackup returns the CdcBackup field if non-nil, zero value otherwise.
 
 ### GetCdcBackupOk
 
-`func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackupOk() (*ObjectStoreScanMethodSetting, bool)`
+`func (o *UpdateObjectStoreScanMethodRequest) GetCdcBackupOk() (*UpdateObjectStoreScanMethodSetting, bool)`
 
 GetCdcBackupOk returns a tuple with the CdcBackup field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCdcBackup
 
-`func (o *UpdateObjectStoreScanMethodRequest) SetCdcBackup(v ObjectStoreScanMethodSetting)`
+`func (o *UpdateObjectStoreScanMethodRequest) SetCdcBackup(v UpdateObjectStoreScanMethodSetting)`
 
 SetCdcBackup sets CdcBackup field to given value.
 
@@ -53,20 +53,20 @@ HasCdcBackup returns a boolean if a field has been set.
 
 ### GetInventoryBackup
 
-`func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackup() ObjectStoreScanMethodSetting`
+`func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackup() UpdateObjectStoreScanMethodSetting`
 
 GetInventoryBackup returns the InventoryBackup field if non-nil, zero value otherwise.
 
 ### GetInventoryBackupOk
 
-`func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackupOk() (*ObjectStoreScanMethodSetting, bool)`
+`func (o *UpdateObjectStoreScanMethodRequest) GetInventoryBackupOk() (*UpdateObjectStoreScanMethodSetting, bool)`
 
 GetInventoryBackupOk returns a tuple with the InventoryBackup field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInventoryBackup
 
-`func (o *UpdateObjectStoreScanMethodRequest) SetInventoryBackup(v ObjectStoreScanMethodSetting)`
+`func (o *UpdateObjectStoreScanMethodRequest) SetInventoryBackup(v UpdateObjectStoreScanMethodSetting)`
 
 SetInventoryBackup sets InventoryBackup field to given value.
 

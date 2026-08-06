@@ -31,8 +31,6 @@ type BigQueryDatasetDestination struct {
 	SelectedViews []string `json:"selectedViews,omitempty"`
 	// Labels to apply to the restored BigQuery dataset as key-value pairs, where key and value are both strings.  **Example:** `{\"eon-restore\": \"true\"}` 
 	Labels *map[string]string `json:"labels,omitempty"`
-	// When set to `true`, existing tables and metadata (views, routines) in the target dataset will be overwritten by the restored data. Materialized views are never overwritten: an existing materialized view is left as-is, since BigQuery has no `CREATE OR REPLACE MATERIALIZED VIEW`. When `false` (default), the restore fails if any conflicting objects already exist in the target dataset. 
-	OverwriteExistingData *bool `json:"overwriteExistingData,omitempty"`
 }
 
 type _BigQueryDatasetDestination BigQueryDatasetDestination
@@ -44,8 +42,6 @@ type _BigQueryDatasetDestination BigQueryDatasetDestination
 func NewBigQueryDatasetDestination(datasetId string) *BigQueryDatasetDestination {
 	this := BigQueryDatasetDestination{}
 	this.DatasetId = datasetId
-	var overwriteExistingData bool = false
-	this.OverwriteExistingData = &overwriteExistingData
 	return &this
 }
 
@@ -54,8 +50,6 @@ func NewBigQueryDatasetDestination(datasetId string) *BigQueryDatasetDestination
 // but it doesn't guarantee that properties required by API are set
 func NewBigQueryDatasetDestinationWithDefaults() *BigQueryDatasetDestination {
 	this := BigQueryDatasetDestination{}
-	var overwriteExistingData bool = false
-	this.OverwriteExistingData = &overwriteExistingData
 	return &this
 }
 
@@ -211,38 +205,6 @@ func (o *BigQueryDatasetDestination) SetLabels(v map[string]string) {
 	o.Labels = &v
 }
 
-// GetOverwriteExistingData returns the OverwriteExistingData field value if set, zero value otherwise.
-func (o *BigQueryDatasetDestination) GetOverwriteExistingData() bool {
-	if o == nil || IsNil(o.OverwriteExistingData) {
-		var ret bool
-		return ret
-	}
-	return *o.OverwriteExistingData
-}
-
-// GetOverwriteExistingDataOk returns a tuple with the OverwriteExistingData field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BigQueryDatasetDestination) GetOverwriteExistingDataOk() (*bool, bool) {
-	if o == nil || IsNil(o.OverwriteExistingData) {
-		return nil, false
-	}
-	return o.OverwriteExistingData, true
-}
-
-// HasOverwriteExistingData returns a boolean if a field has been set.
-func (o *BigQueryDatasetDestination) HasOverwriteExistingData() bool {
-	if o != nil && !IsNil(o.OverwriteExistingData) {
-		return true
-	}
-
-	return false
-}
-
-// SetOverwriteExistingData gets a reference to the given bool and assigns it to the OverwriteExistingData field.
-func (o *BigQueryDatasetDestination) SetOverwriteExistingData(v bool) {
-	o.OverwriteExistingData = &v
-}
-
 func (o BigQueryDatasetDestination) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -265,9 +227,6 @@ func (o BigQueryDatasetDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
-	}
-	if !IsNil(o.OverwriteExistingData) {
-		toSerialize["overwriteExistingData"] = o.OverwriteExistingData
 	}
 	return toSerialize, nil
 }

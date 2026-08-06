@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **IdpId** | **string** | [ID of the identity provider](./list-idps) the group belongs to.  | 
 **ProviderGroupId** | **string** | Identity-provider-assigned group ID. Must match the exact group ID passed by the identity provider to Eon during SAML sign-on.  | 
 **RoleIds** | **[]string** | List of [role IDs](../roles/list-roles) assigned to the group. | 
-**DisplayName** | Pointer to **string** | Optional human-readable label for the group mapping. For display and management only; it is not used when matching SAML groups during sign-on.  | [optional] 
+**DisplayName** | Pointer to **string** | Display name for the group role assignment. Not used when matching SAML groups during sign-on.  | [optional] 
 
 ## Methods
 

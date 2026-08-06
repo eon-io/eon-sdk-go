@@ -21,9 +21,9 @@ var _ MappedNullable = &MinRetentionRule{}
 
 // MinRetentionRule struct for MinRetentionRule
 type MinRetentionRule struct {
-	// The minimum backup retention period, in days.
+	// Minimum backup retention period, in days.
 	MinimumRetention int32 `json:"minimumRetention"`
-	// The backup cadence this minimum retention applies to.
+	// Backup cadence the minimum retention applies to.
 	Frequency string `json:"frequency"`
 }
 

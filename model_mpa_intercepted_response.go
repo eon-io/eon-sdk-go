@@ -19,7 +19,7 @@ import (
 // checks if the MPAInterceptedResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MPAInterceptedResponse{}
 
-// MPAInterceptedResponse Body returned when an operation is intercepted by an MPA policy.
+// MPAInterceptedResponse Response when an operation is intercepted by an action approval policy.
 type MPAInterceptedResponse struct {
 	ActionApprovalRequest NullableMPARequest `json:"actionApprovalRequest"`
 }

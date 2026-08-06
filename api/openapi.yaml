@@ -46,14 +46,12 @@ tags:
 paths:
   /v1/projects/{projectId}/backup-posture-controls:
     post:
-      description: |
-        Description: Create a backup posture control in a project. The control's `resourceSelector`
-        selects which resources it applies to, and its `rules` define the backup
-        requirements those resources must meet. The created control, including its
-        server-assigned `id`, is returned.
+      description: "Description: Creates a backup posture control."
       operationId: createBackupPostureControl
       parameters:
-      - description: The project ID
+      - description: |
+          ID of the project you want to create a backup posture control in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -67,7 +65,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateBackupPostureControlRequest'
-        description: The definition of the backup posture control to create.
+        description: Backup posture control to create.
         required: true
       responses:
         "201":
@@ -75,7 +73,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BackupPostureControl'
-          description: Backup posture control created successfully
+          description: Backup posture control created.
         "1XX":
           description: Informational
         "3XX":
@@ -92,7 +90,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Create a backup posture control
+      summary: Create Backup Posture Control
       tags:
       - backupPostureControls
       x-internal: false
@@ -108,14 +106,13 @@ paths:
           key: id
   /v1/projects/{projectId}/backup-posture-controls/list:
     post:
-      description: |
-        Description: List the backup posture controls configured for a project. Each control
-        carries its severity, `resourceSelector`, and backup requirement `rules`.
-        Use `pageToken` and `pageSize` to page through results, and the request body
-        to sort.
+      description: "Description: Retrieves a list of backup posture controls in the\
+        \ specified project."
       operationId: listBackupPostureControls
       parameters:
-      - description: The project ID
+      - description: |
+          ID of the project whose backup posture controls you want to retrieve.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -158,7 +155,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListBackupPostureControlsResponse'
-          description: Successful operation
+          description: Backup posture controls retrieved.
         "1XX":
           description: Informational
         "3XX":
@@ -175,7 +172,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: List backup posture controls
+      summary: List Backup Posture Controls
       tags:
       - backupPostureControls
       x-mcp: true
@@ -189,11 +186,12 @@ paths:
   /v1/projects/{projectId}/backup-posture-controls/{controlId}:
     delete:
       description: |
-        Description: Delete a backup posture control by ID. System-provided controls cannot be
-        deleted.
+        Description: Deletes a backup posture control.
       operationId: deleteBackupPostureControl
       parameters:
-      - description: The project ID
+      - description: |
+          ID of the project whose backup posture control you want to delete.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -202,7 +200,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: ID of the backup posture control to delete
+      - description: ID of the backup posture control to delete.
         explode: false
         in: path
         name: controlId
@@ -213,9 +211,9 @@ paths:
         style: simple
       responses:
         "200":
-          description: Backup posture control deleted successfully
+          description: Backup posture control deleted.
         "404":
-          description: Backup posture control not found
+          description: Backup posture control wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -232,7 +230,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Delete a backup posture control
+      summary: Delete Backup Posture Control
       tags:
       - backupPostureControls
       x-internal: false
@@ -247,12 +245,12 @@ paths:
           in: path
           key: controlId
     get:
-      description: |
-        Description: Get a single backup posture control by ID, including its severity,
-        `resourceSelector`, and backup requirement `rules`.
+      description: "Description: Retrieves a backup posture control."
       operationId: getBackupPostureControl
       parameters:
-      - description: The project ID
+      - description: |
+          ID of the project whose backup posture control you want to retrieve.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -261,7 +259,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: ID of the backup posture control to retrieve
+      - description: ID of the backup posture control to retrieve.
         explode: false
         in: path
         name: controlId
@@ -276,9 +274,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BackupPostureControl'
-          description: Successful operation
+          description: Backup posture control retrieved.
         "404":
-          description: Backup posture control not found
+          description: Backup posture control wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -295,7 +293,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Get a backup posture control
+      summary: Get Backup Posture Control
       tags:
       - backupPostureControls
       x-mcp: true
@@ -308,12 +306,16 @@ paths:
         excluded: true
     put:
       description: |
-        Description: Replace an existing backup posture control with the supplied definition. This
-        is a full replacement, not a partial update: send the complete control, since
-        any omitted field is reset. System-provided controls cannot be modified.
+        Description: Updates a backup posture control.
+
+        The update is a full replacement, not a partial
+        update.
+        Omitted fields are reset and are no longer enforced as part of the control.
       operationId: updateBackupPostureControl
       parameters:
-      - description: The project ID
+      - description: |
+          ID of the project whose backup posture control you want to update.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
         explode: false
         in: path
         name: projectId
@@ -322,7 +324,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: ID of the backup posture control to update
+      - description: ID of the backup posture control to update.
         explode: false
         in: path
         name: controlId
@@ -336,7 +338,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateBackupPostureControlRequest'
-        description: The full desired state of the backup posture control.
         required: true
       responses:
         "200":
@@ -344,9 +345,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BackupPostureControl'
-          description: Backup posture control updated successfully
+          description: Backup posture control updated.
         "404":
-          description: Backup posture control not found
+          description: Backup posture control wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -363,7 +364,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Update a backup posture control
+      summary: Update Backup Posture Control
       tags:
       - backupPostureControls
       x-internal: false
@@ -1989,7 +1990,7 @@ paths:
   /v1/projects/{projectId}/restore-aws-organizational-units:
     post:
       description: |
-        Description: Connects an AWS organizational unit to the given project as a restore target.
+        Description: Connects an AWS organizational unit to the given project as a restore destination.
 
         All current and future descendant AWS accounts within the organizational unit are discovered and available as restore accounts.
       operationId: connectRestoreAwsOrganizationalUnit
@@ -2007,10 +2008,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -2038,9 +2041,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "409":
           description: AWS organizational unit already exists in Eon.
         "1XX":
@@ -2301,10 +2307,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -2332,9 +2340,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "409":
           description: Restore account already connected to the project.
         "1XX":
@@ -2747,10 +2758,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -2772,9 +2785,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "1XX":
           description: Informational
         "3XX":
@@ -3616,7 +3632,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetObjectStoreScanMethodResponse'
-          description: Object-store scan method settings retrieved.
+          description: Current object-store scan method settings retrieved.
         "400":
           description: Resource type doesn't support object-store scan method settings.
         "404":
@@ -3686,7 +3702,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateObjectStoreScanMethodRequest'
-        description: Object-store scan method settings to update.
+        description: Object-store scan method settings to update. Eon ignores enabled
+          when systemControlled is true. The enabled field is required when systemControlled
+          is false.
         required: true
       responses:
         "200":
@@ -3694,7 +3712,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateObjectStoreScanMethodResponse'
-          description: Object-store scan method settings updated.
+          description: Current object-store scan method settings after the update.
         "400":
           description: "Invalid request body, parameters, or unsupported resource\
             \ type."
@@ -3755,10 +3773,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -3786,9 +3806,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "1XX":
           description: Informational
         "3XX":
@@ -3930,10 +3953,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -3951,9 +3976,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "404":
           description: "Backup policy wasn't found, or the action approval request\
             \ id in X-Action-Approval-Request-Id was not found."
@@ -4081,10 +4109,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -4113,9 +4143,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "404":
           description: "Backup policy wasn't found, or the action approval request\
             \ id in X-Action-Approval-Request-Id was not found."
@@ -4478,7 +4511,7 @@ paths:
           format: tobedefined
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
@@ -4582,7 +4615,7 @@ paths:
           format: tobedefined
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
@@ -4594,10 +4627,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -4619,9 +4654,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -4714,7 +4752,7 @@ paths:
           format: tobedefined
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
@@ -4726,10 +4764,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -4751,9 +4791,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -4846,7 +4889,7 @@ paths:
           format: tobedefined
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
@@ -4858,10 +4901,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -4883,9 +4928,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -4978,7 +5026,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
@@ -4990,10 +5038,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5015,9 +5065,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -5110,7 +5163,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
@@ -5122,10 +5175,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5147,9 +5202,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -5216,7 +5274,7 @@ paths:
         Description: Restores an EC2 instance from an Eon snapshot.
 
         When restoring an EC2 instance, you'll need to specify the configurations of the instance and each volume you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -5245,7 +5303,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
@@ -5257,10 +5315,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5282,9 +5342,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -5377,7 +5440,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: ac3014c2-9ab3-5d7f-ab4c-73412d6b9ef5
         explode: false
@@ -5389,10 +5452,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5414,9 +5479,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -5509,7 +5577,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
@@ -5521,10 +5589,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5546,9 +5616,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -5641,7 +5714,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
@@ -5653,10 +5726,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5679,9 +5754,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -5748,7 +5826,7 @@ paths:
         Description: Restores an Azure disk from an Eon snapshot.
 
         When restoring a disk, you'll specify the configurations of the disk you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -5777,7 +5855,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: c11d3c11-7be5-4ee4-9eb8-2024d9c04904
         explode: false
@@ -5789,10 +5867,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5814,9 +5894,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -5883,7 +5966,7 @@ paths:
         Description: Restores a GCP disk from an Eon snapshot.
 
         When restoring a disk, you'll specify the configurations of the disk you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -5912,7 +5995,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
@@ -5924,10 +6007,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -5949,9 +6034,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -6018,7 +6106,7 @@ paths:
         Description: Restores a GCP VM instance from an Eon snapshot.
 
         When restoring a GCP VM instance, you'll need to specify the configurations of the instance and each disk you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -6047,7 +6135,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
@@ -6059,10 +6147,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -6084,9 +6174,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -6153,7 +6246,7 @@ paths:
         Description: Restores a GCP Cloud SQL instance from an Eon snapshot.
 
         When restoring a GCP Cloud SQL instance, you'll need to specify the configurations of the database instance you want to restore.
-        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backups/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backups/snapshots/list-resource-snapshots).
+        You can retrieve the configurations from the snapshot by calling [Get Snapshot](/api/api-reference/backup-management/snapshots/get-snapshot) or [List Resource Snapshots](/api/api-reference/backup-management/snapshots/list-resource-snapshots).
 
         This operation is asynchronous.
         It triggers a restore job and returns a job ID, which can be used to track the progress of the restore job.
@@ -6182,7 +6275,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: "ID of the Eon [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots)\
+      - description: "ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots)\
           \ to restore."
         example: 3dc6c0c6-f94d-5e85-a174-4b981a4bb262
         explode: false
@@ -6194,10 +6287,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -6219,9 +6314,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "202":
           content:
             application/json:
@@ -6313,7 +6411,7 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of the database [snapshot](/api/api-reference/backups/snapshots/list-resource-snapshots) you want to query.
+          ID of the database [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) you want to query.
           Snapshot must belong to an RDS resource.
         example: 9888b6d9-8d8c-4c25-bcd9-7c71298eba0f
         explode: false
@@ -6593,8 +6691,8 @@ paths:
           type: integer
         style: form
       - description: |
-          Expensive detail groups to include in the response.
-          They are omitted by default to keep the response small.
+          Whether to include indexes for AWS DynamoDB in the response.
+          To minimize response size, these indexes are omitted by default.
         explode: true
         in: query
         name: include
@@ -6673,8 +6771,8 @@ paths:
           type: string
         style: simple
       - description: |
-          Expensive detail groups to include in the response.
-          They are omitted by default to keep the response small.
+          Whether to include indexes for AWS DynamoDB in the response.
+          To minimize response size, these indexes are omitted by default.
         explode: true
         in: query
         name: include
@@ -7522,10 +7620,12 @@ paths:
           type: string
         style: simple
       - description: |
-          ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-          validates the request envelope still matches the captured one and atomically
-          marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-          that are not action-approval-protected.
+          ID of an approved action request.
+          Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+          When used, the current API request must match the original request parameters.
+          The approved action request can be executed only by the original requester.
         explode: false
         in: header
         name: X-Action-Approval-Request-Id
@@ -7548,9 +7648,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MPAInterceptedResponse'
           description: |
-            The operation is MPA-protected. An MPA request was created in CREATED status.
-            The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-            or discard (action DISCARD). The operation did not run.
+            Applicable only when the method is protected by an [action approval policy].
+
+            An action request was created in an initial state.
+            The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+            [action approval policy]: /api/using-the-api/action-approvals
         "404":
           description: Snapshot wasn't found.
         "1XX":
@@ -8086,11 +8189,12 @@ paths:
         excluded: true
   /v1/projects/{projectId}/action-approvals/my-requests/{requestId}:
     get:
-      description: "Description: Retrieves details of a specific action approval request\
-        \ submitted by the current user."
+      description: "Description: Retrieves an action request that was created using\
+        \ the current caller's credentials."
       operationId: getMyActionApprovalRequest
       parameters:
-      - description: The project ID
+      - description: ID of the project.
+        example: 8ea94e63-894f-5779-aa8f-06ad93121abb
         explode: false
         in: path
         name: projectId
@@ -8099,7 +8203,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: The action approval request ID
+      - description: ID of the action request.
+        example: 0fc514a3-61fe-5d39-a079-9d0df1820956
         explode: false
         in: path
         name: requestId
@@ -8114,16 +8219,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetMPARequestResponse'
-          description: Successful operation
+          description: Action request retrieved.
         "403":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Not authorized because the action approval request was created
-            by another user or API caller.
+          description: Unauthorized because the action request was created by another
+            caller.
         "404":
-          description: Action approval request wasn't found.
+          description: Action request wasn't found.
         "1XX":
           description: Informational
         "3XX":
@@ -8140,7 +8245,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Get My Action Approval Request
+      summary: Get My Action Request
       tags:
       - actionApprovals
       x-internal: false
@@ -8151,12 +8256,14 @@ paths:
         excluded: true
   /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/cancel:
     post:
-      description: "Description: Cancel an action approval request created by the\
-        \ current user. Only allowed while the request is in PENDING_APPROVAL or APPROVED\
-        \ status."
+      description: |
+        Description: Cancel an action request created using the current caller's credentials.
+
+        Action requests can be canceled only while the request is approved or pending approval.
       operationId: cancelActionApprovalRequest
       parameters:
-      - description: The project ID
+      - description: ID of the project.
+        example: 8ea94e63-894f-5779-aa8f-06ad93121abb
         explode: false
         in: path
         name: projectId
@@ -8165,7 +8272,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: Action approval request ID.
+      - description: ID of the action request.
+        example: 0fc514a3-61fe-5d39-a079-9d0df1820956
         explode: false
         in: path
         name: requestId
@@ -8180,25 +8288,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CancelMyMPARequestResponse'
-          description: Request canceled.
+          description: Action request canceled.
         "403":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Not authorized (only the requester can cancel their own request)
+          description: Unauthorized because the action request was created by another
+            caller.
         "404":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Action approval request wasn't found.
+          description: Action request wasn't found.
         "409":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Request can't be canceled in its current status.
+          description: Action request can't be canceled in its current status.
         "1XX":
           description: Informational
         "3XX":
@@ -8215,7 +8324,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Cancel Action Approval Request
+      summary: Cancel My Action Request
       tags:
       - actionApprovals
       x-internal: false
@@ -8230,12 +8339,17 @@ paths:
         excluded: true
   /v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit:
     post:
-      description: "Description: Confirm or discard a CREATED action approval request.\
-        \ CONFIRM transitions to PENDING_APPROVAL and starts the approval timer. DISCARD\
-        \ transitions to DISCARDED."
+      description: |
+        Description: Submit or discard an action request that's in its initial `CREATED` status.
+
+        When submitting, the action request status changes to pending approval.
+        The approval window begins, and reviewers must approve before the window ends.
+
+        When discarding, the action request is abandoned, and no further action can be taken.
       operationId: createActionApprovalRequest
       parameters:
-      - description: The project ID
+      - description: ID of the project.
+        example: 8ea94e63-894f-5779-aa8f-06ad93121abb
         explode: false
         in: path
         name: projectId
@@ -8244,7 +8358,8 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: Action approval request ID.
+      - description: ID of the action request.
+        example: 0fc514a3-61fe-5d39-a079-9d0df1820956
         explode: false
         in: path
         name: requestId
@@ -8265,25 +8380,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SubmitMyMPARequestResponse'
-          description: Request submitted successfully
+          description: Action request submitted or discarded.
         "403":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Not authorized (only the requester can submit their own request)
+          description: Unauthorized because the action request was created by another
+            caller.
         "404":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Action approval request wasn't found.
+          description: Action request wasn't found.
         "409":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Request cannot be submitted in its current status
+          description: Action request can't be submitted or discarded in its current
+            status.
         "1XX":
           description: Informational
         "3XX":
@@ -8300,7 +8417,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: Create Action Approval Request
+      summary: Submit My Action Request
       tags:
       - actionApprovals
       x-mcp: true
@@ -8318,10 +8435,12 @@ components:
   parameters:
     MpaRequestIdHeader:
       description: |
-        ID of an APPROVED action approval request authorizing this operation. When set, the gateway
-        validates the request envelope still matches the captured one and atomically
-        marks it EXECUTED before letting the operation run. Single-use; ignored on routes
-        that are not action-approval-protected.
+        ID of an approved action request.
+        Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;
+
+
+        When used, the current API request must match the original request parameters.
+        The approved action request can be executed only by the original requester.
       explode: false
       in: header
       name: X-Action-Approval-Request-Id
@@ -8337,12 +8456,16 @@ components:
           schema:
             $ref: '#/components/schemas/MPAInterceptedResponse'
       description: |
-        The operation is MPA-protected. An MPA request was created in CREATED status.
-        The caller should confirm via the submit endpoint (POST .../submit with action CONFIRM)
-        or discard (action DISCARD). The operation did not run.
+        Applicable only when the method is protected by an [action approval policy].
+
+        An action request was created in an initial state.
+        The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+        [action approval policy]: /api/using-the-api/action-approvals
   schemas:
     MPAInterceptedResponse:
-      description: Body returned when an operation is intercepted by an MPA policy.
+      description: Response when an operation is intercepted by an action approval
+        policy.
       example:
         actionApprovalRequest:
           requesterEmail: requester@example.com
@@ -8530,8 +8653,8 @@ components:
       type: object
     BackupPostureControlGroupCondition:
       description: |
-        A group of expressions combined with a logical operator (`AND`/`OR`). Each
-        operand can itself be a single condition or a nested group.
+        Group of expressions to evaluate using the logical operator specified in `operator`.
+        Each item in the `operands` list can be either a single expression or a nested `group` expression.
       example:
         operands:
         - null
@@ -8542,7 +8665,11 @@ components:
         operator:
           $ref: '#/components/schemas/LogicalOperator'
         operands:
-          description: The expressions to combine with `operator`.
+          description: |
+            List of expressions to evaluate using the logical operator specified in `operator`.
+            Each item in the list can be either a single expression or a nested `group` expression.
+
+            Must contain at least 2 items.
           items:
             $ref: '#/components/schemas/BackupPostureControlExpression'
           minItems: 2
@@ -8615,6 +8742,7 @@ components:
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
       - AWS_CASSANDRA_CLUSTER
+      - AWS_OPENSEARCH
       - GCP_CASSANDRA_CLUSTER
       - AZURE_CASSANDRA_CLUSTER
       - AWS_DOCUMENTDB
@@ -9070,10 +9198,10 @@ components:
         frequency: DAILY
       properties:
         minimumRetention:
-          description: "The minimum backup retention period, in days."
+          description: "Minimum backup retention period, in days."
           type: integer
         frequency:
-          description: The backup cadence this minimum retention applies to.
+          description: Backup cadence the minimum retention applies to.
           enum:
           - DAILY
           - WEEKLY
@@ -9090,7 +9218,7 @@ components:
         maximumRetention: 6
       properties:
         maximumRetention:
-          description: "The maximum backup retention period, in days."
+          description: "Maximum backup retention period, in days."
           type: integer
       required:
       - maximumRetention
@@ -9101,7 +9229,7 @@ components:
         minCopies: 1
       properties:
         minCopies:
-          description: The minimum number of backup copies that must exist.
+          description: Minimum number of backup copies that must exist.
           type: integer
       required:
       - minCopies
@@ -9109,9 +9237,7 @@ components:
       x-nullable: true
     BackupPostureControlRules:
       description: |
-        The backup requirements a resource must satisfy to pass the control. Every rule
-        is optional: a rule you set is evaluated, and one you omit is not. Omit a rule
-        to stop enforcing it.
+        Backup requirements a resource must satisfy.
       example:
         minimumRetention:
         - minimumRetention: 0
@@ -9151,7 +9277,6 @@ components:
       type: object
       x-nullable: true
     CreateBackupPostureControlRequest:
-      description: The definition of a new backup posture control.
       example:
         severity: HIGH
         name: name
@@ -9250,7 +9375,7 @@ components:
           resourceSelectionMode: CONDITIONAL
       properties:
         name:
-          description: Human-readable name of the control.
+          description: Display name of the control.
           type: string
         severity:
           $ref: '#/components/schemas/Severity'
@@ -9267,7 +9392,7 @@ components:
     BackupPostureControl:
       example:
         severity: HIGH
-        name: name
+        name: EU PII retained in EU only
         rules:
           minimumRetention:
           - minimumRetention: 0
@@ -9281,7 +9406,7 @@ components:
           numberOfCopies:
             minCopies: 1
           crossAccount: true
-        id: id
+        id: 02025ea8-13f1-58d2-a7e8-2e533c9d6574
         resourceSelector:
           expression:
             resourceId:
@@ -9364,10 +9489,12 @@ components:
           resourceSelectionMode: CONDITIONAL
       properties:
         id:
-          description: Server-assigned unique identifier of the control.
+          description: ID of the backup posture control.
+          example: 02025ea8-13f1-58d2-a7e8-2e533c9d6574
           type: string
         name:
-          description: Human-readable name of the control.
+          description: Display name of the control.
+          example: EU PII retained in EU only
           type: string
         severity:
           $ref: '#/components/schemas/Severity'
@@ -9384,7 +9511,7 @@ components:
       type: object
       x-nullable: true
     BackupPostureControlSortField:
-      description: The field to sort controls by.
+      description: Field to sort controls by.
       enum:
       - NAME
       - SEVERITY
@@ -9402,7 +9529,7 @@ components:
       example: ASC
       type: string
     BackupPostureControlSort:
-      description: A single sort instruction for listing controls.
+      description: Single sort instruction for listing controls.
       example:
         field: NAME
         order: ASC
@@ -9437,11 +9564,11 @@ components:
       type: object
     ListBackupPostureControlsResponse:
       example:
-        nextPageToken: nextPageToken
-        totalCount: 0
+        nextPageToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+        totalCount: 88
         backupPostureControls:
         - severity: HIGH
-          name: name
+          name: EU PII retained in EU only
           rules:
             minimumRetention:
             - minimumRetention: 0
@@ -9455,7 +9582,7 @@ components:
             numberOfCopies:
               minCopies: 1
             crossAccount: true
-          id: id
+          id: 02025ea8-13f1-58d2-a7e8-2e533c9d6574
           resourceSelector:
             expression:
               resourceId:
@@ -9537,7 +9664,7 @@ components:
                 - apps
             resourceSelectionMode: CONDITIONAL
         - severity: HIGH
-          name: name
+          name: EU PII retained in EU only
           rules:
             minimumRetention:
             - minimumRetention: 0
@@ -9551,7 +9678,7 @@ components:
             numberOfCopies:
               minCopies: 1
             crossAccount: true
-          id: id
+          id: 02025ea8-13f1-58d2-a7e8-2e533c9d6574
           resourceSelector:
             expression:
               resourceId:
@@ -9634,27 +9761,25 @@ components:
             resourceSelectionMode: CONDITIONAL
       properties:
         backupPostureControls:
-          description: "The backup posture controls matching the request, for the\
-            \ current page."
+          description: List of retrieved backup posture controls.
           items:
             $ref: '#/components/schemas/BackupPostureControl'
           type: array
         totalCount:
-          description: Total number of backup posture controls matching the request
-            across all pages.
+          description: Total number of backup posture controls that matched the filter
+            options.
+          example: 88
           type: integer
         nextPageToken:
           description: |
-            Opaque cursor for the next page. Pass it as `pageToken` on the next request,
-            reusing the same body. Absent when there are no more results.
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
           type: string
       required:
       - backupPostureControls
       type: object
     UpdateBackupPostureControlRequest:
-      description: |
-        The full desired state of an existing control. Update is a full replacement:
-        every field is written, so send the complete definition, not a partial patch.
       example:
         severity: HIGH
         name: name
@@ -9753,7 +9878,7 @@ components:
           resourceSelectionMode: CONDITIONAL
       properties:
         name:
-          description: Human-readable name of the control.
+          description: Display name of the control.
           type: string
         severity:
           $ref: '#/components/schemas/Severity'
@@ -10205,8 +10330,8 @@ components:
       example:
         effect: INCLUSIVE
         restoreAccountProviderIds:
-        - restoreAccountProviderIds
-        - restoreAccountProviderIds
+        - "123456789012"
+        - "987654321098"
       nullable: true
       properties:
         effect:
@@ -10214,6 +10339,9 @@ components:
         restoreAccountProviderIds:
           description: |
             List of cloud-provider-assigned restore account IDs to match against.
+          example:
+          - "123456789012"
+          - "987654321098"
           items:
             type: string
           minItems: 1
@@ -10225,10 +10353,7 @@ components:
       x-internal: false
     SameSourceAccountRestoreLimits:
       description: |
-        Restricts restores so a resource may only be restored back to its original source cloud account,
-        matched on the cloud-provider account ID (not the Eon account ID). When `dataAccessRuleId` is set
-        the restriction applies only to resources matching that access condition; otherwise it applies to
-        all resources granted by the role.
+        Restricts restoring applicable resources only to the source account they were backed up from.
       example:
         dataAccessRuleId: dataAccessRuleId
         enabled: true
@@ -10239,8 +10364,8 @@ components:
           type: boolean
         dataAccessRuleId:
           description: |
-            Optional. The id of an access condition (an entry in `accessConditions`) that scopes which
-            resources the restriction applies to. Omit to apply the restriction to all resources.
+            If present, ID of an access condition that scopes which resources the restriction applies to.
+            Omit to apply the restriction to all resources.
           type: string
       required:
       - enabled
@@ -10251,8 +10376,8 @@ components:
         restoreDestinationLimits:
           effect: INCLUSIVE
           restoreAccountProviderIds:
-          - restoreAccountProviderIds
-          - restoreAccountProviderIds
+          - "123456789012"
+          - "987654321098"
         permissionGrants:
         - accessConditionId: Non-PII only.
           permission: inventory.view
@@ -10489,8 +10614,8 @@ components:
         restoreDestinationLimits:
           effect: INCLUSIVE
           restoreAccountProviderIds:
-          - restoreAccountProviderIds
-          - restoreAccountProviderIds
+          - "123456789012"
+          - "987654321098"
         permissionGrants:
         - accessConditionId: Non-PII only.
           permission: inventory.view
@@ -10726,8 +10851,8 @@ components:
           restoreDestinationLimits:
             effect: INCLUSIVE
             restoreAccountProviderIds:
-            - restoreAccountProviderIds
-            - restoreAccountProviderIds
+            - "123456789012"
+            - "987654321098"
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -10929,8 +11054,8 @@ components:
         - restoreDestinationLimits:
             effect: INCLUSIVE
             restoreAccountProviderIds:
-            - restoreAccountProviderIds
-            - restoreAccountProviderIds
+            - "123456789012"
+            - "987654321098"
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -11122,8 +11247,8 @@ components:
         - restoreDestinationLimits:
             effect: INCLUSIVE
             restoreAccountProviderIds:
-            - restoreAccountProviderIds
-            - restoreAccountProviderIds
+            - "123456789012"
+            - "987654321098"
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -11336,8 +11461,8 @@ components:
           restoreDestinationLimits:
             effect: INCLUSIVE
             restoreAccountProviderIds:
-            - restoreAccountProviderIds
-            - restoreAccountProviderIds
+            - "123456789012"
+            - "987654321098"
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -11537,8 +11662,8 @@ components:
         restoreDestinationLimits:
           effect: INCLUSIVE
           restoreAccountProviderIds:
-          - restoreAccountProviderIds
-          - restoreAccountProviderIds
+          - "123456789012"
+          - "987654321098"
         permissionGrants:
         - accessConditionId: Non-PII only.
           permission: inventory.view
@@ -11753,8 +11878,8 @@ components:
           restoreDestinationLimits:
             effect: INCLUSIVE
             restoreAccountProviderIds:
-            - restoreAccountProviderIds
-            - restoreAccountProviderIds
+            - "123456789012"
+            - "987654321098"
           permissionGrants:
           - accessConditionId: Non-PII only.
             permission: inventory.view
@@ -12029,8 +12154,8 @@ components:
           type: array
         displayName:
           description: |
-            Optional human-readable label for the group mapping. For display and management only;
-            it is not used when matching SAML groups during sign-on.
+            Display name for the group role assignment.
+            Not used when matching SAML groups during sign-on.
           example: Engineering Team
           nullable: true
           type: string
@@ -12079,8 +12204,8 @@ components:
           type: array
         displayName:
           description: |
-            Optional human-readable label for the group mapping. For display and management only;
-            it is not used when matching SAML groups during sign-on.
+            Display name for the group role assignment.
+            Not used when matching SAML groups during sign-on.
           example: Engineering Team
           type: string
       required:
@@ -12178,9 +12303,11 @@ components:
           type: array
         displayName:
           description: |
-            Optional human-readable label for the group mapping. For display and management only;
-            it is not used when matching SAML groups during sign-on.
-            Omit (or send null) to leave the existing label unchanged; send an empty string to clear it.
+            Display name for the group role assignment.
+            Not used when matching SAML groups during sign-on.
+
+            Omit or send null to leave the existing display name unchanged.
+            Send an empty string to clear it.
           example: Engineering Team
           nullable: true
           type: string
@@ -12331,6 +12458,11 @@ components:
       - ACCOUNT_STATE_INSUFFICIENT_PERMISSIONS
       - ACCOUNT_STATE_NOT_READY
       - ACCOUNT_STATE_UNSPECIFIED
+      x-docs-public-description: |
+        Connection status of the AWS account, Azure subscription, or GCP project.
+        `ACCOUNT_STATUS_UNSPECIFIED` is supported only in responses.
+      x-docs-internal-enum:
+      - NOT_READY
     AccountInstallationMethod:
       default: UNSPECIFIED
       description: |
@@ -13423,7 +13555,8 @@ components:
       - MPA_OPERATION_TYPE_MPA_OPERATION_CREATE_BACKUP_POLICY
     MPARequestStatus:
       description: |
-        Lifecycle state of an action approval request from creation through resolution. DISCARDED means the requester abandoned a draft before it was submitted for approval.
+        Action request status.
+        For an explanation of statuses, see [Action Request Statuses](/user-guide/access-management/action-approvals/action-request-statuses).
       enum:
       - MPA_REQUEST_STATUS_UNSPECIFIED
       - CREATED
@@ -13461,35 +13594,39 @@ components:
         currentApprovals: 1
       properties:
         requiredApprovals:
-          description: Number of approvals required by this policy.
+          description: Count of approvals the rule requires.
           example: 2
           type: integer
         currentApprovals:
-          description: Number of qualifying approvals received for this policy.
+          description: Count of qualifying approvals received.
           example: 1
           type: integer
         executionWindowHours:
-          description: Hours the requester has to execute the approved action after
-            full approval.
+          description: "After all required approvals are received, number of hours\
+            \ the requester has to complete the action."
           example: 4
           type: integer
         approvalWindowHours:
-          description: Hours allowed for gathering all required approvals after submission.
+          description: "After submitting the action request, number of hours allowed\
+            \ for gathering all required approvals."
           example: 24
           type: integer
         description:
-          description: Human-readable description of the policy.
+          description: Rule description.
           example: Require approval before deleting backup policies.
           type: string
         approverIdpId:
-          description: UUID of the SAML identity provider connection this approver
-            group belongs to.
+          description: |
+            Eon-assigned ID of the SAML identity provider the approver group belongs to.
+            Used in combination with `approverProviderGroupId`.
           example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
           format: uuid
           nullable: true
           type: string
         approverProviderGroupId:
-          description: Provider group identifier from the IdP.
+          description: |
+            Identity-provider-assigned ID of the group.
+            Used in combination with `approverIdpId`.
           example: platform-admins
           nullable: true
           type: string
@@ -13502,6 +13639,7 @@ components:
       type: object
       x-nullable: true
     MPARequest:
+      description: Action request details.
       example:
         requesterEmail: requester@example.com
         resolvedTime: 2026-05-05T02:10:12Z
@@ -13530,14 +13668,14 @@ components:
         status: PENDING_APPROVAL
       properties:
         id:
-          description: Unique identifier of the action approval request.
+          description: ID of the action request.
           example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
           format: uuid
           type: string
         operation:
           $ref: '#/components/schemas/MPAOperationType'
         requesterEmail:
-          description: Email address of the requester who created the approval request.
+          description: Email address of the requester.
           example: requester@example.com
           type: string
         requesterName:
@@ -13545,35 +13683,39 @@ components:
           example: Riley Chen
           type: string
         comment:
-          description: Optional comment from the requester explaining why this operation
-            is needed.
+          description: Comment from the requester explaining why they want to perform
+            the action.
           example: Removing a backup policy that has been replaced.
           type: string
         status:
           $ref: '#/components/schemas/MPARequestStatus'
         policyDetails:
-          description: Per-policy configuration and approval progress.
+          description: |
+            List of the action request's approval rules.
+            Each item contains the rule's configuration and approval progress.
           items:
             $ref: '#/components/schemas/MPARequestPolicyDetail'
           type: array
         approvalExpirationTime:
-          description: Deadline for gathering approvals. Set when the request is confirmed
-            (submitted). Null for requests in CREATED or DISCARDED status.
+          description: |
+            Deadline for gathering approvals.
+            Omitted before the request is submitted or after it's discarded.
           example: 2026-05-05T03:00:05Z
           format: date-time
           nullable: true
           type: string
         executionExpirationTime:
-          description: Deadline for executing the approved action. Set when the request
-            is approved.
+          description: |
+            Deadline for completing the approved action.
+            Set when the request is approved.
           example: 2026-05-05T07:00:05Z
           format: date-time
           nullable: true
           type: string
         resolvedTime:
-          description: "Time when the request reached a terminal state, such as executed,\
-            \ expired, canceled, denied, or discarded. Null while the request is still\
-            \ active."
+          description: |
+            Time when the request reached a terminal state, such as executed, expired, canceled, denied, or discarded.
+            Omitted while the request is still active.
           example: 2026-05-05T02:10:12Z
           format: date-time
           nullable: true
@@ -13816,7 +13958,6 @@ components:
       example:
         managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
         resourceGroupName: my-resource-group
-        enableM365Restore: false
         tenantId: 12345678-1234-1234-1234-123456789012
         eonInternalResourceGroupName: eon-restore-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -13849,13 +13990,6 @@ components:
             to.
           example: 3eca9074-011f-5008-9605-a7ccf00aa93e
           type: string
-        enableM365Restore:
-          description: |
-            True if this Azure restore subscription is dedicated to Microsoft 365 restore
-            (onboarded via the M365 restore module). Such subscriptions are selectable only
-            for Microsoft 365 restore and are excluded from Azure-resource restore pickers.
-          example: false
-          type: boolean
       required:
       - subscriptionId
       - tenantId
@@ -13871,7 +14005,6 @@ components:
         azure:
           managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
           resourceGroupName: my-resource-group
-          enableM365Restore: false
           tenantId: 12345678-1234-1234-1234-123456789012
           eonInternalResourceGroupName: eon-restore-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -13899,7 +14032,6 @@ components:
           azure:
             managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
             resourceGroupName: my-resource-group
-            enableM365Restore: false
             tenantId: 12345678-1234-1234-1234-123456789012
             eonInternalResourceGroupName: eon-restore-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -13967,7 +14099,6 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
-              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14134,7 +14265,6 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
-              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14159,7 +14289,6 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
-              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14208,7 +14337,6 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
-              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14308,7 +14436,6 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
-              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14342,7 +14469,6 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
-              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14376,7 +14502,6 @@ components:
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
               resourceGroupName: my-resource-group
-              enableM365Restore: false
               tenantId: 12345678-1234-1234-1234-123456789012
               eonInternalResourceGroupName: eon-restore-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -16442,30 +16567,28 @@ components:
       type: object
     ObjectStoreScanMethodSetting:
       additionalProperties: false
-      description: "Object-store scan method setting. If systemControlled is true,\
-        \ Eon decides whether the method is enabled. If systemControlled is false,\
-        \ enabled is required."
+      description: Current object-store scan method setting.
       example:
         enabled: true
         systemControlled: false
       properties:
         enabled:
-          description: Whether the scan method is enabled. Required only when systemControlled
-            is false.
+          description: Whether this scan method is currently enabled.
           example: true
-          nullable: true
           type: boolean
         systemControlled:
-          description: Whether Eon should decide when to use this scan method.
+          description: Whether Eon manages this scan method.
           example: false
           type: boolean
       required:
+      - enabled
       - systemControlled
       type: object
     ObjectStoreScanMethod:
       additionalProperties: false
-      description: Object-store scan method settings for an AWS S3 bucket or GCP Cloud
-        Storage bucket.
+      description: Current object-store scan method settings for an AWS S3 bucket
+        or GCP Cloud Storage bucket. Each setting shows whether the method is enabled
+        and whether Eon manages it.
       example:
         inventoryBackup:
           enabled: true
@@ -16484,6 +16607,7 @@ components:
       type: object
     GetObjectStoreScanMethodResponse:
       additionalProperties: false
+      description: Current object-store scan method settings.
       example:
         objectStoreScanMethod:
           inventoryBackup:
@@ -16498,10 +16622,33 @@ components:
       required:
       - objectStoreScanMethod
       type: object
+    UpdateObjectStoreScanMethodSetting:
+      additionalProperties: false
+      description: "Object-store scan method setting to update. When systemControlled\
+        \ is true, Eon manages the method and ignores enabled. When false, enabled\
+        \ is required."
+      example:
+        enabled: true
+        systemControlled: false
+      properties:
+        enabled:
+          description: Whether to enable this scan method. Required when systemControlled
+            is false. Ignored when systemControlled is true.
+          example: true
+          nullable: true
+          type: boolean
+        systemControlled:
+          description: Whether Eon manages this scan method.
+          example: false
+          type: boolean
+      required:
+      - systemControlled
+      type: object
     UpdateObjectStoreScanMethodRequest:
       additionalProperties: false
       description: Object-store scan method settings to update for an AWS S3 bucket
-        or GCP Cloud Storage bucket.
+        or GCP Cloud Storage bucket. Eon ignores enabled when systemControlled is
+        true. The enabled field is required when systemControlled is false.
       example:
         inventoryBackup:
           enabled: true
@@ -16511,12 +16658,13 @@ components:
           systemControlled: false
       properties:
         cdcBackup:
-          $ref: '#/components/schemas/ObjectStoreScanMethodSetting'
+          $ref: '#/components/schemas/UpdateObjectStoreScanMethodSetting'
         inventoryBackup:
-          $ref: '#/components/schemas/ObjectStoreScanMethodSetting'
+          $ref: '#/components/schemas/UpdateObjectStoreScanMethodSetting'
       type: object
     UpdateObjectStoreScanMethodResponse:
       additionalProperties: false
+      description: Current object-store scan method settings after the update.
       example:
         objectStoreScanMethod:
           inventoryBackup:
@@ -17290,11 +17438,8 @@ components:
     ScheduleTimezone:
       default: UTC
       description: |
-        Time zone the policy's backup schedule windows are interpreted in.
-        Applies to every schedule on the policy.
-        `UTC` runs the windows at a fixed UTC hour; `RESOURCE` runs them at the same
-        local hour in each resource's own region time zone.
-        Defaults to `UTC` when omitted.
+        Time zone of the backup schedule windows.
+        `UTC` runs the windows at a fixed UTC hour, whereas `RESOURCE` runs them at the same local hour in each resource's own region time zone.
       enum:
       - UTC
       - RESOURCE
@@ -21443,7 +21588,6 @@ components:
         - order_summary_view
         labels:
           key: labels
-        overwriteExistingData: false
       properties:
         datasetId:
           description: |
@@ -21487,16 +21631,6 @@ components:
 
             **Example:** `{"eon-restore": "true"}`
           type: object
-        overwriteExistingData:
-          default: false
-          description: |
-            When set to `true`, existing tables and metadata (views, routines)
-            in the target dataset will be overwritten by the restored data.
-            Materialized views are never overwritten: an existing materialized view is left
-            as-is, since BigQuery has no `CREATE OR REPLACE MATERIALIZED VIEW`.
-            When `false` (default), the restore fails if any conflicting objects already exist
-            in the target dataset.
-          type: boolean
       required:
       - datasetId
       type: object
@@ -21514,7 +21648,6 @@ components:
           - order_summary_view
           labels:
             key: labels
-          overwriteExistingData: false
       properties:
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
@@ -21987,9 +22120,9 @@ components:
           type: array
         privateIpAddress:
           description: |
-            Optional primary private IPv4 address for the restored instance, e.g. "10.0.0.50".
+            Primary private IPv4 address for the restored instance.
             Must fall within the selected subnet's CIDR range.
-            Leave empty to let AWS auto-assign an address.
+            Omit to let AWS auto-assign an address.
           example: 10.0.0.50
           type: string
         tags:
@@ -22094,7 +22227,6 @@ components:
             privateIpAddress: 10.0.0.50
             tags:
               key: tags
-        templateId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         restoreAccountId:
           description: Eon-assigned ID of the restore account.
@@ -22102,12 +22234,6 @@ components:
           type: string
         destination:
           $ref: '#/components/schemas/AwsEc2InstanceRestoreDestination'
-        templateId:
-          description: |
-            When set, the restore service re-evaluates this restore template at submit
-            time and applies the resolved params onto the request before restoring.
-          format: uuid
-          type: string
       required:
       - destination
       - restoreAccountId
@@ -22812,9 +22938,9 @@ components:
           type: array
         internalIp:
           description: |
-            Optional internal (private) IPv4 address for the restored VM, e.g. "10.0.0.10".
+            Optional internal (private) IPv4 address for the restored VM.
             Must fall within the selected subnet's primary CIDR range.
-            Leave empty to let GCP auto-assign an address.
+            Omit to let GCP auto-assign an address.
           example: 10.0.0.10
           type: string
         startInstanceAfterRestore:
@@ -23202,8 +23328,6 @@ components:
       - records
       type: object
     InventoryDetail:
-      description: |
-        Expensive detail group that a caller can explicitly request on inventory responses.
       enum:
       - DYNAMODB_INDEXES
       example: DYNAMODB_INDEXES
@@ -24425,7 +24549,9 @@ components:
         globalSecondaryIndexes:
           description: |
             Global secondary indexes on the table.
-            Returned only when `include` contains `DYNAMODB_INDEXES`.
+            To minimize response size, not returned by default.
+
+            To include in the response, set `include` to `DYNAMODB_INDEXES` in the request.
           items:
             $ref: '#/components/schemas/DynamoDbGlobalSecondaryIndex'
           type: array
@@ -24433,7 +24559,9 @@ components:
         localSecondaryIndexes:
           description: |
             Local secondary indexes on the table.
-            Returned only when `include` contains `DYNAMODB_INDEXES`.
+            To minimize response size, not returned by default.
+
+            To include in the response, set `include` to `DYNAMODB_INDEXES` in the request.
           items:
             $ref: '#/components/schemas/DynamoDbLocalSecondaryIndex'
           type: array
@@ -25752,8 +25880,9 @@ components:
           type: boolean
           x-internal: false
         holdDescription:
-          description: Free-text note explaining why the snapshot is on hold. Cleared
-            when the hold is removed.
+          description: |
+            Note explaining why the snapshot is on hold.
+            Cleared when the hold is removed.
           example: Keeping for the Q3 audit until finance signs off.
           type: string
           x-internal: false
@@ -25842,8 +25971,8 @@ components:
       properties:
         description:
           description: |
-            Optional free-text note explaining why the snapshot is being held.
-            Shown on the snapshot's hold badge and cleared when the hold is removed.
+            Note explaining why the snapshot is being held.
+            Cleared when the hold is removed.
           example: Keeping for the Q3 audit until finance signs off.
           maxLength: 500
           type: string
@@ -26786,8 +26915,7 @@ components:
       - data
       type: object
     MPADecision:
-      description: |
-        Decision on an MPA review record as returned on read APIs. APPROVED and DENIED come from reviewer actions; CANCELLED is written by the system (for example when the policy is deleted while requests are still pending).
+      description: Reviewer decision.
       enum:
       - APPROVED
       - DENIED
@@ -26808,12 +26936,12 @@ components:
         id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
       properties:
         id:
-          description: Unique identifier of the review.
+          description: ID of the review.
           example: 018f3b3f-4818-7c31-a0d7-2e02f2f83a20
           format: uuid
           type: string
         reviewerEmail:
-          description: Email address of the reviewer who submitted this review.
+          description: Email address of the reviewer.
           example: reviewer@example.com
           type: string
         reviewerName:
@@ -26823,7 +26951,7 @@ components:
         decision:
           $ref: '#/components/schemas/MPADecision'
         comment:
-          description: Optional reviewer comment explaining the decision.
+          description: Comment explaining the reviewer's decision.
           example: Approved after confirming the request with the application owner.
           type: string
         reviewedTime:
@@ -26885,6 +27013,7 @@ components:
         request:
           $ref: '#/components/schemas/MPARequest'
         reviews:
+          description: List of responses submitted by reviewers.
           items:
             $ref: '#/components/schemas/MPAReview'
           type: array
@@ -26976,7 +27105,9 @@ components:
       - actionApprovalRequest
       type: object
     MPASubmitAction:
-      description: Action to take on a CREATED MPA request.
+      description: |
+        Action to take on the initial request.
+        The requester can submit (confirm) or discard the request.
       enum:
       - MPA_SUBMIT_ACTION_UNSPECIFIED
       - CONFIRM
@@ -26995,7 +27126,8 @@ components:
         action:
           $ref: '#/components/schemas/MPASubmitAction'
         comment:
-          description: Optional comment to set on the request alongside the action.
+          description: Comment from the requester explaining why they want to perform
+            the action.
           type: string
       required:
       - action

@@ -41,7 +41,7 @@ type Snapshot struct {
 	Resource *ResourceSnapshot `json:"resource,omitempty"`
 	// Whether the snapshot is on user hold.
 	OnHold *bool `json:"onHold,omitempty"`
-	// Free-text note explaining why the snapshot is on hold. Cleared when the hold is removed.
+	// Note explaining why the snapshot is on hold. Cleared when the hold is removed. 
 	HoldDescription *string `json:"holdDescription,omitempty"`
 }
 

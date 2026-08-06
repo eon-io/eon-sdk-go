@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// MPASubmitAction Action to take on a CREATED MPA request.
+// MPASubmitAction Action to take on the initial request. The requester can submit (confirm) or discard the request. 
 type MPASubmitAction string
 
 // List of MPASubmitAction

@@ -30,7 +30,7 @@ type ApiCreateBackupPostureControlRequest struct {
 	createBackupPostureControlRequest *CreateBackupPostureControlRequest
 }
 
-// The definition of the backup posture control to create.
+// Backup posture control to create.
 func (r ApiCreateBackupPostureControlRequest) CreateBackupPostureControlRequest(createBackupPostureControlRequest CreateBackupPostureControlRequest) ApiCreateBackupPostureControlRequest {
 	r.createBackupPostureControlRequest = &createBackupPostureControlRequest
 	return r
@@ -41,16 +41,12 @@ func (r ApiCreateBackupPostureControlRequest) Execute() (*BackupPostureControl, 
 }
 
 /*
-CreateBackupPostureControl Create a backup posture control
+CreateBackupPostureControl Create Backup Posture Control
 
-Description: Create a backup posture control in a project. The control's `resourceSelector`
-selects which resources it applies to, and its `rules` define the backup
-requirements those resources must meet. The created control, including its
-server-assigned `id`, is returned.
-
+Description: Creates a backup posture control.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
+ @param projectId ID of the project you want to create a backup posture control in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiCreateBackupPostureControlRequest
 */
 func (a *BackupPostureControlsAPIService) CreateBackupPostureControl(ctx context.Context, projectId string) ApiCreateBackupPostureControlRequest {
@@ -175,15 +171,14 @@ func (r ApiDeleteBackupPostureControlRequest) Execute() (*http.Response, error) 
 }
 
 /*
-DeleteBackupPostureControl Delete a backup posture control
+DeleteBackupPostureControl Delete Backup Posture Control
 
-Description: Delete a backup posture control by ID. System-provided controls cannot be
-deleted.
+Description: Deletes a backup posture control.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param controlId ID of the backup posture control to delete
+ @param projectId ID of the project whose backup posture control you want to delete. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param controlId ID of the backup posture control to delete.
  @return ApiDeleteBackupPostureControlRequest
 */
 func (a *BackupPostureControlsAPIService) DeleteBackupPostureControl(ctx context.Context, projectId string, controlId string) ApiDeleteBackupPostureControlRequest {
@@ -294,15 +289,13 @@ func (r ApiGetBackupPostureControlRequest) Execute() (*BackupPostureControl, *ht
 }
 
 /*
-GetBackupPostureControl Get a backup posture control
+GetBackupPostureControl Get Backup Posture Control
 
-Description: Get a single backup posture control by ID, including its severity,
-`resourceSelector`, and backup requirement `rules`.
-
+Description: Retrieves a backup posture control.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param controlId ID of the backup posture control to retrieve
+ @param projectId ID of the project whose backup posture control you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param controlId ID of the backup posture control to retrieve.
  @return ApiGetBackupPostureControlRequest
 */
 func (a *BackupPostureControlsAPIService) GetBackupPostureControl(ctx context.Context, projectId string, controlId string) ApiGetBackupPostureControlRequest {
@@ -443,16 +436,12 @@ func (r ApiListBackupPostureControlsRequest) Execute() (*ListBackupPostureContro
 }
 
 /*
-ListBackupPostureControls List backup posture controls
+ListBackupPostureControls List Backup Posture Controls
 
-Description: List the backup posture controls configured for a project. Each control
-carries its severity, `resourceSelector`, and backup requirement `rules`.
-Use `pageToken` and `pageSize` to page through results, and the request body
-to sort.
-
+Description: Retrieves a list of backup posture controls in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
+ @param projectId ID of the project whose backup posture controls you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiListBackupPostureControlsRequest
 */
 func (a *BackupPostureControlsAPIService) ListBackupPostureControls(ctx context.Context, projectId string) ApiListBackupPostureControlsRequest {
@@ -579,7 +568,6 @@ type ApiUpdateBackupPostureControlRequest struct {
 	updateBackupPostureControlRequest *UpdateBackupPostureControlRequest
 }
 
-// The full desired state of the backup posture control.
 func (r ApiUpdateBackupPostureControlRequest) UpdateBackupPostureControlRequest(updateBackupPostureControlRequest UpdateBackupPostureControlRequest) ApiUpdateBackupPostureControlRequest {
 	r.updateBackupPostureControlRequest = &updateBackupPostureControlRequest
 	return r
@@ -590,16 +578,18 @@ func (r ApiUpdateBackupPostureControlRequest) Execute() (*BackupPostureControl, 
 }
 
 /*
-UpdateBackupPostureControl Update a backup posture control
+UpdateBackupPostureControl Update Backup Posture Control
 
-Description: Replace an existing backup posture control with the supplied definition. This
-is a full replacement, not a partial update: send the complete control, since
-any omitted field is reset. System-provided controls cannot be modified.
+Description: Updates a backup posture control.
+
+The update is a full replacement, not a partial
+update.
+Omitted fields are reset and are no longer enforced as part of the control.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param controlId ID of the backup posture control to update
+ @param projectId ID of the project whose backup posture control you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param controlId ID of the backup posture control to update.
  @return ApiUpdateBackupPostureControlRequest
 */
 func (a *BackupPostureControlsAPIService) UpdateBackupPostureControl(ctx context.Context, projectId string, controlId string) ApiUpdateBackupPostureControlRequest {

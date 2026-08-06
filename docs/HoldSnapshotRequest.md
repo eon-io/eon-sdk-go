@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | Pointer to **string** | Optional free-text note explaining why the snapshot is being held. Shown on the snapshot&#39;s hold badge and cleared when the hold is removed.  | [optional] 
+**Description** | Pointer to **string** | Note explaining why the snapshot is being held. Cleared when the hold is removed.  | [optional] 
 
 ## Methods
 

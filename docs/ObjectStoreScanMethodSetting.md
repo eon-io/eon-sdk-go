@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Enabled** | Pointer to **NullableBool** | Whether the scan method is enabled. Required only when systemControlled is false. | [optional] 
-**SystemControlled** | **bool** | Whether Eon should decide when to use this scan method. | 
+**Enabled** | **bool** | Whether this scan method is currently enabled. | 
+**SystemControlled** | **bool** | Whether Eon manages this scan method. | 
 
 ## Methods
 
 ### NewObjectStoreScanMethodSetting
 
-`func NewObjectStoreScanMethodSetting(systemControlled bool, ) *ObjectStoreScanMethodSetting`
+`func NewObjectStoreScanMethodSetting(enabled bool, systemControlled bool, ) *ObjectStoreScanMethodSetting`
 
 NewObjectStoreScanMethodSetting instantiates a new ObjectStoreScanMethodSetting object
 This constructor will assign default values to properties that have it defined,
@@ -45,22 +45,7 @@ and a boolean to check if the value has been set.
 
 SetEnabled sets Enabled field to given value.
 
-### HasEnabled
 
-`func (o *ObjectStoreScanMethodSetting) HasEnabled() bool`
-
-HasEnabled returns a boolean if a field has been set.
-
-### SetEnabledNil
-
-`func (o *ObjectStoreScanMethodSetting) SetEnabledNil(b bool)`
-
- SetEnabledNil sets the value for Enabled to be an explicit nil
-
-### UnsetEnabled
-`func (o *ObjectStoreScanMethodSetting) UnsetEnabled()`
-
-UnsetEnabled ensures that no value is present for Enabled, not even an explicit nil
 ### GetSystemControlled
 
 `func (o *ObjectStoreScanMethodSetting) GetSystemControlled() bool`

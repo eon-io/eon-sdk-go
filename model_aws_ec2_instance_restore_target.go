@@ -29,7 +29,7 @@ type AwsEc2InstanceRestoreTarget struct {
 	SubnetId string `json:"subnetId"`
 	// List of security group IDs to associate with the restored instance.
 	SecurityGroupIds []string `json:"securityGroupIds,omitempty"`
-	// Optional primary private IPv4 address for the restored instance, e.g. \"10.0.0.50\". Must fall within the selected subnet's CIDR range. Leave empty to let AWS auto-assign an address. 
+	// Primary private IPv4 address for the restored instance. Must fall within the selected subnet's CIDR range. Omit to let AWS auto-assign an address. 
 	PrivateIpAddress *string `json:"privateIpAddress,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`

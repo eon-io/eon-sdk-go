@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ScheduleTimezone Time zone the policy's backup schedule windows are interpreted in. Applies to every schedule on the policy. `UTC` runs the windows at a fixed UTC hour; `RESOURCE` runs them at the same local hour in each resource's own region time zone. Defaults to `UTC` when omitted. 
+// ScheduleTimezone Time zone of the backup schedule windows. `UTC` runs the windows at a fixed UTC hour, whereas `RESOURCE` runs them at the same local hour in each resource's own region time zone. 
 type ScheduleTimezone string
 
 // List of ScheduleTimezone
