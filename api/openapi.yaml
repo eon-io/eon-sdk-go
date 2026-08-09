@@ -34,6 +34,9 @@ tags:
 - description: Define and manage backup policies and schedules.
   name: backupPolicies
   x-displayName: Backup Policies
+- description: Require approval before sensitive actions can run.
+  name: actionApprovals
+  x-displayName: Action Approvals
 - description: "Track backup, restore, and other asynchronous jobs."
   name: jobs
   x-displayName: Jobs
@@ -8187,6 +8190,382 @@ paths:
       - read:dashboard
       x-audit-log:
         excluded: true
+  /v1/projects/{projectId}/action-approvals/rules:
+    get:
+      description: "Description: Retrieves the action approval rules in a project."
+      operationId: listActionApprovalRules
+      parameters:
+      - description: |
+          ID of the project whose action approval rules you want to retrieve.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Filter rules by the action they protect.
+        explode: true
+        in: query
+        name: operation
+        required: false
+        schema:
+          $ref: '#/components/schemas/ActionApprovalOperationType'
+        style: form
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first rule on the next page.
+          Get this value from the previous response.
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of rules to return.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListActionApprovalRulesResponse'
+          description: Action approval rules retrieved.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid pagination parameters or operation filter.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Action Approval Rules
+      tags:
+      - actionApprovals
+      x-permissions:
+      - read:action_approval_rules
+      x-audit-log:
+        excluded: true
+      x-data-access:
+        excluded: true
+      x-internal: false
+    post:
+      description: "Description: Creates an action approval rule in a project."
+      operationId: createActionApprovalRule
+      parameters:
+      - description: |
+          ID of the project in which you want to create an action approval rule.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateActionApprovalRuleRequest'
+        description: Action approval rule to create.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateActionApprovalRuleResponse'
+          description: Action approval rule created.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid action approval rule configuration.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: An action approval rule conflicts with the requested rule.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create Action Approval Rule
+      tags:
+      - actionApprovals
+      x-permissions:
+      - create:action_approval_rules
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: mpa_policy
+          in: resBody
+          key: actionApprovalRule.id
+      x-data-access:
+        excluded: true
+      x-internal: false
+  /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId}:
+    delete:
+      description: "Description: Deletes an action approval rule."
+      operationId: deleteActionApprovalRule
+      parameters:
+      - description: |
+          ID of the project that contains the action approval rule.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Action approval rule ID.
+        explode: false
+        in: path
+        name: actionApprovalRuleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Action approval rule deleted.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action approval rule wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete Action Approval Rule
+      tags:
+      - actionApprovals
+      x-permissions:
+      - delete:action_approval_rules
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: mpa_policy
+          in: path
+          key: actionApprovalRuleId
+      x-data-access:
+        excluded: true
+      x-internal: false
+    get:
+      description: "Description: Retrieves an action approval rule."
+      operationId: getActionApprovalRule
+      parameters:
+      - description: |
+          ID of the project that contains the action approval rule.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Action approval rule ID.
+        explode: false
+        in: path
+        name: actionApprovalRuleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActionApprovalRuleResponse'
+          description: Action approval rule retrieved.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action approval rule wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Action Approval Rule
+      tags:
+      - actionApprovals
+      x-permissions:
+      - read:action_approval_rules
+      x-audit-log:
+        excluded: true
+      x-data-access:
+        excluded: true
+      x-internal: false
+    put:
+      description: |
+        Description: Updates an action approval rule. Only fields included in the request are changed.
+      operationId: updateActionApprovalRule
+      parameters:
+      - description: |
+          ID of the project that contains the action approval rule.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Action approval rule ID.
+        explode: false
+        in: path
+        name: actionApprovalRuleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateActionApprovalRuleRequest'
+        description: Fields to update on the action approval rule.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateActionApprovalRuleResponse'
+          description: Action approval rule updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid action approval rule configuration.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action approval rule wasn't found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The updated action approval rule conflicts with another rule.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update Action Approval Rule
+      tags:
+      - actionApprovals
+      x-permissions:
+      - update:action_approval_rules
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: mpa_policy
+          in: path
+          key: actionApprovalRuleId
+      x-data-access:
+        excluded: true
+      x-internal: false
   /v1/projects/{projectId}/action-approvals/my-requests/{requestId}:
     get:
       description: "Description: Retrieves an action request that was created using\
@@ -8561,6 +8940,11 @@ components:
           - vpcs
           - vpcs
           operator: IN
+        encryptionType:
+          encryptionTypes:
+          - CUSTOMER_MANAGED_KEY
+          - CUSTOMER_MANAGED_KEY
+          operator: CONTAINS_ANY_OF
         resourceName:
           resourceNames:
           - resourceNames
@@ -8646,6 +9030,8 @@ components:
           $ref: '#/components/schemas/ResourceNameCondition'
         resourceId:
           $ref: '#/components/schemas/ResourceIdCondition'
+        encryptionType:
+          $ref: '#/components/schemas/EncryptionTypeCondition'
         tagKeys:
           $ref: '#/components/schemas/TagKeysCondition'
         tagKeyValues:
@@ -9052,6 +9438,42 @@ components:
       - operator
       - resourceIds
       type: object
+    EncryptionType:
+      description: |
+        Cloud-agnostic encryption key management classification derived from a
+        resource's volumes/disks.
+        `ENCRYPTION_TYPE_UNSPECIFIED` is supported only in responses.
+      enum:
+      - ENCRYPTION_TYPE_UNSPECIFIED
+      - UNENCRYPTED
+      - PROVIDER_MANAGED_KEY
+      - CUSTOMER_MANAGED_KEY
+      example: CUSTOMER_MANAGED_KEY
+      type: string
+      x-enum-varnames:
+      - ENCRYPTION_TYPE_UNSPECIFIED
+      - ENCRYPTION_TYPE_UNENCRYPTED
+      - ENCRYPTION_TYPE_PROVIDER_MANAGED_KEY
+      - ENCRYPTION_TYPE_CUSTOMER_MANAGED_KEY
+    EncryptionTypeCondition:
+      example:
+        encryptionTypes:
+        - CUSTOMER_MANAGED_KEY
+        - CUSTOMER_MANAGED_KEY
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        encryptionTypes:
+          items:
+            $ref: '#/components/schemas/EncryptionType'
+          minItems: 1
+          type: array
+      required:
+      - encryptionTypes
+      - operator
+      type: object
     TagKeysCondition:
       example:
         tagKeys:
@@ -9125,6 +9547,11 @@ components:
             - vpcs
             - vpcs
             operator: IN
+          encryptionType:
+            encryptionTypes:
+            - CUSTOMER_MANAGED_KEY
+            - CUSTOMER_MANAGED_KEY
+            operator: CONTAINS_ANY_OF
           resourceName:
             resourceNames:
             - resourceNames
@@ -9315,6 +9742,11 @@ components:
               - vpcs
               - vpcs
               operator: IN
+            encryptionType:
+              encryptionTypes:
+              - CUSTOMER_MANAGED_KEY
+              - CUSTOMER_MANAGED_KEY
+              operator: CONTAINS_ANY_OF
             resourceName:
               resourceNames:
               - resourceNames
@@ -9429,6 +9861,11 @@ components:
               - vpcs
               - vpcs
               operator: IN
+            encryptionType:
+              encryptionTypes:
+              - CUSTOMER_MANAGED_KEY
+              - CUSTOMER_MANAGED_KEY
+              operator: CONTAINS_ANY_OF
             resourceName:
               resourceNames:
               - resourceNames
@@ -9605,6 +10042,11 @@ components:
                 - vpcs
                 - vpcs
                 operator: IN
+              encryptionType:
+                encryptionTypes:
+                - CUSTOMER_MANAGED_KEY
+                - CUSTOMER_MANAGED_KEY
+                operator: CONTAINS_ANY_OF
               resourceName:
                 resourceNames:
                 - resourceNames
@@ -9701,6 +10143,11 @@ components:
                 - vpcs
                 - vpcs
                 operator: IN
+              encryptionType:
+                encryptionTypes:
+                - CUSTOMER_MANAGED_KEY
+                - CUSTOMER_MANAGED_KEY
+                operator: CONTAINS_ANY_OF
               resourceName:
                 resourceNames:
                 - resourceNames
@@ -9818,6 +10265,11 @@ components:
               - vpcs
               - vpcs
               operator: IN
+            encryptionType:
+              encryptionTypes:
+              - CUSTOMER_MANAGED_KEY
+              - CUSTOMER_MANAGED_KEY
+              operator: CONTAINS_ANY_OF
             resourceName:
               resourceNames:
               - resourceNames
@@ -26913,6 +27365,1459 @@ components:
           type: array
       required:
       - data
+      type: object
+    ActionApprovalOperationType:
+      description: Action that can be protected by an action approval rule.
+      enum:
+      - ADD_RESTORE_ACCOUNT
+      - CREATE_BACKUP_POLICY
+      - RESTORE_RESOURCE
+      - UPDATE_BACKUP_POLICY
+      - DELETE_BACKUP_POLICY
+      - REMOVE_SNAPSHOT_HOLD
+      example: DELETE_BACKUP_POLICY
+      type: string
+      x-docs-internal-enum:
+      - REMOVE_SNAPSHOT_HOLD
+      x-enum-varnames:
+      - ACTION_APPROVAL_OPERATION_ADD_RESTORE_ACCOUNT
+      - ACTION_APPROVAL_OPERATION_CREATE_BACKUP_POLICY
+      - ACTION_APPROVAL_OPERATION_RESTORE_RESOURCE
+      - ACTION_APPROVAL_OPERATION_UPDATE_BACKUP_POLICY
+      - ACTION_APPROVAL_OPERATION_DELETE_BACKUP_POLICY
+      - ACTION_APPROVAL_OPERATION_REMOVE_SNAPSHOT_HOLD
+    ActionApprovalRuleExpression:
+      description: |
+        Conditional expression used to determine which resources are targeted by an action approval rule.
+
+        Only one of the expressions below can be used.
+        For multiple conditions using `AND` or `OR` logic, group expressions with `group`.
+        You can nest multiple groups to create more complex expressions.
+      example:
+        resourceId:
+          operator: IN
+          resourceIds:
+          - resourceIds
+          - resourceIds
+        resourceGroupName:
+          resourceGroupNames:
+          - resourceGroupNames
+          - resourceGroupNames
+          operator: IN
+        securityScanConclusion:
+          securityScanConclusions:
+          - CLEAN
+          - CLEAN
+          operator: CONTAINS_ANY_OF
+        tagKeys:
+          tagKeys:
+          - tagKeys
+          - tagKeys
+          operator: CONTAINS_ANY_OF
+        vpc:
+          vpcs:
+          - vpcs
+          - vpcs
+          operator: IN
+        encryptionType:
+          encryptionTypes:
+          - CUSTOMER_MANAGED_KEY
+          - CUSTOMER_MANAGED_KEY
+          operator: CONTAINS_ANY_OF
+        resourceName:
+          resourceNames:
+          - resourceNames
+          - resourceNames
+          operator: CONTAINS
+        dataClasses:
+          dataClasses:
+          - PII
+          - PII
+          operator: CONTAINS_ANY_OF
+        sensitivityAnnotations:
+          sensitivityAnnotations:
+          - CONFIDENTIAL
+          - CONFIDENTIAL
+          operator: IN
+        accountId:
+          accountIds:
+          - accountIds
+          - accountIds
+          operator: IN
+        environment:
+          environments:
+          - PROD
+          - PROD
+          operator: IN
+        tagKeyValues:
+          tagKeyValues:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          operator: CONTAINS_ANY_OF
+        cloudProvider:
+          cloudProviders:
+          - AWS
+          - AWS
+          operator: IN
+        sourceRegion:
+          regions:
+          - regions
+          - regions
+          operator: IN
+        subnets:
+          subnets:
+          - subnets
+          - subnets
+          operator: CONTAINS_ANY_OF
+        group:
+          operands:
+          - null
+          - null
+          operator: AND
+        resourceType:
+          resourceTypes:
+          - AWS_EC2
+          - AWS_EC2
+          operator: IN
+        apps:
+          operator: CONTAINS_ANY_OF
+          apps:
+          - apps
+          - apps
+      nullable: true
+      properties:
+        group:
+          $ref: '#/components/schemas/ActionApprovalRuleGroupCondition'
+        resourceType:
+          $ref: '#/components/schemas/ResourceTypeCondition'
+        dataClasses:
+          $ref: '#/components/schemas/DataClassesCondition'
+        environment:
+          $ref: '#/components/schemas/EnvironmentCondition'
+        apps:
+          $ref: '#/components/schemas/AppsCondition'
+        sensitivityAnnotations:
+          $ref: '#/components/schemas/SensitivityAnnotationsCondition'
+        securityScanConclusion:
+          $ref: '#/components/schemas/SecurityScanConclusionCondition'
+        cloudProvider:
+          $ref: '#/components/schemas/CloudProviderCondition'
+        accountId:
+          $ref: '#/components/schemas/AccountIdCondition'
+        sourceRegion:
+          $ref: '#/components/schemas/RegionCondition'
+        vpc:
+          $ref: '#/components/schemas/VpcCondition'
+        subnets:
+          $ref: '#/components/schemas/SubnetsCondition'
+        resourceGroupName:
+          $ref: '#/components/schemas/ResourceGroupNameCondition'
+        encryptionType:
+          $ref: '#/components/schemas/EncryptionTypeCondition'
+        resourceName:
+          $ref: '#/components/schemas/ResourceNameCondition'
+        resourceId:
+          $ref: '#/components/schemas/ResourceIdCondition'
+        tagKeys:
+          $ref: '#/components/schemas/TagKeysCondition'
+        tagKeyValues:
+          $ref: '#/components/schemas/TagKeyValuesCondition'
+      type: object
+    ActionApprovalRuleGroupCondition:
+      description: |
+        Group of expressions evaluated using the logical operator specified in `operator`.
+        Each operand can be either a single expression or a nested `group`.
+      example:
+        operands:
+        - null
+        - null
+        operator: AND
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/LogicalOperator'
+        operands:
+          description: Must contain at least two expressions.
+          items:
+            $ref: '#/components/schemas/ActionApprovalRuleExpression'
+          minItems: 2
+          type: array
+      required:
+      - operands
+      - operator
+      type: object
+    SensitivityLevel:
+      description: Effective sensitivity level assigned to a resource.
+      enum:
+      - PUBLIC
+      - INTERNAL
+      - CONFIDENTIAL
+      - HIGH_RISK_CONFIDENTIAL
+      example: CONFIDENTIAL
+      type: string
+      x-enum-varnames:
+      - SENSITIVITY_LEVEL_PUBLIC
+      - SENSITIVITY_LEVEL_INTERNAL
+      - SENSITIVITY_LEVEL_CONFIDENTIAL
+      - SENSITIVITY_LEVEL_HIGH_RISK_CONFIDENTIAL
+    SensitivityAnnotationsCondition:
+      example:
+        sensitivityAnnotations:
+        - CONFIDENTIAL
+        - CONFIDENTIAL
+        operator: IN
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ScalarOperators'
+        sensitivityAnnotations:
+          items:
+            $ref: '#/components/schemas/SensitivityLevel'
+          minItems: 1
+          type: array
+      required:
+      - operator
+      - sensitivityAnnotations
+      type: object
+    SecurityScanConclusion:
+      description: Conclusion of a security scan
+      enum:
+      - CLEAN
+      - HIGH_CHANCE_FOR_RANSOMWARE
+      - DATA_ANOMALY_DETECTED
+      - MALWARE_DETECTED
+      example: CLEAN
+      type: string
+    SecurityScanConclusionCondition:
+      description: Security-scan conclusion condition. Valid only for snapshot-targeted
+        operations.
+      example:
+        securityScanConclusions:
+        - CLEAN
+        - CLEAN
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/ListOperators'
+        securityScanConclusions:
+          items:
+            $ref: '#/components/schemas/SecurityScanConclusion'
+          minItems: 1
+          type: array
+      required:
+      - operator
+      - securityScanConclusions
+      type: object
+    ActionApprovalRuleResourceSelector:
+      description: |
+        Selects the resources to which an action approval rule applies.
+        For cloud-resource and snapshot scopes, CONDITIONAL expressions may be
+        combined with resource ID overrides. Explicit inclusions add resources that
+        do not match the expression, while explicit exclusions always win.
+        Backup-policy scopes support only ALL or NONE with Eon backup policy UUIDs.
+      example:
+        expression:
+          resourceId:
+            operator: IN
+            resourceIds:
+            - resourceIds
+            - resourceIds
+          resourceGroupName:
+            resourceGroupNames:
+            - resourceGroupNames
+            - resourceGroupNames
+            operator: IN
+          securityScanConclusion:
+            securityScanConclusions:
+            - CLEAN
+            - CLEAN
+            operator: CONTAINS_ANY_OF
+          tagKeys:
+            tagKeys:
+            - tagKeys
+            - tagKeys
+            operator: CONTAINS_ANY_OF
+          vpc:
+            vpcs:
+            - vpcs
+            - vpcs
+            operator: IN
+          encryptionType:
+            encryptionTypes:
+            - CUSTOMER_MANAGED_KEY
+            - CUSTOMER_MANAGED_KEY
+            operator: CONTAINS_ANY_OF
+          resourceName:
+            resourceNames:
+            - resourceNames
+            - resourceNames
+            operator: CONTAINS
+          dataClasses:
+            dataClasses:
+            - PII
+            - PII
+            operator: CONTAINS_ANY_OF
+          sensitivityAnnotations:
+            sensitivityAnnotations:
+            - CONFIDENTIAL
+            - CONFIDENTIAL
+            operator: IN
+          accountId:
+            accountIds:
+            - accountIds
+            - accountIds
+            operator: IN
+          environment:
+            environments:
+            - PROD
+            - PROD
+            operator: IN
+          tagKeyValues:
+            tagKeyValues:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            operator: CONTAINS_ANY_OF
+          cloudProvider:
+            cloudProviders:
+            - AWS
+            - AWS
+            operator: IN
+          sourceRegion:
+            regions:
+            - regions
+            - regions
+            operator: IN
+          subnets:
+            subnets:
+            - subnets
+            - subnets
+            operator: CONTAINS_ANY_OF
+          group:
+            operands:
+            - null
+            - null
+            operator: AND
+          resourceType:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
+            operator: IN
+          apps:
+            operator: CONTAINS_ANY_OF
+            apps:
+            - apps
+            - apps
+        resourceSelectionMode: CONDITIONAL
+        resourceExclusionOverride:
+        - resourceExclusionOverride
+        - resourceExclusionOverride
+        resourceInclusionOverride:
+        - resourceInclusionOverride
+        - resourceInclusionOverride
+      properties:
+        resourceSelectionMode:
+          $ref: '#/components/schemas/ResourceSelectorMode'
+        resourceInclusionOverride:
+          description: |
+            Resource identifiers to protect, regardless of resourceSelectionMode.
+            When resourceSelectionMode is NONE, only these resources are protected.
+            For cloud-resource-scoped operations these are provider resource IDs
+            (e.g. AWS instance IDs); for backup-policy-scoped operations these are
+            Eon backup policy UUIDs.
+          items:
+            type: string
+          type: array
+        resourceExclusionOverride:
+          description: |
+            Resource identifiers to exclude from protection, regardless of resourceSelectionMode.
+            When resourceSelectionMode is ALL, all resources except these are protected.
+            For cloud-resource-scoped operations these are provider resource IDs;
+            for backup-policy-scoped operations these are Eon backup policy UUIDs.
+          items:
+            type: string
+          type: array
+        expression:
+          $ref: '#/components/schemas/ActionApprovalRuleExpression'
+      required:
+      - resourceSelectionMode
+      type: object
+      x-nullable: true
+    ActionApprovalRule:
+      description: A rule that requires approval before a sensitive action can run.
+      example:
+        approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        requiredApprovals: 1
+        approverProviderGroupId: approverProviderGroupId
+        exemptApiCredentials: true
+        executionWindowHours: 25
+        description: description
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            securityScanConclusion:
+              securityScanConclusions:
+              - CLEAN
+              - CLEAN
+              operator: CONTAINS_ANY_OF
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            encryptionType:
+              encryptionTypes:
+              - CUSTOMER_MANAGED_KEY
+              - CUSTOMER_MANAGED_KEY
+              operator: CONTAINS_ANY_OF
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: CONTAINS
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            sensitivityAnnotations:
+              sensitivityAnnotations:
+              - CONFIDENTIAL
+              - CONFIDENTIAL
+              operator: IN
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - null
+              - null
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+          resourceExclusionOverride:
+          - resourceExclusionOverride
+          - resourceExclusionOverride
+          resourceInclusionOverride:
+          - resourceInclusionOverride
+          - resourceInclusionOverride
+        projectId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        operation: DELETE_BACKUP_POLICY
+        approvalWindowHours: 101
+      properties:
+        id:
+          description: Action approval rule ID.
+          format: uuid
+          type: string
+        projectId:
+          description: ID of the project that contains the action approval rule.
+          format: uuid
+          type: string
+        operation:
+          $ref: '#/components/schemas/ActionApprovalOperationType'
+        requiredApprovals:
+          description: Number of approvals required before the action can be executed.
+          minimum: 1
+          type: integer
+        approvalWindowHours:
+          description: Hours the request stays open for approval before expiring.
+          maximum: 168
+          minimum: 1
+          type: integer
+        executionWindowHours:
+          description: Hours after approval during which the approved action can be
+            executed.
+          maximum: 168
+          minimum: 1
+          type: integer
+        description:
+          description: Optional description explaining the purpose of this rule.
+          type: string
+        resourceSelector:
+          $ref: '#/components/schemas/ActionApprovalRuleResourceSelector'
+        approverIdpId:
+          description: UUID of the SAML identity provider connection this approver
+            group belongs to.
+          format: uuid
+          nullable: true
+          type: string
+        approverProviderGroupId:
+          description: Provider group identifier from the IdP.
+          nullable: true
+          type: string
+        exemptApiCredentials:
+          description: "When true, API credential users bypass this approval rule."
+          type: boolean
+      required:
+      - approvalWindowHours
+      - executionWindowHours
+      - id
+      - operation
+      - projectId
+      - requiredApprovals
+      type: object
+      x-nullable: true
+    ListActionApprovalRulesResponse:
+      description: Paginated list of action approval rules.
+      example:
+        actionApprovalRules:
+        - approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requiredApprovals: 1
+          approverProviderGroupId: approverProviderGroupId
+          exemptApiCredentials: true
+          executionWindowHours: 25
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              securityScanConclusion:
+                securityScanConclusions:
+                - CLEAN
+                - CLEAN
+                operator: CONTAINS_ANY_OF
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              encryptionType:
+                encryptionTypes:
+                - CUSTOMER_MANAGED_KEY
+                - CUSTOMER_MANAGED_KEY
+                operator: CONTAINS_ANY_OF
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: CONTAINS
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              sensitivityAnnotations:
+                sensitivityAnnotations:
+                - CONFIDENTIAL
+                - CONFIDENTIAL
+                operator: IN
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - null
+                - null
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - resourceExclusionOverride
+            - resourceExclusionOverride
+            resourceInclusionOverride:
+            - resourceInclusionOverride
+            - resourceInclusionOverride
+          projectId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          operation: DELETE_BACKUP_POLICY
+          approvalWindowHours: 101
+        - approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requiredApprovals: 1
+          approverProviderGroupId: approverProviderGroupId
+          exemptApiCredentials: true
+          executionWindowHours: 25
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              securityScanConclusion:
+                securityScanConclusions:
+                - CLEAN
+                - CLEAN
+                operator: CONTAINS_ANY_OF
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              encryptionType:
+                encryptionTypes:
+                - CUSTOMER_MANAGED_KEY
+                - CUSTOMER_MANAGED_KEY
+                operator: CONTAINS_ANY_OF
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: CONTAINS
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              sensitivityAnnotations:
+                sensitivityAnnotations:
+                - CONFIDENTIAL
+                - CONFIDENTIAL
+                operator: IN
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - null
+                - null
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - resourceExclusionOverride
+            - resourceExclusionOverride
+            resourceInclusionOverride:
+            - resourceInclusionOverride
+            - resourceInclusionOverride
+          projectId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          operation: DELETE_BACKUP_POLICY
+          approvalWindowHours: 101
+        nextPageToken: nextPageToken
+        totalCount: 5
+      properties:
+        actionApprovalRules:
+          description: Action approval rules in the current page.
+          items:
+            $ref: '#/components/schemas/ActionApprovalRule'
+          type: array
+        totalCount:
+          description: Total number of matching action approval rules.
+          type: integer
+        nextPageToken:
+          description: Cursor that points to the first rule on the next page.
+          type: string
+      required:
+      - actionApprovalRules
+      - totalCount
+      type: object
+    CreateActionApprovalRuleRequest:
+      description: Configuration for a new action approval rule.
+      example:
+        approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        requiredApprovals: 1
+        approverProviderGroupId: approverProviderGroupId
+        exemptApiCredentials: true
+        executionWindowHours: 25
+        description: description
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            securityScanConclusion:
+              securityScanConclusions:
+              - CLEAN
+              - CLEAN
+              operator: CONTAINS_ANY_OF
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            encryptionType:
+              encryptionTypes:
+              - CUSTOMER_MANAGED_KEY
+              - CUSTOMER_MANAGED_KEY
+              operator: CONTAINS_ANY_OF
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: CONTAINS
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            sensitivityAnnotations:
+              sensitivityAnnotations:
+              - CONFIDENTIAL
+              - CONFIDENTIAL
+              operator: IN
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - null
+              - null
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+          resourceExclusionOverride:
+          - resourceExclusionOverride
+          - resourceExclusionOverride
+          resourceInclusionOverride:
+          - resourceInclusionOverride
+          - resourceInclusionOverride
+        operation: DELETE_BACKUP_POLICY
+        approvalWindowHours: 101
+      properties:
+        operation:
+          $ref: '#/components/schemas/ActionApprovalOperationType'
+        requiredApprovals:
+          default: 1
+          description: Number of approvals required before the action can be executed.
+          minimum: 1
+          type: integer
+        approvalWindowHours:
+          description: Hours the request stays open for approval before expiring.
+          maximum: 168
+          minimum: 1
+          type: integer
+        executionWindowHours:
+          description: Hours after approval during which the approved action can be
+            executed.
+          maximum: 168
+          minimum: 1
+          type: integer
+        description:
+          description: Optional description explaining the purpose of this rule.
+          type: string
+        resourceSelector:
+          $ref: '#/components/schemas/ActionApprovalRuleResourceSelector'
+        approverIdpId:
+          description: UUID of the SAML identity provider connection this approver
+            group belongs to.
+          format: uuid
+          type: string
+        approverProviderGroupId:
+          description: Provider group identifier from the IdP.
+          type: string
+        exemptApiCredentials:
+          description: "When true, API credential users bypass this approval rule."
+          type: boolean
+      required:
+      - approvalWindowHours
+      - executionWindowHours
+      - operation
+      type: object
+    CreateActionApprovalRuleResponse:
+      description: Response containing the newly created action approval rule.
+      example:
+        actionApprovalRule:
+          approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requiredApprovals: 1
+          approverProviderGroupId: approverProviderGroupId
+          exemptApiCredentials: true
+          executionWindowHours: 25
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              securityScanConclusion:
+                securityScanConclusions:
+                - CLEAN
+                - CLEAN
+                operator: CONTAINS_ANY_OF
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              encryptionType:
+                encryptionTypes:
+                - CUSTOMER_MANAGED_KEY
+                - CUSTOMER_MANAGED_KEY
+                operator: CONTAINS_ANY_OF
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: CONTAINS
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              sensitivityAnnotations:
+                sensitivityAnnotations:
+                - CONFIDENTIAL
+                - CONFIDENTIAL
+                operator: IN
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - null
+                - null
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - resourceExclusionOverride
+            - resourceExclusionOverride
+            resourceInclusionOverride:
+            - resourceInclusionOverride
+            - resourceInclusionOverride
+          projectId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          operation: DELETE_BACKUP_POLICY
+          approvalWindowHours: 101
+      properties:
+        actionApprovalRule:
+          $ref: '#/components/schemas/ActionApprovalRule'
+      required:
+      - actionApprovalRule
+      type: object
+    GetActionApprovalRuleResponse:
+      description: Response containing the requested action approval rule.
+      example:
+        actionApprovalRule:
+          approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requiredApprovals: 1
+          approverProviderGroupId: approverProviderGroupId
+          exemptApiCredentials: true
+          executionWindowHours: 25
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              securityScanConclusion:
+                securityScanConclusions:
+                - CLEAN
+                - CLEAN
+                operator: CONTAINS_ANY_OF
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              encryptionType:
+                encryptionTypes:
+                - CUSTOMER_MANAGED_KEY
+                - CUSTOMER_MANAGED_KEY
+                operator: CONTAINS_ANY_OF
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: CONTAINS
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              sensitivityAnnotations:
+                sensitivityAnnotations:
+                - CONFIDENTIAL
+                - CONFIDENTIAL
+                operator: IN
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - null
+                - null
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - resourceExclusionOverride
+            - resourceExclusionOverride
+            resourceInclusionOverride:
+            - resourceInclusionOverride
+            - resourceInclusionOverride
+          projectId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          operation: DELETE_BACKUP_POLICY
+          approvalWindowHours: 101
+      properties:
+        actionApprovalRule:
+          $ref: '#/components/schemas/ActionApprovalRule'
+      required:
+      - actionApprovalRule
+      type: object
+    UpdateActionApprovalRuleRequest:
+      description: Fields to update on an action approval rule.
+      example:
+        approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        requiredApprovals: 1
+        approverProviderGroupId: approverProviderGroupId
+        exemptApiCredentials: true
+        executionWindowHours: 25
+        description: description
+        resourceSelector:
+          expression:
+            resourceId:
+              operator: IN
+              resourceIds:
+              - resourceIds
+              - resourceIds
+            resourceGroupName:
+              resourceGroupNames:
+              - resourceGroupNames
+              - resourceGroupNames
+              operator: IN
+            securityScanConclusion:
+              securityScanConclusions:
+              - CLEAN
+              - CLEAN
+              operator: CONTAINS_ANY_OF
+            tagKeys:
+              tagKeys:
+              - tagKeys
+              - tagKeys
+              operator: CONTAINS_ANY_OF
+            vpc:
+              vpcs:
+              - vpcs
+              - vpcs
+              operator: IN
+            encryptionType:
+              encryptionTypes:
+              - CUSTOMER_MANAGED_KEY
+              - CUSTOMER_MANAGED_KEY
+              operator: CONTAINS_ANY_OF
+            resourceName:
+              resourceNames:
+              - resourceNames
+              - resourceNames
+              operator: CONTAINS
+            dataClasses:
+              dataClasses:
+              - PII
+              - PII
+              operator: CONTAINS_ANY_OF
+            sensitivityAnnotations:
+              sensitivityAnnotations:
+              - CONFIDENTIAL
+              - CONFIDENTIAL
+              operator: IN
+            accountId:
+              accountIds:
+              - accountIds
+              - accountIds
+              operator: IN
+            environment:
+              environments:
+              - PROD
+              - PROD
+              operator: IN
+            tagKeyValues:
+              tagKeyValues:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              operator: CONTAINS_ANY_OF
+            cloudProvider:
+              cloudProviders:
+              - AWS
+              - AWS
+              operator: IN
+            sourceRegion:
+              regions:
+              - regions
+              - regions
+              operator: IN
+            subnets:
+              subnets:
+              - subnets
+              - subnets
+              operator: CONTAINS_ANY_OF
+            group:
+              operands:
+              - null
+              - null
+              operator: AND
+            resourceType:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
+              operator: IN
+            apps:
+              operator: CONTAINS_ANY_OF
+              apps:
+              - apps
+              - apps
+          resourceSelectionMode: CONDITIONAL
+          resourceExclusionOverride:
+          - resourceExclusionOverride
+          - resourceExclusionOverride
+          resourceInclusionOverride:
+          - resourceInclusionOverride
+          - resourceInclusionOverride
+        approvalWindowHours: 101
+      properties:
+        requiredApprovals:
+          description: Number of approvals required before the action can be executed.
+          minimum: 1
+          type: integer
+        approvalWindowHours:
+          description: Hours the request stays open for approval before expiring.
+          maximum: 168
+          minimum: 1
+          type: integer
+        executionWindowHours:
+          description: Hours after approval during which the approved action can be
+            executed.
+          maximum: 168
+          minimum: 1
+          type: integer
+        description:
+          description: Optional description explaining the purpose of this rule.
+          type: string
+        resourceSelector:
+          $ref: '#/components/schemas/ActionApprovalRuleResourceSelector'
+        approverIdpId:
+          description: UUID of the SAML identity provider connection this approver
+            group belongs to. Set to null to remove the restriction.
+          format: uuid
+          nullable: true
+          type: string
+        approverProviderGroupId:
+          description: Provider group identifier from the IdP. Set to null to remove.
+          nullable: true
+          type: string
+        exemptApiCredentials:
+          description: "When true, API credential users bypass this approval rule."
+          type: boolean
+      type: object
+    UpdateActionApprovalRuleResponse:
+      description: Response containing the updated action approval rule.
+      example:
+        actionApprovalRule:
+          approverIdpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          requiredApprovals: 1
+          approverProviderGroupId: approverProviderGroupId
+          exemptApiCredentials: true
+          executionWindowHours: 25
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceSelector:
+            expression:
+              resourceId:
+                operator: IN
+                resourceIds:
+                - resourceIds
+                - resourceIds
+              resourceGroupName:
+                resourceGroupNames:
+                - resourceGroupNames
+                - resourceGroupNames
+                operator: IN
+              securityScanConclusion:
+                securityScanConclusions:
+                - CLEAN
+                - CLEAN
+                operator: CONTAINS_ANY_OF
+              tagKeys:
+                tagKeys:
+                - tagKeys
+                - tagKeys
+                operator: CONTAINS_ANY_OF
+              vpc:
+                vpcs:
+                - vpcs
+                - vpcs
+                operator: IN
+              encryptionType:
+                encryptionTypes:
+                - CUSTOMER_MANAGED_KEY
+                - CUSTOMER_MANAGED_KEY
+                operator: CONTAINS_ANY_OF
+              resourceName:
+                resourceNames:
+                - resourceNames
+                - resourceNames
+                operator: CONTAINS
+              dataClasses:
+                dataClasses:
+                - PII
+                - PII
+                operator: CONTAINS_ANY_OF
+              sensitivityAnnotations:
+                sensitivityAnnotations:
+                - CONFIDENTIAL
+                - CONFIDENTIAL
+                operator: IN
+              accountId:
+                accountIds:
+                - accountIds
+                - accountIds
+                operator: IN
+              environment:
+                environments:
+                - PROD
+                - PROD
+                operator: IN
+              tagKeyValues:
+                tagKeyValues:
+                - value: value
+                  key: key
+                - value: value
+                  key: key
+                operator: CONTAINS_ANY_OF
+              cloudProvider:
+                cloudProviders:
+                - AWS
+                - AWS
+                operator: IN
+              sourceRegion:
+                regions:
+                - regions
+                - regions
+                operator: IN
+              subnets:
+                subnets:
+                - subnets
+                - subnets
+                operator: CONTAINS_ANY_OF
+              group:
+                operands:
+                - null
+                - null
+                operator: AND
+              resourceType:
+                resourceTypes:
+                - AWS_EC2
+                - AWS_EC2
+                operator: IN
+              apps:
+                operator: CONTAINS_ANY_OF
+                apps:
+                - apps
+                - apps
+            resourceSelectionMode: CONDITIONAL
+            resourceExclusionOverride:
+            - resourceExclusionOverride
+            - resourceExclusionOverride
+            resourceInclusionOverride:
+            - resourceInclusionOverride
+            - resourceInclusionOverride
+          projectId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          operation: DELETE_BACKUP_POLICY
+          approvalWindowHours: 101
+      properties:
+        actionApprovalRule:
+          $ref: '#/components/schemas/ActionApprovalRule'
+      required:
+      - actionApprovalRule
       type: object
     MPADecision:
       description: Reviewer decision.

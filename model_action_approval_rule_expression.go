@@ -14,50 +14,52 @@ import (
 	"encoding/json"
 )
 
-// checks if the BackupPostureControlExpression type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BackupPostureControlExpression{}
+// checks if the ActionApprovalRuleExpression type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ActionApprovalRuleExpression{}
 
-// BackupPostureControlExpression Resource selector expression that determines which resources a backup posture control applies to. Set exactly one of the properties below. For AND/OR logic across multiple conditions, use `group`; groups can be nested. 
-type BackupPostureControlExpression struct {
-	Group NullableBackupPostureControlGroupCondition `json:"group,omitempty"`
+// ActionApprovalRuleExpression Conditional expression used to determine which resources are targeted by an action approval rule.  Only one of the expressions below can be used. For multiple conditions using `AND` or `OR` logic, group expressions with `group`. You can nest multiple groups to create more complex expressions. 
+type ActionApprovalRuleExpression struct {
+	Group NullableActionApprovalRuleGroupCondition `json:"group,omitempty"`
 	ResourceType NullableResourceTypeCondition `json:"resourceType,omitempty"`
 	DataClasses NullableDataClassesCondition `json:"dataClasses,omitempty"`
 	Environment NullableEnvironmentCondition `json:"environment,omitempty"`
 	Apps NullableAppsCondition `json:"apps,omitempty"`
+	SensitivityAnnotations NullableSensitivityAnnotationsCondition `json:"sensitivityAnnotations,omitempty"`
+	SecurityScanConclusion NullableSecurityScanConclusionCondition `json:"securityScanConclusion,omitempty"`
 	CloudProvider NullableCloudProviderCondition `json:"cloudProvider,omitempty"`
 	AccountId NullableAccountIdCondition `json:"accountId,omitempty"`
 	SourceRegion NullableRegionCondition `json:"sourceRegion,omitempty"`
 	Vpc NullableVpcCondition `json:"vpc,omitempty"`
 	Subnets NullableSubnetsCondition `json:"subnets,omitempty"`
 	ResourceGroupName NullableResourceGroupNameCondition `json:"resourceGroupName,omitempty"`
+	EncryptionType NullableEncryptionTypeCondition `json:"encryptionType,omitempty"`
 	ResourceName NullableResourceNameCondition `json:"resourceName,omitempty"`
 	ResourceId NullableResourceIdCondition `json:"resourceId,omitempty"`
-	EncryptionType NullableEncryptionTypeCondition `json:"encryptionType,omitempty"`
 	TagKeys NullableTagKeysCondition `json:"tagKeys,omitempty"`
 	TagKeyValues NullableTagKeyValuesCondition `json:"tagKeyValues,omitempty"`
 }
 
-// NewBackupPostureControlExpression instantiates a new BackupPostureControlExpression object
+// NewActionApprovalRuleExpression instantiates a new ActionApprovalRuleExpression object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupPostureControlExpression() *BackupPostureControlExpression {
-	this := BackupPostureControlExpression{}
+func NewActionApprovalRuleExpression() *ActionApprovalRuleExpression {
+	this := ActionApprovalRuleExpression{}
 	return &this
 }
 
-// NewBackupPostureControlExpressionWithDefaults instantiates a new BackupPostureControlExpression object
+// NewActionApprovalRuleExpressionWithDefaults instantiates a new ActionApprovalRuleExpression object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBackupPostureControlExpressionWithDefaults() *BackupPostureControlExpression {
-	this := BackupPostureControlExpression{}
+func NewActionApprovalRuleExpressionWithDefaults() *ActionApprovalRuleExpression {
+	this := ActionApprovalRuleExpression{}
 	return &this
 }
 
 // GetGroup returns the Group field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetGroup() BackupPostureControlGroupCondition {
+func (o *ActionApprovalRuleExpression) GetGroup() ActionApprovalRuleGroupCondition {
 	if o == nil || IsNil(o.Group.Get()) {
-		var ret BackupPostureControlGroupCondition
+		var ret ActionApprovalRuleGroupCondition
 		return ret
 	}
 	return *o.Group.Get()
@@ -66,7 +68,7 @@ func (o *BackupPostureControlExpression) GetGroup() BackupPostureControlGroupCon
 // GetGroupOk returns a tuple with the Group field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetGroupOk() (*BackupPostureControlGroupCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetGroupOk() (*ActionApprovalRuleGroupCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -74,7 +76,7 @@ func (o *BackupPostureControlExpression) GetGroupOk() (*BackupPostureControlGrou
 }
 
 // HasGroup returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasGroup() bool {
+func (o *ActionApprovalRuleExpression) HasGroup() bool {
 	if o != nil && o.Group.IsSet() {
 		return true
 	}
@@ -82,22 +84,22 @@ func (o *BackupPostureControlExpression) HasGroup() bool {
 	return false
 }
 
-// SetGroup gets a reference to the given NullableBackupPostureControlGroupCondition and assigns it to the Group field.
-func (o *BackupPostureControlExpression) SetGroup(v BackupPostureControlGroupCondition) {
+// SetGroup gets a reference to the given NullableActionApprovalRuleGroupCondition and assigns it to the Group field.
+func (o *ActionApprovalRuleExpression) SetGroup(v ActionApprovalRuleGroupCondition) {
 	o.Group.Set(&v)
 }
 // SetGroupNil sets the value for Group to be an explicit nil
-func (o *BackupPostureControlExpression) SetGroupNil() {
+func (o *ActionApprovalRuleExpression) SetGroupNil() {
 	o.Group.Set(nil)
 }
 
 // UnsetGroup ensures that no value is present for Group, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetGroup() {
+func (o *ActionApprovalRuleExpression) UnsetGroup() {
 	o.Group.Unset()
 }
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetResourceType() ResourceTypeCondition {
+func (o *ActionApprovalRuleExpression) GetResourceType() ResourceTypeCondition {
 	if o == nil || IsNil(o.ResourceType.Get()) {
 		var ret ResourceTypeCondition
 		return ret
@@ -108,7 +110,7 @@ func (o *BackupPostureControlExpression) GetResourceType() ResourceTypeCondition
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetResourceTypeOk() (*ResourceTypeCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetResourceTypeOk() (*ResourceTypeCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,7 +118,7 @@ func (o *BackupPostureControlExpression) GetResourceTypeOk() (*ResourceTypeCondi
 }
 
 // HasResourceType returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasResourceType() bool {
+func (o *ActionApprovalRuleExpression) HasResourceType() bool {
 	if o != nil && o.ResourceType.IsSet() {
 		return true
 	}
@@ -125,21 +127,21 @@ func (o *BackupPostureControlExpression) HasResourceType() bool {
 }
 
 // SetResourceType gets a reference to the given NullableResourceTypeCondition and assigns it to the ResourceType field.
-func (o *BackupPostureControlExpression) SetResourceType(v ResourceTypeCondition) {
+func (o *ActionApprovalRuleExpression) SetResourceType(v ResourceTypeCondition) {
 	o.ResourceType.Set(&v)
 }
 // SetResourceTypeNil sets the value for ResourceType to be an explicit nil
-func (o *BackupPostureControlExpression) SetResourceTypeNil() {
+func (o *ActionApprovalRuleExpression) SetResourceTypeNil() {
 	o.ResourceType.Set(nil)
 }
 
 // UnsetResourceType ensures that no value is present for ResourceType, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetResourceType() {
+func (o *ActionApprovalRuleExpression) UnsetResourceType() {
 	o.ResourceType.Unset()
 }
 
 // GetDataClasses returns the DataClasses field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetDataClasses() DataClassesCondition {
+func (o *ActionApprovalRuleExpression) GetDataClasses() DataClassesCondition {
 	if o == nil || IsNil(o.DataClasses.Get()) {
 		var ret DataClassesCondition
 		return ret
@@ -150,7 +152,7 @@ func (o *BackupPostureControlExpression) GetDataClasses() DataClassesCondition {
 // GetDataClassesOk returns a tuple with the DataClasses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetDataClassesOk() (*DataClassesCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetDataClassesOk() (*DataClassesCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -158,7 +160,7 @@ func (o *BackupPostureControlExpression) GetDataClassesOk() (*DataClassesConditi
 }
 
 // HasDataClasses returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasDataClasses() bool {
+func (o *ActionApprovalRuleExpression) HasDataClasses() bool {
 	if o != nil && o.DataClasses.IsSet() {
 		return true
 	}
@@ -167,21 +169,21 @@ func (o *BackupPostureControlExpression) HasDataClasses() bool {
 }
 
 // SetDataClasses gets a reference to the given NullableDataClassesCondition and assigns it to the DataClasses field.
-func (o *BackupPostureControlExpression) SetDataClasses(v DataClassesCondition) {
+func (o *ActionApprovalRuleExpression) SetDataClasses(v DataClassesCondition) {
 	o.DataClasses.Set(&v)
 }
 // SetDataClassesNil sets the value for DataClasses to be an explicit nil
-func (o *BackupPostureControlExpression) SetDataClassesNil() {
+func (o *ActionApprovalRuleExpression) SetDataClassesNil() {
 	o.DataClasses.Set(nil)
 }
 
 // UnsetDataClasses ensures that no value is present for DataClasses, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetDataClasses() {
+func (o *ActionApprovalRuleExpression) UnsetDataClasses() {
 	o.DataClasses.Unset()
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetEnvironment() EnvironmentCondition {
+func (o *ActionApprovalRuleExpression) GetEnvironment() EnvironmentCondition {
 	if o == nil || IsNil(o.Environment.Get()) {
 		var ret EnvironmentCondition
 		return ret
@@ -192,7 +194,7 @@ func (o *BackupPostureControlExpression) GetEnvironment() EnvironmentCondition {
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetEnvironmentOk() (*EnvironmentCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetEnvironmentOk() (*EnvironmentCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,7 +202,7 @@ func (o *BackupPostureControlExpression) GetEnvironmentOk() (*EnvironmentConditi
 }
 
 // HasEnvironment returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasEnvironment() bool {
+func (o *ActionApprovalRuleExpression) HasEnvironment() bool {
 	if o != nil && o.Environment.IsSet() {
 		return true
 	}
@@ -209,21 +211,21 @@ func (o *BackupPostureControlExpression) HasEnvironment() bool {
 }
 
 // SetEnvironment gets a reference to the given NullableEnvironmentCondition and assigns it to the Environment field.
-func (o *BackupPostureControlExpression) SetEnvironment(v EnvironmentCondition) {
+func (o *ActionApprovalRuleExpression) SetEnvironment(v EnvironmentCondition) {
 	o.Environment.Set(&v)
 }
 // SetEnvironmentNil sets the value for Environment to be an explicit nil
-func (o *BackupPostureControlExpression) SetEnvironmentNil() {
+func (o *ActionApprovalRuleExpression) SetEnvironmentNil() {
 	o.Environment.Set(nil)
 }
 
 // UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetEnvironment() {
+func (o *ActionApprovalRuleExpression) UnsetEnvironment() {
 	o.Environment.Unset()
 }
 
 // GetApps returns the Apps field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetApps() AppsCondition {
+func (o *ActionApprovalRuleExpression) GetApps() AppsCondition {
 	if o == nil || IsNil(o.Apps.Get()) {
 		var ret AppsCondition
 		return ret
@@ -234,7 +236,7 @@ func (o *BackupPostureControlExpression) GetApps() AppsCondition {
 // GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetAppsOk() (*AppsCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetAppsOk() (*AppsCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -242,7 +244,7 @@ func (o *BackupPostureControlExpression) GetAppsOk() (*AppsCondition, bool) {
 }
 
 // HasApps returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasApps() bool {
+func (o *ActionApprovalRuleExpression) HasApps() bool {
 	if o != nil && o.Apps.IsSet() {
 		return true
 	}
@@ -251,21 +253,105 @@ func (o *BackupPostureControlExpression) HasApps() bool {
 }
 
 // SetApps gets a reference to the given NullableAppsCondition and assigns it to the Apps field.
-func (o *BackupPostureControlExpression) SetApps(v AppsCondition) {
+func (o *ActionApprovalRuleExpression) SetApps(v AppsCondition) {
 	o.Apps.Set(&v)
 }
 // SetAppsNil sets the value for Apps to be an explicit nil
-func (o *BackupPostureControlExpression) SetAppsNil() {
+func (o *ActionApprovalRuleExpression) SetAppsNil() {
 	o.Apps.Set(nil)
 }
 
 // UnsetApps ensures that no value is present for Apps, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetApps() {
+func (o *ActionApprovalRuleExpression) UnsetApps() {
 	o.Apps.Unset()
 }
 
+// GetSensitivityAnnotations returns the SensitivityAnnotations field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ActionApprovalRuleExpression) GetSensitivityAnnotations() SensitivityAnnotationsCondition {
+	if o == nil || IsNil(o.SensitivityAnnotations.Get()) {
+		var ret SensitivityAnnotationsCondition
+		return ret
+	}
+	return *o.SensitivityAnnotations.Get()
+}
+
+// GetSensitivityAnnotationsOk returns a tuple with the SensitivityAnnotations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ActionApprovalRuleExpression) GetSensitivityAnnotationsOk() (*SensitivityAnnotationsCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SensitivityAnnotations.Get(), o.SensitivityAnnotations.IsSet()
+}
+
+// HasSensitivityAnnotations returns a boolean if a field has been set.
+func (o *ActionApprovalRuleExpression) HasSensitivityAnnotations() bool {
+	if o != nil && o.SensitivityAnnotations.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSensitivityAnnotations gets a reference to the given NullableSensitivityAnnotationsCondition and assigns it to the SensitivityAnnotations field.
+func (o *ActionApprovalRuleExpression) SetSensitivityAnnotations(v SensitivityAnnotationsCondition) {
+	o.SensitivityAnnotations.Set(&v)
+}
+// SetSensitivityAnnotationsNil sets the value for SensitivityAnnotations to be an explicit nil
+func (o *ActionApprovalRuleExpression) SetSensitivityAnnotationsNil() {
+	o.SensitivityAnnotations.Set(nil)
+}
+
+// UnsetSensitivityAnnotations ensures that no value is present for SensitivityAnnotations, not even an explicit nil
+func (o *ActionApprovalRuleExpression) UnsetSensitivityAnnotations() {
+	o.SensitivityAnnotations.Unset()
+}
+
+// GetSecurityScanConclusion returns the SecurityScanConclusion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ActionApprovalRuleExpression) GetSecurityScanConclusion() SecurityScanConclusionCondition {
+	if o == nil || IsNil(o.SecurityScanConclusion.Get()) {
+		var ret SecurityScanConclusionCondition
+		return ret
+	}
+	return *o.SecurityScanConclusion.Get()
+}
+
+// GetSecurityScanConclusionOk returns a tuple with the SecurityScanConclusion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ActionApprovalRuleExpression) GetSecurityScanConclusionOk() (*SecurityScanConclusionCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SecurityScanConclusion.Get(), o.SecurityScanConclusion.IsSet()
+}
+
+// HasSecurityScanConclusion returns a boolean if a field has been set.
+func (o *ActionApprovalRuleExpression) HasSecurityScanConclusion() bool {
+	if o != nil && o.SecurityScanConclusion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityScanConclusion gets a reference to the given NullableSecurityScanConclusionCondition and assigns it to the SecurityScanConclusion field.
+func (o *ActionApprovalRuleExpression) SetSecurityScanConclusion(v SecurityScanConclusionCondition) {
+	o.SecurityScanConclusion.Set(&v)
+}
+// SetSecurityScanConclusionNil sets the value for SecurityScanConclusion to be an explicit nil
+func (o *ActionApprovalRuleExpression) SetSecurityScanConclusionNil() {
+	o.SecurityScanConclusion.Set(nil)
+}
+
+// UnsetSecurityScanConclusion ensures that no value is present for SecurityScanConclusion, not even an explicit nil
+func (o *ActionApprovalRuleExpression) UnsetSecurityScanConclusion() {
+	o.SecurityScanConclusion.Unset()
+}
+
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetCloudProvider() CloudProviderCondition {
+func (o *ActionApprovalRuleExpression) GetCloudProvider() CloudProviderCondition {
 	if o == nil || IsNil(o.CloudProvider.Get()) {
 		var ret CloudProviderCondition
 		return ret
@@ -276,7 +362,7 @@ func (o *BackupPostureControlExpression) GetCloudProvider() CloudProviderConditi
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetCloudProviderOk() (*CloudProviderCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetCloudProviderOk() (*CloudProviderCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -284,7 +370,7 @@ func (o *BackupPostureControlExpression) GetCloudProviderOk() (*CloudProviderCon
 }
 
 // HasCloudProvider returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasCloudProvider() bool {
+func (o *ActionApprovalRuleExpression) HasCloudProvider() bool {
 	if o != nil && o.CloudProvider.IsSet() {
 		return true
 	}
@@ -293,21 +379,21 @@ func (o *BackupPostureControlExpression) HasCloudProvider() bool {
 }
 
 // SetCloudProvider gets a reference to the given NullableCloudProviderCondition and assigns it to the CloudProvider field.
-func (o *BackupPostureControlExpression) SetCloudProvider(v CloudProviderCondition) {
+func (o *ActionApprovalRuleExpression) SetCloudProvider(v CloudProviderCondition) {
 	o.CloudProvider.Set(&v)
 }
 // SetCloudProviderNil sets the value for CloudProvider to be an explicit nil
-func (o *BackupPostureControlExpression) SetCloudProviderNil() {
+func (o *ActionApprovalRuleExpression) SetCloudProviderNil() {
 	o.CloudProvider.Set(nil)
 }
 
 // UnsetCloudProvider ensures that no value is present for CloudProvider, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetCloudProvider() {
+func (o *ActionApprovalRuleExpression) UnsetCloudProvider() {
 	o.CloudProvider.Unset()
 }
 
 // GetAccountId returns the AccountId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetAccountId() AccountIdCondition {
+func (o *ActionApprovalRuleExpression) GetAccountId() AccountIdCondition {
 	if o == nil || IsNil(o.AccountId.Get()) {
 		var ret AccountIdCondition
 		return ret
@@ -318,7 +404,7 @@ func (o *BackupPostureControlExpression) GetAccountId() AccountIdCondition {
 // GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetAccountIdOk() (*AccountIdCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetAccountIdOk() (*AccountIdCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -326,7 +412,7 @@ func (o *BackupPostureControlExpression) GetAccountIdOk() (*AccountIdCondition, 
 }
 
 // HasAccountId returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasAccountId() bool {
+func (o *ActionApprovalRuleExpression) HasAccountId() bool {
 	if o != nil && o.AccountId.IsSet() {
 		return true
 	}
@@ -335,21 +421,21 @@ func (o *BackupPostureControlExpression) HasAccountId() bool {
 }
 
 // SetAccountId gets a reference to the given NullableAccountIdCondition and assigns it to the AccountId field.
-func (o *BackupPostureControlExpression) SetAccountId(v AccountIdCondition) {
+func (o *ActionApprovalRuleExpression) SetAccountId(v AccountIdCondition) {
 	o.AccountId.Set(&v)
 }
 // SetAccountIdNil sets the value for AccountId to be an explicit nil
-func (o *BackupPostureControlExpression) SetAccountIdNil() {
+func (o *ActionApprovalRuleExpression) SetAccountIdNil() {
 	o.AccountId.Set(nil)
 }
 
 // UnsetAccountId ensures that no value is present for AccountId, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetAccountId() {
+func (o *ActionApprovalRuleExpression) UnsetAccountId() {
 	o.AccountId.Unset()
 }
 
 // GetSourceRegion returns the SourceRegion field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetSourceRegion() RegionCondition {
+func (o *ActionApprovalRuleExpression) GetSourceRegion() RegionCondition {
 	if o == nil || IsNil(o.SourceRegion.Get()) {
 		var ret RegionCondition
 		return ret
@@ -360,7 +446,7 @@ func (o *BackupPostureControlExpression) GetSourceRegion() RegionCondition {
 // GetSourceRegionOk returns a tuple with the SourceRegion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetSourceRegionOk() (*RegionCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetSourceRegionOk() (*RegionCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -368,7 +454,7 @@ func (o *BackupPostureControlExpression) GetSourceRegionOk() (*RegionCondition, 
 }
 
 // HasSourceRegion returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasSourceRegion() bool {
+func (o *ActionApprovalRuleExpression) HasSourceRegion() bool {
 	if o != nil && o.SourceRegion.IsSet() {
 		return true
 	}
@@ -377,21 +463,21 @@ func (o *BackupPostureControlExpression) HasSourceRegion() bool {
 }
 
 // SetSourceRegion gets a reference to the given NullableRegionCondition and assigns it to the SourceRegion field.
-func (o *BackupPostureControlExpression) SetSourceRegion(v RegionCondition) {
+func (o *ActionApprovalRuleExpression) SetSourceRegion(v RegionCondition) {
 	o.SourceRegion.Set(&v)
 }
 // SetSourceRegionNil sets the value for SourceRegion to be an explicit nil
-func (o *BackupPostureControlExpression) SetSourceRegionNil() {
+func (o *ActionApprovalRuleExpression) SetSourceRegionNil() {
 	o.SourceRegion.Set(nil)
 }
 
 // UnsetSourceRegion ensures that no value is present for SourceRegion, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetSourceRegion() {
+func (o *ActionApprovalRuleExpression) UnsetSourceRegion() {
 	o.SourceRegion.Unset()
 }
 
 // GetVpc returns the Vpc field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetVpc() VpcCondition {
+func (o *ActionApprovalRuleExpression) GetVpc() VpcCondition {
 	if o == nil || IsNil(o.Vpc.Get()) {
 		var ret VpcCondition
 		return ret
@@ -402,7 +488,7 @@ func (o *BackupPostureControlExpression) GetVpc() VpcCondition {
 // GetVpcOk returns a tuple with the Vpc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetVpcOk() (*VpcCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetVpcOk() (*VpcCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -410,7 +496,7 @@ func (o *BackupPostureControlExpression) GetVpcOk() (*VpcCondition, bool) {
 }
 
 // HasVpc returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasVpc() bool {
+func (o *ActionApprovalRuleExpression) HasVpc() bool {
 	if o != nil && o.Vpc.IsSet() {
 		return true
 	}
@@ -419,21 +505,21 @@ func (o *BackupPostureControlExpression) HasVpc() bool {
 }
 
 // SetVpc gets a reference to the given NullableVpcCondition and assigns it to the Vpc field.
-func (o *BackupPostureControlExpression) SetVpc(v VpcCondition) {
+func (o *ActionApprovalRuleExpression) SetVpc(v VpcCondition) {
 	o.Vpc.Set(&v)
 }
 // SetVpcNil sets the value for Vpc to be an explicit nil
-func (o *BackupPostureControlExpression) SetVpcNil() {
+func (o *ActionApprovalRuleExpression) SetVpcNil() {
 	o.Vpc.Set(nil)
 }
 
 // UnsetVpc ensures that no value is present for Vpc, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetVpc() {
+func (o *ActionApprovalRuleExpression) UnsetVpc() {
 	o.Vpc.Unset()
 }
 
 // GetSubnets returns the Subnets field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetSubnets() SubnetsCondition {
+func (o *ActionApprovalRuleExpression) GetSubnets() SubnetsCondition {
 	if o == nil || IsNil(o.Subnets.Get()) {
 		var ret SubnetsCondition
 		return ret
@@ -444,7 +530,7 @@ func (o *BackupPostureControlExpression) GetSubnets() SubnetsCondition {
 // GetSubnetsOk returns a tuple with the Subnets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetSubnetsOk() (*SubnetsCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetSubnetsOk() (*SubnetsCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -452,7 +538,7 @@ func (o *BackupPostureControlExpression) GetSubnetsOk() (*SubnetsCondition, bool
 }
 
 // HasSubnets returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasSubnets() bool {
+func (o *ActionApprovalRuleExpression) HasSubnets() bool {
 	if o != nil && o.Subnets.IsSet() {
 		return true
 	}
@@ -461,21 +547,21 @@ func (o *BackupPostureControlExpression) HasSubnets() bool {
 }
 
 // SetSubnets gets a reference to the given NullableSubnetsCondition and assigns it to the Subnets field.
-func (o *BackupPostureControlExpression) SetSubnets(v SubnetsCondition) {
+func (o *ActionApprovalRuleExpression) SetSubnets(v SubnetsCondition) {
 	o.Subnets.Set(&v)
 }
 // SetSubnetsNil sets the value for Subnets to be an explicit nil
-func (o *BackupPostureControlExpression) SetSubnetsNil() {
+func (o *ActionApprovalRuleExpression) SetSubnetsNil() {
 	o.Subnets.Set(nil)
 }
 
 // UnsetSubnets ensures that no value is present for Subnets, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetSubnets() {
+func (o *ActionApprovalRuleExpression) UnsetSubnets() {
 	o.Subnets.Unset()
 }
 
 // GetResourceGroupName returns the ResourceGroupName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetResourceGroupName() ResourceGroupNameCondition {
+func (o *ActionApprovalRuleExpression) GetResourceGroupName() ResourceGroupNameCondition {
 	if o == nil || IsNil(o.ResourceGroupName.Get()) {
 		var ret ResourceGroupNameCondition
 		return ret
@@ -486,7 +572,7 @@ func (o *BackupPostureControlExpression) GetResourceGroupName() ResourceGroupNam
 // GetResourceGroupNameOk returns a tuple with the ResourceGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetResourceGroupNameOk() (*ResourceGroupNameCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetResourceGroupNameOk() (*ResourceGroupNameCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -494,7 +580,7 @@ func (o *BackupPostureControlExpression) GetResourceGroupNameOk() (*ResourceGrou
 }
 
 // HasResourceGroupName returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasResourceGroupName() bool {
+func (o *ActionApprovalRuleExpression) HasResourceGroupName() bool {
 	if o != nil && o.ResourceGroupName.IsSet() {
 		return true
 	}
@@ -503,105 +589,21 @@ func (o *BackupPostureControlExpression) HasResourceGroupName() bool {
 }
 
 // SetResourceGroupName gets a reference to the given NullableResourceGroupNameCondition and assigns it to the ResourceGroupName field.
-func (o *BackupPostureControlExpression) SetResourceGroupName(v ResourceGroupNameCondition) {
+func (o *ActionApprovalRuleExpression) SetResourceGroupName(v ResourceGroupNameCondition) {
 	o.ResourceGroupName.Set(&v)
 }
 // SetResourceGroupNameNil sets the value for ResourceGroupName to be an explicit nil
-func (o *BackupPostureControlExpression) SetResourceGroupNameNil() {
+func (o *ActionApprovalRuleExpression) SetResourceGroupNameNil() {
 	o.ResourceGroupName.Set(nil)
 }
 
 // UnsetResourceGroupName ensures that no value is present for ResourceGroupName, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetResourceGroupName() {
+func (o *ActionApprovalRuleExpression) UnsetResourceGroupName() {
 	o.ResourceGroupName.Unset()
 }
 
-// GetResourceName returns the ResourceName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetResourceName() ResourceNameCondition {
-	if o == nil || IsNil(o.ResourceName.Get()) {
-		var ret ResourceNameCondition
-		return ret
-	}
-	return *o.ResourceName.Get()
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetResourceNameOk() (*ResourceNameCondition, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ResourceName.Get(), o.ResourceName.IsSet()
-}
-
-// HasResourceName returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasResourceName() bool {
-	if o != nil && o.ResourceName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given NullableResourceNameCondition and assigns it to the ResourceName field.
-func (o *BackupPostureControlExpression) SetResourceName(v ResourceNameCondition) {
-	o.ResourceName.Set(&v)
-}
-// SetResourceNameNil sets the value for ResourceName to be an explicit nil
-func (o *BackupPostureControlExpression) SetResourceNameNil() {
-	o.ResourceName.Set(nil)
-}
-
-// UnsetResourceName ensures that no value is present for ResourceName, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetResourceName() {
-	o.ResourceName.Unset()
-}
-
-// GetResourceId returns the ResourceId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetResourceId() ResourceIdCondition {
-	if o == nil || IsNil(o.ResourceId.Get()) {
-		var ret ResourceIdCondition
-		return ret
-	}
-	return *o.ResourceId.Get()
-}
-
-// GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetResourceIdOk() (*ResourceIdCondition, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ResourceId.Get(), o.ResourceId.IsSet()
-}
-
-// HasResourceId returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasResourceId() bool {
-	if o != nil && o.ResourceId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceId gets a reference to the given NullableResourceIdCondition and assigns it to the ResourceId field.
-func (o *BackupPostureControlExpression) SetResourceId(v ResourceIdCondition) {
-	o.ResourceId.Set(&v)
-}
-// SetResourceIdNil sets the value for ResourceId to be an explicit nil
-func (o *BackupPostureControlExpression) SetResourceIdNil() {
-	o.ResourceId.Set(nil)
-}
-
-// UnsetResourceId ensures that no value is present for ResourceId, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetResourceId() {
-	o.ResourceId.Unset()
-}
-
 // GetEncryptionType returns the EncryptionType field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetEncryptionType() EncryptionTypeCondition {
+func (o *ActionApprovalRuleExpression) GetEncryptionType() EncryptionTypeCondition {
 	if o == nil || IsNil(o.EncryptionType.Get()) {
 		var ret EncryptionTypeCondition
 		return ret
@@ -612,7 +614,7 @@ func (o *BackupPostureControlExpression) GetEncryptionType() EncryptionTypeCondi
 // GetEncryptionTypeOk returns a tuple with the EncryptionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetEncryptionTypeOk() (*EncryptionTypeCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetEncryptionTypeOk() (*EncryptionTypeCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -620,7 +622,7 @@ func (o *BackupPostureControlExpression) GetEncryptionTypeOk() (*EncryptionTypeC
 }
 
 // HasEncryptionType returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasEncryptionType() bool {
+func (o *ActionApprovalRuleExpression) HasEncryptionType() bool {
 	if o != nil && o.EncryptionType.IsSet() {
 		return true
 	}
@@ -629,21 +631,105 @@ func (o *BackupPostureControlExpression) HasEncryptionType() bool {
 }
 
 // SetEncryptionType gets a reference to the given NullableEncryptionTypeCondition and assigns it to the EncryptionType field.
-func (o *BackupPostureControlExpression) SetEncryptionType(v EncryptionTypeCondition) {
+func (o *ActionApprovalRuleExpression) SetEncryptionType(v EncryptionTypeCondition) {
 	o.EncryptionType.Set(&v)
 }
 // SetEncryptionTypeNil sets the value for EncryptionType to be an explicit nil
-func (o *BackupPostureControlExpression) SetEncryptionTypeNil() {
+func (o *ActionApprovalRuleExpression) SetEncryptionTypeNil() {
 	o.EncryptionType.Set(nil)
 }
 
 // UnsetEncryptionType ensures that no value is present for EncryptionType, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetEncryptionType() {
+func (o *ActionApprovalRuleExpression) UnsetEncryptionType() {
 	o.EncryptionType.Unset()
 }
 
+// GetResourceName returns the ResourceName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ActionApprovalRuleExpression) GetResourceName() ResourceNameCondition {
+	if o == nil || IsNil(o.ResourceName.Get()) {
+		var ret ResourceNameCondition
+		return ret
+	}
+	return *o.ResourceName.Get()
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ActionApprovalRuleExpression) GetResourceNameOk() (*ResourceNameCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResourceName.Get(), o.ResourceName.IsSet()
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *ActionApprovalRuleExpression) HasResourceName() bool {
+	if o != nil && o.ResourceName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given NullableResourceNameCondition and assigns it to the ResourceName field.
+func (o *ActionApprovalRuleExpression) SetResourceName(v ResourceNameCondition) {
+	o.ResourceName.Set(&v)
+}
+// SetResourceNameNil sets the value for ResourceName to be an explicit nil
+func (o *ActionApprovalRuleExpression) SetResourceNameNil() {
+	o.ResourceName.Set(nil)
+}
+
+// UnsetResourceName ensures that no value is present for ResourceName, not even an explicit nil
+func (o *ActionApprovalRuleExpression) UnsetResourceName() {
+	o.ResourceName.Unset()
+}
+
+// GetResourceId returns the ResourceId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ActionApprovalRuleExpression) GetResourceId() ResourceIdCondition {
+	if o == nil || IsNil(o.ResourceId.Get()) {
+		var ret ResourceIdCondition
+		return ret
+	}
+	return *o.ResourceId.Get()
+}
+
+// GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ActionApprovalRuleExpression) GetResourceIdOk() (*ResourceIdCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResourceId.Get(), o.ResourceId.IsSet()
+}
+
+// HasResourceId returns a boolean if a field has been set.
+func (o *ActionApprovalRuleExpression) HasResourceId() bool {
+	if o != nil && o.ResourceId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceId gets a reference to the given NullableResourceIdCondition and assigns it to the ResourceId field.
+func (o *ActionApprovalRuleExpression) SetResourceId(v ResourceIdCondition) {
+	o.ResourceId.Set(&v)
+}
+// SetResourceIdNil sets the value for ResourceId to be an explicit nil
+func (o *ActionApprovalRuleExpression) SetResourceIdNil() {
+	o.ResourceId.Set(nil)
+}
+
+// UnsetResourceId ensures that no value is present for ResourceId, not even an explicit nil
+func (o *ActionApprovalRuleExpression) UnsetResourceId() {
+	o.ResourceId.Unset()
+}
+
 // GetTagKeys returns the TagKeys field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetTagKeys() TagKeysCondition {
+func (o *ActionApprovalRuleExpression) GetTagKeys() TagKeysCondition {
 	if o == nil || IsNil(o.TagKeys.Get()) {
 		var ret TagKeysCondition
 		return ret
@@ -654,7 +740,7 @@ func (o *BackupPostureControlExpression) GetTagKeys() TagKeysCondition {
 // GetTagKeysOk returns a tuple with the TagKeys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetTagKeysOk() (*TagKeysCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetTagKeysOk() (*TagKeysCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -662,7 +748,7 @@ func (o *BackupPostureControlExpression) GetTagKeysOk() (*TagKeysCondition, bool
 }
 
 // HasTagKeys returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasTagKeys() bool {
+func (o *ActionApprovalRuleExpression) HasTagKeys() bool {
 	if o != nil && o.TagKeys.IsSet() {
 		return true
 	}
@@ -671,21 +757,21 @@ func (o *BackupPostureControlExpression) HasTagKeys() bool {
 }
 
 // SetTagKeys gets a reference to the given NullableTagKeysCondition and assigns it to the TagKeys field.
-func (o *BackupPostureControlExpression) SetTagKeys(v TagKeysCondition) {
+func (o *ActionApprovalRuleExpression) SetTagKeys(v TagKeysCondition) {
 	o.TagKeys.Set(&v)
 }
 // SetTagKeysNil sets the value for TagKeys to be an explicit nil
-func (o *BackupPostureControlExpression) SetTagKeysNil() {
+func (o *ActionApprovalRuleExpression) SetTagKeysNil() {
 	o.TagKeys.Set(nil)
 }
 
 // UnsetTagKeys ensures that no value is present for TagKeys, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetTagKeys() {
+func (o *ActionApprovalRuleExpression) UnsetTagKeys() {
 	o.TagKeys.Unset()
 }
 
 // GetTagKeyValues returns the TagKeyValues field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BackupPostureControlExpression) GetTagKeyValues() TagKeyValuesCondition {
+func (o *ActionApprovalRuleExpression) GetTagKeyValues() TagKeyValuesCondition {
 	if o == nil || IsNil(o.TagKeyValues.Get()) {
 		var ret TagKeyValuesCondition
 		return ret
@@ -696,7 +782,7 @@ func (o *BackupPostureControlExpression) GetTagKeyValues() TagKeyValuesCondition
 // GetTagKeyValuesOk returns a tuple with the TagKeyValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BackupPostureControlExpression) GetTagKeyValuesOk() (*TagKeyValuesCondition, bool) {
+func (o *ActionApprovalRuleExpression) GetTagKeyValuesOk() (*TagKeyValuesCondition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -704,7 +790,7 @@ func (o *BackupPostureControlExpression) GetTagKeyValuesOk() (*TagKeyValuesCondi
 }
 
 // HasTagKeyValues returns a boolean if a field has been set.
-func (o *BackupPostureControlExpression) HasTagKeyValues() bool {
+func (o *ActionApprovalRuleExpression) HasTagKeyValues() bool {
 	if o != nil && o.TagKeyValues.IsSet() {
 		return true
 	}
@@ -713,20 +799,20 @@ func (o *BackupPostureControlExpression) HasTagKeyValues() bool {
 }
 
 // SetTagKeyValues gets a reference to the given NullableTagKeyValuesCondition and assigns it to the TagKeyValues field.
-func (o *BackupPostureControlExpression) SetTagKeyValues(v TagKeyValuesCondition) {
+func (o *ActionApprovalRuleExpression) SetTagKeyValues(v TagKeyValuesCondition) {
 	o.TagKeyValues.Set(&v)
 }
 // SetTagKeyValuesNil sets the value for TagKeyValues to be an explicit nil
-func (o *BackupPostureControlExpression) SetTagKeyValuesNil() {
+func (o *ActionApprovalRuleExpression) SetTagKeyValuesNil() {
 	o.TagKeyValues.Set(nil)
 }
 
 // UnsetTagKeyValues ensures that no value is present for TagKeyValues, not even an explicit nil
-func (o *BackupPostureControlExpression) UnsetTagKeyValues() {
+func (o *ActionApprovalRuleExpression) UnsetTagKeyValues() {
 	o.TagKeyValues.Unset()
 }
 
-func (o BackupPostureControlExpression) MarshalJSON() ([]byte, error) {
+func (o ActionApprovalRuleExpression) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -734,7 +820,7 @@ func (o BackupPostureControlExpression) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BackupPostureControlExpression) ToMap() (map[string]interface{}, error) {
+func (o ActionApprovalRuleExpression) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Group.IsSet() {
 		toSerialize["group"] = o.Group.Get()
@@ -750,6 +836,12 @@ func (o BackupPostureControlExpression) ToMap() (map[string]interface{}, error) 
 	}
 	if o.Apps.IsSet() {
 		toSerialize["apps"] = o.Apps.Get()
+	}
+	if o.SensitivityAnnotations.IsSet() {
+		toSerialize["sensitivityAnnotations"] = o.SensitivityAnnotations.Get()
+	}
+	if o.SecurityScanConclusion.IsSet() {
+		toSerialize["securityScanConclusion"] = o.SecurityScanConclusion.Get()
 	}
 	if o.CloudProvider.IsSet() {
 		toSerialize["cloudProvider"] = o.CloudProvider.Get()
@@ -769,14 +861,14 @@ func (o BackupPostureControlExpression) ToMap() (map[string]interface{}, error) 
 	if o.ResourceGroupName.IsSet() {
 		toSerialize["resourceGroupName"] = o.ResourceGroupName.Get()
 	}
+	if o.EncryptionType.IsSet() {
+		toSerialize["encryptionType"] = o.EncryptionType.Get()
+	}
 	if o.ResourceName.IsSet() {
 		toSerialize["resourceName"] = o.ResourceName.Get()
 	}
 	if o.ResourceId.IsSet() {
 		toSerialize["resourceId"] = o.ResourceId.Get()
-	}
-	if o.EncryptionType.IsSet() {
-		toSerialize["encryptionType"] = o.EncryptionType.Get()
 	}
 	if o.TagKeys.IsSet() {
 		toSerialize["tagKeys"] = o.TagKeys.Get()
@@ -787,38 +879,38 @@ func (o BackupPostureControlExpression) ToMap() (map[string]interface{}, error) 
 	return toSerialize, nil
 }
 
-type NullableBackupPostureControlExpression struct {
-	value *BackupPostureControlExpression
+type NullableActionApprovalRuleExpression struct {
+	value *ActionApprovalRuleExpression
 	isSet bool
 }
 
-func (v NullableBackupPostureControlExpression) Get() *BackupPostureControlExpression {
+func (v NullableActionApprovalRuleExpression) Get() *ActionApprovalRuleExpression {
 	return v.value
 }
 
-func (v *NullableBackupPostureControlExpression) Set(val *BackupPostureControlExpression) {
+func (v *NullableActionApprovalRuleExpression) Set(val *ActionApprovalRuleExpression) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBackupPostureControlExpression) IsSet() bool {
+func (v NullableActionApprovalRuleExpression) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBackupPostureControlExpression) Unset() {
+func (v *NullableActionApprovalRuleExpression) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBackupPostureControlExpression(val *BackupPostureControlExpression) *NullableBackupPostureControlExpression {
-	return &NullableBackupPostureControlExpression{value: val, isSet: true}
+func NewNullableActionApprovalRuleExpression(val *ActionApprovalRuleExpression) *NullableActionApprovalRuleExpression {
+	return &NullableActionApprovalRuleExpression{value: val, isSet: true}
 }
 
-func (v NullableBackupPostureControlExpression) MarshalJSON() ([]byte, error) {
+func (v NullableActionApprovalRuleExpression) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBackupPostureControlExpression) UnmarshalJSON(src []byte) error {
+func (v *NullableActionApprovalRuleExpression) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

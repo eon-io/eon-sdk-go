@@ -30,6 +30,11 @@ docs/AccountState.md
 docs/AccountStatusFilters.md
 docs/AccountVersion.md
 docs/AccountsAPI.md
+docs/ActionApprovalOperationType.md
+docs/ActionApprovalRule.md
+docs/ActionApprovalRuleExpression.md
+docs/ActionApprovalRuleGroupCondition.md
+docs/ActionApprovalRuleResourceSelector.md
 docs/ActionApprovalsAPI.md
 docs/AnnuallyConfig.md
 docs/ApiCredentials.md
@@ -125,6 +130,8 @@ docs/CostDataRecordCost.md
 docs/CostDataRecordDimensions.md
 docs/CostGranularity.md
 docs/CostUnit.md
+docs/CreateActionApprovalRuleRequest.md
+docs/CreateActionApprovalRuleResponse.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
 docs/CreateBackupPostureControlRequest.md
@@ -167,6 +174,8 @@ docs/EnableRestoreAccountMetricsConfigRequest.md
 docs/EnableRestoreAccountMetricsConfigResponse.md
 docs/EnableSourceAccountMetricsConfigRequest.md
 docs/EnableSourceAccountMetricsConfigResponse.md
+docs/EncryptionType.md
+docs/EncryptionTypeCondition.md
 docs/EndTimeDateFilters.md
 docs/Environment.md
 docs/EnvironmentCondition.md
@@ -194,6 +203,7 @@ docs/GcpSubnetPerRegion.md
 docs/GcpVmInstanceRestoreDestination.md
 docs/GcpVmInstanceRestoreResult.md
 docs/GcpVmInstanceRestoreTarget.md
+docs/GetActionApprovalRuleResponse.md
 docs/GetBackupJobResponse.md
 docs/GetBackupPolicyResponse.md
 docs/GetIdpGroupResponse.md
@@ -232,6 +242,7 @@ docs/JobSnapshotDetails.md
 docs/JobStatus.md
 docs/JobStatusFilters.md
 docs/JobsAPI.md
+docs/ListActionApprovalRulesResponse.md
 docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
 docs/ListBackupPoliciesResponse.md
@@ -356,6 +367,10 @@ docs/S3RestoreTarget.md
 docs/SameSourceAccountRestoreLimits.md
 docs/ScalarOperators.md
 docs/ScheduleTimezone.md
+docs/SecurityScanConclusion.md
+docs/SecurityScanConclusionCondition.md
+docs/SensitivityAnnotationsCondition.md
+docs/SensitivityLevel.md
 docs/Severity.md
 docs/Snapshot.md
 docs/SnapshotDateFilters.md
@@ -406,6 +421,8 @@ docs/TimeFrame.md
 docs/TimeOfDay.md
 docs/TimeOfYear.md
 docs/TokenResponse.md
+docs/UpdateActionApprovalRuleRequest.md
+docs/UpdateActionApprovalRuleResponse.md
 docs/UpdateAwsRestoreAccountAttributes.md
 docs/UpdateAwsSourceAccountAttributes.md
 docs/UpdateBackupPolicyRequest.md
@@ -451,6 +468,11 @@ model_account_name_filters.go
 model_account_state.go
 model_account_status_filters.go
 model_account_version.go
+model_action_approval_operation_type.go
+model_action_approval_rule.go
+model_action_approval_rule_expression.go
+model_action_approval_rule_group_condition.go
+model_action_approval_rule_resource_selector.go
 model_annually_config.go
 model_api_credentials.go
 model_app.go
@@ -540,6 +562,8 @@ model_cost_data_record_cost.go
 model_cost_data_record_dimensions.go
 model_cost_granularity.go
 model_cost_unit.go
+model_create_action_approval_rule_request.go
+model_create_action_approval_rule_response.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
 model_create_backup_posture_control_request.go
@@ -580,6 +604,8 @@ model_enable_restore_account_metrics_config_request.go
 model_enable_restore_account_metrics_config_response.go
 model_enable_source_account_metrics_config_request.go
 model_enable_source_account_metrics_config_response.go
+model_encryption_type.go
+model_encryption_type_condition.go
 model_end_time_date_filters.go
 model_environment.go
 model_environment_condition.go
@@ -607,6 +633,7 @@ model_gcp_vm_instance_restore_destination.go
 model_gcp_vm_instance_restore_result.go
 model_gcp_vm_instance_restore_target.go
 model_gcs_restore_target.go
+model_get_action_approval_rule_response.go
 model_get_backup_job_response.go
 model_get_backup_policy_response.go
 model_get_idp_group_response.go
@@ -643,6 +670,7 @@ model_job_id_filters.go
 model_job_snapshot_details.go
 model_job_status.go
 model_job_status_filters.go
+model_list_action_approval_rules_response.go
 model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
 model_list_backup_policies_response.go
@@ -766,6 +794,10 @@ model_s3_restore_target.go
 model_same_source_account_restore_limits.go
 model_scalar_operators.go
 model_schedule_timezone.go
+model_security_scan_conclusion.go
+model_security_scan_conclusion_condition.go
+model_sensitivity_annotations_condition.go
+model_sensitivity_level.go
 model_severity.go
 model_snapshot.go
 model_snapshot_date_filters.go
@@ -815,6 +847,8 @@ model_time_frame.go
 model_time_of_day.go
 model_time_of_year.go
 model_token_response.go
+model_update_action_approval_rule_request.go
+model_update_action_approval_rule_response.go
 model_update_aws_restore_account_attributes.go
 model_update_aws_source_account_attributes.go
 model_update_backup_policy_request.go

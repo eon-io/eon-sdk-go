@@ -52,6 +52,49 @@ func Test_eon_ActionApprovalsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ActionApprovalsAPIService CreateActionApprovalRule", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.CreateActionApprovalRule(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ActionApprovalsAPIService DeleteActionApprovalRule", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var actionApprovalRuleId string
+
+		httpRes, err := apiClient.ActionApprovalsAPI.DeleteActionApprovalRule(context.Background(), projectId, actionApprovalRuleId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ActionApprovalsAPIService GetActionApprovalRule", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var actionApprovalRuleId string
+
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.GetActionApprovalRule(context.Background(), projectId, actionApprovalRuleId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ActionApprovalsAPIService GetMyActionApprovalRequest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -60,6 +103,35 @@ func Test_eon_ActionApprovalsAPIService(t *testing.T) {
 		var requestId string
 
 		resp, httpRes, err := apiClient.ActionApprovalsAPI.GetMyActionApprovalRequest(context.Background(), projectId, requestId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ActionApprovalsAPIService ListActionApprovalRules", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.ListActionApprovalRules(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ActionApprovalsAPIService UpdateActionApprovalRule", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var actionApprovalRuleId string
+
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.UpdateActionApprovalRule(context.Background(), projectId, actionApprovalRuleId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
