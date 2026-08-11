@@ -27,6 +27,14 @@ type ResourceNameFilters struct {
 	Contains []string `json:"contains,omitempty"`
 	// Matches if no string in this list is a substring of `resourceName`.
 	NotContains []string `json:"notContains,omitempty"`
+	// Matches if any string in this list is a prefix of `resourceName`.
+	StartsWith []string `json:"startsWith,omitempty"`
+	// Matches if no string in this list is a prefix of `resourceName`.
+	NotStartsWith []string `json:"notStartsWith,omitempty"`
+	// Matches if any string in this list is a suffix of `resourceName`.
+	EndsWith []string `json:"endsWith,omitempty"`
+	// Matches if no string in this list is a suffix of `resourceName`.
+	NotEndsWith []string `json:"notEndsWith,omitempty"`
 }
 
 // NewResourceNameFilters instantiates a new ResourceNameFilters object
@@ -174,6 +182,134 @@ func (o *ResourceNameFilters) SetNotContains(v []string) {
 	o.NotContains = v
 }
 
+// GetStartsWith returns the StartsWith field value if set, zero value otherwise.
+func (o *ResourceNameFilters) GetStartsWith() []string {
+	if o == nil || IsNil(o.StartsWith) {
+		var ret []string
+		return ret
+	}
+	return o.StartsWith
+}
+
+// GetStartsWithOk returns a tuple with the StartsWith field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceNameFilters) GetStartsWithOk() ([]string, bool) {
+	if o == nil || IsNil(o.StartsWith) {
+		return nil, false
+	}
+	return o.StartsWith, true
+}
+
+// HasStartsWith returns a boolean if a field has been set.
+func (o *ResourceNameFilters) HasStartsWith() bool {
+	if o != nil && !IsNil(o.StartsWith) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartsWith gets a reference to the given []string and assigns it to the StartsWith field.
+func (o *ResourceNameFilters) SetStartsWith(v []string) {
+	o.StartsWith = v
+}
+
+// GetNotStartsWith returns the NotStartsWith field value if set, zero value otherwise.
+func (o *ResourceNameFilters) GetNotStartsWith() []string {
+	if o == nil || IsNil(o.NotStartsWith) {
+		var ret []string
+		return ret
+	}
+	return o.NotStartsWith
+}
+
+// GetNotStartsWithOk returns a tuple with the NotStartsWith field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceNameFilters) GetNotStartsWithOk() ([]string, bool) {
+	if o == nil || IsNil(o.NotStartsWith) {
+		return nil, false
+	}
+	return o.NotStartsWith, true
+}
+
+// HasNotStartsWith returns a boolean if a field has been set.
+func (o *ResourceNameFilters) HasNotStartsWith() bool {
+	if o != nil && !IsNil(o.NotStartsWith) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotStartsWith gets a reference to the given []string and assigns it to the NotStartsWith field.
+func (o *ResourceNameFilters) SetNotStartsWith(v []string) {
+	o.NotStartsWith = v
+}
+
+// GetEndsWith returns the EndsWith field value if set, zero value otherwise.
+func (o *ResourceNameFilters) GetEndsWith() []string {
+	if o == nil || IsNil(o.EndsWith) {
+		var ret []string
+		return ret
+	}
+	return o.EndsWith
+}
+
+// GetEndsWithOk returns a tuple with the EndsWith field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceNameFilters) GetEndsWithOk() ([]string, bool) {
+	if o == nil || IsNil(o.EndsWith) {
+		return nil, false
+	}
+	return o.EndsWith, true
+}
+
+// HasEndsWith returns a boolean if a field has been set.
+func (o *ResourceNameFilters) HasEndsWith() bool {
+	if o != nil && !IsNil(o.EndsWith) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndsWith gets a reference to the given []string and assigns it to the EndsWith field.
+func (o *ResourceNameFilters) SetEndsWith(v []string) {
+	o.EndsWith = v
+}
+
+// GetNotEndsWith returns the NotEndsWith field value if set, zero value otherwise.
+func (o *ResourceNameFilters) GetNotEndsWith() []string {
+	if o == nil || IsNil(o.NotEndsWith) {
+		var ret []string
+		return ret
+	}
+	return o.NotEndsWith
+}
+
+// GetNotEndsWithOk returns a tuple with the NotEndsWith field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceNameFilters) GetNotEndsWithOk() ([]string, bool) {
+	if o == nil || IsNil(o.NotEndsWith) {
+		return nil, false
+	}
+	return o.NotEndsWith, true
+}
+
+// HasNotEndsWith returns a boolean if a field has been set.
+func (o *ResourceNameFilters) HasNotEndsWith() bool {
+	if o != nil && !IsNil(o.NotEndsWith) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotEndsWith gets a reference to the given []string and assigns it to the NotEndsWith field.
+func (o *ResourceNameFilters) SetNotEndsWith(v []string) {
+	o.NotEndsWith = v
+}
+
 func (o ResourceNameFilters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -195,6 +331,18 @@ func (o ResourceNameFilters) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NotContains) {
 		toSerialize["notContains"] = o.NotContains
+	}
+	if !IsNil(o.StartsWith) {
+		toSerialize["startsWith"] = o.StartsWith
+	}
+	if !IsNil(o.NotStartsWith) {
+		toSerialize["notStartsWith"] = o.NotStartsWith
+	}
+	if !IsNil(o.EndsWith) {
+		toSerialize["endsWith"] = o.EndsWith
+	}
+	if !IsNil(o.NotEndsWith) {
+		toSerialize["notEndsWith"] = o.NotEndsWith
 	}
 	return toSerialize, nil
 }

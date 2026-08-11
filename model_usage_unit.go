@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// UsageUnit Whether usage is returned in byte-months, raw bytes, operations, or object-months for the specified `timeFrame`. `UNSPECIFIED` is supported only in responses. 
+// UsageUnit Whether usage is returned in byte-months, raw bytes, operations, objects, or object-months for the specified `timeFrame`. `UNSPECIFIED` is supported only in responses. 
 type UsageUnit string
 
 // List of UsageUnit
@@ -25,6 +25,7 @@ const (
 	USAGE_UNIT_UNSPECIFIED UsageUnit = "UNSPECIFIED"
 	USAGE_UNIT_OPERATIONS UsageUnit = "OPERATIONS"
 	USAGE_UNIT_OBJECT_MONTHS UsageUnit = "OBJECT_MONTHS"
+	USAGE_UNIT_SEATS UsageUnit = "OBJECTS"
 )
 
 // All allowed values of UsageUnit enum
@@ -34,6 +35,7 @@ var AllowedUsageUnitEnumValues = []UsageUnit{
 	"UNSPECIFIED",
 	"OPERATIONS",
 	"OBJECT_MONTHS",
+	"OBJECTS",
 }
 
 func (v *UsageUnit) UnmarshalJSON(src []byte) error {
@@ -42,15 +44,10 @@ func (v *UsageUnit) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := UsageUnit(value)
-	for _, existing := range AllowedUsageUnitEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid UsageUnit", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = UsageUnit(value)
+	return nil
 }
 
 // NewUsageUnitFromValue returns a pointer to a valid UsageUnit

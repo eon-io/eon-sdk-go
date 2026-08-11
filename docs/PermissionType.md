@@ -115,6 +115,8 @@
 
 * `DISCOVERY_TRIGGER` (value: `"discovery.trigger"`)
 
+* `DATA_CATALOG_QUERY` (value: `"data_catalog.query"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

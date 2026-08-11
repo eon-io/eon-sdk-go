@@ -10403,6 +10403,7 @@ components:
       - storage_gateway_metadata.view
       - data_catalog.view
       - discovery.trigger
+      - data_catalog.query
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -23839,14 +23840,22 @@ components:
     ResourceNameFilters:
       additionalProperties: false
       example:
+        notEndsWith:
+        - -staging
         contains:
         - app-server-2
+        notStartsWith:
+        - test-
         in:
         - db-server
         notContains:
         - db-workflows-1
+        endsWith:
+        - -prod
         notIn:
         - customers
+        startsWith:
+        - app-
       properties:
         in:
           description: Matches if any string in this list equals `resourceName`.
@@ -23873,6 +23882,34 @@ components:
           description: Matches if no string in this list is a substring of `resourceName`.
           example:
           - db-workflows-1
+          items:
+            type: string
+          type: array
+        startsWith:
+          description: Matches if any string in this list is a prefix of `resourceName`.
+          example:
+          - app-
+          items:
+            type: string
+          type: array
+        notStartsWith:
+          description: Matches if no string in this list is a prefix of `resourceName`.
+          example:
+          - test-
+          items:
+            type: string
+          type: array
+        endsWith:
+          description: Matches if any string in this list is a suffix of `resourceName`.
+          example:
+          - -prod
+          items:
+            type: string
+          type: array
+        notEndsWith:
+          description: Matches if no string in this list is a suffix of `resourceName`.
+          example:
+          - -staging
           items:
             type: string
           type: array
@@ -24210,14 +24247,22 @@ components:
           - environment
           - app
         resourceName:
+          notEndsWith:
+          - -staging
           contains:
           - app-server-2
+          notStartsWith:
+          - test-
           in:
           - db-server
           notContains:
           - db-workflows-1
+          endsWith:
+          - -prod
           notIn:
           - customers
+          startsWith:
+          - app-
         dataClasses:
           containsAllOf:
           - PHI
@@ -24340,14 +24385,22 @@ components:
             - environment
             - app
           resourceName:
+            notEndsWith:
+            - -staging
             contains:
             - app-server-2
+            notStartsWith:
+            - test-
             in:
             - db-server
             notContains:
             - db-workflows-1
+            endsWith:
+            - -prod
             notIn:
             - customers
+            startsWith:
+            - app-
           dataClasses:
             containsAllOf:
             - PHI
@@ -26762,7 +26815,7 @@ components:
     UsageUnit:
       default: BYTE_MONTHS
       description: |
-        Whether usage is returned in byte-months, raw bytes, operations, or object-months for the specified `timeFrame`.
+        Whether usage is returned in byte-months, raw bytes, operations, objects, or object-months for the specified `timeFrame`.
         `UNSPECIFIED` is supported only in responses.
       enum:
       - BYTE_MONTHS
@@ -26770,17 +26823,22 @@ components:
       - UNSPECIFIED
       - OPERATIONS
       - OBJECT_MONTHS
+      - OBJECTS
       example: BYTES
       type: string
+      x-extensible-enum: true
       x-docs-internal-enum:
       - OPERATIONS
       - OBJECT_MONTHS
+      - SEATS
       x-enum-varnames:
       - USAGE_UNIT_BYTE_MONTHS
       - USAGE_UNIT_BYTES
       - USAGE_UNIT_UNSPECIFIED
       - USAGE_UNIT_OPERATIONS
       - USAGE_UNIT_OBJECT_MONTHS
+      - USAGE_UNIT_SEATS
+      - USAGE_UNIT_OBJECTS
     TimeFrame:
       example:
         startTime: 2025-01-01T00:00:00Z
@@ -27111,6 +27169,8 @@ components:
       - GCP_CLOUD_SQL_TO_AWS_VAULT_METERING_DIMENSION
       - STORAGE_GATEWAY_METERING_DIMENSION
       - RANSOMWARE_PROTECTED_STORAGE_METERING_DIMENSION
+      - SAAS_BACKUP_STORAGE_METERING_DIMENSION
+      - SAAS_BACKUP_SEATS_METERING_DIMENSION
       example: AWS_EC2_METERING_DIMENSION
       type: string
       x-extensible-enum: true
@@ -27135,6 +27195,8 @@ components:
       - GCP_CLOUD_SQL_TO_AWS_VAULT_METERING_DIMENSION
       - AZURE_SQL_DATABASE_TO_AWS_VAULT_METERING_DIMENSION
       - AZURE_POSTGRESQL_TO_AWS_VAULT_METERING_DIMENSION
+      - SAAS_BACKUP_STORAGE_METERING_DIMENSION
+      - SAAS_BACKUP_SEATS_METERING_DIMENSION
     Cost:
       example:
         amount: 150.75

@@ -76,6 +76,7 @@ const (
 	STORAGE_GATEWAY_METADATA_VIEW PermissionType = "storage_gateway_metadata.view"
 	DATA_CATALOG_VIEW PermissionType = "data_catalog.view"
 	DISCOVERY_TRIGGER PermissionType = "discovery.trigger"
+	DATA_CATALOG_QUERY PermissionType = "data_catalog.query"
 )
 
 // All allowed values of PermissionType enum
@@ -136,6 +137,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"storage_gateway_metadata.view",
 	"data_catalog.view",
 	"discovery.trigger",
+	"data_catalog.query",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {
