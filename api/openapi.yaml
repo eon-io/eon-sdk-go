@@ -9183,7 +9183,7 @@ components:
       description: |
         Data classes.
 
-        Allowed values: `FI`, `PHI`, `PII`
+        Allowed values: `FI`, `PHI`, `PII`, `CREDENTIALS`
       example: PII
       type: string
     DataClassesCondition:
