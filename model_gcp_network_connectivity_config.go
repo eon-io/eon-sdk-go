@@ -19,7 +19,7 @@ import (
 // checks if the GcpNetworkConnectivityConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GcpNetworkConnectivityConfig{}
 
-// GcpNetworkConnectivityConfig struct for GcpNetworkConnectivityConfig
+// GcpNetworkConnectivityConfig Network Eon uses for its own management traffic in the restore account.  Instant instance restore requires this to be configured: the recovery host carries a second, Eon-owned network interface, and Google Compute Engine rejects an instance whose two interfaces share a subnet. Configure a subnet other than the one instances are restored into. Without this configuration Eon falls back to the `default` network and subnet, which collides with any instance restored into `default`. 
 type GcpNetworkConnectivityConfig struct {
 	// Network name.
 	Network string `json:"network"`

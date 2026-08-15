@@ -9142,6 +9142,7 @@ components:
       - GCP_SAP_HANA_VM
       - GOOGLE_WORKSPACE_RESOURCE
       - MICROSOFT_365_RESOURCE
+      - AZURE_ENTRA_ID_RESOURCE
     ResourceTypeCondition:
       example:
         resourceTypes:
@@ -9268,6 +9269,7 @@ components:
       x-docs-internal-enum:
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
+      - AZURE_ENTRA_ID
     CloudProviderCondition:
       example:
         cloudProviders:
@@ -15111,6 +15113,14 @@ components:
       - subnetName
       type: object
     GcpNetworkConnectivityConfig:
+      description: |
+        Network Eon uses for its own management traffic in the restore account.
+
+        Instant instance restore requires this to be configured: the recovery host carries a
+        second, Eon-owned network interface, and Google Compute Engine rejects an instance whose
+        two interfaces share a subnet. Configure a subnet other than the one instances are
+        restored into. Without this configuration Eon falls back to the `default` network and
+        subnet, which collides with any instance restored into `default`.
       example:
         isSharedVpc: true
         networkHostProject: my-shared-vpc-project
