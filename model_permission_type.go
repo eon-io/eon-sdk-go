@@ -45,6 +45,7 @@ const (
 	DATA_CLASSES_OVERRIDE PermissionType = "data_classes.override"
 	ENVIRONMENTS_OVERRIDE PermissionType = "environments.override"
 	DETECTED_APPS_OVERRIDE PermissionType = "detected_apps.override"
+	SENSITIVITY_LEVEL_OVERRIDE PermissionType = "sensitivity_level.override"
 	NETWORK_CLASSIFICATION_OVERRIDE PermissionType = "network_classification.override"
 	CONTROL_VIOLATIONS_MUTE PermissionType = "control_violations.mute"
 	BACKUP_EXCLUSION_MANAGE PermissionType = "backup_exclusion.manage"
@@ -106,6 +107,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"data_classes.override",
 	"environments.override",
 	"detected_apps.override",
+	"sensitivity_level.override",
 	"network_classification.override",
 	"control_violations.mute",
 	"backup_exclusion.manage",
