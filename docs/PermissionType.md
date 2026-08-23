@@ -119,6 +119,8 @@
 
 * `DATA_CATALOG_QUERY` (value: `"data_catalog.query"`)
 
+* `SAAS_BACKUP_SCOPE_MANAGE` (value: `"saas_backup_scope.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

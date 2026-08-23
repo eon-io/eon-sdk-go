@@ -10407,6 +10407,7 @@ components:
       - data_catalog.view
       - discovery.trigger
       - data_catalog.query
+      - saas_backup_scope.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10423,6 +10424,7 @@ components:
       - datalake.operate
       - compliance.view
       - classification_policies.manage
+      - saas_backup_scope.manage
     Permission:
       example:
         permissionType: inventory.view

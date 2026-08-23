@@ -78,6 +78,7 @@ const (
 	DATA_CATALOG_VIEW PermissionType = "data_catalog.view"
 	DISCOVERY_TRIGGER PermissionType = "discovery.trigger"
 	DATA_CATALOG_QUERY PermissionType = "data_catalog.query"
+	SAAS_BACKUP_SCOPE_MANAGE PermissionType = "saas_backup_scope.manage"
 )
 
 // All allowed values of PermissionType enum
@@ -140,6 +141,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"data_catalog.view",
 	"discovery.trigger",
 	"data_catalog.query",
+	"saas_backup_scope.manage",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {
