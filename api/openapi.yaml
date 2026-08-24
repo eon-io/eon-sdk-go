@@ -10408,6 +10408,14 @@ components:
       - discovery.trigger
       - data_catalog.query
       - saas_backup_scope.manage
+      - saas_mail.search
+      - saas_user_drive.search
+      - saas_group_data.search
+      - saas_shared_drive.search
+      - saas_mail.restore
+      - saas_user_drive.restore
+      - saas_group.restore
+      - saas_shared_drive.restore
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10425,6 +10433,14 @@ components:
       - compliance.view
       - classification_policies.manage
       - saas_backup_scope.manage
+      - saas_mail.search
+      - saas_user_drive.search
+      - saas_group_data.search
+      - saas_shared_drive.search
+      - saas_mail.restore
+      - saas_user_drive.restore
+      - saas_group.restore
+      - saas_shared_drive.restore
     Permission:
       example:
         permissionType: inventory.view

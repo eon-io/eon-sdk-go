@@ -79,6 +79,14 @@ const (
 	DISCOVERY_TRIGGER PermissionType = "discovery.trigger"
 	DATA_CATALOG_QUERY PermissionType = "data_catalog.query"
 	SAAS_BACKUP_SCOPE_MANAGE PermissionType = "saas_backup_scope.manage"
+	SAAS_MAIL_SEARCH PermissionType = "saas_mail.search"
+	SAAS_USER_DRIVE_SEARCH PermissionType = "saas_user_drive.search"
+	SAAS_GROUP_DATA_SEARCH PermissionType = "saas_group_data.search"
+	SAAS_SHARED_DRIVE_SEARCH PermissionType = "saas_shared_drive.search"
+	SAAS_MAIL_RESTORE PermissionType = "saas_mail.restore"
+	SAAS_USER_DRIVE_RESTORE PermissionType = "saas_user_drive.restore"
+	SAAS_GROUP_RESTORE PermissionType = "saas_group.restore"
+	SAAS_SHARED_DRIVE_RESTORE PermissionType = "saas_shared_drive.restore"
 )
 
 // All allowed values of PermissionType enum
@@ -142,6 +150,14 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"discovery.trigger",
 	"data_catalog.query",
 	"saas_backup_scope.manage",
+	"saas_mail.search",
+	"saas_user_drive.search",
+	"saas_group_data.search",
+	"saas_shared_drive.search",
+	"saas_mail.restore",
+	"saas_user_drive.restore",
+	"saas_group.restore",
+	"saas_shared_drive.restore",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

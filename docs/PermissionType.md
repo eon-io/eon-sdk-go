@@ -121,6 +121,22 @@
 
 * `SAAS_BACKUP_SCOPE_MANAGE` (value: `"saas_backup_scope.manage"`)
 
+* `SAAS_MAIL_SEARCH` (value: `"saas_mail.search"`)
+
+* `SAAS_USER_DRIVE_SEARCH` (value: `"saas_user_drive.search"`)
+
+* `SAAS_GROUP_DATA_SEARCH` (value: `"saas_group_data.search"`)
+
+* `SAAS_SHARED_DRIVE_SEARCH` (value: `"saas_shared_drive.search"`)
+
+* `SAAS_MAIL_RESTORE` (value: `"saas_mail.restore"`)
+
+* `SAAS_USER_DRIVE_RESTORE` (value: `"saas_user_drive.restore"`)
+
+* `SAAS_GROUP_RESTORE` (value: `"saas_group.restore"`)
+
+* `SAAS_SHARED_DRIVE_RESTORE` (value: `"saas_shared_drive.restore"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
