@@ -26425,6 +26425,7 @@ components:
       - id
       - resourceId
       - status
+      - vaultStorageTier
       type: object
     GetSnapshotResponse:
       example:
