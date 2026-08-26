@@ -149,6 +149,10 @@
 
 * `SAAS_USER_RESTORE` (value: `"saas_user.restore"`)
 
+* `THREAT_DETECTION_CENTER_VIEW` (value: `"threat_detection_center.view"`)
+
+* `THREAT_DETECTION_EXCLUSION_MANAGE` (value: `"threat_detection_exclusion.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

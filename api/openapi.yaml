@@ -10422,6 +10422,8 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
+      - threat_detection_center.view
+      - threat_detection_exclusion.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10453,6 +10455,8 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
+      - threat_detection_center.view
+      - threat_detection_exclusion.manage
     Permission:
       example:
         permissionType: inventory.view
