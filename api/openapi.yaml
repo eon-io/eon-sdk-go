@@ -10416,6 +10416,12 @@ components:
       - saas_user_drive.restore
       - saas_group.restore
       - saas_shared_drive.restore
+      - saas_inventory.view
+      - saas_jobs.view
+      - saas_snapshots.take
+      - saas_configuration.validate
+      - saas_user.search
+      - saas_user.restore
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10441,6 +10447,12 @@ components:
       - saas_user_drive.restore
       - saas_group.restore
       - saas_shared_drive.restore
+      - saas_inventory.view
+      - saas_jobs.view
+      - saas_snapshots.take
+      - saas_configuration.validate
+      - saas_user.search
+      - saas_user.restore
     Permission:
       example:
         permissionType: inventory.view
@@ -17581,6 +17593,7 @@ components:
       - AZURE_SQL_DATABASE_NATIVE_PITR
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
+      - AZURE_ENTRA_ID
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
@@ -26867,7 +26880,6 @@ components:
       - USAGE_UNIT_UNSPECIFIED
       - USAGE_UNIT_OPERATIONS
       - USAGE_UNIT_OBJECT_MONTHS
-      - USAGE_UNIT_SEATS
       - USAGE_UNIT_OBJECTS
     TimeFrame:
       example:

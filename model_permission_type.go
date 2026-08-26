@@ -87,6 +87,12 @@ const (
 	SAAS_USER_DRIVE_RESTORE PermissionType = "saas_user_drive.restore"
 	SAAS_GROUP_RESTORE PermissionType = "saas_group.restore"
 	SAAS_SHARED_DRIVE_RESTORE PermissionType = "saas_shared_drive.restore"
+	SAAS_INVENTORY_VIEW PermissionType = "saas_inventory.view"
+	SAAS_JOBS_VIEW PermissionType = "saas_jobs.view"
+	SAAS_SNAPSHOTS_TAKE PermissionType = "saas_snapshots.take"
+	SAAS_CONFIGURATION_VALIDATE PermissionType = "saas_configuration.validate"
+	SAAS_USER_SEARCH PermissionType = "saas_user.search"
+	SAAS_USER_RESTORE PermissionType = "saas_user.restore"
 )
 
 // All allowed values of PermissionType enum
@@ -158,6 +164,12 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"saas_user_drive.restore",
 	"saas_group.restore",
 	"saas_shared_drive.restore",
+	"saas_inventory.view",
+	"saas_jobs.view",
+	"saas_snapshots.take",
+	"saas_configuration.validate",
+	"saas_user.search",
+	"saas_user.restore",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

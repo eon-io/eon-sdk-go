@@ -137,6 +137,18 @@
 
 * `SAAS_SHARED_DRIVE_RESTORE` (value: `"saas_shared_drive.restore"`)
 
+* `SAAS_INVENTORY_VIEW` (value: `"saas_inventory.view"`)
+
+* `SAAS_JOBS_VIEW` (value: `"saas_jobs.view"`)
+
+* `SAAS_SNAPSHOTS_TAKE` (value: `"saas_snapshots.take"`)
+
+* `SAAS_CONFIGURATION_VALIDATE` (value: `"saas_configuration.validate"`)
+
+* `SAAS_USER_SEARCH` (value: `"saas_user.search"`)
+
+* `SAAS_USER_RESTORE` (value: `"saas_user.restore"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
