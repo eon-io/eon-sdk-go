@@ -97,6 +97,7 @@ const (
 	THREAT_DETECTION_EXCLUSION_MANAGE PermissionType = "threat_detection_exclusion.manage"
 	SAAS_DASHBOARD_VIEW PermissionType = "saas_dashboard.view"
 	SAAS_DISCOVERY_TRIGGER PermissionType = "saas_discovery.trigger"
+	SAAS_SOURCE_ACCOUNTS_MANAGE PermissionType = "saas_source_accounts.manage"
 )
 
 // All allowed values of PermissionType enum
@@ -178,6 +179,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"threat_detection_exclusion.manage",
 	"saas_dashboard.view",
 	"saas_discovery.trigger",
+	"saas_source_accounts.manage",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

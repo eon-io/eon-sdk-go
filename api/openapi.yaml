@@ -10439,6 +10439,7 @@ components:
       - threat_detection_exclusion.manage
       - saas_dashboard.view
       - saas_discovery.trigger
+      - saas_source_accounts.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10474,6 +10475,7 @@ components:
       - threat_detection_exclusion.manage
       - saas_dashboard.view
       - saas_discovery.trigger
+      - saas_source_accounts.manage
     Permission:
       example:
         permissionType: inventory.view

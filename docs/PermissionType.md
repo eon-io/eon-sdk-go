@@ -157,6 +157,8 @@
 
 * `SAAS_DISCOVERY_TRIGGER` (value: `"saas_discovery.trigger"`)
 
+* `SAAS_SOURCE_ACCOUNTS_MANAGE` (value: `"saas_source_accounts.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
