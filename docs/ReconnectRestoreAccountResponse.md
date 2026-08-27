@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RestoreAccount** | [**RestoreAccount**](RestoreAccount.md) |  | 
+**RestoreAccount** | Pointer to [**RestoreAccount**](RestoreAccount.md) |  | [optional] 
+**ActionApprovalRequest** | Pointer to [**NullableMPARequest**](MPARequest.md) |  | [optional] 
 
 ## Methods
 
 ### NewReconnectRestoreAccountResponse
 
-`func NewReconnectRestoreAccountResponse(restoreAccount RestoreAccount, ) *ReconnectRestoreAccountResponse`
+`func NewReconnectRestoreAccountResponse() *ReconnectRestoreAccountResponse`
 
 NewReconnectRestoreAccountResponse instantiates a new ReconnectRestoreAccountResponse object
 This constructor will assign default values to properties that have it defined,
@@ -44,7 +45,47 @@ and a boolean to check if the value has been set.
 
 SetRestoreAccount sets RestoreAccount field to given value.
 
+### HasRestoreAccount
 
+`func (o *ReconnectRestoreAccountResponse) HasRestoreAccount() bool`
+
+HasRestoreAccount returns a boolean if a field has been set.
+
+### GetActionApprovalRequest
+
+`func (o *ReconnectRestoreAccountResponse) GetActionApprovalRequest() MPARequest`
+
+GetActionApprovalRequest returns the ActionApprovalRequest field if non-nil, zero value otherwise.
+
+### GetActionApprovalRequestOk
+
+`func (o *ReconnectRestoreAccountResponse) GetActionApprovalRequestOk() (*MPARequest, bool)`
+
+GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionApprovalRequest
+
+`func (o *ReconnectRestoreAccountResponse) SetActionApprovalRequest(v MPARequest)`
+
+SetActionApprovalRequest sets ActionApprovalRequest field to given value.
+
+### HasActionApprovalRequest
+
+`func (o *ReconnectRestoreAccountResponse) HasActionApprovalRequest() bool`
+
+HasActionApprovalRequest returns a boolean if a field has been set.
+
+### SetActionApprovalRequestNil
+
+`func (o *ReconnectRestoreAccountResponse) SetActionApprovalRequestNil(b bool)`
+
+ SetActionApprovalRequestNil sets the value for ActionApprovalRequest to be an explicit nil
+
+### UnsetActionApprovalRequest
+`func (o *ReconnectRestoreAccountResponse) UnsetActionApprovalRequest()`
+
+UnsetActionApprovalRequest ensures that no value is present for ActionApprovalRequest, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

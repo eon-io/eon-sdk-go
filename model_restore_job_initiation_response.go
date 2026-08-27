@@ -12,8 +12,6 @@ package eon
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RestoreJobInitiationResponse type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,16 @@ var _ MappedNullable = &RestoreJobInitiationResponse{}
 // RestoreJobInitiationResponse struct for RestoreJobInitiationResponse
 type RestoreJobInitiationResponse struct {
 	// Restore job ID.
-	JobId string `json:"jobId"`
+	JobId *string `json:"jobId,omitempty"`
+	ActionApprovalRequest NullableMPARequest `json:"actionApprovalRequest,omitempty"`
 }
-
-type _RestoreJobInitiationResponse RestoreJobInitiationResponse
 
 // NewRestoreJobInitiationResponse instantiates a new RestoreJobInitiationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreJobInitiationResponse(jobId string) *RestoreJobInitiationResponse {
+func NewRestoreJobInitiationResponse() *RestoreJobInitiationResponse {
 	this := RestoreJobInitiationResponse{}
-	this.JobId = jobId
 	return &this
 }
 
@@ -45,28 +41,78 @@ func NewRestoreJobInitiationResponseWithDefaults() *RestoreJobInitiationResponse
 	return &this
 }
 
-// GetJobId returns the JobId field value
+// GetJobId returns the JobId field value if set, zero value otherwise.
 func (o *RestoreJobInitiationResponse) GetJobId() string {
-	if o == nil {
+	if o == nil || IsNil(o.JobId) {
 		var ret string
 		return ret
 	}
-
-	return o.JobId
+	return *o.JobId
 }
 
-// GetJobIdOk returns a tuple with the JobId field value
+// GetJobIdOk returns a tuple with the JobId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreJobInitiationResponse) GetJobIdOk() (*string, bool) {
+	if o == nil || IsNil(o.JobId) {
+		return nil, false
+	}
+	return o.JobId, true
+}
+
+// HasJobId returns a boolean if a field has been set.
+func (o *RestoreJobInitiationResponse) HasJobId() bool {
+	if o != nil && !IsNil(o.JobId) {
+		return true
+	}
+
+	return false
+}
+
+// SetJobId gets a reference to the given string and assigns it to the JobId field.
+func (o *RestoreJobInitiationResponse) SetJobId(v string) {
+	o.JobId = &v
+}
+
+// GetActionApprovalRequest returns the ActionApprovalRequest field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RestoreJobInitiationResponse) GetActionApprovalRequest() MPARequest {
+	if o == nil || IsNil(o.ActionApprovalRequest.Get()) {
+		var ret MPARequest
+		return ret
+	}
+	return *o.ActionApprovalRequest.Get()
+}
+
+// GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RestoreJobInitiationResponse) GetActionApprovalRequestOk() (*MPARequest, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.JobId, true
+	return o.ActionApprovalRequest.Get(), o.ActionApprovalRequest.IsSet()
 }
 
-// SetJobId sets field value
-func (o *RestoreJobInitiationResponse) SetJobId(v string) {
-	o.JobId = v
+// HasActionApprovalRequest returns a boolean if a field has been set.
+func (o *RestoreJobInitiationResponse) HasActionApprovalRequest() bool {
+	if o != nil && o.ActionApprovalRequest.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetActionApprovalRequest gets a reference to the given NullableMPARequest and assigns it to the ActionApprovalRequest field.
+func (o *RestoreJobInitiationResponse) SetActionApprovalRequest(v MPARequest) {
+	o.ActionApprovalRequest.Set(&v)
+}
+// SetActionApprovalRequestNil sets the value for ActionApprovalRequest to be an explicit nil
+func (o *RestoreJobInitiationResponse) SetActionApprovalRequestNil() {
+	o.ActionApprovalRequest.Set(nil)
+}
+
+// UnsetActionApprovalRequest ensures that no value is present for ActionApprovalRequest, not even an explicit nil
+func (o *RestoreJobInitiationResponse) UnsetActionApprovalRequest() {
+	o.ActionApprovalRequest.Unset()
 }
 
 func (o RestoreJobInitiationResponse) MarshalJSON() ([]byte, error) {
@@ -79,45 +125,13 @@ func (o RestoreJobInitiationResponse) MarshalJSON() ([]byte, error) {
 
 func (o RestoreJobInitiationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["jobId"] = o.JobId
+	if !IsNil(o.JobId) {
+		toSerialize["jobId"] = o.JobId
+	}
+	if o.ActionApprovalRequest.IsSet() {
+		toSerialize["actionApprovalRequest"] = o.ActionApprovalRequest.Get()
+	}
 	return toSerialize, nil
-}
-
-func (o *RestoreJobInitiationResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"jobId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRestoreJobInitiationResponse := _RestoreJobInitiationResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRestoreJobInitiationResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = RestoreJobInitiationResponse(varRestoreJobInitiationResponse)
-
-	return err
 }
 
 type NullableRestoreJobInitiationResponse struct {

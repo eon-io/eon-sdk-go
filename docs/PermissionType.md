@@ -153,6 +153,10 @@
 
 * `THREAT_DETECTION_EXCLUSION_MANAGE` (value: `"threat_detection_exclusion.manage"`)
 
+* `SAAS_DASHBOARD_VIEW` (value: `"saas_dashboard.view"`)
+
+* `SAAS_DISCOVERY_TRIGGER` (value: `"saas_discovery.trigger"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

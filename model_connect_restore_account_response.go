@@ -12,8 +12,6 @@ package eon
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ConnectRestoreAccountResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,16 @@ var _ MappedNullable = &ConnectRestoreAccountResponse{}
 
 // ConnectRestoreAccountResponse struct for ConnectRestoreAccountResponse
 type ConnectRestoreAccountResponse struct {
-	RestoreAccount RestoreAccount `json:"restoreAccount"`
+	RestoreAccount *RestoreAccount `json:"restoreAccount,omitempty"`
+	ActionApprovalRequest NullableMPARequest `json:"actionApprovalRequest,omitempty"`
 }
-
-type _ConnectRestoreAccountResponse ConnectRestoreAccountResponse
 
 // NewConnectRestoreAccountResponse instantiates a new ConnectRestoreAccountResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectRestoreAccountResponse(restoreAccount RestoreAccount) *ConnectRestoreAccountResponse {
+func NewConnectRestoreAccountResponse() *ConnectRestoreAccountResponse {
 	this := ConnectRestoreAccountResponse{}
-	this.RestoreAccount = restoreAccount
 	return &this
 }
 
@@ -44,28 +40,78 @@ func NewConnectRestoreAccountResponseWithDefaults() *ConnectRestoreAccountRespon
 	return &this
 }
 
-// GetRestoreAccount returns the RestoreAccount field value
+// GetRestoreAccount returns the RestoreAccount field value if set, zero value otherwise.
 func (o *ConnectRestoreAccountResponse) GetRestoreAccount() RestoreAccount {
-	if o == nil {
+	if o == nil || IsNil(o.RestoreAccount) {
 		var ret RestoreAccount
 		return ret
 	}
-
-	return o.RestoreAccount
+	return *o.RestoreAccount
 }
 
-// GetRestoreAccountOk returns a tuple with the RestoreAccount field value
+// GetRestoreAccountOk returns a tuple with the RestoreAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectRestoreAccountResponse) GetRestoreAccountOk() (*RestoreAccount, bool) {
+	if o == nil || IsNil(o.RestoreAccount) {
+		return nil, false
+	}
+	return o.RestoreAccount, true
+}
+
+// HasRestoreAccount returns a boolean if a field has been set.
+func (o *ConnectRestoreAccountResponse) HasRestoreAccount() bool {
+	if o != nil && !IsNil(o.RestoreAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreAccount gets a reference to the given RestoreAccount and assigns it to the RestoreAccount field.
+func (o *ConnectRestoreAccountResponse) SetRestoreAccount(v RestoreAccount) {
+	o.RestoreAccount = &v
+}
+
+// GetActionApprovalRequest returns the ActionApprovalRequest field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectRestoreAccountResponse) GetActionApprovalRequest() MPARequest {
+	if o == nil || IsNil(o.ActionApprovalRequest.Get()) {
+		var ret MPARequest
+		return ret
+	}
+	return *o.ActionApprovalRequest.Get()
+}
+
+// GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectRestoreAccountResponse) GetActionApprovalRequestOk() (*MPARequest, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.RestoreAccount, true
+	return o.ActionApprovalRequest.Get(), o.ActionApprovalRequest.IsSet()
 }
 
-// SetRestoreAccount sets field value
-func (o *ConnectRestoreAccountResponse) SetRestoreAccount(v RestoreAccount) {
-	o.RestoreAccount = v
+// HasActionApprovalRequest returns a boolean if a field has been set.
+func (o *ConnectRestoreAccountResponse) HasActionApprovalRequest() bool {
+	if o != nil && o.ActionApprovalRequest.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetActionApprovalRequest gets a reference to the given NullableMPARequest and assigns it to the ActionApprovalRequest field.
+func (o *ConnectRestoreAccountResponse) SetActionApprovalRequest(v MPARequest) {
+	o.ActionApprovalRequest.Set(&v)
+}
+// SetActionApprovalRequestNil sets the value for ActionApprovalRequest to be an explicit nil
+func (o *ConnectRestoreAccountResponse) SetActionApprovalRequestNil() {
+	o.ActionApprovalRequest.Set(nil)
+}
+
+// UnsetActionApprovalRequest ensures that no value is present for ActionApprovalRequest, not even an explicit nil
+func (o *ConnectRestoreAccountResponse) UnsetActionApprovalRequest() {
+	o.ActionApprovalRequest.Unset()
 }
 
 func (o ConnectRestoreAccountResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +124,13 @@ func (o ConnectRestoreAccountResponse) MarshalJSON() ([]byte, error) {
 
 func (o ConnectRestoreAccountResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["restoreAccount"] = o.RestoreAccount
+	if !IsNil(o.RestoreAccount) {
+		toSerialize["restoreAccount"] = o.RestoreAccount
+	}
+	if o.ActionApprovalRequest.IsSet() {
+		toSerialize["actionApprovalRequest"] = o.ActionApprovalRequest.Get()
+	}
 	return toSerialize, nil
-}
-
-func (o *ConnectRestoreAccountResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"restoreAccount",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varConnectRestoreAccountResponse := _ConnectRestoreAccountResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConnectRestoreAccountResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ConnectRestoreAccountResponse(varConnectRestoreAccountResponse)
-
-	return err
 }
 
 type NullableConnectRestoreAccountResponse struct {

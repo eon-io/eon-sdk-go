@@ -12,8 +12,6 @@ package eon
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CreateBackupPolicyResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,16 @@ var _ MappedNullable = &CreateBackupPolicyResponse{}
 
 // CreateBackupPolicyResponse struct for CreateBackupPolicyResponse
 type CreateBackupPolicyResponse struct {
-	BackupPolicy BackupPolicy `json:"backupPolicy"`
+	BackupPolicy *BackupPolicy `json:"backupPolicy,omitempty"`
+	ActionApprovalRequest NullableMPARequest `json:"actionApprovalRequest,omitempty"`
 }
-
-type _CreateBackupPolicyResponse CreateBackupPolicyResponse
 
 // NewCreateBackupPolicyResponse instantiates a new CreateBackupPolicyResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateBackupPolicyResponse(backupPolicy BackupPolicy) *CreateBackupPolicyResponse {
+func NewCreateBackupPolicyResponse() *CreateBackupPolicyResponse {
 	this := CreateBackupPolicyResponse{}
-	this.BackupPolicy = backupPolicy
 	return &this
 }
 
@@ -44,28 +40,78 @@ func NewCreateBackupPolicyResponseWithDefaults() *CreateBackupPolicyResponse {
 	return &this
 }
 
-// GetBackupPolicy returns the BackupPolicy field value
+// GetBackupPolicy returns the BackupPolicy field value if set, zero value otherwise.
 func (o *CreateBackupPolicyResponse) GetBackupPolicy() BackupPolicy {
-	if o == nil {
+	if o == nil || IsNil(o.BackupPolicy) {
 		var ret BackupPolicy
 		return ret
 	}
-
-	return o.BackupPolicy
+	return *o.BackupPolicy
 }
 
-// GetBackupPolicyOk returns a tuple with the BackupPolicy field value
+// GetBackupPolicyOk returns a tuple with the BackupPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateBackupPolicyResponse) GetBackupPolicyOk() (*BackupPolicy, bool) {
+	if o == nil || IsNil(o.BackupPolicy) {
+		return nil, false
+	}
+	return o.BackupPolicy, true
+}
+
+// HasBackupPolicy returns a boolean if a field has been set.
+func (o *CreateBackupPolicyResponse) HasBackupPolicy() bool {
+	if o != nil && !IsNil(o.BackupPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupPolicy gets a reference to the given BackupPolicy and assigns it to the BackupPolicy field.
+func (o *CreateBackupPolicyResponse) SetBackupPolicy(v BackupPolicy) {
+	o.BackupPolicy = &v
+}
+
+// GetActionApprovalRequest returns the ActionApprovalRequest field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateBackupPolicyResponse) GetActionApprovalRequest() MPARequest {
+	if o == nil || IsNil(o.ActionApprovalRequest.Get()) {
+		var ret MPARequest
+		return ret
+	}
+	return *o.ActionApprovalRequest.Get()
+}
+
+// GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateBackupPolicyResponse) GetActionApprovalRequestOk() (*MPARequest, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.BackupPolicy, true
+	return o.ActionApprovalRequest.Get(), o.ActionApprovalRequest.IsSet()
 }
 
-// SetBackupPolicy sets field value
-func (o *CreateBackupPolicyResponse) SetBackupPolicy(v BackupPolicy) {
-	o.BackupPolicy = v
+// HasActionApprovalRequest returns a boolean if a field has been set.
+func (o *CreateBackupPolicyResponse) HasActionApprovalRequest() bool {
+	if o != nil && o.ActionApprovalRequest.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetActionApprovalRequest gets a reference to the given NullableMPARequest and assigns it to the ActionApprovalRequest field.
+func (o *CreateBackupPolicyResponse) SetActionApprovalRequest(v MPARequest) {
+	o.ActionApprovalRequest.Set(&v)
+}
+// SetActionApprovalRequestNil sets the value for ActionApprovalRequest to be an explicit nil
+func (o *CreateBackupPolicyResponse) SetActionApprovalRequestNil() {
+	o.ActionApprovalRequest.Set(nil)
+}
+
+// UnsetActionApprovalRequest ensures that no value is present for ActionApprovalRequest, not even an explicit nil
+func (o *CreateBackupPolicyResponse) UnsetActionApprovalRequest() {
+	o.ActionApprovalRequest.Unset()
 }
 
 func (o CreateBackupPolicyResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +124,13 @@ func (o CreateBackupPolicyResponse) MarshalJSON() ([]byte, error) {
 
 func (o CreateBackupPolicyResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["backupPolicy"] = o.BackupPolicy
+	if !IsNil(o.BackupPolicy) {
+		toSerialize["backupPolicy"] = o.BackupPolicy
+	}
+	if o.ActionApprovalRequest.IsSet() {
+		toSerialize["actionApprovalRequest"] = o.ActionApprovalRequest.Get()
+	}
 	return toSerialize, nil
-}
-
-func (o *CreateBackupPolicyResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"backupPolicy",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varCreateBackupPolicyResponse := _CreateBackupPolicyResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateBackupPolicyResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CreateBackupPolicyResponse(varCreateBackupPolicyResponse)
-
-	return err
 }
 
 type NullableCreateBackupPolicyResponse struct {

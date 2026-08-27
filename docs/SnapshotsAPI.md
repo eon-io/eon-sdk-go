@@ -329,7 +329,7 @@ Name | Type | Description  | Notes
 
 ## RestoreAzureDisk
 
-> MPAInterceptedResponse RestoreAzureDisk(ctx, projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreAzureDisk(ctx, projectId, id, snapshotId).RestoreAzureDiskRequest(restoreAzureDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Azure Disk
 
@@ -361,7 +361,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureDisk``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreAzureDisk`: MPAInterceptedResponse
+	// response from `RestoreAzureDisk`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreAzureDisk`: %v\n", resp)
 }
 ```
@@ -391,7 +391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -409,7 +409,7 @@ Name | Type | Description  | Notes
 
 ## RestoreAzureSqlDatabase
 
-> MPAInterceptedResponse RestoreAzureSqlDatabase(ctx, projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreAzureSqlDatabase(ctx, projectId, id, snapshotId).RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Azure SQL Database
 
@@ -441,7 +441,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureSqlDatabase``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreAzureSqlDatabase`: MPAInterceptedResponse
+	// response from `RestoreAzureSqlDatabase`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreAzureSqlDatabase`: %v\n", resp)
 }
 ```
@@ -471,7 +471,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -489,7 +489,7 @@ Name | Type | Description  | Notes
 
 ## RestoreAzureVmInstance
 
-> MPAInterceptedResponse RestoreAzureVmInstance(ctx, projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreAzureVmInstance(ctx, projectId, id, snapshotId).RestoreAzureVmInstanceRequest(restoreAzureVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Azure VM Instance
 
@@ -521,7 +521,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreAzureVmInstance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreAzureVmInstance`: MPAInterceptedResponse
+	// response from `RestoreAzureVmInstance`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreAzureVmInstance`: %v\n", resp)
 }
 ```
@@ -551,7 +551,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -569,7 +569,7 @@ Name | Type | Description  | Notes
 
 ## RestoreBigQueryDataset
 
-> MPAInterceptedResponse RestoreBigQueryDataset(ctx, projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreBigQueryDataset(ctx, projectId, id, snapshotId).RestoreBigQueryDatasetRequest(restoreBigQueryDatasetRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore BigQuery Dataset
 
@@ -601,7 +601,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreBigQueryDataset``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreBigQueryDataset`: MPAInterceptedResponse
+	// response from `RestoreBigQueryDataset`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreBigQueryDataset`: %v\n", resp)
 }
 ```
@@ -631,7 +631,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -649,7 +649,7 @@ Name | Type | Description  | Notes
 
 ## RestoreBucket
 
-> MPAInterceptedResponse RestoreBucket(ctx, projectId, id, snapshotId).RestoreBucketRequest(restoreBucketRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreBucket(ctx, projectId, id, snapshotId).RestoreBucketRequest(restoreBucketRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore Bucket
 
@@ -681,7 +681,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreBucket``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreBucket`: MPAInterceptedResponse
+	// response from `RestoreBucket`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreBucket`: %v\n", resp)
 }
 ```
@@ -711,7 +711,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -729,7 +729,7 @@ Name | Type | Description  | Notes
 
 ## RestoreDatabase
 
-> MPAInterceptedResponse RestoreDatabase(ctx, projectId, id, snapshotId).RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreDatabase(ctx, projectId, id, snapshotId).RestoreDbToRdsInstanceRequest(restoreDbToRdsInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore RDS Instance
 
@@ -761,7 +761,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreDatabase``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreDatabase`: MPAInterceptedResponse
+	// response from `RestoreDatabase`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreDatabase`: %v\n", resp)
 }
 ```
@@ -791,7 +791,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -809,7 +809,7 @@ Name | Type | Description  | Notes
 
 ## RestoreDynamoDBTable
 
-> MPAInterceptedResponse RestoreDynamoDBTable(ctx, projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreDynamoDBTable(ctx, projectId, id, snapshotId).RestoreDynamoDBTableRequest(restoreDynamoDBTableRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore DynamoDB Table
 
@@ -841,7 +841,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreDynamoDBTable``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreDynamoDBTable`: MPAInterceptedResponse
+	// response from `RestoreDynamoDBTable`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreDynamoDBTable`: %v\n", resp)
 }
 ```
@@ -871,7 +871,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -889,7 +889,7 @@ Name | Type | Description  | Notes
 
 ## RestoreEbsVolume
 
-> MPAInterceptedResponse RestoreEbsVolume(ctx, projectId, id, snapshotId).RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreEbsVolume(ctx, projectId, id, snapshotId).RestoreVolumeToEbsRequest(restoreVolumeToEbsRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore EBS Volume
 
@@ -921,7 +921,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreEbsVolume``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreEbsVolume`: MPAInterceptedResponse
+	// response from `RestoreEbsVolume`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreEbsVolume`: %v\n", resp)
 }
 ```
@@ -951,7 +951,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -969,7 +969,7 @@ Name | Type | Description  | Notes
 
 ## RestoreEc2Instance
 
-> MPAInterceptedResponse RestoreEc2Instance(ctx, projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreEc2Instance(ctx, projectId, id, snapshotId).RestoreAwsEc2InstanceRequest(restoreAwsEc2InstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore EC2 Instance
 
@@ -1001,7 +1001,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreEc2Instance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreEc2Instance`: MPAInterceptedResponse
+	// response from `RestoreEc2Instance`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreEc2Instance`: %v\n", resp)
 }
 ```
@@ -1031,7 +1031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -1127,7 +1127,7 @@ Name | Type | Description  | Notes
 
 ## RestoreGcpCloudSql
 
-> MPAInterceptedResponse RestoreGcpCloudSql(ctx, projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreGcpCloudSql(ctx, projectId, id, snapshotId).RestoreGcpCloudSqlRequest(restoreGcpCloudSqlRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore GCP Cloud SQL Instance
 
@@ -1159,7 +1159,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpCloudSql``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreGcpCloudSql`: MPAInterceptedResponse
+	// response from `RestoreGcpCloudSql`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreGcpCloudSql`: %v\n", resp)
 }
 ```
@@ -1189,7 +1189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -1207,7 +1207,7 @@ Name | Type | Description  | Notes
 
 ## RestoreGcpDisk
 
-> MPAInterceptedResponse RestoreGcpDisk(ctx, projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreGcpDisk(ctx, projectId, id, snapshotId).RestoreGcpDiskRequest(restoreGcpDiskRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore GCP Disk
 
@@ -1239,7 +1239,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpDisk``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreGcpDisk`: MPAInterceptedResponse
+	// response from `RestoreGcpDisk`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreGcpDisk`: %v\n", resp)
 }
 ```
@@ -1269,7 +1269,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -1287,7 +1287,7 @@ Name | Type | Description  | Notes
 
 ## RestoreGcpVmInstance
 
-> MPAInterceptedResponse RestoreGcpVmInstance(ctx, projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreGcpVmInstance(ctx, projectId, id, snapshotId).RestoreGcpVmInstanceRequest(restoreGcpVmInstanceRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore GCP VM Instance
 
@@ -1319,7 +1319,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreGcpVmInstance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreGcpVmInstance`: MPAInterceptedResponse
+	// response from `RestoreGcpVmInstance`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreGcpVmInstance`: %v\n", resp)
 }
 ```
@@ -1349,7 +1349,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 
@@ -1367,7 +1367,7 @@ Name | Type | Description  | Notes
 
 ## RestoreToEbsSnapshot
 
-> MPAInterceptedResponse RestoreToEbsSnapshot(ctx, projectId, id, snapshotId).RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
+> RestoreJobInitiationResponse RestoreToEbsSnapshot(ctx, projectId, id, snapshotId).RestoreVolumeToEbsSnapshotRequest(restoreVolumeToEbsSnapshotRequest).XActionApprovalRequestId(xActionApprovalRequestId).Execute()
 
 Restore to EBS Snapshot
 
@@ -1399,7 +1399,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SnapshotsAPI.RestoreToEbsSnapshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RestoreToEbsSnapshot`: MPAInterceptedResponse
+	// response from `RestoreToEbsSnapshot`: RestoreJobInitiationResponse
 	fmt.Fprintf(os.Stdout, "Response from `SnapshotsAPI.RestoreToEbsSnapshot`: %v\n", resp)
 }
 ```
@@ -1429,7 +1429,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MPAInterceptedResponse**](MPAInterceptedResponse.md)
+[**RestoreJobInitiationResponse**](RestoreJobInitiationResponse.md)
 
 ### Authorization
 

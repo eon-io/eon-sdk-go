@@ -618,7 +618,7 @@ func (r ApiRestoreAzureDiskRequest) XActionApprovalRequestId(xActionApprovalRequ
 	return r
 }
 
-func (r ApiRestoreAzureDiskRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreAzureDiskRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreAzureDiskExecute(r)
 }
 
@@ -652,13 +652,13 @@ func (a *SnapshotsAPIService) RestoreAzureDisk(ctx context.Context, projectId st
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreAzureDiskExecute(r ApiRestoreAzureDiskRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureDisk")
@@ -780,7 +780,7 @@ func (r ApiRestoreAzureSqlDatabaseRequest) XActionApprovalRequestId(xActionAppro
 	return r
 }
 
-func (r ApiRestoreAzureSqlDatabaseRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreAzureSqlDatabaseRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreAzureSqlDatabaseExecute(r)
 }
 
@@ -811,13 +811,13 @@ func (a *SnapshotsAPIService) RestoreAzureSqlDatabase(ctx context.Context, proje
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreAzureSqlDatabaseExecute(r ApiRestoreAzureSqlDatabaseRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreAzureSqlDatabaseExecute(r ApiRestoreAzureSqlDatabaseRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureSqlDatabase")
@@ -938,7 +938,7 @@ func (r ApiRestoreAzureVmInstanceRequest) XActionApprovalRequestId(xActionApprov
 	return r
 }
 
-func (r ApiRestoreAzureVmInstanceRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreAzureVmInstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreAzureVmInstanceExecute(r)
 }
 
@@ -969,13 +969,13 @@ func (a *SnapshotsAPIService) RestoreAzureVmInstance(ctx context.Context, projec
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmInstanceRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreAzureVmInstanceExecute(r ApiRestoreAzureVmInstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreAzureVmInstance")
@@ -1096,7 +1096,7 @@ func (r ApiRestoreBigQueryDatasetRequest) XActionApprovalRequestId(xActionApprov
 	return r
 }
 
-func (r ApiRestoreBigQueryDatasetRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreBigQueryDatasetRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreBigQueryDatasetExecute(r)
 }
 
@@ -1127,13 +1127,13 @@ func (a *SnapshotsAPIService) RestoreBigQueryDataset(ctx context.Context, projec
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreBigQueryDatasetExecute(r ApiRestoreBigQueryDatasetRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreBigQueryDatasetExecute(r ApiRestoreBigQueryDatasetRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreBigQueryDataset")
@@ -1254,7 +1254,7 @@ func (r ApiRestoreBucketRequest) XActionApprovalRequestId(xActionApprovalRequest
 	return r
 }
 
-func (r ApiRestoreBucketRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreBucketRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreBucketExecute(r)
 }
 
@@ -1285,13 +1285,13 @@ func (a *SnapshotsAPIService) RestoreBucket(ctx context.Context, projectId strin
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreBucketExecute(r ApiRestoreBucketRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreBucketExecute(r ApiRestoreBucketRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreBucket")
@@ -1412,7 +1412,7 @@ func (r ApiRestoreDatabaseRequest) XActionApprovalRequestId(xActionApprovalReque
 	return r
 }
 
-func (r ApiRestoreDatabaseRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreDatabaseRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreDatabaseExecute(r)
 }
 
@@ -1443,13 +1443,13 @@ func (a *SnapshotsAPIService) RestoreDatabase(ctx context.Context, projectId str
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreDatabaseExecute(r ApiRestoreDatabaseRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreDatabaseExecute(r ApiRestoreDatabaseRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreDatabase")
@@ -1570,7 +1570,7 @@ func (r ApiRestoreDynamoDBTableRequest) XActionApprovalRequestId(xActionApproval
 	return r
 }
 
-func (r ApiRestoreDynamoDBTableRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreDynamoDBTableRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreDynamoDBTableExecute(r)
 }
 
@@ -1601,13 +1601,13 @@ func (a *SnapshotsAPIService) RestoreDynamoDBTable(ctx context.Context, projectI
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTableRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreDynamoDBTableExecute(r ApiRestoreDynamoDBTableRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreDynamoDBTable")
@@ -1728,7 +1728,7 @@ func (r ApiRestoreEbsVolumeRequest) XActionApprovalRequestId(xActionApprovalRequ
 	return r
 }
 
-func (r ApiRestoreEbsVolumeRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreEbsVolumeRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreEbsVolumeExecute(r)
 }
 
@@ -1759,13 +1759,13 @@ func (a *SnapshotsAPIService) RestoreEbsVolume(ctx context.Context, projectId st
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreEbsVolumeExecute(r ApiRestoreEbsVolumeRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreEbsVolumeExecute(r ApiRestoreEbsVolumeRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreEbsVolume")
@@ -1886,7 +1886,7 @@ func (r ApiRestoreEc2InstanceRequest) XActionApprovalRequestId(xActionApprovalRe
 	return r
 }
 
-func (r ApiRestoreEc2InstanceRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreEc2InstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreEc2InstanceExecute(r)
 }
 
@@ -1920,13 +1920,13 @@ func (a *SnapshotsAPIService) RestoreEc2Instance(ctx context.Context, projectId 
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreEc2InstanceExecute(r ApiRestoreEc2InstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreEc2Instance")
@@ -2195,7 +2195,7 @@ func (r ApiRestoreGcpCloudSqlRequest) XActionApprovalRequestId(xActionApprovalRe
 	return r
 }
 
-func (r ApiRestoreGcpCloudSqlRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreGcpCloudSqlRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreGcpCloudSqlExecute(r)
 }
 
@@ -2229,13 +2229,13 @@ func (a *SnapshotsAPIService) RestoreGcpCloudSql(ctx context.Context, projectId 
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreGcpCloudSqlExecute(r ApiRestoreGcpCloudSqlRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreGcpCloudSqlExecute(r ApiRestoreGcpCloudSqlRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpCloudSql")
@@ -2356,7 +2356,7 @@ func (r ApiRestoreGcpDiskRequest) XActionApprovalRequestId(xActionApprovalReques
 	return r
 }
 
-func (r ApiRestoreGcpDiskRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreGcpDiskRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreGcpDiskExecute(r)
 }
 
@@ -2390,13 +2390,13 @@ func (a *SnapshotsAPIService) RestoreGcpDisk(ctx context.Context, projectId stri
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreGcpDiskExecute(r ApiRestoreGcpDiskRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreGcpDiskExecute(r ApiRestoreGcpDiskRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpDisk")
@@ -2517,7 +2517,7 @@ func (r ApiRestoreGcpVmInstanceRequest) XActionApprovalRequestId(xActionApproval
 	return r
 }
 
-func (r ApiRestoreGcpVmInstanceRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreGcpVmInstanceRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreGcpVmInstanceExecute(r)
 }
 
@@ -2551,13 +2551,13 @@ func (a *SnapshotsAPIService) RestoreGcpVmInstance(ctx context.Context, projectI
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreGcpVmInstanceExecute(r ApiRestoreGcpVmInstanceRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreGcpVmInstanceExecute(r ApiRestoreGcpVmInstanceRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreGcpVmInstance")
@@ -2678,7 +2678,7 @@ func (r ApiRestoreToEbsSnapshotRequest) XActionApprovalRequestId(xActionApproval
 	return r
 }
 
-func (r ApiRestoreToEbsSnapshotRequest) Execute() (*MPAInterceptedResponse, *http.Response, error) {
+func (r ApiRestoreToEbsSnapshotRequest) Execute() (*RestoreJobInitiationResponse, *http.Response, error) {
 	return r.ApiService.RestoreToEbsSnapshotExecute(r)
 }
 
@@ -2709,13 +2709,13 @@ func (a *SnapshotsAPIService) RestoreToEbsSnapshot(ctx context.Context, projectI
 }
 
 // Execute executes the request
-//  @return MPAInterceptedResponse
-func (a *SnapshotsAPIService) RestoreToEbsSnapshotExecute(r ApiRestoreToEbsSnapshotRequest) (*MPAInterceptedResponse, *http.Response, error) {
+//  @return RestoreJobInitiationResponse
+func (a *SnapshotsAPIService) RestoreToEbsSnapshotExecute(r ApiRestoreToEbsSnapshotRequest) (*RestoreJobInitiationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *MPAInterceptedResponse
+		localVarReturnValue  *RestoreJobInitiationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnapshotsAPIService.RestoreToEbsSnapshot")

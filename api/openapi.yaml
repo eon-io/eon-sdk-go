@@ -4655,7 +4655,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -4792,7 +4792,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -4929,7 +4929,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -5066,7 +5066,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -5203,7 +5203,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -5343,7 +5343,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -5480,7 +5480,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -5617,7 +5617,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -5755,7 +5755,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -5895,7 +5895,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -6035,7 +6035,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -6175,7 +6175,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -6315,7 +6315,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MPAInterceptedResponse'
+                $ref: '#/components/schemas/RestoreJobInitiationResponse'
           description: |
             Applicable only when the method is protected by an [action approval policy].
 
@@ -8841,6 +8841,18 @@ components:
         The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
 
         [action approval policy]: /api/using-the-api/action-approvals
+    RestoreJobMpaIntercepted:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RestoreJobInitiationResponse'
+      description: |
+        Applicable only when the method is protected by an [action approval policy].
+
+        An action request was created in an initial state.
+        The action request needs to be submitted for approval by passing its ID to [Submit Action Approval Request](api:POST/v1/projects/{projectId}/action-approvals/my-requests/{requestId}/submit).
+
+        [action approval policy]: /api/using-the-api/action-approvals
   schemas:
     MPAInterceptedResponse:
       description: Response when an operation is intercepted by an action approval
@@ -9125,6 +9137,7 @@ components:
       example: AWS_EC2
       type: string
       x-docs-internal-enum:
+      - AWS_EKS_CLUSTER
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
       - AWS_CASSANDRA_CLUSTER
@@ -10424,6 +10437,8 @@ components:
       - saas_user.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
+      - saas_dashboard.view
+      - saas_discovery.trigger
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10457,6 +10472,8 @@ components:
       - saas_user.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
+      - saas_dashboard.view
+      - saas_discovery.trigger
     Permission:
       example:
         permissionType: inventory.view
@@ -14006,21 +14023,6 @@ components:
       - roleArn
       - status
       type: object
-    ConnectRestoreAwsOrganizationalUnitResponse:
-      example:
-        organizationalUnit:
-          providerOrganizationalUnitId: ou-a1b2-f6g7h111
-          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
-          name: dr-eu organizational unit
-          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
-          providerManagementAccountId: "123456789012"
-          status: CONNECTED
-      properties:
-        organizationalUnit:
-          $ref: '#/components/schemas/RestoreAwsOrganizationalUnit'
-      required:
-      - organizationalUnit
-      type: object
     MPAOperationType:
       description: Operation that requires action approval before it can be completed.
       enum:
@@ -14227,6 +14229,47 @@ components:
       - status
       type: object
       x-nullable: true
+    ConnectRestoreAwsOrganizationalUnitResponse:
+      example:
+        actionApprovalRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
+        organizationalUnit:
+          providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          roleArn: arn:aws:iam::123412341234:role/EonRestoreAccountRole
+          name: dr-eu organizational unit
+          id: fc495499-9796-5fc9-ade7-1ba924cbcc42
+          providerManagementAccountId: "123456789012"
+          status: CONNECTED
+      properties:
+        organizationalUnit:
+          $ref: '#/components/schemas/RestoreAwsOrganizationalUnit'
+        actionApprovalRequest:
+          $ref: '#/components/schemas/MPARequest'
+      type: object
     ListRestoreAwsOrganizationalUnitsResponse:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
@@ -14603,11 +14646,37 @@ components:
             installationMethod: TERRAFORM
             latest: 1.2.0
           status: CONNECTED
+        actionApprovalRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
       properties:
         restoreAccount:
           $ref: '#/components/schemas/RestoreAccount'
-      required:
-      - restoreAccount
+        actionApprovalRequest:
+          $ref: '#/components/schemas/MPARequest'
       type: object
     RestoreAccountsFilterConditions:
       additionalProperties: false
@@ -15006,11 +15075,37 @@ components:
             installationMethod: TERRAFORM
             latest: 1.2.0
           status: CONNECTED
+        actionApprovalRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
       properties:
         restoreAccount:
           $ref: '#/components/schemas/RestoreAccount'
-      required:
-      - restoreAccount
+        actionApprovalRequest:
+          $ref: '#/components/schemas/MPARequest'
       type: object
     SubnetPerAvailabilityZone:
       example:
@@ -15695,6 +15790,7 @@ components:
       - AWS_DYNAMO_DB_BACKUP_FULL
       - AWS_DYNAMO_DB_BACKUP_FULL_EXPORT
       - AWS_EKS_NAMESPACE_BACKUP
+      - AWS_EKS_CLUSTER_BACKUP
       - AWS_KEYSPACES_BACKUP_FULL
       - AWS_CASSANDRA_CLUSTER_BACKUP
       - AWS_OPENSEARCH_BACKUP
@@ -15722,6 +15818,7 @@ components:
       type: string
       x-extensible-enum: true
       x-docs-internal-enum:
+      - AWS_EKS_CLUSTER_BACKUP
       - AWS_EBS_VOLUME_BACKUP
       - AWS_S3_LLG_BACKUP
       - AWS_DOCUMENTDB_BACKUP
@@ -19905,11 +20002,37 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
+        actionApprovalRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
       properties:
         backupPolicy:
           $ref: '#/components/schemas/BackupPolicy'
-      required:
-      - backupPolicy
+        actionApprovalRequest:
+          $ref: '#/components/schemas/MPARequest'
       type: object
     ListBackupPoliciesResponse:
       example:
@@ -21704,11 +21827,37 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
+        actionApprovalRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
       properties:
         backupPolicy:
           $ref: '#/components/schemas/BackupPolicy'
-      required:
-      - backupPolicy
+        actionApprovalRequest:
+          $ref: '#/components/schemas/MPARequest'
       type: object
     AwsVaultConfigInput:
       description: |
@@ -22038,14 +22187,40 @@ components:
     RestoreJobInitiationResponse:
       example:
         jobId: 9892ecab-22d5-47ca-b2b4-70369e80b90a
+        actionApprovalRequest:
+          requesterEmail: requester@example.com
+          resolvedTime: 2026-05-05T02:10:12Z
+          requesterName: Riley Chen
+          approvalExpirationTime: 2026-05-05T03:00:05Z
+          executionExpirationTime: 2026-05-05T07:00:05Z
+          createdTime: 2026-05-04T23:00:05Z
+          comment: Removing a backup policy that has been replaced.
+          id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a10
+          policyDetails:
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          - approverIdpId: 018f3b3f-4818-7c31-a0d7-2e02f2f83a31
+            requiredApprovals: 2
+            approverProviderGroupId: platform-admins
+            executionWindowHours: 4
+            description: Require approval before deleting backup policies.
+            approvalWindowHours: 24
+            currentApprovals: 1
+          operation: MPA_OPERATION_DELETE_BACKUP_POLICY
+          status: PENDING_APPROVAL
       properties:
         jobId:
           description: Restore job ID.
           example: 9892ecab-22d5-47ca-b2b4-70369e80b90a
           format: uuid
           type: string
-      required:
-      - jobId
+        actionApprovalRequest:
+          $ref: '#/components/schemas/MPARequest'
       type: object
     RestoreBucketRequest:
       example:

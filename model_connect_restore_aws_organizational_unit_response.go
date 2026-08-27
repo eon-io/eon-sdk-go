@@ -12,8 +12,6 @@ package eon
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ConnectRestoreAwsOrganizationalUnitResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,16 @@ var _ MappedNullable = &ConnectRestoreAwsOrganizationalUnitResponse{}
 
 // ConnectRestoreAwsOrganizationalUnitResponse struct for ConnectRestoreAwsOrganizationalUnitResponse
 type ConnectRestoreAwsOrganizationalUnitResponse struct {
-	OrganizationalUnit RestoreAwsOrganizationalUnit `json:"organizationalUnit"`
+	OrganizationalUnit *RestoreAwsOrganizationalUnit `json:"organizationalUnit,omitempty"`
+	ActionApprovalRequest NullableMPARequest `json:"actionApprovalRequest,omitempty"`
 }
-
-type _ConnectRestoreAwsOrganizationalUnitResponse ConnectRestoreAwsOrganizationalUnitResponse
 
 // NewConnectRestoreAwsOrganizationalUnitResponse instantiates a new ConnectRestoreAwsOrganizationalUnitResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectRestoreAwsOrganizationalUnitResponse(organizationalUnit RestoreAwsOrganizationalUnit) *ConnectRestoreAwsOrganizationalUnitResponse {
+func NewConnectRestoreAwsOrganizationalUnitResponse() *ConnectRestoreAwsOrganizationalUnitResponse {
 	this := ConnectRestoreAwsOrganizationalUnitResponse{}
-	this.OrganizationalUnit = organizationalUnit
 	return &this
 }
 
@@ -44,28 +40,78 @@ func NewConnectRestoreAwsOrganizationalUnitResponseWithDefaults() *ConnectRestor
 	return &this
 }
 
-// GetOrganizationalUnit returns the OrganizationalUnit field value
+// GetOrganizationalUnit returns the OrganizationalUnit field value if set, zero value otherwise.
 func (o *ConnectRestoreAwsOrganizationalUnitResponse) GetOrganizationalUnit() RestoreAwsOrganizationalUnit {
-	if o == nil {
+	if o == nil || IsNil(o.OrganizationalUnit) {
 		var ret RestoreAwsOrganizationalUnit
 		return ret
 	}
-
-	return o.OrganizationalUnit
+	return *o.OrganizationalUnit
 }
 
-// GetOrganizationalUnitOk returns a tuple with the OrganizationalUnit field value
+// GetOrganizationalUnitOk returns a tuple with the OrganizationalUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectRestoreAwsOrganizationalUnitResponse) GetOrganizationalUnitOk() (*RestoreAwsOrganizationalUnit, bool) {
+	if o == nil || IsNil(o.OrganizationalUnit) {
+		return nil, false
+	}
+	return o.OrganizationalUnit, true
+}
+
+// HasOrganizationalUnit returns a boolean if a field has been set.
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) HasOrganizationalUnit() bool {
+	if o != nil && !IsNil(o.OrganizationalUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganizationalUnit gets a reference to the given RestoreAwsOrganizationalUnit and assigns it to the OrganizationalUnit field.
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) SetOrganizationalUnit(v RestoreAwsOrganizationalUnit) {
+	o.OrganizationalUnit = &v
+}
+
+// GetActionApprovalRequest returns the ActionApprovalRequest field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) GetActionApprovalRequest() MPARequest {
+	if o == nil || IsNil(o.ActionApprovalRequest.Get()) {
+		var ret MPARequest
+		return ret
+	}
+	return *o.ActionApprovalRequest.Get()
+}
+
+// GetActionApprovalRequestOk returns a tuple with the ActionApprovalRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) GetActionApprovalRequestOk() (*MPARequest, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OrganizationalUnit, true
+	return o.ActionApprovalRequest.Get(), o.ActionApprovalRequest.IsSet()
 }
 
-// SetOrganizationalUnit sets field value
-func (o *ConnectRestoreAwsOrganizationalUnitResponse) SetOrganizationalUnit(v RestoreAwsOrganizationalUnit) {
-	o.OrganizationalUnit = v
+// HasActionApprovalRequest returns a boolean if a field has been set.
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) HasActionApprovalRequest() bool {
+	if o != nil && o.ActionApprovalRequest.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetActionApprovalRequest gets a reference to the given NullableMPARequest and assigns it to the ActionApprovalRequest field.
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) SetActionApprovalRequest(v MPARequest) {
+	o.ActionApprovalRequest.Set(&v)
+}
+// SetActionApprovalRequestNil sets the value for ActionApprovalRequest to be an explicit nil
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) SetActionApprovalRequestNil() {
+	o.ActionApprovalRequest.Set(nil)
+}
+
+// UnsetActionApprovalRequest ensures that no value is present for ActionApprovalRequest, not even an explicit nil
+func (o *ConnectRestoreAwsOrganizationalUnitResponse) UnsetActionApprovalRequest() {
+	o.ActionApprovalRequest.Unset()
 }
 
 func (o ConnectRestoreAwsOrganizationalUnitResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +124,13 @@ func (o ConnectRestoreAwsOrganizationalUnitResponse) MarshalJSON() ([]byte, erro
 
 func (o ConnectRestoreAwsOrganizationalUnitResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["organizationalUnit"] = o.OrganizationalUnit
+	if !IsNil(o.OrganizationalUnit) {
+		toSerialize["organizationalUnit"] = o.OrganizationalUnit
+	}
+	if o.ActionApprovalRequest.IsSet() {
+		toSerialize["actionApprovalRequest"] = o.ActionApprovalRequest.Get()
+	}
 	return toSerialize, nil
-}
-
-func (o *ConnectRestoreAwsOrganizationalUnitResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"organizationalUnit",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varConnectRestoreAwsOrganizationalUnitResponse := _ConnectRestoreAwsOrganizationalUnitResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	//decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConnectRestoreAwsOrganizationalUnitResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ConnectRestoreAwsOrganizationalUnitResponse(varConnectRestoreAwsOrganizationalUnitResponse)
-
-	return err
 }
 
 type NullableConnectRestoreAwsOrganizationalUnitResponse struct {
