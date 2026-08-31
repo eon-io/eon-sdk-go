@@ -125,6 +125,8 @@
 
 * `SAAS_BACKUP_SEATS_METERING_DIMENSION` (value: `"SAAS_BACKUP_SEATS_METERING_DIMENSION"`)
 
+* `SAAS_BACKUP_SEATS_RANSOMWARE_METERING_DIMENSION` (value: `"SAAS_BACKUP_SEATS_RANSOMWARE_METERING_DIMENSION"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
