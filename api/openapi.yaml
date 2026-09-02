@@ -10440,6 +10440,19 @@ components:
       - saas_dashboard.view
       - saas_discovery.trigger
       - saas_source_accounts.manage
+      - source_accounts.view
+      - saas_source_accounts.view
+      - restore_accounts.view
+      - discovery_configuration.view
+      - vaults.view
+      - backup_policies.view
+      - saas_backup_policies.view
+      - classification_policies.view
+      - object_filters.view
+      - backup_configuration.view
+      - zero_etl_policies.view
+      - restore_templates.view
+      - saas_backup_policies.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10476,6 +10489,19 @@ components:
       - saas_dashboard.view
       - saas_discovery.trigger
       - saas_source_accounts.manage
+      - source_accounts.view
+      - saas_source_accounts.view
+      - restore_accounts.view
+      - discovery_configuration.view
+      - vaults.view
+      - backup_policies.view
+      - saas_backup_policies.view
+      - classification_policies.view
+      - object_filters.view
+      - backup_configuration.view
+      - zero_etl_policies.view
+      - restore_templates.view
+      - saas_backup_policies.manage
     Permission:
       example:
         permissionType: inventory.view
@@ -10496,6 +10522,7 @@ components:
           type: boolean
       required:
       - allowConditions
+      - areas
       - category
       - description
       - name
@@ -27875,8 +27902,11 @@ components:
       - HIGH_CHANCE_FOR_RANSOMWARE
       - DATA_ANOMALY_DETECTED
       - MALWARE_DETECTED
+      - AI_DATA_RISK_DETECTED
+      - DATA_EXPOSURE_RISK_DETECTED
       example: CLEAN
       type: string
+      x-extensible-enum: true
     SecurityScanConclusionCondition:
       description: Security-scan conclusion condition. Valid only for snapshot-targeted
         operations.

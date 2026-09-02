@@ -24,6 +24,8 @@ const (
 	HIGH_CHANCE_FOR_RANSOMWARE SecurityScanConclusion = "HIGH_CHANCE_FOR_RANSOMWARE"
 	DATA_ANOMALY_DETECTED SecurityScanConclusion = "DATA_ANOMALY_DETECTED"
 	MALWARE_DETECTED SecurityScanConclusion = "MALWARE_DETECTED"
+	AI_DATA_RISK_DETECTED SecurityScanConclusion = "AI_DATA_RISK_DETECTED"
+	DATA_EXPOSURE_RISK_DETECTED SecurityScanConclusion = "DATA_EXPOSURE_RISK_DETECTED"
 )
 
 // All allowed values of SecurityScanConclusion enum
@@ -32,6 +34,8 @@ var AllowedSecurityScanConclusionEnumValues = []SecurityScanConclusion{
 	"HIGH_CHANCE_FOR_RANSOMWARE",
 	"DATA_ANOMALY_DETECTED",
 	"MALWARE_DETECTED",
+	"AI_DATA_RISK_DETECTED",
+	"DATA_EXPOSURE_RISK_DETECTED",
 }
 
 func (v *SecurityScanConclusion) UnmarshalJSON(src []byte) error {
@@ -40,15 +44,10 @@ func (v *SecurityScanConclusion) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := SecurityScanConclusion(value)
-	for _, existing := range AllowedSecurityScanConclusionEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid SecurityScanConclusion", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = SecurityScanConclusion(value)
+	return nil
 }
 
 // NewSecurityScanConclusionFromValue returns a pointer to a valid SecurityScanConclusion

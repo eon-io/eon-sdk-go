@@ -159,6 +159,32 @@
 
 * `SAAS_SOURCE_ACCOUNTS_MANAGE` (value: `"saas_source_accounts.manage"`)
 
+* `SOURCE_ACCOUNTS_VIEW` (value: `"source_accounts.view"`)
+
+* `SAAS_SOURCE_ACCOUNTS_VIEW` (value: `"saas_source_accounts.view"`)
+
+* `RESTORE_ACCOUNTS_VIEW` (value: `"restore_accounts.view"`)
+
+* `DISCOVERY_CONFIGURATION_VIEW` (value: `"discovery_configuration.view"`)
+
+* `VAULTS_VIEW` (value: `"vaults.view"`)
+
+* `BACKUP_POLICIES_VIEW` (value: `"backup_policies.view"`)
+
+* `SAAS_BACKUP_POLICIES_VIEW` (value: `"saas_backup_policies.view"`)
+
+* `CLASSIFICATION_POLICIES_VIEW` (value: `"classification_policies.view"`)
+
+* `OBJECT_FILTERS_VIEW` (value: `"object_filters.view"`)
+
+* `BACKUP_CONFIGURATION_VIEW` (value: `"backup_configuration.view"`)
+
+* `ZERO_ETL_POLICIES_VIEW` (value: `"zero_etl_policies.view"`)
+
+* `RESTORE_TEMPLATES_VIEW` (value: `"restore_templates.view"`)
+
+* `SAAS_BACKUP_POLICIES_MANAGE` (value: `"saas_backup_policies.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -11,6 +11,10 @@
 
 * `MALWARE_DETECTED` (value: `"MALWARE_DETECTED"`)
 
+* `AI_DATA_RISK_DETECTED` (value: `"AI_DATA_RISK_DETECTED"`)
+
+* `DATA_EXPOSURE_RISK_DETECTED` (value: `"DATA_EXPOSURE_RISK_DETECTED"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

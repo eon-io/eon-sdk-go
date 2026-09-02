@@ -98,6 +98,19 @@ const (
 	SAAS_DASHBOARD_VIEW PermissionType = "saas_dashboard.view"
 	SAAS_DISCOVERY_TRIGGER PermissionType = "saas_discovery.trigger"
 	SAAS_SOURCE_ACCOUNTS_MANAGE PermissionType = "saas_source_accounts.manage"
+	SOURCE_ACCOUNTS_VIEW PermissionType = "source_accounts.view"
+	SAAS_SOURCE_ACCOUNTS_VIEW PermissionType = "saas_source_accounts.view"
+	RESTORE_ACCOUNTS_VIEW PermissionType = "restore_accounts.view"
+	DISCOVERY_CONFIGURATION_VIEW PermissionType = "discovery_configuration.view"
+	VAULTS_VIEW PermissionType = "vaults.view"
+	BACKUP_POLICIES_VIEW PermissionType = "backup_policies.view"
+	SAAS_BACKUP_POLICIES_VIEW PermissionType = "saas_backup_policies.view"
+	CLASSIFICATION_POLICIES_VIEW PermissionType = "classification_policies.view"
+	OBJECT_FILTERS_VIEW PermissionType = "object_filters.view"
+	BACKUP_CONFIGURATION_VIEW PermissionType = "backup_configuration.view"
+	ZERO_ETL_POLICIES_VIEW PermissionType = "zero_etl_policies.view"
+	RESTORE_TEMPLATES_VIEW PermissionType = "restore_templates.view"
+	SAAS_BACKUP_POLICIES_MANAGE PermissionType = "saas_backup_policies.manage"
 )
 
 // All allowed values of PermissionType enum
@@ -180,6 +193,19 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"saas_dashboard.view",
 	"saas_discovery.trigger",
 	"saas_source_accounts.manage",
+	"source_accounts.view",
+	"saas_source_accounts.view",
+	"restore_accounts.view",
+	"discovery_configuration.view",
+	"vaults.view",
+	"backup_policies.view",
+	"saas_backup_policies.view",
+	"classification_policies.view",
+	"object_filters.view",
+	"backup_configuration.view",
+	"zero_etl_policies.view",
+	"restore_templates.view",
+	"saas_backup_policies.manage",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {
