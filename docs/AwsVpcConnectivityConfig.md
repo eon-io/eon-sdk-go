@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Vpc** | **string** | VPC ID. | 
 **SubnetsPerAvailabilityZone** | Pointer to [**[]SubnetPerAvailabilityZone**](SubnetPerAvailabilityZone.md) | Subnets to configure for availability zones in the VPC. For availability zones not specified in this list, Eon attempts to use the default subnet.  | [optional] 
 **SecurityGroups** | Pointer to [**ResourceTypeToSecurityGroup**](ResourceTypeToSecurityGroup.md) |  | [optional] 
+**PrivateSubnetEnabled** | Pointer to **bool** | Whether to allow cross-region restore into subnets with no internet access, via an S3 gateway endpoint. When true, Eon uses S3 Multi-Region Access Points to reach vault data from this VPC. Turn this on if any subnet in the VPC lacks internet access. Defaults to false. In the Eon console, this setting appears as \&quot;Allow cross-region restore via S3 gateway endpoint\&quot;.  | [optional] [default to false]
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetSecurityGroups sets SecurityGroups field to given value.
 `func (o *AwsVpcConnectivityConfig) HasSecurityGroups() bool`
 
 HasSecurityGroups returns a boolean if a field has been set.
+
+### GetPrivateSubnetEnabled
+
+`func (o *AwsVpcConnectivityConfig) GetPrivateSubnetEnabled() bool`
+
+GetPrivateSubnetEnabled returns the PrivateSubnetEnabled field if non-nil, zero value otherwise.
+
+### GetPrivateSubnetEnabledOk
+
+`func (o *AwsVpcConnectivityConfig) GetPrivateSubnetEnabledOk() (*bool, bool)`
+
+GetPrivateSubnetEnabledOk returns a tuple with the PrivateSubnetEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateSubnetEnabled
+
+`func (o *AwsVpcConnectivityConfig) SetPrivateSubnetEnabled(v bool)`
+
+SetPrivateSubnetEnabled sets PrivateSubnetEnabled field to given value.
+
+### HasPrivateSubnetEnabled
+
+`func (o *AwsVpcConnectivityConfig) HasPrivateSubnetEnabled() bool`
+
+HasPrivateSubnetEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

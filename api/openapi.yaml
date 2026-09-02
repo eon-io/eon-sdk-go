@@ -10453,6 +10453,8 @@ components:
       - zero_etl_policies.view
       - restore_templates.view
       - saas_backup_policies.manage
+      - data_catalog_permissions.manage
+      - data_catalog_tags.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -15186,6 +15188,7 @@ components:
     AwsVpcConnectivityConfig:
       example:
         vpc: vpc-01234567890123456
+        privateSubnetEnabled: false
         securityGroups:
           restoreServer:
           - sg-0d447a77aa14f9e90
@@ -15215,6 +15218,14 @@ components:
           type: array
         securityGroups:
           $ref: '#/components/schemas/ResourceTypeToSecurityGroup'
+        privateSubnetEnabled:
+          default: false
+          description: |
+            Whether to allow cross-region restore into subnets with no internet access, via an S3 gateway endpoint.
+            When true, Eon uses S3 Multi-Region Access Points to reach vault data from this VPC.
+            Turn this on if any subnet in the VPC lacks internet access. Defaults to false.
+            In the Eon console, this setting appears as "Allow cross-region restore via S3 gateway endpoint".
+          type: boolean
       required:
       - region
       - vpc
@@ -15223,6 +15234,7 @@ components:
       example:
         vpcConfigs:
         - vpc: vpc-01234567890123456
+          privateSubnetEnabled: false
           securityGroups:
             restoreServer:
             - sg-0d447a77aa14f9e90
@@ -15235,6 +15247,7 @@ components:
           - subnetId: subnet-01234567890123456
             availabilityZone: us-east-1a
         - vpc: vpc-01234567890123456
+          privateSubnetEnabled: false
           securityGroups:
             restoreServer:
             - sg-0d447a77aa14f9e90
@@ -15368,6 +15381,7 @@ components:
         aws:
           vpcConfigs:
           - vpc: vpc-01234567890123456
+            privateSubnetEnabled: false
             securityGroups:
               restoreServer:
               - sg-0d447a77aa14f9e90
@@ -15380,6 +15394,7 @@ components:
             - subnetId: subnet-01234567890123456
               availabilityZone: us-east-1a
           - vpc: vpc-01234567890123456
+            privateSubnetEnabled: false
             securityGroups:
               restoreServer:
               - sg-0d447a77aa14f9e90
@@ -15422,6 +15437,7 @@ components:
           aws:
             vpcConfigs:
             - vpc: vpc-01234567890123456
+              privateSubnetEnabled: false
               securityGroups:
                 restoreServer:
                 - sg-0d447a77aa14f9e90
@@ -15434,6 +15450,7 @@ components:
               - subnetId: subnet-01234567890123456
                 availabilityZone: us-east-1a
             - vpc: vpc-01234567890123456
+              privateSubnetEnabled: false
               securityGroups:
                 restoreServer:
                 - sg-0d447a77aa14f9e90
@@ -15482,6 +15499,7 @@ components:
             aws:
               vpcConfigs:
               - vpc: vpc-01234567890123456
+                privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
                   - sg-0d447a77aa14f9e90
@@ -15494,6 +15512,7 @@ components:
                 - subnetId: subnet-01234567890123456
                   availabilityZone: us-east-1a
               - vpc: vpc-01234567890123456
+                privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
                   - sg-0d447a77aa14f9e90
@@ -15534,6 +15553,7 @@ components:
         aws:
           vpcConfigs:
           - vpc: vpc-01234567890123456
+            privateSubnetEnabled: false
             securityGroups:
               restoreServer:
               - sg-0d447a77aa14f9e90
@@ -15546,6 +15566,7 @@ components:
             - subnetId: subnet-01234567890123456
               availabilityZone: us-east-1a
           - vpc: vpc-01234567890123456
+            privateSubnetEnabled: false
             securityGroups:
               restoreServer:
               - sg-0d447a77aa14f9e90
@@ -15589,6 +15610,7 @@ components:
             aws:
               vpcConfigs:
               - vpc: vpc-01234567890123456
+                privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
                   - sg-0d447a77aa14f9e90
@@ -15601,6 +15623,7 @@ components:
                 - subnetId: subnet-01234567890123456
                   availabilityZone: us-east-1a
               - vpc: vpc-01234567890123456
+                privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
                   - sg-0d447a77aa14f9e90

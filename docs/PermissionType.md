@@ -185,6 +185,10 @@
 
 * `SAAS_BACKUP_POLICIES_MANAGE` (value: `"saas_backup_policies.manage"`)
 
+* `DATA_CATALOG_PERMISSIONS_MANAGE` (value: `"data_catalog_permissions.manage"`)
+
+* `DATA_CATALOG_TAGS_MANAGE` (value: `"data_catalog_tags.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

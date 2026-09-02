@@ -111,6 +111,8 @@ const (
 	ZERO_ETL_POLICIES_VIEW PermissionType = "zero_etl_policies.view"
 	RESTORE_TEMPLATES_VIEW PermissionType = "restore_templates.view"
 	SAAS_BACKUP_POLICIES_MANAGE PermissionType = "saas_backup_policies.manage"
+	DATA_CATALOG_PERMISSIONS_MANAGE PermissionType = "data_catalog_permissions.manage"
+	DATA_CATALOG_TAGS_MANAGE PermissionType = "data_catalog_tags.manage"
 )
 
 // All allowed values of PermissionType enum
@@ -206,6 +208,8 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"zero_etl_policies.view",
 	"restore_templates.view",
 	"saas_backup_policies.manage",
+	"data_catalog_permissions.manage",
+	"data_catalog_tags.manage",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

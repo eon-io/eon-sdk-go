@@ -28,6 +28,8 @@ type AwsVpcConnectivityConfig struct {
 	// Subnets to configure for availability zones in the VPC. For availability zones not specified in this list, Eon attempts to use the default subnet. 
 	SubnetsPerAvailabilityZone []SubnetPerAvailabilityZone `json:"subnetsPerAvailabilityZone,omitempty"`
 	SecurityGroups *ResourceTypeToSecurityGroup `json:"securityGroups,omitempty"`
+	// Whether to allow cross-region restore into subnets with no internet access, via an S3 gateway endpoint. When true, Eon uses S3 Multi-Region Access Points to reach vault data from this VPC. Turn this on if any subnet in the VPC lacks internet access. Defaults to false. In the Eon console, this setting appears as \"Allow cross-region restore via S3 gateway endpoint\". 
+	PrivateSubnetEnabled *bool `json:"privateSubnetEnabled,omitempty"`
 }
 
 type _AwsVpcConnectivityConfig AwsVpcConnectivityConfig
@@ -40,6 +42,8 @@ func NewAwsVpcConnectivityConfig(region string, vpc string) *AwsVpcConnectivityC
 	this := AwsVpcConnectivityConfig{}
 	this.Region = region
 	this.Vpc = vpc
+	var privateSubnetEnabled bool = false
+	this.PrivateSubnetEnabled = &privateSubnetEnabled
 	return &this
 }
 
@@ -48,6 +52,8 @@ func NewAwsVpcConnectivityConfig(region string, vpc string) *AwsVpcConnectivityC
 // but it doesn't guarantee that properties required by API are set
 func NewAwsVpcConnectivityConfigWithDefaults() *AwsVpcConnectivityConfig {
 	this := AwsVpcConnectivityConfig{}
+	var privateSubnetEnabled bool = false
+	this.PrivateSubnetEnabled = &privateSubnetEnabled
 	return &this
 }
 
@@ -163,6 +169,38 @@ func (o *AwsVpcConnectivityConfig) SetSecurityGroups(v ResourceTypeToSecurityGro
 	o.SecurityGroups = &v
 }
 
+// GetPrivateSubnetEnabled returns the PrivateSubnetEnabled field value if set, zero value otherwise.
+func (o *AwsVpcConnectivityConfig) GetPrivateSubnetEnabled() bool {
+	if o == nil || IsNil(o.PrivateSubnetEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.PrivateSubnetEnabled
+}
+
+// GetPrivateSubnetEnabledOk returns a tuple with the PrivateSubnetEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsVpcConnectivityConfig) GetPrivateSubnetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.PrivateSubnetEnabled) {
+		return nil, false
+	}
+	return o.PrivateSubnetEnabled, true
+}
+
+// HasPrivateSubnetEnabled returns a boolean if a field has been set.
+func (o *AwsVpcConnectivityConfig) HasPrivateSubnetEnabled() bool {
+	if o != nil && !IsNil(o.PrivateSubnetEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateSubnetEnabled gets a reference to the given bool and assigns it to the PrivateSubnetEnabled field.
+func (o *AwsVpcConnectivityConfig) SetPrivateSubnetEnabled(v bool) {
+	o.PrivateSubnetEnabled = &v
+}
+
 func (o AwsVpcConnectivityConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -180,6 +218,9 @@ func (o AwsVpcConnectivityConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SecurityGroups) {
 		toSerialize["securityGroups"] = o.SecurityGroups
+	}
+	if !IsNil(o.PrivateSubnetEnabled) {
+		toSerialize["privateSubnetEnabled"] = o.PrivateSubnetEnabled
 	}
 	return toSerialize, nil
 }
