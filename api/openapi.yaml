@@ -17380,6 +17380,9 @@ components:
           - accountIds
           - accountIds
           operator: IN
+        sourceStorageSize:
+          operator: GREATER_THAN
+          sizeBytes: 5497558138880
         environment:
           environments:
           - PROD
@@ -17475,6 +17478,8 @@ components:
           $ref: '#/components/schemas/SourceAccountTagKeyValuesCondition'
         globalClusterIdentifier:
           $ref: '#/components/schemas/GlobalClusterIdentifierCondition'
+        sourceStorageSize:
+          $ref: '#/components/schemas/SourceStorageSizeCondition'
       type: object
     BackupPolicyGroupCondition:
       description: |
@@ -17584,6 +17589,50 @@ components:
       - globalClusterIdentifier
       - operator
       type: object
+    NumericOperators:
+      description: |
+        Compares the value against a numeric threshold.
+        `UNSPECIFIED` is supported only in responses.
+      enum:
+      - GREATER_THAN
+      - GREATER_THAN_OR_EQUALS
+      - LESS_THAN
+      - LESS_THAN_OR_EQUALS
+      - EQUALS
+      - NOT_EQUALS
+      - UNSPECIFIED
+      example: GREATER_THAN
+      type: string
+      x-enum-varnames:
+      - GREATER_THAN_OPERATOR
+      - GREATER_THAN_OR_EQUALS_OPERATOR
+      - LESS_THAN_OPERATOR
+      - LESS_THAN_OR_EQUALS_OPERATOR
+      - EQUALS_OPERATOR
+      - NOT_EQUALS_OPERATOR
+      - NUMERIC_OPERATOR_UNSPECIFIED
+    SourceStorageSizeCondition:
+      description: |
+        Evaluates the size of the resource's source data, in bytes, against a threshold.
+
+        A resource's size changes over time, so this condition is re-evaluated as the resource grows and
+        shrinks: a resource that crosses the threshold is attached to or detached from the policy accordingly.
+      example:
+        operator: GREATER_THAN
+        sizeBytes: 5497558138880
+      nullable: true
+      properties:
+        operator:
+          $ref: '#/components/schemas/NumericOperators'
+        sizeBytes:
+          example: 5497558138880
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - operator
+      - sizeBytes
+      type: object
     BackupPolicyResourceSelector:
       example:
         expression:
@@ -17632,6 +17681,9 @@ components:
             - accountIds
             - accountIds
             operator: IN
+          sourceStorageSize:
+            operator: GREATER_THAN
+            sizeBytes: 5497558138880
           environment:
             environments:
             - PROD
@@ -19245,6 +19297,9 @@ components:
               - accountIds
               - accountIds
               operator: IN
+            sourceStorageSize:
+              operator: GREATER_THAN
+              sizeBytes: 5497558138880
             environment:
               environments:
               - PROD
@@ -19614,6 +19669,9 @@ components:
               - accountIds
               - accountIds
               operator: IN
+            sourceStorageSize:
+              operator: GREATER_THAN
+              sizeBytes: 5497558138880
             environment:
               environments:
               - PROD
@@ -19989,6 +20047,9 @@ components:
                 - accountIds
                 - accountIds
                 operator: IN
+              sourceStorageSize:
+                operator: GREATER_THAN
+                sizeBytes: 5497558138880
               environment:
                 environments:
                 - PROD
@@ -20373,6 +20434,9 @@ components:
                 - accountIds
                 - accountIds
                 operator: IN
+              sourceStorageSize:
+                operator: GREATER_THAN
+                sizeBytes: 5497558138880
               environment:
                 environments:
                 - PROD
@@ -20721,6 +20785,9 @@ components:
                 - accountIds
                 - accountIds
                 operator: IN
+              sourceStorageSize:
+                operator: GREATER_THAN
+                sizeBytes: 5497558138880
               environment:
                 environments:
                 - PROD
@@ -21089,6 +21156,9 @@ components:
                 - accountIds
                 - accountIds
                 operator: IN
+              sourceStorageSize:
+                operator: GREATER_THAN
+                sizeBytes: 5497558138880
               environment:
                 environments:
                 - PROD
@@ -21444,6 +21514,9 @@ components:
               - accountIds
               - accountIds
               operator: IN
+            sourceStorageSize:
+              operator: GREATER_THAN
+              sizeBytes: 5497558138880
             environment:
               environments:
               - PROD
@@ -21814,6 +21887,9 @@ components:
                 - accountIds
                 - accountIds
                 operator: IN
+              sourceStorageSize:
+                operator: GREATER_THAN
+                sizeBytes: 5497558138880
               environment:
                 environments:
                 - PROD

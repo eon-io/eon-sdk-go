@@ -281,6 +281,7 @@ docs/MeteringDimension.md
 docs/MinRetentionRule.md
 docs/MonthlyConfig.md
 docs/NumberOfCopiesRule.md
+docs/NumericOperators.md
 docs/Oauth2TokenResponse.md
 docs/ObjectStorageDestination.md
 docs/ObjectStoreScanMethod.md
@@ -397,6 +398,7 @@ docs/SourceAccountTagKeysCondition.md
 docs/SourceAccountsFilterConditions.md
 docs/SourceAwsOrganizationalUnit.md
 docs/SourceStorage.md
+docs/SourceStorageSizeCondition.md
 docs/StandardBackupPolicyPlan.md
 docs/StandardBackupScheduleConfig.md
 docs/StandardBackupScheduleFrequency.md
@@ -709,6 +711,7 @@ model_mpa_request_status.go
 model_mpa_review.go
 model_mpa_submit_action.go
 model_number_of_copies_rule.go
+model_numeric_operators.go
 model_oauth2_token_response.go
 model_object_storage_destination.go
 model_object_store_scan_method.go
@@ -823,6 +826,7 @@ model_source_account_tag_keys_condition.go
 model_source_accounts_filter_conditions.go
 model_source_aws_organizational_unit.go
 model_source_storage.go
+model_source_storage_size_condition.go
 model_standard_backup_policy_plan.go
 model_standard_backup_schedule_config.go
 model_standard_backup_schedule_frequency.go

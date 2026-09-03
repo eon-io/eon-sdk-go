@@ -37,6 +37,7 @@ type BackupPolicyExpression struct {
 	SourceAccountTagKeys NullableSourceAccountTagKeysCondition `json:"sourceAccountTagKeys,omitempty"`
 	SourceAccountTagKeyValues NullableSourceAccountTagKeyValuesCondition `json:"sourceAccountTagKeyValues,omitempty"`
 	GlobalClusterIdentifier NullableGlobalClusterIdentifierCondition `json:"globalClusterIdentifier,omitempty"`
+	SourceStorageSize NullableSourceStorageSizeCondition `json:"sourceStorageSize,omitempty"`
 }
 
 // NewBackupPolicyExpression instantiates a new BackupPolicyExpression object
@@ -812,6 +813,48 @@ func (o *BackupPolicyExpression) UnsetGlobalClusterIdentifier() {
 	o.GlobalClusterIdentifier.Unset()
 }
 
+// GetSourceStorageSize returns the SourceStorageSize field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BackupPolicyExpression) GetSourceStorageSize() SourceStorageSizeCondition {
+	if o == nil || IsNil(o.SourceStorageSize.Get()) {
+		var ret SourceStorageSizeCondition
+		return ret
+	}
+	return *o.SourceStorageSize.Get()
+}
+
+// GetSourceStorageSizeOk returns a tuple with the SourceStorageSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BackupPolicyExpression) GetSourceStorageSizeOk() (*SourceStorageSizeCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SourceStorageSize.Get(), o.SourceStorageSize.IsSet()
+}
+
+// HasSourceStorageSize returns a boolean if a field has been set.
+func (o *BackupPolicyExpression) HasSourceStorageSize() bool {
+	if o != nil && o.SourceStorageSize.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceStorageSize gets a reference to the given NullableSourceStorageSizeCondition and assigns it to the SourceStorageSize field.
+func (o *BackupPolicyExpression) SetSourceStorageSize(v SourceStorageSizeCondition) {
+	o.SourceStorageSize.Set(&v)
+}
+// SetSourceStorageSizeNil sets the value for SourceStorageSize to be an explicit nil
+func (o *BackupPolicyExpression) SetSourceStorageSizeNil() {
+	o.SourceStorageSize.Set(nil)
+}
+
+// UnsetSourceStorageSize ensures that no value is present for SourceStorageSize, not even an explicit nil
+func (o *BackupPolicyExpression) UnsetSourceStorageSize() {
+	o.SourceStorageSize.Unset()
+}
+
 func (o BackupPolicyExpression) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -875,6 +918,9 @@ func (o BackupPolicyExpression) ToMap() (map[string]interface{}, error) {
 	}
 	if o.GlobalClusterIdentifier.IsSet() {
 		toSerialize["globalClusterIdentifier"] = o.GlobalClusterIdentifier.Get()
+	}
+	if o.SourceStorageSize.IsSet() {
+		toSerialize["sourceStorageSize"] = o.SourceStorageSize.Get()
 	}
 	return toSerialize, nil
 }

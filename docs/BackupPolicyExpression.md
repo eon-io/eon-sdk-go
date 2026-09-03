@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **SourceAccountTagKeys** | Pointer to [**NullableSourceAccountTagKeysCondition**](SourceAccountTagKeysCondition.md) |  | [optional] 
 **SourceAccountTagKeyValues** | Pointer to [**NullableSourceAccountTagKeyValuesCondition**](SourceAccountTagKeyValuesCondition.md) |  | [optional] 
 **GlobalClusterIdentifier** | Pointer to [**NullableGlobalClusterIdentifierCondition**](GlobalClusterIdentifierCondition.md) |  | [optional] 
+**SourceStorageSize** | Pointer to [**NullableSourceStorageSizeCondition**](SourceStorageSizeCondition.md) |  | [optional] 
 
 ## Methods
 
@@ -672,6 +673,41 @@ HasGlobalClusterIdentifier returns a boolean if a field has been set.
 `func (o *BackupPolicyExpression) UnsetGlobalClusterIdentifier()`
 
 UnsetGlobalClusterIdentifier ensures that no value is present for GlobalClusterIdentifier, not even an explicit nil
+### GetSourceStorageSize
+
+`func (o *BackupPolicyExpression) GetSourceStorageSize() SourceStorageSizeCondition`
+
+GetSourceStorageSize returns the SourceStorageSize field if non-nil, zero value otherwise.
+
+### GetSourceStorageSizeOk
+
+`func (o *BackupPolicyExpression) GetSourceStorageSizeOk() (*SourceStorageSizeCondition, bool)`
+
+GetSourceStorageSizeOk returns a tuple with the SourceStorageSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceStorageSize
+
+`func (o *BackupPolicyExpression) SetSourceStorageSize(v SourceStorageSizeCondition)`
+
+SetSourceStorageSize sets SourceStorageSize field to given value.
+
+### HasSourceStorageSize
+
+`func (o *BackupPolicyExpression) HasSourceStorageSize() bool`
+
+HasSourceStorageSize returns a boolean if a field has been set.
+
+### SetSourceStorageSizeNil
+
+`func (o *BackupPolicyExpression) SetSourceStorageSizeNil(b bool)`
+
+ SetSourceStorageSizeNil sets the value for SourceStorageSize to be an explicit nil
+
+### UnsetSourceStorageSize
+`func (o *BackupPolicyExpression) UnsetSourceStorageSize()`
+
+UnsetSourceStorageSize ensures that no value is present for SourceStorageSize, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
