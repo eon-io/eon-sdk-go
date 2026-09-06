@@ -872,7 +872,7 @@ paths:
       x-data-access:
         excluded: true
       x-permissions:
-      - admin:idp_groups
+      - read:idp_groups
       x-audit-log:
         excluded: true
   /v1/idp-groups/{groupId}:
@@ -974,7 +974,7 @@ paths:
       x-data-access:
         excluded: true
       x-permissions:
-      - admin:idp_groups
+      - read:idp_groups
       x-audit-log:
         excluded: true
     put:
