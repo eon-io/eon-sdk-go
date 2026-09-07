@@ -13150,6 +13150,7 @@ components:
       example:
         providerAccountId: "123412341234"
         name: prod-eu
+        providerAccountAlias: providerAccountAlias
         connectedTime: 2024-08-29T13:24:03Z
         id: fc495499-9796-5fc9-ade7-1ba924cbcc42
         sourceAccountAttributes:
@@ -13188,6 +13189,11 @@ components:
         providerAccountName:
           description: Display name inherited from the cloud provider.
           type: string
+        providerAccountAlias:
+          description: "AWS only. Account alias inherited from the cloud provider,\
+            \ separate from providerAccountName."
+          type: string
+          x-internal: false
         status:
           $ref: '#/components/schemas/AccountState'
         version:
@@ -13211,6 +13217,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
@@ -13512,6 +13519,7 @@ components:
         accounts:
         - providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
@@ -13536,6 +13544,7 @@ components:
           status: CONNECTED
         - providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
@@ -13584,6 +13593,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
@@ -13683,6 +13693,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
@@ -13716,6 +13727,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
@@ -13749,6 +13761,7 @@ components:
         sourceAccount:
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           sourceAccountAttributes:
@@ -14601,6 +14614,7 @@ components:
             subscriptionId: 12345678-1234-1234-1234-123456789012
         providerAccountId: "123412341234"
         name: prod-eu
+        providerAccountAlias: providerAccountAlias
         connectedTime: 2024-08-29T13:24:03Z
         isRestoreAllowed: true
         id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
@@ -14626,6 +14640,11 @@ components:
         providerAccountName:
           description: Display name inherited from the cloud provider.
           type: string
+        providerAccountAlias:
+          description: "AWS only. Account alias inherited from the cloud provider,\
+            \ separate from providerAccountName."
+          type: string
+          x-internal: false
         status:
           $ref: '#/components/schemas/AccountState'
         version:
@@ -14668,6 +14687,7 @@ components:
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
@@ -14860,6 +14880,7 @@ components:
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
@@ -14884,6 +14905,7 @@ components:
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
@@ -14932,6 +14954,7 @@ components:
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
@@ -15031,6 +15054,7 @@ components:
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
@@ -15064,6 +15088,7 @@ components:
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c
@@ -15097,6 +15122,7 @@ components:
               subscriptionId: 12345678-1234-1234-1234-123456789012
           providerAccountId: "123412341234"
           name: prod-eu
+          providerAccountAlias: providerAccountAlias
           connectedTime: 2024-08-29T13:24:03Z
           isRestoreAllowed: true
           id: 9b76a8a2-a918-57e6-94d5-0316ebab663c

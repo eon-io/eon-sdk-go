@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
 **Name** | **string** | Account display name in Eon. | 
 **ProviderAccountName** | Pointer to **string** | Display name inherited from the cloud provider. | [optional] 
+**ProviderAccountAlias** | Pointer to **string** | AWS only. Account alias inherited from the cloud provider, separate from providerAccountName. | [optional] 
 **Status** | [**AccountState**](AccountState.md) |  | 
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
 **ConnectedTime** | Pointer to **time.Time** | Date and time the account was connected to Eon. | [optional] 
@@ -117,6 +118,31 @@ SetProviderAccountName sets ProviderAccountName field to given value.
 `func (o *RestoreAccount) HasProviderAccountName() bool`
 
 HasProviderAccountName returns a boolean if a field has been set.
+
+### GetProviderAccountAlias
+
+`func (o *RestoreAccount) GetProviderAccountAlias() string`
+
+GetProviderAccountAlias returns the ProviderAccountAlias field if non-nil, zero value otherwise.
+
+### GetProviderAccountAliasOk
+
+`func (o *RestoreAccount) GetProviderAccountAliasOk() (*string, bool)`
+
+GetProviderAccountAliasOk returns a tuple with the ProviderAccountAlias field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderAccountAlias
+
+`func (o *RestoreAccount) SetProviderAccountAlias(v string)`
+
+SetProviderAccountAlias sets ProviderAccountAlias field to given value.
+
+### HasProviderAccountAlias
+
+`func (o *RestoreAccount) HasProviderAccountAlias() bool`
+
+HasProviderAccountAlias returns a boolean if a field has been set.
 
 ### GetStatus
 

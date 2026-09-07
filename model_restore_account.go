@@ -30,6 +30,8 @@ type RestoreAccount struct {
 	Name string `json:"name"`
 	// Display name inherited from the cloud provider.
 	ProviderAccountName *string `json:"providerAccountName,omitempty"`
+	// AWS only. Account alias inherited from the cloud provider, separate from providerAccountName.
+	ProviderAccountAlias *string `json:"providerAccountAlias,omitempty"`
 	Status AccountState `json:"status"`
 	Version *AccountVersion `json:"version,omitempty"`
 	// Date and time the account was connected to Eon.
@@ -166,6 +168,38 @@ func (o *RestoreAccount) HasProviderAccountName() bool {
 // SetProviderAccountName gets a reference to the given string and assigns it to the ProviderAccountName field.
 func (o *RestoreAccount) SetProviderAccountName(v string) {
 	o.ProviderAccountName = &v
+}
+
+// GetProviderAccountAlias returns the ProviderAccountAlias field value if set, zero value otherwise.
+func (o *RestoreAccount) GetProviderAccountAlias() string {
+	if o == nil || IsNil(o.ProviderAccountAlias) {
+		var ret string
+		return ret
+	}
+	return *o.ProviderAccountAlias
+}
+
+// GetProviderAccountAliasOk returns a tuple with the ProviderAccountAlias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreAccount) GetProviderAccountAliasOk() (*string, bool) {
+	if o == nil || IsNil(o.ProviderAccountAlias) {
+		return nil, false
+	}
+	return o.ProviderAccountAlias, true
+}
+
+// HasProviderAccountAlias returns a boolean if a field has been set.
+func (o *RestoreAccount) HasProviderAccountAlias() bool {
+	if o != nil && !IsNil(o.ProviderAccountAlias) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderAccountAlias gets a reference to the given string and assigns it to the ProviderAccountAlias field.
+func (o *RestoreAccount) SetProviderAccountAlias(v string) {
+	o.ProviderAccountAlias = &v
 }
 
 // GetStatus returns the Status field value
@@ -319,6 +353,9 @@ func (o RestoreAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	if !IsNil(o.ProviderAccountName) {
 		toSerialize["providerAccountName"] = o.ProviderAccountName
+	}
+	if !IsNil(o.ProviderAccountAlias) {
+		toSerialize["providerAccountAlias"] = o.ProviderAccountAlias
 	}
 	toSerialize["status"] = o.Status
 	if !IsNil(o.Version) {
