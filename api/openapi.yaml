@@ -15892,6 +15892,7 @@ components:
       - ATLAS_MONGODB_CLUSTER_BACKUP_FULL
       - GOOGLE_WORKSPACE_BACKUP
       - MICROSOFT_365_BACKUP
+      - AZURE_ENTRA_ID_BACKUP
       example: AWS_EC2_BACKUP
       type: string
       x-extensible-enum: true
@@ -15910,6 +15911,7 @@ components:
       - AZURE_SAP_HANA_VM_BACKUP
       - GOOGLE_WORKSPACE_BACKUP
       - MICROSOFT_365_BACKUP
+      - AZURE_ENTRA_ID_BACKUP
     BackupJobTypeFilters:
       additionalProperties: false
       example:
@@ -16617,6 +16619,7 @@ components:
       - ATLAS_CLUSTER_RECORD_RESTORE
       - MICROSOFT_365_RESTORE
       - GOOGLE_WORKSPACE_RESTORE
+      - AZURE_ENTRA_ID_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
@@ -16636,6 +16639,7 @@ components:
       - AWS_OPENSEARCH_DOMAIN_RESTORE
       - MICROSOFT_365_RESTORE
       - GOOGLE_WORKSPACE_RESTORE
+      - AZURE_ENTRA_ID_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS
     RestoreJobTypeFilters:
       additionalProperties: false

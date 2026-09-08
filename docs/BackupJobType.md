@@ -81,6 +81,8 @@
 
 * `MICROSOFT_365_BACKUP` (value: `"MICROSOFT_365_BACKUP"`)
 
+* `AZURE_ENTRA_ID_BACKUP` (value: `"AZURE_ENTRA_ID_BACKUP"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

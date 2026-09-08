@@ -59,6 +59,7 @@ const (
 	ATLAS_MONGODB_CLUSTER_BACKUP_FULL BackupJobType = "ATLAS_MONGODB_CLUSTER_BACKUP_FULL"
 	GOOGLE_WORKSPACE_BACKUP BackupJobType = "GOOGLE_WORKSPACE_BACKUP"
 	MICROSOFT_365_BACKUP BackupJobType = "MICROSOFT_365_BACKUP"
+	AZURE_ENTRA_ID_BACKUP BackupJobType = "AZURE_ENTRA_ID_BACKUP"
 )
 
 // All allowed values of BackupJobType enum
@@ -102,6 +103,7 @@ var AllowedBackupJobTypeEnumValues = []BackupJobType{
 	"ATLAS_MONGODB_CLUSTER_BACKUP_FULL",
 	"GOOGLE_WORKSPACE_BACKUP",
 	"MICROSOFT_365_BACKUP",
+	"AZURE_ENTRA_ID_BACKUP",
 }
 
 func (v *BackupJobType) UnmarshalJSON(src []byte) error {
