@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | The permissions of the role | 
 **AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | The condition of the role, keyed by name | [optional] 
 **RestoreDestinationLimits** | Pointer to [**NullableRestoreDestinationLimits**](RestoreDestinationLimits.md) |  | [optional] 
+**RestoreDestinationTagLimits** | Pointer to [**NullableRestoreDestinationTagLimits**](RestoreDestinationTagLimits.md) |  | [optional] 
 **SameSourceAccountRestoreLimits** | Pointer to [**NullableSameSourceAccountRestoreLimits**](SameSourceAccountRestoreLimits.md) |  | [optional] 
 
 ## Methods
@@ -129,6 +130,41 @@ HasRestoreDestinationLimits returns a boolean if a field has been set.
 `func (o *UpdateRoleRequest) UnsetRestoreDestinationLimits()`
 
 UnsetRestoreDestinationLimits ensures that no value is present for RestoreDestinationLimits, not even an explicit nil
+### GetRestoreDestinationTagLimits
+
+`func (o *UpdateRoleRequest) GetRestoreDestinationTagLimits() RestoreDestinationTagLimits`
+
+GetRestoreDestinationTagLimits returns the RestoreDestinationTagLimits field if non-nil, zero value otherwise.
+
+### GetRestoreDestinationTagLimitsOk
+
+`func (o *UpdateRoleRequest) GetRestoreDestinationTagLimitsOk() (*RestoreDestinationTagLimits, bool)`
+
+GetRestoreDestinationTagLimitsOk returns a tuple with the RestoreDestinationTagLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreDestinationTagLimits
+
+`func (o *UpdateRoleRequest) SetRestoreDestinationTagLimits(v RestoreDestinationTagLimits)`
+
+SetRestoreDestinationTagLimits sets RestoreDestinationTagLimits field to given value.
+
+### HasRestoreDestinationTagLimits
+
+`func (o *UpdateRoleRequest) HasRestoreDestinationTagLimits() bool`
+
+HasRestoreDestinationTagLimits returns a boolean if a field has been set.
+
+### SetRestoreDestinationTagLimitsNil
+
+`func (o *UpdateRoleRequest) SetRestoreDestinationTagLimitsNil(b bool)`
+
+ SetRestoreDestinationTagLimitsNil sets the value for RestoreDestinationTagLimits to be an explicit nil
+
+### UnsetRestoreDestinationTagLimits
+`func (o *UpdateRoleRequest) UnsetRestoreDestinationTagLimits()`
+
+UnsetRestoreDestinationTagLimits ensures that no value is present for RestoreDestinationTagLimits, not even an explicit nil
 ### GetSameSourceAccountRestoreLimits
 
 `func (o *UpdateRoleRequest) GetSameSourceAccountRestoreLimits() SameSourceAccountRestoreLimits`

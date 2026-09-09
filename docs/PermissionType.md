@@ -189,6 +189,10 @@
 
 * `DATA_CATALOG_TAGS_MANAGE` (value: `"data_catalog_tags.manage"`)
 
+* `DASHBOARD_MANAGE` (value: `"dashboard.manage"`)
+
+* `AI_ASSISTANT_USE` (value: `"ai_assistant.use"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

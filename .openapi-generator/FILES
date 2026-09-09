@@ -334,6 +334,8 @@ docs/RestoreAccountCloudAttributes.md
 docs/RestoreAccountConnectivityConfig.md
 docs/RestoreAccountMetricsConfig.md
 docs/RestoreAccountSortField.md
+docs/RestoreAccountTagOperator.md
+docs/RestoreAccountTagSubject.md
 docs/RestoreAccountsFilterConditions.md
 docs/RestoreAwsEc2InstanceRequest.md
 docs/RestoreAwsOrganizationalUnit.md
@@ -345,6 +347,7 @@ docs/RestoreBigQueryDatasetRequest.md
 docs/RestoreBucketRequest.md
 docs/RestoreDbToRdsInstanceRequest.md
 docs/RestoreDestinationLimits.md
+docs/RestoreDestinationTagLimits.md
 docs/RestoreDynamoDBTableRequest.md
 docs/RestoreFilesRequest.md
 docs/RestoreGcpCloudSqlRequest.md
@@ -763,6 +766,8 @@ model_restore_account_cloud_attributes.go
 model_restore_account_connectivity_config.go
 model_restore_account_metrics_config.go
 model_restore_account_sort_field.go
+model_restore_account_tag_operator.go
+model_restore_account_tag_subject.go
 model_restore_accounts_filter_conditions.go
 model_restore_aws_ec2_instance_request.go
 model_restore_aws_organizational_unit.go
@@ -774,6 +779,7 @@ model_restore_big_query_dataset_request.go
 model_restore_bucket_request.go
 model_restore_db_to_rds_instance_request.go
 model_restore_destination_limits.go
+model_restore_destination_tag_limits.go
 model_restore_dynamo_db_table_request.go
 model_restore_files_request.go
 model_restore_gcp_cloud_sql_request.go

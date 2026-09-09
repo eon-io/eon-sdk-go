@@ -10455,6 +10455,8 @@ components:
       - saas_backup_policies.manage
       - data_catalog_permissions.manage
       - data_catalog_tags.manage
+      - dashboard.manage
+      - ai_assistant.use
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -10504,6 +10506,8 @@ components:
       - zero_etl_policies.view
       - restore_templates.view
       - saas_backup_policies.manage
+      - dashboard.manage
+      - ai_assistant.use
     Permission:
       example:
         permissionType: inventory.view
@@ -10889,6 +10893,84 @@ components:
       - restoreAccountProviderIds
       type: object
       x-internal: false
+    RestoreAccountTagSubject:
+      description: |
+        What a restore destination tag limit matches its values against.
+      enum:
+      - TAG_KEYS
+      - TAG_KEY_VALUES
+      example: TAG_KEY_VALUES
+      type: string
+      x-enum-varnames:
+      - RESTORE_ACCOUNT_TAG_SUBJECT_TAG_KEYS
+      - RESTORE_ACCOUNT_TAG_SUBJECT_TAG_KEY_VALUES
+      x-fern-enum:
+        TAG_KEYS:
+          description: |
+            Values are tag keys, matched regardless of the value the account holds against them.
+        TAG_KEY_VALUES:
+          description: |
+            Values are whole `key=value` pairs, matched on key and value together.
+    RestoreAccountTagOperator:
+      description: |
+        How a restore destination tag limit compares its values to the tags on the account.
+      enum:
+      - CONTAINS_ANY_OF
+      - CONTAINS_ALL_OF
+      - CONTAINS_NONE_OF
+      example: CONTAINS_ANY_OF
+      type: string
+      x-enum-varnames:
+      - RESTORE_ACCOUNT_TAG_OPERATOR_CONTAINS_ANY_OF
+      - RESTORE_ACCOUNT_TAG_OPERATOR_CONTAINS_ALL_OF
+      - RESTORE_ACCOUNT_TAG_OPERATOR_CONTAINS_NONE_OF
+      x-fern-enum:
+        CONTAINS_ANY_OF:
+          description: |
+            The account is allowed as a destination if it carries at least one of the values.
+        CONTAINS_ALL_OF:
+          description: |
+            The account is allowed as a destination only if it carries every one of the values.
+        CONTAINS_NONE_OF:
+          description: |
+            The account is allowed as a destination only if it carries none of the values.
+    RestoreDestinationTagLimits:
+      description: |
+        Limits the restore accounts that can be used as restore destinations for operations granted by
+        the role, by the tags the cloud provider holds against the account: AWS account tags, Azure
+        subscription tags, or GCP project labels.
+
+        Applied in addition to `restoreDestinationLimits`, so a destination has to satisfy both.
+        Matching is exact on key and value; an account Eon has discovered no tags for satisfies only
+        `CONTAINS_NONE_OF`.
+      example:
+        subject: TAG_KEY_VALUES
+        values:
+        - env=prod
+        - tier=gold
+        operator: CONTAINS_ANY_OF
+      nullable: true
+      properties:
+        subject:
+          $ref: '#/components/schemas/RestoreAccountTagSubject'
+        operator:
+          $ref: '#/components/schemas/RestoreAccountTagOperator'
+        values:
+          description: |
+            Tag keys when `subject` is `TAG_KEYS`, `key=value` pairs when it is `TAG_KEY_VALUES`.
+          example:
+          - env=prod
+          - tier=gold
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - operator
+      - subject
+      - values
+      type: object
+      x-internal: false
     SameSourceAccountRestoreLimits:
       description: |
         Restricts restoring applicable resources only to the source account they were backed up from.
@@ -11102,6 +11184,12 @@ components:
               - apps
           effect: INCLUSIVE
           id: Non-PII only
+        restoreDestinationTagLimits:
+          subject: TAG_KEY_VALUES
+          values:
+          - env=prod
+          - tier=gold
+          operator: CONTAINS_ANY_OF
       properties:
         name:
           description: |
@@ -11123,6 +11211,8 @@ components:
           type: array
         restoreDestinationLimits:
           $ref: '#/components/schemas/RestoreDestinationLimits'
+        restoreDestinationTagLimits:
+          $ref: '#/components/schemas/RestoreDestinationTagLimits'
         sameSourceAccountRestoreLimits:
           $ref: '#/components/schemas/SameSourceAccountRestoreLimits'
       required:
@@ -11341,6 +11431,12 @@ components:
               - apps
           effect: INCLUSIVE
           id: Non-PII only
+        restoreDestinationTagLimits:
+          subject: TAG_KEY_VALUES
+          values:
+          - env=prod
+          - tier=gold
+          operator: CONTAINS_ANY_OF
         id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         id:
@@ -11374,6 +11470,8 @@ components:
           type: array
         restoreDestinationLimits:
           $ref: '#/components/schemas/RestoreDestinationLimits'
+        restoreDestinationTagLimits:
+          $ref: '#/components/schemas/RestoreDestinationTagLimits'
         sameSourceAccountRestoreLimits:
           $ref: '#/components/schemas/SameSourceAccountRestoreLimits'
       required:
@@ -11578,6 +11676,12 @@ components:
                 - apps
             effect: INCLUSIVE
             id: Non-PII only
+          restoreDestinationTagLimits:
+            subject: TAG_KEY_VALUES
+            values:
+            - env=prod
+            - tier=gold
+            operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         role:
@@ -11781,6 +11885,12 @@ components:
                 - apps
             effect: INCLUSIVE
             id: Non-PII only
+          restoreDestinationTagLimits:
+            subject: TAG_KEY_VALUES
+            values:
+            - env=prod
+            - tier=gold
+            operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         - restoreDestinationLimits:
             effect: INCLUSIVE
@@ -11974,6 +12084,12 @@ components:
                 - apps
             effect: INCLUSIVE
             id: Non-PII only
+          restoreDestinationTagLimits:
+            subject: TAG_KEY_VALUES
+            values:
+            - env=prod
+            - tier=gold
+            operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
         totalCount: 0
       properties:
@@ -12188,6 +12304,12 @@ components:
                 - apps
             effect: INCLUSIVE
             id: Non-PII only
+          restoreDestinationTagLimits:
+            subject: TAG_KEY_VALUES
+            values:
+            - env=prod
+            - tier=gold
+            operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         role:
@@ -12388,6 +12510,12 @@ components:
               - apps
           effect: INCLUSIVE
           id: Non-PII only
+        restoreDestinationTagLimits:
+          subject: TAG_KEY_VALUES
+          values:
+          - env=prod
+          - tier=gold
+          operator: CONTAINS_ANY_OF
       properties:
         name:
           description: The name of the role
@@ -12404,6 +12532,8 @@ components:
           type: array
         restoreDestinationLimits:
           $ref: '#/components/schemas/RestoreDestinationLimits'
+        restoreDestinationTagLimits:
+          $ref: '#/components/schemas/RestoreDestinationTagLimits'
         sameSourceAccountRestoreLimits:
           $ref: '#/components/schemas/SameSourceAccountRestoreLimits'
       required:
@@ -12605,6 +12735,12 @@ components:
                 - apps
             effect: INCLUSIVE
             id: Non-PII only
+          restoreDestinationTagLimits:
+            subject: TAG_KEY_VALUES
+            values:
+            - env=prod
+            - tier=gold
+            operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
       properties:
         role:
@@ -27578,6 +27714,8 @@ components:
       - SAAS_BACKUP_STORAGE_METERING_DIMENSION
       - SAAS_BACKUP_SEATS_METERING_DIMENSION
       - SAAS_BACKUP_SEATS_RANSOMWARE_METERING_DIMENSION
+      - AWS_S3_COLD_TIER_STORAGE_METERING_DIMENSION
+      - AWS_S3_COLD_TIER_MANAGED_OBJECTS_METERING_DIMENSION
     Cost:
       example:
         amount: 150.75

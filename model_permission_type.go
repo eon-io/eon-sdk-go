@@ -113,6 +113,8 @@ const (
 	SAAS_BACKUP_POLICIES_MANAGE PermissionType = "saas_backup_policies.manage"
 	DATA_CATALOG_PERMISSIONS_MANAGE PermissionType = "data_catalog_permissions.manage"
 	DATA_CATALOG_TAGS_MANAGE PermissionType = "data_catalog_tags.manage"
+	DASHBOARD_MANAGE PermissionType = "dashboard.manage"
+	AI_ASSISTANT_USE PermissionType = "ai_assistant.use"
 )
 
 // All allowed values of PermissionType enum
@@ -210,6 +212,8 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"saas_backup_policies.manage",
 	"data_catalog_permissions.manage",
 	"data_catalog_tags.manage",
+	"dashboard.manage",
+	"ai_assistant.use",
 }
 
 func (v *PermissionType) UnmarshalJSON(src []byte) error {

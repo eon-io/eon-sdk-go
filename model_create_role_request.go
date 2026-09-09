@@ -28,6 +28,7 @@ type CreateRoleRequest struct {
 	// If present, the ID of the set of access conditions that restrict the resources the permission is granted for. The ID must be present in an entry in `accessConditions`, and the permission itself must support access conditions. If omitted, the permission is granted for all resources. 
 	AccessConditions []AccessCondition `json:"accessConditions,omitempty"`
 	RestoreDestinationLimits NullableRestoreDestinationLimits `json:"restoreDestinationLimits,omitempty"`
+	RestoreDestinationTagLimits NullableRestoreDestinationTagLimits `json:"restoreDestinationTagLimits,omitempty"`
 	SameSourceAccountRestoreLimits NullableSameSourceAccountRestoreLimits `json:"sameSourceAccountRestoreLimits,omitempty"`
 }
 
@@ -174,6 +175,48 @@ func (o *CreateRoleRequest) UnsetRestoreDestinationLimits() {
 	o.RestoreDestinationLimits.Unset()
 }
 
+// GetRestoreDestinationTagLimits returns the RestoreDestinationTagLimits field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateRoleRequest) GetRestoreDestinationTagLimits() RestoreDestinationTagLimits {
+	if o == nil || IsNil(o.RestoreDestinationTagLimits.Get()) {
+		var ret RestoreDestinationTagLimits
+		return ret
+	}
+	return *o.RestoreDestinationTagLimits.Get()
+}
+
+// GetRestoreDestinationTagLimitsOk returns a tuple with the RestoreDestinationTagLimits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateRoleRequest) GetRestoreDestinationTagLimitsOk() (*RestoreDestinationTagLimits, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RestoreDestinationTagLimits.Get(), o.RestoreDestinationTagLimits.IsSet()
+}
+
+// HasRestoreDestinationTagLimits returns a boolean if a field has been set.
+func (o *CreateRoleRequest) HasRestoreDestinationTagLimits() bool {
+	if o != nil && o.RestoreDestinationTagLimits.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreDestinationTagLimits gets a reference to the given NullableRestoreDestinationTagLimits and assigns it to the RestoreDestinationTagLimits field.
+func (o *CreateRoleRequest) SetRestoreDestinationTagLimits(v RestoreDestinationTagLimits) {
+	o.RestoreDestinationTagLimits.Set(&v)
+}
+// SetRestoreDestinationTagLimitsNil sets the value for RestoreDestinationTagLimits to be an explicit nil
+func (o *CreateRoleRequest) SetRestoreDestinationTagLimitsNil() {
+	o.RestoreDestinationTagLimits.Set(nil)
+}
+
+// UnsetRestoreDestinationTagLimits ensures that no value is present for RestoreDestinationTagLimits, not even an explicit nil
+func (o *CreateRoleRequest) UnsetRestoreDestinationTagLimits() {
+	o.RestoreDestinationTagLimits.Unset()
+}
+
 // GetSameSourceAccountRestoreLimits returns the SameSourceAccountRestoreLimits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateRoleRequest) GetSameSourceAccountRestoreLimits() SameSourceAccountRestoreLimits {
 	if o == nil || IsNil(o.SameSourceAccountRestoreLimits.Get()) {
@@ -233,6 +276,9 @@ func (o CreateRoleRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.RestoreDestinationLimits.IsSet() {
 		toSerialize["restoreDestinationLimits"] = o.RestoreDestinationLimits.Get()
+	}
+	if o.RestoreDestinationTagLimits.IsSet() {
+		toSerialize["restoreDestinationTagLimits"] = o.RestoreDestinationTagLimits.Get()
 	}
 	if o.SameSourceAccountRestoreLimits.IsSet() {
 		toSerialize["sameSourceAccountRestoreLimits"] = o.SameSourceAccountRestoreLimits.Get()
