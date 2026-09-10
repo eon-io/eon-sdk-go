@@ -24636,8 +24636,10 @@ components:
       - ACTION_REQUIRED
       - DLSG
       - LIMIT_EXCEEDED
+      - CLASSIFICATION_FAILED
       example: VIOLATIONS_DETECTED
       type: string
+      x-extensible-enum: true
       x-docs-internal-enum:
       - DLSG
       - LIMIT_EXCEEDED

@@ -34,6 +34,7 @@ const (
 	ACTION_REQUIRED BackupStatus = "ACTION_REQUIRED"
 	DLSG BackupStatus = "DLSG"
 	LIMIT_EXCEEDED BackupStatus = "LIMIT_EXCEEDED"
+	CLASSIFICATION_FAILED BackupStatus = "CLASSIFICATION_FAILED"
 )
 
 // All allowed values of BackupStatus enum
@@ -52,6 +53,7 @@ var AllowedBackupStatusEnumValues = []BackupStatus{
 	"ACTION_REQUIRED",
 	"DLSG",
 	"LIMIT_EXCEEDED",
+	"CLASSIFICATION_FAILED",
 }
 
 func (v *BackupStatus) UnmarshalJSON(src []byte) error {
@@ -60,15 +62,10 @@ func (v *BackupStatus) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := BackupStatus(value)
-	for _, existing := range AllowedBackupStatusEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid BackupStatus", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = BackupStatus(value)
+	return nil
 }
 
 // NewBackupStatusFromValue returns a pointer to a valid BackupStatus

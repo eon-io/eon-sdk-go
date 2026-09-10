@@ -31,6 +31,8 @@
 
 * `LIMIT_EXCEEDED` (value: `"LIMIT_EXCEEDED"`)
 
+* `CLASSIFICATION_FAILED` (value: `"CLASSIFICATION_FAILED"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
