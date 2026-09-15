@@ -314,6 +314,7 @@ type ApiListVaultsRequest struct {
 	projectId string
 	pageToken *string
 	pageSize *int32
+	body *map[string]interface{}
 }
 
 // Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
@@ -325,6 +326,11 @@ func (r ApiListVaultsRequest) PageToken(pageToken string) ApiListVaultsRequest {
 // Maximum number of items to return in the response.
 func (r ApiListVaultsRequest) PageSize(pageSize int32) ApiListVaultsRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiListVaultsRequest) Body(body map[string]interface{}) ApiListVaultsRequest {
+	r.body = &body
 	return r
 }
 
@@ -378,7 +384,7 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ListBacku
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -394,6 +400,8 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ListBacku
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
