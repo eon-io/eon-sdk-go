@@ -33,6 +33,8 @@
 
 * `CLASSIFICATION_FAILED` (value: `"CLASSIFICATION_FAILED"`)
 
+* `ACCESS_LOST` (value: `"ACCESS_LOST"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

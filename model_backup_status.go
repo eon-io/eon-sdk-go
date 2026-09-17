@@ -35,6 +35,7 @@ const (
 	DLSG BackupStatus = "DLSG"
 	LIMIT_EXCEEDED BackupStatus = "LIMIT_EXCEEDED"
 	CLASSIFICATION_FAILED BackupStatus = "CLASSIFICATION_FAILED"
+	ACCESS_LOST BackupStatus = "ACCESS_LOST"
 )
 
 // All allowed values of BackupStatus enum
@@ -54,6 +55,7 @@ var AllowedBackupStatusEnumValues = []BackupStatus{
 	"DLSG",
 	"LIMIT_EXCEEDED",
 	"CLASSIFICATION_FAILED",
+	"ACCESS_LOST",
 }
 
 func (v *BackupStatus) UnmarshalJSON(src []byte) error {

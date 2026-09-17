@@ -24647,6 +24647,7 @@ components:
       - DLSG
       - LIMIT_EXCEEDED
       - CLASSIFICATION_FAILED
+      - ACCESS_LOST
       example: VIOLATIONS_DETECTED
       type: string
       x-extensible-enum: true
