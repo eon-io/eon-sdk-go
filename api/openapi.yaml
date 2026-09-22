@@ -179,6 +179,7 @@ paths:
       tags:
       - backupPostureControls
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -300,6 +301,7 @@ paths:
       tags:
       - backupPostureControls
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -1092,6 +1094,7 @@ paths:
       tags:
       - accounts
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -1181,6 +1184,7 @@ paths:
       tags:
       - accounts
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -3288,6 +3292,7 @@ paths:
       tags:
       - jobs
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -3351,6 +3356,7 @@ paths:
       tags:
       - jobs
       x-mcp: true
+      x-local-mcp: true
       x-permissions:
       - read:jobs
       x-audit-log:
@@ -3440,6 +3446,7 @@ paths:
       tags:
       - jobs
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -3503,6 +3510,7 @@ paths:
       tags:
       - jobs
       x-mcp: true
+      x-local-mcp: true
       x-permissions:
       - read:jobs
       x-audit-log:
@@ -3583,6 +3591,7 @@ paths:
       - backups
       x-internal: false
       x-mcp: true
+      x-local-mcp: true
       x-permissions:
       - create:jobs
       x-audit-log:
@@ -3835,6 +3844,7 @@ paths:
       tags:
       - backupPolicies
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -3922,6 +3932,7 @@ paths:
       tags:
       - backupPolicies
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -4079,6 +4090,7 @@ paths:
       tags:
       - backupPolicies
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -4480,6 +4492,7 @@ paths:
       tags:
       - vaults
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -6744,6 +6757,7 @@ paths:
       tags:
       - resources
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -6820,6 +6834,7 @@ paths:
       tags:
       - resources
       x-mcp: true
+      x-local-mcp: true
       x-permissions:
       - read:inventory
       x-audit-log:
@@ -7501,6 +7516,7 @@ paths:
       tags:
       - snapshots
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: false
@@ -7789,6 +7805,7 @@ paths:
       tags:
       - snapshots
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: false
@@ -8112,6 +8129,7 @@ paths:
       tags:
       - billing
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
@@ -8635,6 +8653,7 @@ paths:
       x-internal: false
       x-permissions: []
       x-mcp: true
+      x-local-mcp: true
       x-audit-log:
         excluded: true
       x-data-access:
@@ -8806,6 +8825,7 @@ paths:
       tags:
       - actionApprovals
       x-mcp: true
+      x-local-mcp: true
       x-internal: false
       x-permissions: []
       x-audit-log:
