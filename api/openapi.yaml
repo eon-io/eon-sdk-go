@@ -16764,6 +16764,7 @@ components:
       - MICROSOFT_365_RESTORE
       - GOOGLE_WORKSPACE_RESTORE
       - AZURE_ENTRA_ID_RESTORE
+      - AZURE_ENTRA_ID_MICROSOFT_365_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS
       example: AWS_EC2_INSTANCE_RESTORE
       type: string
@@ -16784,6 +16785,7 @@ components:
       - MICROSOFT_365_RESTORE
       - GOOGLE_WORKSPACE_RESTORE
       - AZURE_ENTRA_ID_RESTORE
+      - AZURE_ENTRA_ID_MICROSOFT_365_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS
     RestoreJobTypeFilters:
       additionalProperties: false
@@ -18399,6 +18401,7 @@ components:
             frequency: WEEKLY
           backupRetentionDays: 30
         scheduleTimezone: UTC
+        reuseExistingSnapshots: false
       nullable: true
       properties:
         backupSchedules:
@@ -18410,6 +18413,14 @@ components:
           type: array
         scheduleTimezone:
           $ref: '#/components/schemas/ScheduleTimezone'
+        reuseExistingSnapshots:
+          description: |
+            Whether to back up from a qualifying existing customer snapshot taken within the backup
+            interval, instead of taking a new one. Applies to RDS resources.
+            Omit or send `null` on an update to leave the current setting unchanged.
+          example: false
+          nullable: true
+          type: boolean
       required:
       - backupSchedules
       type: object
@@ -18654,6 +18665,7 @@ components:
             frequency: WEEKLY
           backupRetentionDays: 30
         scheduleTimezone: UTC
+        reuseExistingSnapshots: false
       nullable: true
       properties:
         resourceTypes:
@@ -18670,6 +18682,14 @@ components:
           type: array
         scheduleTimezone:
           $ref: '#/components/schemas/ScheduleTimezone'
+        reuseExistingSnapshots:
+          description: |
+            Whether to back up from a qualifying existing customer snapshot taken within the backup
+            interval, instead of taking a new one. Applies to RDS resources.
+            Omit or send `null` on an update to leave the current setting unchanged.
+          example: false
+          nullable: true
+          type: boolean
       required:
       - backupSchedules
       - resourceTypes
@@ -19023,6 +19043,7 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
           scheduleTimezone: UTC
+          reuseExistingSnapshots: false
         standardPlan:
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -19098,6 +19119,7 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
           scheduleTimezone: UTC
+          reuseExistingSnapshots: false
         awsNativeStandardPlan:
           backupSchedules:
           - scheduleConfig:
@@ -19274,6 +19296,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+            reuseExistingSnapshots: false
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -19349,6 +19372,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+            reuseExistingSnapshots: false
           awsNativeStandardPlan:
             backupSchedules:
             - scheduleConfig:
@@ -19645,6 +19669,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+            reuseExistingSnapshots: false
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -19720,6 +19745,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+            reuseExistingSnapshots: false
           awsNativeStandardPlan:
             backupSchedules:
             - scheduleConfig:
@@ -20023,6 +20049,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -20098,6 +20125,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -20410,6 +20438,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -20485,6 +20514,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -20761,6 +20791,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -20836,6 +20867,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -21132,6 +21164,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -21207,6 +21240,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -21491,6 +21525,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+            reuseExistingSnapshots: false
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -21566,6 +21601,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
+            reuseExistingSnapshots: false
           awsNativeStandardPlan:
             backupSchedules:
             - scheduleConfig:
@@ -21863,6 +21899,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -21938,6 +21975,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
+              reuseExistingSnapshots: false
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:

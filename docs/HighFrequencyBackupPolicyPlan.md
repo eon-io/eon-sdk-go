@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ResourceTypes** | [**[]HighFrequencyBackupResourceType**](HighFrequencyBackupResourceType.md) | Resource types to backup. | 
 **BackupSchedules** | [**[]HighFrequencyBackupSchedules**](HighFrequencyBackupSchedules.md) | List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault.  | 
 **ScheduleTimezone** | Pointer to [**ScheduleTimezone**](ScheduleTimezone.md) |  | [optional] [default to SCHEDULE_TIMEZONE_UTC]
+**ReuseExistingSnapshots** | Pointer to **NullableBool** | Whether to back up from a qualifying existing customer snapshot taken within the backup interval, instead of taking a new one. Applies to RDS resources. Omit or send &#x60;null&#x60; on an update to leave the current setting unchanged.  | [optional] 
 
 ## Methods
 
@@ -92,6 +93,41 @@ SetScheduleTimezone sets ScheduleTimezone field to given value.
 
 HasScheduleTimezone returns a boolean if a field has been set.
 
+### GetReuseExistingSnapshots
+
+`func (o *HighFrequencyBackupPolicyPlan) GetReuseExistingSnapshots() bool`
+
+GetReuseExistingSnapshots returns the ReuseExistingSnapshots field if non-nil, zero value otherwise.
+
+### GetReuseExistingSnapshotsOk
+
+`func (o *HighFrequencyBackupPolicyPlan) GetReuseExistingSnapshotsOk() (*bool, bool)`
+
+GetReuseExistingSnapshotsOk returns a tuple with the ReuseExistingSnapshots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReuseExistingSnapshots
+
+`func (o *HighFrequencyBackupPolicyPlan) SetReuseExistingSnapshots(v bool)`
+
+SetReuseExistingSnapshots sets ReuseExistingSnapshots field to given value.
+
+### HasReuseExistingSnapshots
+
+`func (o *HighFrequencyBackupPolicyPlan) HasReuseExistingSnapshots() bool`
+
+HasReuseExistingSnapshots returns a boolean if a field has been set.
+
+### SetReuseExistingSnapshotsNil
+
+`func (o *HighFrequencyBackupPolicyPlan) SetReuseExistingSnapshotsNil(b bool)`
+
+ SetReuseExistingSnapshotsNil sets the value for ReuseExistingSnapshots to be an explicit nil
+
+### UnsetReuseExistingSnapshots
+`func (o *HighFrequencyBackupPolicyPlan) UnsetReuseExistingSnapshots()`
+
+UnsetReuseExistingSnapshots ensures that no value is present for ReuseExistingSnapshots, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
