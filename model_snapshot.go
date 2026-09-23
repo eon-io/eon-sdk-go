@@ -36,8 +36,13 @@ type Snapshot struct {
 	ResourceId string `json:"resourceId"`
 	// Backup job ID.
 	JobId *string `json:"jobId,omitempty"`
-	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
+	// Date and time the snapshot's retention expires, from its point in time and retention alone. A snapshot can outlive this date while a hold defers its deletion — see effectiveExpirationTime, which is the date the snapshot is actually expected to be removed. 
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
+	// Date and time the snapshot is actually expected to be deleted, accounting for any hold that defers it past expirationTime. Absent when holdReason is set but the hold has no end date of its own, meaning no deletion date is known until the condition behind the hold changes. 
+	EffectiveExpirationTime *time.Time `json:"effectiveExpirationTime,omitempty"`
+	HoldReason *SnapshotHoldReason `json:"holdReason,omitempty"`
+	// Customer-facing explanation of holdReason, including how to end the hold where that is possible. Absent when the snapshot is not being held. Render as given. 
+	HoldReasonMessage *string `json:"holdReasonMessage,omitempty"`
 	Resource *ResourceSnapshot `json:"resource,omitempty"`
 	// Whether the snapshot is on user hold.
 	OnHold *bool `json:"onHold,omitempty"`
@@ -299,6 +304,102 @@ func (o *Snapshot) SetExpirationTime(v time.Time) {
 	o.ExpirationTime = &v
 }
 
+// GetEffectiveExpirationTime returns the EffectiveExpirationTime field value if set, zero value otherwise.
+func (o *Snapshot) GetEffectiveExpirationTime() time.Time {
+	if o == nil || IsNil(o.EffectiveExpirationTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.EffectiveExpirationTime
+}
+
+// GetEffectiveExpirationTimeOk returns a tuple with the EffectiveExpirationTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetEffectiveExpirationTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.EffectiveExpirationTime) {
+		return nil, false
+	}
+	return o.EffectiveExpirationTime, true
+}
+
+// HasEffectiveExpirationTime returns a boolean if a field has been set.
+func (o *Snapshot) HasEffectiveExpirationTime() bool {
+	if o != nil && !IsNil(o.EffectiveExpirationTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetEffectiveExpirationTime gets a reference to the given time.Time and assigns it to the EffectiveExpirationTime field.
+func (o *Snapshot) SetEffectiveExpirationTime(v time.Time) {
+	o.EffectiveExpirationTime = &v
+}
+
+// GetHoldReason returns the HoldReason field value if set, zero value otherwise.
+func (o *Snapshot) GetHoldReason() SnapshotHoldReason {
+	if o == nil || IsNil(o.HoldReason) {
+		var ret SnapshotHoldReason
+		return ret
+	}
+	return *o.HoldReason
+}
+
+// GetHoldReasonOk returns a tuple with the HoldReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetHoldReasonOk() (*SnapshotHoldReason, bool) {
+	if o == nil || IsNil(o.HoldReason) {
+		return nil, false
+	}
+	return o.HoldReason, true
+}
+
+// HasHoldReason returns a boolean if a field has been set.
+func (o *Snapshot) HasHoldReason() bool {
+	if o != nil && !IsNil(o.HoldReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetHoldReason gets a reference to the given SnapshotHoldReason and assigns it to the HoldReason field.
+func (o *Snapshot) SetHoldReason(v SnapshotHoldReason) {
+	o.HoldReason = &v
+}
+
+// GetHoldReasonMessage returns the HoldReasonMessage field value if set, zero value otherwise.
+func (o *Snapshot) GetHoldReasonMessage() string {
+	if o == nil || IsNil(o.HoldReasonMessage) {
+		var ret string
+		return ret
+	}
+	return *o.HoldReasonMessage
+}
+
+// GetHoldReasonMessageOk returns a tuple with the HoldReasonMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Snapshot) GetHoldReasonMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.HoldReasonMessage) {
+		return nil, false
+	}
+	return o.HoldReasonMessage, true
+}
+
+// HasHoldReasonMessage returns a boolean if a field has been set.
+func (o *Snapshot) HasHoldReasonMessage() bool {
+	if o != nil && !IsNil(o.HoldReasonMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetHoldReasonMessage gets a reference to the given string and assigns it to the HoldReasonMessage field.
+func (o *Snapshot) SetHoldReasonMessage(v string) {
+	o.HoldReasonMessage = &v
+}
+
 // GetResource returns the Resource field value if set, zero value otherwise.
 func (o *Snapshot) GetResource() ResourceSnapshot {
 	if o == nil || IsNil(o.Resource) {
@@ -422,6 +523,15 @@ func (o Snapshot) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ExpirationTime) {
 		toSerialize["expirationTime"] = o.ExpirationTime
+	}
+	if !IsNil(o.EffectiveExpirationTime) {
+		toSerialize["effectiveExpirationTime"] = o.EffectiveExpirationTime
+	}
+	if !IsNil(o.HoldReason) {
+		toSerialize["holdReason"] = o.HoldReason
+	}
+	if !IsNil(o.HoldReasonMessage) {
+		toSerialize["holdReasonMessage"] = o.HoldReasonMessage
 	}
 	if !IsNil(o.Resource) {
 		toSerialize["resource"] = o.Resource

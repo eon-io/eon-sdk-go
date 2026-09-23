@@ -1,0 +1,23 @@
+# SnapshotHoldReason
+
+## Enum
+
+
+* `SNAPSHOT_HOLD_REASON_USER_HOLD` (value: `"USER_HOLD"`)
+
+* `SNAPSHOT_HOLD_REASON_SECURITY_SCAN_BASELINE` (value: `"SECURITY_SCAN_BASELINE"`)
+
+* `SNAPSHOT_HOLD_REASON_REPLAY_ANCHOR` (value: `"REPLAY_ANCHOR"`)
+
+* `SNAPSHOT_HOLD_REASON_DLSG_LAST_SNAPSHOT` (value: `"DLSG_LAST_SNAPSHOT"`)
+
+* `SNAPSHOT_HOLD_REASON_LAST_SNAPSHOT_GRACE` (value: `"LAST_SNAPSHOT_GRACE"`)
+
+* `SNAPSHOT_HOLD_REASON_LINEAGE_ANCHOR_GRACE` (value: `"LINEAGE_ANCHOR_GRACE"`)
+
+* `SNAPSHOT_HOLD_REASON_RECENT_RESTORE` (value: `"RECENT_RESTORE"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

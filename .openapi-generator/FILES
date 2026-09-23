@@ -379,6 +379,7 @@ docs/Severity.md
 docs/Snapshot.md
 docs/SnapshotDateFilters.md
 docs/SnapshotFilterConditions.md
+docs/SnapshotHoldReason.md
 docs/SnapshotIdFilters.md
 docs/SnapshotSortField.md
 docs/SnapshotStorage.md
@@ -811,6 +812,7 @@ model_severity.go
 model_snapshot.go
 model_snapshot_date_filters.go
 model_snapshot_filter_conditions.go
+model_snapshot_hold_reason.go
 model_snapshot_id_filters.go
 model_snapshot_sort_field.go
 model_snapshot_storage.go
