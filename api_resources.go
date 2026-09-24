@@ -945,7 +945,10 @@ func (a *ResourcesAPIService) ListResourcesExecute(r ApiListResourcesRequest) (*
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.listInventoryRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listInventoryRequest != nil {
+		localVarPostBody = r.listInventoryRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

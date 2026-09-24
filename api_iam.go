@@ -95,7 +95,10 @@ func (a *IamAPIService) CreateIdpGroupExecute(r ApiCreateIdpGroupRequest) (*Crea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createIdpGroupRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.createIdpGroupRequest != nil {
+		localVarPostBody = r.createIdpGroupRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -228,7 +231,10 @@ func (a *IamAPIService) CreateRoleExecute(r ApiCreateRoleRequest) (*CreateRoleRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createRoleRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.createRoleRequest != nil {
+		localVarPostBody = r.createRoleRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

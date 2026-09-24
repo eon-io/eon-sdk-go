@@ -2731,7 +2731,10 @@ func (a *AccountsAPIService) ListRestoreAccountsExecute(r ApiListRestoreAccounts
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.listRestoreAccountsRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listRestoreAccountsRequest != nil {
+		localVarPostBody = r.listRestoreAccountsRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -3034,7 +3037,10 @@ func (a *AccountsAPIService) ListSourceAccountsExecute(r ApiListSourceAccountsRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.listSourceAccountsRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listSourceAccountsRequest != nil {
+		localVarPostBody = r.listSourceAccountsRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

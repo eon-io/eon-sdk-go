@@ -376,7 +376,10 @@ func (a *JobsAPIService) ListBackupJobsExecute(r ApiListBackupJobsRequest) (*Lis
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.listBackupJobsRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listBackupJobsRequest != nil {
+		localVarPostBody = r.listBackupJobsRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -533,7 +536,10 @@ func (a *JobsAPIService) ListRestoreJobsExecute(r ApiListRestoreJobsRequest) (*L
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.listRestoreJobsRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listRestoreJobsRequest != nil {
+		localVarPostBody = r.listRestoreJobsRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

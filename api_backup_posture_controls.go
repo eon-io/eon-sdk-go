@@ -501,7 +501,10 @@ func (a *BackupPostureControlsAPIService) ListBackupPostureControlsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.listBackupPostureControlsRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listBackupPostureControlsRequest != nil {
+		localVarPostBody = r.listBackupPostureControlsRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -412,7 +412,10 @@ func (a *DatabaseSnapshotsAPIService) RunQueryExecute(r ApiRunQueryRequest) (*Qu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.queryDBRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.queryDBRequest != nil {
+		localVarPostBody = r.queryDBRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

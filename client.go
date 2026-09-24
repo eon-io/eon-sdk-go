@@ -299,7 +299,15 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
     var resp *http.Response
 	var err error
 	success := false
-	for range(5) {
+	for attempt := range(5) {
+		// Do consumes the body, so a retry must reissue the request with a fresh copy of it or
+		// the transport fails with a Content-Length/body-length mismatch.
+		if attempt > 0 && request.GetBody != nil {
+			request.Body, err = request.GetBody()
+			if err != nil {
+				return resp, err
+			}
+		}
 		resp, err = c.cfg.HTTPClient.Do(request)
 
 		if err != nil && !errors.Is(err, os.ErrDeadlineExceeded){

@@ -234,7 +234,10 @@ func (a *SnapshotsAPIService) HoldSnapshotExecute(r ApiHoldSnapshotRequest) (map
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.holdSnapshotRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.holdSnapshotRequest != nil {
+		localVarPostBody = r.holdSnapshotRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -395,7 +398,10 @@ func (a *SnapshotsAPIService) ListResourceSnapshotsExecute(r ApiListResourceSnap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.listInventorySnapshotsRequest
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listInventorySnapshotsRequest != nil {
+		localVarPostBody = r.listInventorySnapshotsRequest
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
