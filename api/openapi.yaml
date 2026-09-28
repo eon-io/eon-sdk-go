@@ -10462,6 +10462,7 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
+      - saas_teams.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -10515,6 +10516,7 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
+      - saas_teams.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
