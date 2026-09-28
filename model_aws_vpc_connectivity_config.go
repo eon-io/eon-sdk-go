@@ -30,6 +30,8 @@ type AwsVpcConnectivityConfig struct {
 	SecurityGroups *ResourceTypeToSecurityGroup `json:"securityGroups,omitempty"`
 	// Whether to allow cross-region restore into subnets with no internet access, via an S3 gateway endpoint. When true, Eon uses S3 Multi-Region Access Points to reach vault data from this VPC. Turn this on if any subnet in the VPC lacks internet access. Defaults to false. In the Eon console, this setting appears as \"Allow cross-region restore via S3 gateway endpoint\". 
 	PrivateSubnetEnabled *bool `json:"privateSubnetEnabled,omitempty"`
+	// ARN of the KMS key for the restore server Eon launches in this VPC. It encrypts the restore server's root volume and the SSM parameter holding its container-registry token, and applies only when the restore server launches in one of the subnets listed in subnetsPerAvailabilityZone. When this is the region's only VPC, it also encrypts the SSM parameter holding the access token for restores from an Azure vault. It does not encrypt restored resources, which use the key chosen for the restore. The key must be in the VPC's region, and its key policy must let the restore account use it. If omitted, the restore server uses the key chosen for the restored resource. 
+	RestoreServerKmsKeyArn *string `json:"restoreServerKmsKeyArn,omitempty"`
 }
 
 type _AwsVpcConnectivityConfig AwsVpcConnectivityConfig
@@ -201,6 +203,38 @@ func (o *AwsVpcConnectivityConfig) SetPrivateSubnetEnabled(v bool) {
 	o.PrivateSubnetEnabled = &v
 }
 
+// GetRestoreServerKmsKeyArn returns the RestoreServerKmsKeyArn field value if set, zero value otherwise.
+func (o *AwsVpcConnectivityConfig) GetRestoreServerKmsKeyArn() string {
+	if o == nil || IsNil(o.RestoreServerKmsKeyArn) {
+		var ret string
+		return ret
+	}
+	return *o.RestoreServerKmsKeyArn
+}
+
+// GetRestoreServerKmsKeyArnOk returns a tuple with the RestoreServerKmsKeyArn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsVpcConnectivityConfig) GetRestoreServerKmsKeyArnOk() (*string, bool) {
+	if o == nil || IsNil(o.RestoreServerKmsKeyArn) {
+		return nil, false
+	}
+	return o.RestoreServerKmsKeyArn, true
+}
+
+// HasRestoreServerKmsKeyArn returns a boolean if a field has been set.
+func (o *AwsVpcConnectivityConfig) HasRestoreServerKmsKeyArn() bool {
+	if o != nil && !IsNil(o.RestoreServerKmsKeyArn) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreServerKmsKeyArn gets a reference to the given string and assigns it to the RestoreServerKmsKeyArn field.
+func (o *AwsVpcConnectivityConfig) SetRestoreServerKmsKeyArn(v string) {
+	o.RestoreServerKmsKeyArn = &v
+}
+
 func (o AwsVpcConnectivityConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -221,6 +255,9 @@ func (o AwsVpcConnectivityConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PrivateSubnetEnabled) {
 		toSerialize["privateSubnetEnabled"] = o.PrivateSubnetEnabled
+	}
+	if !IsNil(o.RestoreServerKmsKeyArn) {
+		toSerialize["restoreServerKmsKeyArn"] = o.RestoreServerKmsKeyArn
 	}
 	return toSerialize, nil
 }

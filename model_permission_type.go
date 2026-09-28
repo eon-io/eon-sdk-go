@@ -93,7 +93,6 @@ const (
 	SAAS_CONFIGURATION_VALIDATE PermissionType = "saas_configuration.validate"
 	SAAS_USER_SEARCH PermissionType = "saas_user.search"
 	SAAS_USER_RESTORE PermissionType = "saas_user.restore"
-	SAAS_TEAMS_RESTORE PermissionType = "saas_teams.restore"
 	THREAT_DETECTION_CENTER_VIEW PermissionType = "threat_detection_center.view"
 	THREAT_DETECTION_EXCLUSION_MANAGE PermissionType = "threat_detection_exclusion.manage"
 	SAAS_DASHBOARD_VIEW PermissionType = "saas_dashboard.view"
@@ -193,7 +192,6 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"saas_configuration.validate",
 	"saas_user.search",
 	"saas_user.restore",
-	"saas_teams.restore",
 	"threat_detection_center.view",
 	"threat_detection_exclusion.manage",
 	"saas_dashboard.view",

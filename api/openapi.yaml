@@ -37,6 +37,10 @@ tags:
 - description: Require approval before sensitive actions can run.
   name: actionApprovals
   x-displayName: Action Approvals
+- description: "Stop threat detectors from reporting findings for chosen files, tables\
+    \ and databases."
+  name: findingExclusions
+  x-displayName: Finding Exclusions
 - description: "Track backup, restore, and other asynchronous jobs."
   name: jobs
   x-displayName: Jobs
@@ -383,6 +387,381 @@ paths:
         - entityType: control
           in: path
           key: controlId
+  /v1/projects/{projectId}/finding-exclusions:
+    post:
+      description: |
+        Description: Creates an exclusion that stops a detector from reporting findings for matching files, tables or databases.
+        It applies to scans that start after it's created, on one resource or on every resource in the account.
+      operationId: createFindingExclusion
+      parameters:
+      - description: |
+          ID of the project that contains the finding exclusions.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFindingExclusionRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFindingExclusionResponse'
+          description: Finding exclusion created.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Invalid exclusion, for example `MALWARE` with a `TABLE` or\
+            \ `DATABASE` type."
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create Finding Exclusion
+      tags:
+      - findingExclusions
+      x-permissions:
+      - create:infected_exclude_paths
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: project
+          in: path
+          key: projectId
+      x-data-access:
+        excluded: true
+      x-internal: false
+  /v1/projects/{projectId}/finding-exclusions/list:
+    post:
+      description: "Description: Retrieves the finding exclusions in the account,\
+        \ filtered by the conditions in the request body."
+      operationId: listFindingExclusions
+      parameters:
+      - description: |
+          ID of the project that contains the finding exclusions.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first record of the next page of results.
+          Get this value from the previous response, and send it with the same `pageSize` and request body.
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: |
+          Maximum number of finding exclusions to return.
+          Keep the same value for every page of a listing: the page token counts pages of this size.
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          maximum: 200
+          minimum: 1
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFindingExclusionsRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFindingExclusionsResponse'
+          description: Finding exclusions retrieved.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid filters or pagination parameters.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Finding Exclusions
+      tags:
+      - findingExclusions
+      x-permissions:
+      - read:infected_exclude_paths
+      x-audit-log:
+        excluded: true
+      x-data-access:
+        excluded: true
+      x-internal: false
+  /v1/projects/{projectId}/finding-exclusions/{findingExclusionId}:
+    delete:
+      description: "Description: Deletes a finding exclusion. Scans that start afterward\
+        \ report the findings it suppressed."
+      operationId: deleteFindingExclusion
+      parameters:
+      - description: |
+          ID of the project that contains the finding exclusions.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Finding exclusion ID.
+        explode: false
+        in: path
+        name: findingExclusionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Finding exclusion deleted.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The finding exclusion wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Delete Finding Exclusion
+      tags:
+      - findingExclusions
+      x-permissions:
+      - delete:infected_exclude_paths
+      x-audit-log:
+        action: delete
+        entityRefs:
+        - entityType: project
+          in: path
+          key: projectId
+      x-data-access:
+        excluded: true
+      x-internal: false
+    get:
+      description: "Description: Retrieves a finding exclusion."
+      operationId: getFindingExclusion
+      parameters:
+      - description: |
+          ID of the project that contains the finding exclusions.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Finding exclusion ID.
+        explode: false
+        in: path
+        name: findingExclusionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFindingExclusionResponse'
+          description: Finding exclusion retrieved.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The finding exclusion wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Get Finding Exclusion
+      tags:
+      - findingExclusions
+      x-permissions:
+      - read:infected_exclude_paths
+      x-audit-log:
+        excluded: true
+      x-data-access:
+        excluded: true
+      x-internal: false
+    put:
+      description: "Description: Replaces a finding exclusion. The change applies\
+        \ to scans that start after it."
+      operationId: updateFindingExclusion
+      parameters:
+      - description: |
+          ID of the project that contains the finding exclusions.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Finding exclusion ID.
+        explode: false
+        in: path
+        name: findingExclusionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFindingExclusionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFindingExclusionResponse'
+          description: Finding exclusion updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Invalid exclusion, for example `MALWARE` with a `TABLE` or\
+            \ `DATABASE` type."
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The finding exclusion or the resource wasn't found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update Finding Exclusion
+      tags:
+      - findingExclusions
+      x-permissions:
+      - update:infected_exclude_paths
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: project
+          in: path
+          key: projectId
+      x-data-access:
+        excluded: true
+      x-internal: false
   /v1/permissions:
     get:
       description: "Description: Retrieves a list of user permissions."
@@ -10386,6 +10765,394 @@ components:
       - rules
       - severity
       type: object
+    FindingObjectType:
+      description: "What a finding or exclusion refers to: a file path, a database\
+        \ table, or a whole database."
+      enum:
+      - PATH
+      - TABLE
+      - DATABASE
+      example: PATH
+      type: string
+      x-enum-varnames:
+      - FINDING_OBJECT_TYPE_PATH
+      - FINDING_OBJECT_TYPE_TABLE
+      - FINDING_OBJECT_TYPE_DATABASE
+    FindingExclusionDetectorType:
+      description: Detector whose findings an exclusion suppresses.
+      enum:
+      - RANSOMWARE_BEHAVIOR
+      - DATA_ANOMALY
+      - MALWARE
+      example: RANSOMWARE_BEHAVIOR
+      type: string
+      x-enum-varnames:
+      - FINDING_EXCLUSION_DETECTOR_TYPE_RANSOMWARE_BEHAVIOR
+      - FINDING_EXCLUSION_DETECTOR_TYPE_DATA_ANOMALY
+      - FINDING_EXCLUSION_DETECTOR_TYPE_MALWARE
+    CreateFindingExclusionRequest:
+      additionalProperties: false
+      example:
+        resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        type: PATH
+        value: /var/cache
+        detector: RANSOMWARE_BEHAVIOR
+      properties:
+        resourceId:
+          description: |
+            Eon-assigned ID of the resource to apply the exclusion to.
+            Omit it to apply the exclusion to every resource in the account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          format: uuid
+          type: string
+        value:
+          description: |
+            What the exclusion matches, depending on `type`.
+            For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`.
+            Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is
+            currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`).
+            For `TABLE` or `DATABASE`, the exact table or database name.
+          example: /var/cache
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/FindingObjectType'
+        detector:
+          $ref: '#/components/schemas/FindingExclusionDetectorType'
+      required:
+      - detector
+      - type
+      - value
+      type: object
+    FindingExclusion:
+      description: |
+        Stops one detector from reporting findings for matching files, tables or databases, on one resource or on every
+        resource in the account. An exclusion applies to scans that start after it's created or updated.
+      example:
+        resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
+        type: PATH
+        value: /var/cache
+        detector: RANSOMWARE_BEHAVIOR
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          description: Finding exclusion ID.
+          example: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
+          format: uuid
+          type: string
+        resourceId:
+          description: |
+            Eon-assigned ID of the resource the exclusion applies to.
+            Omitted when the exclusion applies to every resource in the account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          format: uuid
+          type: string
+        value:
+          description: |
+            What the exclusion matches, depending on `type`.
+            For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`.
+            Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is
+            currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`).
+            For `TABLE` or `DATABASE`, the exact table or database name.
+          example: /var/cache
+          type: string
+        type:
+          $ref: '#/components/schemas/FindingObjectType'
+        detector:
+          $ref: '#/components/schemas/FindingExclusionDetectorType'
+        updatedAt:
+          description: When the exclusion was created or last updated.
+          format: date-time
+          type: string
+      required:
+      - detector
+      - id
+      - type
+      - updatedAt
+      - value
+      type: object
+      x-nullable: true
+    CreateFindingExclusionResponse:
+      example:
+        findingExclusion:
+          resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
+          type: PATH
+          value: /var/cache
+          detector: RANSOMWARE_BEHAVIOR
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        findingExclusion:
+          $ref: '#/components/schemas/FindingExclusion'
+      required:
+      - findingExclusion
+      type: object
+    Error:
+      example:
+        error: error
+      properties:
+        error:
+          type: string
+      type: object
+    FindingExclusionResourceFilter:
+      additionalProperties: false
+      description: "Filters by the resource an exclusion applies to. Set `isAccountWide`\
+        \ or `in`, not both."
+      example:
+        isAccountWide: true
+        in:
+        - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+      properties:
+        isAccountWide:
+          description: |
+            When `true`, matches only exclusions that apply to every resource in the account.
+            When `false`, matches only exclusions for a single resource.
+          nullable: true
+          type: boolean
+        in:
+          description: "Matches exclusions for any of these resources, by Eon-assigned\
+            \ resource ID. An empty list applies no filter."
+          example:
+          - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
+      x-nullable: true
+    FindingExclusionTypeFilters:
+      additionalProperties: false
+      description: Filters by what an exclusion matches.
+      example:
+        in:
+        - PATH
+        notIn:
+        - DATABASE
+      properties:
+        in:
+          description: Matches exclusions of any of these types. An empty list applies
+            no filter.
+          example:
+          - PATH
+          items:
+            $ref: '#/components/schemas/FindingObjectType'
+          type: array
+        notIn:
+          description: Matches exclusions of none of these types. An empty list applies
+            no filter.
+          example:
+          - DATABASE
+          items:
+            $ref: '#/components/schemas/FindingObjectType'
+          type: array
+      type: object
+      x-nullable: true
+    FindingExclusionDetectorFilters:
+      additionalProperties: false
+      description: Filters by the detector an exclusion suppresses.
+      example:
+        in:
+        - MALWARE
+        notIn:
+        - DATA_ANOMALY
+      properties:
+        in:
+          description: Matches exclusions for any of these detectors. An empty list
+            applies no filter.
+          example:
+          - MALWARE
+          items:
+            $ref: '#/components/schemas/FindingExclusionDetectorType'
+          type: array
+        notIn:
+          description: Matches exclusions for none of these detectors. An empty list
+            applies no filter.
+          example:
+          - DATA_ANOMALY
+          items:
+            $ref: '#/components/schemas/FindingExclusionDetectorType'
+          type: array
+      type: object
+      x-nullable: true
+    FindingExclusionValueFilters:
+      additionalProperties: false
+      description: Filters by the exclusion's `value`.
+      example:
+        contains:
+        - cache
+      properties:
+        contains:
+          description: Matches exclusions whose `value` contains every one of these
+            substrings. An empty list applies no filter.
+          example:
+          - cache
+          items:
+            type: string
+          type: array
+      type: object
+      x-nullable: true
+    FindingExclusionFilterConditions:
+      additionalProperties: false
+      description: Every condition that's set must match.
+      example:
+        resource:
+          isAccountWide: true
+          in:
+          - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        type:
+          in:
+          - PATH
+          notIn:
+          - DATABASE
+        detector:
+          in:
+          - MALWARE
+          notIn:
+          - DATA_ANOMALY
+        value:
+          contains:
+          - cache
+      properties:
+        resource:
+          $ref: '#/components/schemas/FindingExclusionResourceFilter'
+        type:
+          $ref: '#/components/schemas/FindingExclusionTypeFilters'
+        detector:
+          $ref: '#/components/schemas/FindingExclusionDetectorFilters'
+        value:
+          $ref: '#/components/schemas/FindingExclusionValueFilters'
+      type: object
+      x-nullable: true
+    ListFindingExclusionsRequest:
+      additionalProperties: false
+      example:
+        filters:
+          resource:
+            isAccountWide: true
+            in:
+            - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          type:
+            in:
+            - PATH
+            notIn:
+            - DATABASE
+          detector:
+            in:
+            - MALWARE
+            notIn:
+            - DATA_ANOMALY
+          value:
+            contains:
+            - cache
+      properties:
+        filters:
+          $ref: '#/components/schemas/FindingExclusionFilterConditions'
+      type: object
+    ListFindingExclusionsResponse:
+      example:
+        nextPageToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+        findingExclusions:
+        - resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
+          type: PATH
+          value: /var/cache
+          detector: RANSOMWARE_BEHAVIOR
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
+          type: PATH
+          value: /var/cache
+          detector: RANSOMWARE_BEHAVIOR
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        totalCount: 12
+      properties:
+        findingExclusions:
+          description: Finding exclusions on the current page.
+          items:
+            $ref: '#/components/schemas/FindingExclusion'
+          type: array
+        totalCount:
+          description: Total number of finding exclusions that matched the filter
+            options.
+          example: 12
+          type: integer
+        nextPageToken:
+          description: |
+            Cursor that points to the first record of the next page of results.
+            Pass this value in the next request.
+          example: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
+          type: string
+      required:
+      - findingExclusions
+      - totalCount
+      type: object
+    GetFindingExclusionResponse:
+      example:
+        findingExclusion:
+          resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
+          type: PATH
+          value: /var/cache
+          detector: RANSOMWARE_BEHAVIOR
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        findingExclusion:
+          $ref: '#/components/schemas/FindingExclusion'
+      required:
+      - findingExclusion
+      type: object
+    UpdateFindingExclusionRequest:
+      additionalProperties: false
+      description: Replaces every field of the exclusion. An omitted `resourceId`
+        makes it apply to every resource in the account.
+      example:
+        resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        type: PATH
+        value: /var/cache
+        detector: RANSOMWARE_BEHAVIOR
+      properties:
+        resourceId:
+          description: |
+            Eon-assigned ID of the resource to apply the exclusion to.
+            Omit it to apply the exclusion to every resource in the account.
+          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          format: uuid
+          type: string
+        value:
+          description: |
+            What the exclusion matches, depending on `type`.
+            For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`.
+            Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is
+            currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`).
+            For `TABLE` or `DATABASE`, the exact table or database name.
+          example: /var/cache
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/FindingObjectType'
+        detector:
+          $ref: '#/components/schemas/FindingExclusionDetectorType'
+      required:
+      - detector
+      - type
+      - value
+      type: object
+    UpdateFindingExclusionResponse:
+      example:
+        findingExclusion:
+          resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
+          type: PATH
+          value: /var/cache
+          detector: RANSOMWARE_BEHAVIOR
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        findingExclusion:
+          $ref: '#/components/schemas/FindingExclusion'
+      required:
+      - findingExclusion
+      type: object
     PermissionType:
       description: User permission.
       enum:
@@ -10462,7 +11229,6 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
-      - saas_teams.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -10516,7 +11282,6 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
-      - saas_teams.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -15378,6 +16143,7 @@ components:
       type: object
     AwsVpcConnectivityConfig:
       example:
+        restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
         vpc: vpc-01234567890123456
         privateSubnetEnabled: false
         securityGroups:
@@ -15417,6 +16183,18 @@ components:
             Turn this on if any subnet in the VPC lacks internet access. Defaults to false.
             In the Eon console, this setting appears as "Allow cross-region restore via S3 gateway endpoint".
           type: boolean
+        restoreServerKmsKeyArn:
+          description: |
+            ARN of the KMS key for the restore server Eon launches in this VPC. It encrypts the restore server's
+            root volume and the SSM parameter holding its container-registry token, and applies only when the
+            restore server launches in one of the subnets listed in subnetsPerAvailabilityZone.
+            When this is the region's only VPC, it also encrypts the SSM parameter holding the access token for
+            restores from an Azure vault.
+            It does not encrypt restored resources, which use the key chosen for the restore.
+            The key must be in the VPC's region, and its key policy must let the restore account use it.
+            If omitted, the restore server uses the key chosen for the restored resource.
+          example: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+          type: string
       required:
       - region
       - vpc
@@ -15424,7 +16202,8 @@ components:
     AwsRestoreAccountConnectivityConfig:
       example:
         vpcConfigs:
-        - vpc: vpc-01234567890123456
+        - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+          vpc: vpc-01234567890123456
           privateSubnetEnabled: false
           securityGroups:
             restoreServer:
@@ -15437,7 +16216,8 @@ components:
             availabilityZone: us-east-1a
           - subnetId: subnet-01234567890123456
             availabilityZone: us-east-1a
-        - vpc: vpc-01234567890123456
+        - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+          vpc: vpc-01234567890123456
           privateSubnetEnabled: false
           securityGroups:
             restoreServer:
@@ -15571,7 +16351,8 @@ components:
               subnetName: subnet-01234567890123456
         aws:
           vpcConfigs:
-          - vpc: vpc-01234567890123456
+          - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+            vpc: vpc-01234567890123456
             privateSubnetEnabled: false
             securityGroups:
               restoreServer:
@@ -15584,7 +16365,8 @@ components:
               availabilityZone: us-east-1a
             - subnetId: subnet-01234567890123456
               availabilityZone: us-east-1a
-          - vpc: vpc-01234567890123456
+          - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+            vpc: vpc-01234567890123456
             privateSubnetEnabled: false
             securityGroups:
               restoreServer:
@@ -15627,7 +16409,8 @@ components:
                 subnetName: subnet-01234567890123456
           aws:
             vpcConfigs:
-            - vpc: vpc-01234567890123456
+            - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+              vpc: vpc-01234567890123456
               privateSubnetEnabled: false
               securityGroups:
                 restoreServer:
@@ -15640,7 +16423,8 @@ components:
                 availabilityZone: us-east-1a
               - subnetId: subnet-01234567890123456
                 availabilityZone: us-east-1a
-            - vpc: vpc-01234567890123456
+            - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+              vpc: vpc-01234567890123456
               privateSubnetEnabled: false
               securityGroups:
                 restoreServer:
@@ -15689,7 +16473,8 @@ components:
                   subnetName: subnet-01234567890123456
             aws:
               vpcConfigs:
-              - vpc: vpc-01234567890123456
+              - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+                vpc: vpc-01234567890123456
                 privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
@@ -15702,7 +16487,8 @@ components:
                   availabilityZone: us-east-1a
                 - subnetId: subnet-01234567890123456
                   availabilityZone: us-east-1a
-              - vpc: vpc-01234567890123456
+              - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+                vpc: vpc-01234567890123456
                 privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
@@ -15743,7 +16529,8 @@ components:
               subnetName: subnet-01234567890123456
         aws:
           vpcConfigs:
-          - vpc: vpc-01234567890123456
+          - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+            vpc: vpc-01234567890123456
             privateSubnetEnabled: false
             securityGroups:
               restoreServer:
@@ -15756,7 +16543,8 @@ components:
               availabilityZone: us-east-1a
             - subnetId: subnet-01234567890123456
               availabilityZone: us-east-1a
-          - vpc: vpc-01234567890123456
+          - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+            vpc: vpc-01234567890123456
             privateSubnetEnabled: false
             securityGroups:
               restoreServer:
@@ -15800,7 +16588,8 @@ components:
                   subnetName: subnet-01234567890123456
             aws:
               vpcConfigs:
-              - vpc: vpc-01234567890123456
+              - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+                vpc: vpc-01234567890123456
                 privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
@@ -15813,7 +16602,8 @@ components:
                   availabilityZone: us-east-1a
                 - subnetId: subnet-01234567890123456
                   availabilityZone: us-east-1a
-              - vpc: vpc-01234567890123456
+              - restoreServerKmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
+                vpc: vpc-01234567890123456
                 privateSubnetEnabled: false
                 securityGroups:
                   restoreServer:
@@ -27394,13 +28184,6 @@ components:
             Default: `43200` (12 hours).
           example: 43200
           type: integer
-      type: object
-    Error:
-      example:
-        error: error
-      properties:
-        error:
-          type: string
       type: object
     OAuth2TokenRequest:
       additionalProperties: false

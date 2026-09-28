@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **SubnetsPerAvailabilityZone** | Pointer to [**[]SubnetPerAvailabilityZone**](SubnetPerAvailabilityZone.md) | Subnets to configure for availability zones in the VPC. For availability zones not specified in this list, Eon attempts to use the default subnet.  | [optional] 
 **SecurityGroups** | Pointer to [**ResourceTypeToSecurityGroup**](ResourceTypeToSecurityGroup.md) |  | [optional] 
 **PrivateSubnetEnabled** | Pointer to **bool** | Whether to allow cross-region restore into subnets with no internet access, via an S3 gateway endpoint. When true, Eon uses S3 Multi-Region Access Points to reach vault data from this VPC. Turn this on if any subnet in the VPC lacks internet access. Defaults to false. In the Eon console, this setting appears as \&quot;Allow cross-region restore via S3 gateway endpoint\&quot;.  | [optional] [default to false]
+**RestoreServerKmsKeyArn** | Pointer to **string** | ARN of the KMS key for the restore server Eon launches in this VPC. It encrypts the restore server&#39;s root volume and the SSM parameter holding its container-registry token, and applies only when the restore server launches in one of the subnets listed in subnetsPerAvailabilityZone. When this is the region&#39;s only VPC, it also encrypts the SSM parameter holding the access token for restores from an Azure vault. It does not encrypt restored resources, which use the key chosen for the restore. The key must be in the VPC&#39;s region, and its key policy must let the restore account use it. If omitted, the restore server uses the key chosen for the restored resource.  | [optional] 
 
 ## Methods
 
@@ -143,6 +144,31 @@ SetPrivateSubnetEnabled sets PrivateSubnetEnabled field to given value.
 `func (o *AwsVpcConnectivityConfig) HasPrivateSubnetEnabled() bool`
 
 HasPrivateSubnetEnabled returns a boolean if a field has been set.
+
+### GetRestoreServerKmsKeyArn
+
+`func (o *AwsVpcConnectivityConfig) GetRestoreServerKmsKeyArn() string`
+
+GetRestoreServerKmsKeyArn returns the RestoreServerKmsKeyArn field if non-nil, zero value otherwise.
+
+### GetRestoreServerKmsKeyArnOk
+
+`func (o *AwsVpcConnectivityConfig) GetRestoreServerKmsKeyArnOk() (*string, bool)`
+
+GetRestoreServerKmsKeyArnOk returns a tuple with the RestoreServerKmsKeyArn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreServerKmsKeyArn
+
+`func (o *AwsVpcConnectivityConfig) SetRestoreServerKmsKeyArn(v string)`
+
+SetRestoreServerKmsKeyArn sets RestoreServerKmsKeyArn field to given value.
+
+### HasRestoreServerKmsKeyArn
+
+`func (o *AwsVpcConnectivityConfig) HasRestoreServerKmsKeyArn() bool`
+
+HasRestoreServerKmsKeyArn returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -11,6 +11,7 @@ api_backups.go
 api_billing.go
 api_dashboard.go
 api_database_snapshots.go
+api_finding_exclusions.go
 api_iam.go
 api_jobs.go
 api_resources.go
@@ -135,6 +136,8 @@ docs/CreateActionApprovalRuleResponse.md
 docs/CreateBackupPolicyRequest.md
 docs/CreateBackupPolicyResponse.md
 docs/CreateBackupPostureControlRequest.md
+docs/CreateFindingExclusionRequest.md
+docs/CreateFindingExclusionResponse.md
 docs/CreateIdpGroupRequest.md
 docs/CreateIdpGroupResponse.md
 docs/CreateRoleRequest.md
@@ -185,6 +188,15 @@ docs/Error.md
 docs/ErrorCode.md
 docs/ExcludeFromBackupResponse.md
 docs/FilePath.md
+docs/FindingExclusion.md
+docs/FindingExclusionDetectorFilters.md
+docs/FindingExclusionDetectorType.md
+docs/FindingExclusionFilterConditions.md
+docs/FindingExclusionResourceFilter.md
+docs/FindingExclusionTypeFilters.md
+docs/FindingExclusionValueFilters.md
+docs/FindingExclusionsAPI.md
+docs/FindingObjectType.md
 docs/GCSRestoreTarget.md
 docs/GcpBigQueryDatasetRestoreResult.md
 docs/GcpCloudSqlRestoreDestination.md
@@ -206,6 +218,7 @@ docs/GcpVmInstanceRestoreTarget.md
 docs/GetActionApprovalRuleResponse.md
 docs/GetBackupJobResponse.md
 docs/GetBackupPolicyResponse.md
+docs/GetFindingExclusionResponse.md
 docs/GetIdpGroupResponse.md
 docs/GetMPARequestResponse.md
 docs/GetObjectStoreScanMethodResponse.md
@@ -249,6 +262,8 @@ docs/ListBackupPoliciesResponse.md
 docs/ListBackupPostureControlsRequest.md
 docs/ListBackupPostureControlsResponse.md
 docs/ListBackupVaultResponse.md
+docs/ListFindingExclusionsRequest.md
+docs/ListFindingExclusionsResponse.md
 docs/ListIdpGroupsResponse.md
 docs/ListIdpsResponse.md
 docs/ListInventoryRequest.md
@@ -434,6 +449,8 @@ docs/UpdateAwsSourceAccountAttributes.md
 docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
 docs/UpdateBackupPostureControlRequest.md
+docs/UpdateFindingExclusionRequest.md
+docs/UpdateFindingExclusionResponse.md
 docs/UpdateGcpRestoreAccountAttributes.md
 docs/UpdateGcpSourceAccountAttributes.md
 docs/UpdateIdpGroupRequest.md
@@ -573,6 +590,8 @@ model_create_action_approval_rule_response.go
 model_create_backup_policy_request.go
 model_create_backup_policy_response.go
 model_create_backup_posture_control_request.go
+model_create_finding_exclusion_request.go
+model_create_finding_exclusion_response.go
 model_create_idp_group_request.go
 model_create_idp_group_response.go
 model_create_role_request.go
@@ -621,6 +640,14 @@ model_error.go
 model_error_code.go
 model_exclude_from_backup_response.go
 model_file_path.go
+model_finding_exclusion.go
+model_finding_exclusion_detector_filters.go
+model_finding_exclusion_detector_type.go
+model_finding_exclusion_filter_conditions.go
+model_finding_exclusion_resource_filter.go
+model_finding_exclusion_type_filters.go
+model_finding_exclusion_value_filters.go
+model_finding_object_type.go
 model_gcp_big_query_dataset_restore_result.go
 model_gcp_cloud_sql_restore_destination.go
 model_gcp_cloud_sql_target.go
@@ -642,6 +669,7 @@ model_gcs_restore_target.go
 model_get_action_approval_rule_response.go
 model_get_backup_job_response.go
 model_get_backup_policy_response.go
+model_get_finding_exclusion_response.go
 model_get_idp_group_response.go
 model_get_mpa_request_response.go
 model_get_object_store_scan_method_response.go
@@ -683,6 +711,8 @@ model_list_backup_policies_response.go
 model_list_backup_posture_controls_request.go
 model_list_backup_posture_controls_response.go
 model_list_backup_vault_response.go
+model_list_finding_exclusions_request.go
+model_list_finding_exclusions_response.go
 model_list_idp_groups_response.go
 model_list_idps_response.go
 model_list_inventory_request.go
@@ -866,6 +896,8 @@ model_update_aws_source_account_attributes.go
 model_update_backup_policy_request.go
 model_update_backup_policy_response.go
 model_update_backup_posture_control_request.go
+model_update_finding_exclusion_request.go
+model_update_finding_exclusion_response.go
 model_update_gcp_restore_account_attributes.go
 model_update_gcp_source_account_attributes.go
 model_update_idp_group_request.go
@@ -903,6 +935,7 @@ test/api_backups_test.go
 test/api_billing_test.go
 test/api_dashboard_test.go
 test/api_database_snapshots_test.go
+test/api_finding_exclusions_test.go
 test/api_iam_test.go
 test/api_jobs_test.go
 test/api_resources_test.go
