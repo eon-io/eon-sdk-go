@@ -25,6 +25,8 @@ type AwsSourceAccountAttributes struct {
 	RoleArn string `json:"roleArn"`
 	// Cloud-provider-assigned ID of the AWS organization the account belongs to.
 	OrganizationId *string `json:"organizationId,omitempty"`
+	// AWS regions Eon discovers in. Empty means all supported regions.
+	Regions []string `json:"regions,omitempty"`
 }
 
 type _AwsSourceAccountAttributes AwsSourceAccountAttributes
@@ -103,6 +105,38 @@ func (o *AwsSourceAccountAttributes) SetOrganizationId(v string) {
 	o.OrganizationId = &v
 }
 
+// GetRegions returns the Regions field value if set, zero value otherwise.
+func (o *AwsSourceAccountAttributes) GetRegions() []string {
+	if o == nil || IsNil(o.Regions) {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsSourceAccountAttributes) GetRegionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Regions) {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *AwsSourceAccountAttributes) HasRegions() bool {
+	if o != nil && !IsNil(o.Regions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *AwsSourceAccountAttributes) SetRegions(v []string) {
+	o.Regions = v
+}
+
 func (o AwsSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -116,6 +150,9 @@ func (o AwsSourceAccountAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize["roleArn"] = o.RoleArn
 	if !IsNil(o.OrganizationId) {
 		toSerialize["organizationId"] = o.OrganizationId
+	}
+	if !IsNil(o.Regions) {
+		toSerialize["regions"] = o.Regions
 	}
 	return toSerialize, nil
 }

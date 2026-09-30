@@ -23,6 +23,8 @@ var _ MappedNullable = &AwsSourceAccountAttributesInput{}
 type AwsSourceAccountAttributesInput struct {
 	// ARN of the role Eon assumes to access the account in AWS.
 	RoleArn string `json:"roleArn"`
+	// AWS regions Eon discovers in. Omit or leave empty to discover in all supported regions.
+	Regions []string `json:"regions,omitempty"`
 }
 
 type _AwsSourceAccountAttributesInput AwsSourceAccountAttributesInput
@@ -69,6 +71,38 @@ func (o *AwsSourceAccountAttributesInput) SetRoleArn(v string) {
 	o.RoleArn = v
 }
 
+// GetRegions returns the Regions field value if set, zero value otherwise.
+func (o *AwsSourceAccountAttributesInput) GetRegions() []string {
+	if o == nil || IsNil(o.Regions) {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsSourceAccountAttributesInput) GetRegionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Regions) {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *AwsSourceAccountAttributesInput) HasRegions() bool {
+	if o != nil && !IsNil(o.Regions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *AwsSourceAccountAttributesInput) SetRegions(v []string) {
+	o.Regions = v
+}
+
 func (o AwsSourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +114,9 @@ func (o AwsSourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 func (o AwsSourceAccountAttributesInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["roleArn"] = o.RoleArn
+	if !IsNil(o.Regions) {
+		toSerialize["regions"] = o.Regions
+	}
 	return toSerialize, nil
 }
 

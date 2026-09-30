@@ -17,11 +17,9 @@ import (
 // checks if the FindingExclusionResourceFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusionResourceFilter{}
 
-// FindingExclusionResourceFilter Filters by the resource an exclusion applies to. Set `isAccountWide` or `in`, not both.
+// FindingExclusionResourceFilter Filters by the resource a resource-scoped exclusion applies to. Account-wide exclusions never match it.
 type FindingExclusionResourceFilter struct {
-	// When `true`, matches only exclusions that apply to every resource in the account. When `false`, matches only exclusions for a single resource. 
-	IsAccountWide NullableBool `json:"isAccountWide,omitempty"`
-	// Matches exclusions for any of these resources, by Eon-assigned resource ID. An empty list applies no filter.
+	// Matches exclusions for any of these resources, by cloud provider resource ID. An empty list applies no filter; IDs that match no resource in the account match no exclusion. 
 	In []string `json:"in,omitempty"`
 }
 
@@ -40,48 +38,6 @@ func NewFindingExclusionResourceFilter() *FindingExclusionResourceFilter {
 func NewFindingExclusionResourceFilterWithDefaults() *FindingExclusionResourceFilter {
 	this := FindingExclusionResourceFilter{}
 	return &this
-}
-
-// GetIsAccountWide returns the IsAccountWide field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FindingExclusionResourceFilter) GetIsAccountWide() bool {
-	if o == nil || IsNil(o.IsAccountWide.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.IsAccountWide.Get()
-}
-
-// GetIsAccountWideOk returns a tuple with the IsAccountWide field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FindingExclusionResourceFilter) GetIsAccountWideOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.IsAccountWide.Get(), o.IsAccountWide.IsSet()
-}
-
-// HasIsAccountWide returns a boolean if a field has been set.
-func (o *FindingExclusionResourceFilter) HasIsAccountWide() bool {
-	if o != nil && o.IsAccountWide.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIsAccountWide gets a reference to the given NullableBool and assigns it to the IsAccountWide field.
-func (o *FindingExclusionResourceFilter) SetIsAccountWide(v bool) {
-	o.IsAccountWide.Set(&v)
-}
-// SetIsAccountWideNil sets the value for IsAccountWide to be an explicit nil
-func (o *FindingExclusionResourceFilter) SetIsAccountWideNil() {
-	o.IsAccountWide.Set(nil)
-}
-
-// UnsetIsAccountWide ensures that no value is present for IsAccountWide, not even an explicit nil
-func (o *FindingExclusionResourceFilter) UnsetIsAccountWide() {
-	o.IsAccountWide.Unset()
 }
 
 // GetIn returns the In field value if set, zero value otherwise.
@@ -126,9 +82,6 @@ func (o FindingExclusionResourceFilter) MarshalJSON() ([]byte, error) {
 
 func (o FindingExclusionResourceFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.IsAccountWide.IsSet() {
-		toSerialize["isAccountWide"] = o.IsAccountWide.Get()
-	}
 	if !IsNil(o.In) {
 		toSerialize["in"] = o.In
 	}

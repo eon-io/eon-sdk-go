@@ -27,8 +27,8 @@ type RestoreInstanceVolumeInput struct {
 	Description *string `json:"description,omitempty"`
 	// Tags to apply to the restored volume as key-value pairs, where key and value are both strings.  **Example:** `{\"primary\": \"\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
-	// ARN of the KMS key for encrypting the restored volume.
-	VolumeEncryptionKeyId string `json:"volumeEncryptionKeyId"`
+	// ARN of the KMS key for encrypting the restored volume. Omit it to restore the volume unencrypted, or encrypted with the account default key when EBS encryption by default is enabled. Volumes restored from a native EBS backup are always encrypted and use the AWS-managed `aws/ebs` key when this is omitted. 
+	VolumeEncryptionKeyId *string `json:"volumeEncryptionKeyId,omitempty"`
 	VolumeSettings VolumeSettings `json:"volumeSettings"`
 }
 
@@ -38,10 +38,9 @@ type _RestoreInstanceVolumeInput RestoreInstanceVolumeInput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreInstanceVolumeInput(providerVolumeId string, volumeEncryptionKeyId string, volumeSettings VolumeSettings) *RestoreInstanceVolumeInput {
+func NewRestoreInstanceVolumeInput(providerVolumeId string, volumeSettings VolumeSettings) *RestoreInstanceVolumeInput {
 	this := RestoreInstanceVolumeInput{}
 	this.ProviderVolumeId = providerVolumeId
-	this.VolumeEncryptionKeyId = volumeEncryptionKeyId
 	this.VolumeSettings = volumeSettings
 	return &this
 }
@@ -142,28 +141,36 @@ func (o *RestoreInstanceVolumeInput) SetTags(v map[string]string) {
 	o.Tags = &v
 }
 
-// GetVolumeEncryptionKeyId returns the VolumeEncryptionKeyId field value
+// GetVolumeEncryptionKeyId returns the VolumeEncryptionKeyId field value if set, zero value otherwise.
 func (o *RestoreInstanceVolumeInput) GetVolumeEncryptionKeyId() string {
-	if o == nil {
+	if o == nil || IsNil(o.VolumeEncryptionKeyId) {
 		var ret string
 		return ret
 	}
-
-	return o.VolumeEncryptionKeyId
+	return *o.VolumeEncryptionKeyId
 }
 
-// GetVolumeEncryptionKeyIdOk returns a tuple with the VolumeEncryptionKeyId field value
+// GetVolumeEncryptionKeyIdOk returns a tuple with the VolumeEncryptionKeyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreInstanceVolumeInput) GetVolumeEncryptionKeyIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.VolumeEncryptionKeyId) {
 		return nil, false
 	}
-	return &o.VolumeEncryptionKeyId, true
+	return o.VolumeEncryptionKeyId, true
 }
 
-// SetVolumeEncryptionKeyId sets field value
+// HasVolumeEncryptionKeyId returns a boolean if a field has been set.
+func (o *RestoreInstanceVolumeInput) HasVolumeEncryptionKeyId() bool {
+	if o != nil && !IsNil(o.VolumeEncryptionKeyId) {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumeEncryptionKeyId gets a reference to the given string and assigns it to the VolumeEncryptionKeyId field.
 func (o *RestoreInstanceVolumeInput) SetVolumeEncryptionKeyId(v string) {
-	o.VolumeEncryptionKeyId = v
+	o.VolumeEncryptionKeyId = &v
 }
 
 // GetVolumeSettings returns the VolumeSettings field value
@@ -207,7 +214,9 @@ func (o RestoreInstanceVolumeInput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
-	toSerialize["volumeEncryptionKeyId"] = o.VolumeEncryptionKeyId
+	if !IsNil(o.VolumeEncryptionKeyId) {
+		toSerialize["volumeEncryptionKeyId"] = o.VolumeEncryptionKeyId
+	}
 	toSerialize["volumeSettings"] = o.VolumeSettings
 	return toSerialize, nil
 }
@@ -218,7 +227,6 @@ func (o *RestoreInstanceVolumeInput) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"providerVolumeId",
-		"volumeEncryptionKeyId",
 		"volumeSettings",
 	}
 

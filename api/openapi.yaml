@@ -432,6 +432,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: The resource wasn't found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: More than one resource in the account has this provider resource
+            ID.
         "1XX":
           description: Informational
         "3XX":
@@ -732,6 +739,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: The finding exclusion or the resource wasn't found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: More than one resource in the account has this provider resource
+            ID.
         "1XX":
           description: Informational
         "3XX":
@@ -10765,6 +10779,18 @@ components:
       - rules
       - severity
       type: object
+    FindingExclusionScope:
+      description: |
+        Where an exclusion applies. `RESOURCE` applies it to the one resource named by `providerResourceId`;
+        `ACCOUNT` applies it to every resource in the account.
+      enum:
+      - RESOURCE
+      - ACCOUNT
+      example: RESOURCE
+      type: string
+      x-enum-varnames:
+      - FINDING_EXCLUSION_SCOPE_RESOURCE
+      - FINDING_EXCLUSION_SCOPE_ACCOUNT
     FindingObjectType:
       description: "What a finding or exclusion refers to: a file path, a database\
         \ table, or a whole database."
@@ -10793,17 +10819,20 @@ components:
     CreateFindingExclusionRequest:
       additionalProperties: false
       example:
-        resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        providerResourceId: i-0abc123def4567890
+        scope: RESOURCE
         type: PATH
         value: /var/cache
         detector: RANSOMWARE_BEHAVIOR
       properties:
-        resourceId:
+        scope:
+          $ref: '#/components/schemas/FindingExclusionScope'
+        providerResourceId:
           description: |
-            Eon-assigned ID of the resource to apply the exclusion to.
-            Omit it to apply the exclusion to every resource in the account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          format: uuid
+            Cloud provider ID of the resource to apply the exclusion to, such as an EC2 instance ID or an Azure resource ID.
+            Required when `scope` is `RESOURCE`, and must be omitted when it's `ACCOUNT`.
+          example: i-0abc123def4567890
+          minLength: 1
           type: string
         value:
           description: |
@@ -10821,6 +10850,7 @@ components:
           $ref: '#/components/schemas/FindingExclusionDetectorType'
       required:
       - detector
+      - scope
       - type
       - value
       type: object
@@ -10829,7 +10859,8 @@ components:
         Stops one detector from reporting findings for matching files, tables or databases, on one resource or on every
         resource in the account. An exclusion applies to scans that start after it's created or updated.
       example:
-        resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        providerResourceId: i-0abc123def4567890
+        scope: RESOURCE
         id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
         type: PATH
         value: /var/cache
@@ -10841,12 +10872,13 @@ components:
           example: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
           format: uuid
           type: string
-        resourceId:
+        scope:
+          $ref: '#/components/schemas/FindingExclusionScope'
+        providerResourceId:
           description: |
-            Eon-assigned ID of the resource the exclusion applies to.
-            Omitted when the exclusion applies to every resource in the account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          format: uuid
+            Cloud provider ID of the resource the exclusion applies to, such as an EC2 instance ID or an Azure resource ID.
+            Present when `scope` is `RESOURCE`.
+          example: i-0abc123def4567890
           type: string
         value:
           description: |
@@ -10868,6 +10900,7 @@ components:
       required:
       - detector
       - id
+      - scope
       - type
       - updatedAt
       - value
@@ -10876,7 +10909,8 @@ components:
     CreateFindingExclusionResponse:
       example:
         findingExclusion:
-          resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          providerResourceId: i-0abc123def4567890
+          scope: RESOURCE
           id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
           type: PATH
           value: /var/cache
@@ -10895,28 +10929,48 @@ components:
         error:
           type: string
       type: object
+    FindingExclusionScopeFilters:
+      additionalProperties: false
+      description: Filters by where an exclusion applies.
+      example:
+        in:
+        - ACCOUNT
+        notIn:
+        - RESOURCE
+      properties:
+        in:
+          description: Matches exclusions with any of these scopes. An empty list
+            applies no filter.
+          example:
+          - ACCOUNT
+          items:
+            $ref: '#/components/schemas/FindingExclusionScope'
+          type: array
+        notIn:
+          description: Matches exclusions with none of these scopes. An empty list
+            applies no filter.
+          example:
+          - RESOURCE
+          items:
+            $ref: '#/components/schemas/FindingExclusionScope'
+          type: array
+      type: object
+      x-nullable: true
     FindingExclusionResourceFilter:
       additionalProperties: false
-      description: "Filters by the resource an exclusion applies to. Set `isAccountWide`\
-        \ or `in`, not both."
+      description: Filters by the resource a resource-scoped exclusion applies to.
+        Account-wide exclusions never match it.
       example:
-        isAccountWide: true
         in:
-        - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        - i-0abc123def4567890
       properties:
-        isAccountWide:
-          description: |
-            When `true`, matches only exclusions that apply to every resource in the account.
-            When `false`, matches only exclusions for a single resource.
-          nullable: true
-          type: boolean
         in:
-          description: "Matches exclusions for any of these resources, by Eon-assigned\
-            \ resource ID. An empty list applies no filter."
+          description: |
+            Matches exclusions for any of these resources, by cloud provider resource ID.
+            An empty list applies no filter; IDs that match no resource in the account match no exclusion.
           example:
-          - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          - i-0abc123def4567890
           items:
-            format: uuid
             type: string
           type: array
       type: object
@@ -10997,9 +11051,13 @@ components:
       description: Every condition that's set must match.
       example:
         resource:
-          isAccountWide: true
           in:
-          - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          - i-0abc123def4567890
+        scope:
+          in:
+          - ACCOUNT
+          notIn:
+          - RESOURCE
         type:
           in:
           - PATH
@@ -11014,6 +11072,8 @@ components:
           contains:
           - cache
       properties:
+        scope:
+          $ref: '#/components/schemas/FindingExclusionScopeFilters'
         resource:
           $ref: '#/components/schemas/FindingExclusionResourceFilter'
         type:
@@ -11029,9 +11089,13 @@ components:
       example:
         filters:
           resource:
-            isAccountWide: true
             in:
-            - 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+            - i-0abc123def4567890
+          scope:
+            in:
+            - ACCOUNT
+            notIn:
+            - RESOURCE
           type:
             in:
             - PATH
@@ -11053,13 +11117,15 @@ components:
       example:
         nextPageToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         findingExclusions:
-        - resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        - providerResourceId: i-0abc123def4567890
+          scope: RESOURCE
           id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
           type: PATH
           value: /var/cache
           detector: RANSOMWARE_BEHAVIOR
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        - providerResourceId: i-0abc123def4567890
+          scope: RESOURCE
           id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
           type: PATH
           value: /var/cache
@@ -11090,7 +11156,8 @@ components:
     GetFindingExclusionResponse:
       example:
         findingExclusion:
-          resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          providerResourceId: i-0abc123def4567890
+          scope: RESOURCE
           id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
           type: PATH
           value: /var/cache
@@ -11104,20 +11171,22 @@ components:
       type: object
     UpdateFindingExclusionRequest:
       additionalProperties: false
-      description: Replaces every field of the exclusion. An omitted `resourceId`
-        makes it apply to every resource in the account.
+      description: "Replaces every field of the exclusion, including its scope."
       example:
-        resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+        providerResourceId: i-0abc123def4567890
+        scope: RESOURCE
         type: PATH
         value: /var/cache
         detector: RANSOMWARE_BEHAVIOR
       properties:
-        resourceId:
+        scope:
+          $ref: '#/components/schemas/FindingExclusionScope'
+        providerResourceId:
           description: |
-            Eon-assigned ID of the resource to apply the exclusion to.
-            Omit it to apply the exclusion to every resource in the account.
-          example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
-          format: uuid
+            Cloud provider ID of the resource to apply the exclusion to, such as an EC2 instance ID or an Azure resource ID.
+            Required when `scope` is `RESOURCE`, and must be omitted when it's `ACCOUNT`.
+          example: i-0abc123def4567890
+          minLength: 1
           type: string
         value:
           description: |
@@ -11135,13 +11204,15 @@ components:
           $ref: '#/components/schemas/FindingExclusionDetectorType'
       required:
       - detector
+      - scope
       - type
       - value
       type: object
     UpdateFindingExclusionResponse:
       example:
         findingExclusion:
-          resourceId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
+          providerResourceId: i-0abc123def4567890
+          scope: RESOURCE
           id: 4c1f3b0e-8d9a-4f55-9b1e-2d6f3a7c8e10
           type: PATH
           value: /var/cache
@@ -13806,6 +13877,9 @@ components:
         AWS account configuration.
         Applicable if `cloudProvider` is set to `AWS`.
       example:
+        regions:
+        - us-east-1
+        - eu-west-1
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
       properties:
@@ -13813,6 +13887,15 @@ components:
           description: ARN of the role Eon assumes to access the account in AWS.
           example: arn:aws:iam::123412341234:role/EonSourceAccountRole
           type: string
+        regions:
+          description: AWS regions Eon discovers in. Omit or leave empty to discover
+            in all supported regions.
+          example:
+          - us-east-1
+          - eu-west-1
+          items:
+            type: string
+          type: array
       required:
       - roleArn
       type: object
@@ -13868,6 +13951,9 @@ components:
           serviceAccount: eon-source@my-project.iam.gserviceaccount.com
         cloudProvider: AWS
         aws:
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
           tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
@@ -13893,6 +13979,9 @@ components:
             serviceAccount: eon-source@my-project.iam.gserviceaccount.com
           cloudProvider: AWS
           aws:
+            regions:
+            - us-east-1
+            - eu-west-1
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
             tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
@@ -13977,6 +14066,9 @@ components:
         Applicable if `cloudProvider` is set to `AWS`.
       example:
         organizationId: o-1234567890
+        regions:
+        - us-east-1
+        - eu-west-1
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
       properties:
@@ -13989,6 +14081,14 @@ components:
             belongs to.
           example: o-1234567890
           type: string
+        regions:
+          description: AWS regions Eon discovers in. Empty means all supported regions.
+          example:
+          - us-east-1
+          - eu-west-1
+          items:
+            type: string
+          type: array
       required:
       - roleArn
       type: object
@@ -14060,6 +14160,9 @@ components:
         cloudProvider: AWS
         aws:
           organizationId: o-1234567890
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
           managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14093,6 +14196,9 @@ components:
           cloudProvider: AWS
           aws:
             organizationId: o-1234567890
+            regions:
+            - us-east-1
+            - eu-west-1
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
             managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14160,6 +14266,9 @@ components:
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
+              regions:
+              - us-east-1
+              - eu-west-1
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14462,6 +14571,9 @@ components:
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
+              regions:
+              - us-east-1
+              - eu-west-1
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14487,6 +14599,9 @@ components:
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
+              regions:
+              - us-east-1
+              - eu-west-1
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14536,6 +14651,9 @@ components:
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
+              regions:
+              - us-east-1
+              - eu-west-1
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14636,6 +14754,9 @@ components:
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
+              regions:
+              - us-east-1
+              - eu-west-1
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14670,6 +14791,9 @@ components:
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
+              regions:
+              - us-east-1
+              - eu-west-1
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14704,6 +14828,9 @@ components:
             cloudProvider: AWS
             aws:
               organizationId: o-1234567890
+              regions:
+              - us-east-1
+              - eu-west-1
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
@@ -14804,6 +14931,9 @@ components:
     ConnectSourceAwsOrganizationalUnitRequest:
       example:
         providerOrganizationalUnitId: ou-a1b2-f6g7h111
+        regions:
+        - us-east-1
+        - eu-west-1
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       properties:
         roleArn:
@@ -14815,6 +14945,15 @@ components:
           description: AWS-assigned organizational unit ID.
           example: ou-a1b2-f6g7h111
           type: string
+        regions:
+          description: AWS regions Eon discovers in. Omit or leave empty to discover
+            in all supported regions.
+          example:
+          - us-east-1
+          - eu-west-1
+          items:
+            type: string
+          type: array
       required:
       - providerOrganizationalUnitId
       - roleArn
@@ -14822,6 +14961,9 @@ components:
     SourceAwsOrganizationalUnit:
       example:
         providerOrganizationalUnitId: ou-a1b2-f6g7h111
+        regions:
+        - us-east-1
+        - eu-west-1
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         name: prod-eu organizational unit
         id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -14851,6 +14993,14 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/AccountState'
+        regions:
+          description: AWS regions Eon discovers in. Empty means all supported regions.
+          example:
+          - us-east-1
+          - eu-west-1
+          items:
+            type: string
+          type: array
       required:
       - id
       - name
@@ -14863,6 +15013,9 @@ components:
       example:
         organizationalUnit:
           providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -14879,12 +15032,18 @@ components:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         organizationalUnits:
         - providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
           providerManagementAccountId: "123456789012"
           status: CONNECTED
         - providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -14915,6 +15074,9 @@ components:
       example:
         organizationalUnit:
           providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -14930,6 +15092,9 @@ components:
       example:
         organizationalUnit:
           providerOrganizationalUnitId: ou-a1b2-f6g7h111
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           name: prod-eu organizational unit
           id: fc495499-9796-5fc9-ade7-1ba924cbcc42
@@ -23888,14 +24053,16 @@ components:
             **Example:** `{"primary": ""}`
           type: object
         volumeEncryptionKeyId:
-          description: ARN of the KMS key for encrypting the restored volume.
+          description: |
+            ARN of the KMS key for encrypting the restored volume. Omit it to restore the volume unencrypted, or encrypted
+            with the account default key when EBS encryption by default is enabled. Volumes restored from a native EBS
+            backup are always encrypted and use the AWS-managed `aws/ebs` key when this is omitted.
           example: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
           type: string
         volumeSettings:
           $ref: '#/components/schemas/VolumeSettings'
       required:
       - providerVolumeId
-      - volumeEncryptionKeyId
       - volumeSettings
       type: object
     AwsEc2InstanceRestoreTarget:
@@ -28611,6 +28778,9 @@ components:
       type: string
       x-extensible-enum: true
       x-docs-internal-enum:
+      - GCP_SQL_VM_METERING_DIMENSION
+      - GCP_SQL_VM_TO_AWS_VAULT_METERING_DIMENSION
+      - GCP_SQL_VM_TO_AZURE_VAULT_METERING_DIMENSION
       - AWS_RDS_ORACLE_METERING_DIMENSION
       - AWS_EC2_CASSANDRA_METERING_DIMENSION
       - AZURE_VM_CASSANDRA_METERING_DIMENSION

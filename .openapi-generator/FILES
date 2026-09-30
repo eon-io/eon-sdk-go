@@ -193,6 +193,8 @@ docs/FindingExclusionDetectorFilters.md
 docs/FindingExclusionDetectorType.md
 docs/FindingExclusionFilterConditions.md
 docs/FindingExclusionResourceFilter.md
+docs/FindingExclusionScope.md
+docs/FindingExclusionScopeFilters.md
 docs/FindingExclusionTypeFilters.md
 docs/FindingExclusionValueFilters.md
 docs/FindingExclusionsAPI.md
@@ -645,6 +647,8 @@ model_finding_exclusion_detector_filters.go
 model_finding_exclusion_detector_type.go
 model_finding_exclusion_filter_conditions.go
 model_finding_exclusion_resource_filter.go
+model_finding_exclusion_scope.go
+model_finding_exclusion_scope_filters.go
 model_finding_exclusion_type_filters.go
 model_finding_exclusion_value_filters.go
 model_finding_object_type.go

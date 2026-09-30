@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **ProviderVolumeId** | **string** | Cloud-provider-assigned ID of the volume to restore. | 
 **Description** | Pointer to **string** | Optional description. | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored volume as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;primary\&quot;: \&quot;\&quot;}&#x60;  | [optional] 
-**VolumeEncryptionKeyId** | **string** | ARN of the KMS key for encrypting the restored volume. | 
+**VolumeEncryptionKeyId** | Pointer to **string** | ARN of the KMS key for encrypting the restored volume. Omit it to restore the volume unencrypted, or encrypted with the account default key when EBS encryption by default is enabled. Volumes restored from a native EBS backup are always encrypted and use the AWS-managed &#x60;aws/ebs&#x60; key when this is omitted.  | [optional] 
 **VolumeSettings** | [**VolumeSettings**](VolumeSettings.md) |  | 
 
 ## Methods
 
 ### NewRestoreInstanceVolumeInput
 
-`func NewRestoreInstanceVolumeInput(providerVolumeId string, volumeEncryptionKeyId string, volumeSettings VolumeSettings, ) *RestoreInstanceVolumeInput`
+`func NewRestoreInstanceVolumeInput(providerVolumeId string, volumeSettings VolumeSettings, ) *RestoreInstanceVolumeInput`
 
 NewRestoreInstanceVolumeInput instantiates a new RestoreInstanceVolumeInput object
 This constructor will assign default values to properties that have it defined,
@@ -118,6 +118,11 @@ and a boolean to check if the value has been set.
 
 SetVolumeEncryptionKeyId sets VolumeEncryptionKeyId field to given value.
 
+### HasVolumeEncryptionKeyId
+
+`func (o *RestoreInstanceVolumeInput) HasVolumeEncryptionKeyId() bool`
+
+HasVolumeEncryptionKeyId returns a boolean if a field has been set.
 
 ### GetVolumeSettings
 

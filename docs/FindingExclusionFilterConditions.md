@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Scope** | Pointer to [**NullableFindingExclusionScopeFilters**](FindingExclusionScopeFilters.md) |  | [optional] 
 **Resource** | Pointer to [**NullableFindingExclusionResourceFilter**](FindingExclusionResourceFilter.md) |  | [optional] 
 **Type** | Pointer to [**NullableFindingExclusionTypeFilters**](FindingExclusionTypeFilters.md) |  | [optional] 
 **Detector** | Pointer to [**NullableFindingExclusionDetectorFilters**](FindingExclusionDetectorFilters.md) |  | [optional] 
@@ -28,6 +29,41 @@ NewFindingExclusionFilterConditionsWithDefaults instantiates a new FindingExclus
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetScope
+
+`func (o *FindingExclusionFilterConditions) GetScope() FindingExclusionScopeFilters`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *FindingExclusionFilterConditions) GetScopeOk() (*FindingExclusionScopeFilters, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *FindingExclusionFilterConditions) SetScope(v FindingExclusionScopeFilters)`
+
+SetScope sets Scope field to given value.
+
+### HasScope
+
+`func (o *FindingExclusionFilterConditions) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
+
+### SetScopeNil
+
+`func (o *FindingExclusionFilterConditions) SetScopeNil(b bool)`
+
+ SetScopeNil sets the value for Scope to be an explicit nil
+
+### UnsetScope
+`func (o *FindingExclusionFilterConditions) UnsetScope()`
+
+UnsetScope ensures that no value is present for Scope, not even an explicit nil
 ### GetResource
 
 `func (o *FindingExclusionFilterConditions) GetResource() FindingExclusionResourceFilter`

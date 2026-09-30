@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Finding exclusion ID. | 
-**ResourceId** | Pointer to **string** | Eon-assigned ID of the resource the exclusion applies to. Omitted when the exclusion applies to every resource in the account.  | [optional] 
+**Scope** | [**FindingExclusionScope**](FindingExclusionScope.md) |  | 
+**ProviderResourceId** | Pointer to **string** | Cloud provider ID of the resource the exclusion applies to, such as an EC2 instance ID or an Azure resource ID. Present when &#x60;scope&#x60; is &#x60;RESOURCE&#x60;.  | [optional] 
 **Value** | **string** | What the exclusion matches, depending on &#x60;type&#x60;. For &#x60;PATH&#x60;, every file whose path starts with this value, so &#x60;/data/tmp&#x60; also matches &#x60;/data/tmp2/report.csv&#x60;. Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is currently lowercase, so write Windows prefixes in lowercase (for example &#x60;c:/users/app/cache&#x60;). For &#x60;TABLE&#x60; or &#x60;DATABASE&#x60;, the exact table or database name.  | 
 **Type** | [**FindingObjectType**](FindingObjectType.md) |  | 
 **Detector** | [**FindingExclusionDetectorType**](FindingExclusionDetectorType.md) |  | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewFindingExclusion
 
-`func NewFindingExclusion(id string, value string, type_ FindingObjectType, detector FindingExclusionDetectorType, updatedAt time.Time, ) *FindingExclusion`
+`func NewFindingExclusion(id string, scope FindingExclusionScope, value string, type_ FindingObjectType, detector FindingExclusionDetectorType, updatedAt time.Time, ) *FindingExclusion`
 
 NewFindingExclusion instantiates a new FindingExclusion object
 This constructor will assign default values to properties that have it defined,
@@ -50,30 +51,50 @@ and a boolean to check if the value has been set.
 SetId sets Id field to given value.
 
 
-### GetResourceId
+### GetScope
 
-`func (o *FindingExclusion) GetResourceId() string`
+`func (o *FindingExclusion) GetScope() FindingExclusionScope`
 
-GetResourceId returns the ResourceId field if non-nil, zero value otherwise.
+GetScope returns the Scope field if non-nil, zero value otherwise.
 
-### GetResourceIdOk
+### GetScopeOk
 
-`func (o *FindingExclusion) GetResourceIdOk() (*string, bool)`
+`func (o *FindingExclusion) GetScopeOk() (*FindingExclusionScope, bool)`
 
-GetResourceIdOk returns a tuple with the ResourceId field if it's non-nil, zero value otherwise
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResourceId
+### SetScope
 
-`func (o *FindingExclusion) SetResourceId(v string)`
+`func (o *FindingExclusion) SetScope(v FindingExclusionScope)`
 
-SetResourceId sets ResourceId field to given value.
+SetScope sets Scope field to given value.
 
-### HasResourceId
 
-`func (o *FindingExclusion) HasResourceId() bool`
+### GetProviderResourceId
 
-HasResourceId returns a boolean if a field has been set.
+`func (o *FindingExclusion) GetProviderResourceId() string`
+
+GetProviderResourceId returns the ProviderResourceId field if non-nil, zero value otherwise.
+
+### GetProviderResourceIdOk
+
+`func (o *FindingExclusion) GetProviderResourceIdOk() (*string, bool)`
+
+GetProviderResourceIdOk returns a tuple with the ProviderResourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderResourceId
+
+`func (o *FindingExclusion) SetProviderResourceId(v string)`
+
+SetProviderResourceId sets ProviderResourceId field to given value.
+
+### HasProviderResourceId
+
+`func (o *FindingExclusion) HasProviderResourceId() bool`
+
+HasProviderResourceId returns a boolean if a field has been set.
 
 ### GetValue
 

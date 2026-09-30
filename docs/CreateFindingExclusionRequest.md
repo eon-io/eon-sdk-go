@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResourceId** | Pointer to **string** | Eon-assigned ID of the resource to apply the exclusion to. Omit it to apply the exclusion to every resource in the account.  | [optional] 
+**Scope** | [**FindingExclusionScope**](FindingExclusionScope.md) |  | 
+**ProviderResourceId** | Pointer to **string** | Cloud provider ID of the resource to apply the exclusion to, such as an EC2 instance ID or an Azure resource ID. Required when &#x60;scope&#x60; is &#x60;RESOURCE&#x60;, and must be omitted when it&#39;s &#x60;ACCOUNT&#x60;.  | [optional] 
 **Value** | **string** | What the exclusion matches, depending on &#x60;type&#x60;. For &#x60;PATH&#x60;, every file whose path starts with this value, so &#x60;/data/tmp&#x60; also matches &#x60;/data/tmp2/report.csv&#x60;. Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is currently lowercase, so write Windows prefixes in lowercase (for example &#x60;c:/users/app/cache&#x60;). For &#x60;TABLE&#x60; or &#x60;DATABASE&#x60;, the exact table or database name.  | 
 **Type** | [**FindingObjectType**](FindingObjectType.md) |  | 
 **Detector** | [**FindingExclusionDetectorType**](FindingExclusionDetectorType.md) |  | 
@@ -13,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewCreateFindingExclusionRequest
 
-`func NewCreateFindingExclusionRequest(value string, type_ FindingObjectType, detector FindingExclusionDetectorType, ) *CreateFindingExclusionRequest`
+`func NewCreateFindingExclusionRequest(scope FindingExclusionScope, value string, type_ FindingObjectType, detector FindingExclusionDetectorType, ) *CreateFindingExclusionRequest`
 
 NewCreateFindingExclusionRequest instantiates a new CreateFindingExclusionRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,30 +29,50 @@ NewCreateFindingExclusionRequestWithDefaults instantiates a new CreateFindingExc
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetResourceId
+### GetScope
 
-`func (o *CreateFindingExclusionRequest) GetResourceId() string`
+`func (o *CreateFindingExclusionRequest) GetScope() FindingExclusionScope`
 
-GetResourceId returns the ResourceId field if non-nil, zero value otherwise.
+GetScope returns the Scope field if non-nil, zero value otherwise.
 
-### GetResourceIdOk
+### GetScopeOk
 
-`func (o *CreateFindingExclusionRequest) GetResourceIdOk() (*string, bool)`
+`func (o *CreateFindingExclusionRequest) GetScopeOk() (*FindingExclusionScope, bool)`
 
-GetResourceIdOk returns a tuple with the ResourceId field if it's non-nil, zero value otherwise
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResourceId
+### SetScope
 
-`func (o *CreateFindingExclusionRequest) SetResourceId(v string)`
+`func (o *CreateFindingExclusionRequest) SetScope(v FindingExclusionScope)`
 
-SetResourceId sets ResourceId field to given value.
+SetScope sets Scope field to given value.
 
-### HasResourceId
 
-`func (o *CreateFindingExclusionRequest) HasResourceId() bool`
+### GetProviderResourceId
 
-HasResourceId returns a boolean if a field has been set.
+`func (o *CreateFindingExclusionRequest) GetProviderResourceId() string`
+
+GetProviderResourceId returns the ProviderResourceId field if non-nil, zero value otherwise.
+
+### GetProviderResourceIdOk
+
+`func (o *CreateFindingExclusionRequest) GetProviderResourceIdOk() (*string, bool)`
+
+GetProviderResourceIdOk returns a tuple with the ProviderResourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderResourceId
+
+`func (o *CreateFindingExclusionRequest) SetProviderResourceId(v string)`
+
+SetProviderResourceId sets ProviderResourceId field to given value.
+
+### HasProviderResourceId
+
+`func (o *CreateFindingExclusionRequest) HasProviderResourceId() bool`
+
+HasProviderResourceId returns a boolean if a field has been set.
 
 ### GetValue
 

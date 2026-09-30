@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ProviderOrganizationalUnitId** | **string** | AWS-assigned organizational unit ID. | 
 **ProviderManagementAccountId** | **string** | AWS-assigned ID of the organization&#39;s management account. | 
 **Status** | [**AccountState**](AccountState.md) |  | 
+**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. Empty means all supported regions. | [optional] 
 
 ## Methods
 
@@ -149,6 +150,31 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
+
+### GetRegions
+
+`func (o *SourceAwsOrganizationalUnit) GetRegions() []string`
+
+GetRegions returns the Regions field if non-nil, zero value otherwise.
+
+### GetRegionsOk
+
+`func (o *SourceAwsOrganizationalUnit) GetRegionsOk() (*[]string, bool)`
+
+GetRegionsOk returns a tuple with the Regions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegions
+
+`func (o *SourceAwsOrganizationalUnit) SetRegions(v []string)`
+
+SetRegions sets Regions field to given value.
+
+### HasRegions
+
+`func (o *SourceAwsOrganizationalUnit) HasRegions() bool`
+
+HasRegions returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

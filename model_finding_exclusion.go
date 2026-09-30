@@ -24,8 +24,9 @@ var _ MappedNullable = &FindingExclusion{}
 type FindingExclusion struct {
 	// Finding exclusion ID.
 	Id string `json:"id"`
-	// Eon-assigned ID of the resource the exclusion applies to. Omitted when the exclusion applies to every resource in the account. 
-	ResourceId *string `json:"resourceId,omitempty"`
+	Scope FindingExclusionScope `json:"scope"`
+	// Cloud provider ID of the resource the exclusion applies to, such as an EC2 instance ID or an Azure resource ID. Present when `scope` is `RESOURCE`. 
+	ProviderResourceId *string `json:"providerResourceId,omitempty"`
 	// What the exclusion matches, depending on `type`. For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`. Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`). For `TABLE` or `DATABASE`, the exact table or database name. 
 	Value string `json:"value"`
 	Type FindingObjectType `json:"type"`
@@ -40,9 +41,10 @@ type _FindingExclusion FindingExclusion
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFindingExclusion(id string, value string, type_ FindingObjectType, detector FindingExclusionDetectorType, updatedAt time.Time) *FindingExclusion {
+func NewFindingExclusion(id string, scope FindingExclusionScope, value string, type_ FindingObjectType, detector FindingExclusionDetectorType, updatedAt time.Time) *FindingExclusion {
 	this := FindingExclusion{}
 	this.Id = id
+	this.Scope = scope
 	this.Value = value
 	this.Type = type_
 	this.Detector = detector
@@ -82,36 +84,60 @@ func (o *FindingExclusion) SetId(v string) {
 	o.Id = v
 }
 
-// GetResourceId returns the ResourceId field value if set, zero value otherwise.
-func (o *FindingExclusion) GetResourceId() string {
-	if o == nil || IsNil(o.ResourceId) {
+// GetScope returns the Scope field value
+func (o *FindingExclusion) GetScope() FindingExclusionScope {
+	if o == nil {
+		var ret FindingExclusionScope
+		return ret
+	}
+
+	return o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value
+// and a boolean to check if the value has been set.
+func (o *FindingExclusion) GetScopeOk() (*FindingExclusionScope, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Scope, true
+}
+
+// SetScope sets field value
+func (o *FindingExclusion) SetScope(v FindingExclusionScope) {
+	o.Scope = v
+}
+
+// GetProviderResourceId returns the ProviderResourceId field value if set, zero value otherwise.
+func (o *FindingExclusion) GetProviderResourceId() string {
+	if o == nil || IsNil(o.ProviderResourceId) {
 		var ret string
 		return ret
 	}
-	return *o.ResourceId
+	return *o.ProviderResourceId
 }
 
-// GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
+// GetProviderResourceIdOk returns a tuple with the ProviderResourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindingExclusion) GetResourceIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceId) {
+func (o *FindingExclusion) GetProviderResourceIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ProviderResourceId) {
 		return nil, false
 	}
-	return o.ResourceId, true
+	return o.ProviderResourceId, true
 }
 
-// HasResourceId returns a boolean if a field has been set.
-func (o *FindingExclusion) HasResourceId() bool {
-	if o != nil && !IsNil(o.ResourceId) {
+// HasProviderResourceId returns a boolean if a field has been set.
+func (o *FindingExclusion) HasProviderResourceId() bool {
+	if o != nil && !IsNil(o.ProviderResourceId) {
 		return true
 	}
 
 	return false
 }
 
-// SetResourceId gets a reference to the given string and assigns it to the ResourceId field.
-func (o *FindingExclusion) SetResourceId(v string) {
-	o.ResourceId = &v
+// SetProviderResourceId gets a reference to the given string and assigns it to the ProviderResourceId field.
+func (o *FindingExclusion) SetProviderResourceId(v string) {
+	o.ProviderResourceId = &v
 }
 
 // GetValue returns the Value field value
@@ -221,8 +247,9 @@ func (o FindingExclusion) MarshalJSON() ([]byte, error) {
 func (o FindingExclusion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	if !IsNil(o.ResourceId) {
-		toSerialize["resourceId"] = o.ResourceId
+	toSerialize["scope"] = o.Scope
+	if !IsNil(o.ProviderResourceId) {
+		toSerialize["providerResourceId"] = o.ProviderResourceId
 	}
 	toSerialize["value"] = o.Value
 	toSerialize["type"] = o.Type
@@ -237,6 +264,7 @@ func (o *FindingExclusion) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
+		"scope",
 		"value",
 		"type",
 		"detector",

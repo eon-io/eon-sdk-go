@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RoleArn** | **string** | ARN of the role Eon assumes to access the account in AWS. | 
+**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. Omit or leave empty to discover in all supported regions. | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetRoleArn sets RoleArn field to given value.
 
+
+### GetRegions
+
+`func (o *AwsSourceAccountAttributesInput) GetRegions() []string`
+
+GetRegions returns the Regions field if non-nil, zero value otherwise.
+
+### GetRegionsOk
+
+`func (o *AwsSourceAccountAttributesInput) GetRegionsOk() (*[]string, bool)`
+
+GetRegionsOk returns a tuple with the Regions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegions
+
+`func (o *AwsSourceAccountAttributesInput) SetRegions(v []string)`
+
+SetRegions sets Regions field to given value.
+
+### HasRegions
+
+`func (o *AwsSourceAccountAttributesInput) HasRegions() bool`
+
+HasRegions returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -34,7 +34,7 @@ import (
 
 func main() {
 	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
-	createFindingExclusionRequest := *openapiclient.NewCreateFindingExclusionRequest("/var/cache", openapiclient.FindingObjectType("PATH"), openapiclient.FindingExclusionDetectorType("RANSOMWARE_BEHAVIOR")) // CreateFindingExclusionRequest | 
+	createFindingExclusionRequest := *openapiclient.NewCreateFindingExclusionRequest(openapiclient.FindingExclusionScope("RESOURCE"), "/var/cache", openapiclient.FindingObjectType("PATH"), openapiclient.FindingExclusionDetectorType("RANSOMWARE_BEHAVIOR")) // CreateFindingExclusionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -327,7 +327,7 @@ import (
 func main() {
 	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
 	findingExclusionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Finding exclusion ID.
-	updateFindingExclusionRequest := *openapiclient.NewUpdateFindingExclusionRequest("/var/cache", openapiclient.FindingObjectType("PATH"), openapiclient.FindingExclusionDetectorType("RANSOMWARE_BEHAVIOR")) // UpdateFindingExclusionRequest | 
+	updateFindingExclusionRequest := *openapiclient.NewUpdateFindingExclusionRequest(openapiclient.FindingExclusionScope("RESOURCE"), "/var/cache", openapiclient.FindingObjectType("PATH"), openapiclient.FindingExclusionDetectorType("RANSOMWARE_BEHAVIOR")) // UpdateFindingExclusionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
