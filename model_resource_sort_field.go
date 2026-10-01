@@ -15,13 +15,14 @@ import (
 	"fmt"
 )
 
-// ResourceSortField Field to sort by.
+// ResourceSortField Field to sort by. Ascending, `configurationStatus` puts resources Eon is expected to back up before those out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`. 
 type ResourceSortField string
 
 // List of ResourceSortField
 const (
 	ID ResourceSortField = "id"
 	BACKUP_STATUS ResourceSortField = "backupStatus"
+	CONFIGURATION_STATUS ResourceSortField = "configurationStatus"
 	ACCOUNT_ID ResourceSortField = "accountId"
 	RESOURCE_NAME ResourceSortField = "resourceName"
 	ENVIRONMENT ResourceSortField = "environment"
@@ -44,6 +45,7 @@ const (
 var AllowedResourceSortFieldEnumValues = []ResourceSortField{
 	"id",
 	"backupStatus",
+	"configurationStatus",
 	"accountId",
 	"resourceName",
 	"environment",

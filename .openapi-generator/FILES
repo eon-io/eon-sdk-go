@@ -114,6 +114,10 @@ docs/CancelMyMPARequestResponse.md
 docs/Classifications.md
 docs/CloudProviderCondition.md
 docs/CloudProviderFilters.md
+docs/ComplianceStatus.md
+docs/ComplianceStatusFilters.md
+docs/ConfigurationStatus.md
+docs/ConfigurationStatusFilters.md
 docs/ConnectRestoreAccountRequest.md
 docs/ConnectRestoreAccountResponse.md
 docs/ConnectRestoreAwsOrganizationalUnitRequest.md
@@ -570,6 +574,10 @@ model_cancel_my_mpa_request_response.go
 model_classifications.go
 model_cloud_provider_condition.go
 model_cloud_provider_filters.go
+model_compliance_status.go
+model_compliance_status_filters.go
+model_configuration_status.go
+model_configuration_status_filters.go
 model_connect_restore_account_request.go
 model_connect_restore_account_response.go
 model_connect_restore_aws_organizational_unit_request.go

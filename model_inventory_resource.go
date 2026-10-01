@@ -43,6 +43,8 @@ type InventoryResource struct {
 	SnapshotStorage SnapshotStorage `json:"snapshotStorage"`
 	SourceStorage SourceStorage `json:"sourceStorage"`
 	ControlViolationCounts NullableControlViolations `json:"controlViolationCounts,omitempty"`
+	ComplianceStatus *ComplianceStatus `json:"complianceStatus,omitempty"`
+	ConfigurationStatus *ConfigurationStatus `json:"configurationStatus,omitempty"`
 	// Resource tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** `{\"env\": \"prod\", \"app\": \"web\"}` 
 	Tags map[string]string `json:"tags"`
 	CloudProvider Provider `json:"cloudProvider"`
@@ -456,6 +458,70 @@ func (o *InventoryResource) UnsetControlViolationCounts() {
 	o.ControlViolationCounts.Unset()
 }
 
+// GetComplianceStatus returns the ComplianceStatus field value if set, zero value otherwise.
+func (o *InventoryResource) GetComplianceStatus() ComplianceStatus {
+	if o == nil || IsNil(o.ComplianceStatus) {
+		var ret ComplianceStatus
+		return ret
+	}
+	return *o.ComplianceStatus
+}
+
+// GetComplianceStatusOk returns a tuple with the ComplianceStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryResource) GetComplianceStatusOk() (*ComplianceStatus, bool) {
+	if o == nil || IsNil(o.ComplianceStatus) {
+		return nil, false
+	}
+	return o.ComplianceStatus, true
+}
+
+// HasComplianceStatus returns a boolean if a field has been set.
+func (o *InventoryResource) HasComplianceStatus() bool {
+	if o != nil && !IsNil(o.ComplianceStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetComplianceStatus gets a reference to the given ComplianceStatus and assigns it to the ComplianceStatus field.
+func (o *InventoryResource) SetComplianceStatus(v ComplianceStatus) {
+	o.ComplianceStatus = &v
+}
+
+// GetConfigurationStatus returns the ConfigurationStatus field value if set, zero value otherwise.
+func (o *InventoryResource) GetConfigurationStatus() ConfigurationStatus {
+	if o == nil || IsNil(o.ConfigurationStatus) {
+		var ret ConfigurationStatus
+		return ret
+	}
+	return *o.ConfigurationStatus
+}
+
+// GetConfigurationStatusOk returns a tuple with the ConfigurationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryResource) GetConfigurationStatusOk() (*ConfigurationStatus, bool) {
+	if o == nil || IsNil(o.ConfigurationStatus) {
+		return nil, false
+	}
+	return o.ConfigurationStatus, true
+}
+
+// HasConfigurationStatus returns a boolean if a field has been set.
+func (o *InventoryResource) HasConfigurationStatus() bool {
+	if o != nil && !IsNil(o.ConfigurationStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationStatus gets a reference to the given ConfigurationStatus and assigns it to the ConfigurationStatus field.
+func (o *InventoryResource) SetConfigurationStatus(v ConfigurationStatus) {
+	o.ConfigurationStatus = &v
+}
+
 // GetTags returns the Tags field value
 func (o *InventoryResource) GetTags() map[string]string {
 	if o == nil {
@@ -692,6 +758,12 @@ func (o InventoryResource) ToMap() (map[string]interface{}, error) {
 	toSerialize["sourceStorage"] = o.SourceStorage
 	if o.ControlViolationCounts.IsSet() {
 		toSerialize["controlViolationCounts"] = o.ControlViolationCounts.Get()
+	}
+	if !IsNil(o.ComplianceStatus) {
+		toSerialize["complianceStatus"] = o.ComplianceStatus
+	}
+	if !IsNil(o.ConfigurationStatus) {
+		toSerialize["configurationStatus"] = o.ConfigurationStatus
 	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["cloudProvider"] = o.CloudProvider

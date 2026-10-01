@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **SnapshotStorage** | [**SnapshotStorage**](SnapshotStorage.md) |  | 
 **SourceStorage** | [**SourceStorage**](SourceStorage.md) |  | 
 **ControlViolationCounts** | Pointer to [**NullableControlViolations**](ControlViolations.md) |  | [optional] 
+**ComplianceStatus** | Pointer to [**ComplianceStatus**](ComplianceStatus.md) |  | [optional] 
+**ConfigurationStatus** | Pointer to [**ConfigurationStatus**](ConfigurationStatus.md) |  | [optional] 
 **Tags** | **map[string]string** | Resource tags as key-value pairs. Both keys and values are strings. If a tag is a key with no value, the value is presented as an empty string.  **Example:** &#x60;{\&quot;env\&quot;: \&quot;prod\&quot;, \&quot;app\&quot;: \&quot;web\&quot;}&#x60;  | 
 **CloudProvider** | [**Provider**](Provider.md) |  | 
 **ResourceType** | [**ResourceType**](ResourceType.md) |  | 
@@ -344,6 +346,56 @@ HasControlViolationCounts returns a boolean if a field has been set.
 `func (o *InventoryResource) UnsetControlViolationCounts()`
 
 UnsetControlViolationCounts ensures that no value is present for ControlViolationCounts, not even an explicit nil
+### GetComplianceStatus
+
+`func (o *InventoryResource) GetComplianceStatus() ComplianceStatus`
+
+GetComplianceStatus returns the ComplianceStatus field if non-nil, zero value otherwise.
+
+### GetComplianceStatusOk
+
+`func (o *InventoryResource) GetComplianceStatusOk() (*ComplianceStatus, bool)`
+
+GetComplianceStatusOk returns a tuple with the ComplianceStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComplianceStatus
+
+`func (o *InventoryResource) SetComplianceStatus(v ComplianceStatus)`
+
+SetComplianceStatus sets ComplianceStatus field to given value.
+
+### HasComplianceStatus
+
+`func (o *InventoryResource) HasComplianceStatus() bool`
+
+HasComplianceStatus returns a boolean if a field has been set.
+
+### GetConfigurationStatus
+
+`func (o *InventoryResource) GetConfigurationStatus() ConfigurationStatus`
+
+GetConfigurationStatus returns the ConfigurationStatus field if non-nil, zero value otherwise.
+
+### GetConfigurationStatusOk
+
+`func (o *InventoryResource) GetConfigurationStatusOk() (*ConfigurationStatus, bool)`
+
+GetConfigurationStatusOk returns a tuple with the ConfigurationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurationStatus
+
+`func (o *InventoryResource) SetConfigurationStatus(v ConfigurationStatus)`
+
+SetConfigurationStatus sets ConfigurationStatus field to given value.
+
+### HasConfigurationStatus
+
+`func (o *InventoryResource) HasConfigurationStatus() bool`
+
+HasConfigurationStatus returns a boolean if a field has been set.
+
 ### GetTags
 
 `func (o *InventoryResource) GetTags() map[string]string`

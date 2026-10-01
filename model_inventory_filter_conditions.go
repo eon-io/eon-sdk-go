@@ -30,6 +30,8 @@ type InventoryFilterConditions struct {
 	Subnets *SubnetFilters `json:"subnets,omitempty"`
 	DataClasses *DataClassesFilters `json:"dataClasses,omitempty"`
 	BackupStatus *BackupStatusFilters `json:"backupStatus,omitempty"`
+	ConfigurationStatus *ConfigurationStatusFilters `json:"configurationStatus,omitempty"`
+	ComplianceStatus *ComplianceStatusFilters `json:"complianceStatus,omitempty"`
 	TagKeys *TagKeysFilters `json:"tagKeys,omitempty"`
 	TagKeyValues *TagKeyValuesFilters `json:"tagKeyValues,omitempty"`
 }
@@ -403,6 +405,70 @@ func (o *InventoryFilterConditions) SetBackupStatus(v BackupStatusFilters) {
 	o.BackupStatus = &v
 }
 
+// GetConfigurationStatus returns the ConfigurationStatus field value if set, zero value otherwise.
+func (o *InventoryFilterConditions) GetConfigurationStatus() ConfigurationStatusFilters {
+	if o == nil || IsNil(o.ConfigurationStatus) {
+		var ret ConfigurationStatusFilters
+		return ret
+	}
+	return *o.ConfigurationStatus
+}
+
+// GetConfigurationStatusOk returns a tuple with the ConfigurationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryFilterConditions) GetConfigurationStatusOk() (*ConfigurationStatusFilters, bool) {
+	if o == nil || IsNil(o.ConfigurationStatus) {
+		return nil, false
+	}
+	return o.ConfigurationStatus, true
+}
+
+// HasConfigurationStatus returns a boolean if a field has been set.
+func (o *InventoryFilterConditions) HasConfigurationStatus() bool {
+	if o != nil && !IsNil(o.ConfigurationStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationStatus gets a reference to the given ConfigurationStatusFilters and assigns it to the ConfigurationStatus field.
+func (o *InventoryFilterConditions) SetConfigurationStatus(v ConfigurationStatusFilters) {
+	o.ConfigurationStatus = &v
+}
+
+// GetComplianceStatus returns the ComplianceStatus field value if set, zero value otherwise.
+func (o *InventoryFilterConditions) GetComplianceStatus() ComplianceStatusFilters {
+	if o == nil || IsNil(o.ComplianceStatus) {
+		var ret ComplianceStatusFilters
+		return ret
+	}
+	return *o.ComplianceStatus
+}
+
+// GetComplianceStatusOk returns a tuple with the ComplianceStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryFilterConditions) GetComplianceStatusOk() (*ComplianceStatusFilters, bool) {
+	if o == nil || IsNil(o.ComplianceStatus) {
+		return nil, false
+	}
+	return o.ComplianceStatus, true
+}
+
+// HasComplianceStatus returns a boolean if a field has been set.
+func (o *InventoryFilterConditions) HasComplianceStatus() bool {
+	if o != nil && !IsNil(o.ComplianceStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetComplianceStatus gets a reference to the given ComplianceStatusFilters and assigns it to the ComplianceStatus field.
+func (o *InventoryFilterConditions) SetComplianceStatus(v ComplianceStatusFilters) {
+	o.ComplianceStatus = &v
+}
+
 // GetTagKeys returns the TagKeys field value if set, zero value otherwise.
 func (o *InventoryFilterConditions) GetTagKeys() TagKeysFilters {
 	if o == nil || IsNil(o.TagKeys) {
@@ -509,6 +575,12 @@ func (o InventoryFilterConditions) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.BackupStatus) {
 		toSerialize["backupStatus"] = o.BackupStatus
+	}
+	if !IsNil(o.ConfigurationStatus) {
+		toSerialize["configurationStatus"] = o.ConfigurationStatus
+	}
+	if !IsNil(o.ComplianceStatus) {
+		toSerialize["complianceStatus"] = o.ComplianceStatus
 	}
 	if !IsNil(o.TagKeys) {
 		toSerialize["tagKeys"] = o.TagKeys

@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **Subnets** | Pointer to [**SubnetFilters**](SubnetFilters.md) |  | [optional] 
 **DataClasses** | Pointer to [**DataClassesFilters**](DataClassesFilters.md) |  | [optional] 
 **BackupStatus** | Pointer to [**BackupStatusFilters**](BackupStatusFilters.md) |  | [optional] 
+**ConfigurationStatus** | Pointer to [**ConfigurationStatusFilters**](ConfigurationStatusFilters.md) |  | [optional] 
+**ComplianceStatus** | Pointer to [**ComplianceStatusFilters**](ComplianceStatusFilters.md) |  | [optional] 
 **TagKeys** | Pointer to [**TagKeysFilters**](TagKeysFilters.md) |  | [optional] 
 **TagKeyValues** | Pointer to [**TagKeyValuesFilters**](TagKeyValuesFilters.md) |  | [optional] 
 
@@ -311,6 +313,56 @@ SetBackupStatus sets BackupStatus field to given value.
 `func (o *InventoryFilterConditions) HasBackupStatus() bool`
 
 HasBackupStatus returns a boolean if a field has been set.
+
+### GetConfigurationStatus
+
+`func (o *InventoryFilterConditions) GetConfigurationStatus() ConfigurationStatusFilters`
+
+GetConfigurationStatus returns the ConfigurationStatus field if non-nil, zero value otherwise.
+
+### GetConfigurationStatusOk
+
+`func (o *InventoryFilterConditions) GetConfigurationStatusOk() (*ConfigurationStatusFilters, bool)`
+
+GetConfigurationStatusOk returns a tuple with the ConfigurationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurationStatus
+
+`func (o *InventoryFilterConditions) SetConfigurationStatus(v ConfigurationStatusFilters)`
+
+SetConfigurationStatus sets ConfigurationStatus field to given value.
+
+### HasConfigurationStatus
+
+`func (o *InventoryFilterConditions) HasConfigurationStatus() bool`
+
+HasConfigurationStatus returns a boolean if a field has been set.
+
+### GetComplianceStatus
+
+`func (o *InventoryFilterConditions) GetComplianceStatus() ComplianceStatusFilters`
+
+GetComplianceStatus returns the ComplianceStatus field if non-nil, zero value otherwise.
+
+### GetComplianceStatusOk
+
+`func (o *InventoryFilterConditions) GetComplianceStatusOk() (*ComplianceStatusFilters, bool)`
+
+GetComplianceStatusOk returns a tuple with the ComplianceStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComplianceStatus
+
+`func (o *InventoryFilterConditions) SetComplianceStatus(v ComplianceStatusFilters)`
+
+SetComplianceStatus sets ComplianceStatus field to given value.
+
+### HasComplianceStatus
+
+`func (o *InventoryFilterConditions) HasComplianceStatus() bool`
+
+HasComplianceStatus returns a boolean if a field has been set.
 
 ### GetTagKeys
 

@@ -149,6 +149,8 @@
 
 * `SAAS_USER_RESTORE` (value: `"saas_user.restore"`)
 
+* `SAAS_TEAMS_SEARCH` (value: `"saas_teams.search"`)
+
 * `SAAS_TEAMS_RESTORE` (value: `"saas_teams.restore"`)
 
 * `THREAT_DETECTION_CENTER_VIEW` (value: `"threat_detection_center.view"`)

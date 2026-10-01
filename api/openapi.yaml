@@ -11300,6 +11300,7 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
+      - saas_teams.search
       - saas_teams.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
@@ -11354,6 +11355,7 @@ components:
       - saas_configuration.validate
       - saas_user.search
       - saas_user.restore
+      - saas_teams.search
       - saas_teams.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
@@ -25333,10 +25335,14 @@ components:
       x-enum-varnames:
       - INVENTORY_DETAIL_DYNAMODB_INDEXES
     ResourceSortField:
-      description: Field to sort by.
+      description: |
+        Field to sort by.
+        Ascending, `configurationStatus` puts resources Eon is expected to back up before those
+        out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`.
       enum:
       - id
       - backupStatus
+      - configurationStatus
       - accountId
       - resourceName
       - environment
@@ -25701,6 +25707,133 @@ components:
             $ref: '#/components/schemas/BackupStatus'
           type: array
       type: object
+    ConfigurationStatus:
+      description: |
+        Whether a backup is configured for this resource, and if not why not. One of the
+        independent axes of resource status, alongside `complianceStatus` — neither
+        outranks the other, and a pending customer action is reported as a blocker rather
+        than as a status here.
+        In scope, and counted:
+        `INITIAL_CLASSIFICATION` — found, type still being worked out.
+        `ACCESS_LOST` — Eon can no longer reach the resource; permissions were removed or
+        changed, and nobody decided this.
+        `CLASSIFICATION_FAILED` — Eon tried repeatedly to classify it and gave up. The
+        type is supported; something about this instance defeated it.
+        `UNASSIGNED` — classified and eligible, but no backup policy covers it.
+        `ASSIGNED` — a backup policy covers it, storage-gateway policies included: this
+        axis answers whether a backup is configured, not who takes it.
+        Out of scope, and not counted — four causes with one shared consequence, kept
+        distinct because a customer can do different things about each:
+        `TERMINATED` — deleted in the cloud.
+        `DISCONNECTED` — the customer told Eon not to discover it, by deactivating the
+        account or by a discovery exclusion rule.
+        `EXCLUDED_FROM_BACKUP` — the customer chose not to back it up.
+        `UNSUPPORTED` — Eon cannot back up this kind of resource.
+      enum:
+      - INITIAL_CLASSIFICATION
+      - ACCESS_LOST
+      - CLASSIFICATION_FAILED
+      - UNASSIGNED
+      - ASSIGNED
+      - TERMINATED
+      - DISCONNECTED
+      - EXCLUDED_FROM_BACKUP
+      - LIMIT_EXCEEDED
+      - UNSUPPORTED
+      example: ASSIGNED
+      type: string
+      x-enum-varnames:
+      - CONFIGURATION_STATUS_INITIAL_CLASSIFICATION
+      - CONFIGURATION_STATUS_ACCESS_LOST
+      - CONFIGURATION_STATUS_CLASSIFICATION_FAILED
+      - CONFIGURATION_STATUS_UNASSIGNED
+      - CONFIGURATION_STATUS_ASSIGNED
+      - CONFIGURATION_STATUS_TERMINATED
+      - CONFIGURATION_STATUS_DISCONNECTED
+      - CONFIGURATION_STATUS_EXCLUDED_FROM_BACKUP
+      - CONFIGURATION_STATUS_LIMIT_EXCEEDED
+      - CONFIGURATION_STATUS_UNSUPPORTED
+      x-extensible-enum: true
+      x-docs-internal-enum:
+      - LIMIT_EXCEEDED
+    ConfigurationStatusFilters:
+      additionalProperties: false
+      example:
+        in:
+        - UNASSIGNED
+        - ASSIGNED
+        notIn:
+        - TERMINATED
+        - DISCONNECTED
+      properties:
+        in:
+          description: Matches if any value in this list equals `configurationStatus`.
+          example:
+          - UNASSIGNED
+          - ASSIGNED
+          items:
+            $ref: '#/components/schemas/ConfigurationStatus'
+          type: array
+        notIn:
+          description: |
+            Matches if no value in this list equals `configurationStatus`. A resource the
+            status recalculation has not reached yet has no configuration status, and
+            matches every `notIn` list.
+          example:
+          - TERMINATED
+          - DISCONNECTED
+          items:
+            $ref: '#/components/schemas/ConfigurationStatus'
+          type: array
+      type: object
+    ComplianceStatus:
+      description: |
+        Whether the resource meets the controls applied to it. Independent of
+        `configurationStatus` — it is evaluated whether or not a backup policy is assigned,
+        since a resource with no policy can already violate a control that says it must
+        be backed up.
+        `COMPLIANT` — no violations. This is the default: a resource no control applies
+        to reads compliant rather than "not evaluated".
+        `VIOLATIONS` — at least one open violation.
+        `ALL_MUTED` — the resource has violations and every one of them is muted.
+        There is deliberately no value for "nothing to check". Derived from the
+        resource's issues on each request rather than stored, so it cannot drift out of
+        step with `controlViolationCounts`. Absent only when the resource's issues could
+        not be read for the response.
+      enum:
+      - COMPLIANT
+      - VIOLATIONS
+      - ALL_MUTED
+      example: COMPLIANT
+      type: string
+      x-enum-varnames:
+      - COMPLIANCE_STATUS_COMPLIANT
+      - COMPLIANCE_STATUS_VIOLATIONS
+      - COMPLIANCE_STATUS_ALL_MUTED
+      x-extensible-enum: true
+    ComplianceStatusFilters:
+      additionalProperties: false
+      example:
+        in:
+        - VIOLATIONS
+        notIn:
+        - COMPLIANT
+      properties:
+        in:
+          description: Matches if any value in this list equals `complianceStatus`.
+          example:
+          - VIOLATIONS
+          items:
+            $ref: '#/components/schemas/ComplianceStatus'
+          type: array
+        notIn:
+          description: Matches if no value in this list equals `complianceStatus`.
+          example:
+          - COMPLIANT
+          items:
+            $ref: '#/components/schemas/ComplianceStatus'
+          type: array
+      type: object
     TagKeysFilters:
       additionalProperties: false
       example:
@@ -25794,6 +25927,11 @@ components:
           containsAnyOf:
           - environment
           - app
+        complianceStatus:
+          in:
+          - VIOLATIONS
+          notIn:
+          - COMPLIANT
         resourceName:
           notEndsWith:
           - -staging
@@ -25840,6 +25978,13 @@ components:
           in:
           - NOT_BACKED_UP
           - PROTECTED
+          notIn:
+          - TERMINATED
+          - DISCONNECTED
+        configurationStatus:
+          in:
+          - UNASSIGNED
+          - ASSIGNED
           notIn:
           - TERMINATED
           - DISCONNECTED
@@ -25913,6 +26058,10 @@ components:
           $ref: '#/components/schemas/DataClassesFilters'
         backupStatus:
           $ref: '#/components/schemas/BackupStatusFilters'
+        configurationStatus:
+          $ref: '#/components/schemas/ConfigurationStatusFilters'
+        complianceStatus:
+          $ref: '#/components/schemas/ComplianceStatusFilters'
         tagKeys:
           $ref: '#/components/schemas/TagKeysFilters'
         tagKeyValues:
@@ -25932,6 +26081,11 @@ components:
             containsAnyOf:
             - environment
             - app
+          complianceStatus:
+            in:
+            - VIOLATIONS
+            notIn:
+            - COMPLIANT
           resourceName:
             notEndsWith:
             - -staging
@@ -25978,6 +26132,13 @@ components:
             in:
             - NOT_BACKED_UP
             - PROTECTED
+            notIn:
+            - TERMINATED
+            - DISCONNECTED
+          configurationStatus:
+            in:
+            - UNASSIGNED
+            - ASSIGNED
             notIn:
             - TERMINATED
             - DISCONNECTED
@@ -26832,6 +26993,7 @@ components:
                 - email
                 projectionType: INCLUDE
         vpc: vpc-041d4426c201ee954
+        complianceStatus: COMPLIANT
         resourceName: customers db
         oldestSnapshotTime: 2024-09-24T08:21:01Z
         latestSnapshotTime: 2024-11-28T23:01:39Z
@@ -26863,6 +27025,7 @@ components:
           sizeBytes: 123456789012
         discoveredTime: 2024-11-29T11:22:33Z
         backupStatus: VIOLATIONS_DETECTED
+        configurationStatus: ASSIGNED
         providerAccountId: "123456789012"
         cloudProvider: AWS
         createdTime: 2024-08-29T13:24:03Z
@@ -26928,6 +27091,10 @@ components:
           $ref: '#/components/schemas/SourceStorage'
         controlViolationCounts:
           $ref: '#/components/schemas/ControlViolations'
+        complianceStatus:
+          $ref: '#/components/schemas/ComplianceStatus'
+        configurationStatus:
+          $ref: '#/components/schemas/ConfigurationStatus'
         tags:
           additionalProperties:
             type: string
@@ -27082,6 +27249,7 @@ components:
                   - email
                   projectionType: INCLUDE
           vpc: vpc-041d4426c201ee954
+          complianceStatus: COMPLIANT
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
           latestSnapshotTime: 2024-11-28T23:01:39Z
@@ -27113,6 +27281,7 @@ components:
             sizeBytes: 123456789012
           discoveredTime: 2024-11-29T11:22:33Z
           backupStatus: VIOLATIONS_DETECTED
+          configurationStatus: ASSIGNED
           providerAccountId: "123456789012"
           cloudProvider: AWS
           createdTime: 2024-08-29T13:24:03Z
@@ -27229,6 +27398,7 @@ components:
                   - email
                   projectionType: INCLUDE
           vpc: vpc-041d4426c201ee954
+          complianceStatus: COMPLIANT
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
           latestSnapshotTime: 2024-11-28T23:01:39Z
@@ -27260,6 +27430,7 @@ components:
             sizeBytes: 123456789012
           discoveredTime: 2024-11-29T11:22:33Z
           backupStatus: VIOLATIONS_DETECTED
+          configurationStatus: ASSIGNED
           providerAccountId: "123456789012"
           cloudProvider: AWS
           createdTime: 2024-08-29T13:24:03Z
@@ -27399,6 +27570,7 @@ components:
                   - email
                   projectionType: INCLUDE
           vpc: vpc-041d4426c201ee954
+          complianceStatus: COMPLIANT
           resourceName: customers db
           oldestSnapshotTime: 2024-09-24T08:21:01Z
           latestSnapshotTime: 2024-11-28T23:01:39Z
@@ -27430,6 +27602,7 @@ components:
             sizeBytes: 123456789012
           discoveredTime: 2024-11-29T11:22:33Z
           backupStatus: VIOLATIONS_DETECTED
+          configurationStatus: ASSIGNED
           providerAccountId: "123456789012"
           cloudProvider: AWS
           createdTime: 2024-08-29T13:24:03Z

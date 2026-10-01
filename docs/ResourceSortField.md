@@ -7,6 +7,8 @@
 
 * `BACKUP_STATUS` (value: `"backupStatus"`)
 
+* `CONFIGURATION_STATUS` (value: `"configurationStatus"`)
+
 * `ACCOUNT_ID` (value: `"accountId"`)
 
 * `RESOURCE_NAME` (value: `"resourceName"`)
