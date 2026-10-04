@@ -29,6 +29,7 @@ type InventoryFilterConditions struct {
 	Apps *AppFilters `json:"apps,omitempty"`
 	Subnets *SubnetFilters `json:"subnets,omitempty"`
 	DataClasses *DataClassesFilters `json:"dataClasses,omitempty"`
+	// Deprecated
 	BackupStatus *BackupStatusFilters `json:"backupStatus,omitempty"`
 	ConfigurationStatus *ConfigurationStatusFilters `json:"configurationStatus,omitempty"`
 	ComplianceStatus *ComplianceStatusFilters `json:"complianceStatus,omitempty"`
@@ -374,6 +375,7 @@ func (o *InventoryFilterConditions) SetDataClasses(v DataClassesFilters) {
 }
 
 // GetBackupStatus returns the BackupStatus field value if set, zero value otherwise.
+// Deprecated
 func (o *InventoryFilterConditions) GetBackupStatus() BackupStatusFilters {
 	if o == nil || IsNil(o.BackupStatus) {
 		var ret BackupStatusFilters
@@ -384,6 +386,7 @@ func (o *InventoryFilterConditions) GetBackupStatus() BackupStatusFilters {
 
 // GetBackupStatusOk returns a tuple with the BackupStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *InventoryFilterConditions) GetBackupStatusOk() (*BackupStatusFilters, bool) {
 	if o == nil || IsNil(o.BackupStatus) {
 		return nil, false
@@ -401,6 +404,7 @@ func (o *InventoryFilterConditions) HasBackupStatus() bool {
 }
 
 // SetBackupStatus gets a reference to the given BackupStatusFilters and assigns it to the BackupStatus field.
+// Deprecated
 func (o *InventoryFilterConditions) SetBackupStatus(v BackupStatusFilters) {
 	o.BackupStatus = &v
 }

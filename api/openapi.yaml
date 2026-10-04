@@ -25339,6 +25339,8 @@ components:
         Field to sort by.
         Ascending, `configurationStatus` puts resources Eon is expected to back up before those
         out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`.
+        `backupStatus` is deprecated: sort by `configurationStatus` instead. It is supported until
+        `backupStatus` is removed on April 30, 2027.
       enum:
       - id
       - backupStatus
@@ -25653,8 +25655,11 @@ components:
           type: array
       type: object
     BackupStatus:
+      deprecated: true
       description: |
-        Eon backup status.
+        Deprecated Eon backup status, replaced by `configurationStatus` (whether a backup is configured
+        for the resource, and if not why not) and `complianceStatus` (whether the resource meets the
+        controls applied to it). Removed on April 30, 2027.
         For an explanation of statuses, see [Backup Statuses](/user-guide/monitoring/backup-statuses).
         `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses.
       enum:
@@ -25682,6 +25687,7 @@ components:
       - LIMIT_EXCEEDED
     BackupStatusFilters:
       additionalProperties: false
+      deprecated: true
       example:
         in:
         - NOT_BACKED_UP

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ResourceSortField Field to sort by. Ascending, `configurationStatus` puts resources Eon is expected to back up before those out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`. 
+// ResourceSortField Field to sort by. Ascending, `configurationStatus` puts resources Eon is expected to back up before those out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`. `backupStatus` is deprecated: sort by `configurationStatus` instead. It is supported until `backupStatus` is removed on April 30, 2027. 
 type ResourceSortField string
 
 // List of ResourceSortField

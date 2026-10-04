@@ -32,6 +32,7 @@ type InventoryResource struct {
 	LatestSnapshotTime *time.Time `json:"latestSnapshotTime,omitempty"`
 	// Date and time of the resource's first Eon snapshot.
 	OldestSnapshotTime *time.Time `json:"oldestSnapshotTime,omitempty"`
+	// Deprecated
 	BackupStatus BackupStatus `json:"backupStatus"`
 	// Cloud-provider-assigned resource ID.
 	ProviderResourceId string `json:"providerResourceId"`
@@ -241,6 +242,7 @@ func (o *InventoryResource) SetOldestSnapshotTime(v time.Time) {
 }
 
 // GetBackupStatus returns the BackupStatus field value
+// Deprecated
 func (o *InventoryResource) GetBackupStatus() BackupStatus {
 	if o == nil {
 		var ret BackupStatus
@@ -252,6 +254,7 @@ func (o *InventoryResource) GetBackupStatus() BackupStatus {
 
 // GetBackupStatusOk returns a tuple with the BackupStatus field value
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *InventoryResource) GetBackupStatusOk() (*BackupStatus, bool) {
 	if o == nil {
 		return nil, false
@@ -260,6 +263,7 @@ func (o *InventoryResource) GetBackupStatusOk() (*BackupStatus, bool) {
 }
 
 // SetBackupStatus sets field value
+// Deprecated
 func (o *InventoryResource) SetBackupStatus(v BackupStatus) {
 	o.BackupStatus = v
 }
