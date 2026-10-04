@@ -2856,6 +2856,7 @@ paths:
       summary: List Restore Accounts
       tags:
       - accounts
+      x-mcp: true
       x-internal: false
       x-data-access:
         excluded: true
