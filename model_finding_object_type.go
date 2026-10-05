@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// FindingObjectType What a finding or exclusion refers to: a file path, a database table, or a whole database.
+// FindingObjectType What a finding or exclusion refers to: a file path, a database table, a whole database, or a KMS key (key ARN or 12-digit AWS account ID) whose objects are trusted.
 type FindingObjectType string
 
 // List of FindingObjectType
@@ -23,6 +23,7 @@ const (
 	FINDING_OBJECT_TYPE_PATH FindingObjectType = "PATH"
 	FINDING_OBJECT_TYPE_TABLE FindingObjectType = "TABLE"
 	FINDING_OBJECT_TYPE_DATABASE FindingObjectType = "DATABASE"
+	FINDING_OBJECT_TYPE_KMS_KEY FindingObjectType = "KMS_KEY"
 )
 
 // All allowed values of FindingObjectType enum
@@ -30,6 +31,7 @@ var AllowedFindingObjectTypeEnumValues = []FindingObjectType{
 	"PATH",
 	"TABLE",
 	"DATABASE",
+	"KMS_KEY",
 }
 
 func (v *FindingObjectType) UnmarshalJSON(src []byte) error {
@@ -38,15 +40,10 @@ func (v *FindingObjectType) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := FindingObjectType(value)
-	for _, existing := range AllowedFindingObjectTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid FindingObjectType", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = FindingObjectType(value)
+	return nil
 }
 
 // NewFindingObjectTypeFromValue returns a pointer to a valid FindingObjectType

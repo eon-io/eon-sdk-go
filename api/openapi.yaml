@@ -10794,17 +10794,21 @@ components:
       - FINDING_EXCLUSION_SCOPE_ACCOUNT
     FindingObjectType:
       description: "What a finding or exclusion refers to: a file path, a database\
-        \ table, or a whole database."
+        \ table, a whole database, or a KMS key (key ARN or 12-digit AWS account ID)\
+        \ whose objects are trusted."
       enum:
       - PATH
       - TABLE
       - DATABASE
+      - KMS_KEY
       example: PATH
       type: string
+      x-extensible-enum: true
       x-enum-varnames:
       - FINDING_OBJECT_TYPE_PATH
       - FINDING_OBJECT_TYPE_TABLE
       - FINDING_OBJECT_TYPE_DATABASE
+      - FINDING_OBJECT_TYPE_KMS_KEY
     FindingExclusionDetectorType:
       description: Detector whose findings an exclusion suppresses.
       enum:
