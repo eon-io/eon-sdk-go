@@ -452,6 +452,7 @@ docs/UpdateActionApprovalRuleRequest.md
 docs/UpdateActionApprovalRuleResponse.md
 docs/UpdateAwsRestoreAccountAttributes.md
 docs/UpdateAwsSourceAccountAttributes.md
+docs/UpdateAzureSourceAccountAttributes.md
 docs/UpdateBackupPolicyRequest.md
 docs/UpdateBackupPolicyResponse.md
 docs/UpdateBackupPostureControlRequest.md
@@ -905,6 +906,7 @@ model_update_action_approval_rule_request.go
 model_update_action_approval_rule_response.go
 model_update_aws_restore_account_attributes.go
 model_update_aws_source_account_attributes.go
+model_update_azure_source_account_attributes.go
 model_update_backup_policy_request.go
 model_update_backup_policy_response.go
 model_update_backup_posture_control_request.go

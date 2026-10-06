@@ -29,6 +29,8 @@ type AzureSourceAccountAttributes struct {
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
 	// ID of the Azure management group the source account is scoped to.
 	ManagementGroupId *string `json:"managementGroupId,omitempty"`
+	// Azure regions Eon discovers in. Empty means all supported regions.
+	Regions []string `json:"regions,omitempty"`
 }
 
 type _AzureSourceAccountAttributes AzureSourceAccountAttributes
@@ -168,6 +170,38 @@ func (o *AzureSourceAccountAttributes) SetManagementGroupId(v string) {
 	o.ManagementGroupId = &v
 }
 
+// GetRegions returns the Regions field value if set, zero value otherwise.
+func (o *AzureSourceAccountAttributes) GetRegions() []string {
+	if o == nil || IsNil(o.Regions) {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureSourceAccountAttributes) GetRegionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Regions) {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *AzureSourceAccountAttributes) HasRegions() bool {
+	if o != nil && !IsNil(o.Regions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *AzureSourceAccountAttributes) SetRegions(v []string) {
+	o.Regions = v
+}
+
 func (o AzureSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -185,6 +219,9 @@ func (o AzureSourceAccountAttributes) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ManagementGroupId) {
 		toSerialize["managementGroupId"] = o.ManagementGroupId
+	}
+	if !IsNil(o.Regions) {
+		toSerialize["regions"] = o.Regions
 	}
 	return toSerialize, nil
 }

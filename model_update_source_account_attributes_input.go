@@ -17,9 +17,10 @@ import (
 // checks if the UpdateSourceAccountAttributesInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateSourceAccountAttributesInput{}
 
-// UpdateSourceAccountAttributesInput Cloud-provider-specific fields to update. One of: `aws`, `gcp`. 
+// UpdateSourceAccountAttributesInput Cloud-provider-specific fields to update. One of: `aws`, `azure`, `gcp`. 
 type UpdateSourceAccountAttributesInput struct {
 	Aws NullableUpdateAwsSourceAccountAttributes `json:"aws,omitempty"`
+	Azure NullableUpdateAzureSourceAccountAttributes `json:"azure,omitempty"`
 	Gcp NullableUpdateGcpSourceAccountAttributes `json:"gcp,omitempty"`
 }
 
@@ -82,6 +83,48 @@ func (o *UpdateSourceAccountAttributesInput) UnsetAws() {
 	o.Aws.Unset()
 }
 
+// GetAzure returns the Azure field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateSourceAccountAttributesInput) GetAzure() UpdateAzureSourceAccountAttributes {
+	if o == nil || IsNil(o.Azure.Get()) {
+		var ret UpdateAzureSourceAccountAttributes
+		return ret
+	}
+	return *o.Azure.Get()
+}
+
+// GetAzureOk returns a tuple with the Azure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateSourceAccountAttributesInput) GetAzureOk() (*UpdateAzureSourceAccountAttributes, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Azure.Get(), o.Azure.IsSet()
+}
+
+// HasAzure returns a boolean if a field has been set.
+func (o *UpdateSourceAccountAttributesInput) HasAzure() bool {
+	if o != nil && o.Azure.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAzure gets a reference to the given NullableUpdateAzureSourceAccountAttributes and assigns it to the Azure field.
+func (o *UpdateSourceAccountAttributesInput) SetAzure(v UpdateAzureSourceAccountAttributes) {
+	o.Azure.Set(&v)
+}
+// SetAzureNil sets the value for Azure to be an explicit nil
+func (o *UpdateSourceAccountAttributesInput) SetAzureNil() {
+	o.Azure.Set(nil)
+}
+
+// UnsetAzure ensures that no value is present for Azure, not even an explicit nil
+func (o *UpdateSourceAccountAttributesInput) UnsetAzure() {
+	o.Azure.Unset()
+}
+
 // GetGcp returns the Gcp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateSourceAccountAttributesInput) GetGcp() UpdateGcpSourceAccountAttributes {
 	if o == nil || IsNil(o.Gcp.Get()) {
@@ -136,6 +179,9 @@ func (o UpdateSourceAccountAttributesInput) ToMap() (map[string]interface{}, err
 	toSerialize := map[string]interface{}{}
 	if o.Aws.IsSet() {
 		toSerialize["aws"] = o.Aws.Get()
+	}
+	if o.Azure.IsSet() {
+		toSerialize["azure"] = o.Azure.Get()
 	}
 	if o.Gcp.IsSet() {
 		toSerialize["gcp"] = o.Gcp.Get()

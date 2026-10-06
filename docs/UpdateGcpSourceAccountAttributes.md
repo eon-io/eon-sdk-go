@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ServiceAccount** | Pointer to **NullableString** | Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed. The GCP project ID must remain the same.  | [optional] 
+**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions.  | [optional] 
 
 ## Methods
 
@@ -60,6 +61,31 @@ HasServiceAccount returns a boolean if a field has been set.
 `func (o *UpdateGcpSourceAccountAttributes) UnsetServiceAccount()`
 
 UnsetServiceAccount ensures that no value is present for ServiceAccount, not even an explicit nil
+### GetRegions
+
+`func (o *UpdateGcpSourceAccountAttributes) GetRegions() []string`
+
+GetRegions returns the Regions field if non-nil, zero value otherwise.
+
+### GetRegionsOk
+
+`func (o *UpdateGcpSourceAccountAttributes) GetRegionsOk() (*[]string, bool)`
+
+GetRegionsOk returns a tuple with the Regions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegions
+
+`func (o *UpdateGcpSourceAccountAttributes) SetRegions(v []string)`
+
+SetRegions sets Regions field to given value.
+
+### HasRegions
+
+`func (o *UpdateGcpSourceAccountAttributes) HasRegions() bool`
+
+HasRegions returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

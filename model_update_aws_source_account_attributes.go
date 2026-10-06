@@ -21,6 +21,8 @@ var _ MappedNullable = &UpdateAwsSourceAccountAttributes{}
 type UpdateAwsSourceAccountAttributes struct {
 	// ARN of the role Eon assumes to access the account in AWS. Only the role name portion of the ARN can be changed. The AWS account ID must remain the same. 
 	RoleArn NullableString `json:"roleArn,omitempty"`
+	// AWS regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions. 
+	Regions []string `json:"regions,omitempty"`
 }
 
 // NewUpdateAwsSourceAccountAttributes instantiates a new UpdateAwsSourceAccountAttributes object
@@ -82,6 +84,38 @@ func (o *UpdateAwsSourceAccountAttributes) UnsetRoleArn() {
 	o.RoleArn.Unset()
 }
 
+// GetRegions returns the Regions field value if set, zero value otherwise.
+func (o *UpdateAwsSourceAccountAttributes) GetRegions() []string {
+	if o == nil || IsNil(o.Regions) {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAwsSourceAccountAttributes) GetRegionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Regions) {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *UpdateAwsSourceAccountAttributes) HasRegions() bool {
+	if o != nil && !IsNil(o.Regions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *UpdateAwsSourceAccountAttributes) SetRegions(v []string) {
+	o.Regions = v
+}
+
 func (o UpdateAwsSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -94,6 +128,9 @@ func (o UpdateAwsSourceAccountAttributes) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	if o.RoleArn.IsSet() {
 		toSerialize["roleArn"] = o.RoleArn.Get()
+	}
+	if !IsNil(o.Regions) {
+		toSerialize["regions"] = o.Regions
 	}
 	return toSerialize, nil
 }

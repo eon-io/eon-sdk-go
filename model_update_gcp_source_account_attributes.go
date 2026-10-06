@@ -21,6 +21,8 @@ var _ MappedNullable = &UpdateGcpSourceAccountAttributes{}
 type UpdateGcpSourceAccountAttributes struct {
 	// Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed. The GCP project ID must remain the same. 
 	ServiceAccount NullableString `json:"serviceAccount,omitempty"`
+	// GCP regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions. 
+	Regions []string `json:"regions,omitempty"`
 }
 
 // NewUpdateGcpSourceAccountAttributes instantiates a new UpdateGcpSourceAccountAttributes object
@@ -82,6 +84,38 @@ func (o *UpdateGcpSourceAccountAttributes) UnsetServiceAccount() {
 	o.ServiceAccount.Unset()
 }
 
+// GetRegions returns the Regions field value if set, zero value otherwise.
+func (o *UpdateGcpSourceAccountAttributes) GetRegions() []string {
+	if o == nil || IsNil(o.Regions) {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGcpSourceAccountAttributes) GetRegionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Regions) {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *UpdateGcpSourceAccountAttributes) HasRegions() bool {
+	if o != nil && !IsNil(o.Regions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *UpdateGcpSourceAccountAttributes) SetRegions(v []string) {
+	o.Regions = v
+}
+
 func (o UpdateGcpSourceAccountAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -94,6 +128,9 @@ func (o UpdateGcpSourceAccountAttributes) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	if o.ServiceAccount.IsSet() {
 		toSerialize["serviceAccount"] = o.ServiceAccount.Get()
+	}
+	if !IsNil(o.Regions) {
+		toSerialize["regions"] = o.Regions
 	}
 	return toSerialize, nil
 }

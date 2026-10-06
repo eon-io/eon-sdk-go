@@ -13911,6 +13911,9 @@ components:
         Azure subscription configuration.
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
+        regions:
+        - eastus
+        - westeurope
         tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
         eonInternalResourceGroupName: eon-source-internal-rg
         subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
@@ -13932,6 +13935,15 @@ components:
             Resource group name for Eon's temporary internal resources.
           example: eon-source-internal-rg
           type: string
+        regions:
+          description: Azure regions Eon discovers in. Omit or leave empty to discover
+            in all supported regions.
+          example:
+          - eastus
+          - westeurope
+          items:
+            type: string
+          type: array
       required:
       - subscriptionId
       - tenantId
@@ -13941,6 +13953,9 @@ components:
         GCP project configuration.
         Applicable if `cloudProvider` is set to `GCP`.
       example:
+        regions:
+        - us-central1
+        - europe-west1
         serviceAccount: eon-source@my-project.iam.gserviceaccount.com
       nullable: true
       properties:
@@ -13949,12 +13964,24 @@ components:
             the project.
           example: eon-source@my-project.iam.gserviceaccount.com
           type: string
+        regions:
+          description: GCP regions Eon discovers in. Omit or leave empty to discover
+            in all supported regions.
+          example:
+          - us-central1
+          - europe-west1
+          items:
+            type: string
+          type: array
       required:
       - serviceAccount
       type: object
     SourceAccountAttributesInput:
       example:
         gcp:
+          regions:
+          - us-central1
+          - europe-west1
           serviceAccount: eon-source@my-project.iam.gserviceaccount.com
         cloudProvider: AWS
         aws:
@@ -13963,6 +13990,9 @@ components:
           - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
+          regions:
+          - eastus
+          - westeurope
           tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
           eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
@@ -13983,6 +14013,9 @@ components:
         name: prod-eu
         sourceAccountAttributes:
           gcp:
+            regions:
+            - us-central1
+            - europe-west1
             serviceAccount: eon-source@my-project.iam.gserviceaccount.com
           cloudProvider: AWS
           aws:
@@ -13991,6 +14024,9 @@ components:
             - eu-west-1
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
+            regions:
+            - eastus
+            - westeurope
             tenantId: c9f36fd0-566d-53d3-a59c-b59828f17e58
             eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 0b9c9b5f-75a1-5c98-8b76-39e301282301
@@ -14105,6 +14141,9 @@ components:
         Applicable if `cloudProvider` is set to `GCP`.
       example:
         organizationId: "123456789012"
+        regions:
+        - us-central1
+        - europe-west1
         serviceAccount: serviceAccount
         folderId: "987654321098"
       nullable: true
@@ -14119,6 +14158,14 @@ components:
           description: Cloud-provider-assigned ID of the GCP project's parent folder.
           example: "987654321098"
           type: string
+        regions:
+          description: GCP regions Eon discovers in. Empty means all supported regions.
+          example:
+          - us-central1
+          - europe-west1
+          items:
+            type: string
+          type: array
       required:
       - serviceAccount
       type: object
@@ -14128,6 +14175,9 @@ components:
         Applicable if `cloudProvider` is set to `AZURE`.
       example:
         managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+        regions:
+        - eastus
+        - westeurope
         tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
         eonInternalResourceGroupName: eon-source-internal-rg
         subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14154,6 +14204,14 @@ components:
             to.
           example: 3eca9074-011f-5008-9605-a7ccf00aa93e
           type: string
+        regions:
+          description: Azure regions Eon discovers in. Empty means all supported regions.
+          example:
+          - eastus
+          - westeurope
+          items:
+            type: string
+          type: array
       required:
       - subscriptionId
       - tenantId
@@ -14162,6 +14220,9 @@ components:
       example:
         gcp:
           organizationId: "123456789012"
+          regions:
+          - us-central1
+          - europe-west1
           serviceAccount: serviceAccount
           folderId: "987654321098"
         cloudProvider: AWS
@@ -14173,6 +14234,9 @@ components:
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
         azure:
           managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+          regions:
+          - eastus
+          - westeurope
           tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
           eonInternalResourceGroupName: eon-source-internal-rg
           subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14198,6 +14262,9 @@ components:
         sourceAccountAttributes:
           gcp:
             organizationId: "123456789012"
+            regions:
+            - us-central1
+            - europe-west1
             serviceAccount: serviceAccount
             folderId: "987654321098"
           cloudProvider: AWS
@@ -14209,6 +14276,9 @@ components:
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
           azure:
             managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+            regions:
+            - eastus
+            - westeurope
             tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
             eonInternalResourceGroupName: eon-source-internal-rg
             subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14268,6 +14338,9 @@ components:
           sourceAccountAttributes:
             gcp:
               organizationId: "123456789012"
+              regions:
+              - us-central1
+              - europe-west1
               serviceAccount: serviceAccount
               folderId: "987654321098"
             cloudProvider: AWS
@@ -14279,6 +14352,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              regions:
+              - eastus
+              - westeurope
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14573,6 +14649,9 @@ components:
           sourceAccountAttributes:
             gcp:
               organizationId: "123456789012"
+              regions:
+              - us-central1
+              - europe-west1
               serviceAccount: serviceAccount
               folderId: "987654321098"
             cloudProvider: AWS
@@ -14584,6 +14663,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              regions:
+              - eastus
+              - westeurope
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14601,6 +14683,9 @@ components:
           sourceAccountAttributes:
             gcp:
               organizationId: "123456789012"
+              regions:
+              - us-central1
+              - europe-west1
               serviceAccount: serviceAccount
               folderId: "987654321098"
             cloudProvider: AWS
@@ -14612,6 +14697,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              regions:
+              - eastus
+              - westeurope
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14653,6 +14741,9 @@ components:
           sourceAccountAttributes:
             gcp:
               organizationId: "123456789012"
+              regions:
+              - us-central1
+              - europe-west1
               serviceAccount: serviceAccount
               folderId: "987654321098"
             cloudProvider: AWS
@@ -14664,6 +14755,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              regions:
+              - eastus
+              - westeurope
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14683,6 +14777,9 @@ components:
       description: |
         Updatable AWS account fields.
       example:
+        regions:
+        - us-east-1
+        - eu-west-1
         roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
       nullable: true
       properties:
@@ -14694,12 +14791,46 @@ components:
           example: arn:aws:iam::123412341234:role/EonSourceAccountRole
           type: string
           x-nullable: true
+        regions:
+          description: |
+            AWS regions Eon discovers in. Omit to leave the current regions unchanged.
+            Pass an empty list to discover in all supported regions.
+          example:
+          - us-east-1
+          - eu-west-1
+          items:
+            type: string
+          type: array
+      type: object
+      x-nullable: true
+    UpdateAzureSourceAccountAttributes:
+      description: |
+        Updatable Azure subscription fields.
+      example:
+        regions:
+        - eastus
+        - westeurope
+      nullable: true
+      properties:
+        regions:
+          description: |
+            Azure regions Eon discovers in. Omit to leave the current regions unchanged.
+            Pass an empty list to discover in all supported regions.
+          example:
+          - eastus
+          - westeurope
+          items:
+            type: string
+          type: array
       type: object
       x-nullable: true
     UpdateGcpSourceAccountAttributes:
       description: |
         Updatable GCP account fields.
       example:
+        regions:
+        - us-central1
+        - europe-west1
         serviceAccount: eon-source@my-project.iam.gserviceaccount.com
       nullable: true
       properties:
@@ -14711,20 +14842,42 @@ components:
           example: eon-source@my-project.iam.gserviceaccount.com
           type: string
           x-nullable: true
+        regions:
+          description: |
+            GCP regions Eon discovers in. Omit to leave the current regions unchanged.
+            Pass an empty list to discover in all supported regions.
+          example:
+          - us-central1
+          - europe-west1
+          items:
+            type: string
+          type: array
       type: object
       x-nullable: true
     UpdateSourceAccountAttributesInput:
       description: |
         Cloud-provider-specific fields to update.
-        One of: `aws`, `gcp`.
+        One of: `aws`, `azure`, `gcp`.
       example:
         gcp:
+          regions:
+          - us-central1
+          - europe-west1
           serviceAccount: eon-source@my-project.iam.gserviceaccount.com
         aws:
+          regions:
+          - us-east-1
+          - eu-west-1
           roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+        azure:
+          regions:
+          - eastus
+          - westeurope
       properties:
         aws:
           $ref: '#/components/schemas/UpdateAwsSourceAccountAttributes'
+        azure:
+          $ref: '#/components/schemas/UpdateAzureSourceAccountAttributes'
         gcp:
           $ref: '#/components/schemas/UpdateGcpSourceAccountAttributes'
       type: object
@@ -14733,9 +14886,19 @@ components:
         name: name
         sourceAccountAttributes:
           gcp:
+            regions:
+            - us-central1
+            - europe-west1
             serviceAccount: eon-source@my-project.iam.gserviceaccount.com
           aws:
+            regions:
+            - us-east-1
+            - eu-west-1
             roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
+          azure:
+            regions:
+            - eastus
+            - westeurope
       properties:
         name:
           description: Display name for the source account in Eon.
@@ -14756,6 +14919,9 @@ components:
           sourceAccountAttributes:
             gcp:
               organizationId: "123456789012"
+              regions:
+              - us-central1
+              - europe-west1
               serviceAccount: serviceAccount
               folderId: "987654321098"
             cloudProvider: AWS
@@ -14767,6 +14933,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              regions:
+              - eastus
+              - westeurope
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14793,6 +14962,9 @@ components:
           sourceAccountAttributes:
             gcp:
               organizationId: "123456789012"
+              regions:
+              - us-central1
+              - europe-west1
               serviceAccount: serviceAccount
               folderId: "987654321098"
             cloudProvider: AWS
@@ -14804,6 +14976,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              regions:
+              - eastus
+              - westeurope
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012
@@ -14830,6 +15005,9 @@ components:
           sourceAccountAttributes:
             gcp:
               organizationId: "123456789012"
+              regions:
+              - us-central1
+              - europe-west1
               serviceAccount: serviceAccount
               folderId: "987654321098"
             cloudProvider: AWS
@@ -14841,6 +15019,9 @@ components:
               roleArn: arn:aws:iam::123412341234:role/EonSourceAccountRole
             azure:
               managementGroupId: 3eca9074-011f-5008-9605-a7ccf00aa93e
+              regions:
+              - eastus
+              - westeurope
               tenantId: 060901b5-ae27-5b6f-aaf5-829b635615e9
               eonInternalResourceGroupName: eon-source-internal-rg
               subscriptionId: 12345678-1234-1234-1234-123456789012

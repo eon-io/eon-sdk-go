@@ -23,6 +23,8 @@ var _ MappedNullable = &GcpSourceAccountAttributesInput{}
 type GcpSourceAccountAttributesInput struct {
 	// Email address of the GCP service account Eon uses to access the project.
 	ServiceAccount string `json:"serviceAccount"`
+	// GCP regions Eon discovers in. Omit or leave empty to discover in all supported regions.
+	Regions []string `json:"regions,omitempty"`
 }
 
 type _GcpSourceAccountAttributesInput GcpSourceAccountAttributesInput
@@ -69,6 +71,38 @@ func (o *GcpSourceAccountAttributesInput) SetServiceAccount(v string) {
 	o.ServiceAccount = v
 }
 
+// GetRegions returns the Regions field value if set, zero value otherwise.
+func (o *GcpSourceAccountAttributesInput) GetRegions() []string {
+	if o == nil || IsNil(o.Regions) {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GcpSourceAccountAttributesInput) GetRegionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Regions) {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *GcpSourceAccountAttributesInput) HasRegions() bool {
+	if o != nil && !IsNil(o.Regions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *GcpSourceAccountAttributesInput) SetRegions(v []string) {
+	o.Regions = v
+}
+
 func (o GcpSourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +114,9 @@ func (o GcpSourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 func (o GcpSourceAccountAttributesInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["serviceAccount"] = o.ServiceAccount
+	if !IsNil(o.Regions) {
+		toSerialize["regions"] = o.Regions
+	}
 	return toSerialize, nil
 }
 

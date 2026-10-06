@@ -27,6 +27,8 @@ type AzureSourceAccountAttributesInput struct {
 	SubscriptionId string `json:"subscriptionId"`
 	// Resource group name for Eon's temporary internal resources. 
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
+	// Azure regions Eon discovers in. Omit or leave empty to discover in all supported regions.
+	Regions []string `json:"regions,omitempty"`
 }
 
 type _AzureSourceAccountAttributesInput AzureSourceAccountAttributesInput
@@ -134,6 +136,38 @@ func (o *AzureSourceAccountAttributesInput) SetEonInternalResourceGroupName(v st
 	o.EonInternalResourceGroupName = &v
 }
 
+// GetRegions returns the Regions field value if set, zero value otherwise.
+func (o *AzureSourceAccountAttributesInput) GetRegions() []string {
+	if o == nil || IsNil(o.Regions) {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureSourceAccountAttributesInput) GetRegionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Regions) {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *AzureSourceAccountAttributesInput) HasRegions() bool {
+	if o != nil && !IsNil(o.Regions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *AzureSourceAccountAttributesInput) SetRegions(v []string) {
+	o.Regions = v
+}
+
 func (o AzureSourceAccountAttributesInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -148,6 +182,9 @@ func (o AzureSourceAccountAttributesInput) ToMap() (map[string]interface{}, erro
 	toSerialize["subscriptionId"] = o.SubscriptionId
 	if !IsNil(o.EonInternalResourceGroupName) {
 		toSerialize["eonInternalResourceGroupName"] = o.EonInternalResourceGroupName
+	}
+	if !IsNil(o.Regions) {
+		toSerialize["regions"] = o.Regions
 	}
 	return toSerialize, nil
 }

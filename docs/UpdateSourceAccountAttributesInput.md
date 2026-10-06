@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Aws** | Pointer to [**NullableUpdateAwsSourceAccountAttributes**](UpdateAwsSourceAccountAttributes.md) |  | [optional] 
+**Azure** | Pointer to [**NullableUpdateAzureSourceAccountAttributes**](UpdateAzureSourceAccountAttributes.md) |  | [optional] 
 **Gcp** | Pointer to [**NullableUpdateGcpSourceAccountAttributes**](UpdateGcpSourceAccountAttributes.md) |  | [optional] 
 
 ## Methods
@@ -61,6 +62,41 @@ HasAws returns a boolean if a field has been set.
 `func (o *UpdateSourceAccountAttributesInput) UnsetAws()`
 
 UnsetAws ensures that no value is present for Aws, not even an explicit nil
+### GetAzure
+
+`func (o *UpdateSourceAccountAttributesInput) GetAzure() UpdateAzureSourceAccountAttributes`
+
+GetAzure returns the Azure field if non-nil, zero value otherwise.
+
+### GetAzureOk
+
+`func (o *UpdateSourceAccountAttributesInput) GetAzureOk() (*UpdateAzureSourceAccountAttributes, bool)`
+
+GetAzureOk returns a tuple with the Azure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzure
+
+`func (o *UpdateSourceAccountAttributesInput) SetAzure(v UpdateAzureSourceAccountAttributes)`
+
+SetAzure sets Azure field to given value.
+
+### HasAzure
+
+`func (o *UpdateSourceAccountAttributesInput) HasAzure() bool`
+
+HasAzure returns a boolean if a field has been set.
+
+### SetAzureNil
+
+`func (o *UpdateSourceAccountAttributesInput) SetAzureNil(b bool)`
+
+ SetAzureNil sets the value for Azure to be an explicit nil
+
+### UnsetAzure
+`func (o *UpdateSourceAccountAttributesInput) UnsetAzure()`
+
+UnsetAzure ensures that no value is present for Azure, not even an explicit nil
 ### GetGcp
 
 `func (o *UpdateSourceAccountAttributesInput) GetGcp() UpdateGcpSourceAccountAttributes`

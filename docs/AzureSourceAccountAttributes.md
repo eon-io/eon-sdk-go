@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **SubscriptionId** | **string** | ID of the Azure subscription. | 
 **EonInternalResourceGroupName** | Pointer to **string** | Resource group name for Eon&#39;s temporary internal resources.  | [optional] [default to "eon-source-internal-rg"]
 **ManagementGroupId** | Pointer to **string** | ID of the Azure management group the source account is scoped to. | [optional] 
+**Regions** | Pointer to **[]string** | Azure regions Eon discovers in. Empty means all supported regions. | [optional] 
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetManagementGroupId sets ManagementGroupId field to given value.
 `func (o *AzureSourceAccountAttributes) HasManagementGroupId() bool`
 
 HasManagementGroupId returns a boolean if a field has been set.
+
+### GetRegions
+
+`func (o *AzureSourceAccountAttributes) GetRegions() []string`
+
+GetRegions returns the Regions field if non-nil, zero value otherwise.
+
+### GetRegionsOk
+
+`func (o *AzureSourceAccountAttributes) GetRegionsOk() (*[]string, bool)`
+
+GetRegionsOk returns a tuple with the Regions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegions
+
+`func (o *AzureSourceAccountAttributes) SetRegions(v []string)`
+
+SetRegions sets Regions field to given value.
+
+### HasRegions
+
+`func (o *AzureSourceAccountAttributes) HasRegions() bool`
+
+HasRegions returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ServiceAccount** | **string** |  | 
 **OrganizationId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP project&#39;s parent organization. | [optional] 
 **FolderId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP project&#39;s parent folder. | [optional] 
+**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. Empty means all supported regions. | [optional] 
 
 ## Methods
 
@@ -96,6 +97,31 @@ SetFolderId sets FolderId field to given value.
 `func (o *GcpSourceAccountAttributes) HasFolderId() bool`
 
 HasFolderId returns a boolean if a field has been set.
+
+### GetRegions
+
+`func (o *GcpSourceAccountAttributes) GetRegions() []string`
+
+GetRegions returns the Regions field if non-nil, zero value otherwise.
+
+### GetRegionsOk
+
+`func (o *GcpSourceAccountAttributes) GetRegionsOk() (*[]string, bool)`
+
+GetRegionsOk returns a tuple with the Regions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegions
+
+`func (o *GcpSourceAccountAttributes) SetRegions(v []string)`
+
+SetRegions sets Regions field to given value.
+
+### HasRegions
+
+`func (o *GcpSourceAccountAttributes) HasRegions() bool`
+
+HasRegions returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
