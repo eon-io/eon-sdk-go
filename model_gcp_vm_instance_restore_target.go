@@ -35,7 +35,7 @@ type GcpVmInstanceRestoreTarget struct {
 	NetworkHostProject *string `json:"networkHostProject,omitempty"`
 	// Labels to apply to the restored VM as key-value pairs, where key and value are both strings. These labels are always applied: `\"eon-restore\": \"true\"`.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Labels *map[string]string `json:"labels,omitempty"`
-	// Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot. The boot disk must be in the list. 
+	// Disks to restore and attach to the restored instance. Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot. The boot disk must be in the list. A standard restore must include every disk of the backed-up instance. 
 	Disks []RestoreGcpInstanceDiskInput `json:"disks"`
 	// Optional internal (private) IPv4 address for the restored VM. Must fall within the selected subnet's primary CIDR range. Omit to let GCP auto-assign an address. 
 	InternalIp *string `json:"internalIp,omitempty"`

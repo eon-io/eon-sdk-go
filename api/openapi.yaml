@@ -25118,7 +25118,7 @@ components:
           description: |
             Disks to restore and attach to the restored instance.
             Each item in the list corresponds to a disk to be restored, where `providerDiskId` matches the disk's ID at the time of the snapshot.
-            The boot disk must be in the list.
+            The boot disk must be in the list. A standard restore must include every disk of the backed-up instance.
           items:
             $ref: '#/components/schemas/RestoreGcpInstanceDiskInput'
           type: array
