@@ -24,6 +24,8 @@ type RestoreAzureInstanceDiskInput struct {
 	// Cloud-provider-assigned ID of the disk to restore.
 	ProviderDiskId string `json:"providerDiskId"`
 	Settings AzureDiskSettings `json:"settings"`
+	// ARM resource ID of the disk encryption set to encrypt the restored disk with a customer-managed key. The disk encryption set must be in the restore account's subscription and in the target region. If not provided, the restored disk is encrypted with a platform-managed key. 
+	DiskEncryptionSetId *string `json:"diskEncryptionSetId,omitempty"`
 }
 
 type _RestoreAzureInstanceDiskInput RestoreAzureInstanceDiskInput
@@ -95,6 +97,38 @@ func (o *RestoreAzureInstanceDiskInput) SetSettings(v AzureDiskSettings) {
 	o.Settings = v
 }
 
+// GetDiskEncryptionSetId returns the DiskEncryptionSetId field value if set, zero value otherwise.
+func (o *RestoreAzureInstanceDiskInput) GetDiskEncryptionSetId() string {
+	if o == nil || IsNil(o.DiskEncryptionSetId) {
+		var ret string
+		return ret
+	}
+	return *o.DiskEncryptionSetId
+}
+
+// GetDiskEncryptionSetIdOk returns a tuple with the DiskEncryptionSetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreAzureInstanceDiskInput) GetDiskEncryptionSetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.DiskEncryptionSetId) {
+		return nil, false
+	}
+	return o.DiskEncryptionSetId, true
+}
+
+// HasDiskEncryptionSetId returns a boolean if a field has been set.
+func (o *RestoreAzureInstanceDiskInput) HasDiskEncryptionSetId() bool {
+	if o != nil && !IsNil(o.DiskEncryptionSetId) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskEncryptionSetId gets a reference to the given string and assigns it to the DiskEncryptionSetId field.
+func (o *RestoreAzureInstanceDiskInput) SetDiskEncryptionSetId(v string) {
+	o.DiskEncryptionSetId = &v
+}
+
 func (o RestoreAzureInstanceDiskInput) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -107,6 +141,9 @@ func (o RestoreAzureInstanceDiskInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["providerDiskId"] = o.ProviderDiskId
 	toSerialize["settings"] = o.Settings
+	if !IsNil(o.DiskEncryptionSetId) {
+		toSerialize["diskEncryptionSetId"] = o.DiskEncryptionSetId
+	}
 	return toSerialize, nil
 }
 
