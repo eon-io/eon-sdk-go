@@ -17639,6 +17639,9 @@ components:
         id: 37732835-d768-5990-ba93-a7c2d2e6d754
         isManagedByEon: true
         region: us-east-1
+        tags:
+          owner: platform
+          cost-center: "1234"
       properties:
         id:
           description: Vault ID.
@@ -17666,6 +17669,17 @@ components:
           type: boolean
         vaultAttributes:
           $ref: '#/components/schemas/VaultProviderAttributes'
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            User-defined metadata tags, used for filtering and search only.
+            They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
+          example:
+            owner: platform
+            cost-center: "1234"
+          type: object
+          x-internal: false
       required:
       - id
       - isManagedByEon
@@ -17711,6 +17725,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          tags:
+            owner: platform
+            cost-center: "1234"
         backupType: AWS_EC2_BACKUP
       properties:
         jobExecutionDetails:
@@ -17765,6 +17782,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            tags:
+              owner: platform
+              cost-center: "1234"
           backupType: AWS_EC2_BACKUP
         - resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
@@ -17800,6 +17820,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            tags:
+              owner: platform
+              cost-center: "1234"
           backupType: AWS_EC2_BACKUP
         totalCount: 2347
       properties:
@@ -17859,6 +17882,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            tags:
+              owner: platform
+              cost-center: "1234"
           backupType: AWS_EC2_BACKUP
       properties:
         job:
@@ -17914,6 +17940,8 @@ components:
       - GCP_COMPUTE_ENGINE_RECORD_RESTORE
       - GCP_CLOUD_SQL_DATABASE_RESTORE
       - GCP_CLOUD_SQL_RECORD_RESTORE
+      - GCP_SQL_VM_RECORD_RESTORE
+      - GCP_SQL_VM_PITR_RESTORE
       - GCP_BIGQUERY_DATASET_RESTORE
       - GCP_BIGQUERY_RECORD_RESTORE
       - GCP_BIGQUERY_NATIVE_RESTORE_DATASET
@@ -18315,6 +18343,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          tags:
+            owner: platform
+            cost-center: "1234"
       properties:
         jobExecutionDetails:
           $ref: '#/components/schemas/JobExecutionDetails'
@@ -18390,6 +18421,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            tags:
+              owner: platform
+              cost-center: "1234"
         - restoreType: AWS_EC2_INSTANCE_RESTORE
           destinationDetails:
             restoreAccountId: 146586e8-f69a-5148-9d7b-7c3a6b006048
@@ -18443,6 +18477,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            tags:
+              owner: platform
+              cost-center: "1234"
         totalCount: 188
       properties:
         jobs:
@@ -18520,6 +18557,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            tags:
+              owner: platform
+              cost-center: "1234"
       properties:
         job:
           $ref: '#/components/schemas/RestoreJob'
@@ -20731,6 +20771,9 @@ components:
           - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
           - db-FE4MOD3UCIYIQKXF3UVTCB55FA
         enabled: true
+        tags:
+          owner: platform
+          cost-center: "1234"
       properties:
         name:
           description: Backup policy display name.
@@ -20745,6 +20788,17 @@ components:
           $ref: '#/components/schemas/BackupPolicyResourceSelector'
         backupPlan:
           $ref: '#/components/schemas/BackupPolicyPlan'
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            User-defined metadata tags, used for filtering and search only.
+            They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
+          example:
+            owner: platform
+            cost-center: "1234"
+          type: object
+          x-internal: false
       required:
       - backupPlan
       - name
@@ -21105,6 +21159,9 @@ components:
           - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
           - db-FE4MOD3UCIYIQKXF3UVTCB55FA
         enabled: true
+        tags:
+          owner: platform
+          cost-center: "1234"
       properties:
         id:
           description: Backup policy ID.
@@ -21122,6 +21179,17 @@ components:
           $ref: '#/components/schemas/BackupPolicyResourceSelector'
         backupPlan:
           $ref: '#/components/schemas/BackupPolicyPlan'
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            User-defined metadata tags, used for filtering and search only.
+            They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
+          example:
+            owner: platform
+            cost-center: "1234"
+          type: object
+          x-internal: false
       required:
       - backupPlan
       - enabled
@@ -21485,6 +21553,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
+          tags:
+            owner: platform
+            cost-center: "1234"
         actionApprovalRequest:
           requesterEmail: requester@example.com
           resolvedTime: 2026-05-05T02:10:12Z
@@ -21874,6 +21945,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
+          tags:
+            owner: platform
+            cost-center: "1234"
         - name: Production with PII
           backupPlan:
             backupPolicyType: STANDARD
@@ -22227,6 +22301,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
+          tags:
+            owner: platform
+            cost-center: "1234"
         totalCount: 2347
       properties:
         backupPolicies:
@@ -22600,6 +22677,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
+          tags:
+            owner: platform
+            cost-center: "1234"
       properties:
         backupPolicy:
           $ref: '#/components/schemas/BackupPolicy'
@@ -22960,6 +23040,9 @@ components:
           - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
           - db-FE4MOD3UCIYIQKXF3UVTCB55FA
         enabled: true
+        tags:
+          owner: platform
+          cost-center: "1234"
       properties:
         name:
           description: Backup policy display name.
@@ -22974,6 +23057,17 @@ components:
           $ref: '#/components/schemas/BackupPolicyResourceSelector'
         backupPlan:
           $ref: '#/components/schemas/BackupPolicyPlan'
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            User-defined metadata tags, used for filtering and search only.
+            They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
+          example:
+            owner: platform
+            cost-center: "1234"
+          type: object
+          x-internal: false
       required:
       - backupPlan
       - name
@@ -23335,6 +23429,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
+          tags:
+            owner: platform
+            cost-center: "1234"
         actionApprovalRequest:
           requesterEmail: requester@example.com
           resolvedTime: 2026-05-05T02:10:12Z
@@ -23404,6 +23501,9 @@ components:
           aws:
             encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
         region: eu-central-1
+        tags:
+          owner: platform
+          cost-center: "1234"
       properties:
         name:
           description: Vault display name.
@@ -23415,6 +23515,17 @@ components:
           type: string
         vaultAttributes:
           $ref: '#/components/schemas/VaultProviderAttributesInput'
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            User-defined metadata tags, used for filtering and search only.
+            They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
+          example:
+            owner: platform
+            cost-center: "1234"
+          type: object
+          x-internal: false
       required:
       - name
       - region
@@ -23433,6 +23544,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          tags:
+            owner: platform
+            cost-center: "1234"
       properties:
         vault:
           $ref: '#/components/schemas/BackupVault'
@@ -23452,6 +23566,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          tags:
+            owner: platform
+            cost-center: "1234"
       properties:
         vault:
           $ref: '#/components/schemas/BackupVault'
@@ -23461,11 +23578,25 @@ components:
     UpdateVaultRequest:
       example:
         name: My new vault name
+        tags:
+          owner: platform
+          cost-center: "1234"
       properties:
         name:
           description: Vault display name.
           example: My new vault name
           type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: |
+            User-defined metadata tags, used for filtering and search only.
+            They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
+          example:
+            owner: platform
+            cost-center: "1234"
+          type: object
+          x-internal: false
       required:
       - name
       type: object
@@ -23482,6 +23613,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          tags:
+            owner: platform
+            cost-center: "1234"
       properties:
         vault:
           $ref: '#/components/schemas/BackupVault'
@@ -23504,6 +23638,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          tags:
+            owner: platform
+            cost-center: "1234"
         - providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -23514,6 +23651,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          tags:
+            owner: platform
+            cost-center: "1234"
         totalCount: 188
       properties:
         vaults:
@@ -24907,15 +25047,20 @@ components:
         iops:
           description: |
             Provisioned IOPS for the disk.
-            Applicable only when `type` is `pd-extreme`.
-            When restoring, defaults to the original IOPS captured by the snapshot.
+            Applies to `pd-extreme`, `hyperdisk-balanced`, `hyperdisk-balanced-high-availability` and `hyperdisk-extreme`.
+            The value is passed to GCP as is: one outside GCP's limits for the disk type and size fails the restore.
+            `hyperdisk-balanced` and `hyperdisk-balanced-high-availability` take IOPS and throughput together: set both or neither.
+            When omitted, the disk gets GCP's default IOPS for its type and size.
           example: 3000
           format: int64
           type: integer
         throughput:
           description: |
             Disk throughput.
-            When restoring, defaults to the original throughput captured by the snapshot.
+            Applies to `hyperdisk-balanced`, `hyperdisk-balanced-high-availability`, `hyperdisk-throughput` and `hyperdisk-ml`.
+            The value is passed to GCP as is: one outside GCP's limits for the disk type and size fails the restore.
+            `hyperdisk-balanced` and `hyperdisk-balanced-high-availability` take IOPS and throughput together: set both or neither.
+            When omitted, the disk gets GCP's default throughput for its type and size.
           example: 125
           format: int64
           type: integer

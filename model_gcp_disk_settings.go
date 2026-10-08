@@ -27,9 +27,9 @@ type GcpDiskSettings struct {
 	Type string `json:"type"`
 	// Size of the disk, in bytes.
 	SizeBytes int64 `json:"sizeBytes"`
-	// Provisioned IOPS for the disk. Applicable only when `type` is `pd-extreme`. When restoring, defaults to the original IOPS captured by the snapshot. 
+	// Provisioned IOPS for the disk. Applies to `pd-extreme`, `hyperdisk-balanced`, `hyperdisk-balanced-high-availability` and `hyperdisk-extreme`. The value is passed to GCP as is: one outside GCP's limits for the disk type and size fails the restore. `hyperdisk-balanced` and `hyperdisk-balanced-high-availability` take IOPS and throughput together: set both or neither. When omitted, the disk gets GCP's default IOPS for its type and size. 
 	Iops *int64 `json:"iops,omitempty"`
-	// Disk throughput. When restoring, defaults to the original throughput captured by the snapshot. 
+	// Disk throughput. Applies to `hyperdisk-balanced`, `hyperdisk-balanced-high-availability`, `hyperdisk-throughput` and `hyperdisk-ml`. The value is passed to GCP as is: one outside GCP's limits for the disk type and size fails the restore. `hyperdisk-balanced` and `hyperdisk-balanced-high-availability` take IOPS and throughput together: set both or neither. When omitted, the disk gets GCP's default throughput for its type and size. 
 	Throughput *int64 `json:"throughput,omitempty"`
 	// Disk description.
 	Description *string `json:"description,omitempty"`

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Region** | **string** | Region where the vault is located. | 
 **IsManagedByEon** | **bool** | Whether the vault is in an Eon-managed vault account. | 
 **VaultAttributes** | [**VaultProviderAttributes**](VaultProviderAttributes.md) |  | 
+**Tags** | Pointer to **map[string]string** | User-defined metadata tags, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.  | [optional] 
 
 ## Methods
 
@@ -170,6 +171,31 @@ and a boolean to check if the value has been set.
 
 SetVaultAttributes sets VaultAttributes field to given value.
 
+
+### GetTags
+
+`func (o *BackupVault) GetTags() map[string]string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *BackupVault) GetTagsOk() (*map[string]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *BackupVault) SetTags(v map[string]string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *BackupVault) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
