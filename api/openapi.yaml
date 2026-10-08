@@ -11327,6 +11327,7 @@ components:
       - saas_backup_policies.manage
       - data_catalog_permissions.manage
       - data_catalog_tags.manage
+      - data_catalog_pipelines.manage
       - dashboard.manage
       - ai_assistant.use
       example: inventory.view

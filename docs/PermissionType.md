@@ -193,6 +193,8 @@
 
 * `DATA_CATALOG_TAGS_MANAGE` (value: `"data_catalog_tags.manage"`)
 
+* `DATA_CATALOG_PIPELINES_MANAGE` (value: `"data_catalog_pipelines.manage"`)
+
 * `DASHBOARD_MANAGE` (value: `"dashboard.manage"`)
 
 * `AI_ASSISTANT_USE` (value: `"ai_assistant.use"`)

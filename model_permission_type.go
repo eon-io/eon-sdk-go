@@ -115,6 +115,7 @@ const (
 	SAAS_BACKUP_POLICIES_MANAGE PermissionType = "saas_backup_policies.manage"
 	DATA_CATALOG_PERMISSIONS_MANAGE PermissionType = "data_catalog_permissions.manage"
 	DATA_CATALOG_TAGS_MANAGE PermissionType = "data_catalog_tags.manage"
+	DATA_CATALOG_PIPELINES_MANAGE PermissionType = "data_catalog_pipelines.manage"
 	DASHBOARD_MANAGE PermissionType = "dashboard.manage"
 	AI_ASSISTANT_USE PermissionType = "ai_assistant.use"
 )
@@ -216,6 +217,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"saas_backup_policies.manage",
 	"data_catalog_permissions.manage",
 	"data_catalog_tags.manage",
+	"data_catalog_pipelines.manage",
 	"dashboard.manage",
 	"ai_assistant.use",
 }
