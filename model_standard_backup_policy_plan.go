@@ -24,7 +24,8 @@ type StandardBackupPolicyPlan struct {
 	// List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault. 
 	BackupSchedules []StandardBackupSchedules `json:"backupSchedules"`
 	ScheduleTimezone *ScheduleTimezone `json:"scheduleTimezone,omitempty"`
-	// Whether to back up from a qualifying existing customer snapshot taken within the backup interval, instead of taking a new one. Applies to RDS resources. Omit or send `null` on an update to leave the current setting unchanged. 
+	// No longer used. Snapshot reuse is now decided per project rather than per policy, so this field is accepted and ignored, and omitted from responses. 
+	// Deprecated
 	ReuseExistingSnapshots NullableBool `json:"reuseExistingSnapshots,omitempty"`
 }
 
@@ -109,6 +110,7 @@ func (o *StandardBackupPolicyPlan) SetScheduleTimezone(v ScheduleTimezone) {
 }
 
 // GetReuseExistingSnapshots returns the ReuseExistingSnapshots field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *StandardBackupPolicyPlan) GetReuseExistingSnapshots() bool {
 	if o == nil || IsNil(o.ReuseExistingSnapshots.Get()) {
 		var ret bool
@@ -120,6 +122,7 @@ func (o *StandardBackupPolicyPlan) GetReuseExistingSnapshots() bool {
 // GetReuseExistingSnapshotsOk returns a tuple with the ReuseExistingSnapshots field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *StandardBackupPolicyPlan) GetReuseExistingSnapshotsOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
@@ -137,6 +140,7 @@ func (o *StandardBackupPolicyPlan) HasReuseExistingSnapshots() bool {
 }
 
 // SetReuseExistingSnapshots gets a reference to the given NullableBool and assigns it to the ReuseExistingSnapshots field.
+// Deprecated
 func (o *StandardBackupPolicyPlan) SetReuseExistingSnapshots(v bool) {
 	o.ReuseExistingSnapshots.Set(&v)
 }

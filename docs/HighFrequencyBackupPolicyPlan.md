@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ResourceTypes** | [**[]HighFrequencyBackupResourceType**](HighFrequencyBackupResourceType.md) | Resource types to backup. | 
 **BackupSchedules** | [**[]HighFrequencyBackupSchedules**](HighFrequencyBackupSchedules.md) | List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault.  | 
 **ScheduleTimezone** | Pointer to [**ScheduleTimezone**](ScheduleTimezone.md) |  | [optional] [default to SCHEDULE_TIMEZONE_UTC]
-**ReuseExistingSnapshots** | Pointer to **NullableBool** | Whether to back up from a qualifying existing customer snapshot taken within the backup interval, instead of taking a new one. Applies to RDS resources. Omit or send &#x60;null&#x60; on an update to leave the current setting unchanged.  | [optional] 
+**ReuseExistingSnapshots** | Pointer to **NullableBool** | No longer used. Snapshot reuse is now decided per project rather than per policy, so this field is accepted and ignored, and omitted from responses.  | [optional] 
 
 ## Methods
 

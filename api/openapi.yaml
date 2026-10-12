@@ -53,6 +53,9 @@ tags:
 - description: Access billing and usage metering information.
   name: billing
   x-displayName: Billing
+- description: Requests Eon sends to webhook notification targets.
+  name: webhooks
+  x-displayName: Webhooks
 paths:
   /v1/projects/{projectId}/backup-posture-controls:
     post:
@@ -19613,7 +19616,7 @@ components:
             frequency: WEEKLY
           backupRetentionDays: 30
         scheduleTimezone: UTC
-        reuseExistingSnapshots: false
+        reuseExistingSnapshots: true
       nullable: true
       properties:
         backupSchedules:
@@ -19626,11 +19629,10 @@ components:
         scheduleTimezone:
           $ref: '#/components/schemas/ScheduleTimezone'
         reuseExistingSnapshots:
+          deprecated: true
           description: |
-            Whether to back up from a qualifying existing customer snapshot taken within the backup
-            interval, instead of taking a new one. Applies to RDS resources.
-            Omit or send `null` on an update to leave the current setting unchanged.
-          example: false
+            No longer used. Snapshot reuse is now decided per project rather than per policy, so this
+            field is accepted and ignored, and omitted from responses.
           nullable: true
           type: boolean
       required:
@@ -19877,7 +19879,7 @@ components:
             frequency: WEEKLY
           backupRetentionDays: 30
         scheduleTimezone: UTC
-        reuseExistingSnapshots: false
+        reuseExistingSnapshots: true
       nullable: true
       properties:
         resourceTypes:
@@ -19895,11 +19897,10 @@ components:
         scheduleTimezone:
           $ref: '#/components/schemas/ScheduleTimezone'
         reuseExistingSnapshots:
+          deprecated: true
           description: |
-            Whether to back up from a qualifying existing customer snapshot taken within the backup
-            interval, instead of taking a new one. Applies to RDS resources.
-            Omit or send `null` on an update to leave the current setting unchanged.
-          example: false
+            No longer used. Snapshot reuse is now decided per project rather than per policy, so this
+            field is accepted and ignored, and omitted from responses.
           nullable: true
           type: boolean
       required:
@@ -20255,7 +20256,7 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
           scheduleTimezone: UTC
-          reuseExistingSnapshots: false
+          reuseExistingSnapshots: true
         standardPlan:
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -20331,7 +20332,7 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
           scheduleTimezone: UTC
-          reuseExistingSnapshots: false
+          reuseExistingSnapshots: true
         awsNativeStandardPlan:
           backupSchedules:
           - scheduleConfig:
@@ -20508,7 +20509,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
-            reuseExistingSnapshots: false
+            reuseExistingSnapshots: true
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -20584,7 +20585,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
-            reuseExistingSnapshots: false
+            reuseExistingSnapshots: true
           awsNativeStandardPlan:
             backupSchedules:
             - scheduleConfig:
@@ -20895,7 +20896,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
-            reuseExistingSnapshots: false
+            reuseExistingSnapshots: true
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -20971,7 +20972,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
-            reuseExistingSnapshots: false
+            reuseExistingSnapshots: true
           awsNativeStandardPlan:
             backupSchedules:
             - scheduleConfig:
@@ -21289,7 +21290,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -21365,7 +21366,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -21681,7 +21682,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -21757,7 +21758,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -22037,7 +22038,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -22113,7 +22114,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -22413,7 +22414,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -22489,7 +22490,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -22777,7 +22778,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
-            reuseExistingSnapshots: false
+            reuseExistingSnapshots: true
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -22853,7 +22854,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             scheduleTimezone: UTC
-            reuseExistingSnapshots: false
+            reuseExistingSnapshots: true
           awsNativeStandardPlan:
             backupSchedules:
             - scheduleConfig:
@@ -23165,7 +23166,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -23241,7 +23242,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               scheduleTimezone: UTC
-              reuseExistingSnapshots: false
+              reuseExistingSnapshots: true
             awsNativeStandardPlan:
               backupSchedules:
               - scheduleConfig:
@@ -29118,6 +29119,7 @@ components:
       - RESOURCE_TYPE
       - RESOURCE
       - RESOURCE_AND_VAULT
+      - VAULT
       example: SOURCE_ACCOUNT
       type: string
       x-docs-internal-enum:
@@ -29125,6 +29127,7 @@ components:
       - USAGE_TYPE
       - DSG_BUCKET
       - DSG_ENVIRONMENT
+      - VAULT
       x-enum-varnames:
       - COST_GROUP_BY_PRODUCT
       - COST_GROUP_BY_USAGE_TYPE
@@ -29135,6 +29138,7 @@ components:
       - COST_GROUP_BY_RESOURCE_TYPE
       - COST_GROUP_BY_RESOURCE
       - COST_GROUP_BY_RESOURCE_AND_VAULT
+      - COST_GROUP_BY_VAULT
     QueryCostDataRequest:
       example:
         usageUnit: BYTES
@@ -29344,6 +29348,7 @@ components:
       - SAAS_BACKUP_SEATS_RANSOMWARE_METERING_DIMENSION
       - AWS_S3_COLD_TIER_STORAGE_METERING_DIMENSION
       - AWS_S3_COLD_TIER_MANAGED_OBJECTS_METERING_DIMENSION
+      - AWS_S3_COLD_TIER_RESTORE_METERING_DIMENSION
     Cost:
       example:
         amount: 150.75
@@ -31281,6 +31286,2010 @@ components:
         actionApprovalRequest:
           $ref: '#/components/schemas/MPARequest'
       type: object
+    WebhookV1ProtobufTimestamp:
+      description: |
+        A point in time inside `arguments`, encoded as an object rather than a string: whole seconds since the Unix
+        epoch (1970-01-01T00:00:00Z) plus a nanosecond fraction. Each field is omitted when it's zero.
+      properties:
+        seconds:
+          description: Seconds since the Unix epoch.
+          example: 1709528767
+          format: int64
+          type: integer
+        nanos:
+          description: Nanosecond fraction of the second.
+          example: 500000000
+          format: int32
+          maximum: 999999999
+          minimum: 0
+          type: integer
+      type: object
+    WebhookV1ProtobufDuration:
+      description: |
+        A length of time inside `arguments`, encoded as an object rather than a string: whole seconds plus a
+        nanosecond fraction. Each field is omitted when it's zero.
+      properties:
+        seconds:
+          description: Whole seconds.
+          example: 3600
+          format: int64
+          type: integer
+        nanos:
+          description: Nanosecond fraction of the duration.
+          example: 0
+          format: int32
+          type: integer
+      type: object
+    WebhookV1BackupJobDetails:
+      description: Details of the resource a backup job ran for.
+      properties:
+        resourceName:
+          description: Name of the resource.
+          type: string
+        resourceId:
+          description: Cloud-provider-assigned ID of the resource.
+          type: string
+        policyName:
+          description: Name of the backup policy that ran the job.
+          type: string
+        sourceAccountName:
+          description: Name of the source cloud account.
+          type: string
+        duration:
+          $ref: '#/components/schemas/WebhookV1ProtobufDuration'
+        resourceType:
+          description: Resource type.
+          type: string
+      type: object
+    WebhookV1BackupJobFailedArguments:
+      description: Details of a `BACKUP_JOB_FAILED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        details:
+          $ref: '#/components/schemas/WebhookV1BackupJobDetails'
+      type: object
+    WebhookV1StandardPayloadBackupJobFailed:
+      description: Standard envelope of the notifications sent when a backup job failed.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_JOB_FAILED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobFailed_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1BackupJobSkippedArguments:
+      description: Details of a `BACKUP_JOB_SKIPPED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        userMessage:
+          description: Explanation of the job outcome.
+          type: string
+        details:
+          $ref: '#/components/schemas/WebhookV1BackupJobDetails'
+      type: object
+    WebhookV1StandardPayloadBackupJobSkipped:
+      description: Standard envelope of the notifications sent when a backup job was
+        skipped.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_JOB_SKIPPED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobSkipped_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1BackupJobRejectedArguments:
+      description: Details of a `BACKUP_JOB_REJECTED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        userMessage:
+          description: Explanation of the job outcome.
+          type: string
+        details:
+          $ref: '#/components/schemas/WebhookV1BackupJobDetails'
+      type: object
+    WebhookV1StandardPayloadBackupJobRejected:
+      description: Standard envelope of the notifications sent when a backup job was
+        rejected.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_JOB_REJECTED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobRejected_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1BackupJobSucceededArguments:
+      description: Details of a `BACKUP_JOB_SUCCEEDED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        details:
+          $ref: '#/components/schemas/WebhookV1BackupJobDetails'
+      type: object
+    WebhookV1StandardPayloadBackupJobSucceeded:
+      description: Standard envelope of the notifications sent when a backup job succeeded.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_JOB_SUCCEEDED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobSucceeded_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1BackupJobPartialArguments:
+      description: Details of a `BACKUP_JOB_PARTIAL` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        userMessage:
+          description: Explanation of the job outcome.
+          type: string
+        details:
+          $ref: '#/components/schemas/WebhookV1BackupJobDetails'
+      type: object
+    WebhookV1StandardPayloadBackupJobPartial:
+      description: Standard envelope of the notifications sent when a backup job partially
+        succeeded.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_JOB_PARTIAL
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobPartial_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1RestoreJobSucceededArguments:
+      description: Details of a `RESTORE_JOB_SUCCEEDED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+      type: object
+    WebhookV1StandardPayloadRestoreJobSucceeded:
+      description: Standard envelope of the notifications sent when a restore job
+        succeeded.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - RESTORE_JOB_SUCCEEDED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadRestoreJobSucceeded_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1RestoreJobFailedArguments:
+      description: Details of a `RESTORE_JOB_FAILED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+      type: object
+    WebhookV1StandardPayloadRestoreJobFailed:
+      description: Standard envelope of the notifications sent when a restore job
+        failed.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - RESTORE_JOB_FAILED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadRestoreJobFailed_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1RestoreJobRejectedArguments:
+      description: Details of a `RESTORE_JOB_REJECTED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        userMessage:
+          description: Explanation of the job outcome.
+          type: string
+      type: object
+    WebhookV1StandardPayloadRestoreJobRejected:
+      description: Standard envelope of the notifications sent when a restore job
+        was rejected.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - RESTORE_JOB_REJECTED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadRestoreJobRejected_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1ClassificationJobFailedArguments:
+      description: Details of a `CLASSIFICATION_JOB_FAILED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+      type: object
+    WebhookV1StandardPayloadClassificationJobFailed:
+      description: Standard envelope of the notifications sent when a classification
+        job failed.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - CLASSIFICATION_JOB_FAILED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadClassificationJobFailed_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1ClassificationJobSkippedArguments:
+      description: Details of a `CLASSIFICATION_JOB_SKIPPED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        userMessage:
+          description: Explanation of the job outcome.
+          type: string
+      type: object
+    WebhookV1StandardPayloadClassificationJobSkipped:
+      description: Standard envelope of the notifications sent when a classification
+        job was skipped.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - CLASSIFICATION_JOB_SKIPPED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadClassificationJobSkipped_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1ClassificationJobRejectedArguments:
+      description: Details of a `CLASSIFICATION_JOB_REJECTED` notification.
+      properties:
+        id:
+          description: Job ID.
+          type: string
+        startTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        endTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        userMessage:
+          description: Explanation of the job outcome.
+          type: string
+      type: object
+    WebhookV1StandardPayloadClassificationJobRejected:
+      description: Standard envelope of the notifications sent when a classification
+        job was rejected.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - CLASSIFICATION_JOB_REJECTED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadClassificationJobRejected_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1BackupPolicyNotificationArguments:
+      description: Details of the resources a backup policy was applied to or unapplied
+        from.
+      properties:
+        id:
+          description: Policy ID.
+          type: string
+        resourceIds:
+          description: IDs of the affected resources.
+          items:
+            type: string
+          type: array
+        totalResources:
+          description: Total number of affected resources.
+          format: int32
+          type: integer
+        name:
+          description: Policy name.
+          type: string
+        resourceNames:
+          description: Names of the affected resources.
+          items:
+            type: string
+          type: array
+      type: object
+    WebhookV1StandardPayloadPolicyAssignment:
+      description: Standard envelope of the notifications sent when a policy was applied
+        to or unapplied from a resource.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_POLICY_APPLIED
+          - BACKUP_POLICY_UNAPPLIED
+          - CLASSIFICATION_POLICY_APPLIED
+          - CLASSIFICATION_POLICY_UNAPPLIED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadPolicyAssignment_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1PolicyArguments:
+      description: Details of the policy a notification refers to.
+      properties:
+        id:
+          description: Policy ID.
+          type: string
+        name:
+          description: Policy name.
+          type: string
+        dateCreated:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        dateModified:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        userCreatedName:
+          description: Name of the user who created the policy.
+          type: string
+        userModifiedName:
+          description: Name of the user who last modified the policy.
+          type: string
+      type: object
+    WebhookV1StandardPayloadPolicyChange:
+      description: "Standard envelope of the notifications sent when a policy was\
+        \ created, updated or deleted."
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_POLICY_CREATED
+          - BACKUP_POLICY_UPDATED
+          - BACKUP_POLICY_DELETED
+          - CLASSIFICATION_POLICY_CREATED
+          - CLASSIFICATION_POLICY_UPDATED
+          - CLASSIFICATION_POLICY_DELETED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadPolicyChange_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1VaultArguments:
+      description: Details of the backup vault a notification refers to.
+      properties:
+        id:
+          description: Vault ID.
+          type: string
+        name:
+          description: Vault name.
+          type: string
+      type: object
+    WebhookV1StandardPayloadBackupVault:
+      description: Standard envelope of the notifications sent when a backup vault
+        was created or deleted.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - BACKUP_VAULT_CREATED
+          - BACKUP_VAULT_DELETED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadBackupVault_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1CloudAccountArguments:
+      description: Details of the cloud account a notification refers to.
+      properties:
+        providerAccountId:
+          description: Cloud-provider-assigned account ID.
+          type: string
+        type:
+          description: Cloud account type.
+          type: string
+        cloudProvider:
+          description: Cloud provider.
+          type: string
+        projectId:
+          description: ID of the project the cloud account belongs to.
+          type: string
+      type: object
+    WebhookV1StandardPayloadCloudAccount:
+      description: Standard envelope of the notifications sent when a cloud account
+        changed.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - CLOUD_ACCOUNT_CREATED
+          - CLOUD_ACCOUNT_UPDATED
+          - CLOUD_ACCOUNT_DELETED
+          - CLOUD_ACCOUNT_DEACTIVATED
+          - CLOUD_ACCOUNT_ACTIVATED
+          - CLOUD_ACCOUNT_ACCESS_LOST
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadCloudAccount_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1ConclusionTypes:
+      description: |
+        Conclusion of a security scan.
+        Sent as the integer value; omitted when it's `0`.
+
+        - `0`: `UNKNOWN_CONCLUSION`
+        - `1`: `CLEAN`
+        - `2`: `HIGH_CHANCE_FOR_RANSOMWARE`
+        - `3`: `DATA_ANOMALY_DETECTED`
+        - `4`: `MALWARE_DETECTED`
+        - `5`: `AI_DATA_RISK_DETECTED`
+        - `6`: `DATA_EXPOSURE_RISK_DETECTED`
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - WEBHOOK_V1_CONCLUSION_TYPES_UNKNOWN_CONCLUSION
+      - WEBHOOK_V1_CONCLUSION_TYPES_CLEAN
+      - WEBHOOK_V1_CONCLUSION_TYPES_HIGH_CHANCE_FOR_RANSOMWARE
+      - WEBHOOK_V1_CONCLUSION_TYPES_DATA_ANOMALY_DETECTED
+      - WEBHOOK_V1_CONCLUSION_TYPES_MALWARE_DETECTED
+      - WEBHOOK_V1_CONCLUSION_TYPES_AI_DATA_RISK_DETECTED
+      - WEBHOOK_V1_CONCLUSION_TYPES_DATA_EXPOSURE_RISK_DETECTED
+    WebhookV1SecurityEvidence:
+      description: Evidence behind a security scan finding.
+      properties:
+        type:
+          description: Evidence type.
+          type: string
+        displayName:
+          description: Display name of the evidence.
+          type: string
+      type: object
+    WebhookV1AnomalyDataPoint:
+      description: A single point of a data anomaly time series.
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        actual_value:
+          description: Observed value.
+          format: double
+          type: number
+        forecast_value:
+          description: Forecast value.
+          format: double
+          type: number
+        upper_bound:
+          description: Upper bound of the expected range.
+          format: double
+          type: number
+        lower_bound:
+          description: Lower bound of the expected range.
+          format: double
+          type: number
+        is_anomaly:
+          description: Whether the point is flagged as an anomaly.
+          type: boolean
+        snapshot_id:
+          description: Eon-assigned ID of the snapshot associated with the point.
+          type: string
+        point_in_time:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+      type: object
+    WebhookV1AnomalyGraphData:
+      description: Time series behind a data anomaly finding.
+      properties:
+        data_points:
+          description: Points of the time series.
+          items:
+            $ref: '#/components/schemas/WebhookV1AnomalyDataPoint'
+          type: array
+      type: object
+    WebhookV1FindingObjectType:
+      description: |
+        Type of the object a security scan finding refers to.
+        Sent as the integer value; omitted when it's `0`.
+
+        - `0`: `FINDING_OBJECT_TYPE_UNSPECIFIED`
+        - `1`: `FINDING_OBJECT_TYPE_PATH`
+        - `2`: `FINDING_OBJECT_TYPE_TABLE`
+        - `3`: `FINDING_OBJECT_TYPE_DATABASE`
+        - `4`: `FINDING_OBJECT_TYPE_KMS_KEY`
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - WEBHOOK_V1_FINDING_OBJECT_TYPE_UNSPECIFIED
+      - WEBHOOK_V1_FINDING_OBJECT_TYPE_PATH
+      - WEBHOOK_V1_FINDING_OBJECT_TYPE_TABLE
+      - WEBHOOK_V1_FINDING_OBJECT_TYPE_DATABASE
+      - WEBHOOK_V1_FINDING_OBJECT_TYPE_KMS_KEY
+    WebhookV1SecurityScanResult:
+      description: A single finding of a security scan.
+      properties:
+        evidence:
+          $ref: '#/components/schemas/WebhookV1SecurityEvidence'
+        justification:
+          description: Justification of the finding.
+          type: string
+        score:
+          description: Score of the finding.
+          format: float
+          type: number
+        anomaly_graph:
+          $ref: '#/components/schemas/WebhookV1AnomalyGraphData'
+        path:
+          description: Path of the object the finding refers to.
+          type: string
+        type:
+          $ref: '#/components/schemas/WebhookV1FindingObjectType'
+      type: object
+    WebhookV1SecurityScanApproval:
+      description: |
+        Approval status of a security scan.
+        Sent as the integer value; omitted when it's `0`.
+
+        - `0`: `SECURITY_APPROVAL_UNSPECIFIED`
+        - `1`: `SECURITY_UNAPPROVED`
+        - `2`: `SECURITY_APPROVED`
+      enum:
+      - 0
+      - 1
+      - 2
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - WEBHOOK_V1_SECURITY_SCAN_APPROVAL_SECURITY_APPROVAL_UNSPECIFIED
+      - WEBHOOK_V1_SECURITY_SCAN_APPROVAL_SECURITY_UNAPPROVED
+      - WEBHOOK_V1_SECURITY_SCAN_APPROVAL_SECURITY_APPROVED
+    WebhookV1DetectorType:
+      description: |
+        Detector that produced a security scan.
+        Sent as the integer value; omitted when it's `0`.
+
+        - `0`: `UNKNOWN_DETECTOR`
+        - `1`: `MALWARE`
+        - `2`: `RANSOMWARE_BEHAVIOR`
+        - `3`: `DATA_ANOMALY`
+        - `4`: `AI_DATA_RISK`
+        - `5`: `DATA_EXPOSURE_RISK`
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - WEBHOOK_V1_DETECTOR_TYPE_UNKNOWN_DETECTOR
+      - WEBHOOK_V1_DETECTOR_TYPE_MALWARE
+      - WEBHOOK_V1_DETECTOR_TYPE_RANSOMWARE_BEHAVIOR
+      - WEBHOOK_V1_DETECTOR_TYPE_DATA_ANOMALY
+      - WEBHOOK_V1_DETECTOR_TYPE_AI_DATA_RISK
+      - WEBHOOK_V1_DETECTOR_TYPE_DATA_EXPOSURE_RISK
+    WebhookV1ReviewerType:
+      description: |
+        Reviewer of a security scan.
+        Sent as the integer value; omitted when it's `0`.
+
+        - `0`: `NOT_REVIEWED`
+        - `2`: `LLM_REVIEWER`
+      enum:
+      - 0
+      - 2
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - WEBHOOK_V1_REVIEWER_TYPE_NOT_REVIEWED
+      - WEBHOOK_V1_REVIEWER_TYPE_LLM_REVIEWER
+    WebhookV1RiskLevel:
+      description: |
+        Risk level of a security scan.
+        Sent as the integer value; omitted when it's `0`.
+
+        - `0`: `RISK_LEVEL_UNSPECIFIED`
+        - `1`: `RISK_LEVEL_LOW`
+        - `2`: `RISK_LEVEL_MEDIUM`
+        - `3`: `RISK_LEVEL_HIGH`
+        - `4`: `RISK_LEVEL_CRITICAL`
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - WEBHOOK_V1_RISK_LEVEL_UNSPECIFIED
+      - WEBHOOK_V1_RISK_LEVEL_LOW
+      - WEBHOOK_V1_RISK_LEVEL_MEDIUM
+      - WEBHOOK_V1_RISK_LEVEL_HIGH
+      - WEBHOOK_V1_RISK_LEVEL_CRITICAL
+    WebhookV1SecurityScan:
+      description: Result of a security scan of a snapshot.
+      properties:
+        projectId:
+          description: Project ID.
+          type: string
+        snapshotId:
+          description: Eon-assigned snapshot ID.
+          type: string
+        resourceId:
+          description: Eon-assigned resource ID.
+          type: string
+        dateCreated:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        conclusion:
+          $ref: '#/components/schemas/WebhookV1ConclusionTypes'
+        results:
+          description: Individual findings of the scan.
+          items:
+            $ref: '#/components/schemas/WebhookV1SecurityScanResult'
+          type: array
+        approval:
+          $ref: '#/components/schemas/WebhookV1SecurityScanApproval'
+        confidence_score:
+          description: Confidence score of the conclusion.
+          format: float
+          type: number
+        justification:
+          description: Justification of the conclusion.
+          type: string
+        detector_type:
+          $ref: '#/components/schemas/WebhookV1DetectorType'
+        reviewer_type:
+          $ref: '#/components/schemas/WebhookV1ReviewerType'
+        reviewer_is_ransomware:
+          description: Whether the reviewer classified the finding as ransomware.
+            Omitted when the finding wasn't reviewed.
+          type: boolean
+        reviewer_confidence_score:
+          description: Confidence score of the reviewer. Omitted when the finding
+            wasn't reviewed.
+          format: int32
+          type: integer
+        reviewer_reason:
+          description: Reviewer's reasoning.
+          type: string
+        reviewer_prompt_version:
+          description: Version of the reviewer prompt.
+          type: string
+        risk_level:
+          $ref: '#/components/schemas/WebhookV1RiskLevel'
+        risk_reason:
+          description: Reason for the risk level.
+          type: string
+        risk_model_version:
+          description: Version of the risk model.
+          type: string
+        total_results_count:
+          description: "Total number of findings, which can exceed the number of entries\
+            \ in `results`."
+          format: int32
+          type: integer
+      type: object
+    WebhookV1ResourceArguments:
+      description: Details of the resource a notification refers to.
+      properties:
+        providerId:
+          description: Cloud-provider-assigned ID of the resource.
+          type: string
+        name:
+          description: Name of the resource.
+          type: string
+        securityScan:
+          $ref: '#/components/schemas/WebhookV1SecurityScan'
+        resourceType:
+          description: Resource type.
+          type: string
+      type: object
+    WebhookV1StandardPayloadResource:
+      description: "Standard envelope of the notifications sent when a security finding\
+        \ on a resource was detected, remediated or excluded."
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - RANSOMWARE_DETECTED_IN_RESOURCE
+          - RANSOMWARE_INFECTION_REMEDIATED
+          - RESOURCE_EXCLUDED_FROM_RANSOMWARE_DETECTION
+          - RANSOMWARE_DETECTION_EXCLUSION_CANCELED
+          - MALWARE_REMEDIATED
+          - DATA_ANOMALY_REMEDIATED
+          - AI_DATA_RISK_REMEDIATED
+          - DATA_EXPOSURE_RISK_REMEDIATED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadResource_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1SnapshotArguments:
+      description: Details of the snapshot a notification refers to.
+      properties:
+        resourceProviderId:
+          description: Cloud-provider-assigned ID of the snapshot's resource.
+          type: string
+        resourceName:
+          description: Name of the snapshot's resource.
+          type: string
+        snapshotId:
+          description: Eon-assigned snapshot ID.
+          type: string
+        securityScan:
+          $ref: '#/components/schemas/WebhookV1SecurityScan'
+        resourceType:
+          description: Resource type.
+          type: string
+      type: object
+    WebhookV1StandardPayloadSnapshot:
+      description: Standard envelope of the notifications sent when a security scan
+        found a risk in a snapshot.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - RANSOMWARE_DETECTED_IN_SNAPSHOT
+          - MALWARE_DETECTED_IN_SNAPSHOT
+          - DATA_ANOMALY_DETECTED_IN_SNAPSHOT
+          - AI_DATA_RISK_DETECTED_IN_SNAPSHOT
+          - DATA_EXPOSURE_RISK_DETECTED_IN_SNAPSHOT
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshot_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1InitiatorArguments:
+      description: User who initiated the action the notification refers to.
+      properties:
+        userId:
+          description: User ID.
+          type: string
+        userName:
+          description: User name.
+          type: string
+      type: object
+    WebhookV1StandardPayloadSnapshotUserProtection:
+      description: Standard envelope of the notifications sent when a user protected
+        or unprotected a snapshot.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - SNAPSHOT_USER_PROTECTED
+          - SNAPSHOT_USER_UNPROTECTED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1SnapshotAccessDeniedArguments:
+      description: Details of a snapshot that includes items the backup couldn't access.
+      properties:
+        jobId:
+          description: ID of the backup job that created the snapshot.
+          type: string
+        resourceName:
+          description: Name of the resource.
+          type: string
+        resourceProviderId:
+          description: Cloud-provider-assigned ID of the resource.
+          type: string
+        accessDeniedItems:
+          description: Number of items the backup couldn't access.
+          format: int64
+          type: integer
+        accessDeniedBytes:
+          description: "Total size, in bytes, of the items the backup couldn't access."
+          format: int64
+          type: integer
+        resourceType:
+          description: Resource type.
+          type: string
+      type: object
+    WebhookV1StandardPayloadSnapshotAccessDenied:
+      description: Standard envelope of the notifications sent when a snapshot includes
+        items Eon was denied access to.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - SNAPSHOT_INCLUDES_ACCESS_DENIED_ITEMS
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1ViolationsDetectionNotificationArguments:
+      description: Details of control violations detected or resolved on resources.
+      properties:
+        resourceIds:
+          description: IDs of the affected resources.
+          items:
+            type: string
+          type: array
+        totalResources:
+          description: Total number of affected resources.
+          format: int32
+          type: integer
+        controlName:
+          description: Name of the control.
+          type: string
+        detected:
+          description: Whether the violations were detected. Omitted when they were
+            resolved.
+          type: boolean
+      type: object
+    WebhookV1StandardPayloadViolations:
+      description: Standard envelope of the notifications sent when policy violations
+        were detected or resolved on resources.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - HIGH_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES
+          - MEDIUM_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES
+          - LOW_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES
+          - VIOLATIONS_RESOLVED_ON_RESOURCES
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadViolations_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1IssueMutedNotificationArguments:
+      description: Details of an issue muted or unmuted on a resource.
+      properties:
+        controlName:
+          description: Name of the control.
+          type: string
+        providerResourceId:
+          description: Cloud-provider-assigned ID of the resource.
+          type: string
+        muted:
+          description: Whether the issue was muted. Omitted when it was unmuted.
+          type: boolean
+        resourceName:
+          description: Name of the resource.
+          type: string
+        resourceType:
+          description: Resource type.
+          type: string
+      type: object
+    WebhookV1StandardPayloadIssueMuted:
+      description: Standard envelope of the notifications sent when an issue on a
+        resource was muted or unmuted.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - ISSUE_MUTED_ON_RESOURCE
+          - ISSUE_UNMUTED_ON_RESOURCE
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadIssueMuted_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1JobMetricsReportFailedArguments:
+      description: Details of a failed job metrics report.
+      properties:
+        cloudAccountArguments:
+          $ref: '#/components/schemas/WebhookV1CloudAccountArguments'
+        region:
+          description: Region of the report.
+          type: string
+        error:
+          description: Error message.
+          type: string
+      type: object
+    WebhookV1StandardPayloadJobMetricsReportFailed:
+      description: Standard envelope of the notifications sent when a job metrics
+        report failed.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - JOB_METRICS_REPORT_FAILED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadJobMetricsReportFailed_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1NotificationTargetChangeArguments:
+      description: Details of a change to a notification target.
+      properties:
+        policyId:
+          description: Notification policy ID.
+          type: string
+        policyName:
+          description: Notification policy name.
+          type: string
+        userName:
+          description: Name of the user who made the change.
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+      type: object
+    WebhookV1StandardPayloadNotificationTargetChange:
+      description: Standard envelope of the notifications sent when a notification
+        target changed.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - NOTIFICATION_TARGET_CREATED
+          - NOTIFICATION_TARGET_UPDATED
+          - NOTIFICATION_TARGET_DELETED
+          - NOTIFICATION_TARGET_ENABLED
+          - NOTIFICATION_TARGET_DISABLED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1CreditsNotificationArguments:
+      description: Details of a credits usage threshold notification.
+      properties:
+        totalCredits:
+          description: Total credits in the agreement.
+          format: int64
+          minimum: 0
+          type: integer
+        remainingCredits:
+          description: Remaining credits.
+          format: int64
+          minimum: 0
+          type: integer
+        usedCredits:
+          description: Used credits.
+          format: int64
+          minimum: 0
+          type: integer
+        usagePercentage:
+          description: Percentage of the total credits that's been used.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        thresholdPercentage:
+          description: Usage threshold percentage that was crossed.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        agreementId:
+          description: Agreement ID.
+          type: string
+      type: object
+    WebhookV1StandardPayloadCreditsUsage:
+      description: Standard envelope of the notifications sent when credits usage
+        crossed a threshold.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - CREDITS_USAGE_THRESHOLD_75
+          - CREDITS_USAGE_THRESHOLD_90
+          - CREDITS_USAGE_THRESHOLD_95
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadCreditsUsage_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1CreditsMonthlyUsageNotificationArguments:
+      description: Details of a monthly credits usage notification.
+      properties:
+        totalCredits:
+          description: Total credits in the agreement.
+          format: int64
+          minimum: 0
+          type: integer
+        expectedMonthlyCredits:
+          description: Expected monthly credit usage.
+          format: int64
+          minimum: 0
+          type: integer
+        actualMonthlyCredits:
+          description: Actual monthly credit usage.
+          format: int64
+          minimum: 0
+          type: integer
+        contractMonths:
+          description: "Length of the contract, in months."
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        agreementId:
+          description: Agreement ID.
+          type: string
+        thresholdPercentage:
+          description: Usage threshold percentage that was crossed.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+      type: object
+    WebhookV1StandardPayloadCreditsMonthlyUsage:
+      description: Standard envelope of the notifications sent when monthly credits
+        usage crossed a threshold.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - CREDITS_MONTHLY_USAGE_80
+          - CREDITS_MONTHLY_USAGE_90
+          - CREDITS_MONTHLY_USAGE_100
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadCreditsMonthlyUsage_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1MPARequestNotificationArguments:
+      description: Details of a multi-party approval request.
+      properties:
+        request_id:
+          description: Approval request ID.
+          type: string
+        operation:
+          description: Operation that requires approval.
+          type: string
+        requester_email:
+          description: Email address of the requester.
+          type: string
+        policy_description:
+          description: Description of the approval policy.
+          type: string
+        approval_expires_at:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+      type: object
+    WebhookV1StandardPayloadMpaRequest:
+      description: Standard envelope of the notifications sent when a multi-party
+        approval request changed state.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - MPA_REQUEST_PENDING_APPROVAL
+          - MPA_REQUEST_EXECUTED
+          - MPA_REQUEST_EXPIRED
+          - MPA_REQUEST_CANCELLED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadMpaRequest_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1MPAReviewNotificationArguments:
+      description: Details of a review of a multi-party approval request.
+      properties:
+        request_id:
+          description: Approval request ID.
+          type: string
+        operation:
+          description: Operation that requires approval.
+          type: string
+        requester_email:
+          description: Email address of the requester.
+          type: string
+        reviewer_email:
+          description: Email address of the reviewer.
+          type: string
+        decision:
+          description: Review decision.
+          type: string
+        comment:
+          description: Reviewer comment.
+          type: string
+        new_status:
+          description: Status of the request after the review.
+          type: string
+      type: object
+    WebhookV1StandardPayloadMpaReview:
+      description: Standard envelope of the notifications sent when a reviewer approved
+        or denied a multi-party approval request.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - MPA_REQUEST_APPROVED
+          - MPA_REQUEST_DENIED
+          - MPA_REQUEST_PARTIALLY_APPROVED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadMpaReview_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1GdsgOperationalNotificationArguments:
+      description: Details of an operational alert about a GDSG environment.
+      properties:
+        environmentId:
+          description: Environment ID.
+          type: string
+        environmentName:
+          description: Environment name.
+          type: string
+        region:
+          description: Region of the environment.
+          type: string
+        stage:
+          description: Pipeline stage the alert refers to.
+          type: string
+        signal:
+          description: Signal that triggered the alert.
+          type: string
+        currentValueMs:
+          description: "Current value of the signal, in milliseconds."
+          format: int64
+          type: integer
+        slaSeconds:
+          description: "SLA threshold, in seconds."
+          format: int64
+          type: integer
+        lastReportTime:
+          $ref: '#/components/schemas/WebhookV1ProtobufTimestamp'
+        reportIntervalMs:
+          description: "Expected report interval, in milliseconds."
+          format: int64
+          type: integer
+        sampleError:
+          description: Sample error message.
+          type: string
+        consoleLink:
+          description: Link to the environment in the Eon console.
+          type: string
+      type: object
+    WebhookV1StandardPayloadGdsgOperational:
+      description: Standard envelope of the notifications sent when an operational
+        alert was raised about a GDSG environment.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - GDSG_SLA_BREACHED
+          - GDSG_SYSTEM_INACCESSIBLE
+          - GDSG_WORKER_FAILURE
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadGdsgOperational_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1StandardPayload:
+      description: |
+        Envelope of every webhook notification except audit logs and the onboarding message. `type` determines which
+        members `arguments` carries; each variant lists the types it covers and the members they always carry.
+      discriminator:
+        mapping:
+          BACKUP_JOB_FAILED: '#/components/schemas/WebhookV1StandardPayloadBackupJobFailed'
+          BACKUP_JOB_SKIPPED: '#/components/schemas/WebhookV1StandardPayloadBackupJobSkipped'
+          BACKUP_JOB_REJECTED: '#/components/schemas/WebhookV1StandardPayloadBackupJobRejected'
+          BACKUP_JOB_SUCCEEDED: '#/components/schemas/WebhookV1StandardPayloadBackupJobSucceeded'
+          BACKUP_JOB_PARTIAL: '#/components/schemas/WebhookV1StandardPayloadBackupJobPartial'
+          RESTORE_JOB_SUCCEEDED: '#/components/schemas/WebhookV1StandardPayloadRestoreJobSucceeded'
+          RESTORE_JOB_FAILED: '#/components/schemas/WebhookV1StandardPayloadRestoreJobFailed'
+          RESTORE_JOB_REJECTED: '#/components/schemas/WebhookV1StandardPayloadRestoreJobRejected'
+          CLASSIFICATION_JOB_FAILED: '#/components/schemas/WebhookV1StandardPayloadClassificationJobFailed'
+          CLASSIFICATION_JOB_SKIPPED: '#/components/schemas/WebhookV1StandardPayloadClassificationJobSkipped'
+          CLASSIFICATION_JOB_REJECTED: '#/components/schemas/WebhookV1StandardPayloadClassificationJobRejected'
+          BACKUP_POLICY_APPLIED: '#/components/schemas/WebhookV1StandardPayloadPolicyAssignment'
+          BACKUP_POLICY_UNAPPLIED: '#/components/schemas/WebhookV1StandardPayloadPolicyAssignment'
+          CLASSIFICATION_POLICY_APPLIED: '#/components/schemas/WebhookV1StandardPayloadPolicyAssignment'
+          CLASSIFICATION_POLICY_UNAPPLIED: '#/components/schemas/WebhookV1StandardPayloadPolicyAssignment'
+          BACKUP_POLICY_CREATED: '#/components/schemas/WebhookV1StandardPayloadPolicyChange'
+          BACKUP_POLICY_UPDATED: '#/components/schemas/WebhookV1StandardPayloadPolicyChange'
+          BACKUP_POLICY_DELETED: '#/components/schemas/WebhookV1StandardPayloadPolicyChange'
+          CLASSIFICATION_POLICY_CREATED: '#/components/schemas/WebhookV1StandardPayloadPolicyChange'
+          CLASSIFICATION_POLICY_UPDATED: '#/components/schemas/WebhookV1StandardPayloadPolicyChange'
+          CLASSIFICATION_POLICY_DELETED: '#/components/schemas/WebhookV1StandardPayloadPolicyChange'
+          BACKUP_VAULT_CREATED: '#/components/schemas/WebhookV1StandardPayloadBackupVault'
+          BACKUP_VAULT_DELETED: '#/components/schemas/WebhookV1StandardPayloadBackupVault'
+          CLOUD_ACCOUNT_CREATED: '#/components/schemas/WebhookV1StandardPayloadCloudAccount'
+          CLOUD_ACCOUNT_UPDATED: '#/components/schemas/WebhookV1StandardPayloadCloudAccount'
+          CLOUD_ACCOUNT_DELETED: '#/components/schemas/WebhookV1StandardPayloadCloudAccount'
+          CLOUD_ACCOUNT_DEACTIVATED: '#/components/schemas/WebhookV1StandardPayloadCloudAccount'
+          CLOUD_ACCOUNT_ACTIVATED: '#/components/schemas/WebhookV1StandardPayloadCloudAccount'
+          CLOUD_ACCOUNT_ACCESS_LOST: '#/components/schemas/WebhookV1StandardPayloadCloudAccount'
+          RANSOMWARE_DETECTED_IN_RESOURCE: '#/components/schemas/WebhookV1StandardPayloadResource'
+          RANSOMWARE_INFECTION_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
+          RESOURCE_EXCLUDED_FROM_RANSOMWARE_DETECTION: '#/components/schemas/WebhookV1StandardPayloadResource'
+          RANSOMWARE_DETECTION_EXCLUSION_CANCELED: '#/components/schemas/WebhookV1StandardPayloadResource'
+          MALWARE_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
+          DATA_ANOMALY_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
+          AI_DATA_RISK_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
+          DATA_EXPOSURE_RISK_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
+          RANSOMWARE_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
+          MALWARE_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
+          DATA_ANOMALY_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
+          AI_DATA_RISK_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
+          DATA_EXPOSURE_RISK_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
+          SNAPSHOT_USER_PROTECTED: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
+          SNAPSHOT_USER_UNPROTECTED: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
+          SNAPSHOT_INCLUDES_ACCESS_DENIED_ITEMS: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied'
+          HIGH_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
+          MEDIUM_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
+          LOW_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
+          VIOLATIONS_RESOLVED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
+          ISSUE_MUTED_ON_RESOURCE: '#/components/schemas/WebhookV1StandardPayloadIssueMuted'
+          ISSUE_UNMUTED_ON_RESOURCE: '#/components/schemas/WebhookV1StandardPayloadIssueMuted'
+          JOB_METRICS_REPORT_FAILED: '#/components/schemas/WebhookV1StandardPayloadJobMetricsReportFailed'
+          NOTIFICATION_TARGET_CREATED: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
+          NOTIFICATION_TARGET_UPDATED: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
+          NOTIFICATION_TARGET_DELETED: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
+          NOTIFICATION_TARGET_ENABLED: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
+          NOTIFICATION_TARGET_DISABLED: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
+          CREDITS_USAGE_THRESHOLD_75: '#/components/schemas/WebhookV1StandardPayloadCreditsUsage'
+          CREDITS_USAGE_THRESHOLD_90: '#/components/schemas/WebhookV1StandardPayloadCreditsUsage'
+          CREDITS_USAGE_THRESHOLD_95: '#/components/schemas/WebhookV1StandardPayloadCreditsUsage'
+          CREDITS_MONTHLY_USAGE_80: '#/components/schemas/WebhookV1StandardPayloadCreditsMonthlyUsage'
+          CREDITS_MONTHLY_USAGE_90: '#/components/schemas/WebhookV1StandardPayloadCreditsMonthlyUsage'
+          CREDITS_MONTHLY_USAGE_100: '#/components/schemas/WebhookV1StandardPayloadCreditsMonthlyUsage'
+          MPA_REQUEST_PENDING_APPROVAL: '#/components/schemas/WebhookV1StandardPayloadMpaRequest'
+          MPA_REQUEST_EXECUTED: '#/components/schemas/WebhookV1StandardPayloadMpaRequest'
+          MPA_REQUEST_EXPIRED: '#/components/schemas/WebhookV1StandardPayloadMpaRequest'
+          MPA_REQUEST_CANCELLED: '#/components/schemas/WebhookV1StandardPayloadMpaRequest'
+          MPA_REQUEST_APPROVED: '#/components/schemas/WebhookV1StandardPayloadMpaReview'
+          MPA_REQUEST_DENIED: '#/components/schemas/WebhookV1StandardPayloadMpaReview'
+          MPA_REQUEST_PARTIALLY_APPROVED: '#/components/schemas/WebhookV1StandardPayloadMpaReview'
+          GDSG_SLA_BREACHED: '#/components/schemas/WebhookV1StandardPayloadGdsgOperational'
+          GDSG_SYSTEM_INACCESSIBLE: '#/components/schemas/WebhookV1StandardPayloadGdsgOperational'
+          GDSG_WORKER_FAILURE: '#/components/schemas/WebhookV1StandardPayloadGdsgOperational'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobFailed'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobSkipped'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobRejected'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobSucceeded'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadBackupJobPartial'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadRestoreJobSucceeded'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadRestoreJobFailed'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadRestoreJobRejected'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadClassificationJobFailed'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadClassificationJobSkipped'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadClassificationJobRejected'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadPolicyAssignment'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadPolicyChange'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadBackupVault'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadCloudAccount'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadResource'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadViolations'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadIssueMuted'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadJobMetricsReportFailed'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadCreditsUsage'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadCreditsMonthlyUsage'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadMpaRequest'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadMpaReview'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadGdsgOperational'
+    WebhookV1AuditEvent:
+      description: Audit log event.
+      properties:
+        type:
+          description: Event type.
+          enum:
+          - AUDIT_LOG_CREATED
+          example: AUDIT_LOG_CREATED
+          type: string
+        payload:
+          description: The audit log entry as arbitrary JSON. Its structure isn't
+            part of the webhook contract.
+      required:
+      - payload
+      - type
+      type: object
+    WebhookV1AuditPayload:
+      description: |
+        Envelope of an `AUDIT_LOG_CREATED` notification. It has the same structure as the Splunk audit log event and
+        carries no top-level notification metadata, so no `X-Eon-*` headers are sent with it.
+      properties:
+        event:
+          $ref: '#/components/schemas/WebhookV1AuditEvent'
+      required:
+      - event
+      type: object
+    WebhookV1OnboardingPayload:
+      description: |
+        Envelope of the message sent once when a webhook notification target is configured, confirming that Eon can
+        deliver to it.
+      properties:
+        type:
+          description: Always `onboarding`. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - onboarding
+          example: onboarding
+          type: string
+        message:
+          description: Human-readable confirmation message.
+          example: Welcome to Eon! You have successfully configured webhook notifications.
+          type: string
+        projectId:
+          description: ID of the project the webhook target belongs to.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the message was sent, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+      required:
+      - message
+      - projectId
+      - timestamp
+      - type
+      type: object
+    WebhookV1Payload:
+      description: |
+        Body of an outbound webhook notification. Every request carries exactly one of three envelopes:
+
+        - `WebhookV1StandardPayload` for every notification type except audit logs.
+        - `WebhookV1AuditPayload` for `AUDIT_LOG_CREATED`, identified by its top-level `event` object.
+        - `WebhookV1OnboardingPayload` for the one-time confirmation sent when a webhook target is configured, identified by `type` `onboarding`.
+      oneOf:
+      - $ref: '#/components/schemas/WebhookV1StandardPayload'
+      - $ref: '#/components/schemas/WebhookV1AuditPayload'
+      - $ref: '#/components/schemas/WebhookV1OnboardingPayload'
     createVault_409_response:
       example:
         error: error
@@ -31297,8 +33306,387 @@ components:
           format: tobedefined
           type: string
       type: object
+    WebhookV1StandardPayloadBackupJobFailed_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `backupJobFailed`.
+      properties:
+        backupJobFailed:
+          $ref: '#/components/schemas/WebhookV1BackupJobFailedArguments'
+      required:
+      - backupJobFailed
+      type: object
+    WebhookV1StandardPayloadBackupJobSkipped_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `backupJobSkipped`.
+      properties:
+        backupJobSkipped:
+          $ref: '#/components/schemas/WebhookV1BackupJobSkippedArguments'
+      required:
+      - backupJobSkipped
+      type: object
+    WebhookV1StandardPayloadBackupJobRejected_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `backupJobRejected`.
+      properties:
+        backupJobRejected:
+          $ref: '#/components/schemas/WebhookV1BackupJobRejectedArguments'
+      required:
+      - backupJobRejected
+      type: object
+    WebhookV1StandardPayloadBackupJobSucceeded_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `backupJobSucceeded`.
+      properties:
+        backupJobSucceeded:
+          $ref: '#/components/schemas/WebhookV1BackupJobSucceededArguments'
+      required:
+      - backupJobSucceeded
+      type: object
+    WebhookV1StandardPayloadBackupJobPartial_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `backupJobPartial`.
+      properties:
+        backupJobPartial:
+          $ref: '#/components/schemas/WebhookV1BackupJobPartialArguments'
+      required:
+      - backupJobPartial
+      type: object
+    WebhookV1StandardPayloadRestoreJobSucceeded_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `restoreJobSucceeded`.
+      properties:
+        restoreJobSucceeded:
+          $ref: '#/components/schemas/WebhookV1RestoreJobSucceededArguments'
+      required:
+      - restoreJobSucceeded
+      type: object
+    WebhookV1StandardPayloadRestoreJobFailed_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `restoreJobFailed`.
+      properties:
+        restoreJobFailed:
+          $ref: '#/components/schemas/WebhookV1RestoreJobFailedArguments'
+      required:
+      - restoreJobFailed
+      type: object
+    WebhookV1StandardPayloadRestoreJobRejected_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `restoreJobRejected`.
+      properties:
+        restoreJobRejected:
+          $ref: '#/components/schemas/WebhookV1RestoreJobRejectedArguments'
+      required:
+      - restoreJobRejected
+      type: object
+    WebhookV1StandardPayloadClassificationJobFailed_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `classificationJobFailed`.
+      properties:
+        classificationJobFailed:
+          $ref: '#/components/schemas/WebhookV1ClassificationJobFailedArguments'
+      required:
+      - classificationJobFailed
+      type: object
+    WebhookV1StandardPayloadClassificationJobSkipped_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `classificationJobSkipped`.
+      properties:
+        classificationJobSkipped:
+          $ref: '#/components/schemas/WebhookV1ClassificationJobSkippedArguments'
+      required:
+      - classificationJobSkipped
+      type: object
+    WebhookV1StandardPayloadClassificationJobRejected_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `classificationJobRejected`.
+      properties:
+        classificationJobRejected:
+          $ref: '#/components/schemas/WebhookV1ClassificationJobRejectedArguments'
+      required:
+      - classificationJobRejected
+      type: object
+    WebhookV1StandardPayloadPolicyAssignment_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `backupPolicyNotificationArguments`.
+      properties:
+        backupPolicyNotificationArguments:
+          $ref: '#/components/schemas/WebhookV1BackupPolicyNotificationArguments'
+      required:
+      - backupPolicyNotificationArguments
+      type: object
+    WebhookV1StandardPayloadPolicyChange_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `policyArguments`.
+      properties:
+        policyArguments:
+          $ref: '#/components/schemas/WebhookV1PolicyArguments'
+      required:
+      - policyArguments
+      type: object
+    WebhookV1StandardPayloadBackupVault_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `vaultArguments`.
+      properties:
+        vaultArguments:
+          $ref: '#/components/schemas/WebhookV1VaultArguments'
+      required:
+      - vaultArguments
+      type: object
+    WebhookV1StandardPayloadCloudAccount_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `cloudAccountArguments`.
+      properties:
+        cloudAccountArguments:
+          $ref: '#/components/schemas/WebhookV1CloudAccountArguments'
+      required:
+      - cloudAccountArguments
+      type: object
+    WebhookV1StandardPayloadResource_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `resourceArguments`.
+      properties:
+        resourceArguments:
+          $ref: '#/components/schemas/WebhookV1ResourceArguments'
+      required:
+      - resourceArguments
+      type: object
+    WebhookV1StandardPayloadSnapshot_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `snapshotArguments`.
+      properties:
+        snapshotArguments:
+          $ref: '#/components/schemas/WebhookV1SnapshotArguments'
+      required:
+      - snapshotArguments
+      type: object
+    WebhookV1StandardPayloadSnapshotUserProtection_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `snapshotArguments` and `initiatorArguments`.
+      properties:
+        snapshotArguments:
+          $ref: '#/components/schemas/WebhookV1SnapshotArguments'
+        initiatorArguments:
+          $ref: '#/components/schemas/WebhookV1InitiatorArguments'
+      required:
+      - initiatorArguments
+      - snapshotArguments
+      type: object
+    WebhookV1StandardPayloadSnapshotAccessDenied_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `snapshotAccessDenied`.
+      properties:
+        snapshotAccessDenied:
+          $ref: '#/components/schemas/WebhookV1SnapshotAccessDeniedArguments'
+      required:
+      - snapshotAccessDenied
+      type: object
+    WebhookV1StandardPayloadViolations_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `violationsDetectionNotificationArguments`.
+      properties:
+        violationsDetectionNotificationArguments:
+          $ref: '#/components/schemas/WebhookV1ViolationsDetectionNotificationArguments'
+      required:
+      - violationsDetectionNotificationArguments
+      type: object
+    WebhookV1StandardPayloadIssueMuted_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `issueMutedNotificationArguments`.
+      properties:
+        issueMutedNotificationArguments:
+          $ref: '#/components/schemas/WebhookV1IssueMutedNotificationArguments'
+      required:
+      - issueMutedNotificationArguments
+      type: object
+    WebhookV1StandardPayloadJobMetricsReportFailed_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `jobMetricsReportFailed`.
+      properties:
+        jobMetricsReportFailed:
+          $ref: '#/components/schemas/WebhookV1JobMetricsReportFailedArguments'
+      required:
+      - jobMetricsReportFailed
+      type: object
+    WebhookV1StandardPayloadNotificationTargetChange_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `notificationTargetChange`.
+      properties:
+        notificationTargetChange:
+          $ref: '#/components/schemas/WebhookV1NotificationTargetChangeArguments'
+      required:
+      - notificationTargetChange
+      type: object
+    WebhookV1StandardPayloadCreditsUsage_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `creditsNotification`.
+      properties:
+        creditsNotification:
+          $ref: '#/components/schemas/WebhookV1CreditsNotificationArguments'
+      required:
+      - creditsNotification
+      type: object
+    WebhookV1StandardPayloadCreditsMonthlyUsage_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `creditsMonthlyUsageNotification`.
+      properties:
+        creditsMonthlyUsageNotification:
+          $ref: '#/components/schemas/WebhookV1CreditsMonthlyUsageNotificationArguments'
+      required:
+      - creditsMonthlyUsageNotification
+      type: object
+    WebhookV1StandardPayloadMpaRequest_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `mpaRequestNotification`.
+      properties:
+        mpaRequestNotification:
+          $ref: '#/components/schemas/WebhookV1MPARequestNotificationArguments'
+      required:
+      - mpaRequestNotification
+      type: object
+    WebhookV1StandardPayloadMpaReview_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `mpaReviewNotification`.
+      properties:
+        mpaReviewNotification:
+          $ref: '#/components/schemas/WebhookV1MPAReviewNotificationArguments'
+      required:
+      - mpaReviewNotification
+      type: object
+    WebhookV1StandardPayloadGdsgOperational_arguments:
+      description: |
+        Details of the notification. Notifications of these types always carry `gdsgOperationalNotification`.
+      properties:
+        gdsgOperationalNotification:
+          $ref: '#/components/schemas/WebhookV1GdsgOperationalNotificationArguments'
+      required:
+      - gdsgOperationalNotification
+      type: object
   securitySchemes:
     ApiKeyAuth:
       bearerFormat: JWT
       scheme: bearer
       type: http
+x-webhooks:
+  notification:
+    post:
+      operationId: webhookV1Notification
+      summary: Webhook notification
+      description: |
+        Eon sends an HTTP `POST` request with a JSON body to the URL of each webhook notification target when a
+        notification it subscribes to is created. The body is one of three envelopes, described in
+        `WebhookV1Payload`.
+
+        The body is plain JSON, not protobuf JSON: property names are exactly as documented here, including the
+        mix of camelCase and snake_case inside `arguments`. Enums inside `arguments` are integers, 64-bit integers
+        are JSON numbers, and timestamps and durations inside `arguments` are `{"seconds", "nanos"}` objects.
+        Empty or zero-valued properties inside `arguments` are omitted.
+      security: []
+      tags:
+      - webhooks
+      parameters:
+      - in: header
+        name: X-Eon-Notification-Id
+        description: |
+          Notification ID, the same as the body's `id`.
+          Sent with standard notifications only. Omitted for audit logs and for the onboarding message.
+        required: false
+        schema:
+          type: string
+        example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+      - in: header
+        name: X-Eon-Notification-Type
+        description: |
+          Notification type, the same as the body's `type`.
+          Sent with standard notifications and the onboarding message. Omitted for audit logs.
+        required: false
+        schema:
+          type: string
+        example: BACKUP_JOB_FAILED
+      - in: header
+        name: X-Eon-Timestamp
+        description: |
+          RFC 3339 timestamp, the same as the body's `timestamp`.
+          Sent with standard notifications and the onboarding message. Omitted for audit logs.
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: 2024-03-04T05:06:07Z
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookV1Payload'
+            examples:
+              standard:
+                summary: Standard notification
+                value:
+                  id: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+                  projectId: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+                  timestamp: 2024-03-04T05:06:07Z
+                  type: RANSOMWARE_DETECTED_IN_SNAPSHOT
+                  arguments:
+                    snapshotArguments:
+                      resourceProviderId: arn:aws:ec2:us-east-1:123456789012:instance/i-0123456789abcdef0
+                      resourceName: prod-db
+                      snapshotId: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                      resourceType: AWS_EC2
+                      securityScan:
+                        snapshotId: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                        dateCreated:
+                          seconds: 1709528767
+                        conclusion: 2
+                        confidence_score: 0.92
+                        detector_type: 2
+                        risk_level: 4
+                        total_results_count: 1
+                        results:
+                        - path: /var/lib/data/encrypted.bin
+                          score: 0.92
+                          type: 1
+              standardJob:
+                summary: Standard notification for a backup job
+                value:
+                  id: 9c8b7a6d-5e4f-4a3b-2c1d-0e9f8a7b6c5d
+                  projectId: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+                  timestamp: 2024-03-04T05:06:07Z
+                  type: BACKUP_JOB_FAILED
+                  arguments:
+                    backupJobFailed:
+                      id: 3e4f5a6b-7c8d-4e9f-0a1b-2c3d4e5f6a7b
+                      startTime:
+                        seconds: 1709527000
+                      endTime:
+                        seconds: 1709528767
+                        nanos: 500000000
+                      details:
+                        resourceName: prod-db
+                        resourceId: i-0123456789abcdef0
+                        policyName: daily
+                        sourceAccountName: production
+                        resourceType: AWS_EC2
+                        duration:
+                          seconds: 1767
+                          nanos: 500000000
+              audit:
+                summary: Audit log
+                value:
+                  event:
+                    type: AUDIT_LOG_CREATED
+                    payload:
+                      id: 0a1b2c3d-4e5f-4a6b-7c8d-9e0f1a2b3c4d
+                      action: DELETE
+              onboarding:
+                summary: Onboarding message
+                value:
+                  type: onboarding
+                  message: Welcome to Eon! You have successfully configured webhook
+                    notifications.
+                  projectId: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+                  timestamp: 2024-03-04T05:06:07Z
+      responses:
+        "2XX":
+          description: |
+            The notification was delivered. Respond with any `2xx` status; the response body is ignored. Any other
+            status means the delivery failed.

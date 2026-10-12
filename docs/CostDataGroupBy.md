@@ -21,6 +21,8 @@
 
 * `COST_GROUP_BY_RESOURCE_AND_VAULT` (value: `"RESOURCE_AND_VAULT"`)
 
+* `COST_GROUP_BY_VAULT` (value: `"VAULT"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
