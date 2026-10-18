@@ -25703,6 +25703,8 @@ components:
         out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`.
         `backupStatus` is deprecated: sort by `configurationStatus` instead. It is supported until
         `backupStatus` is removed on April 30, 2027.
+        Descending, `alerts` puts the resources that need attention first: by their most severe alert across
+        control violations and action items, then by how many alerts they have.
       enum:
       - id
       - backupStatus
@@ -25723,6 +25725,7 @@ components:
       - clusterName
       - globalClusterIdentifier
       - lastDataClassificationTime
+      - alerts
       example: latestSnapshotTime
       type: string
       x-docs-internal-enum:
@@ -25736,6 +25739,7 @@ components:
       - eonSnapshotCount
       - nonEonSnapshotCount
       - lastDataClassificationTime
+      - alerts
     SortResourceBy:
       description: |
         List of sorting options.

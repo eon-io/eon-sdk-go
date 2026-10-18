@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ResourceSortField Field to sort by. Ascending, `configurationStatus` puts resources Eon is expected to back up before those out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`. `backupStatus` is deprecated: sort by `configurationStatus` instead. It is supported until `backupStatus` is removed on April 30, 2027. 
+// ResourceSortField Field to sort by. Ascending, `configurationStatus` puts resources Eon is expected to back up before those out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`. `backupStatus` is deprecated: sort by `configurationStatus` instead. It is supported until `backupStatus` is removed on April 30, 2027. Descending, `alerts` puts the resources that need attention first: by their most severe alert across control violations and action items, then by how many alerts they have. 
 type ResourceSortField string
 
 // List of ResourceSortField
@@ -39,6 +39,7 @@ const (
 	CLUSTER_NAME ResourceSortField = "clusterName"
 	GLOBAL_CLUSTER_IDENTIFIER ResourceSortField = "globalClusterIdentifier"
 	LAST_DATA_CLASSIFICATION_TIME ResourceSortField = "lastDataClassificationTime"
+	ALERTS ResourceSortField = "alerts"
 )
 
 // All allowed values of ResourceSortField enum
@@ -62,6 +63,7 @@ var AllowedResourceSortFieldEnumValues = []ResourceSortField{
 	"clusterName",
 	"globalClusterIdentifier",
 	"lastDataClassificationTime",
+	"alerts",
 }
 
 func (v *ResourceSortField) UnmarshalJSON(src []byte) error {
