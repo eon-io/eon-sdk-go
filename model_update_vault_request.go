@@ -23,8 +23,8 @@ var _ MappedNullable = &UpdateVaultRequest{}
 type UpdateVaultRequest struct {
 	// Vault display name.
 	Name string `json:"name"`
-	// User-defined metadata tags, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
-	Tags *map[string]string `json:"tags,omitempty"`
+	// User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
+	Labels []string `json:"labels,omitempty"`
 }
 
 type _UpdateVaultRequest UpdateVaultRequest
@@ -71,36 +71,36 @@ func (o *UpdateVaultRequest) SetName(v string) {
 	o.Name = v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *UpdateVaultRequest) GetTags() map[string]string {
-	if o == nil || IsNil(o.Tags) {
-		var ret map[string]string
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *UpdateVaultRequest) GetLabels() []string {
+	if o == nil || IsNil(o.Labels) {
+		var ret []string
 		return ret
 	}
-	return *o.Tags
+	return o.Labels
 }
 
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateVaultRequest) GetTagsOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.Tags) {
+func (o *UpdateVaultRequest) GetLabelsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
-	return o.Tags, true
+	return o.Labels, true
 }
 
-// HasTags returns a boolean if a field has been set.
-func (o *UpdateVaultRequest) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
+// HasLabels returns a boolean if a field has been set.
+func (o *UpdateVaultRequest) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
 		return true
 	}
 
 	return false
 }
 
-// SetTags gets a reference to the given map[string]string and assigns it to the Tags field.
-func (o *UpdateVaultRequest) SetTags(v map[string]string) {
-	o.Tags = &v
+// SetLabels gets a reference to the given []string and assigns it to the Labels field.
+func (o *UpdateVaultRequest) SetLabels(v []string) {
+	o.Labels = v
 }
 
 func (o UpdateVaultRequest) MarshalJSON() ([]byte, error) {
@@ -114,8 +114,8 @@ func (o UpdateVaultRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateVaultRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	if !IsNil(o.Tags) {
-		toSerialize["tags"] = o.Tags
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
 	}
 	return toSerialize, nil
 }

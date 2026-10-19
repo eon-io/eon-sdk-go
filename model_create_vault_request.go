@@ -26,8 +26,8 @@ type CreateVaultRequest struct {
 	// Region where the vault is hosted.
 	Region string `json:"region"`
 	VaultAttributes VaultProviderAttributesInput `json:"vaultAttributes"`
-	// User-defined metadata tags, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
-	Tags *map[string]string `json:"tags,omitempty"`
+	// User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
+	Labels []string `json:"labels,omitempty"`
 }
 
 type _CreateVaultRequest CreateVaultRequest
@@ -124,36 +124,36 @@ func (o *CreateVaultRequest) SetVaultAttributes(v VaultProviderAttributesInput) 
 	o.VaultAttributes = v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *CreateVaultRequest) GetTags() map[string]string {
-	if o == nil || IsNil(o.Tags) {
-		var ret map[string]string
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *CreateVaultRequest) GetLabels() []string {
+	if o == nil || IsNil(o.Labels) {
+		var ret []string
 		return ret
 	}
-	return *o.Tags
+	return o.Labels
 }
 
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateVaultRequest) GetTagsOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.Tags) {
+func (o *CreateVaultRequest) GetLabelsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
-	return o.Tags, true
+	return o.Labels, true
 }
 
-// HasTags returns a boolean if a field has been set.
-func (o *CreateVaultRequest) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
+// HasLabels returns a boolean if a field has been set.
+func (o *CreateVaultRequest) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
 		return true
 	}
 
 	return false
 }
 
-// SetTags gets a reference to the given map[string]string and assigns it to the Tags field.
-func (o *CreateVaultRequest) SetTags(v map[string]string) {
-	o.Tags = &v
+// SetLabels gets a reference to the given []string and assigns it to the Labels field.
+func (o *CreateVaultRequest) SetLabels(v []string) {
+	o.Labels = v
 }
 
 func (o CreateVaultRequest) MarshalJSON() ([]byte, error) {
@@ -169,8 +169,8 @@ func (o CreateVaultRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["region"] = o.Region
 	toSerialize["vaultAttributes"] = o.VaultAttributes
-	if !IsNil(o.Tags) {
-		toSerialize["tags"] = o.Tags
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
 	}
 	return toSerialize, nil
 }

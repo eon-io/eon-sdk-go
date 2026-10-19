@@ -17647,9 +17647,9 @@ components:
         id: 37732835-d768-5990-ba93-a7c2d2e6d754
         isManagedByEon: true
         region: us-east-1
-        tags:
-          owner: platform
-          cost-center: "1234"
+        labels:
+        - platform
+        - cost-center 1234
       properties:
         id:
           description: Vault ID.
@@ -17677,16 +17677,16 @@ components:
           type: boolean
         vaultAttributes:
           $ref: '#/components/schemas/VaultProviderAttributes'
-        tags:
-          additionalProperties:
-            type: string
+        labels:
           description: |
-            User-defined metadata tags, used for filtering and search only.
+            User-defined metadata labels, used for filtering and search only.
             They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
           example:
-            owner: platform
-            cost-center: "1234"
-          type: object
+          - platform
+          - cost-center 1234
+          items:
+            type: string
+          type: array
           x-internal: false
       required:
       - id
@@ -17733,9 +17733,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
         backupType: AWS_EC2_BACKUP
       properties:
         jobExecutionDetails:
@@ -17790,9 +17790,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
-            tags:
-              owner: platform
-              cost-center: "1234"
+            labels:
+            - platform
+            - cost-center 1234
           backupType: AWS_EC2_BACKUP
         - resourceDetails:
             providerResourceId: db-IPQ7PQ3Q7UMA2LIGOOSUV3B5XU
@@ -17828,9 +17828,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
-            tags:
-              owner: platform
-              cost-center: "1234"
+            labels:
+            - platform
+            - cost-center 1234
           backupType: AWS_EC2_BACKUP
         totalCount: 2347
       properties:
@@ -17890,9 +17890,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
-            tags:
-              owner: platform
-              cost-center: "1234"
+            labels:
+            - platform
+            - cost-center 1234
           backupType: AWS_EC2_BACKUP
       properties:
         job:
@@ -18352,9 +18352,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
       properties:
         jobExecutionDetails:
           $ref: '#/components/schemas/JobExecutionDetails'
@@ -18430,9 +18430,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
-            tags:
-              owner: platform
-              cost-center: "1234"
+            labels:
+            - platform
+            - cost-center 1234
         - restoreType: AWS_EC2_INSTANCE_RESTORE
           destinationDetails:
             restoreAccountId: 146586e8-f69a-5148-9d7b-7c3a6b006048
@@ -18486,9 +18486,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
-            tags:
-              owner: platform
-              cost-center: "1234"
+            labels:
+            - platform
+            - cost-center 1234
         totalCount: 188
       properties:
         jobs:
@@ -18566,9 +18566,9 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
-            tags:
-              owner: platform
-              cost-center: "1234"
+            labels:
+            - platform
+            - cost-center 1234
       properties:
         job:
           $ref: '#/components/schemas/RestoreJob'
@@ -19186,6 +19186,7 @@ components:
       example: STANDARD
       type: string
       x-docs-internal-enum:
+      - AWS_NATIVE_HIGH_FREQUENCY
       - BIGQUERY_NATIVE_PITR
       - AZURE_FILES_STANDARD
       - AZURE_SQL_DATABASE_NATIVE_PITR
@@ -20778,9 +20779,9 @@ components:
           - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
           - db-FE4MOD3UCIYIQKXF3UVTCB55FA
         enabled: true
-        tags:
-          owner: platform
-          cost-center: "1234"
+        labels:
+        - platform
+        - cost-center 1234
       properties:
         name:
           description: Backup policy display name.
@@ -20795,16 +20796,16 @@ components:
           $ref: '#/components/schemas/BackupPolicyResourceSelector'
         backupPlan:
           $ref: '#/components/schemas/BackupPolicyPlan'
-        tags:
-          additionalProperties:
-            type: string
+        labels:
           description: |
-            User-defined metadata tags, used for filtering and search only.
+            User-defined metadata labels, used for filtering and search only.
             They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
           example:
-            owner: platform
-            cost-center: "1234"
-          type: object
+          - platform
+          - cost-center 1234
+          items:
+            type: string
+          type: array
           x-internal: false
       required:
       - backupPlan
@@ -21166,9 +21167,9 @@ components:
           - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
           - db-FE4MOD3UCIYIQKXF3UVTCB55FA
         enabled: true
-        tags:
-          owner: platform
-          cost-center: "1234"
+        labels:
+        - platform
+        - cost-center 1234
       properties:
         id:
           description: Backup policy ID.
@@ -21186,16 +21187,16 @@ components:
           $ref: '#/components/schemas/BackupPolicyResourceSelector'
         backupPlan:
           $ref: '#/components/schemas/BackupPolicyPlan'
-        tags:
-          additionalProperties:
-            type: string
+        labels:
           description: |
-            User-defined metadata tags, used for filtering and search only.
+            User-defined metadata labels, used for filtering and search only.
             They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
           example:
-            owner: platform
-            cost-center: "1234"
-          type: object
+          - platform
+          - cost-center 1234
+          items:
+            type: string
+          type: array
           x-internal: false
       required:
       - backupPlan
@@ -21560,9 +21561,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
         actionApprovalRequest:
           requesterEmail: requester@example.com
           resolvedTime: 2026-05-05T02:10:12Z
@@ -21952,9 +21953,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
         - name: Production with PII
           backupPlan:
             backupPolicyType: STANDARD
@@ -22308,9 +22309,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
         totalCount: 2347
       properties:
         backupPolicies:
@@ -22684,9 +22685,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
       properties:
         backupPolicy:
           $ref: '#/components/schemas/BackupPolicy'
@@ -23047,9 +23048,9 @@ components:
           - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
           - db-FE4MOD3UCIYIQKXF3UVTCB55FA
         enabled: true
-        tags:
-          owner: platform
-          cost-center: "1234"
+        labels:
+        - platform
+        - cost-center 1234
       properties:
         name:
           description: Backup policy display name.
@@ -23064,16 +23065,16 @@ components:
           $ref: '#/components/schemas/BackupPolicyResourceSelector'
         backupPlan:
           $ref: '#/components/schemas/BackupPolicyPlan'
-        tags:
-          additionalProperties:
-            type: string
+        labels:
           description: |
-            User-defined metadata tags, used for filtering and search only.
+            User-defined metadata labels, used for filtering and search only.
             They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
           example:
-            owner: platform
-            cost-center: "1234"
-          type: object
+          - platform
+          - cost-center 1234
+          items:
+            type: string
+          type: array
           x-internal: false
       required:
       - backupPlan
@@ -23436,9 +23437,9 @@ components:
             - cluster-3RYR75ARQOPQJ6MCRKTQFDR2GE
             - db-FE4MOD3UCIYIQKXF3UVTCB55FA
           enabled: true
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
         actionApprovalRequest:
           requesterEmail: requester@example.com
           resolvedTime: 2026-05-05T02:10:12Z
@@ -23508,9 +23509,9 @@ components:
           aws:
             encryptionKey: arn:aws:kms:us-east-1:123456789012:key/4692190d-ae52-56fe-9937-6aa2c4e3df62
         region: eu-central-1
-        tags:
-          owner: platform
-          cost-center: "1234"
+        labels:
+        - platform
+        - cost-center 1234
       properties:
         name:
           description: Vault display name.
@@ -23522,16 +23523,16 @@ components:
           type: string
         vaultAttributes:
           $ref: '#/components/schemas/VaultProviderAttributesInput'
-        tags:
-          additionalProperties:
-            type: string
+        labels:
           description: |
-            User-defined metadata tags, used for filtering and search only.
+            User-defined metadata labels, used for filtering and search only.
             They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
           example:
-            owner: platform
-            cost-center: "1234"
-          type: object
+          - platform
+          - cost-center 1234
+          items:
+            type: string
+          type: array
           x-internal: false
       required:
       - name
@@ -23551,9 +23552,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
       properties:
         vault:
           $ref: '#/components/schemas/BackupVault'
@@ -23573,9 +23574,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
       properties:
         vault:
           $ref: '#/components/schemas/BackupVault'
@@ -23585,24 +23586,24 @@ components:
     UpdateVaultRequest:
       example:
         name: My new vault name
-        tags:
-          owner: platform
-          cost-center: "1234"
+        labels:
+        - platform
+        - cost-center 1234
       properties:
         name:
           description: Vault display name.
           example: My new vault name
           type: string
-        tags:
-          additionalProperties:
-            type: string
+        labels:
           description: |
-            User-defined metadata tags, used for filtering and search only.
+            User-defined metadata labels, used for filtering and search only.
             They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.
           example:
-            owner: platform
-            cost-center: "1234"
-          type: object
+          - platform
+          - cost-center 1234
+          items:
+            type: string
+          type: array
           x-internal: false
       required:
       - name
@@ -23620,9 +23621,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
       properties:
         vault:
           $ref: '#/components/schemas/BackupVault'
@@ -23645,9 +23646,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
         - providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -23658,9 +23659,9 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
-          tags:
-            owner: platform
-            cost-center: "1234"
+          labels:
+          - platform
+          - cost-center 1234
         totalCount: 188
       properties:
         vaults:
@@ -26158,54 +26159,6 @@ components:
             $ref: '#/components/schemas/ConfigurationStatus'
           type: array
       type: object
-    ComplianceStatus:
-      description: |
-        Whether the resource meets the controls applied to it. Independent of
-        `configurationStatus` — it is evaluated whether or not a backup policy is assigned,
-        since a resource with no policy can already violate a control that says it must
-        be backed up.
-        `COMPLIANT` — no violations. This is the default: a resource no control applies
-        to reads compliant rather than "not evaluated".
-        `VIOLATIONS` — at least one open violation.
-        `ALL_MUTED` — the resource has violations and every one of them is muted.
-        There is deliberately no value for "nothing to check". Derived from the
-        resource's issues on each request rather than stored, so it cannot drift out of
-        step with `controlViolationCounts`. Absent only when the resource's issues could
-        not be read for the response.
-      enum:
-      - COMPLIANT
-      - VIOLATIONS
-      - ALL_MUTED
-      example: COMPLIANT
-      type: string
-      x-enum-varnames:
-      - COMPLIANCE_STATUS_COMPLIANT
-      - COMPLIANCE_STATUS_VIOLATIONS
-      - COMPLIANCE_STATUS_ALL_MUTED
-      x-extensible-enum: true
-    ComplianceStatusFilters:
-      additionalProperties: false
-      example:
-        in:
-        - VIOLATIONS
-        notIn:
-        - COMPLIANT
-      properties:
-        in:
-          description: Matches if any value in this list equals `complianceStatus`.
-          example:
-          - VIOLATIONS
-          items:
-            $ref: '#/components/schemas/ComplianceStatus'
-          type: array
-        notIn:
-          description: Matches if no value in this list equals `complianceStatus`.
-          example:
-          - COMPLIANT
-          items:
-            $ref: '#/components/schemas/ComplianceStatus'
-          type: array
-      type: object
     TagKeysFilters:
       additionalProperties: false
       example:
@@ -26299,11 +26252,6 @@ components:
           containsAnyOf:
           - environment
           - app
-        complianceStatus:
-          in:
-          - VIOLATIONS
-          notIn:
-          - COMPLIANT
         resourceName:
           notEndsWith:
           - -staging
@@ -26432,8 +26380,6 @@ components:
           $ref: '#/components/schemas/BackupStatusFilters'
         configurationStatus:
           $ref: '#/components/schemas/ConfigurationStatusFilters'
-        complianceStatus:
-          $ref: '#/components/schemas/ComplianceStatusFilters'
         tagKeys:
           $ref: '#/components/schemas/TagKeysFilters'
         tagKeyValues:
@@ -26453,11 +26399,6 @@ components:
             containsAnyOf:
             - environment
             - app
-          complianceStatus:
-            in:
-            - VIOLATIONS
-            notIn:
-            - COMPLIANT
           resourceName:
             notEndsWith:
             - -staging
@@ -26764,6 +26705,31 @@ components:
       - medium
       - muted
       type: object
+    ComplianceStatus:
+      description: |
+        Whether the resource meets the controls applied to it. Independent of
+        `configurationStatus` — it is evaluated whether or not a backup policy is assigned,
+        since a resource with no policy can already violate a control that says it must
+        be backed up.
+        `COMPLIANT` — no violations. This is the default: a resource no control applies
+        to reads compliant rather than "not evaluated".
+        `VIOLATIONS` — at least one open violation.
+        `ALL_MUTED` — the resource has violations and every one of them is muted.
+        There is deliberately no value for "nothing to check". Derived from the
+        resource's issues on each request rather than stored, so it cannot drift out of
+        step with `controlViolationCounts`. Absent only when the resource's issues could
+        not be read for the response.
+      enum:
+      - COMPLIANT
+      - VIOLATIONS
+      - ALL_MUTED
+      example: COMPLIANT
+      type: string
+      x-enum-varnames:
+      - COMPLIANCE_STATUS_COMPLIANT
+      - COMPLIANCE_STATUS_VIOLATIONS
+      - COMPLIANCE_STATUS_ALL_MUTED
+      x-extensible-enum: true
     InventoryVolume:
       example:
         path: /dev/xvda
@@ -28979,6 +28945,7 @@ components:
       - OPERATIONS
       - OBJECT_MONTHS
       - SEATS
+      - ECU
       x-enum-varnames:
       - USAGE_UNIT_BYTE_MONTHS
       - USAGE_UNIT_BYTES
@@ -29126,6 +29093,7 @@ components:
       - RESOURCE
       - RESOURCE_AND_VAULT
       - VAULT
+      - AI_AGENT_APP
       example: SOURCE_ACCOUNT
       type: string
       x-docs-internal-enum:
@@ -29134,6 +29102,7 @@ components:
       - DSG_BUCKET
       - DSG_ENVIRONMENT
       - VAULT
+      - AI_AGENT_APP
       x-enum-varnames:
       - COST_GROUP_BY_PRODUCT
       - COST_GROUP_BY_USAGE_TYPE
@@ -29145,6 +29114,7 @@ components:
       - COST_GROUP_BY_RESOURCE
       - COST_GROUP_BY_RESOURCE_AND_VAULT
       - COST_GROUP_BY_VAULT
+      - COST_GROUP_BY_AI_AGENT_APP
     QueryCostDataRequest:
       example:
         usageUnit: BYTES
@@ -29355,6 +29325,7 @@ components:
       - AWS_S3_COLD_TIER_STORAGE_METERING_DIMENSION
       - AWS_S3_COLD_TIER_MANAGED_OBJECTS_METERING_DIMENSION
       - AWS_S3_COLD_TIER_RESTORE_METERING_DIMENSION
+      - AI_AGENT_ECU_METERING_DIMENSION
     Cost:
       example:
         amount: 150.75
@@ -31346,6 +31317,12 @@ components:
         resourceType:
           description: Resource type.
           type: string
+        snapshotSizeBytes:
+          description: Bytes the job's snapshot stored. Present only for finished
+            non-native backups.
+          format: int64
+          minimum: 0
+          type: integer
       type: object
     WebhookV1BackupJobFailedArguments:
       description: Details of a `BACKUP_JOB_FAILED` notification.

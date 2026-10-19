@@ -23,6 +23,8 @@
 
 * `COST_GROUP_BY_VAULT` (value: `"VAULT"`)
 
+* `COST_GROUP_BY_AI_AGENT_APP` (value: `"AI_AGENT_APP"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

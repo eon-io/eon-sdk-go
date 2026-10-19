@@ -27,8 +27,8 @@ type UpdateBackupPolicyRequest struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	ResourceSelector BackupPolicyResourceSelector `json:"resourceSelector"`
 	BackupPlan BackupPolicyPlan `json:"backupPlan"`
-	// User-defined metadata tags, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
-	Tags *map[string]string `json:"tags,omitempty"`
+	// User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
+	Labels []string `json:"labels,omitempty"`
 }
 
 type _UpdateBackupPolicyRequest UpdateBackupPolicyRequest
@@ -161,36 +161,36 @@ func (o *UpdateBackupPolicyRequest) SetBackupPlan(v BackupPolicyPlan) {
 	o.BackupPlan = v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *UpdateBackupPolicyRequest) GetTags() map[string]string {
-	if o == nil || IsNil(o.Tags) {
-		var ret map[string]string
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *UpdateBackupPolicyRequest) GetLabels() []string {
+	if o == nil || IsNil(o.Labels) {
+		var ret []string
 		return ret
 	}
-	return *o.Tags
+	return o.Labels
 }
 
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateBackupPolicyRequest) GetTagsOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.Tags) {
+func (o *UpdateBackupPolicyRequest) GetLabelsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
-	return o.Tags, true
+	return o.Labels, true
 }
 
-// HasTags returns a boolean if a field has been set.
-func (o *UpdateBackupPolicyRequest) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
+// HasLabels returns a boolean if a field has been set.
+func (o *UpdateBackupPolicyRequest) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
 		return true
 	}
 
 	return false
 }
 
-// SetTags gets a reference to the given map[string]string and assigns it to the Tags field.
-func (o *UpdateBackupPolicyRequest) SetTags(v map[string]string) {
-	o.Tags = &v
+// SetLabels gets a reference to the given []string and assigns it to the Labels field.
+func (o *UpdateBackupPolicyRequest) SetLabels(v []string) {
+	o.Labels = v
 }
 
 func (o UpdateBackupPolicyRequest) MarshalJSON() ([]byte, error) {
@@ -209,8 +209,8 @@ func (o UpdateBackupPolicyRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["resourceSelector"] = o.ResourceSelector
 	toSerialize["backupPlan"] = o.BackupPlan
-	if !IsNil(o.Tags) {
-		toSerialize["tags"] = o.Tags
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
 	}
 	return toSerialize, nil
 }

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Enabled** | **bool** | Whether the backup policy is enabled. | 
 **ResourceSelector** | [**BackupPolicyResourceSelector**](BackupPolicyResourceSelector.md) |  | 
 **BackupPlan** | [**BackupPolicyPlan**](BackupPolicyPlan.md) |  | 
-**Tags** | Pointer to **map[string]string** | User-defined metadata tags, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.  | [optional] 
+**Labels** | Pointer to **[]string** | User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.  | [optional] 
 
 ## Methods
 
@@ -130,30 +130,30 @@ and a boolean to check if the value has been set.
 SetBackupPlan sets BackupPlan field to given value.
 
 
-### GetTags
+### GetLabels
 
-`func (o *BackupPolicy) GetTags() map[string]string`
+`func (o *BackupPolicy) GetLabels() []string`
 
-GetTags returns the Tags field if non-nil, zero value otherwise.
+GetLabels returns the Labels field if non-nil, zero value otherwise.
 
-### GetTagsOk
+### GetLabelsOk
 
-`func (o *BackupPolicy) GetTagsOk() (*map[string]string, bool)`
+`func (o *BackupPolicy) GetLabelsOk() (*[]string, bool)`
 
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTags
+### SetLabels
 
-`func (o *BackupPolicy) SetTags(v map[string]string)`
+`func (o *BackupPolicy) SetLabels(v []string)`
 
-SetTags sets Tags field to given value.
+SetLabels sets Labels field to given value.
 
-### HasTags
+### HasLabels
 
-`func (o *BackupPolicy) HasTags() bool`
+`func (o *BackupPolicy) HasLabels() bool`
 
-HasTags returns a boolean if a field has been set.
+HasLabels returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

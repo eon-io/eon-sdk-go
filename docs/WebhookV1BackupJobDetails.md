@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **SourceAccountName** | Pointer to **string** | Name of the source cloud account. | [optional] 
 **Duration** | Pointer to [**WebhookV1ProtobufDuration**](WebhookV1ProtobufDuration.md) |  | [optional] 
 **ResourceType** | Pointer to **string** | Resource type. | [optional] 
+**SnapshotSizeBytes** | Pointer to **int64** | Bytes the job&#39;s snapshot stored. Present only for finished non-native backups. | [optional] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetResourceType sets ResourceType field to given value.
 `func (o *WebhookV1BackupJobDetails) HasResourceType() bool`
 
 HasResourceType returns a boolean if a field has been set.
+
+### GetSnapshotSizeBytes
+
+`func (o *WebhookV1BackupJobDetails) GetSnapshotSizeBytes() int64`
+
+GetSnapshotSizeBytes returns the SnapshotSizeBytes field if non-nil, zero value otherwise.
+
+### GetSnapshotSizeBytesOk
+
+`func (o *WebhookV1BackupJobDetails) GetSnapshotSizeBytesOk() (*int64, bool)`
+
+GetSnapshotSizeBytesOk returns a tuple with the SnapshotSizeBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotSizeBytes
+
+`func (o *WebhookV1BackupJobDetails) SetSnapshotSizeBytes(v int64)`
+
+SetSnapshotSizeBytes sets SnapshotSizeBytes field to given value.
+
+### HasSnapshotSizeBytes
+
+`func (o *WebhookV1BackupJobDetails) HasSnapshotSizeBytes() bool`
+
+HasSnapshotSizeBytes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

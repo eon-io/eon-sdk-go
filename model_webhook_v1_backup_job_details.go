@@ -30,6 +30,8 @@ type WebhookV1BackupJobDetails struct {
 	Duration *WebhookV1ProtobufDuration `json:"duration,omitempty"`
 	// Resource type.
 	ResourceType *string `json:"resourceType,omitempty"`
+	// Bytes the job's snapshot stored. Present only for finished non-native backups.
+	SnapshotSizeBytes *int64 `json:"snapshotSizeBytes,omitempty"`
 }
 
 // NewWebhookV1BackupJobDetails instantiates a new WebhookV1BackupJobDetails object
@@ -241,6 +243,38 @@ func (o *WebhookV1BackupJobDetails) SetResourceType(v string) {
 	o.ResourceType = &v
 }
 
+// GetSnapshotSizeBytes returns the SnapshotSizeBytes field value if set, zero value otherwise.
+func (o *WebhookV1BackupJobDetails) GetSnapshotSizeBytes() int64 {
+	if o == nil || IsNil(o.SnapshotSizeBytes) {
+		var ret int64
+		return ret
+	}
+	return *o.SnapshotSizeBytes
+}
+
+// GetSnapshotSizeBytesOk returns a tuple with the SnapshotSizeBytes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WebhookV1BackupJobDetails) GetSnapshotSizeBytesOk() (*int64, bool) {
+	if o == nil || IsNil(o.SnapshotSizeBytes) {
+		return nil, false
+	}
+	return o.SnapshotSizeBytes, true
+}
+
+// HasSnapshotSizeBytes returns a boolean if a field has been set.
+func (o *WebhookV1BackupJobDetails) HasSnapshotSizeBytes() bool {
+	if o != nil && !IsNil(o.SnapshotSizeBytes) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnapshotSizeBytes gets a reference to the given int64 and assigns it to the SnapshotSizeBytes field.
+func (o *WebhookV1BackupJobDetails) SetSnapshotSizeBytes(v int64) {
+	o.SnapshotSizeBytes = &v
+}
+
 func (o WebhookV1BackupJobDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -268,6 +302,9 @@ func (o WebhookV1BackupJobDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ResourceType) {
 		toSerialize["resourceType"] = o.ResourceType
+	}
+	if !IsNil(o.SnapshotSizeBytes) {
+		toSerialize["snapshotSizeBytes"] = o.SnapshotSizeBytes
 	}
 	return toSerialize, nil
 }
