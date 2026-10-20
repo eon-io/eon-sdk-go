@@ -872,6 +872,8 @@ func (r ApiListResourcesRequest) Execute() (*ListResourcesResponse, *http.Respon
 ListResources List Resources
 
 Description: Retrieves a list of resources for the given project.
+By default, results include cloud resources only.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose resources you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 

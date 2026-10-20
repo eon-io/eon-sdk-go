@@ -27,6 +27,8 @@ const (
 	MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_BACKUP_POLICY MPAOperationType = "MPA_OPERATION_DELETE_BACKUP_POLICY"
 	MPA_OPERATION_TYPE_MPA_OPERATION_REMOVE_SNAPSHOT_HOLD MPAOperationType = "MPA_OPERATION_REMOVE_SNAPSHOT_HOLD"
 	MPA_OPERATION_TYPE_MPA_OPERATION_CREATE_BACKUP_POLICY MPAOperationType = "MPA_OPERATION_CREATE_BACKUP_POLICY"
+	MPA_OPERATION_TYPE_MPA_OPERATION_UPDATE_NOTIFICATION_POLICY MPAOperationType = "MPA_OPERATION_UPDATE_NOTIFICATION_POLICY"
+	MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_NOTIFICATION_POLICY MPAOperationType = "MPA_OPERATION_DELETE_NOTIFICATION_POLICY"
 )
 
 // All allowed values of MPAOperationType enum
@@ -38,6 +40,8 @@ var AllowedMPAOperationTypeEnumValues = []MPAOperationType{
 	"MPA_OPERATION_DELETE_BACKUP_POLICY",
 	"MPA_OPERATION_REMOVE_SNAPSHOT_HOLD",
 	"MPA_OPERATION_CREATE_BACKUP_POLICY",
+	"MPA_OPERATION_UPDATE_NOTIFICATION_POLICY",
+	"MPA_OPERATION_DELETE_NOTIFICATION_POLICY",
 }
 
 func (v *MPAOperationType) UnmarshalJSON(src []byte) error {
@@ -46,15 +50,10 @@ func (v *MPAOperationType) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := MPAOperationType(value)
-	for _, existing := range AllowedMPAOperationTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid MPAOperationType", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = MPAOperationType(value)
+	return nil
 }
 
 // NewMPAOperationTypeFromValue returns a pointer to a valid MPAOperationType

@@ -7072,7 +7072,9 @@ paths:
           key: projectId
   /v1/projects/{projectId}/resources:
     post:
-      description: "Description: Retrieves a list of resources for the given project."
+      description: |
+        Description: Retrieves a list of resources for the given project.
+        By default, results include cloud resources only.
       operationId: listResources
       parameters:
       - description: |
@@ -15369,10 +15371,15 @@ components:
       - MPA_OPERATION_DELETE_BACKUP_POLICY
       - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
       - MPA_OPERATION_CREATE_BACKUP_POLICY
+      - MPA_OPERATION_UPDATE_NOTIFICATION_POLICY
+      - MPA_OPERATION_DELETE_NOTIFICATION_POLICY
       example: MPA_OPERATION_DELETE_BACKUP_POLICY
       type: string
+      x-extensible-enum: true
       x-docs-internal-enum:
       - MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
+      - MPA_OPERATION_UPDATE_NOTIFICATION_POLICY
+      - MPA_OPERATION_DELETE_NOTIFICATION_POLICY
       x-enum-varnames:
       - MPA_OPERATION_TYPE_UNSPECIFIED
       - MPA_OPERATION_TYPE_MPA_OPERATION_ADD_RESTORE_ACCOUNT
@@ -15381,6 +15388,8 @@ components:
       - MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_BACKUP_POLICY
       - MPA_OPERATION_TYPE_MPA_OPERATION_REMOVE_SNAPSHOT_HOLD
       - MPA_OPERATION_TYPE_MPA_OPERATION_CREATE_BACKUP_POLICY
+      - MPA_OPERATION_TYPE_MPA_OPERATION_UPDATE_NOTIFICATION_POLICY
+      - MPA_OPERATION_TYPE_MPA_OPERATION_DELETE_NOTIFICATION_POLICY
     MPARequestStatus:
       description: |
         Action request status.
@@ -29566,10 +29575,15 @@ components:
       - UPDATE_BACKUP_POLICY
       - DELETE_BACKUP_POLICY
       - REMOVE_SNAPSHOT_HOLD
+      - UPDATE_NOTIFICATION_POLICY
+      - DELETE_NOTIFICATION_POLICY
       example: DELETE_BACKUP_POLICY
       type: string
+      x-extensible-enum: true
       x-docs-internal-enum:
       - REMOVE_SNAPSHOT_HOLD
+      - UPDATE_NOTIFICATION_POLICY
+      - DELETE_NOTIFICATION_POLICY
       x-enum-varnames:
       - ACTION_APPROVAL_OPERATION_ADD_RESTORE_ACCOUNT
       - ACTION_APPROVAL_OPERATION_CREATE_BACKUP_POLICY
@@ -29577,6 +29591,8 @@ components:
       - ACTION_APPROVAL_OPERATION_UPDATE_BACKUP_POLICY
       - ACTION_APPROVAL_OPERATION_DELETE_BACKUP_POLICY
       - ACTION_APPROVAL_OPERATION_REMOVE_SNAPSHOT_HOLD
+      - ACTION_APPROVAL_OPERATION_UPDATE_NOTIFICATION_POLICY
+      - ACTION_APPROVAL_OPERATION_DELETE_NOTIFICATION_POLICY
     ActionApprovalRuleExpression:
       description: |
         Conditional expression used to determine which resources are targeted by an action approval rule.
@@ -31320,6 +31336,12 @@ components:
         snapshotSizeBytes:
           description: Bytes the job's snapshot stored. Present only for finished
             non-native backups.
+          format: int64
+          minimum: 0
+          type: integer
+        sourceSizeBytes:
+          description: Logical size of the source at backup time. Present only for
+            finished non-native backups with a known source size.
           format: int64
           minimum: 0
           type: integer

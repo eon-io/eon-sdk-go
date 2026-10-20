@@ -26,6 +26,8 @@ const (
 	ACTION_APPROVAL_OPERATION_UPDATE_BACKUP_POLICY ActionApprovalOperationType = "UPDATE_BACKUP_POLICY"
 	ACTION_APPROVAL_OPERATION_DELETE_BACKUP_POLICY ActionApprovalOperationType = "DELETE_BACKUP_POLICY"
 	ACTION_APPROVAL_OPERATION_REMOVE_SNAPSHOT_HOLD ActionApprovalOperationType = "REMOVE_SNAPSHOT_HOLD"
+	ACTION_APPROVAL_OPERATION_UPDATE_NOTIFICATION_POLICY ActionApprovalOperationType = "UPDATE_NOTIFICATION_POLICY"
+	ACTION_APPROVAL_OPERATION_DELETE_NOTIFICATION_POLICY ActionApprovalOperationType = "DELETE_NOTIFICATION_POLICY"
 )
 
 // All allowed values of ActionApprovalOperationType enum
@@ -36,6 +38,8 @@ var AllowedActionApprovalOperationTypeEnumValues = []ActionApprovalOperationType
 	"UPDATE_BACKUP_POLICY",
 	"DELETE_BACKUP_POLICY",
 	"REMOVE_SNAPSHOT_HOLD",
+	"UPDATE_NOTIFICATION_POLICY",
+	"DELETE_NOTIFICATION_POLICY",
 }
 
 func (v *ActionApprovalOperationType) UnmarshalJSON(src []byte) error {
@@ -44,15 +48,10 @@ func (v *ActionApprovalOperationType) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ActionApprovalOperationType(value)
-	for _, existing := range AllowedActionApprovalOperationTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid ActionApprovalOperationType", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = ActionApprovalOperationType(value)
+	return nil
 }
 
 // NewActionApprovalOperationTypeFromValue returns a pointer to a valid ActionApprovalOperationType
