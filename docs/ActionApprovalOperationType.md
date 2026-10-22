@@ -19,6 +19,8 @@
 
 * `ACTION_APPROVAL_OPERATION_DELETE_NOTIFICATION_POLICY` (value: `"DELETE_NOTIFICATION_POLICY"`)
 
+* `ACTION_APPROVAL_OPERATION_UPDATE_INGESTION_PIPELINE` (value: `"UPDATE_INGESTION_PIPELINE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

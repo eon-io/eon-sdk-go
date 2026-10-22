@@ -28,6 +28,7 @@ const (
 	ACTION_APPROVAL_OPERATION_REMOVE_SNAPSHOT_HOLD ActionApprovalOperationType = "REMOVE_SNAPSHOT_HOLD"
 	ACTION_APPROVAL_OPERATION_UPDATE_NOTIFICATION_POLICY ActionApprovalOperationType = "UPDATE_NOTIFICATION_POLICY"
 	ACTION_APPROVAL_OPERATION_DELETE_NOTIFICATION_POLICY ActionApprovalOperationType = "DELETE_NOTIFICATION_POLICY"
+	ACTION_APPROVAL_OPERATION_UPDATE_INGESTION_PIPELINE ActionApprovalOperationType = "UPDATE_INGESTION_PIPELINE"
 )
 
 // All allowed values of ActionApprovalOperationType enum
@@ -40,6 +41,7 @@ var AllowedActionApprovalOperationTypeEnumValues = []ActionApprovalOperationType
 	"REMOVE_SNAPSHOT_HOLD",
 	"UPDATE_NOTIFICATION_POLICY",
 	"DELETE_NOTIFICATION_POLICY",
+	"UPDATE_INGESTION_PIPELINE",
 }
 
 func (v *ActionApprovalOperationType) UnmarshalJSON(src []byte) error {

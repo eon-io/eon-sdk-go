@@ -55,6 +55,7 @@ const (
 	GCP_CLOUD_FIRESTORE ResourceType = "GCP_CLOUD_FIRESTORE"
 	GCP_DISK ResourceType = "GCP_DISK"
 	GCP_SAP_HANA_VM ResourceType = "GCP_SAP_HANA_VM"
+	GCP_SQL_VM ResourceType = "GCP_SQL_VM"
 	GCP_CASSANDRA_CLUSTER ResourceType = "GCP_CASSANDRA_CLUSTER"
 	GOOGLE_WORKSPACE_RESOURCE ResourceType = "GOOGLE_WORKSPACE_RESOURCE"
 	MICROSOFT_365_RESOURCE ResourceType = "MICROSOFT_365_RESOURCE"
@@ -98,6 +99,7 @@ var AllowedResourceTypeEnumValues = []ResourceType{
 	"GCP_CLOUD_FIRESTORE",
 	"GCP_DISK",
 	"GCP_SAP_HANA_VM",
+	"GCP_SQL_VM",
 	"GCP_CASSANDRA_CLUSTER",
 	"GOOGLE_WORKSPACE_RESOURCE",
 	"MICROSOFT_365_RESOURCE",
@@ -110,15 +112,10 @@ func (v *ResourceType) UnmarshalJSON(src []byte) error {
 	if err != nil {
 		return err
 	}
-	enumTypeValue := ResourceType(value)
-	for _, existing := range AllowedResourceTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid ResourceType", value)
+	// x-extensible-enum (EON-15210): open set. Accept unknown values instead of failing so a
+	// value added to the server's enum does not break decoding for an already-released client.
+	*v = ResourceType(value)
+	return nil
 }
 
 // NewResourceTypeFromValue returns a pointer to a valid ResourceType
