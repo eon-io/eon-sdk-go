@@ -9588,6 +9588,7 @@ components:
       - GOOGLE_WORKSPACE_RESOURCE
       - MICROSOFT_365_RESOURCE
       - AZURE_ENTRA_ID_RESOURCE
+      - CLAUDE_ENTERPRISE_RESOURCE
     ResourceTypeCondition:
       example:
         resourceTypes:
@@ -9715,6 +9716,7 @@ components:
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
       - AZURE_ENTRA_ID
+      - CLAUDE_ENTERPRISE
     CloudProviderCondition:
       example:
         cloudProviders:
@@ -17245,6 +17247,7 @@ components:
       - GOOGLE_WORKSPACE_BACKUP
       - MICROSOFT_365_BACKUP
       - AZURE_ENTRA_ID_BACKUP
+      - CLAUDE_ENTERPRISE_BACKUP
     BackupJobTypeFilters:
       additionalProperties: false
       example:
