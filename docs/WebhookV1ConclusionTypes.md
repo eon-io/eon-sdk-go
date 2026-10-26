@@ -17,6 +17,8 @@
 
 * `WEBHOOK_V1_CONCLUSION_TYPES_DATA_EXPOSURE_RISK_DETECTED` (value: `6`)
 
+* `WEBHOOK_V1_CONCLUSION_TYPES_VULNERABLE_APPLICATION_DETECTED` (value: `7`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

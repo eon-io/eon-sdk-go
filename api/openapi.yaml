@@ -29831,6 +29831,7 @@ components:
       - MALWARE_DETECTED
       - AI_DATA_RISK_DETECTED
       - DATA_EXPOSURE_RISK_DETECTED
+      - VULNERABLE_APPLICATION_DETECTED
       example: CLEAN
       type: string
       x-extensible-enum: true
@@ -32149,6 +32150,7 @@ components:
         - `4`: `MALWARE_DETECTED`
         - `5`: `AI_DATA_RISK_DETECTED`
         - `6`: `DATA_EXPOSURE_RISK_DETECTED`
+        - `7`: `VULNERABLE_APPLICATION_DETECTED`
       enum:
       - 0
       - 1
@@ -32157,6 +32159,7 @@ components:
       - 4
       - 5
       - 6
+      - 7
       format: int32
       type: integer
       x-enum-varnames:
@@ -32167,6 +32170,7 @@ components:
       - WEBHOOK_V1_CONCLUSION_TYPES_MALWARE_DETECTED
       - WEBHOOK_V1_CONCLUSION_TYPES_AI_DATA_RISK_DETECTED
       - WEBHOOK_V1_CONCLUSION_TYPES_DATA_EXPOSURE_RISK_DETECTED
+      - WEBHOOK_V1_CONCLUSION_TYPES_VULNERABLE_APPLICATION_DETECTED
     WebhookV1SecurityEvidence:
       description: Evidence behind a security scan finding.
       properties:
@@ -32289,6 +32293,7 @@ components:
         - `3`: `DATA_ANOMALY`
         - `4`: `AI_DATA_RISK`
         - `5`: `DATA_EXPOSURE_RISK`
+        - `6`: `VULNERABLE_APPLICATION`
       enum:
       - 0
       - 1
@@ -32296,6 +32301,7 @@ components:
       - 3
       - 4
       - 5
+      - 6
       format: int32
       type: integer
       x-enum-varnames:
@@ -32305,6 +32311,7 @@ components:
       - WEBHOOK_V1_DETECTOR_TYPE_DATA_ANOMALY
       - WEBHOOK_V1_DETECTOR_TYPE_AI_DATA_RISK
       - WEBHOOK_V1_DETECTOR_TYPE_DATA_EXPOSURE_RISK
+      - WEBHOOK_V1_DETECTOR_TYPE_VULNERABLE_APPLICATION
     WebhookV1ReviewerType:
       description: |
         Reviewer of a security scan.

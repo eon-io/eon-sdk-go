@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// WebhookV1ConclusionTypes Conclusion of a security scan. Sent as the integer value; omitted when it's `0`.  - `0`: `UNKNOWN_CONCLUSION` - `1`: `CLEAN` - `2`: `HIGH_CHANCE_FOR_RANSOMWARE` - `3`: `DATA_ANOMALY_DETECTED` - `4`: `MALWARE_DETECTED` - `5`: `AI_DATA_RISK_DETECTED` - `6`: `DATA_EXPOSURE_RISK_DETECTED` 
+// WebhookV1ConclusionTypes Conclusion of a security scan. Sent as the integer value; omitted when it's `0`.  - `0`: `UNKNOWN_CONCLUSION` - `1`: `CLEAN` - `2`: `HIGH_CHANCE_FOR_RANSOMWARE` - `3`: `DATA_ANOMALY_DETECTED` - `4`: `MALWARE_DETECTED` - `5`: `AI_DATA_RISK_DETECTED` - `6`: `DATA_EXPOSURE_RISK_DETECTED` - `7`: `VULNERABLE_APPLICATION_DETECTED` 
 type WebhookV1ConclusionTypes int32
 
 // List of WebhookV1ConclusionTypes
@@ -27,6 +27,7 @@ const (
 	WEBHOOK_V1_CONCLUSION_TYPES_MALWARE_DETECTED WebhookV1ConclusionTypes = 4
 	WEBHOOK_V1_CONCLUSION_TYPES_AI_DATA_RISK_DETECTED WebhookV1ConclusionTypes = 5
 	WEBHOOK_V1_CONCLUSION_TYPES_DATA_EXPOSURE_RISK_DETECTED WebhookV1ConclusionTypes = 6
+	WEBHOOK_V1_CONCLUSION_TYPES_VULNERABLE_APPLICATION_DETECTED WebhookV1ConclusionTypes = 7
 )
 
 // All allowed values of WebhookV1ConclusionTypes enum
@@ -38,6 +39,7 @@ var AllowedWebhookV1ConclusionTypesEnumValues = []WebhookV1ConclusionTypes{
 	4,
 	5,
 	6,
+	7,
 }
 
 func (v *WebhookV1ConclusionTypes) UnmarshalJSON(src []byte) error {

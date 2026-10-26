@@ -26,6 +26,7 @@ const (
 	MALWARE_DETECTED SecurityScanConclusion = "MALWARE_DETECTED"
 	AI_DATA_RISK_DETECTED SecurityScanConclusion = "AI_DATA_RISK_DETECTED"
 	DATA_EXPOSURE_RISK_DETECTED SecurityScanConclusion = "DATA_EXPOSURE_RISK_DETECTED"
+	VULNERABLE_APPLICATION_DETECTED SecurityScanConclusion = "VULNERABLE_APPLICATION_DETECTED"
 )
 
 // All allowed values of SecurityScanConclusion enum
@@ -36,6 +37,7 @@ var AllowedSecurityScanConclusionEnumValues = []SecurityScanConclusion{
 	"MALWARE_DETECTED",
 	"AI_DATA_RISK_DETECTED",
 	"DATA_EXPOSURE_RISK_DETECTED",
+	"VULNERABLE_APPLICATION_DETECTED",
 }
 
 func (v *SecurityScanConclusion) UnmarshalJSON(src []byte) error {

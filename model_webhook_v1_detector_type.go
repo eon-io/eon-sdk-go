@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// WebhookV1DetectorType Detector that produced a security scan. Sent as the integer value; omitted when it's `0`.  - `0`: `UNKNOWN_DETECTOR` - `1`: `MALWARE` - `2`: `RANSOMWARE_BEHAVIOR` - `3`: `DATA_ANOMALY` - `4`: `AI_DATA_RISK` - `5`: `DATA_EXPOSURE_RISK` 
+// WebhookV1DetectorType Detector that produced a security scan. Sent as the integer value; omitted when it's `0`.  - `0`: `UNKNOWN_DETECTOR` - `1`: `MALWARE` - `2`: `RANSOMWARE_BEHAVIOR` - `3`: `DATA_ANOMALY` - `4`: `AI_DATA_RISK` - `5`: `DATA_EXPOSURE_RISK` - `6`: `VULNERABLE_APPLICATION` 
 type WebhookV1DetectorType int32
 
 // List of WebhookV1DetectorType
@@ -26,6 +26,7 @@ const (
 	WEBHOOK_V1_DETECTOR_TYPE_DATA_ANOMALY WebhookV1DetectorType = 3
 	WEBHOOK_V1_DETECTOR_TYPE_AI_DATA_RISK WebhookV1DetectorType = 4
 	WEBHOOK_V1_DETECTOR_TYPE_DATA_EXPOSURE_RISK WebhookV1DetectorType = 5
+	WEBHOOK_V1_DETECTOR_TYPE_VULNERABLE_APPLICATION WebhookV1DetectorType = 6
 )
 
 // All allowed values of WebhookV1DetectorType enum
@@ -36,6 +37,7 @@ var AllowedWebhookV1DetectorTypeEnumValues = []WebhookV1DetectorType{
 	3,
 	4,
 	5,
+	6,
 }
 
 func (v *WebhookV1DetectorType) UnmarshalJSON(src []byte) error {
