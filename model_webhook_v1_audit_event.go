@@ -24,7 +24,7 @@ type WebhookV1AuditEvent struct {
 	// Event type.
 	Type string `json:"type"`
 	// The audit log entry as arbitrary JSON. Its structure isn't part of the webhook contract.
-	Payload interface{} `json:"payload"`
+	Payload map[string]interface{} `json:"payload"`
 }
 
 type _WebhookV1AuditEvent WebhookV1AuditEvent
@@ -33,7 +33,7 @@ type _WebhookV1AuditEvent WebhookV1AuditEvent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookV1AuditEvent(type_ string, payload interface{}) *WebhookV1AuditEvent {
+func NewWebhookV1AuditEvent(type_ string, payload map[string]interface{}) *WebhookV1AuditEvent {
 	this := WebhookV1AuditEvent{}
 	this.Type = type_
 	this.Payload = payload
@@ -73,10 +73,9 @@ func (o *WebhookV1AuditEvent) SetType(v string) {
 }
 
 // GetPayload returns the Payload field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *WebhookV1AuditEvent) GetPayload() interface{} {
+func (o *WebhookV1AuditEvent) GetPayload() map[string]interface{} {
 	if o == nil {
-		var ret interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 
@@ -85,16 +84,15 @@ func (o *WebhookV1AuditEvent) GetPayload() interface{} {
 
 // GetPayloadOk returns a tuple with the Payload field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WebhookV1AuditEvent) GetPayloadOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Payload) {
-		return nil, false
+func (o *WebhookV1AuditEvent) GetPayloadOk() (map[string]interface{}, bool) {
+	if o == nil {
+		return map[string]interface{}{}, false
 	}
-	return &o.Payload, true
+	return o.Payload, true
 }
 
 // SetPayload sets field value
-func (o *WebhookV1AuditEvent) SetPayload(v interface{}) {
+func (o *WebhookV1AuditEvent) SetPayload(v map[string]interface{}) {
 	o.Payload = v
 }
 
@@ -109,9 +107,7 @@ func (o WebhookV1AuditEvent) MarshalJSON() ([]byte, error) {
 func (o WebhookV1AuditEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
-	if o.Payload != nil {
-		toSerialize["payload"] = o.Payload
-	}
+	toSerialize["payload"] = o.Payload
 	return toSerialize, nil
 }
 

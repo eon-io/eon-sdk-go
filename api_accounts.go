@@ -3519,6 +3519,12 @@ type ApiReconnectSourceAccountRequest struct {
 	ApiService *AccountsAPIService
 	projectId string
 	accountId string
+	body *map[string]interface{}
+}
+
+func (r ApiReconnectSourceAccountRequest) Body(body map[string]interface{}) ApiReconnectSourceAccountRequest {
+	r.body = &body
+	return r
 }
 
 func (r ApiReconnectSourceAccountRequest) Execute() (*ReconnectSourceAccountResponse, *http.Response, error) {
@@ -3569,7 +3575,7 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -3584,6 +3590,11 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.body != nil {
+		localVarPostBody = r.body
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

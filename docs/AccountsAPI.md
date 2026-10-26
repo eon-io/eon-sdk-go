@@ -1942,7 +1942,7 @@ Name | Type | Description  | Notes
 
 ## ReconnectSourceAccount
 
-> ReconnectSourceAccountResponse ReconnectSourceAccount(ctx, projectId, accountId).Execute()
+> ReconnectSourceAccountResponse ReconnectSourceAccount(ctx, projectId, accountId).Body(body).Execute()
 
 Reconnect Source Account
 
@@ -1963,10 +1963,11 @@ import (
 func main() {
 	projectId := "cc4fe8ee-0c62-56f2-9fda-f27bc7753e55" // string | ID of the project whose source account you want to reconnect. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	accountId := "72d29280-a0be-59df-b33c-59f9015606c3" // string | Eon-assigned ID of the source account to reconnect.
+	body := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountsAPI.ReconnectSourceAccount(context.Background(), projectId, accountId).Execute()
+	resp, r, err := apiClient.AccountsAPI.ReconnectSourceAccount(context.Background(), projectId, accountId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountsAPI.ReconnectSourceAccount``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1994,6 +1995,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **body** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -2005,7 +2007,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -1887,6 +1887,12 @@ paths:
           format: tobedefined
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReconnectSourceAccountRequest'
+        required: false
       responses:
         "200":
           content:
@@ -9320,6 +9326,18 @@ components:
       - mpaPolicies
       type: object
       x-nullable: true
+    WebhookV1Payload:
+      description: |
+        Body of an outbound webhook notification. Every request carries exactly one of three envelopes:
+
+        - `WebhookV1StandardPayload` for every notification type except audit logs.
+        - `WebhookV1AuditPayload` for `AUDIT_LOG_CREATED`, identified by its top-level `event` object.
+        - `WebhookV1OnboardingPayload` for the one-time confirmation sent when a webhook target is configured, identified by `type` `onboarding`.
+      oneOf:
+      - $ref: '#/components/schemas/WebhookV1StandardPayload'
+      - $ref: '#/components/schemas/WebhookV1AuditPayload'
+      - $ref: '#/components/schemas/WebhookV1OnboardingPayload'
+      x-docs-omit: true
     Severity:
       description: Severity assigned to a control and to the violations it raises.
       enum:
@@ -15007,6 +15025,8 @@ components:
           $ref: '#/components/schemas/SourceAccount'
       required:
       - sourceAccount
+      type: object
+    ReconnectSourceAccountRequest:
       type: object
     ReconnectSourceAccountResponse:
       example:
@@ -31293,6 +31313,21 @@ components:
         actionApprovalRequest:
           $ref: '#/components/schemas/MPARequest'
       type: object
+    WebhookV1NotificationId:
+      description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+      example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+      type: string
+    WebhookV1ProjectId:
+      description: ID of the project the notification belongs to.
+      example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+      type: string
+    WebhookV1Timestamp:
+      description: |
+        Time the notification was created, in RFC 3339 format with second precision.
+        Also sent in the `X-Eon-Timestamp` header.
+      example: 2024-03-04T05:06:07Z
+      format: date-time
+      type: string
     WebhookV1ProtobufTimestamp:
       description: |
         A point in time inside `arguments`, encoded as an object rather than a string: whole seconds since the Unix
@@ -33132,8 +33167,8 @@ components:
       type: object
     WebhookV1StandardPayload:
       description: |
-        Envelope of every webhook notification except audit logs and the onboarding message. `type` determines which
-        members `arguments` carries; each variant lists the types it covers and the members they always carry.
+        Envelope of every event notification. `type` determines which members `arguments` carries; each variant lists
+        the types it covers and the members they always carry.
       discriminator:
         mapping:
           BACKUP_JOB_FAILED: '#/components/schemas/WebhookV1StandardPayloadBackupJobFailed'
@@ -33251,6 +33286,7 @@ components:
         payload:
           description: The audit log entry as arbitrary JSON. Its structure isn't
             part of the webhook contract.
+          type: object
       required:
       - payload
       - type
@@ -33265,6 +33301,17 @@ components:
       required:
       - event
       type: object
+    WebhookV1TargetProjectId:
+      description: ID of the project the webhook target belongs to.
+      example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+      type: string
+    WebhookV1MessageTimestamp:
+      description: |
+        Time the message was sent, in RFC 3339 format with second precision.
+        Also sent in the `X-Eon-Timestamp` header.
+      example: 2024-03-04T05:06:07Z
+      format: date-time
+      type: string
     WebhookV1OnboardingPayload:
       description: |
         Envelope of the message sent once when a webhook notification target is configured, confirming that Eon can
@@ -33298,17 +33345,6 @@ components:
       - timestamp
       - type
       type: object
-    WebhookV1Payload:
-      description: |
-        Body of an outbound webhook notification. Every request carries exactly one of three envelopes:
-
-        - `WebhookV1StandardPayload` for every notification type except audit logs.
-        - `WebhookV1AuditPayload` for `AUDIT_LOG_CREATED`, identified by its top-level `event` object.
-        - `WebhookV1OnboardingPayload` for the one-time confirmation sent when a webhook target is configured, identified by `type` `onboarding`.
-      oneOf:
-      - $ref: '#/components/schemas/WebhookV1StandardPayload'
-      - $ref: '#/components/schemas/WebhookV1AuditPayload'
-      - $ref: '#/components/schemas/WebhookV1OnboardingPayload'
     createVault_409_response:
       example:
         error: error
@@ -33586,14 +33622,15 @@ components:
       scheme: bearer
       type: http
 x-webhooks:
-  notification:
+  notification-event:
     post:
-      operationId: webhookV1Notification
-      summary: Webhook notification
+      operationId: webhookV1NotificationEvent
+      summary: Event Notification
+      x-fern-webhook: true
       description: |
-        Eon sends an HTTP `POST` request with a JSON body to the URL of each webhook notification target when a
-        notification it subscribes to is created. The body is one of three envelopes, described in
-        `WebhookV1Payload`.
+        Eon sends an HTTP `POST` request with a JSON body to the URL of each webhook notification target when an
+        event notification it subscribes to is created. The body is the envelope described in
+        `WebhookV1StandardPayload`, and `type` determines which members `arguments` carries.
 
         The body is plain JSON, not protobuf JSON: property names are exactly as documented here, including the
         mix of camelCase and snake_case inside `arguments`. Enums inside `arguments` are integers, 64-bit integers
@@ -33605,27 +33642,21 @@ x-webhooks:
       parameters:
       - in: header
         name: X-Eon-Notification-Id
-        description: |
-          Notification ID, the same as the body's `id`.
-          Sent with standard notifications only. Omitted for audit logs and for the onboarding message.
+        description: "Notification ID, the same as the body's `id`."
         required: false
         schema:
           type: string
         example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
       - in: header
         name: X-Eon-Notification-Type
-        description: |
-          Notification type, the same as the body's `type`.
-          Sent with standard notifications and the onboarding message. Omitted for audit logs.
+        description: "Notification type, the same as the body's `type`."
         required: false
         schema:
           type: string
         example: BACKUP_JOB_FAILED
       - in: header
         name: X-Eon-Timestamp
-        description: |
-          RFC 3339 timestamp, the same as the body's `timestamp`.
-          Sent with standard notifications and the onboarding message. Omitted for audit logs.
+        description: "RFC 3339 timestamp, the same as the body's `timestamp`."
         required: false
         schema:
           type: string
@@ -33636,7 +33667,7 @@ x-webhooks:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebhookV1Payload'
+              $ref: '#/components/schemas/WebhookV1StandardPayload'
             examples:
               standard:
                 summary: Standard notification
@@ -33688,14 +33719,46 @@ x-webhooks:
                         duration:
                           seconds: 1767
                           nanos: 500000000
-              audit:
-                summary: Audit log
-                value:
-                  event:
-                    type: AUDIT_LOG_CREATED
-                    payload:
-                      id: 0a1b2c3d-4e5f-4a6b-7c8d-9e0f1a2b3c4d
-                      action: DELETE
+      responses:
+        "2XX":
+          description: |
+            The notification was delivered. Respond with any `2xx` status; the response body is ignored. Any other
+            status means the delivery failed.
+  notification-test:
+    post:
+      operationId: webhookV1NotificationTest
+      summary: Test Notification
+      x-fern-webhook: true
+      description: |
+        Eon sends an HTTP `POST` request with a JSON body to the URL of a webhook notification target once, when the
+        target is configured, to confirm that Eon can deliver to it. The body is the envelope described in
+        `WebhookV1OnboardingPayload`.
+      security: []
+      tags:
+      - webhooks
+      parameters:
+      - in: header
+        name: X-Eon-Notification-Type
+        description: "Message type, the same as the body's `type`."
+        required: false
+        schema:
+          type: string
+        example: onboarding
+      - in: header
+        name: X-Eon-Timestamp
+        description: "RFC 3339 timestamp, the same as the body's `timestamp`."
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: 2024-03-04T05:06:07Z
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookV1OnboardingPayload'
+            examples:
               onboarding:
                 summary: Onboarding message
                 value:
@@ -33704,6 +33767,38 @@ x-webhooks:
                     notifications.
                   projectId: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
                   timestamp: 2024-03-04T05:06:07Z
+      responses:
+        "2XX":
+          description: |
+            The message was delivered. Respond with any `2xx` status; the response body is ignored. Any other
+            status means the delivery failed.
+  audit-log:
+    post:
+      operationId: webhookV1AuditLog
+      summary: Audit Log Event
+      x-fern-webhook: true
+      description: |
+        Eon sends an HTTP `POST` request with a JSON body to the URL of each webhook notification target when an
+        audit log entry it subscribes to is created. The body is the envelope described in
+        `WebhookV1AuditPayload`. No `X-Eon-*` headers are sent with it.
+      security: []
+      tags:
+      - webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookV1AuditPayload'
+            examples:
+              audit:
+                summary: Audit log
+                value:
+                  event:
+                    type: AUDIT_LOG_CREATED
+                    payload:
+                      id: 0a1b2c3d-4e5f-4a6b-7c8d-9e0f1a2b3c4d
+                      action: DELETE
       responses:
         "2XX":
           description: |
