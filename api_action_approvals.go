@@ -476,17 +476,6 @@ func (a *ActionApprovalsAPIService) CreateActionApprovalRuleExecute(r ApiCreateA
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -933,15 +922,9 @@ type ApiListActionApprovalRulesRequest struct {
 	ctx context.Context
 	ApiService *ActionApprovalsAPIService
 	projectId string
-	operation *ActionApprovalOperationType
 	pageToken *string
 	pageSize *int32
-}
-
-// Filter rules by the action they protect.
-func (r ApiListActionApprovalRulesRequest) Operation(operation ActionApprovalOperationType) ApiListActionApprovalRulesRequest {
-	r.operation = &operation
-	return r
+	listActionApprovalRulesRequest *ListActionApprovalRulesRequest
 }
 
 // Cursor that points to the first rule on the next page. Get this value from the previous response. 
@@ -956,6 +939,11 @@ func (r ApiListActionApprovalRulesRequest) PageSize(pageSize int32) ApiListActio
 	return r
 }
 
+func (r ApiListActionApprovalRulesRequest) ListActionApprovalRulesRequest(listActionApprovalRulesRequest ListActionApprovalRulesRequest) ApiListActionApprovalRulesRequest {
+	r.listActionApprovalRulesRequest = &listActionApprovalRulesRequest
+	return r
+}
+
 func (r ApiListActionApprovalRulesRequest) Execute() (*ListActionApprovalRulesResponse, *http.Response, error) {
 	return r.ApiService.ListActionApprovalRulesExecute(r)
 }
@@ -964,6 +952,8 @@ func (r ApiListActionApprovalRulesRequest) Execute() (*ListActionApprovalRulesRe
 ListActionApprovalRules List Action Approval Rules
 
 Description: Retrieves the action approval rules in a project.
+Use `pageToken` and `pageSize` for pagination. Pass filters in the request body.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
@@ -981,13 +971,189 @@ func (a *ActionApprovalsAPIService) ListActionApprovalRules(ctx context.Context,
 //  @return ListActionApprovalRulesResponse
 func (a *ActionApprovalsAPIService) ListActionApprovalRulesExecute(r ApiListActionApprovalRulesRequest) (*ListActionApprovalRulesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *ListActionApprovalRulesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionApprovalsAPIService.ListActionApprovalRules")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/action-approvals/rules/list"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
+	} else {
+		var defaultValue int32 = 50
+		r.pageSize = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listActionApprovalRulesRequest != nil {
+		localVarPostBody = r.listActionApprovalRulesRequest
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListActionApprovalRulesDeprecatedRequest struct {
+	ctx context.Context
+	ApiService *ActionApprovalsAPIService
+	projectId string
+	operation *ActionApprovalOperationType
+	pageToken *string
+	pageSize *int32
+}
+
+// Filter rules by the action they protect.
+func (r ApiListActionApprovalRulesDeprecatedRequest) Operation(operation ActionApprovalOperationType) ApiListActionApprovalRulesDeprecatedRequest {
+	r.operation = &operation
+	return r
+}
+
+// Cursor that points to the first rule on the next page. Get this value from the previous response. 
+func (r ApiListActionApprovalRulesDeprecatedRequest) PageToken(pageToken string) ApiListActionApprovalRulesDeprecatedRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// Maximum number of rules to return.
+func (r ApiListActionApprovalRulesDeprecatedRequest) PageSize(pageSize int32) ApiListActionApprovalRulesDeprecatedRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiListActionApprovalRulesDeprecatedRequest) Execute() (*ListActionApprovalRulesResponse, *http.Response, error) {
+	return r.ApiService.ListActionApprovalRulesDeprecatedExecute(r)
+}
+
+/*
+ListActionApprovalRulesDeprecated List Action Approval Rules (Deprecated)
+
+Description: Retrieves the action approval rules in a project.
+
+Deprecated: use `POST /v1/projects/{projectId}/action-approvals/rules/list` (`listActionApprovalRules`) instead.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @return ApiListActionApprovalRulesDeprecatedRequest
+
+Deprecated
+*/
+func (a *ActionApprovalsAPIService) ListActionApprovalRulesDeprecated(ctx context.Context, projectId string) ApiListActionApprovalRulesDeprecatedRequest {
+	return ApiListActionApprovalRulesDeprecatedRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+	}
+}
+
+// Execute executes the request
+//  @return ListActionApprovalRulesResponse
+// Deprecated
+func (a *ActionApprovalsAPIService) ListActionApprovalRulesDeprecatedExecute(r ApiListActionApprovalRulesDeprecatedRequest) (*ListActionApprovalRulesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListActionApprovalRulesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionApprovalsAPIService.ListActionApprovalRulesDeprecated")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1139,13 +1305,192 @@ func (a *ActionApprovalsAPIService) UpdateActionApprovalRule(ctx context.Context
 //  @return UpdateActionApprovalRuleResponse
 func (a *ActionApprovalsAPIService) UpdateActionApprovalRuleExecute(r ApiUpdateActionApprovalRuleRequest) (*UpdateActionApprovalRuleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *UpdateActionApprovalRuleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionApprovalsAPIService.UpdateActionApprovalRule")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"actionApprovalRuleId"+"}", url.PathEscape(parameterValueToString(r.actionApprovalRuleId, "actionApprovalRuleId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateActionApprovalRuleRequest == nil {
+		return localVarReturnValue, nil, reportError("updateActionApprovalRuleRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateActionApprovalRuleRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode >= 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateActionApprovalRuleDeprecatedRequest struct {
+	ctx context.Context
+	ApiService *ActionApprovalsAPIService
+	projectId string
+	actionApprovalRuleId string
+	updateActionApprovalRuleRequest *UpdateActionApprovalRuleRequest
+}
+
+// Fields to update on the action approval rule.
+func (r ApiUpdateActionApprovalRuleDeprecatedRequest) UpdateActionApprovalRuleRequest(updateActionApprovalRuleRequest UpdateActionApprovalRuleRequest) ApiUpdateActionApprovalRuleDeprecatedRequest {
+	r.updateActionApprovalRuleRequest = &updateActionApprovalRuleRequest
+	return r
+}
+
+func (r ApiUpdateActionApprovalRuleDeprecatedRequest) Execute() (*UpdateActionApprovalRuleResponse, *http.Response, error) {
+	return r.ApiService.UpdateActionApprovalRuleDeprecatedExecute(r)
+}
+
+/*
+UpdateActionApprovalRuleDeprecated Update Action Approval Rule (Deprecated)
+
+Description: Updates an action approval rule. Only fields included in the request are changed.
+
+Deprecated: use `PATCH /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId}` (`updateActionApprovalRule`) instead.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param actionApprovalRuleId Action approval rule ID.
+ @return ApiUpdateActionApprovalRuleDeprecatedRequest
+
+Deprecated
+*/
+func (a *ActionApprovalsAPIService) UpdateActionApprovalRuleDeprecated(ctx context.Context, projectId string, actionApprovalRuleId string) ApiUpdateActionApprovalRuleDeprecatedRequest {
+	return ApiUpdateActionApprovalRuleDeprecatedRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		actionApprovalRuleId: actionApprovalRuleId,
+	}
+}
+
+// Execute executes the request
+//  @return UpdateActionApprovalRuleResponse
+// Deprecated
+func (a *ActionApprovalsAPIService) UpdateActionApprovalRuleDeprecatedExecute(r ApiUpdateActionApprovalRuleDeprecatedRequest) (*UpdateActionApprovalRuleResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateActionApprovalRuleResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionApprovalsAPIService.UpdateActionApprovalRuleDeprecated")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

@@ -782,6 +782,460 @@ paths:
       x-data-access:
         excluded: true
       x-internal: false
+  /projects/{projectId}/restore-accounts/{accountId}/aws/s3-buckets:
+    get:
+      description: "Description: Lists S3 buckets available to the restore account."
+      operationId: listS3Buckets
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3Buckets'
+          description: Successful operation
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List S3 Buckets
+      tags:
+      - listS3Buckets
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore
+      x-audit-log:
+        excluded: true
+  /projects/{projectId}/restore-accounts/{accountId}/regions/{region}/encryption-keys:
+    get:
+      description: "Description: Lists encryption keys available to the restore account\
+        \ in the specified region."
+      operationId: listEncryptionKeys
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Region
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          format: tobedefined
+          type: string
+        style: simple
+      - description: Whether to include AWS managed keys in the response
+        explode: true
+        in: query
+        name: includeAwsManagedKeys
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeys'
+          description: Successful operation
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Encryption Keys
+      tags:
+      - listEncryptionKeys
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore
+      x-audit-log:
+        excluded: true
+  /projects/{projectId}/restore-accounts/{accountId}/regions/{region}/aws-security-groups:
+    get:
+      description: "Description: Lists security groups available to the restore account\
+        \ in the specified region."
+      operationId: listAwsSecurityGroups
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Optional VPC ID to filter security groups by
+        explode: true
+        in: query
+        name: vpcId
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Optional subnet ID to filter security groups by
+        explode: true
+        in: query
+        name: subnetId
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The region to get availability zones for
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          format: tobedefined
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreSecurityGroups'
+          description: Discovery Invoked
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Security Groups
+      tags:
+      - listAwsSecurityGroups
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore
+      x-audit-log:
+        excluded: true
+  /projects/{projectId}/restore-accounts/{accountId}/regions/{region}/aws-subnets-v2:
+    get:
+      description: "Description: Lists restore-account subnets and their associated\
+        \ VPCs in the specified region."
+      operationId: listAwsSubnetsV2
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The region to get subnets for
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          format: tobedefined
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSubnetsResponseV2'
+          description: The region subnets information
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Subnets
+      tags:
+      - listAwsSubnetsV2
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore
+      x-audit-log:
+        excluded: true
+  /projects/{projectId}/restore-accounts/{accountId}/regions/{region}/aws-vpcs:
+    get:
+      description: "Description: Lists VPCs available to the restore account in the\
+        \ specified region."
+      operationId: listAwsVpcs
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The region to get VPCs for
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          format: tobedefined
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAwsVpcsResponse'
+          description: The region VPCs
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List VPCs
+      tags:
+      - listAwsVpcs
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore
+      x-audit-log:
+        excluded: true
+  /projects/{projectId}/restore-accounts/{accountId}/regions/{region}/aws-instance-types:
+    get:
+      description: "Description: Lists EC2 instance types available for restore in\
+        \ the specified subnet and region."
+      operationId: listAwsInstanceTypes
+      parameters:
+      - description: The project ID
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The subnet ID to get instance types for
+        explode: true
+        in: query
+        name: subnetId
+        required: true
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: |
+          Number of guest volumes the operator plans to restore. Used to
+          size the host-memory reserve for instant-restore host
+          selection. Optional; the server uses a default when absent.
+        explode: true
+        in: query
+        name: volumeCount
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: |
+          Sum of guest-volume sizes in bytes. Used to size the
+          host-memory reserve (mmap working-set term). Optional; the
+          server uses a default when absent.
+        explode: true
+        in: query
+        name: totalVolumeBytes
+        required: false
+        schema:
+          format: int64
+          minimum: 0
+          type: integer
+        style: form
+      - description: ID of the restore account
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The region to get instance types for
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          format: tobedefined
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstanceTypesResponse'
+          description: The subnet instance types
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Instance Types
+      tags:
+      - listAwsInstanceTypes
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - read:restore
+      x-audit-log:
+        excluded: true
   /v1/permissions:
     get:
       description: "Description: Retrieves a list of user permissions."
@@ -4173,6 +4627,141 @@ paths:
         - entityType: resource
           in: path
           key: id
+  /v1/projects/{projectId}/inventory/restore-templates:
+    post:
+      description: "Description: Creates a restore template in the specified project."
+      operationId: createRestoreTemplate
+      parameters:
+      - description: |
+          ID of the project you want to create a restore template in.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRestoreTemplateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRestoreTemplateResponse'
+          description: Restore template created.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Create Restore Template
+      tags:
+      - restoreTemplates
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:restore_templates
+      x-audit-log:
+        action: create
+        entityRefs:
+        - entityType: restore_template
+          in: resBody
+          key: restoreTemplate.id
+  /v1/projects/{projectId}/restore-template/{restoreTemplateId}/bulk-attach:
+    post:
+      description: |
+        Description: Attaches a restore template to multiple cloud resources in one call.
+        Existing template assignments are overwritten unconditionally.
+      operationId: bulkAttachRestoreTemplate
+      parameters:
+      - description: |
+          ID of the project the resources belong to.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: ID of the restore template to attach to the resources.
+        example: de308488-df3d-5b82-8f37-477ef529f491
+        explode: false
+        in: path
+        name: restoreTemplateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkAttachRestoreTemplateRequest'
+        required: true
+      responses:
+        "204":
+          description: Operation completed successfully.
+        "400":
+          description: "Invalid request. For example, the template type is incompatible\
+            \ with a resource type."
+        "404":
+          description: Restore template not found.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Bulk Attach Restore Template
+      tags:
+      - restoreTemplates
+      x-mcp: true
+      x-internal: false
+      x-data-access:
+        excluded: true
+      x-permissions:
+      - admin:restore_templates
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: restore_template
+          in: path
+          key: restoreTemplateId
   /v1/projects/{projectId}/backup-policies:
     post:
       description: "Description: Creates a backup policy."
@@ -8623,8 +9212,12 @@ paths:
         excluded: true
   /v1/projects/{projectId}/action-approvals/rules:
     get:
-      description: "Description: Retrieves the action approval rules in a project."
-      operationId: listActionApprovalRules
+      deprecated: true
+      description: |
+        Description: Retrieves the action approval rules in a project.
+
+        Deprecated: use `POST /v1/projects/{projectId}/action-approvals/rules/list` (`listActionApprovalRules`) instead.
+      operationId: listActionApprovalRules_deprecated
       parameters:
       - description: |
           ID of the project whose action approval rules you want to retrieve.
@@ -8698,7 +9291,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Internal Server Error
-      summary: List Action Approval Rules
+      summary: List Action Approval Rules (Deprecated)
       tags:
       - actionApprovals
       x-permissions:
@@ -8708,6 +9301,7 @@ paths:
       x-data-access:
         excluded: true
       x-internal: false
+      x-docs-omit: true
     post:
       description: "Description: Creates an action approval rule in a project."
       operationId: createActionApprovalRule
@@ -8744,12 +9338,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid action approval rule configuration.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: An action approval rule conflicts with the requested rule.
         "1XX":
           description: Informational
         "3XX":
@@ -8777,6 +9365,93 @@ paths:
         - entityType: mpa_policy
           in: resBody
           key: actionApprovalRule.id
+      x-data-access:
+        excluded: true
+      x-internal: false
+  /v1/projects/{projectId}/action-approvals/rules/list:
+    post:
+      description: |
+        Description: Retrieves the action approval rules in a project.
+        Use `pageToken` and `pageSize` for pagination. Pass filters in the request body.
+      operationId: listActionApprovalRules
+      parameters:
+      - description: |
+          ID of the project whose action approval rules you want to retrieve.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - allowEmptyValue: true
+        description: |
+          Cursor that points to the first rule on the next page.
+          Get this value from the previous response.
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          format: tobedefined
+          type: string
+        style: form
+      - description: Maximum number of rules to return.
+        example: 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          minimum: 1
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListActionApprovalRulesRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListActionApprovalRulesResponse'
+          description: Action approval rules retrieved.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid pagination parameters or operation filter.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: List Action Approval Rules
+      tags:
+      - actionApprovals
+      x-permissions:
+      - read:action_approval_rules
+      x-audit-log:
+        excluded: true
       x-data-access:
         excluded: true
       x-internal: false
@@ -8909,7 +9584,7 @@ paths:
       x-data-access:
         excluded: true
       x-internal: false
-    put:
+    patch:
       description: |
         Description: Updates an action approval rule. Only fields included in the request are changed.
       operationId: updateActionApprovalRule
@@ -8997,6 +9672,98 @@ paths:
       x-data-access:
         excluded: true
       x-internal: false
+    put:
+      deprecated: true
+      description: |
+        Description: Updates an action approval rule. Only fields included in the request are changed.
+
+        Deprecated: use `PATCH /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId}` (`updateActionApprovalRule`) instead.
+      operationId: updateActionApprovalRule_deprecated
+      parameters:
+      - description: |
+          ID of the project that contains the action approval rule.
+          You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.
+        example: 733888d8-2573-5f9a-b81d-21f051d24fda
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Action approval rule ID.
+        explode: false
+        in: path
+        name: actionApprovalRuleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateActionApprovalRuleRequest'
+        description: Fields to update on the action approval rule.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateActionApprovalRuleResponse'
+          description: Action approval rule updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid action approval rule configuration.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action approval rule wasn't found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The updated action approval rule conflicts with another rule.
+        "1XX":
+          description: Informational
+        "3XX":
+          description: Redirect
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client Error
+        "5XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      summary: Update Action Approval Rule (Deprecated)
+      tags:
+      - actionApprovals
+      x-permissions:
+      - update:action_approval_rules
+      x-audit-log:
+        action: update
+        entityRefs:
+        - entityType: mpa_policy
+          in: path
+          key: actionApprovalRuleId
+      x-data-access:
+        excluded: true
+      x-internal: false
+      x-docs-omit: true
   /v1/projects/{projectId}/action-approvals/my-requests/{requestId}:
     get:
       description: "Description: Retrieves an action request that was created using\
@@ -11259,6 +12026,156 @@ components:
           $ref: '#/components/schemas/FindingExclusion'
       required:
       - findingExclusion
+      type: object
+    S3Bucket:
+      example:
+        bucketName: bucketName
+        regionName: regionName
+      properties:
+        bucketName:
+          description: The name of the bucket
+          type: string
+        regionName:
+          description: The region name where bucket is located
+          type: string
+      required:
+      - bucketName
+      - regionName
+      type: object
+    S3Buckets:
+      example:
+        buckets:
+        - bucketName: bucketName
+          regionName: regionName
+        - bucketName: bucketName
+          regionName: regionName
+      properties:
+        buckets:
+          items:
+            $ref: '#/components/schemas/S3Bucket'
+          type: array
+      required:
+      - buckets
+      type: object
+    EncryptionKey:
+      example:
+        aliasName: aliasName
+        id: id
+        arn: arn
+      properties:
+        id:
+          description: The ID of the encryption key
+          type: string
+        arn:
+          description: The full name of the encryption key
+          type: string
+        aliasName:
+          description: The alias name of the encryption key
+          type: string
+      required:
+      - aliasName
+      - arn
+      - id
+      type: object
+    EncryptionKeys:
+      example:
+        keys:
+        - aliasName: aliasName
+          id: id
+          arn: arn
+        - aliasName: aliasName
+          id: id
+          arn: arn
+      properties:
+        keys:
+          items:
+            $ref: '#/components/schemas/EncryptionKey'
+          type: array
+      required:
+      - keys
+      type: object
+    RestoreSecurityGroups:
+      example:
+        securityGroups:
+        - name: name
+          vpc: vpc
+          id: id
+        - name: name
+          vpc: vpc
+          id: id
+        region: region
+      properties:
+        region:
+          description: The region to restore
+          type: string
+        securityGroups:
+          description: The available zones for the region
+          items:
+            $ref: '#/components/schemas/RestoreSecurityGroups_securityGroups_inner'
+          type: array
+      required:
+      - region
+      - securityGroups
+      type: object
+    ListSubnetsResponseV2:
+      example:
+        subnets:
+        - cidrBlock: cidrBlock
+          vpc: vpc
+          name: name
+          id: id
+          availabilityZone: availabilityZone
+        - cidrBlock: cidrBlock
+          vpc: vpc
+          name: name
+          id: id
+          availabilityZone: availabilityZone
+      properties:
+        subnets:
+          description: The available zones for the region
+          items:
+            $ref: '#/components/schemas/ListSubnetsResponseV2_subnets_inner'
+          type: array
+      required:
+      - subnets
+      type: object
+    ListAwsVpcsResponse:
+      example:
+        vpcs:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        vpcs:
+          description: The available VPCs for the region
+          items:
+            $ref: '#/components/schemas/ListAwsVpcsResponse_vpcs_inner'
+          type: array
+      required:
+      - vpcs
+      type: object
+    ListInstanceTypesResponse:
+      example:
+        instanceTypes:
+        - instanceTypes
+        - instanceTypes
+        instantRestoreMapping:
+          key: instantRestoreMapping
+      properties:
+        instanceTypes:
+          description: The instance types list
+          items:
+            type: string
+          type: array
+        instantRestoreMapping:
+          additionalProperties:
+            type: string
+          description: |
+            Map from post-promotion instance type → instant-restore host
+            instance type. Keys present in `instanceTypes` but absent from
+            this map have no instant-restore option in this AZ.
+          type: object
       type: object
     PermissionType:
       description: User permission.
@@ -18016,6 +18933,7 @@ components:
       - AWS_EBS_SNAPSHOT_CONVERT
       - AWS_DYNAMO_DB_RESTORE_TO_S3
       - AZURE_POSTGRESQL_RECORD_RESTORE
+      - AZURE_POSTGRESQL_SERVER_RESTORE
       - AZURE_SAP_HANA_VM_INSTANCE_RESTORE
       - AWS_DOCUMENTDB_RESTORE
       - AWS_NEPTUNE_RESTORE
@@ -18757,6 +19675,316 @@ components:
       required:
       - objectStoreScanMethod
       type: object
+    RestoreTemplateResourceType:
+      description: The resource type the restore template applies to.
+      enum:
+      - RESTORE_TEMPLATE_RESOURCE_TYPE_UNSPECIFIED
+      - EC2_INSTANCE
+      - S3_BUCKET
+      example: EC2_INSTANCE
+      type: string
+      x-enum-varnames:
+      - RESTORE_TEMPLATE_RESOURCE_TYPE_UNSPECIFIED
+      - RESTORE_TEMPLATE_RESOURCE_TYPE_EC2_INSTANCE
+      - RESTORE_TEMPLATE_RESOURCE_TYPE_S3_BUCKET
+    Ec2TemplateParams:
+      example:
+        subnetId: subnet-0123456789abcdef0
+        additionalTags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        targetAccountId: acc-0123456789abcdef0
+        nameTemplate: "{original_name}-restored"
+        startAfterRestore: false
+        inheritInstanceType: false
+        securityGroupIds:
+        - sg-0123456789abcdef0
+        kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+        instanceType: t3.medium
+        keepOriginalTags: true
+        targetRegion: us-east-1
+      properties:
+        subnetId:
+          description: Target subnet ID for the restored EC2 instance.
+          example: subnet-0123456789abcdef0
+          type: string
+        securityGroupIds:
+          description: Security group IDs to attach to the restored EC2 instance.
+          example:
+          - sg-0123456789abcdef0
+          items:
+            type: string
+          type: array
+        instanceType:
+          description: |
+            EC2 instance type for the restored instance. Required unless inheritInstanceType is true, and must be
+            empty when it is.
+          example: t3.medium
+          type: string
+        inheritInstanceType:
+          default: false
+          description: |
+            Restore each instance with the instance type recorded in its own snapshot instead of instanceType. The
+            template's subnet must be in an availability zone that offers that type.
+          example: false
+          type: boolean
+        kmsKeyArn:
+          description: ARN of the KMS key to use for encrypting the restored instance.
+          example: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+          type: string
+        keepOriginalTags:
+          default: true
+          description: Whether to keep the original tags from the source resource.
+          example: true
+          type: boolean
+        additionalTags:
+          description: Additional tags to apply to the restored EC2 instance.
+          items:
+            $ref: '#/components/schemas/Ec2TemplateParams_additionalTags_inner'
+          type: array
+        nameTemplate:
+          description: Template for naming the restored EC2 instance.
+          example: "{original_name}-restored"
+          type: string
+        startAfterRestore:
+          description: Whether to start the restored EC2 instance after restoration.
+          example: false
+          type: boolean
+        targetAccountId:
+          description: ID of the target cloud account for the restore.
+          example: acc-0123456789abcdef0
+          type: string
+        targetRegion:
+          description: Target region for the restore.
+          example: us-east-1
+          type: string
+      required:
+      - keepOriginalTags
+      - nameTemplate
+      - startAfterRestore
+      - subnetId
+      - targetAccountId
+      - targetRegion
+      type: object
+      x-nullable: true
+    S3TemplateParams:
+      example:
+        targetAccountId: acc-0123456789abcdef0
+        prefixTemplate: "restored/{original_prefix}"
+        kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+        targetBucketId: my-restore-bucket
+        targetRegion: us-east-1
+      properties:
+        targetBucketId:
+          description: ID of the target S3 bucket for the restore.
+          example: my-restore-bucket
+          type: string
+        prefixTemplate:
+          description: Template for the prefix to use when restoring objects.
+          example: "restored/{original_prefix}"
+          type: string
+        targetAccountId:
+          description: ID of the target cloud account for the restore.
+          example: acc-0123456789abcdef0
+          type: string
+        targetRegion:
+          description: Target region for the restore.
+          example: us-east-1
+          type: string
+        kmsKeyArn:
+          description: |
+            ARN of a customer-managed KMS key in the target account and region. It encrypts the restore's temporary
+            secrets in the restore account: the vault access secret and the container-registry token. Restored objects
+            use the target bucket's default encryption. AWS-managed keys aren't accepted.
+          example: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+          type: string
+      required:
+      - prefixTemplate
+      - targetAccountId
+      - targetBucketId
+      - targetRegion
+      type: object
+      x-nullable: true
+    CreateRestoreTemplateRequest:
+      example:
+        ec2Params:
+          subnetId: subnet-0123456789abcdef0
+          additionalTags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          targetAccountId: acc-0123456789abcdef0
+          nameTemplate: "{original_name}-restored"
+          startAfterRestore: false
+          inheritInstanceType: false
+          securityGroupIds:
+          - sg-0123456789abcdef0
+          kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+          instanceType: t3.medium
+          keepOriginalTags: true
+          targetRegion: us-east-1
+        s3Params:
+          targetAccountId: acc-0123456789abcdef0
+          prefixTemplate: "restored/{original_prefix}"
+          kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+          targetBucketId: my-restore-bucket
+          targetRegion: us-east-1
+        name: EC2 production restore template
+        description: Used for restoring production EC2 instances
+        resourceType: EC2_INSTANCE
+      properties:
+        name:
+          description: Restore template display name.
+          example: EC2 production restore template
+          type: string
+        description:
+          description: Optional description of the restore template.
+          example: Used for restoring production EC2 instances
+          type: string
+        resourceType:
+          $ref: '#/components/schemas/RestoreTemplateResourceType'
+        ec2Params:
+          $ref: '#/components/schemas/Ec2TemplateParams'
+        s3Params:
+          $ref: '#/components/schemas/S3TemplateParams'
+      required:
+      - name
+      - resourceType
+      type: object
+    RestoreTemplate:
+      example:
+        ec2Params:
+          subnetId: subnet-0123456789abcdef0
+          additionalTags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          targetAccountId: acc-0123456789abcdef0
+          nameTemplate: "{original_name}-restored"
+          startAfterRestore: false
+          inheritInstanceType: false
+          securityGroupIds:
+          - sg-0123456789abcdef0
+          kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+          instanceType: t3.medium
+          keepOriginalTags: true
+          targetRegion: us-east-1
+        createdAt: 2024-01-15T10:30:00Z
+        s3Params:
+          targetAccountId: acc-0123456789abcdef0
+          prefixTemplate: "restored/{original_prefix}"
+          kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+          targetBucketId: my-restore-bucket
+          targetRegion: us-east-1
+        name: EC2 production restore template
+        description: Used for restoring production EC2 instances
+        id: de308488-df3d-5b82-8f37-477ef529f491
+        attachedResourceCount: 3
+        resourceType: EC2_INSTANCE
+        updatedAt: 2024-01-16T14:20:00Z
+      properties:
+        id:
+          description: Restore template ID.
+          example: de308488-df3d-5b82-8f37-477ef529f491
+          format: uuid
+          type: string
+        name:
+          description: Restore template display name.
+          example: EC2 production restore template
+          type: string
+        description:
+          description: Optional description of the restore template.
+          example: Used for restoring production EC2 instances
+          type: string
+        resourceType:
+          $ref: '#/components/schemas/RestoreTemplateResourceType'
+        ec2Params:
+          $ref: '#/components/schemas/Ec2TemplateParams'
+        s3Params:
+          $ref: '#/components/schemas/S3TemplateParams'
+        attachedResourceCount:
+          description: Number of resources currently using this restore template.
+          example: 3
+          type: integer
+        createdAt:
+          description: Timestamp when the restore template was created.
+          example: 2024-01-15T10:30:00Z
+          format: date-time
+          type: string
+        updatedAt:
+          description: Timestamp when the restore template was last updated.
+          example: 2024-01-16T14:20:00Z
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
+      - resourceType
+      type: object
+      x-nullable: true
+    CreateRestoreTemplateResponse:
+      example:
+        restoreTemplate:
+          ec2Params:
+            subnetId: subnet-0123456789abcdef0
+            additionalTags:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            targetAccountId: acc-0123456789abcdef0
+            nameTemplate: "{original_name}-restored"
+            startAfterRestore: false
+            inheritInstanceType: false
+            securityGroupIds:
+            - sg-0123456789abcdef0
+            kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+            instanceType: t3.medium
+            keepOriginalTags: true
+            targetRegion: us-east-1
+          createdAt: 2024-01-15T10:30:00Z
+          s3Params:
+            targetAccountId: acc-0123456789abcdef0
+            prefixTemplate: "restored/{original_prefix}"
+            kmsKeyArn: arn:aws:kms:us-east-1:123456789012:key/mrk-abc123
+            targetBucketId: my-restore-bucket
+            targetRegion: us-east-1
+          name: EC2 production restore template
+          description: Used for restoring production EC2 instances
+          id: de308488-df3d-5b82-8f37-477ef529f491
+          attachedResourceCount: 3
+          resourceType: EC2_INSTANCE
+          updatedAt: 2024-01-16T14:20:00Z
+      properties:
+        restoreTemplate:
+          $ref: '#/components/schemas/RestoreTemplate'
+      required:
+      - restoreTemplate
+      type: object
+    BulkAttachRestoreTemplateRequest:
+      example:
+        resourceIds:
+        - 043090df-9fe5-4f89-9859-45db589c2936
+        - 7b3d5a2e-1c4f-4a8b-b9e0-2f1d3c5e7a8b
+      properties:
+        resourceIds:
+          description: List of resource IDs to attach the restore template to.
+          example:
+          - 043090df-9fe5-4f89-9859-45db589c2936
+          - 7b3d5a2e-1c4f-4a8b-b9e0-2f1d3c5e7a8b
+          items:
+            format: uuid
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - resourceIds
+      type: object
+      x-internal: false
     BackupPolicyExpression:
       description: |
         Conditional expression to evaulate to determine which resources are to included in the backup policy.
@@ -28542,7 +29770,6 @@ components:
       - id
       - resourceId
       - status
-      - vaultStorageTier
       type: object
     GetSnapshotResponse:
       example:
@@ -30675,6 +31902,15 @@ components:
           $ref: '#/components/schemas/ActionApprovalRule'
       required:
       - actionApprovalRule
+      type: object
+    ListActionApprovalRulesRequest:
+      additionalProperties: false
+      example:
+        filters:
+          operation: DELETE_BACKUP_POLICY
+      properties:
+        filters:
+          $ref: '#/components/schemas/ListActionApprovalRulesRequest_filters'
       type: object
     GetActionApprovalRuleResponse:
       description: Response containing the requested action approval rule.
@@ -33367,6 +34603,87 @@ components:
           example: start time should be at least 24 hours before end time
           format: tobedefined
           type: string
+      type: object
+    RestoreSecurityGroups_securityGroups_inner:
+      example:
+        name: name
+        vpc: vpc
+        id: id
+      properties:
+        name:
+          description: Then name of the security group
+          type: string
+        id:
+          description: The id of the security group
+          type: string
+        vpc:
+          description: The vpc id of the security group
+          type: string
+      required:
+      - id
+      - name
+      - vpc
+      type: object
+    ListSubnetsResponseV2_subnets_inner:
+      example:
+        cidrBlock: cidrBlock
+        vpc: vpc
+        name: name
+        id: id
+        availabilityZone: availabilityZone
+      properties:
+        id:
+          description: The id of the subnet
+          type: string
+        vpc:
+          description: The vpc id of the subnet
+          type: string
+        availabilityZone:
+          description: The availability zone of the subnet
+          type: string
+        name:
+          description: The name of the subnet
+          type: string
+        cidrBlock:
+          description: The primary IPv4 CIDR range of the subnet (e.g. "10.0.0.0/24")
+          type: string
+      required:
+      - availabilityZone
+      - id
+      - vpc
+      type: object
+    ListAwsVpcsResponse_vpcs_inner:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: The id of the VPC
+          type: string
+        name:
+          description: The name of the VPC
+          type: string
+      required:
+      - id
+      type: object
+    Ec2TemplateParams_additionalTags_inner:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    ListActionApprovalRulesRequest_filters:
+      additionalProperties: false
+      description: Optional filters. Omitted properties are not applied.
+      example:
+        operation: DELETE_BACKUP_POLICY
+      properties:
+        operation:
+          $ref: '#/components/schemas/ActionApprovalOperationType'
       type: object
     WebhookV1StandardPayloadBackupJobFailed_arguments:
       description: |

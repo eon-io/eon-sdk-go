@@ -10,8 +10,10 @@ Method | HTTP request | Description
 [**DeleteActionApprovalRule**](ActionApprovalsAPI.md#DeleteActionApprovalRule) | **Delete** /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId} | Delete Action Approval Rule
 [**GetActionApprovalRule**](ActionApprovalsAPI.md#GetActionApprovalRule) | **Get** /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId} | Get Action Approval Rule
 [**GetMyActionApprovalRequest**](ActionApprovalsAPI.md#GetMyActionApprovalRequest) | **Get** /v1/projects/{projectId}/action-approvals/my-requests/{requestId} | Get My Action Request
-[**ListActionApprovalRules**](ActionApprovalsAPI.md#ListActionApprovalRules) | **Get** /v1/projects/{projectId}/action-approvals/rules | List Action Approval Rules
-[**UpdateActionApprovalRule**](ActionApprovalsAPI.md#UpdateActionApprovalRule) | **Put** /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId} | Update Action Approval Rule
+[**ListActionApprovalRules**](ActionApprovalsAPI.md#ListActionApprovalRules) | **Post** /v1/projects/{projectId}/action-approvals/rules/list | List Action Approval Rules
+[**ListActionApprovalRulesDeprecated**](ActionApprovalsAPI.md#ListActionApprovalRulesDeprecated) | **Get** /v1/projects/{projectId}/action-approvals/rules | List Action Approval Rules (Deprecated)
+[**UpdateActionApprovalRule**](ActionApprovalsAPI.md#UpdateActionApprovalRule) | **Patch** /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId} | Update Action Approval Rule
+[**UpdateActionApprovalRuleDeprecated**](ActionApprovalsAPI.md#UpdateActionApprovalRuleDeprecated) | **Put** /v1/projects/{projectId}/action-approvals/rules/{actionApprovalRuleId} | Update Action Approval Rule (Deprecated)
 
 
 
@@ -454,9 +456,85 @@ Name | Type | Description  | Notes
 
 ## ListActionApprovalRules
 
-> ListActionApprovalRulesResponse ListActionApprovalRules(ctx, projectId).Operation(operation).PageToken(pageToken).PageSize(pageSize).Execute()
+> ListActionApprovalRulesResponse ListActionApprovalRules(ctx, projectId).PageToken(pageToken).PageSize(pageSize).ListActionApprovalRulesRequest(listActionApprovalRulesRequest).Execute()
 
 List Action Approval Rules
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+	pageToken := "pageToken_example" // string | Cursor that points to the first rule on the next page. Get this value from the previous response.  (optional)
+	pageSize := int32(10) // int32 | Maximum number of rules to return. (optional) (default to 50)
+	listActionApprovalRulesRequest := *openapiclient.NewListActionApprovalRulesRequest() // ListActionApprovalRulesRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ActionApprovalsAPI.ListActionApprovalRules(context.Background(), projectId).PageToken(pageToken).PageSize(pageSize).ListActionApprovalRulesRequest(listActionApprovalRulesRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ActionApprovalsAPI.ListActionApprovalRules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListActionApprovalRules`: ListActionApprovalRulesResponse
+	fmt.Fprintf(os.Stdout, "Response from `ActionApprovalsAPI.ListActionApprovalRules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListActionApprovalRulesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **pageToken** | **string** | Cursor that points to the first rule on the next page. Get this value from the previous response.  | 
+ **pageSize** | **int32** | Maximum number of rules to return. | [default to 50]
+ **listActionApprovalRulesRequest** | [**ListActionApprovalRulesRequest**](ListActionApprovalRulesRequest.md) |  | 
+
+### Return type
+
+[**ListActionApprovalRulesResponse**](ListActionApprovalRulesResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListActionApprovalRulesDeprecated
+
+> ListActionApprovalRulesResponse ListActionApprovalRulesDeprecated(ctx, projectId).Operation(operation).PageToken(pageToken).PageSize(pageSize).Execute()
+
+List Action Approval Rules (Deprecated)
 
 
 
@@ -480,13 +558,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ActionApprovalsAPI.ListActionApprovalRules(context.Background(), projectId).Operation(operation).PageToken(pageToken).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.ActionApprovalsAPI.ListActionApprovalRulesDeprecated(context.Background(), projectId).Operation(operation).PageToken(pageToken).PageSize(pageSize).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ActionApprovalsAPI.ListActionApprovalRules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ActionApprovalsAPI.ListActionApprovalRulesDeprecated``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListActionApprovalRules`: ListActionApprovalRulesResponse
-	fmt.Fprintf(os.Stdout, "Response from `ActionApprovalsAPI.ListActionApprovalRules`: %v\n", resp)
+	// response from `ListActionApprovalRulesDeprecated`: ListActionApprovalRulesResponse
+	fmt.Fprintf(os.Stdout, "Response from `ActionApprovalsAPI.ListActionApprovalRulesDeprecated`: %v\n", resp)
 }
 ```
 
@@ -500,7 +578,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListActionApprovalRulesRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListActionApprovalRulesDeprecatedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -577,6 +655,81 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateActionApprovalRuleRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateActionApprovalRuleRequest** | [**UpdateActionApprovalRuleRequest**](UpdateActionApprovalRuleRequest.md) | Fields to update on the action approval rule. | 
+
+### Return type
+
+[**UpdateActionApprovalRuleResponse**](UpdateActionApprovalRuleResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateActionApprovalRuleDeprecated
+
+> UpdateActionApprovalRuleResponse UpdateActionApprovalRuleDeprecated(ctx, projectId, actionApprovalRuleId).UpdateActionApprovalRuleRequest(updateActionApprovalRuleRequest).Execute()
+
+Update Action Approval Rule (Deprecated)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eon-io/eon-service/services/frontend/api-gateway/sdk/external-go"
+)
+
+func main() {
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+	actionApprovalRuleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Action approval rule ID.
+	updateActionApprovalRuleRequest := *openapiclient.NewUpdateActionApprovalRuleRequest() // UpdateActionApprovalRuleRequest | Fields to update on the action approval rule.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ActionApprovalsAPI.UpdateActionApprovalRuleDeprecated(context.Background(), projectId, actionApprovalRuleId).UpdateActionApprovalRuleRequest(updateActionApprovalRuleRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ActionApprovalsAPI.UpdateActionApprovalRuleDeprecated``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateActionApprovalRuleDeprecated`: UpdateActionApprovalRuleResponse
+	fmt.Fprintf(os.Stdout, "Response from `ActionApprovalsAPI.UpdateActionApprovalRuleDeprecated`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**projectId** | **string** | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**actionApprovalRuleId** | **string** | Action approval rule ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateActionApprovalRuleDeprecatedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

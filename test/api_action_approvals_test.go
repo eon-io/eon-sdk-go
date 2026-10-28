@@ -124,6 +124,20 @@ func Test_eon_ActionApprovalsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ActionApprovalsAPIService ListActionApprovalRulesDeprecated", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.ListActionApprovalRulesDeprecated(context.Background(), projectId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ActionApprovalsAPIService UpdateActionApprovalRule", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -132,6 +146,21 @@ func Test_eon_ActionApprovalsAPIService(t *testing.T) {
 		var actionApprovalRuleId string
 
 		resp, httpRes, err := apiClient.ActionApprovalsAPI.UpdateActionApprovalRule(context.Background(), projectId, actionApprovalRuleId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ActionApprovalsAPIService UpdateActionApprovalRuleDeprecated", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var projectId string
+		var actionApprovalRuleId string
+
+		resp, httpRes, err := apiClient.ActionApprovalsAPI.UpdateActionApprovalRuleDeprecated(context.Background(), projectId, actionApprovalRuleId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

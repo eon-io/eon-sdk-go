@@ -73,7 +73,21 @@ type APIClient struct {
 
 	JobsAPI *JobsAPIService
 
+	ListAwsInstanceTypesAPI *ListAwsInstanceTypesAPIService
+
+	ListAwsSecurityGroupsAPI *ListAwsSecurityGroupsAPIService
+
+	ListAwsSubnetsV2API *ListAwsSubnetsV2APIService
+
+	ListAwsVpcsAPI *ListAwsVpcsAPIService
+
+	ListEncryptionKeysAPI *ListEncryptionKeysAPIService
+
+	ListS3BucketsAPI *ListS3BucketsAPIService
+
 	ResourcesAPI *ResourcesAPIService
+
+	RestoreTemplatesAPI *RestoreTemplatesAPIService
 
 	SnapshotsAPI *SnapshotsAPIService
 
@@ -108,7 +122,14 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FindingExclusionsAPI = (*FindingExclusionsAPIService)(&c.common)
 	c.IamAPI = (*IamAPIService)(&c.common)
 	c.JobsAPI = (*JobsAPIService)(&c.common)
+	c.ListAwsInstanceTypesAPI = (*ListAwsInstanceTypesAPIService)(&c.common)
+	c.ListAwsSecurityGroupsAPI = (*ListAwsSecurityGroupsAPIService)(&c.common)
+	c.ListAwsSubnetsV2API = (*ListAwsSubnetsV2APIService)(&c.common)
+	c.ListAwsVpcsAPI = (*ListAwsVpcsAPIService)(&c.common)
+	c.ListEncryptionKeysAPI = (*ListEncryptionKeysAPIService)(&c.common)
+	c.ListS3BucketsAPI = (*ListS3BucketsAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
+	c.RestoreTemplatesAPI = (*RestoreTemplatesAPIService)(&c.common)
 	c.SnapshotsAPI = (*SnapshotsAPIService)(&c.common)
 	c.VaultsAPI = (*VaultsAPIService)(&c.common)
 
