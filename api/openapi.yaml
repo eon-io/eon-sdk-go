@@ -11641,8 +11641,8 @@ components:
           description: |
             What the exclusion matches, depending on `type`.
             For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`.
-            Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is
-            currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`).
+            Linux paths are compared case-sensitively. A Windows path starts with its drive letter
+            and ignores case and separator, so `C:\Users\App\Cache` and `c:/users/app/cache` match the same files.
             For `TABLE` or `DATABASE`, the exact table or database name.
           example: /var/cache
           minLength: 1
@@ -11687,8 +11687,8 @@ components:
           description: |
             What the exclusion matches, depending on `type`.
             For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`.
-            Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is
-            currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`).
+            Linux paths are compared case-sensitively. A Windows path starts with its drive letter
+            and ignores case and separator, so `C:\Users\App\Cache` and `c:/users/app/cache` match the same files.
             For `TABLE` or `DATABASE`, the exact table or database name.
           example: /var/cache
           type: string
@@ -11995,8 +11995,8 @@ components:
           description: |
             What the exclusion matches, depending on `type`.
             For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`.
-            Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is
-            currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`).
+            Linux paths are compared case-sensitively. A Windows path starts with its drive letter
+            and ignores case and separator, so `C:\Users\App\Cache` and `c:/users/app/cache` match the same files.
             For `TABLE` or `DATABASE`, the exact table or database name.
           example: /var/cache
           minLength: 1

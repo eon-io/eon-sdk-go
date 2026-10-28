@@ -27,7 +27,7 @@ type FindingExclusion struct {
 	Scope FindingExclusionScope `json:"scope"`
 	// Cloud provider ID of the resource the exclusion applies to, such as an EC2 instance ID or an Azure resource ID. Present when `scope` is `RESOURCE`. 
 	ProviderResourceId *string `json:"providerResourceId,omitempty"`
-	// What the exclusion matches, depending on `type`. For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`. Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is currently lowercase, so write Windows prefixes in lowercase (for example `c:/users/app/cache`). For `TABLE` or `DATABASE`, the exact table or database name. 
+	// What the exclusion matches, depending on `type`. For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`. Linux paths are compared case-sensitively. A Windows path starts with its drive letter and ignores case and separator, so `C:\\Users\\App\\Cache` and `c:/users/app/cache` match the same files. For `TABLE` or `DATABASE`, the exact table or database name. 
 	Value string `json:"value"`
 	Type FindingObjectType `json:"type"`
 	Detector FindingExclusionDetectorType `json:"detector"`

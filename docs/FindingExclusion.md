@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **string** | Finding exclusion ID. | 
 **Scope** | [**FindingExclusionScope**](FindingExclusionScope.md) |  | 
 **ProviderResourceId** | Pointer to **string** | Cloud provider ID of the resource the exclusion applies to, such as an EC2 instance ID or an Azure resource ID. Present when &#x60;scope&#x60; is &#x60;RESOURCE&#x60;.  | [optional] 
-**Value** | **string** | What the exclusion matches, depending on &#x60;type&#x60;. For &#x60;PATH&#x60;, every file whose path starts with this value, so &#x60;/data/tmp&#x60; also matches &#x60;/data/tmp2/report.csv&#x60;. Linux paths are compared case-sensitively. Windows paths are compared as the backup stores them, which is currently lowercase, so write Windows prefixes in lowercase (for example &#x60;c:/users/app/cache&#x60;). For &#x60;TABLE&#x60; or &#x60;DATABASE&#x60;, the exact table or database name.  | 
+**Value** | **string** | What the exclusion matches, depending on &#x60;type&#x60;. For &#x60;PATH&#x60;, every file whose path starts with this value, so &#x60;/data/tmp&#x60; also matches &#x60;/data/tmp2/report.csv&#x60;. Linux paths are compared case-sensitively. A Windows path starts with its drive letter and ignores case and separator, so &#x60;C:\\Users\\App\\Cache&#x60; and &#x60;c:/users/app/cache&#x60; match the same files. For &#x60;TABLE&#x60; or &#x60;DATABASE&#x60;, the exact table or database name.  | 
 **Type** | [**FindingObjectType**](FindingObjectType.md) |  | 
 **Detector** | [**FindingExclusionDetectorType**](FindingExclusionDetectorType.md) |  | 
 **UpdatedAt** | **time.Time** | When the exclusion was created or last updated. | 
