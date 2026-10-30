@@ -52,7 +52,7 @@ For more information, see [About Self-Managed Vault Keys].
 If you use self-managed vault keys, you assume responsibility for securing them from unauthorized access and deletion.
 </Error>
 
-[About Self-Managed Vault Keys]: /user-guide/backing-up/vaults/about-self-managed-vault-keys
+[About Self-Managed Vault Keys]: /data-protection/backup-and-protection/backup-configuration/vaults/about-self-managed-vault-keys
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -314,7 +314,7 @@ type ApiListVaultsRequest struct {
 	projectId string
 	pageToken *string
 	pageSize *int32
-	body *map[string]interface{}
+	listVaultsRequest *ListVaultsRequest
 }
 
 // Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
@@ -329,8 +329,8 @@ func (r ApiListVaultsRequest) PageSize(pageSize int32) ApiListVaultsRequest {
 	return r
 }
 
-func (r ApiListVaultsRequest) Body(body map[string]interface{}) ApiListVaultsRequest {
-	r.body = &body
+func (r ApiListVaultsRequest) ListVaultsRequest(listVaultsRequest ListVaultsRequest) ApiListVaultsRequest {
+	r.listVaultsRequest = &listVaultsRequest
 	return r
 }
 
@@ -402,8 +402,8 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ListBacku
 	}
 	// body params
 	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
-	if r.body != nil {
-		localVarPostBody = r.body
+	if r.listVaultsRequest != nil {
+		localVarPostBody = r.listVaultsRequest
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

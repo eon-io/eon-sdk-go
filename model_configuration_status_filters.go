@@ -21,7 +21,7 @@ var _ MappedNullable = &ConfigurationStatusFilters{}
 type ConfigurationStatusFilters struct {
 	// Matches if any value in this list equals `configurationStatus`.
 	In []ConfigurationStatus `json:"in,omitempty"`
-	// Matches if no value in this list equals `configurationStatus`. A resource the status recalculation has not reached yet has no configuration status, and matches every `notIn` list. 
+	// Matches if none of the values in this list equal `configurationStatus`. A resource whose status hasn't been calculated yet has no configuration status, and matches every `notIn` list. 
 	NotIn []ConfigurationStatus `json:"notIn,omitempty"`
 }
 

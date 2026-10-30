@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadMpaRequestArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadMpaRequestArguments{}
 
-// WebhookV1StandardPayloadMpaRequestArguments Details of the notification. Notifications of these types always carry `mpaRequestNotification`. 
+// WebhookV1StandardPayloadMpaRequestArguments Details of the notification. Always `mpaRequestNotification`. 
 type WebhookV1StandardPayloadMpaRequestArguments struct {
 	MpaRequestNotification WebhookV1MPARequestNotificationArguments `json:"mpaRequestNotification"`
 }

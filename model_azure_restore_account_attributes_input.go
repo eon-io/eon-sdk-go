@@ -21,7 +21,7 @@ var _ MappedNullable = &AzureRestoreAccountAttributesInput{}
 
 // AzureRestoreAccountAttributesInput Azure subscription configuration. Applicable if `cloudProvider` is set to `AZURE`. 
 type AzureRestoreAccountAttributesInput struct {
-	// ID of the tenant the subscription belongs to.
+	// Cloud-provider-assigned ID of the Azure tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
 	// Subscription ID. 
 	SubscriptionId string `json:"subscriptionId"`

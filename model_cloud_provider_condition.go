@@ -22,6 +22,7 @@ var _ MappedNullable = &CloudProviderCondition{}
 // CloudProviderCondition struct for CloudProviderCondition
 type CloudProviderCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Cloud providers to evaluate.
 	CloudProviders []Provider `json:"cloudProviders"`
 }
 

@@ -30,7 +30,7 @@ type SourceAccount struct {
 	Name string `json:"name"`
 	// Display name inherited from the cloud provider.
 	ProviderAccountName *string `json:"providerAccountName,omitempty"`
-	// AWS only. Account alias inherited from the cloud provider, separate from providerAccountName.
+	// Account alias inherited from the cloud provider. Can coexist with `providerAccountName`.  Applicable for AWS only. 
 	ProviderAccountAlias *string `json:"providerAccountAlias,omitempty"`
 	Status AccountState `json:"status"`
 	Version *AccountVersion `json:"version,omitempty"`

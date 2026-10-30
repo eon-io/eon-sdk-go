@@ -26,7 +26,7 @@ type CreateVaultRequest struct {
 	// Region where the vault is hosted.
 	Region string `json:"region"`
 	VaultAttributes VaultProviderAttributesInput `json:"vaultAttributes"`
-	// User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
+	// List of labels for filtering and searching for vaults. Doesn't affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
 	Labels []string `json:"labels,omitempty"`
 }
 

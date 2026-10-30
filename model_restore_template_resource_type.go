@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// RestoreTemplateResourceType The resource type the restore template applies to.
+// RestoreTemplateResourceType Resource type the restore template applies to. `RESTORE_TEMPLATE_RESOURCE_TYPE_UNSPECIFIED` is supported only in responses. 
 type RestoreTemplateResourceType string
 
 // List of RestoreTemplateResourceType

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Keys** | [**[]EncryptionKey**](EncryptionKey.md) |  | 
+**Keys** | [**[]EncryptionKey**](EncryptionKey.md) | List of encryption keys. | 
 
 ## Methods
 

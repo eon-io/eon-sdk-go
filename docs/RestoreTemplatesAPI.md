@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the resources belong to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the restore template is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	restoreTemplateId := "de308488-df3d-5b82-8f37-477ef529f491" // string | ID of the restore template to attach to the resources.
 	bulkAttachRestoreTemplateRequest := *openapiclient.NewBulkAttachRestoreTemplateRequest([]string{"ResourceIds_example"}) // BulkAttachRestoreTemplateRequest | 
 
@@ -50,7 +50,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project the resources belong to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**projectId** | **string** | ID of the project the restore template is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **restoreTemplateId** | **string** | ID of the restore template to attach to the resources. | 
 
 ### Other Parameters
@@ -103,7 +103,7 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project you want to create a restore template in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the restore template is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	createRestoreTemplateRequest := *openapiclient.NewCreateRestoreTemplateRequest("EC2 production restore template", openapiclient.RestoreTemplateResourceType("RESTORE_TEMPLATE_RESOURCE_TYPE_UNSPECIFIED")) // CreateRestoreTemplateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -124,7 +124,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project you want to create a restore template in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**projectId** | **string** | ID of the project the restore template is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 

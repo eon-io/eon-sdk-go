@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Seconds** | Pointer to **int64** | Whole seconds. | [optional] 
-**Nanos** | Pointer to **int32** | Nanosecond fraction of the duration. | [optional] 
+**Seconds** | Pointer to **int64** | Whole seconds. Omitted when &#x60;0&#x60;.  | [optional] 
+**Nanos** | Pointer to **int32** | Nanosecond fraction of the second. Omitted when &#x60;0&#x60;.  | [optional] 
 
 ## Methods
 

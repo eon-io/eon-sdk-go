@@ -29,11 +29,11 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
-	region := "region_example" // string | The region to get availability zones for
-	vpcId := "vpcId_example" // string | Optional VPC ID to filter security groups by (optional)
-	subnetId := "subnetId_example" // string | Optional subnet ID to filter security groups by (optional)
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
+	region := "region_example" // string | Region where the security groups are located.
+	vpcId := "vpcId_example" // string | ID of the VPC to filter security groups by. (optional)
+	subnetId := "subnetId_example" // string | ID of the subnet to filter security groups by. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,9 +53,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The project ID | 
-**accountId** | **string** | ID of the restore account | 
-**region** | **string** | The region to get availability zones for | 
+**projectId** | **string** | ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
+**region** | **string** | Region where the security groups are located. | 
 
 ### Other Parameters
 
@@ -67,8 +67,8 @@ Name | Type | Description  | Notes
 
 
 
- **vpcId** | **string** | Optional VPC ID to filter security groups by | 
- **subnetId** | **string** | Optional subnet ID to filter security groups by | 
+ **vpcId** | **string** | ID of the VPC to filter security groups by. | 
+ **subnetId** | **string** | ID of the subnet to filter security groups by. | 
 
 ### Return type
 

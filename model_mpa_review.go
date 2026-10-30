@@ -31,7 +31,7 @@ type MPAReview struct {
 	Decision MPADecision `json:"decision"`
 	// Comment explaining the reviewer's decision.
 	Comment *string `json:"comment,omitempty"`
-	// Time when the review was submitted.
+	// Date and time the review was submitted.
 	ReviewedTime time.Time `json:"reviewedTime"`
 }
 

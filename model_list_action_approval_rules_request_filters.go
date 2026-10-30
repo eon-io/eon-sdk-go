@@ -17,7 +17,7 @@ import (
 // checks if the ListActionApprovalRulesRequestFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListActionApprovalRulesRequestFilters{}
 
-// ListActionApprovalRulesRequestFilters Optional filters. Omitted properties are not applied.
+// ListActionApprovalRulesRequestFilters Filter conditions. If omitted, no filtering is applied. 
 type ListActionApprovalRulesRequestFilters struct {
 	Operation *ActionApprovalOperationType `json:"operation,omitempty"`
 }

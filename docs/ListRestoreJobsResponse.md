@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Jobs** | [**[]RestoreJob**](RestoreJob.md) | List of retrieved restore jobs. | 
+**Jobs** | [**[]RestoreJob**](RestoreJob.md) | List of restore jobs. | 
 **NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 **TotalCount** | **int32** | Total number of restore jobs that matched the filter options. | 
 

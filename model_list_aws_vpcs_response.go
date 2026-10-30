@@ -21,7 +21,7 @@ var _ MappedNullable = &ListAwsVpcsResponse{}
 
 // ListAwsVpcsResponse struct for ListAwsVpcsResponse
 type ListAwsVpcsResponse struct {
-	// The available VPCs for the region
+	// List of VPCs.
 	Vpcs []ListAwsVpcsResponseVpcsInner `json:"vpcs"`
 }
 

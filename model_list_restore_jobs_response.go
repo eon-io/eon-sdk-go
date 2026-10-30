@@ -21,7 +21,7 @@ var _ MappedNullable = &ListRestoreJobsResponse{}
 
 // ListRestoreJobsResponse struct for ListRestoreJobsResponse
 type ListRestoreJobsResponse struct {
-	// List of retrieved restore jobs.
+	// List of restore jobs.
 	Jobs []RestoreJob `json:"jobs"`
 	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`

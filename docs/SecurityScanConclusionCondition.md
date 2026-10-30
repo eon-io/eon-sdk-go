@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ListOperators**](ListOperators.md) |  | 
-**SecurityScanConclusions** | [**[]SecurityScanConclusion**](SecurityScanConclusion.md) |  | 
+**SecurityScanConclusions** | [**[]SecurityScanConclusion**](SecurityScanConclusion.md) | Security scan conclusions to evaluate. | 
 
 ## Methods
 

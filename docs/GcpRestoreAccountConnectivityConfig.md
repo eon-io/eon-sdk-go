@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**NetworkConfigs** | Pointer to [**[]GcpNetworkConnectivityConfig**](GcpNetworkConnectivityConfig.md) | Networks to configure. | [optional] 
+**NetworkConfigs** | Pointer to [**[]GcpNetworkConnectivityConfig**](GcpNetworkConnectivityConfig.md) | List of networks to configure, which Eon uses for its own management traffic in the restore account.  When restoring instances with instant restore, this configuration is required. Without this configuration, Eon uses the &#x60;default&#x60; network and subnet, which conflicts with any instance you restore into &#x60;default&#x60;. This is because the recovery host has a second network interface that Eon owns, and each interface must use a unique subnet (Google Compute Engine requirement). Therefore, you must choose a subnet that&#39;s not the one you restore the instance into.  | [optional] 
 
 ## Methods
 

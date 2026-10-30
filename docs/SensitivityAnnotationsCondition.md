@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**SensitivityAnnotations** | [**[]SensitivityLevel**](SensitivityLevel.md) |  | 
+**SensitivityAnnotations** | [**[]SensitivityLevel**](SensitivityLevel.md) | Sensitivity levels to evaluate. | 
 
 ## Methods
 

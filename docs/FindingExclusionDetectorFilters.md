@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**In** | Pointer to [**[]FindingExclusionDetectorType**](FindingExclusionDetectorType.md) | Matches exclusions for any of these detectors. An empty list applies no filter. | [optional] 
-**NotIn** | Pointer to [**[]FindingExclusionDetectorType**](FindingExclusionDetectorType.md) | Matches exclusions for none of these detectors. An empty list applies no filter. | [optional] 
+**In** | Pointer to [**[]FindingExclusionDetectorType**](FindingExclusionDetectorType.md) | Matches if any value in this list equals &#x60;detector&#x60;. | [optional] 
+**NotIn** | Pointer to [**[]FindingExclusionDetectorType**](FindingExclusionDetectorType.md) | Matches if none of the values in this list equal &#x60;detector&#x60;. | [optional] 
 
 ## Methods
 

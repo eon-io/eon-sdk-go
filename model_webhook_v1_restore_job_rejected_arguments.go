@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1RestoreJobRejectedArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1RestoreJobRejectedArguments{}
 
-// WebhookV1RestoreJobRejectedArguments Details of a `RESTORE_JOB_REJECTED` notification.
+// WebhookV1RestoreJobRejectedArguments Details of the `RESTORE_JOB_REJECTED` notification.
 type WebhookV1RestoreJobRejectedArguments struct {
 	// Job ID.
 	Id *string `json:"id,omitempty"`

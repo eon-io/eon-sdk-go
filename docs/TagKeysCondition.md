@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ListOperators**](ListOperators.md) |  | 
-**TagKeys** | **[]string** |  | 
+**TagKeys** | **[]string** | Tag keys to evaluate. | 
 
 ## Methods
 

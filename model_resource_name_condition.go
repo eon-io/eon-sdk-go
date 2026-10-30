@@ -22,6 +22,7 @@ var _ MappedNullable = &ResourceNameCondition{}
 // ResourceNameCondition struct for ResourceNameCondition
 type ResourceNameCondition struct {
 	Operator StringOperators `json:"operator"`
+	// Resource names to evaluate.
 	ResourceNames []string `json:"resourceNames"`
 }
 

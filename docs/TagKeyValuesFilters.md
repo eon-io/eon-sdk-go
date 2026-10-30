@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ContainsAllOf** | Pointer to **[]string** | Matches if any &#x60;{key}&#x3D;{value}&#x60; pair in this list is in the &#x60;tags&#x60; list. | [optional] 
-**ContainsAnyOf** | Pointer to **[]string** | Matches if none of the &#x60;{key}&#x3D;{value}&#x60; pairs in this list are in the &#x60;tags&#x60; list. | [optional] 
-**ContainsNoneOf** | Pointer to **[]string** | Matches if all &#x60;{key}&#x3D;{value}&#x60; pairs in this list are in the &#x60;tags&#x60; list. | [optional] 
+**ContainsAllOf** | Pointer to **[]string** | Matches if all &#x60;{key}&#x3D;{value}&#x60; pairs in this list are in the &#x60;tags&#x60; list. | [optional] 
+**ContainsAnyOf** | Pointer to **[]string** | Matches if any &#x60;{key}&#x3D;{value}&#x60; pair in this list is in the &#x60;tags&#x60; list. | [optional] 
+**ContainsNoneOf** | Pointer to **[]string** | Matches if none of the &#x60;{key}&#x3D;{value}&#x60; pairs in this list are in the &#x60;tags&#x60; list. | [optional] 
 
 ## Methods
 

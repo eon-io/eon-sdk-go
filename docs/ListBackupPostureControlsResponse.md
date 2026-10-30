@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BackupPostureControls** | [**[]BackupPostureControl**](BackupPostureControl.md) | List of retrieved backup posture controls. | 
+**BackupPostureControls** | [**[]BackupPostureControl**](BackupPostureControl.md) | List of backup posture controls. | 
 **TotalCount** | Pointer to **int32** | Total number of backup posture controls that matched the filter options. | [optional] 
 **NextPageToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 

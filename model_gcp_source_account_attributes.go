@@ -26,7 +26,7 @@ type GcpSourceAccountAttributes struct {
 	OrganizationId *string `json:"organizationId,omitempty"`
 	// Cloud-provider-assigned ID of the GCP project's parent folder.
 	FolderId *string `json:"folderId,omitempty"`
-	// GCP regions Eon discovers in. Empty means all supported regions.
+	// GCP regions Eon discovers in. If omitted, Eon discovers in all supported regions.
 	Regions []string `json:"regions,omitempty"`
 }
 

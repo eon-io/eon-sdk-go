@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ListOperators**](ListOperators.md) |  | 
-**EncryptionTypes** | [**[]EncryptionType**](EncryptionType.md) |  | 
+**EncryptionTypes** | [**[]EncryptionType**](EncryptionType.md) | Encryption types to evaluate. | 
 
 ## Methods
 

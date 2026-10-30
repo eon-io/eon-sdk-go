@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1MPAReviewNotificationArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1MPAReviewNotificationArguments{}
 
-// WebhookV1MPAReviewNotificationArguments Details of a review of a multi-party approval request.
+// WebhookV1MPAReviewNotificationArguments Details of the review of an action approval request.
 type WebhookV1MPAReviewNotificationArguments struct {
 	// Approval request ID.
 	RequestId *string `json:"request_id,omitempty"`

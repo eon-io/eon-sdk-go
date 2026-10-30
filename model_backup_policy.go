@@ -29,7 +29,7 @@ type BackupPolicy struct {
 	Enabled bool `json:"enabled"`
 	ResourceSelector BackupPolicyResourceSelector `json:"resourceSelector"`
 	BackupPlan BackupPolicyPlan `json:"backupPlan"`
-	// User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
+	// List of labels for filtering and searching for backup policies. Doesn't affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
 	Labels []string `json:"labels,omitempty"`
 }
 

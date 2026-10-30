@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// FindingExclusionScope Where an exclusion applies. `RESOURCE` applies it to the one resource named by `providerResourceId`; `ACCOUNT` applies it to every resource in the account. 
+// FindingExclusionScope Whether the exclusion applies to a single resource or to all resources in the Eon account.  If set to `RESOURCE`, a resource ID must be set in `providerResourceId`. 
 type FindingExclusionScope string
 
 // List of FindingExclusionScope

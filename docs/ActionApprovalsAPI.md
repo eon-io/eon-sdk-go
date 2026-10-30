@@ -38,7 +38,7 @@ import (
 )
 
 func main() {
-	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project.
+	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	requestId := "0fc514a3-61fe-5d39-a079-9d0df1820956" // string | ID of the action request.
 
 	configuration := openapiclient.NewConfiguration()
@@ -59,7 +59,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project. | 
+**projectId** | **string** | ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **requestId** | **string** | ID of the action request. | 
 
 ### Other Parameters
@@ -111,7 +111,7 @@ import (
 )
 
 func main() {
-	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project.
+	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	requestId := "0fc514a3-61fe-5d39-a079-9d0df1820956" // string | ID of the action request.
 	submitMyMPARequestRequest := *openapiclient.NewSubmitMyMPARequestRequest(openapiclient.MPASubmitAction("MPA_SUBMIT_ACTION_UNSPECIFIED")) // SubmitMyMPARequestRequest | 
 
@@ -133,7 +133,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project. | 
+**projectId** | **string** | ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **requestId** | **string** | ID of the action request. | 
 
 ### Other Parameters
@@ -186,8 +186,8 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project in which you want to create an action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
-	createActionApprovalRuleRequest := *openapiclient.NewCreateActionApprovalRuleRequest(openapiclient.ActionApprovalOperationType("ADD_RESTORE_ACCOUNT"), int32(123), int32(123)) // CreateActionApprovalRuleRequest | Action approval rule to create.
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	createActionApprovalRuleRequest := *openapiclient.NewCreateActionApprovalRuleRequest(openapiclient.ActionApprovalOperationType("ADD_RESTORE_ACCOUNT"), int32(123), int32(123)) // CreateActionApprovalRuleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -207,7 +207,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project in which you want to create an action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -217,7 +217,7 @@ Other parameters are passed through a pointer to a apiCreateActionApprovalRuleRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createActionApprovalRuleRequest** | [**CreateActionApprovalRuleRequest**](CreateActionApprovalRuleRequest.md) | Action approval rule to create. | 
+ **createActionApprovalRuleRequest** | [**CreateActionApprovalRuleRequest**](CreateActionApprovalRuleRequest.md) |  | 
 
 ### Return type
 
@@ -258,7 +258,7 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
 	actionApprovalRuleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Action approval rule ID.
 
 	configuration := openapiclient.NewConfiguration()
@@ -277,7 +277,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
 **actionApprovalRuleId** | **string** | Action approval rule ID. | 
 
 ### Other Parameters
@@ -329,7 +329,7 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
 	actionApprovalRuleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Action approval rule ID.
 
 	configuration := openapiclient.NewConfiguration()
@@ -350,7 +350,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
 **actionApprovalRuleId** | **string** | Action approval rule ID. | 
 
 ### Other Parameters
@@ -402,7 +402,7 @@ import (
 )
 
 func main() {
-	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project.
+	projectId := "8ea94e63-894f-5779-aa8f-06ad93121abb" // string | ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	requestId := "0fc514a3-61fe-5d39-a079-9d0df1820956" // string | ID of the action request.
 
 	configuration := openapiclient.NewConfiguration()
@@ -423,7 +423,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project. | 
+**projectId** | **string** | ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **requestId** | **string** | ID of the action request. | 
 
 ### Other Parameters
@@ -475,9 +475,9 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
-	pageToken := "pageToken_example" // string | Cursor that points to the first rule on the next page. Get this value from the previous response.  (optional)
-	pageSize := int32(10) // int32 | Maximum number of rules to return. (optional) (default to 50)
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	pageToken := "pageToken_example" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
+	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 	listActionApprovalRulesRequest := *openapiclient.NewListActionApprovalRulesRequest() // ListActionApprovalRulesRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -498,7 +498,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -508,8 +508,8 @@ Other parameters are passed through a pointer to a apiListActionApprovalRulesReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **pageToken** | **string** | Cursor that points to the first rule on the next page. Get this value from the previous response.  | 
- **pageSize** | **int32** | Maximum number of rules to return. | [default to 50]
+ **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
+ **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
  **listActionApprovalRulesRequest** | [**ListActionApprovalRulesRequest**](ListActionApprovalRulesRequest.md) |  | 
 
 ### Return type
@@ -551,9 +551,9 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
-	operation := openapiclient.ActionApprovalOperationType("ADD_RESTORE_ACCOUNT") // ActionApprovalOperationType | Filter rules by the action they protect. (optional)
-	pageToken := "pageToken_example" // string | Cursor that points to the first rule on the next page. Get this value from the previous response.  (optional)
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	operation := openapiclient.ActionApprovalOperationType("ADD_RESTORE_ACCOUNT") // ActionApprovalOperationType | Filter rules by the action they apply to. (optional)
+	pageToken := "pageToken_example" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of rules to return. (optional) (default to 50)
 
 	configuration := openapiclient.NewConfiguration()
@@ -574,7 +574,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -584,8 +584,8 @@ Other parameters are passed through a pointer to a apiListActionApprovalRulesDep
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **operation** | [**ActionApprovalOperationType**](ActionApprovalOperationType.md) | Filter rules by the action they protect. | 
- **pageToken** | **string** | Cursor that points to the first rule on the next page. Get this value from the previous response.  | 
+ **operation** | [**ActionApprovalOperationType**](ActionApprovalOperationType.md) | Filter rules by the action they apply to. | 
+ **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response.  | 
  **pageSize** | **int32** | Maximum number of rules to return. | [default to 50]
 
 ### Return type
@@ -627,9 +627,9 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	actionApprovalRuleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Action approval rule ID.
-	updateActionApprovalRuleRequest := *openapiclient.NewUpdateActionApprovalRuleRequest() // UpdateActionApprovalRuleRequest | Fields to update on the action approval rule.
+	updateActionApprovalRuleRequest := *openapiclient.NewUpdateActionApprovalRuleRequest() // UpdateActionApprovalRuleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -649,7 +649,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 **actionApprovalRuleId** | **string** | Action approval rule ID. | 
 
 ### Other Parameters
@@ -661,7 +661,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateActionApprovalRuleRequest** | [**UpdateActionApprovalRuleRequest**](UpdateActionApprovalRuleRequest.md) | Fields to update on the action approval rule. | 
+ **updateActionApprovalRuleRequest** | [**UpdateActionApprovalRuleRequest**](UpdateActionApprovalRuleRequest.md) |  | 
 
 ### Return type
 

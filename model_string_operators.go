@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// StringOperators Evaluates string values. `UNSPECIFIED` is supported only in responses. 
+// StringOperators Operator that evaluates string values. `UNSPECIFIED` is supported only in responses. 
 type StringOperators string
 
 // List of StringOperators

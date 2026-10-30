@@ -21,13 +21,13 @@ var _ MappedNullable = &Ec2TemplateParams{}
 
 // Ec2TemplateParams struct for Ec2TemplateParams
 type Ec2TemplateParams struct {
-	// Target subnet ID for the restored EC2 instance.
+	// Cloud-provider-assigned ID of the subnet for the restored EC2 instance.
 	SubnetId string `json:"subnetId"`
-	// Security group IDs to attach to the restored EC2 instance.
+	// Cloud-provider-assigned IDs of the security groups to attach to the restored EC2 instance.
 	SecurityGroupIds []string `json:"securityGroupIds,omitempty"`
-	// EC2 instance type for the restored instance. Required unless inheritInstanceType is true, and must be empty when it is. 
+	// EC2 instance type for the restored instance. Required unless `inheritInstanceType` is set to `true`, in which case, must be empty. 
 	InstanceType *string `json:"instanceType,omitempty"`
-	// Restore each instance with the instance type recorded in its own snapshot instead of instanceType. The template's subnet must be in an availability zone that offers that type. 
+	// Whether to restore each instance with the instance type recorded in its own snapshot, instead of `instanceType`. The template's subnet must be in an availability zone that offers the specified type. 
 	InheritInstanceType *bool `json:"inheritInstanceType,omitempty"`
 	// ARN of the KMS key to use for encrypting the restored instance.
 	KmsKeyArn *string `json:"kmsKeyArn,omitempty"`
@@ -39,7 +39,7 @@ type Ec2TemplateParams struct {
 	NameTemplate string `json:"nameTemplate"`
 	// Whether to start the restored EC2 instance after restoration.
 	StartAfterRestore bool `json:"startAfterRestore"`
-	// ID of the target cloud account for the restore.
+	// Eon-assigned ID of the destination restore account.
 	TargetAccountId string `json:"targetAccountId"`
 	// Target region for the restore.
 	TargetRegion string `json:"targetRegion"`

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// WebhookV1ConclusionTypes Conclusion of a security scan. Sent as the integer value; omitted when it's `0`.  - `0`: `UNKNOWN_CONCLUSION` - `1`: `CLEAN` - `2`: `HIGH_CHANCE_FOR_RANSOMWARE` - `3`: `DATA_ANOMALY_DETECTED` - `4`: `MALWARE_DETECTED` - `5`: `AI_DATA_RISK_DETECTED` - `6`: `DATA_EXPOSURE_RISK_DETECTED` - `7`: `VULNERABLE_APPLICATION_DETECTED` 
+// WebhookV1ConclusionTypes Conclusion of a security scan. Sent as the integer value. Omitted when `0`.  - `0`: `UNKNOWN_CONCLUSION` - `1`: `CLEAN` - `2`: `HIGH_CHANCE_FOR_RANSOMWARE` - `3`: `DATA_ANOMALY_DETECTED` - `4`: `MALWARE_DETECTED` - `5`: `AI_DATA_RISK_DETECTED` - `6`: `DATA_EXPOSURE_RISK_DETECTED` - `7`: `VULNERABLE_APPLICATION_DETECTED` 
 type WebhookV1ConclusionTypes int32
 
 // List of WebhookV1ConclusionTypes

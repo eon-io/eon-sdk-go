@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ServiceAccount** | **string** |  | 
 **OrganizationId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP project&#39;s parent organization. | [optional] 
 **FolderId** | Pointer to **string** | Cloud-provider-assigned ID of the GCP project&#39;s parent folder. | [optional] 
-**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. Empty means all supported regions. | [optional] 
+**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. If omitted, Eon discovers in all supported regions. | [optional] 
 
 ## Methods
 

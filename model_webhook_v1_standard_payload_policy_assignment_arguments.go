@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadPolicyAssignmentArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadPolicyAssignmentArguments{}
 
-// WebhookV1StandardPayloadPolicyAssignmentArguments Details of the notification. Notifications of these types always carry `backupPolicyNotificationArguments`. 
+// WebhookV1StandardPayloadPolicyAssignmentArguments Details of the notification. Always `backupPolicyNotificationArguments`. 
 type WebhookV1StandardPayloadPolicyAssignmentArguments struct {
 	BackupPolicyNotificationArguments WebhookV1BackupPolicyNotificationArguments `json:"backupPolicyNotificationArguments"`
 }

@@ -32,7 +32,7 @@ type SourceAwsOrganizationalUnit struct {
 	// AWS-assigned ID of the organization's management account.
 	ProviderManagementAccountId string `json:"providerManagementAccountId"`
 	Status AccountState `json:"status"`
-	// AWS regions Eon discovers in. Empty means all supported regions.
+	// AWS regions Eon discovers in. If omitted, Eon discovers in all supported regions. 
 	Regions []string `json:"regions,omitempty"`
 }
 

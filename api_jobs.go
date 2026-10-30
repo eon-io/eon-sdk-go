@@ -37,7 +37,7 @@ func (r ApiGetBackupJobRequest) Execute() (*GetBackupJobResponse, *http.Response
 /*
 GetBackupJob Get Backup Job
 
-Description: Retrieves a backup job by ID.
+Description: Retrieves a backup job.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -165,7 +165,7 @@ func (r ApiGetRestoreJobRequest) Execute() (*GetRestoreJobResponse, *http.Respon
 /*
 GetRestoreJob Get Restore Job
 
-Description: Retrieves a restore job by ID.
+Description: Retrieves a restore job.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the job is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -300,7 +300,6 @@ func (r ApiListBackupJobsRequest) PageSize(pageSize int32) ApiListBackupJobsRequ
 	return r
 }
 
-// Filter and sort options.
 func (r ApiListBackupJobsRequest) ListBackupJobsRequest(listBackupJobsRequest ListBackupJobsRequest) ApiListBackupJobsRequest {
 	r.listBackupJobsRequest = &listBackupJobsRequest
 	return r
@@ -313,7 +312,7 @@ func (r ApiListBackupJobsRequest) Execute() (*ListBackupJobsResponse, *http.Resp
 /*
 ListBackupJobs List Backup Jobs
 
-Description: Retrieves a list of backup jobs for the given project.
+Description: Retrieves a list of backup jobs in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose restore jobs you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -459,7 +458,6 @@ func (r ApiListRestoreJobsRequest) PageSize(pageSize int32) ApiListRestoreJobsRe
 	return r
 }
 
-// Filter and sort options. 
 func (r ApiListRestoreJobsRequest) ListRestoreJobsRequest(listRestoreJobsRequest ListRestoreJobsRequest) ApiListRestoreJobsRequest {
 	r.listRestoreJobsRequest = &listRestoreJobsRequest
 	return r
@@ -472,7 +470,7 @@ func (r ApiListRestoreJobsRequest) Execute() (*ListRestoreJobsResponse, *http.Re
 /*
 ListRestoreJobs List Restore Jobs
 
-Description: Retrieves a list of restore jobs for the given project.
+Description: Retrieves a list of restore jobs in the specified project.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

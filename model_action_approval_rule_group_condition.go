@@ -22,7 +22,7 @@ var _ MappedNullable = &ActionApprovalRuleGroupCondition{}
 // ActionApprovalRuleGroupCondition Group of expressions evaluated using the logical operator specified in `operator`. Each operand can be either a single expression or a nested `group`. 
 type ActionApprovalRuleGroupCondition struct {
 	Operator LogicalOperator `json:"operator"`
-	// Must contain at least two expressions.
+	// List of expressions to evaluate using the logical operator specified in `operator`. Each item in the list can be either a single expression or a nested `group` expression. 
 	Operands []ActionApprovalRuleExpression `json:"operands"`
 }
 

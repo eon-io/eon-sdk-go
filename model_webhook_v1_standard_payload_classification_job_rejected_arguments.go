@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadClassificationJobRejectedArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadClassificationJobRejectedArguments{}
 
-// WebhookV1StandardPayloadClassificationJobRejectedArguments Details of the notification. Notifications of these types always carry `classificationJobRejected`. 
+// WebhookV1StandardPayloadClassificationJobRejectedArguments Details of the notification. Always `classificationJobRejected`. 
 type WebhookV1StandardPayloadClassificationJobRejectedArguments struct {
 	ClassificationJobRejected WebhookV1ClassificationJobRejectedArguments `json:"classificationJobRejected"`
 }

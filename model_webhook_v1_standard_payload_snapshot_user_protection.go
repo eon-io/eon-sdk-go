@@ -20,11 +20,11 @@ import (
 // checks if the WebhookV1StandardPayloadSnapshotUserProtection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadSnapshotUserProtection{}
 
-// WebhookV1StandardPayloadSnapshotUserProtection Standard envelope of the notifications sent when a user protected or unprotected a snapshot.
+// WebhookV1StandardPayloadSnapshotUserProtection Notification of a user protecting or unprotecting a snapshot.
 type WebhookV1StandardPayloadSnapshotUserProtection struct {
 	// Notification ID. Also sent in the `X-Eon-Notification-Id` header.
 	Id string `json:"id"`
-	// ID of the project the notification belongs to.
+	// ID of the project the notification policy is in.
 	ProjectId string `json:"projectId"`
 	// Time the notification was created, in RFC 3339 format with second precision. Also sent in the `X-Eon-Timestamp` header. 
 	Timestamp time.Time `json:"timestamp"`

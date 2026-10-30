@@ -19,7 +19,7 @@ import (
 // checks if the GetActionApprovalRuleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetActionApprovalRuleResponse{}
 
-// GetActionApprovalRuleResponse Response containing the requested action approval rule.
+// GetActionApprovalRuleResponse struct for GetActionApprovalRuleResponse
 type GetActionApprovalRuleResponse struct {
 	ActionApprovalRule NullableActionApprovalRule `json:"actionApprovalRule"`
 }

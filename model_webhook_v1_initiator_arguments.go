@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1InitiatorArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1InitiatorArguments{}
 
-// WebhookV1InitiatorArguments User who initiated the action the notification refers to.
+// WebhookV1InitiatorArguments Details of the user who initiated the action that triggered the notification.
 type WebhookV1InitiatorArguments struct {
 	// User ID.
 	UserId *string `json:"userId,omitempty"`

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ServiceAccount** | Pointer to **NullableString** | Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed. The GCP project ID must remain the same.  | [optional] 
-**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions.  | [optional] 
+**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. Omit to leave the current regions unchanged. To discover in all supported regions, pass an empty list.  | [optional] 
 
 ## Methods
 

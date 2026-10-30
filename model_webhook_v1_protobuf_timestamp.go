@@ -17,11 +17,11 @@ import (
 // checks if the WebhookV1ProtobufTimestamp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1ProtobufTimestamp{}
 
-// WebhookV1ProtobufTimestamp A point in time inside `arguments`, encoded as an object rather than a string: whole seconds since the Unix epoch (1970-01-01T00:00:00Z) plus a nanosecond fraction. Each field is omitted when it's zero. 
+// WebhookV1ProtobufTimestamp Time encoded as an object rather than a string. 
 type WebhookV1ProtobufTimestamp struct {
-	// Seconds since the Unix epoch.
+	// Seconds since the Unix epoch (1970-01-01T00:00:00Z). Omitted when `0`. 
 	Seconds *int64 `json:"seconds,omitempty"`
-	// Nanosecond fraction of the second.
+	// Nanosecond fraction of the second. Omitted when `0`. 
 	Nanos *int32 `json:"nanos,omitempty"`
 }
 

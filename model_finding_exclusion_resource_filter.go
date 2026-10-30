@@ -17,9 +17,9 @@ import (
 // checks if the FindingExclusionResourceFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusionResourceFilter{}
 
-// FindingExclusionResourceFilter Filters by the resource a resource-scoped exclusion applies to. Account-wide exclusions never match it.
+// FindingExclusionResourceFilter struct for FindingExclusionResourceFilter
 type FindingExclusionResourceFilter struct {
-	// Matches exclusions for any of these resources, by cloud provider resource ID. An empty list applies no filter; IDs that match no resource in the account match no exclusion. 
+	// Matches if any string in this list equals `providerResourceId`. Account-wide exclusions never match. 
 	In []string `json:"in,omitempty"`
 }
 

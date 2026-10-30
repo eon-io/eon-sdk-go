@@ -21,18 +21,18 @@ var _ MappedNullable = &UpdateActionApprovalRuleRequest{}
 type UpdateActionApprovalRuleRequest struct {
 	// Number of approvals required before the action can be executed.
 	RequiredApprovals *int32 `json:"requiredApprovals,omitempty"`
-	// Hours the request stays open for approval before expiring.
+	// Number of hours the request stays open for approval. If the approvals aren't received before the end of the window, the request expires. 
 	ApprovalWindowHours *int32 `json:"approvalWindowHours,omitempty"`
-	// Hours after approval during which the approved action can be executed.
+	// Number of hours after approval the requester can execute the action. If the requester doesn't execute before the end of the window, the request expires. 
 	ExecutionWindowHours *int32 `json:"executionWindowHours,omitempty"`
-	// Optional description explaining the purpose of this rule.
+	// Description explaining the purpose of the rule.
 	Description *string `json:"description,omitempty"`
 	ResourceSelector NullableActionApprovalRuleResourceSelector `json:"resourceSelector,omitempty"`
-	// UUID of the SAML identity provider connection this approver group belongs to. Set to null to remove the restriction.
+	// Eon-assigned ID of the identity provider the approver's SAML group belongs to. Used in combination with `approverProviderGroupId`. 
 	ApproverIdpId NullableString `json:"approverIdpId,omitempty"`
-	// Provider group identifier from the IdP. Set to null to remove.
+	// Identity-provider-assigned ID of the approver group. Used in combination with `approverIdpId`. 
 	ApproverProviderGroupId NullableString `json:"approverProviderGroupId,omitempty"`
-	// When true, API credential users bypass this approval rule.
+	// Whether API clients bypass the rule or are bound by it.  When `true`, API clients bypass the rule and don't require approval to perform the action. When `false`, API clients are bound like any other user and must get the required approvals. 
 	ExemptApiCredentials *bool `json:"exemptApiCredentials,omitempty"`
 }
 

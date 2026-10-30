@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TenantId** | **string** | ID of the Azure tenant the subscription belongs to. | 
-**SubscriptionId** | **string** | ID of the Azure source subscription. | 
+**TenantId** | **string** | Cloud-provider-assigned ID of the Azure tenant the subscription belongs to. | 
+**SubscriptionId** | **string** | Cloud-provider-assigned ID of the Azure source subscription. | 
 **EonInternalResourceGroupName** | Pointer to **string** | Resource group name for Eon&#39;s temporary internal resources.  | [optional] [default to "eon-source-internal-rg"]
-**Regions** | Pointer to **[]string** | Azure regions Eon discovers in. Omit or leave empty to discover in all supported regions. | [optional] 
+**Regions** | Pointer to **[]string** | Azure regions Eon discovers in. Omit or leave empty to discover in all supported regions.  | [optional] 
 
 ## Methods
 

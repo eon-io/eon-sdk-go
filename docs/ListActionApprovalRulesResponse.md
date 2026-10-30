@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionApprovalRules** | [**[]ActionApprovalRule**](ActionApprovalRule.md) | Action approval rules in the current page. | 
-**TotalCount** | **int32** | Total number of matching action approval rules. | 
-**NextPageToken** | Pointer to **string** | Cursor that points to the first rule on the next page. | [optional] 
+**ActionApprovalRules** | [**[]ActionApprovalRule**](ActionApprovalRule.md) | List of action approval rules. | 
+**TotalCount** | **int32** | Total number of action approval rules that matched the filter options. | 
+**NextPageToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 
 ## Methods
 

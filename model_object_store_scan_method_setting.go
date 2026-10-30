@@ -19,11 +19,11 @@ import (
 // checks if the ObjectStoreScanMethodSetting type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ObjectStoreScanMethodSetting{}
 
-// ObjectStoreScanMethodSetting Current object-store scan method setting.
+// ObjectStoreScanMethodSetting struct for ObjectStoreScanMethodSetting
 type ObjectStoreScanMethodSetting struct {
-	// Whether this scan method is currently enabled.
+	// Whether this mode is currently enabled.
 	Enabled bool `json:"enabled"`
-	// Whether Eon manages this scan method.
+	// Whether Eon automatically manages this mode. 
 	SystemControlled bool `json:"systemControlled"`
 }
 

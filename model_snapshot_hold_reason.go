@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// SnapshotHoldReason Why a snapshot that is past its retention has not been deleted. Absent when the snapshot is not being held. New reasons are added over time, so treat an unrecognized value as \"held, reason unknown\" and show holdReasonMessage. 
+// SnapshotHoldReason Reason a snapshot past its retention hasn't been deleted. Absent when the snapshot isn't on hold. New reasons are added over time, so treat an unrecognized value as \"held, reason unknown\" and show holdReasonMessage. 
 type SnapshotHoldReason string
 
 // List of SnapshotHoldReason

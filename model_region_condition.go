@@ -22,6 +22,7 @@ var _ MappedNullable = &RegionCondition{}
 // RegionCondition struct for RegionCondition
 type RegionCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Source regions to evaluate.
 	Regions []string `json:"regions"`
 }
 

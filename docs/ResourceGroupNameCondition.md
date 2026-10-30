@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**ResourceGroupNames** | **[]string** |  | 
+**ResourceGroupNames** | **[]string** | Resource group names to evaluate. | 
 
 ## Methods
 

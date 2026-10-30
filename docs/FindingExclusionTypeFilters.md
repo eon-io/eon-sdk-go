@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**In** | Pointer to [**[]FindingObjectType**](FindingObjectType.md) | Matches exclusions of any of these types. An empty list applies no filter. | [optional] 
-**NotIn** | Pointer to [**[]FindingObjectType**](FindingObjectType.md) | Matches exclusions of none of these types. An empty list applies no filter. | [optional] 
+**In** | Pointer to [**[]FindingObjectType**](FindingObjectType.md) | Matches if any value in this list equals &#x60;type&#x60;. | [optional] 
+**NotIn** | Pointer to [**[]FindingObjectType**](FindingObjectType.md) | Matches if none of the values in this list equal &#x60;type&#x60;. | [optional] 
 
 ## Methods
 

@@ -21,7 +21,7 @@ var _ MappedNullable = &AnnuallyConfig{}
 type AnnuallyConfig struct {
 	TimeOfDay *TimeOfDay `json:"timeOfDay,omitempty"`
 	TimeOfYear *TimeOfYear `json:"timeOfYear,omitempty"`
-	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
+	// Window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
 	StartWindowMinutes *int32 `json:"startWindowMinutes,omitempty"`
 }
 

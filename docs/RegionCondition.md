@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**Regions** | **[]string** |  | 
+**Regions** | **[]string** | Source regions to evaluate. | 
 
 ## Methods
 

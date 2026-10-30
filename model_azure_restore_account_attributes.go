@@ -21,15 +21,15 @@ var _ MappedNullable = &AzureRestoreAccountAttributes{}
 
 // AzureRestoreAccountAttributes Azure subscription configuration. Applicable if `cloudProvider` is set to `AZURE`. 
 type AzureRestoreAccountAttributes struct {
-	// ID of the tenant the subscription belongs to.
+	// Cloud-provider-assigned ID of the Azure tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
-	// ID of the Azure subscription.
+	// Cloud-provider-assigned ID of the Azure subscription.
 	SubscriptionId string `json:"subscriptionId"`
 	// Name of the Azure resource group to scope permissions to. When provided, restoring is limited to this specific resource group. When omitted, permissions are scoped to the subscription. 
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
 	// Name of the Eon internal resource group for temporary restore resources. 
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
-	// ID of the Azure management group the restore account is scoped to.
+	// Cloud-provider-assigned ID of the Azure management group the restore account is scoped to.
 	ManagementGroupId *string `json:"managementGroupId,omitempty"`
 }
 

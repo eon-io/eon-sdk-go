@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1CreditsMonthlyUsageNotificationArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1CreditsMonthlyUsageNotificationArguments{}
 
-// WebhookV1CreditsMonthlyUsageNotificationArguments Details of a monthly credits usage notification.
+// WebhookV1CreditsMonthlyUsageNotificationArguments Details of the monthly credit usage notification.
 type WebhookV1CreditsMonthlyUsageNotificationArguments struct {
 	// Total credits in the agreement.
 	TotalCredits *int64 `json:"totalCredits,omitempty"`

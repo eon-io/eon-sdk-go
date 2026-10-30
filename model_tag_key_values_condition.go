@@ -22,6 +22,7 @@ var _ MappedNullable = &TagKeyValuesCondition{}
 // TagKeyValuesCondition struct for TagKeyValuesCondition
 type TagKeyValuesCondition struct {
 	Operator ListOperators `json:"operator"`
+	// Tag key-value pairs to evaluate.
 	TagKeyValues []TagKeyValue `json:"tagKeyValues"`
 }
 

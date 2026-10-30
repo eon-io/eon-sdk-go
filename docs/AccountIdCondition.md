@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**AccountIds** | **[]string** |  | 
+**AccountIds** | **[]string** | Cloud-provider-assigned account IDs to evaluate. | 
 
 ## Methods
 

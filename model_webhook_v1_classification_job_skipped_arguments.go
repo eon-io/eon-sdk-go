@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1ClassificationJobSkippedArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1ClassificationJobSkippedArguments{}
 
-// WebhookV1ClassificationJobSkippedArguments Details of a `CLASSIFICATION_JOB_SKIPPED` notification.
+// WebhookV1ClassificationJobSkippedArguments Details of the `CLASSIFICATION_JOB_SKIPPED` notification.
 type WebhookV1ClassificationJobSkippedArguments struct {
 	// Job ID.
 	Id *string `json:"id,omitempty"`

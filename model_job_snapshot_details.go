@@ -28,6 +28,10 @@ type JobSnapshotDetails struct {
 	PointInTime time.Time `json:"pointInTime"`
 	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
+	// Bytes the job's snapshot stored. The full size for a full backup, the delta for an incremental. Absent for native snapshots.
+	SnapshotSizeBytes NullableInt64 `json:"snapshotSizeBytes,omitempty"`
+	// Logical size of the source at backup time. Absent for native snapshots and when the size is unknown.
+	SourceSizeBytes NullableInt64 `json:"sourceSizeBytes,omitempty"`
 }
 
 type _JobSnapshotDetails JobSnapshotDetails
@@ -138,6 +142,90 @@ func (o *JobSnapshotDetails) SetExpirationTime(v time.Time) {
 	o.ExpirationTime = &v
 }
 
+// GetSnapshotSizeBytes returns the SnapshotSizeBytes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *JobSnapshotDetails) GetSnapshotSizeBytes() int64 {
+	if o == nil || IsNil(o.SnapshotSizeBytes.Get()) {
+		var ret int64
+		return ret
+	}
+	return *o.SnapshotSizeBytes.Get()
+}
+
+// GetSnapshotSizeBytesOk returns a tuple with the SnapshotSizeBytes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *JobSnapshotDetails) GetSnapshotSizeBytesOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SnapshotSizeBytes.Get(), o.SnapshotSizeBytes.IsSet()
+}
+
+// HasSnapshotSizeBytes returns a boolean if a field has been set.
+func (o *JobSnapshotDetails) HasSnapshotSizeBytes() bool {
+	if o != nil && o.SnapshotSizeBytes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSnapshotSizeBytes gets a reference to the given NullableInt64 and assigns it to the SnapshotSizeBytes field.
+func (o *JobSnapshotDetails) SetSnapshotSizeBytes(v int64) {
+	o.SnapshotSizeBytes.Set(&v)
+}
+// SetSnapshotSizeBytesNil sets the value for SnapshotSizeBytes to be an explicit nil
+func (o *JobSnapshotDetails) SetSnapshotSizeBytesNil() {
+	o.SnapshotSizeBytes.Set(nil)
+}
+
+// UnsetSnapshotSizeBytes ensures that no value is present for SnapshotSizeBytes, not even an explicit nil
+func (o *JobSnapshotDetails) UnsetSnapshotSizeBytes() {
+	o.SnapshotSizeBytes.Unset()
+}
+
+// GetSourceSizeBytes returns the SourceSizeBytes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *JobSnapshotDetails) GetSourceSizeBytes() int64 {
+	if o == nil || IsNil(o.SourceSizeBytes.Get()) {
+		var ret int64
+		return ret
+	}
+	return *o.SourceSizeBytes.Get()
+}
+
+// GetSourceSizeBytesOk returns a tuple with the SourceSizeBytes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *JobSnapshotDetails) GetSourceSizeBytesOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SourceSizeBytes.Get(), o.SourceSizeBytes.IsSet()
+}
+
+// HasSourceSizeBytes returns a boolean if a field has been set.
+func (o *JobSnapshotDetails) HasSourceSizeBytes() bool {
+	if o != nil && o.SourceSizeBytes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceSizeBytes gets a reference to the given NullableInt64 and assigns it to the SourceSizeBytes field.
+func (o *JobSnapshotDetails) SetSourceSizeBytes(v int64) {
+	o.SourceSizeBytes.Set(&v)
+}
+// SetSourceSizeBytesNil sets the value for SourceSizeBytes to be an explicit nil
+func (o *JobSnapshotDetails) SetSourceSizeBytesNil() {
+	o.SourceSizeBytes.Set(nil)
+}
+
+// UnsetSourceSizeBytes ensures that no value is present for SourceSizeBytes, not even an explicit nil
+func (o *JobSnapshotDetails) UnsetSourceSizeBytes() {
+	o.SourceSizeBytes.Unset()
+}
+
 func (o JobSnapshotDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -154,6 +242,12 @@ func (o JobSnapshotDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["pointInTime"] = o.PointInTime
 	if !IsNil(o.ExpirationTime) {
 		toSerialize["expirationTime"] = o.ExpirationTime
+	}
+	if o.SnapshotSizeBytes.IsSet() {
+		toSerialize["snapshotSizeBytes"] = o.SnapshotSizeBytes.Get()
+	}
+	if o.SourceSizeBytes.IsSet() {
+		toSerialize["sourceSizeBytes"] = o.SourceSizeBytes.Get()
 	}
 	return toSerialize, nil
 }

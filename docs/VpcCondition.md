@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**Vpcs** | **[]string** |  | 
+**Vpcs** | **[]string** | Cloud-provider-assigned VPC IDs to evaluate. | 
 
 ## Methods
 

@@ -17,7 +17,7 @@ import (
 // checks if the UpdateObjectStoreScanMethodRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateObjectStoreScanMethodRequest{}
 
-// UpdateObjectStoreScanMethodRequest Object-store scan method settings to update for an AWS S3 bucket or GCP Cloud Storage bucket. Eon ignores enabled when systemControlled is true. The enabled field is required when systemControlled is false.
+// UpdateObjectStoreScanMethodRequest Scan mode and change detection mode settings to update for an Amazon S3 bucket or Google Cloud Storage bucket. Eon ignores `enabled` when `systemControlled` is `true`. The `enabled` field is required when `systemControlled` is `false`.
 type UpdateObjectStoreScanMethodRequest struct {
 	CdcBackup *UpdateObjectStoreScanMethodSetting `json:"cdcBackup,omitempty"`
 	InventoryBackup *UpdateObjectStoreScanMethodSetting `json:"inventoryBackup,omitempty"`

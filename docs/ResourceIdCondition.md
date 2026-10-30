@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**ResourceIds** | **[]string** |  | 
+**ResourceIds** | **[]string** | Cloud-provider-assigned resource IDs to evaluate. | 
 
 ## Methods
 

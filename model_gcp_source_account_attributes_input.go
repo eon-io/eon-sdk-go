@@ -23,7 +23,7 @@ var _ MappedNullable = &GcpSourceAccountAttributesInput{}
 type GcpSourceAccountAttributesInput struct {
 	// Email address of the GCP service account Eon uses to access the project.
 	ServiceAccount string `json:"serviceAccount"`
-	// GCP regions Eon discovers in. Omit or leave empty to discover in all supported regions.
+	// GCP regions Eon discovers in. Omit or leave empty to discover in all supported regions. 
 	Regions []string `json:"regions,omitempty"`
 }
 

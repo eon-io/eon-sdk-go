@@ -19,13 +19,13 @@ import (
 // checks if the ListActionApprovalRulesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListActionApprovalRulesResponse{}
 
-// ListActionApprovalRulesResponse Paginated list of action approval rules.
+// ListActionApprovalRulesResponse struct for ListActionApprovalRulesResponse
 type ListActionApprovalRulesResponse struct {
-	// Action approval rules in the current page.
+	// List of action approval rules.
 	ActionApprovalRules []ActionApprovalRule `json:"actionApprovalRules"`
-	// Total number of matching action approval rules.
+	// Total number of action approval rules that matched the filter options.
 	TotalCount int32 `json:"totalCount"`
-	// Cursor that points to the first rule on the next page.
+	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 }
 

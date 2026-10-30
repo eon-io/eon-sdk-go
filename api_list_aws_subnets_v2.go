@@ -38,12 +38,12 @@ func (r ApiListAwsSubnetsV2Request) Execute() (*ListSubnetsResponseV2, *http.Res
 /*
 ListAwsSubnetsV2 List Subnets
 
-Description: Lists restore-account subnets and their associated VPCs in the specified region.
+Description: Retrieves a list of subnets available to Eon in the specified region of the restore account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param accountId ID of the restore account
- @param region The region to get subnets for
+ @param projectId ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
+ @param region Region where the subnets are located.
  @return ApiListAwsSubnetsV2Request
 */
 func (a *ListAwsSubnetsV2APIService) ListAwsSubnetsV2(ctx context.Context, projectId string, accountId string, region string) ApiListAwsSubnetsV2Request {

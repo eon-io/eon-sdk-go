@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1VaultArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1VaultArguments{}
 
-// WebhookV1VaultArguments Details of the backup vault a notification refers to.
+// WebhookV1VaultArguments Details of the vault a notification refers to.
 type WebhookV1VaultArguments struct {
 	// Vault ID.
 	Id *string `json:"id,omitempty"`

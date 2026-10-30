@@ -24,7 +24,7 @@ type RestoreAzureInstanceDiskInput struct {
 	// Cloud-provider-assigned ID of the disk to restore.
 	ProviderDiskId string `json:"providerDiskId"`
 	Settings AzureDiskSettings `json:"settings"`
-	// ARM resource ID of the disk encryption set to encrypt the restored disk with a customer-managed key. The disk encryption set must be in the restore account's subscription and in the target region. If not provided, the restored disk is encrypted with a platform-managed key. 
+	// ARM resource ID of the disk encryption set whose customer-managed key encrypts the restored disk. The disk encryption set must be in the restore account's subscription and the destination region. If omitted, the restored disk is encrypted with a platform-managed key. 
 	DiskEncryptionSetId *string `json:"diskEncryptionSetId,omitempty"`
 }
 

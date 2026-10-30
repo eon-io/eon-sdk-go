@@ -17,11 +17,11 @@ import (
 // checks if the FindingExclusionTypeFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusionTypeFilters{}
 
-// FindingExclusionTypeFilters Filters by what an exclusion matches.
+// FindingExclusionTypeFilters struct for FindingExclusionTypeFilters
 type FindingExclusionTypeFilters struct {
-	// Matches exclusions of any of these types. An empty list applies no filter.
+	// Matches if any value in this list equals `type`.
 	In []FindingObjectType `json:"in,omitempty"`
-	// Matches exclusions of none of these types. An empty list applies no filter.
+	// Matches if none of the values in this list equal `type`.
 	NotIn []FindingObjectType `json:"notIn,omitempty"`
 }
 

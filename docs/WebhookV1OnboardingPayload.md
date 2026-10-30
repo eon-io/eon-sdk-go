@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | Always &#x60;onboarding&#x60;. Also sent in the &#x60;X-Eon-Notification-Type&#x60; header. | 
+**Type** | **string** | Always &#x60;onboarding&#x60;. Also sent in the &#x60;X-Eon-Notification-Type&#x60; header.  | 
 **Message** | **string** | Human-readable confirmation message. | 
-**ProjectId** | **string** | ID of the project the webhook target belongs to. | 
+**ProjectId** | **string** | ID of the project the notification policy is in. | 
 **Timestamp** | **time.Time** | Time the message was sent, in RFC 3339 format with second precision. Also sent in the &#x60;X-Eon-Timestamp&#x60; header.  | 
 
 ## Methods

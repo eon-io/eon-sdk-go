@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadCloudAccountArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadCloudAccountArguments{}
 
-// WebhookV1StandardPayloadCloudAccountArguments Details of the notification. Notifications of these types always carry `cloudAccountArguments`. 
+// WebhookV1StandardPayloadCloudAccountArguments Details of the notification. Always `cloudAccountArguments`. 
 type WebhookV1StandardPayloadCloudAccountArguments struct {
 	CloudAccountArguments WebhookV1CloudAccountArguments `json:"cloudAccountArguments"`
 }

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// DynamoDbBillingMode DynamoDB billing mode. 
+// DynamoDbBillingMode DynamoDB billing mode. `UNSPECIFIED` is supported only in responses. 
 type DynamoDbBillingMode string
 
 // List of DynamoDbBillingMode

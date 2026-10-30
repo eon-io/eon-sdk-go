@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateAwsSourceAccountAttributes{}
 type UpdateAwsSourceAccountAttributes struct {
 	// ARN of the role Eon assumes to access the account in AWS. Only the role name portion of the ARN can be changed. The AWS account ID must remain the same. 
 	RoleArn NullableString `json:"roleArn,omitempty"`
-	// AWS regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions. 
+	// AWS regions Eon discovers in. Omit to leave the current regions unchanged. To discover in all supported regions, pass an empty list. 
 	Regions []string `json:"regions,omitempty"`
 }
 

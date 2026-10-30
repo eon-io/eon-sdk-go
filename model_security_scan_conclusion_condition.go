@@ -19,9 +19,10 @@ import (
 // checks if the SecurityScanConclusionCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SecurityScanConclusionCondition{}
 
-// SecurityScanConclusionCondition Security-scan conclusion condition. Valid only for snapshot-targeted operations.
+// SecurityScanConclusionCondition Security-scan conclusion condition. Valid only for snapshot-targeted operations. 
 type SecurityScanConclusionCondition struct {
 	Operator ListOperators `json:"operator"`
+	// Security scan conclusions to evaluate.
 	SecurityScanConclusions []SecurityScanConclusion `json:"securityScanConclusions"`
 }
 

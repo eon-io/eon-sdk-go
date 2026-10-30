@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Buckets** | [**[]S3Bucket**](S3Bucket.md) |  | 
+**Buckets** | [**[]S3Bucket**](S3Bucket.md) | List of buckets. | 
 
 ## Methods
 

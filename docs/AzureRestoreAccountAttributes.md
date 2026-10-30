@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TenantId** | **string** | ID of the tenant the subscription belongs to. | 
-**SubscriptionId** | **string** | ID of the Azure subscription. | 
+**TenantId** | **string** | Cloud-provider-assigned ID of the Azure tenant the subscription belongs to. | 
+**SubscriptionId** | **string** | Cloud-provider-assigned ID of the Azure subscription. | 
 **ResourceGroupName** | Pointer to **string** | Name of the Azure resource group to scope permissions to. When provided, restoring is limited to this specific resource group. When omitted, permissions are scoped to the subscription.  | [optional] 
 **EonInternalResourceGroupName** | Pointer to **string** | Name of the Eon internal resource group for temporary restore resources.  | [optional] 
-**ManagementGroupId** | Pointer to **string** | ID of the Azure management group the restore account is scoped to. | [optional] 
+**ManagementGroupId** | Pointer to **string** | Cloud-provider-assigned ID of the Azure management group the restore account is scoped to. | [optional] 
 
 ## Methods
 

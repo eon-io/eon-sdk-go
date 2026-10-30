@@ -21,9 +21,9 @@ var _ MappedNullable = &S3Bucket{}
 
 // S3Bucket struct for S3Bucket
 type S3Bucket struct {
-	// The name of the bucket
+	// Name of the bucket.
 	BucketName string `json:"bucketName"`
-	// The region name where bucket is located
+	// Region where the bucket is located.
 	RegionName string `json:"regionName"`
 }
 

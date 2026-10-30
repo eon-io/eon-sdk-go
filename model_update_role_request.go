@@ -21,11 +21,11 @@ var _ MappedNullable = &UpdateRoleRequest{}
 
 // UpdateRoleRequest struct for UpdateRoleRequest
 type UpdateRoleRequest struct {
-	// The name of the role
+	// Name of the role.
 	Name string `json:"name"`
-	// The permissions of the role
+	// Permissions of the role.
 	PermissionGrants []PermissionGrantInput `json:"permissionGrants"`
-	// The condition of the role, keyed by name
+	// Condition of the role, keyed by name.
 	AccessConditions []AccessCondition `json:"accessConditions,omitempty"`
 	RestoreDestinationLimits NullableRestoreDestinationLimits `json:"restoreDestinationLimits,omitempty"`
 	RestoreDestinationTagLimits NullableRestoreDestinationTagLimits `json:"restoreDestinationTagLimits,omitempty"`

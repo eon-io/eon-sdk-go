@@ -21,7 +21,7 @@ var _ MappedNullable = &BulkAttachRestoreTemplateRequest{}
 
 // BulkAttachRestoreTemplateRequest struct for BulkAttachRestoreTemplateRequest
 type BulkAttachRestoreTemplateRequest struct {
-	// List of resource IDs to attach the restore template to.
+	// List of Eon-assigned resource IDs to attach the restore template to.
 	ResourceIds []string `json:"resourceIds"`
 }
 

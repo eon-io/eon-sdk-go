@@ -22,20 +22,20 @@ var _ MappedNullable = &RestoreTemplate{}
 
 // RestoreTemplate struct for RestoreTemplate
 type RestoreTemplate struct {
-	// Restore template ID.
+	// ID of the restore template.
 	Id string `json:"id"`
 	// Restore template display name.
 	Name string `json:"name"`
-	// Optional description of the restore template.
+	// Description of the restore template's purpose.
 	Description *string `json:"description,omitempty"`
 	ResourceType RestoreTemplateResourceType `json:"resourceType"`
 	Ec2Params NullableEc2TemplateParams `json:"ec2Params,omitempty"`
 	S3Params NullableS3TemplateParams `json:"s3Params,omitempty"`
 	// Number of resources currently using this restore template.
 	AttachedResourceCount *int32 `json:"attachedResourceCount,omitempty"`
-	// Timestamp when the restore template was created.
+	// Date and time the restore template was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Timestamp when the restore template was last updated.
+	// Date and time the restore template was last updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 }
 

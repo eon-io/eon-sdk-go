@@ -580,7 +580,6 @@ type ApiUpdateBackupPolicyRequest struct {
 	xActionApprovalRequestId *string
 }
 
-// The request body for updating a policy
 func (r ApiUpdateBackupPolicyRequest) UpdateBackupPolicyRequest(updateBackupPolicyRequest UpdateBackupPolicyRequest) ApiUpdateBackupPolicyRequest {
 	r.updateBackupPolicyRequest = &updateBackupPolicyRequest
 	return r
@@ -600,6 +599,10 @@ func (r ApiUpdateBackupPolicyRequest) Execute() (*UpdateBackupPolicyResponse, *h
 UpdateBackupPolicy Update Backup Policy
 
 Description: Updates a backup policy.
+
+This operation replaces the entire backup policy object.
+Omitted fields are overwritten.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 

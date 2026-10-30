@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ProviderVolumeId** | **string** | The volume&#39;s cloud-provider-assigned resource ID. | 
+**ProviderVolumeId** | **string** | Cloud-provider-assigned resource ID of the volume. | 
 **Path** | **string** | Path of the volume on the machine it&#39;s attached to. | 
 **Region** | **string** | Region the volume is hosted in. | 
 **EncryptionKeyId** | Pointer to **string** | ID of the encryption key used to encrypt the volume. | [optional] 

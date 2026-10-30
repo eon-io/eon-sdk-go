@@ -23,7 +23,7 @@ var _ MappedNullable = &AwsSourceAccountAttributesInput{}
 type AwsSourceAccountAttributesInput struct {
 	// ARN of the role Eon assumes to access the account in AWS.
 	RoleArn string `json:"roleArn"`
-	// AWS regions Eon discovers in. Omit or leave empty to discover in all supported regions.
+	// AWS regions Eon discovers in. Omit or leave empty to discover in all supported regions. 
 	Regions []string `json:"regions,omitempty"`
 }
 

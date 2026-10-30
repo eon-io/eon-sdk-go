@@ -17,11 +17,11 @@ import (
 // checks if the FindingExclusionScopeFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusionScopeFilters{}
 
-// FindingExclusionScopeFilters Filters by where an exclusion applies.
+// FindingExclusionScopeFilters struct for FindingExclusionScopeFilters
 type FindingExclusionScopeFilters struct {
-	// Matches exclusions with any of these scopes. An empty list applies no filter.
+	// Matches if any value in this list equals `scope`.
 	In []FindingExclusionScope `json:"in,omitempty"`
-	// Matches exclusions with none of these scopes. An empty list applies no filter.
+	// Matches if none of the values in this list equal `scope`.
 	NotIn []FindingExclusionScope `json:"notIn,omitempty"`
 }
 

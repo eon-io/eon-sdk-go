@@ -17,9 +17,9 @@ import (
 // checks if the FindingExclusionValueFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusionValueFilters{}
 
-// FindingExclusionValueFilters Filters by the exclusion's `value`.
+// FindingExclusionValueFilters struct for FindingExclusionValueFilters
 type FindingExclusionValueFilters struct {
-	// Matches exclusions whose `value` contains every one of these substrings. An empty list applies no filter.
+	// Matches if every string in this list is a substring of `value`.
 	Contains []string `json:"contains,omitempty"`
 }
 

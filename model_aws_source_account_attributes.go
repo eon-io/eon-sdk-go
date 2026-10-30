@@ -25,7 +25,7 @@ type AwsSourceAccountAttributes struct {
 	RoleArn string `json:"roleArn"`
 	// Cloud-provider-assigned ID of the AWS organization the account belongs to.
 	OrganizationId *string `json:"organizationId,omitempty"`
-	// AWS regions Eon discovers in. Empty means all supported regions.
+	// AWS regions Eon discovers in. If omitted, Eon discovers in all supported regions.
 	Regions []string `json:"regions,omitempty"`
 }
 

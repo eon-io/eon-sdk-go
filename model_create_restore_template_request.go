@@ -23,7 +23,7 @@ var _ MappedNullable = &CreateRestoreTemplateRequest{}
 type CreateRestoreTemplateRequest struct {
 	// Restore template display name.
 	Name string `json:"name"`
-	// Optional description of the restore template.
+	// Description of the purpose of the restore template.
 	Description *string `json:"description,omitempty"`
 	ResourceType RestoreTemplateResourceType `json:"resourceType"`
 	Ec2Params NullableEc2TemplateParams `json:"ec2Params,omitempty"`

@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1BackupPolicyNotificationArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1BackupPolicyNotificationArguments{}
 
-// WebhookV1BackupPolicyNotificationArguments Details of the resources a backup policy was applied to or unapplied from.
+// WebhookV1BackupPolicyNotificationArguments Details of the resources a policy was applied to or unapplied from.
 type WebhookV1BackupPolicyNotificationArguments struct {
 	// Policy ID.
 	Id *string `json:"id,omitempty"`

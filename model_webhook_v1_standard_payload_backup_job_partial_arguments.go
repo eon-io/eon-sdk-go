@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadBackupJobPartialArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadBackupJobPartialArguments{}
 
-// WebhookV1StandardPayloadBackupJobPartialArguments Details of the notification. Notifications of these types always carry `backupJobPartial`. 
+// WebhookV1StandardPayloadBackupJobPartialArguments Details of the notification. Always `backupJobPartial`. 
 type WebhookV1StandardPayloadBackupJobPartialArguments struct {
 	BackupJobPartial WebhookV1BackupJobPartialArguments `json:"backupJobPartial"`
 }

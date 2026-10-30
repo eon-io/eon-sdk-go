@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Vault display name. | 
-**Labels** | Pointer to **[]string** | User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources.  | [optional] 
+**Labels** | Pointer to **[]string** | List of labels for filtering and searching for vaults. Doesn&#39;t affect backup behavior, access control, or the tags Eon sets on your cloud resources.  | [optional] 
 
 ## Methods
 

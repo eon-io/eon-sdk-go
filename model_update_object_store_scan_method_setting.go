@@ -19,11 +19,11 @@ import (
 // checks if the UpdateObjectStoreScanMethodSetting type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateObjectStoreScanMethodSetting{}
 
-// UpdateObjectStoreScanMethodSetting Object-store scan method setting to update. When systemControlled is true, Eon manages the method and ignores enabled. When false, enabled is required.
+// UpdateObjectStoreScanMethodSetting struct for UpdateObjectStoreScanMethodSetting
 type UpdateObjectStoreScanMethodSetting struct {
-	// Whether to enable this scan method. Required when systemControlled is false. Ignored when systemControlled is true.
+	// Whether to enable this mode. Required when `systemControlled` is `false`. Ignored when `systemControlled` is `true`.
 	Enabled NullableBool `json:"enabled,omitempty"`
-	// Whether Eon manages this scan method.
+	// Whether Eon manages this mode. When `true`, Eon automatically determines whether the mode is enabled. 
 	SystemControlled bool `json:"systemControlled"`
 }
 

@@ -19,11 +19,11 @@ var _ MappedNullable = &TagKeysFilters{}
 
 // TagKeysFilters struct for TagKeysFilters
 type TagKeysFilters struct {
-	// Matches if any key in this list is in the `tags` keys list.
-	ContainsAllOf []string `json:"containsAllOf,omitempty"`
-	// Matches if none of the keys in this list are in the `tags` keys list.
-	ContainsAnyOf []string `json:"containsAnyOf,omitempty"`
 	// Matches if all keys in this list are in the `tags` keys list.
+	ContainsAllOf []string `json:"containsAllOf,omitempty"`
+	// Matches if any key in this list is in the `tags` keys list.
+	ContainsAnyOf []string `json:"containsAnyOf,omitempty"`
+	// Matches if none of the keys in this list are in the `tags` keys list.
 	ContainsNoneOf []string `json:"containsNoneOf,omitempty"`
 }
 

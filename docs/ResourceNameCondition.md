@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**StringOperators**](StringOperators.md) |  | 
-**ResourceNames** | **[]string** |  | 
+**ResourceNames** | **[]string** | Resource names to evaluate. | 
 
 ## Methods
 

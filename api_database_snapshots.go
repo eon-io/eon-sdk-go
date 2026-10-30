@@ -207,7 +207,7 @@ When a query is completed, you can retrieve the query results in one of these wa
 
 If the query failed, see [Troubleshooting Queries] for possible errors and how to resolve them.
 
-[Troubleshooting Queries]: /user-guide/searching-exploring-and-querying/query/troubleshooting-queries
+[Troubleshooting Queries]: /data-protection/backup-and-protection/exploring-and-querying/query/troubleshooting-queries
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -352,7 +352,7 @@ When the query is complete, the results are saved as a CSV to the location you s
 
 If the request fails, see [Troubleshooting Queries] for possible errors and how to resolve them.
 
-[Troubleshooting Queries]: /user-guide/searching-exploring-and-querying/query/troubleshooting-queries
+[Troubleshooting Queries]: /data-protection/backup-and-protection/exploring-and-querying/query/troubleshooting-queries
 [Get Query Status]: ./get-query-status
 [Get Query Result]: ./get-query-result
 

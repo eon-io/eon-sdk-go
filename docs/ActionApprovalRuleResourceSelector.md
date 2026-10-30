@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ResourceSelectionMode** | [**ResourceSelectorMode**](ResourceSelectorMode.md) |  | 
-**ResourceInclusionOverride** | Pointer to **[]string** | Resource identifiers to protect, regardless of resourceSelectionMode. When resourceSelectionMode is NONE, only these resources are protected. For cloud-resource-scoped operations these are provider resource IDs (e.g. AWS instance IDs); for backup-policy-scoped operations these are Eon backup policy UUIDs.  | [optional] 
-**ResourceExclusionOverride** | Pointer to **[]string** | Resource identifiers to exclude from protection, regardless of resourceSelectionMode. When resourceSelectionMode is ALL, all resources except these are protected. For cloud-resource-scoped operations these are provider resource IDs; for backup-policy-scoped operations these are Eon backup policy UUIDs.  | [optional] 
+**ResourceInclusionOverride** | Pointer to **[]string** | IDs of entities to protect, regardless of resource selection mode. When resource selection mode is &#x60;NONE&#x60;, only these resources are protected.  | [optional] 
+**ResourceExclusionOverride** | Pointer to **[]string** | IDs of entities to exclude from protection, regardless of resource selection mode. When resource selection mode is &#x60;ALL&#x60;, all entities except these are protected.  | [optional] 
 **Expression** | Pointer to [**NullableActionApprovalRuleExpression**](ActionApprovalRuleExpression.md) |  | [optional] 
 
 ## Methods

@@ -19,27 +19,27 @@ import (
 // checks if the ActionApprovalRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionApprovalRule{}
 
-// ActionApprovalRule A rule that requires approval before a sensitive action can run.
+// ActionApprovalRule Rule that determines the approval requirements for a sensitive action.
 type ActionApprovalRule struct {
-	// Action approval rule ID.
+	// ID of the action approval rule.
 	Id string `json:"id"`
-	// ID of the project that contains the action approval rule.
+	// ID of the project the action approval rule is in.
 	ProjectId string `json:"projectId"`
 	Operation ActionApprovalOperationType `json:"operation"`
 	// Number of approvals required before the action can be executed.
 	RequiredApprovals int32 `json:"requiredApprovals"`
-	// Hours the request stays open for approval before expiring.
+	// Number of hours the request stays open for approval before expiring.
 	ApprovalWindowHours int32 `json:"approvalWindowHours"`
-	// Hours after approval during which the approved action can be executed.
+	// Number of hours after approval the approved action can be executed.
 	ExecutionWindowHours int32 `json:"executionWindowHours"`
-	// Optional description explaining the purpose of this rule.
+	// Description explaining the purpose of the rule.
 	Description *string `json:"description,omitempty"`
 	ResourceSelector NullableActionApprovalRuleResourceSelector `json:"resourceSelector,omitempty"`
-	// UUID of the SAML identity provider connection this approver group belongs to.
+	// Eon-assigned ID of the SAML identity provider the approver group belongs to. Used in combination with `approverProviderGroupId`. 
 	ApproverIdpId NullableString `json:"approverIdpId,omitempty"`
-	// Provider group identifier from the IdP.
+	// Identity-provider-assigned ID of the approver group. Used in combination with `approverIdpId`. 
 	ApproverProviderGroupId NullableString `json:"approverProviderGroupId,omitempty"`
-	// When true, API credential users bypass this approval rule.
+	// Whether API clients bypass the rule or are bound by it.  When `true`, API clients bypass the rule and don't require approval to perform the action. When `false`, API clients are bound like any other user and must get the required approvals. 
 	ExemptApiCredentials *bool `json:"exemptApiCredentials,omitempty"`
 }
 

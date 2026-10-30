@@ -21,9 +21,9 @@ var _ MappedNullable = &ListAwsVpcsResponseVpcsInner{}
 
 // ListAwsVpcsResponseVpcsInner struct for ListAwsVpcsResponseVpcsInner
 type ListAwsVpcsResponseVpcsInner struct {
-	// The id of the VPC
+	// Cloud-provider-assigned ID of the VPC.
 	Id string `json:"id"`
-	// The name of the VPC
+	// Name of the VPC.
 	Name *string `json:"name,omitempty"`
 }
 

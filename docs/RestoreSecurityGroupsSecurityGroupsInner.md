@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Then name of the security group | 
-**Id** | **string** | The id of the security group | 
-**Vpc** | **string** | The vpc id of the security group | 
+**Name** | **string** | Name of the security group. | 
+**Id** | **string** | Cloud-provider-assigned ID of the security group. | 
+**Vpc** | **string** | Cloud-provider-assigned ID of the VPC the security group is in. | 
 
 ## Methods
 

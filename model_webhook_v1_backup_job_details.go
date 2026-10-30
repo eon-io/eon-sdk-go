@@ -17,23 +17,19 @@ import (
 // checks if the WebhookV1BackupJobDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1BackupJobDetails{}
 
-// WebhookV1BackupJobDetails Details of the resource a backup job ran for.
+// WebhookV1BackupJobDetails Details of the resource the backup job ran for.
 type WebhookV1BackupJobDetails struct {
 	// Name of the resource.
 	ResourceName *string `json:"resourceName,omitempty"`
 	// Cloud-provider-assigned ID of the resource.
 	ResourceId *string `json:"resourceId,omitempty"`
-	// Name of the backup policy that ran the job.
+	// Name of the backup policy that triggered the job.
 	PolicyName *string `json:"policyName,omitempty"`
-	// Name of the source cloud account.
+	// Display name of the source account.
 	SourceAccountName *string `json:"sourceAccountName,omitempty"`
 	Duration *WebhookV1ProtobufDuration `json:"duration,omitempty"`
 	// Resource type.
 	ResourceType *string `json:"resourceType,omitempty"`
-	// Bytes the job's snapshot stored. Present only for finished non-native backups.
-	SnapshotSizeBytes *int64 `json:"snapshotSizeBytes,omitempty"`
-	// Logical size of the source at backup time. Present only for finished non-native backups with a known source size.
-	SourceSizeBytes *int64 `json:"sourceSizeBytes,omitempty"`
 }
 
 // NewWebhookV1BackupJobDetails instantiates a new WebhookV1BackupJobDetails object
@@ -245,70 +241,6 @@ func (o *WebhookV1BackupJobDetails) SetResourceType(v string) {
 	o.ResourceType = &v
 }
 
-// GetSnapshotSizeBytes returns the SnapshotSizeBytes field value if set, zero value otherwise.
-func (o *WebhookV1BackupJobDetails) GetSnapshotSizeBytes() int64 {
-	if o == nil || IsNil(o.SnapshotSizeBytes) {
-		var ret int64
-		return ret
-	}
-	return *o.SnapshotSizeBytes
-}
-
-// GetSnapshotSizeBytesOk returns a tuple with the SnapshotSizeBytes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhookV1BackupJobDetails) GetSnapshotSizeBytesOk() (*int64, bool) {
-	if o == nil || IsNil(o.SnapshotSizeBytes) {
-		return nil, false
-	}
-	return o.SnapshotSizeBytes, true
-}
-
-// HasSnapshotSizeBytes returns a boolean if a field has been set.
-func (o *WebhookV1BackupJobDetails) HasSnapshotSizeBytes() bool {
-	if o != nil && !IsNil(o.SnapshotSizeBytes) {
-		return true
-	}
-
-	return false
-}
-
-// SetSnapshotSizeBytes gets a reference to the given int64 and assigns it to the SnapshotSizeBytes field.
-func (o *WebhookV1BackupJobDetails) SetSnapshotSizeBytes(v int64) {
-	o.SnapshotSizeBytes = &v
-}
-
-// GetSourceSizeBytes returns the SourceSizeBytes field value if set, zero value otherwise.
-func (o *WebhookV1BackupJobDetails) GetSourceSizeBytes() int64 {
-	if o == nil || IsNil(o.SourceSizeBytes) {
-		var ret int64
-		return ret
-	}
-	return *o.SourceSizeBytes
-}
-
-// GetSourceSizeBytesOk returns a tuple with the SourceSizeBytes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhookV1BackupJobDetails) GetSourceSizeBytesOk() (*int64, bool) {
-	if o == nil || IsNil(o.SourceSizeBytes) {
-		return nil, false
-	}
-	return o.SourceSizeBytes, true
-}
-
-// HasSourceSizeBytes returns a boolean if a field has been set.
-func (o *WebhookV1BackupJobDetails) HasSourceSizeBytes() bool {
-	if o != nil && !IsNil(o.SourceSizeBytes) {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceSizeBytes gets a reference to the given int64 and assigns it to the SourceSizeBytes field.
-func (o *WebhookV1BackupJobDetails) SetSourceSizeBytes(v int64) {
-	o.SourceSizeBytes = &v
-}
-
 func (o WebhookV1BackupJobDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -336,12 +268,6 @@ func (o WebhookV1BackupJobDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ResourceType) {
 		toSerialize["resourceType"] = o.ResourceType
-	}
-	if !IsNil(o.SnapshotSizeBytes) {
-		toSerialize["snapshotSizeBytes"] = o.SnapshotSizeBytes
-	}
-	if !IsNil(o.SourceSizeBytes) {
-		toSerialize["sourceSizeBytes"] = o.SourceSizeBytes
 	}
 	return toSerialize, nil
 }

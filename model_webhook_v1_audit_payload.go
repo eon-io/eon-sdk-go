@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1AuditPayload type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1AuditPayload{}
 
-// WebhookV1AuditPayload Envelope of an `AUDIT_LOG_CREATED` notification. It has the same structure as the Splunk audit log event and carries no top-level notification metadata, so no `X-Eon-*` headers are sent with it. 
+// WebhookV1AuditPayload Notification of a created audit log entry. Has the same structure as the Splunk audit log event. 
 type WebhookV1AuditPayload struct {
 	Event WebhookV1AuditEvent `json:"event"`
 }

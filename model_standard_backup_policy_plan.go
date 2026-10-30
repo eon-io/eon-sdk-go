@@ -24,9 +24,6 @@ type StandardBackupPolicyPlan struct {
 	// List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault. 
 	BackupSchedules []StandardBackupSchedules `json:"backupSchedules"`
 	ScheduleTimezone *ScheduleTimezone `json:"scheduleTimezone,omitempty"`
-	// No longer used. Snapshot reuse is now decided per project rather than per policy, so this field is accepted and ignored, and omitted from responses. 
-	// Deprecated
-	ReuseExistingSnapshots NullableBool `json:"reuseExistingSnapshots,omitempty"`
 }
 
 type _StandardBackupPolicyPlan StandardBackupPolicyPlan
@@ -109,51 +106,6 @@ func (o *StandardBackupPolicyPlan) SetScheduleTimezone(v ScheduleTimezone) {
 	o.ScheduleTimezone = &v
 }
 
-// GetReuseExistingSnapshots returns the ReuseExistingSnapshots field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
-func (o *StandardBackupPolicyPlan) GetReuseExistingSnapshots() bool {
-	if o == nil || IsNil(o.ReuseExistingSnapshots.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.ReuseExistingSnapshots.Get()
-}
-
-// GetReuseExistingSnapshotsOk returns a tuple with the ReuseExistingSnapshots field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
-func (o *StandardBackupPolicyPlan) GetReuseExistingSnapshotsOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ReuseExistingSnapshots.Get(), o.ReuseExistingSnapshots.IsSet()
-}
-
-// HasReuseExistingSnapshots returns a boolean if a field has been set.
-func (o *StandardBackupPolicyPlan) HasReuseExistingSnapshots() bool {
-	if o != nil && o.ReuseExistingSnapshots.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetReuseExistingSnapshots gets a reference to the given NullableBool and assigns it to the ReuseExistingSnapshots field.
-// Deprecated
-func (o *StandardBackupPolicyPlan) SetReuseExistingSnapshots(v bool) {
-	o.ReuseExistingSnapshots.Set(&v)
-}
-// SetReuseExistingSnapshotsNil sets the value for ReuseExistingSnapshots to be an explicit nil
-func (o *StandardBackupPolicyPlan) SetReuseExistingSnapshotsNil() {
-	o.ReuseExistingSnapshots.Set(nil)
-}
-
-// UnsetReuseExistingSnapshots ensures that no value is present for ReuseExistingSnapshots, not even an explicit nil
-func (o *StandardBackupPolicyPlan) UnsetReuseExistingSnapshots() {
-	o.ReuseExistingSnapshots.Unset()
-}
-
 func (o StandardBackupPolicyPlan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -167,9 +119,6 @@ func (o StandardBackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	toSerialize["backupSchedules"] = o.BackupSchedules
 	if !IsNil(o.ScheduleTimezone) {
 		toSerialize["scheduleTimezone"] = o.ScheduleTimezone
-	}
-	if o.ReuseExistingSnapshots.IsSet() {
-		toSerialize["reuseExistingSnapshots"] = o.ReuseExistingSnapshots.Get()
 	}
 	return toSerialize, nil
 }

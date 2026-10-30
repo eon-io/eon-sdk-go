@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | Event type. | 
-**Payload** | **map[string]interface{}** | The audit log entry as arbitrary JSON. Its structure isn&#39;t part of the webhook contract. | 
+**Payload** | **map[string]interface{}** | Audit log entry as object. | 
 
 ## Methods
 

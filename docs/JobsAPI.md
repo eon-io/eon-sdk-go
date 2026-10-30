@@ -181,7 +181,7 @@ func main() {
 	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose restore jobs you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
-	listBackupJobsRequest := *openapiclient.NewListBackupJobsRequest() // ListBackupJobsRequest | Filter and sort options. (optional)
+	listBackupJobsRequest := *openapiclient.NewListBackupJobsRequest() // ListBackupJobsRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
  **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
- **listBackupJobsRequest** | [**ListBackupJobsRequest**](ListBackupJobsRequest.md) | Filter and sort options. | 
+ **listBackupJobsRequest** | [**ListBackupJobsRequest**](ListBackupJobsRequest.md) |  | 
 
 ### Return type
 
@@ -257,7 +257,7 @@ func main() {
 	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose restore jobs you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
-	listRestoreJobsRequest := *openapiclient.NewListRestoreJobsRequest() // ListRestoreJobsRequest | Filter and sort options.  (optional)
+	listRestoreJobsRequest := *openapiclient.NewListRestoreJobsRequest() // ListRestoreJobsRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
  **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
- **listRestoreJobsRequest** | [**ListRestoreJobsRequest**](ListRestoreJobsRequest.md) | Filter and sort options.  | 
+ **listRestoreJobsRequest** | [**ListRestoreJobsRequest**](ListRestoreJobsRequest.md) |  | 
 
 ### Return type
 

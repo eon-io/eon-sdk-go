@@ -318,7 +318,6 @@ func (r ApiListResourceSnapshotsRequest) PageSize(pageSize int32) ApiListResourc
 	return r
 }
 
-// Filter options.
 func (r ApiListResourceSnapshotsRequest) ListInventorySnapshotsRequest(listInventorySnapshotsRequest ListInventorySnapshotsRequest) ApiListResourceSnapshotsRequest {
 	r.listInventorySnapshotsRequest = &listInventorySnapshotsRequest
 	return r
@@ -774,7 +773,6 @@ type ApiRestoreAzureSqlDatabaseRequest struct {
 	xActionApprovalRequestId *string
 }
 
-// The request body for restoring the instance
 func (r ApiRestoreAzureSqlDatabaseRequest) RestoreAzureSqlDatabaseRequest(restoreAzureSqlDatabaseRequest RestoreAzureSqlDatabaseRequest) ApiRestoreAzureSqlDatabaseRequest {
 	r.restoreAzureSqlDatabaseRequest = &restoreAzureSqlDatabaseRequest
 	return r

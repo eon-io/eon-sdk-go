@@ -21,7 +21,7 @@ var _ MappedNullable = &ListBackupPostureControlsResponse{}
 
 // ListBackupPostureControlsResponse struct for ListBackupPostureControlsResponse
 type ListBackupPostureControlsResponse struct {
-	// List of retrieved backup posture controls.
+	// List of backup posture controls.
 	BackupPostureControls []BackupPostureControl `json:"backupPostureControls"`
 	// Total number of backup posture controls that matched the filter options.
 	TotalCount *int32 `json:"totalCount,omitempty"`

@@ -25,7 +25,7 @@ type ListInventorySnapshotsResponse struct {
 	Snapshots []Snapshot `json:"snapshots"`
 	// Cursor that points to the first record of the next page of results. Pass this value in the next request. 
 	NextToken *string `json:"nextToken,omitempty"`
-	// The total number of Eon snapshots.
+	// Total number of Eon snapshots that matched the filter options.
 	TotalCount int32 `json:"totalCount"`
 }
 

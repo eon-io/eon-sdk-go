@@ -8,14 +8,14 @@ Method | HTTP request | Description
 [**CancelVolumeBackupExclusion**](ResourcesAPI.md#CancelVolumeBackupExclusion) | **Patch** /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/include | Cancel Volume Backup Exclusion
 [**ExcludeResourceFromBackup**](ResourcesAPI.md#ExcludeResourceFromBackup) | **Patch** /v1/projects/{projectId}/resources/{id}/exclude | Exclude Resource from Backup
 [**ExcludeVolumeFromBackup**](ResourcesAPI.md#ExcludeVolumeFromBackup) | **Patch** /v1/projects/{projectId}/resources/{id}/volumes/{volumeId}/exclude | Exclude Volume from Backup
-[**GetObjectStoreScanMethod**](ResourcesAPI.md#GetObjectStoreScanMethod) | **Get** /v1/projects/{projectId}/resources/{id}/object-store-scan-method | Get object-store scan method
+[**GetObjectStoreScanMethod**](ResourcesAPI.md#GetObjectStoreScanMethod) | **Get** /v1/projects/{projectId}/resources/{id}/object-store-scan-method | Get Object-Store Scan Method
 [**GetResource**](ResourcesAPI.md#GetResource) | **Get** /v1/projects/{projectId}/resources/{id} | Get Resource
 [**ListResources**](ResourcesAPI.md#ListResources) | **Post** /v1/projects/{projectId}/resources | List Resources
 [**OverrideDataClasses**](ResourcesAPI.md#OverrideDataClasses) | **Patch** /v1/projects/{projectId}/resources/{id}/data-classifications | Override Data Classes
 [**OverrideEnvironment**](ResourcesAPI.md#OverrideEnvironment) | **Patch** /v1/projects/{projectId}/resources/{id}/environments | Override Environment
 [**RemoveDataClassesOverride**](ResourcesAPI.md#RemoveDataClassesOverride) | **Delete** /v1/projects/{projectId}/resources/{id}/data-classifications | Remove Data Classes Override
 [**RemoveEnvironmentOverride**](ResourcesAPI.md#RemoveEnvironmentOverride) | **Delete** /v1/projects/{projectId}/resources/{id}/environments | Remove Environment Override
-[**UpdateObjectStoreScanMethod**](ResourcesAPI.md#UpdateObjectStoreScanMethod) | **Patch** /v1/projects/{projectId}/resources/{id}/object-store-scan-method | Update object-store scan method
+[**UpdateObjectStoreScanMethod**](ResourcesAPI.md#UpdateObjectStoreScanMethod) | **Patch** /v1/projects/{projectId}/resources/{id}/object-store-scan-method | Update Object-Store Scan Method
 
 
 
@@ -321,7 +321,7 @@ Name | Type | Description  | Notes
 
 > GetObjectStoreScanMethodResponse GetObjectStoreScanMethod(ctx, projectId, id).Execute()
 
-Get object-store scan method
+Get Object-Store Scan Method
 
 
 
@@ -339,7 +339,7 @@ import (
 
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource.
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the Amazon S3 bucket or Google Cloud Storage bucket to retrieve.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
-**id** | **string** | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource. | 
+**id** | **string** | Eon-assigned ID of the Amazon S3 bucket or Google Cloud Storage bucket to retrieve. | 
 
 ### Other Parameters
 
@@ -839,7 +839,7 @@ Name | Type | Description  | Notes
 
 > UpdateObjectStoreScanMethodResponse UpdateObjectStoreScanMethod(ctx, projectId, id).UpdateObjectStoreScanMethodRequest(updateObjectStoreScanMethodRequest).Execute()
 
-Update object-store scan method
+Update Object-Store Scan Method
 
 
 
@@ -857,8 +857,8 @@ import (
 
 func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
-	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource.
-	updateObjectStoreScanMethodRequest := *openapiclient.NewUpdateObjectStoreScanMethodRequest() // UpdateObjectStoreScanMethodRequest | Object-store scan method settings to update. Eon ignores enabled when systemControlled is true. The enabled field is required when systemControlled is false.
+	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the Amazon S3 bucket or Google Cloud Storage bucket to update.
+	updateObjectStoreScanMethodRequest := *openapiclient.NewUpdateObjectStoreScanMethodRequest() // UpdateObjectStoreScanMethodRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -879,7 +879,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **projectId** | **string** | ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
-**id** | **string** | Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource. | 
+**id** | **string** | Eon-assigned ID of the Amazon S3 bucket or Google Cloud Storage bucket to update. | 
 
 ### Other Parameters
 
@@ -890,7 +890,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateObjectStoreScanMethodRequest** | [**UpdateObjectStoreScanMethodRequest**](UpdateObjectStoreScanMethodRequest.md) | Object-store scan method settings to update. Eon ignores enabled when systemControlled is true. The enabled field is required when systemControlled is false. | 
+ **updateObjectStoreScanMethodRequest** | [**UpdateObjectStoreScanMethodRequest**](UpdateObjectStoreScanMethodRequest.md) |  | 
 
 ### Return type
 

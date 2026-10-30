@@ -216,6 +216,7 @@ docs/FindingExclusionTypeFilters.md
 docs/FindingExclusionValueFilters.md
 docs/FindingExclusionsAPI.md
 docs/FindingObjectType.md
+docs/FreeTextFilters.md
 docs/GCSRestoreTarget.md
 docs/GcpBigQueryDatasetRestoreResult.md
 docs/GcpCloudSqlRestoreDestination.md
@@ -313,6 +314,7 @@ docs/ListSourceAccountsResponse.md
 docs/ListSourceAwsOrganizationalUnitsResponse.md
 docs/ListSubnetsResponseV2.md
 docs/ListSubnetsResponseV2SubnetsInner.md
+docs/ListVaultsRequest.md
 docs/LogicalOperator.md
 docs/MPADecision.md
 docs/MPAInterceptedResponse.md
@@ -327,6 +329,7 @@ docs/MaxRetentionRule.md
 docs/MeteringDimension.md
 docs/MinRetentionRule.md
 docs/MonthlyConfig.md
+docs/NetworkInterfaceConfig.md
 docs/NumberOfCopiesRule.md
 docs/NumericOperators.md
 docs/Oauth2TokenResponse.md
@@ -468,6 +471,7 @@ docs/StorageAccountRestoreTarget.md
 docs/StringOperators.md
 docs/SubmitMyMPARequestRequest.md
 docs/SubmitMyMPARequestResponse.md
+docs/SubnetConfig.md
 docs/SubnetFilters.md
 docs/SubnetPerAvailabilityZone.md
 docs/SubnetsCondition.md
@@ -513,10 +517,17 @@ docs/UpdateVaultRequest.md
 docs/UpdateVaultResponse.md
 docs/Usage.md
 docs/UsageUnit.md
+docs/VNetConfig.md
 docs/VaultProtectionMode.md
 docs/VaultProviderAttributes.md
 docs/VaultProviderAttributesInput.md
+docs/VaultRegionFilters.md
+docs/VaultStatus.md
+docs/VaultStatusFilters.md
+docs/VaultType.md
+docs/VaultTypeFilters.md
 docs/VaultsAPI.md
+docs/VaultsFilterConditions.md
 docs/VolumeSettings.md
 docs/VpcCondition.md
 docs/WebhookV1AnomalyDataPoint.md
@@ -804,6 +815,7 @@ model_finding_exclusion_scope_filters.go
 model_finding_exclusion_type_filters.go
 model_finding_exclusion_value_filters.go
 model_finding_object_type.go
+model_free_text_filters.go
 model_gcp_big_query_dataset_restore_result.go
 model_gcp_cloud_sql_restore_destination.go
 model_gcp_cloud_sql_target.go
@@ -893,6 +905,7 @@ model_list_source_accounts_response.go
 model_list_source_aws_organizational_units_response.go
 model_list_subnets_response_v2.go
 model_list_subnets_response_v2_subnets_inner.go
+model_list_vaults_request.go
 model_logical_operator.go
 model_max_retention_rule.go
 model_metering_dimension.go
@@ -907,6 +920,7 @@ model_mpa_request_policy_detail.go
 model_mpa_request_status.go
 model_mpa_review.go
 model_mpa_submit_action.go
+model_network_interface_config.go
 model_number_of_copies_rule.go
 model_numeric_operators.go
 model_oauth2_token_response.go
@@ -1045,6 +1059,7 @@ model_storage_account_restore_target.go
 model_string_operators.go
 model_submit_my_mpa_request_request.go
 model_submit_my_mpa_request_response.go
+model_subnet_config.go
 model_subnet_filters.go
 model_subnet_per_availability_zone.go
 model_subnets_condition.go
@@ -1090,9 +1105,16 @@ model_update_vault_request.go
 model_update_vault_response.go
 model_usage.go
 model_usage_unit.go
+model_v_net_config.go
 model_vault_protection_mode.go
 model_vault_provider_attributes.go
 model_vault_provider_attributes_input.go
+model_vault_region_filters.go
+model_vault_status.go
+model_vault_status_filters.go
+model_vault_type.go
+model_vault_type_filters.go
+model_vaults_filter_conditions.go
 model_volume_settings.go
 model_vpc_condition.go
 model_webhook_v1_anomaly_data_point.go

@@ -21,9 +21,9 @@ var _ MappedNullable = &RestoreSecurityGroups{}
 
 // RestoreSecurityGroups struct for RestoreSecurityGroups
 type RestoreSecurityGroups struct {
-	// The region to restore
+	// Region where the security groups are located.
 	Region string `json:"region"`
-	// The available zones for the region
+	// List of security groups.
 	SecurityGroups []RestoreSecurityGroupsSecurityGroupsInner `json:"securityGroups"`
 }
 

@@ -17,7 +17,7 @@ import (
 // checks if the FindingExclusionFilterConditions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusionFilterConditions{}
 
-// FindingExclusionFilterConditions Every condition that's set must match.
+// FindingExclusionFilterConditions struct for FindingExclusionFilterConditions
 type FindingExclusionFilterConditions struct {
 	Scope NullableFindingExclusionScopeFilters `json:"scope,omitempty"`
 	Resource NullableFindingExclusionResourceFilter `json:"resource,omitempty"`

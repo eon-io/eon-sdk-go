@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadSnapshotAccessDeniedArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadSnapshotAccessDeniedArguments{}
 
-// WebhookV1StandardPayloadSnapshotAccessDeniedArguments Details of the notification. Notifications of these types always carry `snapshotAccessDenied`. 
+// WebhookV1StandardPayloadSnapshotAccessDeniedArguments Details of the notification. Always `snapshotAccessDenied`. 
 type WebhookV1StandardPayloadSnapshotAccessDeniedArguments struct {
 	SnapshotAccessDenied WebhookV1SnapshotAccessDeniedArguments `json:"snapshotAccessDenied"`
 }

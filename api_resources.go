@@ -569,13 +569,14 @@ func (r ApiGetObjectStoreScanMethodRequest) Execute() (*GetObjectStoreScanMethod
 }
 
 /*
-GetObjectStoreScanMethod Get object-store scan method
+GetObjectStoreScanMethod Get Object-Store Scan Method
 
-Description: Retrieves object-store scan method settings for an AWS S3 bucket or GCP Cloud Storage bucket.
+Description: Retrieves the scan mode and change detection mode for an Amazon S3 bucket or Google Cloud Storage bucket.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
- @param id Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource.
+ @param id Eon-assigned ID of the Amazon S3 bucket or Google Cloud Storage bucket to retrieve.
  @return ApiGetObjectStoreScanMethodRequest
 */
 func (a *ResourcesAPIService) GetObjectStoreScanMethod(ctx context.Context, projectId string, id string) ApiGetObjectStoreScanMethodRequest {
@@ -706,7 +707,7 @@ func (r ApiGetResourceRequest) Execute() (*GetResourceResponse, *http.Response, 
 /*
 GetResource Get Resource
 
-Description: Retrieves a resource by ID.
+Description: Retrieves a resource.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -871,7 +872,7 @@ func (r ApiListResourcesRequest) Execute() (*ListResourcesResponse, *http.Respon
 /*
 ListResources List Resources
 
-Description: Retrieves a list of resources for the given project.
+Description: Retrieves a list of resources in the specified project.
 By default, results include cloud resources only.
 
 
@@ -1029,7 +1030,7 @@ func (r ApiOverrideDataClassesRequest) Execute() (*OverrideDataClassificationsRe
 /*
 OverrideDataClasses Override Data Classes
 
-Description: Manually sets a resource's data classes, overriding auto-classification.
+Description: Sets a resource's data classes manually, overriding auto-classification.
 
 You can revert to auto-classification of data classes by calling [Remove Data Classes Override](remove-data-classes-override) for the same resource.
 
@@ -1171,7 +1172,7 @@ func (r ApiOverrideEnvironmentRequest) Execute() (*OverrideEnvironmentResponse, 
 /*
 OverrideEnvironment Override Environment
 
-Description: Manually sets a resource's environment, overriding auto-classification.
+Description: Sets a resource's environment manually, overriding auto-classification.
 
 You can revert to auto-classification of environment by calling [Remove Environment Override](remove-environment-override) for the same resource.
 
@@ -1537,7 +1538,6 @@ type ApiUpdateObjectStoreScanMethodRequest struct {
 	updateObjectStoreScanMethodRequest *UpdateObjectStoreScanMethodRequest
 }
 
-// Object-store scan method settings to update. Eon ignores enabled when systemControlled is true. The enabled field is required when systemControlled is false.
 func (r ApiUpdateObjectStoreScanMethodRequest) UpdateObjectStoreScanMethodRequest(updateObjectStoreScanMethodRequest UpdateObjectStoreScanMethodRequest) ApiUpdateObjectStoreScanMethodRequest {
 	r.updateObjectStoreScanMethodRequest = &updateObjectStoreScanMethodRequest
 	return r
@@ -1548,13 +1548,14 @@ func (r ApiUpdateObjectStoreScanMethodRequest) Execute() (*UpdateObjectStoreScan
 }
 
 /*
-UpdateObjectStoreScanMethod Update object-store scan method
+UpdateObjectStoreScanMethod Update Object-Store Scan Method
 
-Description: Updates object-store scan method settings for an AWS S3 bucket or GCP Cloud Storage bucket. Despite S3-oriented setting names, CDC and inventory settings apply to both AWS S3 buckets and GCP Cloud Storage buckets.
+Description: Updates the scan mode and change detection mode for an Amazon S3 bucket or Google Cloud Storage bucket.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project the resource is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
- @param id Eon-assigned ID of the AWS S3 bucket or GCP Cloud Storage bucket resource.
+ @param id Eon-assigned ID of the Amazon S3 bucket or Google Cloud Storage bucket to update.
  @return ApiUpdateObjectStoreScanMethodRequest
 */
 func (a *ResourcesAPIService) UpdateObjectStoreScanMethod(ctx context.Context, projectId string, id string) ApiUpdateObjectStoreScanMethodRequest {

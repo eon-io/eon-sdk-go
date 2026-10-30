@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Seconds** | Pointer to **int64** | Seconds since the Unix epoch. | [optional] 
-**Nanos** | Pointer to **int32** | Nanosecond fraction of the second. | [optional] 
+**Seconds** | Pointer to **int64** | Seconds since the Unix epoch (1970-01-01T00:00:00Z). Omitted when &#x60;0&#x60;.  | [optional] 
+**Nanos** | Pointer to **int32** | Nanosecond fraction of the second. Omitted when &#x60;0&#x60;.  | [optional] 
 
 ## Methods
 

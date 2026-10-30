@@ -22,6 +22,7 @@ var _ MappedNullable = &EncryptionTypeCondition{}
 // EncryptionTypeCondition struct for EncryptionTypeCondition
 type EncryptionTypeCondition struct {
 	Operator ListOperators `json:"operator"`
+	// Encryption types to evaluate.
 	EncryptionTypes []EncryptionType `json:"encryptionTypes"`
 }
 

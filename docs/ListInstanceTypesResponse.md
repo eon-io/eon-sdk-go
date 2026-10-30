@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InstanceTypes** | Pointer to **[]string** | The instance types list | [optional] 
-**InstantRestoreMapping** | Pointer to **map[string]string** | Map from post-promotion instance type → instant-restore host instance type. Keys present in &#x60;instanceTypes&#x60; but absent from this map have no instant-restore option in this AZ.  | [optional] 
+**InstanceTypes** | Pointer to **[]string** | List of instance types. | [optional] 
+**InstantRestoreMapping** | Pointer to **map[string]string** | Map from post-promotion to instant-restore host instance type. Options that are present in &#x60;instanceTypes&#x60; but absent from this list are not available for instant restore in the availability zone.  | [optional] 
 
 ## Methods
 

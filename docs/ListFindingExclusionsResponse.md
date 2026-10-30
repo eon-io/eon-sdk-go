@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FindingExclusions** | [**[]FindingExclusion**](FindingExclusion.md) | Finding exclusions on the current page. | 
+**FindingExclusions** | [**[]FindingExclusion**](FindingExclusion.md) | List of finding exclusions. | 
 **TotalCount** | **int32** | Total number of finding exclusions that matched the filter options. | 
 **NextPageToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 

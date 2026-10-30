@@ -20,11 +20,11 @@ import (
 // checks if the WebhookV1StandardPayloadJobMetricsReportFailed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadJobMetricsReportFailed{}
 
-// WebhookV1StandardPayloadJobMetricsReportFailed Standard envelope of the notifications sent when a job metrics report failed.
+// WebhookV1StandardPayloadJobMetricsReportFailed Notification of a failed job metrics report.
 type WebhookV1StandardPayloadJobMetricsReportFailed struct {
 	// Notification ID. Also sent in the `X-Eon-Notification-Id` header.
 	Id string `json:"id"`
-	// ID of the project the notification belongs to.
+	// ID of the project the notification policy is in.
 	ProjectId string `json:"projectId"`
 	// Time the notification was created, in RFC 3339 format with second precision. Also sent in the `X-Eon-Timestamp` header. 
 	Timestamp time.Time `json:"timestamp"`

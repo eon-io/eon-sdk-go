@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Key** | Pointer to **string** |  | [optional] 
-**Value** | Pointer to **string** |  | [optional] 
+**Key** | Pointer to **string** | Tag key. | [optional] 
+**Value** | Pointer to **string** | Tag value. | [optional] 
 
 ## Methods
 

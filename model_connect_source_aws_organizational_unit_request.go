@@ -25,7 +25,7 @@ type ConnectSourceAwsOrganizationalUnitRequest struct {
 	RoleArn string `json:"roleArn"`
 	// AWS-assigned organizational unit ID.
 	ProviderOrganizationalUnitId string `json:"providerOrganizationalUnitId"`
-	// AWS regions Eon discovers in. Omit or leave empty to discover in all supported regions.
+	// AWS regions Eon discovers in. Omit or leave empty to discover in all supported regions. 
 	Regions []string `json:"regions,omitempty"`
 }
 

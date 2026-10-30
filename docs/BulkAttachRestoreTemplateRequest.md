@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResourceIds** | **[]string** | List of resource IDs to attach the restore template to. | 
+**ResourceIds** | **[]string** | List of Eon-assigned resource IDs to attach the restore template to. | 
 
 ## Methods
 

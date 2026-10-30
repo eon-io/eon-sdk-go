@@ -329,7 +329,7 @@ import (
 func main() {
 	projectId := "6b3ea428-f6a4-5bb5-8fb2-e4d5d2d920ce" // string | ID of the project whose backup policy you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	backupPolicyId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the backup policy to update.
-	updateBackupPolicyRequest := *openapiclient.NewUpdateBackupPolicyRequest("Production with PII", *openapiclient.NewBackupPolicyResourceSelector(openapiclient.ResourceSelectorMode("ALL")), *openapiclient.NewBackupPolicyPlan(openapiclient.BackupPolicyType("UNSPECIFIED"))) // UpdateBackupPolicyRequest | The request body for updating a policy
+	updateBackupPolicyRequest := *openapiclient.NewUpdateBackupPolicyRequest("Production with PII", *openapiclient.NewBackupPolicyResourceSelector(openapiclient.ResourceSelectorMode("ALL")), *openapiclient.NewBackupPolicyPlan(openapiclient.BackupPolicyType("UNSPECIFIED"))) // UpdateBackupPolicyRequest | 
 	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateBackupPolicyRequest** | [**UpdateBackupPolicyRequest**](UpdateBackupPolicyRequest.md) | The request body for updating a policy | 
+ **updateBackupPolicyRequest** | [**UpdateBackupPolicyRequest**](UpdateBackupPolicyRequest.md) |  | 
  **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type

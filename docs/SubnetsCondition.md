@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ListOperators**](ListOperators.md) |  | 
-**Subnets** | **[]string** |  | 
+**Subnets** | **[]string** | Cloud-provider-assigned subnet IDs to evaluate. | 
 
 ## Methods
 

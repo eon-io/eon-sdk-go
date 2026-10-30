@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **PolicyDetails** | [**[]MPARequestPolicyDetail**](MPARequestPolicyDetail.md) | List of the action request&#39;s approval rules. Each item contains the rule&#39;s configuration and approval progress.  | 
 **ApprovalExpirationTime** | Pointer to **NullableTime** | Deadline for gathering approvals. Omitted before the request is submitted or after it&#39;s discarded.  | [optional] 
 **ExecutionExpirationTime** | Pointer to **NullableTime** | Deadline for completing the approved action. Set when the request is approved.  | [optional] 
-**ResolvedTime** | Pointer to **NullableTime** | Time when the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Omitted while the request is still active.  | [optional] 
-**CreatedTime** | **time.Time** | Time when the approval request was created. | 
+**ResolvedTime** | Pointer to **NullableTime** | Date and time the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Omitted while the request is still active.  | [optional] 
+**CreatedTime** | **time.Time** | Date and time the approval request was created. | 
 
 ## Methods
 

@@ -34,7 +34,7 @@ type BackupVault struct {
 	// Whether the vault is in an Eon-managed vault account.
 	IsManagedByEon bool `json:"isManagedByEon"`
 	VaultAttributes VaultProviderAttributes `json:"vaultAttributes"`
-	// User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
+	// List of labels for filtering and searching for vaults. Doesn't affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
 	Labels []string `json:"labels,omitempty"`
 }
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RoleArn** | Pointer to **NullableString** | ARN of the role Eon assumes to access the account in AWS. Only the role name portion of the ARN can be changed. The AWS account ID must remain the same.  | [optional] 
-**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions.  | [optional] 
+**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. Omit to leave the current regions unchanged. To discover in all supported regions, pass an empty list.  | [optional] 
 
 ## Methods
 

@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1JobMetricsReportFailedArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1JobMetricsReportFailedArguments{}
 
-// WebhookV1JobMetricsReportFailedArguments Details of a failed job metrics report.
+// WebhookV1JobMetricsReportFailedArguments Details of the failed job metrics report.
 type WebhookV1JobMetricsReportFailedArguments struct {
 	CloudAccountArguments *WebhookV1CloudAccountArguments `json:"cloudAccountArguments,omitempty"`
 	// Region of the report.

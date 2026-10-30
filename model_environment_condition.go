@@ -22,6 +22,7 @@ var _ MappedNullable = &EnvironmentCondition{}
 // EnvironmentCondition struct for EnvironmentCondition
 type EnvironmentCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Environments to evaluate.
 	Environments []Environment `json:"environments"`
 }
 

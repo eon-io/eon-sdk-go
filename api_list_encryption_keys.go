@@ -32,7 +32,7 @@ type ApiListEncryptionKeysRequest struct {
 	includeAwsManagedKeys *bool
 }
 
-// Whether to include AWS managed keys in the response
+// Whether to include AWS-managed keys in the response.
 func (r ApiListEncryptionKeysRequest) IncludeAwsManagedKeys(includeAwsManagedKeys bool) ApiListEncryptionKeysRequest {
 	r.includeAwsManagedKeys = &includeAwsManagedKeys
 	return r
@@ -45,12 +45,12 @@ func (r ApiListEncryptionKeysRequest) Execute() (*EncryptionKeys, *http.Response
 /*
 ListEncryptionKeys List Encryption Keys
 
-Description: Lists encryption keys available to the restore account in the specified region.
+Description: Retrieves a list of encryption keys available to Eon in the specified region of the restore account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param accountId ID of the restore account
- @param region Region
+ @param projectId ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
+ @param region Region where the encryption keys are located.
  @return ApiListEncryptionKeysRequest
 */
 func (a *ListEncryptionKeysAPIService) ListEncryptionKeys(ctx context.Context, projectId string, accountId string, region string) ApiListEncryptionKeysRequest {

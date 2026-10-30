@@ -22,6 +22,7 @@ var _ MappedNullable = &AccountIdCondition{}
 // AccountIdCondition struct for AccountIdCondition
 type AccountIdCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Cloud-provider-assigned account IDs to evaluate.
 	AccountIds []string `json:"accountIds"`
 }
 

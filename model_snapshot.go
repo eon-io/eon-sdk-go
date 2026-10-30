@@ -36,12 +36,12 @@ type Snapshot struct {
 	ResourceId string `json:"resourceId"`
 	// Backup job ID.
 	JobId *string `json:"jobId,omitempty"`
-	// Date and time the snapshot's retention expires, from its point in time and retention alone. A snapshot can outlive this date while a hold defers its deletion — see effectiveExpirationTime, which is the date the snapshot is actually expected to be removed. 
+	// Date and time the snapshot's retention expires and is marked for deletion. Calculated based on its point in time and retention.  A snapshot can outlive this date while on hold, which defers its deletion. In these cases, `effectiveExpirationTime` reflects the date the snapshot is expected to be removed after the hold ends. 
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
-	// Date and time the snapshot is actually expected to be deleted, accounting for any hold that defers it past expirationTime. Absent when holdReason is set but the hold has no end date of its own, meaning no deletion date is known until the condition behind the hold changes. 
+	// Date and time the snapshot is expected to be deleted, accounting for any hold that defers it past its original expiration. Absent when `holdReason` is set but the hold has no end date of its own, meaning no deletion date is known until the condition behind the hold changes. 
 	EffectiveExpirationTime *time.Time `json:"effectiveExpirationTime,omitempty"`
 	HoldReason *SnapshotHoldReason `json:"holdReason,omitempty"`
-	// Customer-facing explanation of holdReason, including how to end the hold where that is possible. Absent when the snapshot is not being held. Render as given. 
+	// Explanation of `holdReason`, including how to end the hold, if possible. Absent when the snapshot is not on hold. 
 	HoldReasonMessage *string `json:"holdReasonMessage,omitempty"`
 	Resource *ResourceSnapshot `json:"resource,omitempty"`
 	// Whether the snapshot is on user hold.

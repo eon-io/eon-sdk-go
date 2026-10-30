@@ -19,7 +19,7 @@ import (
 // checks if the RestoreDestinationTagLimits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RestoreDestinationTagLimits{}
 
-// RestoreDestinationTagLimits Limits the restore accounts that can be used as restore destinations for operations granted by the role, by the tags the cloud provider holds against the account: AWS account tags, Azure subscription tags, or GCP project labels.  Applied in addition to `restoreDestinationLimits`, so a destination has to satisfy both. Matching is exact on key and value; an account Eon has discovered no tags for satisfies only `CONTAINS_NONE_OF`. 
+// RestoreDestinationTagLimits Limits the restore accounts that can be used as restore destinations for operations granted by the role, using the tags the cloud provider holds against the account (AWS account tags, Azure subscription tags, or GCP project labels).  Applied in combination with `restoreDestinationLimits`, so a destination has to satisfy both. Matching is exact on key and value. If Eon discovers no tags for an account, the account satisfies only `CONTAINS_NONE_OF`. 
 type RestoreDestinationTagLimits struct {
 	Subject RestoreAccountTagSubject `json:"subject"`
 	Operator RestoreAccountTagOperator `json:"operator"`

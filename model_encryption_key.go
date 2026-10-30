@@ -21,11 +21,11 @@ var _ MappedNullable = &EncryptionKey{}
 
 // EncryptionKey struct for EncryptionKey
 type EncryptionKey struct {
-	// The ID of the encryption key
+	// Cloud-provider-assigned ID of the encryption key.
 	Id string `json:"id"`
-	// The full name of the encryption key
+	// ARN of the encryption key.
 	Arn string `json:"arn"`
-	// The alias name of the encryption key
+	// Encryption key alias.
 	AliasName string `json:"aliasName"`
 }
 

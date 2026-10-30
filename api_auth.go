@@ -195,7 +195,7 @@ func (r ApiGetAccessTokenOAuth2Request) ClientSecret(clientSecret string) ApiGet
 	return r
 }
 
-// The OAuth 2.0 grant type you&#39;re using. Must be &#x60;client_credentials&#x60;. 
+// OAuth 2.0 grant type you&#39;re using. Must be &#x60;client_credentials&#x60;. 
 func (r ApiGetAccessTokenOAuth2Request) GrantType(grantType string) ApiGetAccessTokenOAuth2Request {
 	r.grantType = &grantType
 	return r

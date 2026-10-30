@@ -20,13 +20,13 @@ import (
 // checks if the WebhookV1OnboardingPayload type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1OnboardingPayload{}
 
-// WebhookV1OnboardingPayload Envelope of the message sent once when a webhook notification target is configured, confirming that Eon can deliver to it. 
+// WebhookV1OnboardingPayload Notification of a newly configured webhook, sent once to confirm that Eon can deliver to it.
 type WebhookV1OnboardingPayload struct {
-	// Always `onboarding`. Also sent in the `X-Eon-Notification-Type` header.
+	// Always `onboarding`. Also sent in the `X-Eon-Notification-Type` header. 
 	Type string `json:"type"`
 	// Human-readable confirmation message.
 	Message string `json:"message"`
-	// ID of the project the webhook target belongs to.
+	// ID of the project the notification policy is in.
 	ProjectId string `json:"projectId"`
 	// Time the message was sent, in RFC 3339 format with second precision. Also sent in the `X-Eon-Timestamp` header. 
 	Timestamp time.Time `json:"timestamp"`

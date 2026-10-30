@@ -21,15 +21,15 @@ var _ MappedNullable = &ListSubnetsResponseV2SubnetsInner{}
 
 // ListSubnetsResponseV2SubnetsInner struct for ListSubnetsResponseV2SubnetsInner
 type ListSubnetsResponseV2SubnetsInner struct {
-	// The id of the subnet
+	// Cloud-provider-assigned ID of the subnet.
 	Id string `json:"id"`
-	// The vpc id of the subnet
+	// Cloud-provider-assigned ID of the VPC the subnet is in.
 	Vpc string `json:"vpc"`
-	// The availability zone of the subnet
+	// Availability zone the subnet is in.
 	AvailabilityZone string `json:"availabilityZone"`
-	// The name of the subnet
+	// Name of the subnet.
 	Name *string `json:"name,omitempty"`
-	// The primary IPv4 CIDR range of the subnet (e.g. \"10.0.0.0/24\")
+	// Primary IPv4 CIDR range of the subnet.
 	CidrBlock *string `json:"cidrBlock,omitempty"`
 }
 

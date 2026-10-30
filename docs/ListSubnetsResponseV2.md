@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Subnets** | [**[]ListSubnetsResponseV2SubnetsInner**](ListSubnetsResponseV2SubnetsInner.md) | The available zones for the region | 
+**Subnets** | [**[]ListSubnetsResponseV2SubnetsInner**](ListSubnetsResponseV2SubnetsInner.md) | List of subnets. | 
 
 ## Methods
 

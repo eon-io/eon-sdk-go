@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ListOperators**](ListOperators.md) |  | 
-**Apps** | **[]string** |  | 
+**Apps** | **[]string** | Apps to evaluate. | 
 
 ## Methods
 

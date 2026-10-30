@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Regions** | Pointer to **[]string** | Azure regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions.  | [optional] 
+**Regions** | Pointer to **[]string** | Azure regions Eon discovers in. Omit to leave the current regions unchanged. To discover in all supported regions, pass an empty list.  | [optional] 
 
 ## Methods
 

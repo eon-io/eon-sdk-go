@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Restore template ID. | 
+**Id** | **string** | ID of the restore template. | 
 **Name** | **string** | Restore template display name. | 
-**Description** | Pointer to **string** | Optional description of the restore template. | [optional] 
+**Description** | Pointer to **string** | Description of the restore template&#39;s purpose. | [optional] 
 **ResourceType** | [**RestoreTemplateResourceType**](RestoreTemplateResourceType.md) |  | 
 **Ec2Params** | Pointer to [**NullableEc2TemplateParams**](Ec2TemplateParams.md) |  | [optional] 
 **S3Params** | Pointer to [**NullableS3TemplateParams**](S3TemplateParams.md) |  | [optional] 
 **AttachedResourceCount** | Pointer to **int32** | Number of resources currently using this restore template. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Timestamp when the restore template was created. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Timestamp when the restore template was last updated. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | Date and time the restore template was created. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Date and time the restore template was last updated. | [optional] 
 
 ## Methods
 

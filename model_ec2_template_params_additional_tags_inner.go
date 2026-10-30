@@ -19,7 +19,9 @@ var _ MappedNullable = &Ec2TemplateParamsAdditionalTagsInner{}
 
 // Ec2TemplateParamsAdditionalTagsInner struct for Ec2TemplateParamsAdditionalTagsInner
 type Ec2TemplateParamsAdditionalTagsInner struct {
+	// Tag key.
 	Key *string `json:"key,omitempty"`
+	// Tag value.
 	Value *string `json:"value,omitempty"`
 }
 

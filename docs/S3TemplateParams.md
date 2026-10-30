@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TargetBucketId** | **string** | ID of the target S3 bucket for the restore. | 
+**TargetBucketId** | **string** | Name of the target S3 bucket for the restore. | 
 **PrefixTemplate** | **string** | Template for the prefix to use when restoring objects. | 
-**TargetAccountId** | **string** | ID of the target cloud account for the restore. | 
+**TargetAccountId** | **string** | Eon-assigned ID of the target restore account. | 
 **TargetRegion** | **string** | Target region for the restore. | 
 **KmsKeyArn** | Pointer to **string** | ARN of a customer-managed KMS key in the target account and region. It encrypts the restore&#39;s temporary secrets in the restore account: the vault access secret and the container-registry token. Restored objects use the target bucket&#39;s default encryption. AWS-managed keys aren&#39;t accepted.  | [optional] 
 

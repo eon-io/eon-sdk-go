@@ -22,6 +22,7 @@ var _ MappedNullable = &SubnetsCondition{}
 // SubnetsCondition struct for SubnetsCondition
 type SubnetsCondition struct {
 	Operator ListOperators `json:"operator"`
+	// Cloud-provider-assigned subnet IDs to evaluate.
 	Subnets []string `json:"subnets"`
 }
 

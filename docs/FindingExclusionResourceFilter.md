@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**In** | Pointer to **[]string** | Matches exclusions for any of these resources, by cloud provider resource ID. An empty list applies no filter; IDs that match no resource in the account match no exclusion.  | [optional] 
+**In** | Pointer to **[]string** | Matches if any string in this list equals &#x60;providerResourceId&#x60;. Account-wide exclusions never match.  | [optional] 
 
 ## Methods
 

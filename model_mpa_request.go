@@ -38,9 +38,9 @@ type MPARequest struct {
 	ApprovalExpirationTime NullableTime `json:"approvalExpirationTime,omitempty"`
 	// Deadline for completing the approved action. Set when the request is approved. 
 	ExecutionExpirationTime NullableTime `json:"executionExpirationTime,omitempty"`
-	// Time when the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Omitted while the request is still active. 
+	// Date and time the request reached a terminal state, such as executed, expired, canceled, denied, or discarded. Omitted while the request is still active. 
 	ResolvedTime NullableTime `json:"resolvedTime,omitempty"`
-	// Time when the approval request was created.
+	// Date and time the approval request was created.
 	CreatedTime time.Time `json:"createdTime"`
 }
 

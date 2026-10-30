@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateGcpSourceAccountAttributes{}
 type UpdateGcpSourceAccountAttributes struct {
 	// Email of the service account Eon impersonates to access the GCP project. Only the service account name portion can be changed. The GCP project ID must remain the same. 
 	ServiceAccount NullableString `json:"serviceAccount,omitempty"`
-	// GCP regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions. 
+	// GCP regions Eon discovers in. Omit to leave the current regions unchanged. To discover in all supported regions, pass an empty list. 
 	Regions []string `json:"regions,omitempty"`
 }
 

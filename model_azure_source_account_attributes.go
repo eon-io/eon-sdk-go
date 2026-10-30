@@ -21,15 +21,15 @@ var _ MappedNullable = &AzureSourceAccountAttributes{}
 
 // AzureSourceAccountAttributes Azure subscription configuration. Applicable if `cloudProvider` is set to `AZURE`. 
 type AzureSourceAccountAttributes struct {
-	// ID of the Azure tenant the subscription belongs to.
+	// Cloud-provider-assigned ID of the Azure tenant the subscription belongs to.
 	TenantId string `json:"tenantId"`
-	// ID of the Azure subscription.
+	// Cloud-provider-assigned ID of the Azure subscription.
 	SubscriptionId string `json:"subscriptionId"`
 	// Resource group name for Eon's temporary internal resources. 
 	EonInternalResourceGroupName *string `json:"eonInternalResourceGroupName,omitempty"`
-	// ID of the Azure management group the source account is scoped to.
+	// Cloud-provider-assigned ID of the Azure management group the source account is scoped to.
 	ManagementGroupId *string `json:"managementGroupId,omitempty"`
-	// Azure regions Eon discovers in. Empty means all supported regions.
+	// Azure regions Eon discovers in. If omitted, Eon discovers in all supported regions.
 	Regions []string `json:"regions,omitempty"`
 }
 

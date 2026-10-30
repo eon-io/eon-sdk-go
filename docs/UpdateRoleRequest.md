@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | The name of the role | 
-**PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | The permissions of the role | 
-**AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | The condition of the role, keyed by name | [optional] 
+**Name** | **string** | Name of the role. | 
+**PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | Permissions of the role. | 
+**AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | Condition of the role, keyed by name. | [optional] 
 **RestoreDestinationLimits** | Pointer to [**NullableRestoreDestinationLimits**](RestoreDestinationLimits.md) |  | [optional] 
 **RestoreDestinationTagLimits** | Pointer to [**NullableRestoreDestinationTagLimits**](RestoreDestinationTagLimits.md) |  | [optional] 
 **SameSourceAccountRestoreLimits** | Pointer to [**NullableSameSourceAccountRestoreLimits**](SameSourceAccountRestoreLimits.md) |  | [optional] 

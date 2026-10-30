@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ComplianceStatus Whether the resource meets the controls applied to it. Independent of `configurationStatus` — it is evaluated whether or not a backup policy is assigned, since a resource with no policy can already violate a control that says it must be backed up. `COMPLIANT` — no violations. This is the default: a resource no control applies to reads compliant rather than \"not evaluated\". `VIOLATIONS` — at least one open violation. `ALL_MUTED` — the resource has violations and every one of them is muted. There is deliberately no value for \"nothing to check\". Derived from the resource's issues on each request rather than stored, so it cannot drift out of step with `controlViolationCounts`. Absent only when the resource's issues could not be read for the response. 
+// ComplianceStatus Whether the resource meets the backup posture controls applied to it. Evaluated independent of `configurationStatus`.  - `COMPLIANT`: No violations.   This is the default status.   Resources with no controls applied are considered compliant. - `VIOLATIONS`: At least one open violation.   For the count, see `controlViolationCounts`. - `ALL_MUTED`: The resource has violations and every one of them is muted. 
 type ComplianceStatus string
 
 // List of ComplianceStatus

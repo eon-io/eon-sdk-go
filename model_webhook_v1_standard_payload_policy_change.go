@@ -20,11 +20,11 @@ import (
 // checks if the WebhookV1StandardPayloadPolicyChange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadPolicyChange{}
 
-// WebhookV1StandardPayloadPolicyChange Standard envelope of the notifications sent when a policy was created, updated or deleted.
+// WebhookV1StandardPayloadPolicyChange Notification of a created, updated, or deleted policy.
 type WebhookV1StandardPayloadPolicyChange struct {
 	// Notification ID. Also sent in the `X-Eon-Notification-Id` header.
 	Id string `json:"id"`
-	// ID of the project the notification belongs to.
+	// ID of the project the notification policy is in.
 	ProjectId string `json:"projectId"`
 	// Time the notification was created, in RFC 3339 format with second precision. Also sent in the `X-Eon-Timestamp` header. 
 	Timestamp time.Time `json:"timestamp"`

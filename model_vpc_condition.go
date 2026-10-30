@@ -22,6 +22,7 @@ var _ MappedNullable = &VpcCondition{}
 // VpcCondition struct for VpcCondition
 type VpcCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Cloud-provider-assigned VPC IDs to evaluate.
 	Vpcs []string `json:"vpcs"`
 }
 

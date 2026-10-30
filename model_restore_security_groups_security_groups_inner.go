@@ -21,11 +21,11 @@ var _ MappedNullable = &RestoreSecurityGroupsSecurityGroupsInner{}
 
 // RestoreSecurityGroupsSecurityGroupsInner struct for RestoreSecurityGroupsSecurityGroupsInner
 type RestoreSecurityGroupsSecurityGroupsInner struct {
-	// Then name of the security group
+	// Name of the security group.
 	Name string `json:"name"`
-	// The id of the security group
+	// Cloud-provider-assigned ID of the security group.
 	Id string `json:"id"`
-	// The vpc id of the security group
+	// Cloud-provider-assigned ID of the VPC the security group is in.
 	Vpc string `json:"vpc"`
 }
 

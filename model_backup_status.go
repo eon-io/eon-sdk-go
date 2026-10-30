@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// BackupStatus Deprecated Eon backup status, replaced by `configurationStatus` (whether a backup is configured for the resource, and if not why not) and `complianceStatus` (whether the resource meets the controls applied to it). Removed on April 30, 2027. For an explanation of statuses, see [Backup Statuses](/user-guide/monitoring/backup-statuses). `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses. 
+// BackupStatus Eon backup status. For an explanation of statuses, see [Backup Statuses](/data-protection/backup-and-protection/backup-management/backup-statuses). `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses.  Replaced by `configurationStatus` and `complianceStatus`. Supported until April 30, 2027. 
 type BackupStatus string
 
 // List of BackupStatus

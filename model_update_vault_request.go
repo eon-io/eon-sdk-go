@@ -23,7 +23,7 @@ var _ MappedNullable = &UpdateVaultRequest{}
 type UpdateVaultRequest struct {
 	// Vault display name.
 	Name string `json:"name"`
-	// User-defined metadata labels, used for filtering and search only. They do not affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
+	// List of labels for filtering and searching for vaults. Doesn't affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
 	Labels []string `json:"labels,omitempty"`
 }
 

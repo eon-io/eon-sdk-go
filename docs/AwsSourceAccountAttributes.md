@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RoleArn** | **string** | ARN of the role Eon assumes to access the account in AWS. | 
 **OrganizationId** | Pointer to **string** | Cloud-provider-assigned ID of the AWS organization the account belongs to. | [optional] 
-**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. Empty means all supported regions. | [optional] 
+**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. If omitted, Eon discovers in all supported regions. | [optional] 
 
 ## Methods
 

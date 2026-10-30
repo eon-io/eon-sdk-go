@@ -27,7 +27,7 @@ type RestoreInstanceVolumeInput struct {
 	Description *string `json:"description,omitempty"`
 	// Tags to apply to the restored volume as key-value pairs, where key and value are both strings.  **Example:** `{\"primary\": \"\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
-	// ARN of the KMS key for encrypting the restored volume. Omit it to restore the volume unencrypted, or encrypted with the account default key when EBS encryption by default is enabled. Volumes restored from a native EBS backup are always encrypted and use the AWS-managed `aws/ebs` key when this is omitted. 
+	// ARN of the KMS key to encrypt the restored volume with. If omitted, the volume is restored unencrypted, unless EBS encryption by default is on. In that case, it's encrypted with the account's default key.  Volumes restored from a native EBS backup are always encrypted. If omitted when restoring EBS volumes, they use the AWS-managed `aws/ebs` key. 
 	VolumeEncryptionKeyId *string `json:"volumeEncryptionKeyId,omitempty"`
 	VolumeSettings VolumeSettings `json:"volumeSettings"`
 }

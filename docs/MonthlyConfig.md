@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DaysOfMonth** | Pointer to **[]int32** | Days of the month to schedule backups.  | [optional] 
 **TimeOfDay** | Pointer to [**TimeOfDay**](TimeOfDay.md) |  | [optional] 
-**StartWindowMinutes** | Pointer to **int32** | The window of time after the start time you want the backup to start, in minutes. Defaults to &#x60;240&#x60; (4 hours).  | [optional] [default to 240]
+**StartWindowMinutes** | Pointer to **int32** | Window of time after the start time you want the backup to start, in minutes. Defaults to &#x60;240&#x60; (4 hours).  | [optional] [default to 240]
 
 ## Methods
 

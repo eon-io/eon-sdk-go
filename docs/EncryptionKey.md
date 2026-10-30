@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The ID of the encryption key | 
-**Arn** | **string** | The full name of the encryption key | 
-**AliasName** | **string** | The alias name of the encryption key | 
+**Id** | **string** | Cloud-provider-assigned ID of the encryption key. | 
+**Arn** | **string** | ARN of the encryption key. | 
+**AliasName** | **string** | Encryption key alias. | 
 
 ## Methods
 

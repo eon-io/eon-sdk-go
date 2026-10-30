@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **VaultId** | Pointer to **string** | ID of the vault the snapshot is stored in. Empty for native snapshots. | [optional] 
 **ResourceId** | **string** | Eon-assigned ID of the resource the snapshot is backing up. | 
 **JobId** | Pointer to **string** | Backup job ID. | [optional] 
-**ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention expires, from its point in time and retention alone. A snapshot can outlive this date while a hold defers its deletion — see effectiveExpirationTime, which is the date the snapshot is actually expected to be removed.  | [optional] 
-**EffectiveExpirationTime** | Pointer to **time.Time** | Date and time the snapshot is actually expected to be deleted, accounting for any hold that defers it past expirationTime. Absent when holdReason is set but the hold has no end date of its own, meaning no deletion date is known until the condition behind the hold changes.  | [optional] 
+**ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention expires and is marked for deletion. Calculated based on its point in time and retention.  A snapshot can outlive this date while on hold, which defers its deletion. In these cases, &#x60;effectiveExpirationTime&#x60; reflects the date the snapshot is expected to be removed after the hold ends.  | [optional] 
+**EffectiveExpirationTime** | Pointer to **time.Time** | Date and time the snapshot is expected to be deleted, accounting for any hold that defers it past its original expiration. Absent when &#x60;holdReason&#x60; is set but the hold has no end date of its own, meaning no deletion date is known until the condition behind the hold changes.  | [optional] 
 **HoldReason** | Pointer to [**SnapshotHoldReason**](SnapshotHoldReason.md) |  | [optional] 
-**HoldReasonMessage** | Pointer to **string** | Customer-facing explanation of holdReason, including how to end the hold where that is possible. Absent when the snapshot is not being held. Render as given.  | [optional] 
+**HoldReasonMessage** | Pointer to **string** | Explanation of &#x60;holdReason&#x60;, including how to end the hold, if possible. Absent when the snapshot is not on hold.  | [optional] 
 **Resource** | Pointer to [**ResourceSnapshot**](ResourceSnapshot.md) |  | [optional] 
 **OnHold** | Pointer to **bool** | Whether the snapshot is on user hold. | [optional] 
 **HoldDescription** | Pointer to **string** | Note explaining why the snapshot is on hold. Cleared when the hold is removed.  | [optional] 

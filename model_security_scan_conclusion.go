@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// SecurityScanConclusion Conclusion of a security scan
+// SecurityScanConclusion Conclusion of a security scan.
 type SecurityScanConclusion string
 
 // List of SecurityScanConclusion

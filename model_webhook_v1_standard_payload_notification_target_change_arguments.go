@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadNotificationTargetChangeArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadNotificationTargetChangeArguments{}
 
-// WebhookV1StandardPayloadNotificationTargetChangeArguments Details of the notification. Notifications of these types always carry `notificationTargetChange`. 
+// WebhookV1StandardPayloadNotificationTargetChangeArguments Details of the notification. Always `notificationTargetChange`. 
 type WebhookV1StandardPayloadNotificationTargetChangeArguments struct {
 	NotificationTargetChange WebhookV1NotificationTargetChangeArguments `json:"notificationTargetChange"`
 }

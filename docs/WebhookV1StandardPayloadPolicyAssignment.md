@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Notification ID. Also sent in the &#x60;X-Eon-Notification-Id&#x60; header. | 
-**ProjectId** | **string** | ID of the project the notification belongs to. | 
+**ProjectId** | **string** | ID of the project the notification policy is in. | 
 **Timestamp** | **time.Time** | Time the notification was created, in RFC 3339 format with second precision. Also sent in the &#x60;X-Eon-Timestamp&#x60; header.  | 
 **Type** | **string** | Notification type. Also sent in the &#x60;X-Eon-Notification-Type&#x60; header. | 
 **Arguments** | [**WebhookV1StandardPayloadPolicyAssignmentArguments**](WebhookV1StandardPayloadPolicyAssignmentArguments.md) |  | 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**LogicalOperator**](LogicalOperator.md) |  | 
-**Operands** | [**[]ActionApprovalRuleExpression**](ActionApprovalRuleExpression.md) | Must contain at least two expressions. | 
+**Operands** | [**[]ActionApprovalRuleExpression**](ActionApprovalRuleExpression.md) | List of expressions to evaluate using the logical operator specified in &#x60;operator&#x60;. Each item in the list can be either a single expression or a nested &#x60;group&#x60; expression.  | 
 
 ## Methods
 

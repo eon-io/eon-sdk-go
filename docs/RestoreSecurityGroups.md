@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Region** | **string** | The region to restore | 
-**SecurityGroups** | [**[]RestoreSecurityGroupsSecurityGroupsInner**](RestoreSecurityGroupsSecurityGroupsInner.md) | The available zones for the region | 
+**Region** | **string** | Region where the security groups are located. | 
+**SecurityGroups** | [**[]RestoreSecurityGroupsSecurityGroupsInner**](RestoreSecurityGroupsSecurityGroupsInner.md) | List of security groups. | 
 
 ## Methods
 

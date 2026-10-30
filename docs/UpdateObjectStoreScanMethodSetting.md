@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Enabled** | Pointer to **NullableBool** | Whether to enable this scan method. Required when systemControlled is false. Ignored when systemControlled is true. | [optional] 
-**SystemControlled** | **bool** | Whether Eon manages this scan method. | 
+**Enabled** | Pointer to **NullableBool** | Whether to enable this mode. Required when &#x60;systemControlled&#x60; is &#x60;false&#x60;. Ignored when &#x60;systemControlled&#x60; is &#x60;true&#x60;. | [optional] 
+**SystemControlled** | **bool** | Whether Eon manages this mode. When &#x60;true&#x60;, Eon automatically determines whether the mode is enabled.  | 
 
 ## Methods
 

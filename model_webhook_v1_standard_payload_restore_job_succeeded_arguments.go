@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadRestoreJobSucceededArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadRestoreJobSucceededArguments{}
 
-// WebhookV1StandardPayloadRestoreJobSucceededArguments Details of the notification. Notifications of these types always carry `restoreJobSucceeded`. 
+// WebhookV1StandardPayloadRestoreJobSucceededArguments Details of the notification. Always `restoreJobSucceeded`. 
 type WebhookV1StandardPayloadRestoreJobSucceededArguments struct {
 	RestoreJobSucceeded WebhookV1RestoreJobSucceededArguments `json:"restoreJobSucceeded"`
 }

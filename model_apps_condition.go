@@ -22,6 +22,7 @@ var _ MappedNullable = &AppsCondition{}
 // AppsCondition struct for AppsCondition
 type AppsCondition struct {
 	Operator ListOperators `json:"operator"`
+	// Apps to evaluate.
 	Apps []string `json:"apps"`
 }
 

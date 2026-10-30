@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1IssueMutedNotificationArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1IssueMutedNotificationArguments{}
 
-// WebhookV1IssueMutedNotificationArguments Details of an issue muted or unmuted on a resource.
+// WebhookV1IssueMutedNotificationArguments Details of the muted or unmuted issue.
 type WebhookV1IssueMutedNotificationArguments struct {
 	// Name of the control.
 	ControlName *string `json:"controlName,omitempty"`

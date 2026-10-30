@@ -34,19 +34,19 @@ type ApiListAwsInstanceTypesRequest struct {
 	totalVolumeBytes *int64
 }
 
-// The subnet ID to get instance types for
+// ID of the subnet whose instance types you want to list.
 func (r ApiListAwsInstanceTypesRequest) SubnetId(subnetId string) ApiListAwsInstanceTypesRequest {
 	r.subnetId = &subnetId
 	return r
 }
 
-// Number of guest volumes the operator plans to restore. Used to size the host-memory reserve for instant-restore host selection. Optional; the server uses a default when absent. 
+// Number of guest volumes you plan to restore. Used to size the host-memory reserve for instant-restore host selection. If omitted, the server uses a default. 
 func (r ApiListAwsInstanceTypesRequest) VolumeCount(volumeCount int32) ApiListAwsInstanceTypesRequest {
 	r.volumeCount = &volumeCount
 	return r
 }
 
-// Sum of guest-volume sizes in bytes. Used to size the host-memory reserve (mmap working-set term). Optional; the server uses a default when absent. 
+// Total size of the guest volumes you plan to restore, in bytes. Used to size the host-memory reserve. If omitted, the server uses a default. 
 func (r ApiListAwsInstanceTypesRequest) TotalVolumeBytes(totalVolumeBytes int64) ApiListAwsInstanceTypesRequest {
 	r.totalVolumeBytes = &totalVolumeBytes
 	return r
@@ -59,12 +59,12 @@ func (r ApiListAwsInstanceTypesRequest) Execute() (*ListInstanceTypesResponse, *
 /*
 ListAwsInstanceTypes List Instance Types
 
-Description: Lists EC2 instance types available for restore in the specified subnet and region.
+Description: Retrieves a list of EC2 instance types available for restore in the specified subnet and region.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param accountId ID of the restore account
- @param region The region to get instance types for
+ @param projectId ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
+ @param region Region where the subnet is located.
  @return ApiListAwsInstanceTypesRequest
 */
 func (a *ListAwsInstanceTypesAPIService) ListAwsInstanceTypes(ctx context.Context, projectId string, accountId string, region string) ApiListAwsInstanceTypesRequest {

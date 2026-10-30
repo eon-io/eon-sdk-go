@@ -22,9 +22,9 @@ var _ MappedNullable = &CreateFindingExclusionRequest{}
 // CreateFindingExclusionRequest struct for CreateFindingExclusionRequest
 type CreateFindingExclusionRequest struct {
 	Scope FindingExclusionScope `json:"scope"`
-	// Cloud provider ID of the resource to apply the exclusion to, such as an EC2 instance ID or an Azure resource ID. Required when `scope` is `RESOURCE`, and must be omitted when it's `ACCOUNT`. 
+	// Cloud-provider-assigned ID of the resource to apply the exclusion to.  Required for `RESOURCE` scope. Must be omitted for `ACCOUNT` scope. 
 	ProviderResourceId *string `json:"providerResourceId,omitempty"`
-	// What the exclusion matches, depending on `type`. For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`. Linux paths are compared case-sensitively. A Windows path starts with its drive letter and ignores case and separator, so `C:\\Users\\App\\Cache` and `c:/users/app/cache` match the same files. For `TABLE` or `DATABASE`, the exact table or database name. 
+	// Matching value to exclude. The value set in this field depends on the specified `type`.  - `PATH`: Matches files whose path starts with the specified value, case-sensitive.   For example, `/data/tmp` matches `/data/tmp2/report.csv`.      Linux paths are case-sensitive.      Windows paths are case-insensitive, normalize for the file separator, and start with the drive letter.     For example, `C:\\Users\\App\\Cache` matches `c:/users/app/cache`.  - `TABLE`: Exact table name.  - `DATABASE`: Exact database name.  - `KMS_KEY`: Either a KMS key ARN, or an AWS account ID to trust all keys in the account.   Available for the ransomware detector only. 
 	Value string `json:"value"`
 	Type FindingObjectType `json:"type"`
 	Detector FindingExclusionDetectorType `json:"detector"`

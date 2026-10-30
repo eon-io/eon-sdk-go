@@ -19,12 +19,12 @@ import (
 // checks if the ActionApprovalRuleResourceSelector type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionApprovalRuleResourceSelector{}
 
-// ActionApprovalRuleResourceSelector Selects the resources to which an action approval rule applies. For cloud-resource and snapshot scopes, CONDITIONAL expressions may be combined with resource ID overrides. Explicit inclusions add resources that do not match the expression, while explicit exclusions always win. Backup-policy scopes support only ALL or NONE with Eon backup policy UUIDs. 
+// ActionApprovalRuleResourceSelector Configuration that determines which entities the action approval rule applies to.  If the rule applies to backup policies, `CONDITIONAL` selection is unavailable. 
 type ActionApprovalRuleResourceSelector struct {
 	ResourceSelectionMode ResourceSelectorMode `json:"resourceSelectionMode"`
-	// Resource identifiers to protect, regardless of resourceSelectionMode. When resourceSelectionMode is NONE, only these resources are protected. For cloud-resource-scoped operations these are provider resource IDs (e.g. AWS instance IDs); for backup-policy-scoped operations these are Eon backup policy UUIDs. 
+	// IDs of entities to protect, regardless of resource selection mode. When resource selection mode is `NONE`, only these resources are protected. 
 	ResourceInclusionOverride []string `json:"resourceInclusionOverride,omitempty"`
-	// Resource identifiers to exclude from protection, regardless of resourceSelectionMode. When resourceSelectionMode is ALL, all resources except these are protected. For cloud-resource-scoped operations these are provider resource IDs; for backup-policy-scoped operations these are Eon backup policy UUIDs. 
+	// IDs of entities to exclude from protection, regardless of resource selection mode. When resource selection mode is `ALL`, all entities except these are protected. 
 	ResourceExclusionOverride []string `json:"resourceExclusionOverride,omitempty"`
 	Expression NullableActionApprovalRuleExpression `json:"expression,omitempty"`
 }

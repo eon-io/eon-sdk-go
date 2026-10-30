@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// WebhookV1FindingObjectType Type of the object a security scan finding refers to. Sent as the integer value; omitted when it's `0`.  - `0`: `FINDING_OBJECT_TYPE_UNSPECIFIED` - `1`: `FINDING_OBJECT_TYPE_PATH` - `2`: `FINDING_OBJECT_TYPE_TABLE` - `3`: `FINDING_OBJECT_TYPE_DATABASE` - `4`: `FINDING_OBJECT_TYPE_KMS_KEY` 
+// WebhookV1FindingObjectType Type of the object a security scan finding refers to. Sent as the integer value. Omitted when `0`.  - `0`: `FINDING_OBJECT_TYPE_UNSPECIFIED` - `1`: `FINDING_OBJECT_TYPE_PATH` - `2`: `FINDING_OBJECT_TYPE_TABLE` - `3`: `FINDING_OBJECT_TYPE_DATABASE` - `4`: `FINDING_OBJECT_TYPE_KMS_KEY` 
 type WebhookV1FindingObjectType int32
 
 // List of WebhookV1FindingObjectType

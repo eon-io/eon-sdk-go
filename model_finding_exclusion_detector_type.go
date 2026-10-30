@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// FindingExclusionDetectorType Detector whose findings an exclusion suppresses.
+// FindingExclusionDetectorType Detector type the exclusion applies to. If set to `MALWARE`, only paths can be excluded. 
 type FindingExclusionDetectorType string
 
 // List of FindingExclusionDetectorType

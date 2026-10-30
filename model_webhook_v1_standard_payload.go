@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// WebhookV1StandardPayload - Envelope of every event notification. `type` determines which members `arguments` carries; each variant lists the types it covers and the members they always carry. 
+// WebhookV1StandardPayload - struct for WebhookV1StandardPayload
 type WebhookV1StandardPayload struct {
 	WebhookV1StandardPayloadBackupJobFailed *WebhookV1StandardPayloadBackupJobFailed
 	WebhookV1StandardPayloadBackupJobPartial *WebhookV1StandardPayloadBackupJobPartial

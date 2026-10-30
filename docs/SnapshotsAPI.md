@@ -198,7 +198,7 @@ func main() {
 	id := "043090df-9fe5-4f89-9859-45db589c2936" // string | Eon-assigned ID of the resource whose Eon snapshots you want to retrieve.
 	pageToken := "OGRjZmRkNjYtZjJiMy00MmQ3LWIyMjMtNzU2M2NmMThiYWM2fDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
-	listInventorySnapshotsRequest := *openapiclient.NewListInventorySnapshotsRequest() // ListInventorySnapshotsRequest | Filter options. (optional)
+	listInventorySnapshotsRequest := *openapiclient.NewListInventorySnapshotsRequest() // ListInventorySnapshotsRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
  **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
- **listInventorySnapshotsRequest** | [**ListInventorySnapshotsRequest**](ListInventorySnapshotsRequest.md) | Filter options. | 
+ **listInventorySnapshotsRequest** | [**ListInventorySnapshotsRequest**](ListInventorySnapshotsRequest.md) |  | 
 
 ### Return type
 
@@ -431,7 +431,7 @@ func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project the snapshot is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	id := "fb806ce1-1cd3-5034-928a-33a87be714da" // string | Eon-assigned resource ID.
 	snapshotId := "3dc6c0c6-f94d-5e85-a174-4b981a4bb262" // string | ID of the Eon [snapshot](/api/api-reference/backup-management/snapshots/list-resource-snapshots) to restore.
-	restoreAzureSqlDatabaseRequest := *openapiclient.NewRestoreAzureSqlDatabaseRequest("RestoreAccountId_example", *openapiclient.NewAzureSqlDatabaseRestoreDestination()) // RestoreAzureSqlDatabaseRequest | The request body for restoring the instance
+	restoreAzureSqlDatabaseRequest := *openapiclient.NewRestoreAzureSqlDatabaseRequest("RestoreAccountId_example", *openapiclient.NewAzureSqlDatabaseRestoreDestination()) // RestoreAzureSqlDatabaseRequest | 
 	xActionApprovalRequestId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -466,7 +466,7 @@ Name | Type | Description  | Notes
 
 
 
- **restoreAzureSqlDatabaseRequest** | [**RestoreAzureSqlDatabaseRequest**](RestoreAzureSqlDatabaseRequest.md) | The request body for restoring the instance | 
+ **restoreAzureSqlDatabaseRequest** | [**RestoreAzureSqlDatabaseRequest**](RestoreAzureSqlDatabaseRequest.md) |  | 
  **xActionApprovalRequestId** | **string** | ID of an approved action request. Applicable only when the method is protected by an action approval policy and the action request has been approved.&amp;nbsp;   When used, the current API request must match the original request parameters. The approved action request can be executed only by the original requester.  | 
 
 ### Return type

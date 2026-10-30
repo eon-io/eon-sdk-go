@@ -19,7 +19,7 @@ import (
 // checks if the SourceStorageSizeCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SourceStorageSizeCondition{}
 
-// SourceStorageSizeCondition Evaluates the size of the resource's source data, in bytes, against a threshold.  A resource's size changes over time, so this condition is re-evaluated as the resource grows and shrinks: a resource that crosses the threshold is attached to or detached from the policy accordingly. 
+// SourceStorageSizeCondition Evaluates the size of the resource's source data, in bytes, against a threshold.  A resource's size changes over time, so this condition is re-evaluated as the resource grows and shrinks. A resource that crosses the threshold is attached to or detached from the policy accordingly. 
 type SourceStorageSizeCondition struct {
 	Operator NumericOperators `json:"operator"`
 	SizeBytes int64 `json:"sizeBytes"`

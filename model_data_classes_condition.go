@@ -22,6 +22,7 @@ var _ MappedNullable = &DataClassesCondition{}
 // DataClassesCondition struct for DataClassesCondition
 type DataClassesCondition struct {
 	Operator ListOperators `json:"operator"`
+	// Data classes to evaluate.
 	DataClasses []string `json:"dataClasses"`
 }
 

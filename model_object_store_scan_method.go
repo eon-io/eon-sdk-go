@@ -19,7 +19,7 @@ import (
 // checks if the ObjectStoreScanMethod type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ObjectStoreScanMethod{}
 
-// ObjectStoreScanMethod Current object-store scan method settings for an AWS S3 bucket or GCP Cloud Storage bucket. Each setting shows whether the method is enabled and whether Eon manages it.
+// ObjectStoreScanMethod Scan mode and change detection mode settings.
 type ObjectStoreScanMethod struct {
 	CdcBackup ObjectStoreScanMethodSetting `json:"cdcBackup"`
 	InventoryBackup ObjectStoreScanMethodSetting `json:"inventoryBackup"`

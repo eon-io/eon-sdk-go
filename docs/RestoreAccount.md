@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ProviderAccountId** | **string** | Cloud-provider-assigned account ID. | 
 **Name** | **string** | Account display name in Eon. | 
 **ProviderAccountName** | Pointer to **string** | Display name inherited from the cloud provider. | [optional] 
-**ProviderAccountAlias** | Pointer to **string** | AWS only. Account alias inherited from the cloud provider, separate from providerAccountName. | [optional] 
+**ProviderAccountAlias** | Pointer to **string** | Account alias inherited from the cloud provider. Can coexist with &#x60;providerAccountName&#x60;.  Applicable for AWS only.  | [optional] 
 **Status** | [**AccountState**](AccountState.md) |  | 
 **Version** | Pointer to [**AccountVersion**](AccountVersion.md) |  | [optional] 
 **ConnectedTime** | Pointer to **time.Time** | Date and time the account was connected to Eon. | [optional] 

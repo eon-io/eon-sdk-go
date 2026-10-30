@@ -21,7 +21,7 @@ var _ MappedNullable = &InventoryVolume{}
 
 // InventoryVolume struct for InventoryVolume
 type InventoryVolume struct {
-	// The volume's cloud-provider-assigned resource ID.
+	// Cloud-provider-assigned resource ID of the volume.
 	ProviderVolumeId string `json:"providerVolumeId"`
 	// Path of the volume on the machine it's attached to.
 	Path string `json:"path"`

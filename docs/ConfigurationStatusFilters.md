@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **In** | Pointer to [**[]ConfigurationStatus**](ConfigurationStatus.md) | Matches if any value in this list equals &#x60;configurationStatus&#x60;. | [optional] 
-**NotIn** | Pointer to [**[]ConfigurationStatus**](ConfigurationStatus.md) | Matches if no value in this list equals &#x60;configurationStatus&#x60;. A resource the status recalculation has not reached yet has no configuration status, and matches every &#x60;notIn&#x60; list.  | [optional] 
+**NotIn** | Pointer to [**[]ConfigurationStatus**](ConfigurationStatus.md) | Matches if none of the values in this list equal &#x60;configurationStatus&#x60;. A resource whose status hasn&#39;t been calculated yet has no configuration status, and matches every &#x60;notIn&#x60; list.  | [optional] 
 
 ## Methods
 

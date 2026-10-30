@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**Environments** | [**[]Environment**](Environment.md) |  | 
+**Environments** | [**[]Environment**](Environment.md) | Environments to evaluate. | 
 
 ## Methods
 

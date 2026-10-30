@@ -785,8 +785,8 @@ import (
 )
 
 func main() {
-	roleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the role
-	updateRoleRequest := *openapiclient.NewUpdateRoleRequest("Name_example", []openapiclient.PermissionGrantInput{*openapiclient.NewPermissionGrantInput(openapiclient.PermissionType("permission_id_unspecified"))}) // UpdateRoleRequest | The request body for updating a user
+	roleId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the role.
+	updateRoleRequest := *openapiclient.NewUpdateRoleRequest("Name_example", []openapiclient.PermissionGrantInput{*openapiclient.NewPermissionGrantInput(openapiclient.PermissionType("permission_id_unspecified"))}) // UpdateRoleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -806,7 +806,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**roleId** | **string** | ID of the role | 
+**roleId** | **string** | ID of the role. | 
 
 ### Other Parameters
 
@@ -816,7 +816,7 @@ Other parameters are passed through a pointer to a apiUpdateRoleRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **updateRoleRequest** | [**UpdateRoleRequest**](UpdateRoleRequest.md) | The request body for updating a user | 
+ **updateRoleRequest** | [**UpdateRoleRequest**](UpdateRoleRequest.md) |  | 
 
 ### Return type
 

@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadIssueMutedArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadIssueMutedArguments{}
 
-// WebhookV1StandardPayloadIssueMutedArguments Details of the notification. Notifications of these types always carry `issueMutedNotificationArguments`. 
+// WebhookV1StandardPayloadIssueMutedArguments Details of the notification. Always `issueMutedNotificationArguments`. 
 type WebhookV1StandardPayloadIssueMutedArguments struct {
 	IssueMutedNotificationArguments WebhookV1IssueMutedNotificationArguments `json:"issueMutedNotificationArguments"`
 }

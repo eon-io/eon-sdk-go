@@ -17,7 +17,7 @@ import (
 // checks if the BackupStatusFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupStatusFilters{}
 
-// BackupStatusFilters struct for BackupStatusFilters
+// BackupStatusFilters Filters for resource backup status.  Replaced by `configurationStatus`. Supported until April 30, 2027. 
 type BackupStatusFilters struct {
 	// Matches if any value in this list equals `backupStatus`.
 	In []BackupStatus `json:"in,omitempty"`

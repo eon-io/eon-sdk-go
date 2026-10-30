@@ -22,6 +22,7 @@ var _ MappedNullable = &SensitivityAnnotationsCondition{}
 // SensitivityAnnotationsCondition struct for SensitivityAnnotationsCondition
 type SensitivityAnnotationsCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Sensitivity levels to evaluate.
 	SensitivityAnnotations []SensitivityLevel `json:"sensitivityAnnotations"`
 }
 

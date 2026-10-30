@@ -42,12 +42,14 @@ func (r ApiCreateFindingExclusionRequest) Execute() (*CreateFindingExclusionResp
 /*
 CreateFindingExclusion Create Finding Exclusion
 
-Description: Creates an exclusion that stops a detector from reporting findings for matching files, tables or databases.
-It applies to scans that start after it's created, on one resource or on every resource in the account.
+Description: Excludes matching files, tables, or databases from threat detection.
+
+The exclusion can be scoped either to a single resource or to all resources in the Eon account.
+Creating an exclusion has no effect on in-progress scans.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiCreateFindingExclusionRequest
 */
 func (a *FindingExclusionsAPIService) CreateFindingExclusion(ctx context.Context, projectId string) ApiCreateFindingExclusionRequest {
@@ -207,11 +209,14 @@ func (r ApiDeleteFindingExclusionRequest) Execute() (*http.Response, error) {
 /*
 DeleteFindingExclusion Delete Finding Exclusion
 
-Description: Deletes a finding exclusion. Scans that start afterward report the findings it suppressed.
+Description: Deletes a finding exclusion.
+
+Deleting an exclusion has no effect on in-progress scans.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
- @param findingExclusionId Finding exclusion ID.
+ @param projectId ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param findingExclusionId ID of the finding exclusion to delete.
  @return ApiDeleteFindingExclusionRequest
 */
 func (a *FindingExclusionsAPIService) DeleteFindingExclusion(ctx context.Context, projectId string, findingExclusionId string) ApiDeleteFindingExclusionRequest {
@@ -338,8 +343,8 @@ GetFindingExclusion Get Finding Exclusion
 Description: Retrieves a finding exclusion.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
- @param findingExclusionId Finding exclusion ID.
+ @param projectId ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param findingExclusionId ID of the finding exclusion to retrieve.
  @return ApiGetFindingExclusionRequest
 */
 func (a *FindingExclusionsAPIService) GetFindingExclusion(ctx context.Context, projectId string, findingExclusionId string) ApiGetFindingExclusionRequest {
@@ -475,7 +480,7 @@ func (r ApiListFindingExclusionsRequest) PageToken(pageToken string) ApiListFind
 	return r
 }
 
-// Maximum number of finding exclusions to return. Keep the same value for every page of a listing: the page token counts pages of this size. 
+// Maximum number of items to return in the response.
 func (r ApiListFindingExclusionsRequest) PageSize(pageSize int32) ApiListFindingExclusionsRequest {
 	r.pageSize = &pageSize
 	return r
@@ -493,10 +498,10 @@ func (r ApiListFindingExclusionsRequest) Execute() (*ListFindingExclusionsRespon
 /*
 ListFindingExclusions List Finding Exclusions
 
-Description: Retrieves the finding exclusions in the account, filtered by the conditions in the request body.
+Description: Retrieves a list of finding exclusions in the Eon account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project the finding exclusions are in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiListFindingExclusionsRequest
 */
 func (a *FindingExclusionsAPIService) ListFindingExclusions(ctx context.Context, projectId string) ApiListFindingExclusionsRequest {
@@ -649,11 +654,16 @@ func (r ApiUpdateFindingExclusionRequest) Execute() (*UpdateFindingExclusionResp
 /*
 UpdateFindingExclusion Update Finding Exclusion
 
-Description: Replaces a finding exclusion. The change applies to scans that start after it.
+Description: Updates a finding exclusion.
+
+This operation replaces the entire finding exclusion object.
+Omitted fields are overwritten.
+Updating an exclusion has no effect on in-progress scans.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
- @param findingExclusionId Finding exclusion ID.
+ @param projectId ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param findingExclusionId ID of the finding exclusion to update.
  @return ApiUpdateFindingExclusionRequest
 */
 func (a *FindingExclusionsAPIService) UpdateFindingExclusion(ctx context.Context, projectId string, findingExclusionId string) ApiUpdateFindingExclusionRequest {

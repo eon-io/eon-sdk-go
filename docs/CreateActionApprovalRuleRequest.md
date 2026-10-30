@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operation** | [**ActionApprovalOperationType**](ActionApprovalOperationType.md) |  | 
 **RequiredApprovals** | Pointer to **int32** | Number of approvals required before the action can be executed. | [optional] [default to 1]
-**ApprovalWindowHours** | **int32** | Hours the request stays open for approval before expiring. | 
-**ExecutionWindowHours** | **int32** | Hours after approval during which the approved action can be executed. | 
-**Description** | Pointer to **string** | Optional description explaining the purpose of this rule. | [optional] 
+**ApprovalWindowHours** | **int32** | Number of hours the request stays open for approval. If the approvals aren&#39;t received before the end of the window, the request expires.  | 
+**ExecutionWindowHours** | **int32** | Number of hours after approval the requester can execute the action. If the requester doesn&#39;t execute before the end of the window, the request expires.  | 
+**Description** | Pointer to **string** | Description explaining the purpose of the rule. | [optional] 
 **ResourceSelector** | Pointer to [**NullableActionApprovalRuleResourceSelector**](ActionApprovalRuleResourceSelector.md) |  | [optional] 
-**ApproverIdpId** | Pointer to **string** | UUID of the SAML identity provider connection this approver group belongs to. | [optional] 
-**ApproverProviderGroupId** | Pointer to **string** | Provider group identifier from the IdP. | [optional] 
-**ExemptApiCredentials** | Pointer to **bool** | When true, API credential users bypass this approval rule. | [optional] 
+**ApproverIdpId** | Pointer to **string** | Eon-assigned ID of the identity provider the approver&#39;s SAML group belongs to. Used in combination with &#x60;approverProviderGroupId&#x60;.  | [optional] 
+**ApproverProviderGroupId** | Pointer to **string** | Identity-provider-assigned ID of the approver group. Used in combination with &#x60;approverIdpId&#x60;.  | [optional] 
+**ExemptApiCredentials** | Pointer to **bool** | Whether API clients bypass the rule or are bound by it.  When &#x60;true&#x60;, API clients bypass the rule and don&#39;t require approval to perform the action. When &#x60;false&#x60;, API clients are bound like any other user and must get the required approvals.  | [optional] 
 
 ## Methods
 

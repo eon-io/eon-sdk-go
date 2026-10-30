@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Snapshot ID. | [optional] 
 **PointInTime** | **time.Time** | Date and time of the resource that&#39;s preserved by the snapshot. | 
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
+**SnapshotSizeBytes** | Pointer to **NullableInt64** | Bytes the job&#39;s snapshot stored. The full size for a full backup, the delta for an incremental. Absent for native snapshots. | [optional] 
+**SourceSizeBytes** | Pointer to **NullableInt64** | Logical size of the source at backup time. Absent for native snapshots and when the size is unknown. | [optional] 
 
 ## Methods
 
@@ -97,6 +99,76 @@ SetExpirationTime sets ExpirationTime field to given value.
 
 HasExpirationTime returns a boolean if a field has been set.
 
+### GetSnapshotSizeBytes
+
+`func (o *JobSnapshotDetails) GetSnapshotSizeBytes() int64`
+
+GetSnapshotSizeBytes returns the SnapshotSizeBytes field if non-nil, zero value otherwise.
+
+### GetSnapshotSizeBytesOk
+
+`func (o *JobSnapshotDetails) GetSnapshotSizeBytesOk() (*int64, bool)`
+
+GetSnapshotSizeBytesOk returns a tuple with the SnapshotSizeBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotSizeBytes
+
+`func (o *JobSnapshotDetails) SetSnapshotSizeBytes(v int64)`
+
+SetSnapshotSizeBytes sets SnapshotSizeBytes field to given value.
+
+### HasSnapshotSizeBytes
+
+`func (o *JobSnapshotDetails) HasSnapshotSizeBytes() bool`
+
+HasSnapshotSizeBytes returns a boolean if a field has been set.
+
+### SetSnapshotSizeBytesNil
+
+`func (o *JobSnapshotDetails) SetSnapshotSizeBytesNil(b bool)`
+
+ SetSnapshotSizeBytesNil sets the value for SnapshotSizeBytes to be an explicit nil
+
+### UnsetSnapshotSizeBytes
+`func (o *JobSnapshotDetails) UnsetSnapshotSizeBytes()`
+
+UnsetSnapshotSizeBytes ensures that no value is present for SnapshotSizeBytes, not even an explicit nil
+### GetSourceSizeBytes
+
+`func (o *JobSnapshotDetails) GetSourceSizeBytes() int64`
+
+GetSourceSizeBytes returns the SourceSizeBytes field if non-nil, zero value otherwise.
+
+### GetSourceSizeBytesOk
+
+`func (o *JobSnapshotDetails) GetSourceSizeBytesOk() (*int64, bool)`
+
+GetSourceSizeBytesOk returns a tuple with the SourceSizeBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceSizeBytes
+
+`func (o *JobSnapshotDetails) SetSourceSizeBytes(v int64)`
+
+SetSourceSizeBytes sets SourceSizeBytes field to given value.
+
+### HasSourceSizeBytes
+
+`func (o *JobSnapshotDetails) HasSourceSizeBytes() bool`
+
+HasSourceSizeBytes returns a boolean if a field has been set.
+
+### SetSourceSizeBytesNil
+
+`func (o *JobSnapshotDetails) SetSourceSizeBytesNil(b bool)`
+
+ SetSourceSizeBytesNil sets the value for SourceSizeBytes to be an explicit nil
+
+### UnsetSourceSizeBytes
+`func (o *JobSnapshotDetails) UnsetSourceSizeBytes()`
+
+UnsetSourceSizeBytes ensures that no value is present for SourceSizeBytes, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

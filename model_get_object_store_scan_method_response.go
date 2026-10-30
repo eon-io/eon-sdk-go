@@ -19,7 +19,7 @@ import (
 // checks if the GetObjectStoreScanMethodResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetObjectStoreScanMethodResponse{}
 
-// GetObjectStoreScanMethodResponse Current object-store scan method settings.
+// GetObjectStoreScanMethodResponse struct for GetObjectStoreScanMethodResponse
 type GetObjectStoreScanMethodResponse struct {
 	ObjectStoreScanMethod ObjectStoreScanMethod `json:"objectStoreScanMethod"`
 }

@@ -19,7 +19,7 @@ var _ MappedNullable = &GcpRestoreAccountConnectivityConfig{}
 
 // GcpRestoreAccountConnectivityConfig struct for GcpRestoreAccountConnectivityConfig
 type GcpRestoreAccountConnectivityConfig struct {
-	// Networks to configure.
+	// List of networks to configure, which Eon uses for its own management traffic in the restore account.  When restoring instances with instant restore, this configuration is required. Without this configuration, Eon uses the `default` network and subnet, which conflicts with any instance you restore into `default`. This is because the recovery host has a second network interface that Eon owns, and each interface must use a unique subnet (Google Compute Engine requirement). Therefore, you must choose a subnet that's not the one you restore the instance into. 
 	NetworkConfigs []GcpNetworkConnectivityConfig `json:"networkConfigs,omitempty"`
 }
 

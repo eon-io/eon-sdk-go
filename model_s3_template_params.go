@@ -21,11 +21,11 @@ var _ MappedNullable = &S3TemplateParams{}
 
 // S3TemplateParams struct for S3TemplateParams
 type S3TemplateParams struct {
-	// ID of the target S3 bucket for the restore.
+	// Name of the target S3 bucket for the restore.
 	TargetBucketId string `json:"targetBucketId"`
 	// Template for the prefix to use when restoring objects.
 	PrefixTemplate string `json:"prefixTemplate"`
-	// ID of the target cloud account for the restore.
+	// Eon-assigned ID of the target restore account.
 	TargetAccountId string `json:"targetAccountId"`
 	// Target region for the restore.
 	TargetRegion string `json:"targetRegion"`

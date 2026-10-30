@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// FindingObjectType What a finding or exclusion refers to: a file path, a database table, a whole database, or a KMS key (key ARN or 12-digit AWS account ID) whose objects are trusted.
+// FindingObjectType Whether the finding is set to a file path, a database table, a whole database, or objects encrypted with a trusted KMS key. Used in combination with `value`. 
 type FindingObjectType string
 
 // List of FindingObjectType

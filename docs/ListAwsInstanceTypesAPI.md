@@ -29,12 +29,12 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	subnetId := "subnetId_example" // string | The subnet ID to get instance types for
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
-	region := "region_example" // string | The region to get instance types for
-	volumeCount := int32(56) // int32 | Number of guest volumes the operator plans to restore. Used to size the host-memory reserve for instant-restore host selection. Optional; the server uses a default when absent.  (optional)
-	totalVolumeBytes := int64(789) // int64 | Sum of guest-volume sizes in bytes. Used to size the host-memory reserve (mmap working-set term). Optional; the server uses a default when absent.  (optional)
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	subnetId := "subnetId_example" // string | ID of the subnet whose instance types you want to list.
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
+	region := "region_example" // string | Region where the subnet is located.
+	volumeCount := int32(56) // int32 | Number of guest volumes you plan to restore. Used to size the host-memory reserve for instant-restore host selection. If omitted, the server uses a default.  (optional)
+	totalVolumeBytes := int64(789) // int64 | Total size of the guest volumes you plan to restore, in bytes. Used to size the host-memory reserve. If omitted, the server uses a default.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -54,9 +54,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The project ID | 
-**accountId** | **string** | ID of the restore account | 
-**region** | **string** | The region to get instance types for | 
+**projectId** | **string** | ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
+**region** | **string** | Region where the subnet is located. | 
 
 ### Other Parameters
 
@@ -66,11 +66,11 @@ Other parameters are passed through a pointer to a apiListAwsInstanceTypesReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **subnetId** | **string** | The subnet ID to get instance types for | 
+ **subnetId** | **string** | ID of the subnet whose instance types you want to list. | 
 
 
- **volumeCount** | **int32** | Number of guest volumes the operator plans to restore. Used to size the host-memory reserve for instant-restore host selection. Optional; the server uses a default when absent.  | 
- **totalVolumeBytes** | **int64** | Sum of guest-volume sizes in bytes. Used to size the host-memory reserve (mmap working-set term). Optional; the server uses a default when absent.  | 
+ **volumeCount** | **int32** | Number of guest volumes you plan to restore. Used to size the host-memory reserve for instant-restore host selection. If omitted, the server uses a default.  | 
+ **totalVolumeBytes** | **int64** | Total size of the guest volumes you plan to restore, in bytes. Used to size the host-memory reserve. If omitted, the server uses a default.  | 
 
 ### Return type
 

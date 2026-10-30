@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// EncryptionType Cloud-agnostic encryption key management classification derived from a resource's volumes/disks. `ENCRYPTION_TYPE_UNSPECIFIED` is supported only in responses. 
+// EncryptionType Cloud-agnostic encryption key management classification derived from a resource's volumes or disks. `ENCRYPTION_TYPE_UNSPECIFIED` is supported only in responses. 
 type EncryptionType string
 
 // List of EncryptionType

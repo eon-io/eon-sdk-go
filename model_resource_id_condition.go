@@ -22,6 +22,7 @@ var _ MappedNullable = &ResourceIdCondition{}
 // ResourceIdCondition struct for ResourceIdCondition
 type ResourceIdCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Cloud-provider-assigned resource IDs to evaluate.
 	ResourceIds []string `json:"resourceIds"`
 }
 

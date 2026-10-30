@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **InstanceType** | Pointer to **string** | Instance type. | [optional] 
 **SubnetId** | Pointer to **string** | ID of the subnet the instance is in. | [optional] 
 **SecurityGroupIds** | Pointer to **[]string** | IDs of security groups associated with the resource. | [optional] 
-**InstanceProfileName** | Pointer to **string** | The resource&#39;s instance profile. | [optional] 
+**InstanceProfileName** | Pointer to **string** | Instance profile of the resource. | [optional] 
 **Volumes** | Pointer to [**[]InventorySnapshotVolume**](InventorySnapshotVolume.md) | List of volumes attached to the resource. | [optional] 
 
 ## Methods

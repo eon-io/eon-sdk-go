@@ -43,12 +43,13 @@ func (r ApiBulkAttachRestoreTemplateRequest) Execute() (*http.Response, error) {
 /*
 BulkAttachRestoreTemplate Bulk Attach Restore Template
 
-Description: Attaches a restore template to multiple cloud resources in one call.
-Existing template assignments are overwritten unconditionally.
+Description: Attaches a restore template to multiple resources.
+
+Existing restore template assignments on the resources are overwritten.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project the resources belong to. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param projectId ID of the project the restore template is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param restoreTemplateId ID of the restore template to attach to the resources.
  @return ApiBulkAttachRestoreTemplateRequest
 */
@@ -172,10 +173,10 @@ func (r ApiCreateRestoreTemplateRequest) Execute() (*CreateRestoreTemplateRespon
 /*
 CreateRestoreTemplate Create Restore Template
 
-Description: Creates a restore template in the specified project.
+Description: Creates a restore template.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project you want to create a restore template in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param projectId ID of the project the restore template is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiCreateRestoreTemplateRequest
 */
 func (a *RestoreTemplatesAPIService) CreateRestoreTemplate(ctx context.Context, projectId string) ApiCreateRestoreTemplateRequest {

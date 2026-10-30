@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ScalarOperators**](ScalarOperators.md) |  | 
-**CloudProviders** | [**[]Provider**](Provider.md) |  | 
+**CloudProviders** | [**[]Provider**](Provider.md) | Cloud providers to evaluate. | 
 
 ## Methods
 

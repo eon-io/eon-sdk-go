@@ -17,11 +17,11 @@ import (
 // checks if the FindingExclusionDetectorFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusionDetectorFilters{}
 
-// FindingExclusionDetectorFilters Filters by the detector an exclusion suppresses.
+// FindingExclusionDetectorFilters struct for FindingExclusionDetectorFilters
 type FindingExclusionDetectorFilters struct {
-	// Matches exclusions for any of these detectors. An empty list applies no filter.
+	// Matches if any value in this list equals `detector`.
 	In []FindingExclusionDetectorType `json:"in,omitempty"`
-	// Matches exclusions for none of these detectors. An empty list applies no filter.
+	// Matches if none of the values in this list equal `detector`.
 	NotIn []FindingExclusionDetectorType `json:"notIn,omitempty"`
 }
 

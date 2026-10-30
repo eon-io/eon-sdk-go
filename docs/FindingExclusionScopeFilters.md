@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**In** | Pointer to [**[]FindingExclusionScope**](FindingExclusionScope.md) | Matches exclusions with any of these scopes. An empty list applies no filter. | [optional] 
-**NotIn** | Pointer to [**[]FindingExclusionScope**](FindingExclusionScope.md) | Matches exclusions with none of these scopes. An empty list applies no filter. | [optional] 
+**In** | Pointer to [**[]FindingExclusionScope**](FindingExclusionScope.md) | Matches if any value in this list equals &#x60;scope&#x60;. | [optional] 
+**NotIn** | Pointer to [**[]FindingExclusionScope**](FindingExclusionScope.md) | Matches if none of the values in this list equal &#x60;scope&#x60;. | [optional] 
 
 ## Methods
 

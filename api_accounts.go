@@ -2008,10 +2008,10 @@ func (r ApiGetRestoreAccountRequest) Execute() (*GetRestoreAccountResponse, *htt
 /*
 GetRestoreAccount Get Restore Account
 
-Description: Retrieve a restore account by ID.
+Description: Retrieves a restore account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project.
+ @param projectId ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param accountId Eon-assigned ID of the restore account.
  @return ApiGetRestoreAccountRequest
 */
@@ -2394,10 +2394,10 @@ func (r ApiGetSourceAccountRequest) Execute() (*GetSourceAccountResponse, *http.
 /*
 GetSourceAccount Get Source Account
 
-Description: Retrieve a source account by ID.
+Description: Retrieves a source account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project.
+ @param projectId ID of the project the source account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param accountId Eon-assigned ID of the source account.
  @return ApiGetSourceAccountRequest
 */
@@ -2658,7 +2658,6 @@ func (r ApiListRestoreAccountsRequest) PageSize(pageSize int32) ApiListRestoreAc
 	return r
 }
 
-// Filter options. 
 func (r ApiListRestoreAccountsRequest) ListRestoreAccountsRequest(listRestoreAccountsRequest ListRestoreAccountsRequest) ApiListRestoreAccountsRequest {
 	r.listRestoreAccountsRequest = &listRestoreAccountsRequest
 	return r
@@ -2671,7 +2670,7 @@ func (r ApiListRestoreAccountsRequest) Execute() (*ListRestoreAccountsResponse, 
 /*
 ListRestoreAccounts List Restore Accounts
 
-Description: Retrieves a list of restore accounts for the given project.
+Description: Retrieves a list of restore accounts in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose restore accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -2820,7 +2819,7 @@ func (r ApiListRestoreAwsOrganizationalUnitsRequest) Execute() (*ListRestoreAwsO
 /*
 ListRestoreAwsOrganizationalUnits List Restore AWS Organizational Units
 
-Description: Retrieves a list of AWS restore organizational units for the given project.
+Description: Retrieves a list of AWS restore organizational units in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -2961,7 +2960,6 @@ func (r ApiListSourceAccountsRequest) PageSize(pageSize int32) ApiListSourceAcco
 	return r
 }
 
-// Filter options. 
 func (r ApiListSourceAccountsRequest) ListSourceAccountsRequest(listSourceAccountsRequest ListSourceAccountsRequest) ApiListSourceAccountsRequest {
 	r.listSourceAccountsRequest = &listSourceAccountsRequest
 	return r
@@ -2974,7 +2972,7 @@ func (r ApiListSourceAccountsRequest) Execute() (*ListSourceAccountsResponse, *h
 /*
 ListSourceAccounts List Source Accounts
 
-Description: Retrieves a list of source accounts for the given project.
+Description: Retrieves a list of source accounts in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose source accounts you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -3126,7 +3124,7 @@ func (r ApiListSourceAwsOrganizationalUnitsRequest) Execute() (*ListSourceAwsOrg
 /*
 ListSourceAwsOrganizationalUnits List Source AWS Organizational Units
 
-Description: Retrieves a list of AWS organizational units for the given project.
+Description: Retrieves a list of AWS organizational units in the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose AWS organizational units you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
@@ -3519,12 +3517,6 @@ type ApiReconnectSourceAccountRequest struct {
 	ApiService *AccountsAPIService
 	projectId string
 	accountId string
-	body *map[string]interface{}
-}
-
-func (r ApiReconnectSourceAccountRequest) Body(body map[string]interface{}) ApiReconnectSourceAccountRequest {
-	r.body = &body
-	return r
 }
 
 func (r ApiReconnectSourceAccountRequest) Execute() (*ReconnectSourceAccountResponse, *http.Response, error) {
@@ -3575,7 +3567,7 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -3590,11 +3582,6 @@ func (a *AccountsAPIService) ReconnectSourceAccountExecute(r ApiReconnectSourceA
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
-	if r.body != nil {
-		localVarPostBody = r.body
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -3807,7 +3794,7 @@ Description: Updates restore account properties.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project.
+ @param projectId ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param accountId Eon-assigned ID of the restore account to update.
  @return ApiUpdateRestoreAccountRequest
 */
@@ -3945,10 +3932,13 @@ UpdateRestoreAccountConnectivityConfig Update Restore Account Connectivity Confi
 
 Description: Updates the connectivity configuration of the specified restore account.
 
+This operation replaces the entire connectivity configuration object.
+Omitted fields are overwritten.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param projectId ID of the project whose restore account connectivity configuration you want to update. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
- @param accountId ID of the restore account
+ @param accountId Eon-assigned ID of the restore account.
  @return ApiUpdateRestoreAccountConnectivityConfigRequest
 */
 func (a *AccountsAPIService) UpdateRestoreAccountConnectivityConfig(ctx context.Context, projectId string, accountId string) ApiUpdateRestoreAccountConnectivityConfigRequest {
@@ -4087,7 +4077,7 @@ Description: Updates source account properties.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project.
+ @param projectId ID of the project the source account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param accountId Eon-assigned ID of the source account to update.
  @return ApiUpdateSourceAccountRequest
 */

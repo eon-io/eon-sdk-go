@@ -24,7 +24,7 @@ type WeeklyConfig struct {
 	// Days of the week to schedule backups. 
 	DaysOfWeek []DayOfWeek `json:"daysOfWeek"`
 	TimeOfDay TimeOfDay `json:"timeOfDay"`
-	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
+	// Window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
 	StartWindowMinutes *int32 `json:"startWindowMinutes,omitempty"`
 }
 

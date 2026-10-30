@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SubnetId** | **string** | Target subnet ID for the restored EC2 instance. | 
-**SecurityGroupIds** | Pointer to **[]string** | Security group IDs to attach to the restored EC2 instance. | [optional] 
-**InstanceType** | Pointer to **string** | EC2 instance type for the restored instance. Required unless inheritInstanceType is true, and must be empty when it is.  | [optional] 
-**InheritInstanceType** | Pointer to **bool** | Restore each instance with the instance type recorded in its own snapshot instead of instanceType. The template&#39;s subnet must be in an availability zone that offers that type.  | [optional] [default to false]
+**SubnetId** | **string** | Cloud-provider-assigned ID of the subnet for the restored EC2 instance. | 
+**SecurityGroupIds** | Pointer to **[]string** | Cloud-provider-assigned IDs of the security groups to attach to the restored EC2 instance. | [optional] 
+**InstanceType** | Pointer to **string** | EC2 instance type for the restored instance. Required unless &#x60;inheritInstanceType&#x60; is set to &#x60;true&#x60;, in which case, must be empty.  | [optional] 
+**InheritInstanceType** | Pointer to **bool** | Whether to restore each instance with the instance type recorded in its own snapshot, instead of &#x60;instanceType&#x60;. The template&#39;s subnet must be in an availability zone that offers the specified type.  | [optional] [default to false]
 **KmsKeyArn** | Pointer to **string** | ARN of the KMS key to use for encrypting the restored instance. | [optional] 
 **KeepOriginalTags** | **bool** | Whether to keep the original tags from the source resource. | [default to true]
 **AdditionalTags** | Pointer to [**[]Ec2TemplateParamsAdditionalTagsInner**](Ec2TemplateParamsAdditionalTagsInner.md) | Additional tags to apply to the restored EC2 instance. | [optional] 
 **NameTemplate** | **string** | Template for naming the restored EC2 instance. | 
 **StartAfterRestore** | **bool** | Whether to start the restored EC2 instance after restoration. | 
-**TargetAccountId** | **string** | ID of the target cloud account for the restore. | 
+**TargetAccountId** | **string** | Eon-assigned ID of the destination restore account. | 
 **TargetRegion** | **string** | Target region for the restore. | 
 
 ## Methods

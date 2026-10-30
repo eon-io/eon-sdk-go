@@ -21,6 +21,7 @@ var _ MappedNullable = &S3Buckets{}
 
 // S3Buckets struct for S3Buckets
 type S3Buckets struct {
+	// List of buckets.
 	Buckets []S3Bucket `json:"buckets"`
 }
 

@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1NotificationTargetChangeArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1NotificationTargetChangeArguments{}
 
-// WebhookV1NotificationTargetChangeArguments Details of a change to a notification target.
+// WebhookV1NotificationTargetChangeArguments Details of the change to a notification policy.
 type WebhookV1NotificationTargetChangeArguments struct {
 	// Notification policy ID.
 	PolicyId *string `json:"policyId,omitempty"`

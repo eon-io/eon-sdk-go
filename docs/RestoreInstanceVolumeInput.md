@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ProviderVolumeId** | **string** | Cloud-provider-assigned ID of the volume to restore. | 
 **Description** | Pointer to **string** | Optional description. | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored volume as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;primary\&quot;: \&quot;\&quot;}&#x60;  | [optional] 
-**VolumeEncryptionKeyId** | Pointer to **string** | ARN of the KMS key for encrypting the restored volume. Omit it to restore the volume unencrypted, or encrypted with the account default key when EBS encryption by default is enabled. Volumes restored from a native EBS backup are always encrypted and use the AWS-managed &#x60;aws/ebs&#x60; key when this is omitted.  | [optional] 
+**VolumeEncryptionKeyId** | Pointer to **string** | ARN of the KMS key to encrypt the restored volume with. If omitted, the volume is restored unencrypted, unless EBS encryption by default is on. In that case, it&#39;s encrypted with the account&#39;s default key.  Volumes restored from a native EBS backup are always encrypted. If omitted when restoring EBS volumes, they use the AWS-managed &#x60;aws/ebs&#x60; key.  | [optional] 
 **VolumeSettings** | [**VolumeSettings**](VolumeSettings.md) |  | 
 
 ## Methods

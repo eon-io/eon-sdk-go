@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ResourceSortField Field to sort by. Ascending, `configurationStatus` puts resources Eon is expected to back up before those out of scope, starting with `UNASSIGNED` and ending with `TERMINATED`. `backupStatus` is deprecated: sort by `configurationStatus` instead. It is supported until `backupStatus` is removed on April 30, 2027. Descending, `alerts` puts the resources that need attention first: by their most severe alert across control violations and action items, then by how many alerts they have. 
+// ResourceSortField Field to sort by.  **Notes**:  - Sorting `configurationStatus` in ascending order puts resources Eon is expected to back up before those out of scope.   The order starts with `UNASSIGNED` and ends with `TERMINATED`.  - Sorting `alerts` in descending order puts the resources that need attention first.   Sorted first by alert severity, then by number of alerts. 
 type ResourceSortField string
 
 // List of ResourceSortField

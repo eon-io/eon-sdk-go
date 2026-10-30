@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Contains** | Pointer to **[]string** | Matches exclusions whose &#x60;value&#x60; contains every one of these substrings. An empty list applies no filter. | [optional] 
+**Contains** | Pointer to **[]string** | Matches if every string in this list is a substring of &#x60;value&#x60;. | [optional] 
 
 ## Methods
 

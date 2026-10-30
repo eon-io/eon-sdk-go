@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// MPASubmitAction Action to take on the initial request. The requester can submit (confirm) or discard the request. 
+// MPASubmitAction Action to take on the initial request. The requester can submit (confirm) or discard the request. `MPA_SUBMIT_ACTION_UNSPECIFIED` is supported only in responses. 
 type MPASubmitAction string
 
 // List of MPASubmitAction

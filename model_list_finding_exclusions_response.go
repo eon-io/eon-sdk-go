@@ -21,7 +21,7 @@ var _ MappedNullable = &ListFindingExclusionsResponse{}
 
 // ListFindingExclusionsResponse struct for ListFindingExclusionsResponse
 type ListFindingExclusionsResponse struct {
-	// Finding exclusions on the current page.
+	// List of finding exclusions.
 	FindingExclusions []FindingExclusion `json:"findingExclusions"`
 	// Total number of finding exclusions that matched the filter options.
 	TotalCount int32 `json:"totalCount"`

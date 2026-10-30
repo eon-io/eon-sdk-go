@@ -34,7 +34,7 @@ import (
 
 func main() {
 	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project you want to create a backup posture control in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
-	createBackupPostureControlRequest := *openapiclient.NewCreateBackupPostureControlRequest("Name_example", openapiclient.Severity("HIGH"), "TODO", "TODO") // CreateBackupPostureControlRequest | Backup posture control to create.
+	createBackupPostureControlRequest := *openapiclient.NewCreateBackupPostureControlRequest("Name_example", openapiclient.Severity("HIGH"), "TODO", "TODO") // CreateBackupPostureControlRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiCreateBackupPostureControl
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createBackupPostureControlRequest** | [**CreateBackupPostureControlRequest**](CreateBackupPostureControlRequest.md) | Backup posture control to create. | 
+ **createBackupPostureControlRequest** | [**CreateBackupPostureControlRequest**](CreateBackupPostureControlRequest.md) |  | 
 
 ### Return type
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ProviderOrganizationalUnitId** | **string** | AWS-assigned organizational unit ID. | 
 **ProviderManagementAccountId** | **string** | AWS-assigned ID of the organization&#39;s management account. | 
 **Status** | [**AccountState**](AccountState.md) |  | 
-**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. Empty means all supported regions. | [optional] 
+**Regions** | Pointer to **[]string** | AWS regions Eon discovers in. If omitted, Eon discovers in all supported regions.  | [optional] 
 
 ## Methods
 

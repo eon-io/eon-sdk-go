@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadSnapshotArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadSnapshotArguments{}
 
-// WebhookV1StandardPayloadSnapshotArguments Details of the notification. Notifications of these types always carry `snapshotArguments`. 
+// WebhookV1StandardPayloadSnapshotArguments Details of the notification. Always `snapshotArguments`. 
 type WebhookV1StandardPayloadSnapshotArguments struct {
 	SnapshotArguments WebhookV1SnapshotArguments `json:"snapshotArguments"`
 }

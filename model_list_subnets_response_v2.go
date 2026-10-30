@@ -21,7 +21,7 @@ var _ MappedNullable = &ListSubnetsResponseV2{}
 
 // ListSubnetsResponseV2 struct for ListSubnetsResponseV2
 type ListSubnetsResponseV2 struct {
-	// The available zones for the region
+	// List of subnets.
 	Subnets []ListSubnetsResponseV2SubnetsInner `json:"subnets"`
 }
 

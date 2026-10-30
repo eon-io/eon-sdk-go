@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ScalarOperators Evaluates whether the value is in the list. `UNSPECIFIED` is supported only in responses. 
+// ScalarOperators Operator that evaluates whether the value is in the list. `UNSPECIFIED` is supported only in responses. 
 type ScalarOperators string
 
 // List of ScalarOperators

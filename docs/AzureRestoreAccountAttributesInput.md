@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TenantId** | **string** | ID of the tenant the subscription belongs to. | 
+**TenantId** | **string** | Cloud-provider-assigned ID of the Azure tenant the subscription belongs to. | 
 **SubscriptionId** | **string** | Subscription ID.  | 
 **ResourceGroupName** | Pointer to **string** | Resource group name. | [optional] 
 **EonInternalResourceGroupName** | Pointer to **string** | Resource group name for Eon&#39;s temporary internal resources.  | [optional] [default to "eon-restore-internal-rg"]

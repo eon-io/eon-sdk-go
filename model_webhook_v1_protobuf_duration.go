@@ -17,11 +17,11 @@ import (
 // checks if the WebhookV1ProtobufDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1ProtobufDuration{}
 
-// WebhookV1ProtobufDuration A length of time inside `arguments`, encoded as an object rather than a string: whole seconds plus a nanosecond fraction. Each field is omitted when it's zero. 
+// WebhookV1ProtobufDuration Length of time, encoded as an object rather than a string. 
 type WebhookV1ProtobufDuration struct {
-	// Whole seconds.
+	// Whole seconds. Omitted when `0`. 
 	Seconds *int64 `json:"seconds,omitempty"`
-	// Nanosecond fraction of the duration.
+	// Nanosecond fraction of the second. Omitted when `0`. 
 	Nanos *int32 `json:"nanos,omitempty"`
 }
 

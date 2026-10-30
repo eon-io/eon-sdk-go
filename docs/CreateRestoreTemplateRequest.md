@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Restore template display name. | 
-**Description** | Pointer to **string** | Optional description of the restore template. | [optional] 
+**Description** | Pointer to **string** | Description of the purpose of the restore template. | [optional] 
 **ResourceType** | [**RestoreTemplateResourceType**](RestoreTemplateResourceType.md) |  | 
 **Ec2Params** | Pointer to [**NullableEc2TemplateParams**](Ec2TemplateParams.md) |  | [optional] 
 **S3Params** | Pointer to [**NullableS3TemplateParams**](S3TemplateParams.md) |  | [optional] 

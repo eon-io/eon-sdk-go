@@ -21,7 +21,9 @@ var _ MappedNullable = &TagKeyValue{}
 
 // TagKeyValue struct for TagKeyValue
 type TagKeyValue struct {
+	// Tag key.
 	Key string `json:"key"`
+	// Tag value.
 	Value *string `json:"value,omitempty"`
 }
 

@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ActionApprovalOperationType Action that can be protected by an action approval rule.
+// ActionApprovalOperationType Action that requires approval under the rule.
 type ActionApprovalOperationType string
 
 // List of ActionApprovalOperationType

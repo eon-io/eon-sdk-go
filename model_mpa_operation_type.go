@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// MPAOperationType Operation that requires action approval before it can be completed.
+// MPAOperationType Operation that requires action approval before it can be completed. `MPA_OPERATION_TYPE_UNSPECIFIED` is supported only in responses. 
 type MPAOperationType string
 
 // List of MPAOperationType

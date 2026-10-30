@@ -37,13 +37,13 @@ func (r ApiCancelActionApprovalRequestRequest) Execute() (*CancelMyMPARequestRes
 /*
 CancelActionApprovalRequest Cancel My Action Request
 
-Description: Cancel an action request created using the current caller's credentials.
+Description: Cancels an action request created using the current caller's credentials.
 
 Action requests can be canceled only while the request is approved or pending approval.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project.
+ @param projectId ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param requestId ID of the action request.
  @return ApiCancelActionApprovalRequestRequest
 */
@@ -207,7 +207,7 @@ func (r ApiCreateActionApprovalRequestRequest) Execute() (*SubmitMyMPARequestRes
 /*
 CreateActionApprovalRequest Submit My Action Request
 
-Description: Submit or discard an action request that's in its initial `CREATED` status.
+Description: Submits or discards an action request that's in its initial `CREATED` status.
 
 When submitting, the action request status changes to pending approval.
 The approval window begins, and reviewers must approve before the window ends.
@@ -216,7 +216,7 @@ When discarding, the action request is abandoned, and no further action can be t
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project.
+ @param projectId ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param requestId ID of the action request.
  @return ApiCreateActionApprovalRequestRequest
 */
@@ -372,7 +372,6 @@ type ApiCreateActionApprovalRuleRequest struct {
 	createActionApprovalRuleRequest *CreateActionApprovalRuleRequest
 }
 
-// Action approval rule to create.
 func (r ApiCreateActionApprovalRuleRequest) CreateActionApprovalRuleRequest(createActionApprovalRuleRequest CreateActionApprovalRuleRequest) ApiCreateActionApprovalRuleRequest {
 	r.createActionApprovalRuleRequest = &createActionApprovalRuleRequest
 	return r
@@ -385,10 +384,10 @@ func (r ApiCreateActionApprovalRuleRequest) Execute() (*CreateActionApprovalRule
 /*
 CreateActionApprovalRule Create Action Approval Rule
 
-Description: Creates an action approval rule in a project.
+Description: Creates an action approval rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project in which you want to create an action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiCreateActionApprovalRuleRequest
 */
 func (a *ActionApprovalsAPIService) CreateActionApprovalRule(ctx context.Context, projectId string) ApiCreateActionApprovalRuleRequest {
@@ -529,7 +528,7 @@ DeleteActionApprovalRule Delete Action Approval Rule
 Description: Deletes an action approval rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
  @param actionApprovalRuleId Action approval rule ID.
  @return ApiDeleteActionApprovalRuleRequest
 */
@@ -657,7 +656,7 @@ GetActionApprovalRule Get Action Approval Rule
 Description: Retrieves an action approval rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
  @param actionApprovalRuleId Action approval rule ID.
  @return ApiGetActionApprovalRuleRequest
 */
@@ -796,7 +795,7 @@ GetMyActionApprovalRequest Get My Action Request
 Description: Retrieves an action request that was created using the current caller's credentials.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project.
+ @param projectId ID of the project the action request is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param requestId ID of the action request.
  @return ApiGetMyActionApprovalRequestRequest
 */
@@ -927,13 +926,13 @@ type ApiListActionApprovalRulesRequest struct {
 	listActionApprovalRulesRequest *ListActionApprovalRulesRequest
 }
 
-// Cursor that points to the first rule on the next page. Get this value from the previous response. 
+// Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
 func (r ApiListActionApprovalRulesRequest) PageToken(pageToken string) ApiListActionApprovalRulesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Maximum number of rules to return.
+// Maximum number of items to return in the response.
 func (r ApiListActionApprovalRulesRequest) PageSize(pageSize int32) ApiListActionApprovalRulesRequest {
 	r.pageSize = &pageSize
 	return r
@@ -951,12 +950,10 @@ func (r ApiListActionApprovalRulesRequest) Execute() (*ListActionApprovalRulesRe
 /*
 ListActionApprovalRules List Action Approval Rules
 
-Description: Retrieves the action approval rules in a project.
-Use `pageToken` and `pageSize` for pagination. Pass filters in the request body.
-
+Description: Retrieves a list of action approval rules for the specified project.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiListActionApprovalRulesRequest
 */
 func (a *ActionApprovalsAPIService) ListActionApprovalRules(ctx context.Context, projectId string) ApiListActionApprovalRulesRequest {
@@ -1098,13 +1095,13 @@ type ApiListActionApprovalRulesDeprecatedRequest struct {
 	pageSize *int32
 }
 
-// Filter rules by the action they protect.
+// Filter rules by the action they apply to.
 func (r ApiListActionApprovalRulesDeprecatedRequest) Operation(operation ActionApprovalOperationType) ApiListActionApprovalRulesDeprecatedRequest {
 	r.operation = &operation
 	return r
 }
 
-// Cursor that points to the first rule on the next page. Get this value from the previous response. 
+// Cursor that points to the first record of the next page of results. Get this value from the previous response. 
 func (r ApiListActionApprovalRulesDeprecatedRequest) PageToken(pageToken string) ApiListActionApprovalRulesDeprecatedRequest {
 	r.pageToken = &pageToken
 	return r
@@ -1129,7 +1126,7 @@ Deprecated: use `POST /v1/projects/{projectId}/action-approvals/rules/list` (`li
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project whose action approval rules you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @return ApiListActionApprovalRulesDeprecatedRequest
 
 Deprecated
@@ -1271,7 +1268,6 @@ type ApiUpdateActionApprovalRuleRequest struct {
 	updateActionApprovalRuleRequest *UpdateActionApprovalRuleRequest
 }
 
-// Fields to update on the action approval rule.
 func (r ApiUpdateActionApprovalRuleRequest) UpdateActionApprovalRuleRequest(updateActionApprovalRuleRequest UpdateActionApprovalRuleRequest) ApiUpdateActionApprovalRuleRequest {
 	r.updateActionApprovalRuleRequest = &updateActionApprovalRuleRequest
 	return r
@@ -1288,7 +1284,7 @@ Description: Updates an action approval rule. Only fields included in the reques
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId ID of the project that contains the action approval rule. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+ @param projectId ID of the project the action approval rule is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
  @param actionApprovalRuleId Action approval rule ID.
  @return ApiUpdateActionApprovalRuleRequest
 */

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Snapshots** | [**[]Snapshot**](Snapshot.md) | List of Eon snapshots. | 
 **NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
-**TotalCount** | **int32** | The total number of Eon snapshots. | 
+**TotalCount** | **int32** | Total number of Eon snapshots that matched the filter options. | 
 
 ## Methods
 

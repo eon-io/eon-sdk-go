@@ -25,7 +25,7 @@ type AwsEc2SnapshotProperties struct {
 	SubnetId *string `json:"subnetId,omitempty"`
 	// IDs of security groups associated with the resource.
 	SecurityGroupIds []string `json:"securityGroupIds,omitempty"`
-	// The resource's instance profile.
+	// Instance profile of the resource.
 	InstanceProfileName *string `json:"instanceProfileName,omitempty"`
 	// List of volumes attached to the resource.
 	Volumes []InventorySnapshotVolume `json:"volumes,omitempty"`

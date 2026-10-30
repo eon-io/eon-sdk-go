@@ -100,7 +100,7 @@ import (
 func main() {
 	clientId := "clientId_example" // string | API client ID.
 	clientSecret := "clientSecret_example" // string | API client secret.
-	grantType := "grantType_example" // string | The OAuth 2.0 grant type you're using. Must be `client_credentials`. 
+	grantType := "grantType_example" // string | OAuth 2.0 grant type you're using. Must be `client_credentials`. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **clientId** | **string** | API client ID. | 
  **clientSecret** | **string** | API client secret. | 
- **grantType** | **string** | The OAuth 2.0 grant type you&#39;re using. Must be &#x60;client_credentials&#x60;.  | 
+ **grantType** | **string** | OAuth 2.0 grant type you&#39;re using. Must be &#x60;client_credentials&#x60;.  | 
 
 ### Return type
 

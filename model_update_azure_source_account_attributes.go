@@ -19,7 +19,7 @@ var _ MappedNullable = &UpdateAzureSourceAccountAttributes{}
 
 // UpdateAzureSourceAccountAttributes Updatable Azure subscription fields. 
 type UpdateAzureSourceAccountAttributes struct {
-	// Azure regions Eon discovers in. Omit to leave the current regions unchanged. Pass an empty list to discover in all supported regions. 
+	// Azure regions Eon discovers in. Omit to leave the current regions unchanged. To discover in all supported regions, pass an empty list. 
 	Regions []string `json:"regions,omitempty"`
 }
 

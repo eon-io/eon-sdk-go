@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadCreditsUsageArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadCreditsUsageArguments{}
 
-// WebhookV1StandardPayloadCreditsUsageArguments Details of the notification. Notifications of these types always carry `creditsNotification`. 
+// WebhookV1StandardPayloadCreditsUsageArguments Details of the notification. Always `creditsNotification`. 
 type WebhookV1StandardPayloadCreditsUsageArguments struct {
 	CreditsNotification WebhookV1CreditsNotificationArguments `json:"creditsNotification"`
 }

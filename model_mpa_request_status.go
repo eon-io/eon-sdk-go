@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// MPARequestStatus Action request status. For an explanation of statuses, see [Action Request Statuses](/user-guide/access-management/action-approvals/action-request-statuses). 
+// MPARequestStatus Action request status. For an explanation of statuses, see [Action Request Statuses](/data-protection/account-administration/access-management/action-approvals/action-request-statuses). `MPA_REQUEST_STATUS_UNSPECIFIED` is supported only in responses. 
 type MPARequestStatus string
 
 // List of MPARequestStatus

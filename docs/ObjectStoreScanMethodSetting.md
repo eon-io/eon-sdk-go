@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Enabled** | **bool** | Whether this scan method is currently enabled. | 
-**SystemControlled** | **bool** | Whether Eon manages this scan method. | 
+**Enabled** | **bool** | Whether this mode is currently enabled. | 
+**SystemControlled** | **bool** | Whether Eon automatically manages this mode.  | 
 
 ## Methods
 

@@ -19,7 +19,7 @@ import (
 // checks if the SameSourceAccountRestoreLimits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SameSourceAccountRestoreLimits{}
 
-// SameSourceAccountRestoreLimits Restricts restoring applicable resources only to the source account they were backed up from. 
+// SameSourceAccountRestoreLimits Restricts restoring applicable resources to the source account they were backed up from. 
 type SameSourceAccountRestoreLimits struct {
 	// Whether the same-source-account restore restriction is active.
 	Enabled bool `json:"enabled"`

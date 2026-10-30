@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ServiceAccount** | **string** | Email address of the GCP service account Eon uses to access the project. | 
-**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. Omit or leave empty to discover in all supported regions. | [optional] 
+**Regions** | Pointer to **[]string** | GCP regions Eon discovers in. Omit or leave empty to discover in all supported regions.  | [optional] 
 
 ## Methods
 

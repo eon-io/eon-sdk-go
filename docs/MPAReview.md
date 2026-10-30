@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ReviewerName** | Pointer to **string** | Display name of the reviewer at the time the review was submitted. | [optional] 
 **Decision** | [**MPADecision**](MPADecision.md) |  | 
 **Comment** | Pointer to **string** | Comment explaining the reviewer&#39;s decision. | [optional] 
-**ReviewedTime** | **time.Time** | Time when the review was submitted. | 
+**ReviewedTime** | **time.Time** | Date and time the review was submitted. | 
 
 ## Methods
 

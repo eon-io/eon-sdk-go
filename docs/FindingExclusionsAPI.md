@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	createFindingExclusionRequest := *openapiclient.NewCreateFindingExclusionRequest(openapiclient.FindingExclusionScope("RESOURCE"), "/var/cache", openapiclient.FindingObjectType("PATH"), openapiclient.FindingExclusionDetectorType("RANSOMWARE_BEHAVIOR")) // CreateFindingExclusionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -105,8 +105,8 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
-	findingExclusionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Finding exclusion ID.
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	findingExclusionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the finding exclusion to delete.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -124,8 +124,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
-**findingExclusionId** | **string** | Finding exclusion ID. | 
+**projectId** | **string** | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**findingExclusionId** | **string** | ID of the finding exclusion to delete. | 
 
 ### Other Parameters
 
@@ -176,8 +176,8 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
-	findingExclusionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Finding exclusion ID.
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	findingExclusionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the finding exclusion to retrieve.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -197,8 +197,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
-**findingExclusionId** | **string** | Finding exclusion ID. | 
+**projectId** | **string** | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**findingExclusionId** | **string** | ID of the finding exclusion to retrieve. | 
 
 ### Other Parameters
 
@@ -249,9 +249,9 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the finding exclusions are in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "pageToken_example" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response, and send it with the same `pageSize` and request body.  (optional)
-	pageSize := int32(56) // int32 | Maximum number of finding exclusions to return. Keep the same value for every page of a listing: the page token counts pages of this size.  (optional) (default to 50)
+	pageSize := int32(56) // int32 | Maximum number of items to return in the response. (optional) (default to 50)
 	listFindingExclusionsRequest := *openapiclient.NewListFindingExclusionsRequest() // ListFindingExclusionsRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -272,7 +272,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
+**projectId** | **string** | ID of the project the finding exclusions are in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
 
 ### Other Parameters
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response, and send it with the same &#x60;pageSize&#x60; and request body.  | 
- **pageSize** | **int32** | Maximum number of finding exclusions to return. Keep the same value for every page of a listing: the page token counts pages of this size.  | [default to 50]
+ **pageSize** | **int32** | Maximum number of items to return in the response. | [default to 50]
  **listFindingExclusionsRequest** | [**ListFindingExclusionsRequest**](ListFindingExclusionsRequest.md) |  | 
 
 ### Return type
@@ -325,8 +325,8 @@ import (
 )
 
 func main() {
-	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page. 
-	findingExclusionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Finding exclusion ID.
+	projectId := "733888d8-2573-5f9a-b81d-21f051d24fda" // string | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	findingExclusionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the finding exclusion to update.
 	updateFindingExclusionRequest := *openapiclient.NewUpdateFindingExclusionRequest(openapiclient.FindingExclusionScope("RESOURCE"), "/var/cache", openapiclient.FindingObjectType("PATH"), openapiclient.FindingExclusionDetectorType("RANSOMWARE_BEHAVIOR")) // UpdateFindingExclusionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -347,8 +347,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | ID of the project that contains the finding exclusions. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page.  | 
-**findingExclusionId** | **string** | Finding exclusion ID. | 
+**projectId** | **string** | ID of the project the finding exclusion is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**findingExclusionId** | **string** | ID of the finding exclusion to update. | 
 
 ### Other Parameters
 

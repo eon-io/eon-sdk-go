@@ -22,6 +22,7 @@ var _ MappedNullable = &ResourceGroupNameCondition{}
 // ResourceGroupNameCondition struct for ResourceGroupNameCondition
 type ResourceGroupNameCondition struct {
 	Operator ScalarOperators `json:"operator"`
+	// Resource group names to evaluate.
 	ResourceGroupNames []string `json:"resourceGroupNames"`
 }
 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Action approval rule ID. | 
-**ProjectId** | **string** | ID of the project that contains the action approval rule. | 
+**Id** | **string** | ID of the action approval rule. | 
+**ProjectId** | **string** | ID of the project the action approval rule is in. | 
 **Operation** | [**ActionApprovalOperationType**](ActionApprovalOperationType.md) |  | 
 **RequiredApprovals** | **int32** | Number of approvals required before the action can be executed. | 
-**ApprovalWindowHours** | **int32** | Hours the request stays open for approval before expiring. | 
-**ExecutionWindowHours** | **int32** | Hours after approval during which the approved action can be executed. | 
-**Description** | Pointer to **string** | Optional description explaining the purpose of this rule. | [optional] 
+**ApprovalWindowHours** | **int32** | Number of hours the request stays open for approval before expiring. | 
+**ExecutionWindowHours** | **int32** | Number of hours after approval the approved action can be executed. | 
+**Description** | Pointer to **string** | Description explaining the purpose of the rule. | [optional] 
 **ResourceSelector** | Pointer to [**NullableActionApprovalRuleResourceSelector**](ActionApprovalRuleResourceSelector.md) |  | [optional] 
-**ApproverIdpId** | Pointer to **NullableString** | UUID of the SAML identity provider connection this approver group belongs to. | [optional] 
-**ApproverProviderGroupId** | Pointer to **NullableString** | Provider group identifier from the IdP. | [optional] 
-**ExemptApiCredentials** | Pointer to **bool** | When true, API credential users bypass this approval rule. | [optional] 
+**ApproverIdpId** | Pointer to **NullableString** | Eon-assigned ID of the SAML identity provider the approver group belongs to. Used in combination with &#x60;approverProviderGroupId&#x60;.  | [optional] 
+**ApproverProviderGroupId** | Pointer to **NullableString** | Identity-provider-assigned ID of the approver group. Used in combination with &#x60;approverIdpId&#x60;.  | [optional] 
+**ExemptApiCredentials** | Pointer to **bool** | Whether API clients bypass the rule or are bound by it.  When &#x60;true&#x60;, API clients bypass the rule and don&#39;t require approval to perform the action. When &#x60;false&#x60;, API clients are bound like any other user and must get the required approvals.  | [optional] 
 
 ## Methods
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Jobs** | [**[]BackupJob**](BackupJob.md) | List of retrieved backup jobs. | 
+**Jobs** | [**[]BackupJob**](BackupJob.md) | List of backup jobs. | 
 **NextToken** | Pointer to **string** | Cursor that points to the first record of the next page of results. Pass this value in the next request.  | [optional] 
 **TotalCount** | **int32** | Total number of backup jobs that matched the filter options. | 
 

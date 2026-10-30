@@ -20,18 +20,18 @@ import (
 // checks if the FindingExclusion type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FindingExclusion{}
 
-// FindingExclusion Stops one detector from reporting findings for matching files, tables or databases, on one resource or on every resource in the account. An exclusion applies to scans that start after it's created or updated. 
+// FindingExclusion Exclusion that stops a detector from reporting findings for matching files, tables, or databases. Can be scoped either to a single resource or to all resources in your inventory. 
 type FindingExclusion struct {
-	// Finding exclusion ID.
+	// ID of the finding exclusion.
 	Id string `json:"id"`
 	Scope FindingExclusionScope `json:"scope"`
-	// Cloud provider ID of the resource the exclusion applies to, such as an EC2 instance ID or an Azure resource ID. Present when `scope` is `RESOURCE`. 
+	// Cloud-provider-assigned ID of the resource the exclusion applies to.  Set when scope is `RESOURCE`. 
 	ProviderResourceId *string `json:"providerResourceId,omitempty"`
-	// What the exclusion matches, depending on `type`. For `PATH`, every file whose path starts with this value, so `/data/tmp` also matches `/data/tmp2/report.csv`. Linux paths are compared case-sensitively. A Windows path starts with its drive letter and ignores case and separator, so `C:\\Users\\App\\Cache` and `c:/users/app/cache` match the same files. For `TABLE` or `DATABASE`, the exact table or database name. 
+	// Matching value to exclude. The value set in this field depends on the specified `type`.  - `PATH`: Matches files whose path starts with the specified value, case-sensitive.   For example, `/data/tmp` matches `/data/tmp2/report.csv`.      Linux paths are case-sensitive.      Windows paths are case-insensitive, normalize for the file separator, and start with the drive letter.     For example, `C:\\Users\\App\\Cache` matches `c:/users/app/cache`.  - `TABLE`: Exact table name.  - `DATABASE`: Exact database name.  - `KMS_KEY`: Either a KMS key ARN, or an AWS account ID to trust all keys in the account.   Available for the ransomware detector only. 
 	Value string `json:"value"`
 	Type FindingObjectType `json:"type"`
 	Detector FindingExclusionDetectorType `json:"detector"`
-	// When the exclusion was created or last updated.
+	// Date and time the exclusion was updated.
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 

@@ -29,10 +29,10 @@ import (
 )
 
 func main() {
-	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The project ID
-	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the restore account
-	region := "region_example" // string | Region
-	includeAwsManagedKeys := true // bool | Whether to include AWS managed keys in the response (optional) (default to false)
+	projectId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+	accountId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Eon-assigned ID of the restore account.
+	region := "region_example" // string | Region where the encryption keys are located.
+	includeAwsManagedKeys := true // bool | Whether to include AWS-managed keys in the response. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -52,9 +52,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The project ID | 
-**accountId** | **string** | ID of the restore account | 
-**region** | **string** | Region | 
+**projectId** | **string** | ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console.  | 
+**accountId** | **string** | Eon-assigned ID of the restore account. | 
+**region** | **string** | Region where the encryption keys are located. | 
 
 ### Other Parameters
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 
 
- **includeAwsManagedKeys** | **bool** | Whether to include AWS managed keys in the response | [default to false]
+ **includeAwsManagedKeys** | **bool** | Whether to include AWS-managed keys in the response. | [default to false]
 
 ### Return type
 

@@ -17,7 +17,7 @@ import (
 // checks if the WebhookV1SnapshotAccessDeniedArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1SnapshotAccessDeniedArguments{}
 
-// WebhookV1SnapshotAccessDeniedArguments Details of a snapshot that includes items the backup couldn't access.
+// WebhookV1SnapshotAccessDeniedArguments Details of the snapshot that includes items Eon was denied access to.
 type WebhookV1SnapshotAccessDeniedArguments struct {
 	// ID of the backup job that created the snapshot.
 	JobId *string `json:"jobId,omitempty"`

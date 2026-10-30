@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Vpcs** | [**[]ListAwsVpcsResponseVpcsInner**](ListAwsVpcsResponseVpcsInner.md) | The available VPCs for the region | 
+**Vpcs** | [**[]ListAwsVpcsResponseVpcsInner**](ListAwsVpcsResponseVpcsInner.md) | List of VPCs. | 
 
 ## Methods
 

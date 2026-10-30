@@ -19,11 +19,11 @@ import (
 // checks if the WebhookV1AuditEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1AuditEvent{}
 
-// WebhookV1AuditEvent Audit log event.
+// WebhookV1AuditEvent Event reporting an audit log entry.
 type WebhookV1AuditEvent struct {
 	// Event type.
 	Type string `json:"type"`
-	// The audit log entry as arbitrary JSON. Its structure isn't part of the webhook contract.
+	// Audit log entry as object.
 	Payload map[string]interface{} `json:"payload"`
 }
 

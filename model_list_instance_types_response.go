@@ -19,9 +19,9 @@ var _ MappedNullable = &ListInstanceTypesResponse{}
 
 // ListInstanceTypesResponse struct for ListInstanceTypesResponse
 type ListInstanceTypesResponse struct {
-	// The instance types list
+	// List of instance types.
 	InstanceTypes []string `json:"instanceTypes,omitempty"`
-	// Map from post-promotion instance type → instant-restore host instance type. Keys present in `instanceTypes` but absent from this map have no instant-restore option in this AZ. 
+	// Map from post-promotion to instant-restore host instance type. Options that are present in `instanceTypes` but absent from this list are not available for instant restore in the availability zone. 
 	InstantRestoreMapping *map[string]string `json:"instantRestoreMapping,omitempty"`
 }
 

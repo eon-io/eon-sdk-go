@@ -33,13 +33,13 @@ type ApiListAwsSecurityGroupsRequest struct {
 	subnetId *string
 }
 
-// Optional VPC ID to filter security groups by
+// ID of the VPC to filter security groups by.
 func (r ApiListAwsSecurityGroupsRequest) VpcId(vpcId string) ApiListAwsSecurityGroupsRequest {
 	r.vpcId = &vpcId
 	return r
 }
 
-// Optional subnet ID to filter security groups by
+// ID of the subnet to filter security groups by.
 func (r ApiListAwsSecurityGroupsRequest) SubnetId(subnetId string) ApiListAwsSecurityGroupsRequest {
 	r.subnetId = &subnetId
 	return r
@@ -52,12 +52,12 @@ func (r ApiListAwsSecurityGroupsRequest) Execute() (*RestoreSecurityGroups, *htt
 /*
 ListAwsSecurityGroups List Security Groups
 
-Description: Lists security groups available to the restore account in the specified region.
+Description: Retrieves a list of security groups available to Eon in the specified region of the restore account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The project ID
- @param accountId ID of the restore account
- @param region The region to get availability zones for
+ @param projectId ID of the project the restore account is in. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
+ @param accountId Eon-assigned ID of the restore account.
+ @param region Region where the security groups are located.
  @return ApiListAwsSecurityGroupsRequest
 */
 func (a *ListAwsSecurityGroupsAPIService) ListAwsSecurityGroups(ctx context.Context, projectId string, accountId string, region string) ApiListAwsSecurityGroupsRequest {

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The id of the subnet | 
-**Vpc** | **string** | The vpc id of the subnet | 
-**AvailabilityZone** | **string** | The availability zone of the subnet | 
-**Name** | Pointer to **string** | The name of the subnet | [optional] 
-**CidrBlock** | Pointer to **string** | The primary IPv4 CIDR range of the subnet (e.g. \&quot;10.0.0.0/24\&quot;) | [optional] 
+**Id** | **string** | Cloud-provider-assigned ID of the subnet. | 
+**Vpc** | **string** | Cloud-provider-assigned ID of the VPC the subnet is in. | 
+**AvailabilityZone** | **string** | Availability zone the subnet is in. | 
+**Name** | Pointer to **string** | Name of the subnet. | [optional] 
+**CidrBlock** | Pointer to **string** | Primary IPv4 CIDR range of the subnet. | [optional] 
 
 ## Methods
 

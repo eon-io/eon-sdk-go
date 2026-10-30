@@ -535,7 +535,7 @@ func (r ApiGetIdpGroupRequest) Execute() (*GetIdpGroupResponse, *http.Response, 
 /*
 GetIdpGroup Get IdP Group Role Assignment
 
-Description: Retrieves an IdP group role assignment by ID.
+Description: Retrieves an IdP group role assignment.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId Eon-assigned IdP group role assignment ID.
@@ -1466,7 +1466,6 @@ type ApiUpdateRoleRequest struct {
 	updateRoleRequest *UpdateRoleRequest
 }
 
-// The request body for updating a user
 func (r ApiUpdateRoleRequest) UpdateRoleRequest(updateRoleRequest UpdateRoleRequest) ApiUpdateRoleRequest {
 	r.updateRoleRequest = &updateRoleRequest
 	return r
@@ -1479,10 +1478,14 @@ func (r ApiUpdateRoleRequest) Execute() (*UpdateRoleResponse, *http.Response, er
 /*
 UpdateRole Update Role
 
-Description: This API operation updates the details of a role using its unique ID. The request body must contain the updated role details.
+Description: Updates a role.
+
+This operation replaces the entire role object.
+Omitted fields are overwritten.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId ID of the role
+ @param roleId ID of the role.
  @return ApiUpdateRoleRequest
 */
 func (a *IamAPIService) UpdateRole(ctx context.Context, roleId string) ApiUpdateRoleRequest {

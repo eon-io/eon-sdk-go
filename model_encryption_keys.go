@@ -21,6 +21,7 @@ var _ MappedNullable = &EncryptionKeys{}
 
 // EncryptionKeys struct for EncryptionKeys
 type EncryptionKeys struct {
+	// List of encryption keys.
 	Keys []EncryptionKey `json:"keys"`
 }
 

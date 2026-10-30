@@ -30,7 +30,6 @@ type ApiCreateBackupPostureControlRequest struct {
 	createBackupPostureControlRequest *CreateBackupPostureControlRequest
 }
 
-// Backup posture control to create.
 func (r ApiCreateBackupPostureControlRequest) CreateBackupPostureControlRequest(createBackupPostureControlRequest CreateBackupPostureControlRequest) ApiCreateBackupPostureControlRequest {
 	r.createBackupPostureControlRequest = &createBackupPostureControlRequest
 	return r
@@ -585,9 +584,8 @@ UpdateBackupPostureControl Update Backup Posture Control
 
 Description: Updates a backup posture control.
 
-The update is a full replacement, not a partial
-update.
-Omitted fields are reset and are no longer enforced as part of the control.
+This operation replaces the entire backup posture control object.
+Omitted fields are overwritten and are no longer enforced as part of the control.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The id of the VPC | 
-**Name** | Pointer to **string** | The name of the VPC | [optional] 
+**Id** | **string** | Cloud-provider-assigned ID of the VPC. | 
+**Name** | Pointer to **string** | Name of the VPC. | [optional] 
 
 ## Methods
 

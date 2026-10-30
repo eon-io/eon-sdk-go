@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Region** | **string** | Region to restore to. | 
 **ResourceGroupName** | **string** | Name of the resource group to restore to. | 
 **Settings** | [**AzureDiskSettings**](AzureDiskSettings.md) |  | 
-**DiskEncryptionSetId** | Pointer to **string** | ARM resource ID of the disk encryption set to encrypt the restored disk with a customer-managed key. The disk encryption set must be in the restore account&#39;s subscription and in the target region. If not provided, the restored disk is encrypted with a platform-managed key.  | [optional] 
+**DiskEncryptionSetId** | Pointer to **string** | ARM resource ID of the disk encryption set whose customer-managed key encrypts the restored disk. The disk encryption set must be in the restore account&#39;s subscription and the destination region. If omitted, the restored disk is encrypted with a platform-managed key.  | [optional] 
 
 ## Methods
 

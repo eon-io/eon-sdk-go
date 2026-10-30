@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## ListVaults
 
-> ListBackupVaultResponse ListVaults(ctx, projectId).PageToken(pageToken).PageSize(pageSize).Body(body).Execute()
+> ListBackupVaultResponse ListVaults(ctx, projectId).PageToken(pageToken).PageSize(pageSize).ListVaultsRequest(listVaultsRequest).Execute()
 
 List Vaults
 
@@ -180,11 +180,11 @@ func main() {
 	projectId := "1ee34dc5-0a7c-4e56-a820-917371e05c8d" // string | ID of the project whose vaults you want to retrieve. You can get your project ID from the [API Credentials](https://console.eon.io/global-management/api-credentials) page in your global management console. 
 	pageToken := "Yjk3ODZjNjktZTIwZC00NjAxLWE1MzktZjg2NGExM2IxYTZlfDE=" // string | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  (optional)
 	pageSize := int32(10) // int32 | Maximum number of items to return in the response. (optional)
-	body := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+	listVaultsRequest := *openapiclient.NewListVaultsRequest() // ListVaultsRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VaultsAPI.ListVaults(context.Background(), projectId).PageToken(pageToken).PageSize(pageSize).Body(body).Execute()
+	resp, r, err := apiClient.VaultsAPI.ListVaults(context.Background(), projectId).PageToken(pageToken).PageSize(pageSize).ListVaultsRequest(listVaultsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VaultsAPI.ListVaults``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
  **pageToken** | **string** | Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests.  | 
  **pageSize** | **int32** | Maximum number of items to return in the response. | 
- **body** | **map[string]interface{}** |  | 
+ **listVaultsRequest** | [**ListVaultsRequest**](ListVaultsRequest.md) |  | 
 
 ### Return type
 

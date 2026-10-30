@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operator** | [**ListOperators**](ListOperators.md) |  | 
-**DataClasses** | **[]string** |  | 
+**DataClasses** | **[]string** | Data classes to evaluate. | 
 
 ## Methods
 

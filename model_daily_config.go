@@ -20,7 +20,7 @@ var _ MappedNullable = &DailyConfig{}
 // DailyConfig struct for DailyConfig
 type DailyConfig struct {
 	TimeOfDay *TimeOfDay `json:"timeOfDay,omitempty"`
-	// The window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
+	// Window of time after the start time you want the backup to start, in minutes. Defaults to `240` (4 hours). 
 	StartWindowMinutes *int32 `json:"startWindowMinutes,omitempty"`
 }
 
