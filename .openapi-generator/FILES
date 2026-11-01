@@ -113,6 +113,7 @@ docs/BackupPostureControlsAPI.md
 docs/BackupStatus.md
 docs/BackupStatusFilters.md
 docs/BackupVault.md
+docs/BackupVaultCreationFailureReason.md
 docs/BackupsAPI.md
 docs/BigQueryDatasetDestination.md
 docs/BillingAPI.md
@@ -717,6 +718,7 @@ model_backup_posture_control_sort_field.go
 model_backup_status.go
 model_backup_status_filters.go
 model_backup_vault.go
+model_backup_vault_creation_failure_reason.go
 model_big_query_dataset_destination.go
 model_bulk_attach_restore_template_request.go
 model_cancel_exclusion_from_backup_response.go

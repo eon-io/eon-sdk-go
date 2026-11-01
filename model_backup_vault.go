@@ -34,6 +34,10 @@ type BackupVault struct {
 	// Whether the vault is in an Eon-managed vault account.
 	IsManagedByEon bool `json:"isManagedByEon"`
 	VaultAttributes VaultProviderAttributes `json:"vaultAttributes"`
+	Status *VaultStatus `json:"status,omitempty"`
+	CreationFailureReason *BackupVaultCreationFailureReason `json:"creationFailureReason,omitempty"`
+	// Why the vault's creation failed, and what to do about it. Set only for a vault whose creation failed. 
+	CreationErrorMessage *string `json:"creationErrorMessage,omitempty"`
 	// List of labels for filtering and searching for vaults. Doesn't affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
 	Labels []string `json:"labels,omitempty"`
 }
@@ -232,6 +236,102 @@ func (o *BackupVault) SetVaultAttributes(v VaultProviderAttributes) {
 	o.VaultAttributes = v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *BackupVault) GetStatus() VaultStatus {
+	if o == nil || IsNil(o.Status) {
+		var ret VaultStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupVault) GetStatusOk() (*VaultStatus, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *BackupVault) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given VaultStatus and assigns it to the Status field.
+func (o *BackupVault) SetStatus(v VaultStatus) {
+	o.Status = &v
+}
+
+// GetCreationFailureReason returns the CreationFailureReason field value if set, zero value otherwise.
+func (o *BackupVault) GetCreationFailureReason() BackupVaultCreationFailureReason {
+	if o == nil || IsNil(o.CreationFailureReason) {
+		var ret BackupVaultCreationFailureReason
+		return ret
+	}
+	return *o.CreationFailureReason
+}
+
+// GetCreationFailureReasonOk returns a tuple with the CreationFailureReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupVault) GetCreationFailureReasonOk() (*BackupVaultCreationFailureReason, bool) {
+	if o == nil || IsNil(o.CreationFailureReason) {
+		return nil, false
+	}
+	return o.CreationFailureReason, true
+}
+
+// HasCreationFailureReason returns a boolean if a field has been set.
+func (o *BackupVault) HasCreationFailureReason() bool {
+	if o != nil && !IsNil(o.CreationFailureReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreationFailureReason gets a reference to the given BackupVaultCreationFailureReason and assigns it to the CreationFailureReason field.
+func (o *BackupVault) SetCreationFailureReason(v BackupVaultCreationFailureReason) {
+	o.CreationFailureReason = &v
+}
+
+// GetCreationErrorMessage returns the CreationErrorMessage field value if set, zero value otherwise.
+func (o *BackupVault) GetCreationErrorMessage() string {
+	if o == nil || IsNil(o.CreationErrorMessage) {
+		var ret string
+		return ret
+	}
+	return *o.CreationErrorMessage
+}
+
+// GetCreationErrorMessageOk returns a tuple with the CreationErrorMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupVault) GetCreationErrorMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.CreationErrorMessage) {
+		return nil, false
+	}
+	return o.CreationErrorMessage, true
+}
+
+// HasCreationErrorMessage returns a boolean if a field has been set.
+func (o *BackupVault) HasCreationErrorMessage() bool {
+	if o != nil && !IsNil(o.CreationErrorMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreationErrorMessage gets a reference to the given string and assigns it to the CreationErrorMessage field.
+func (o *BackupVault) SetCreationErrorMessage(v string) {
+	o.CreationErrorMessage = &v
+}
+
 // GetLabels returns the Labels field value if set, zero value otherwise.
 func (o *BackupVault) GetLabels() []string {
 	if o == nil || IsNil(o.Labels) {
@@ -281,6 +381,15 @@ func (o BackupVault) ToMap() (map[string]interface{}, error) {
 	toSerialize["region"] = o.Region
 	toSerialize["isManagedByEon"] = o.IsManagedByEon
 	toSerialize["vaultAttributes"] = o.VaultAttributes
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.CreationFailureReason) {
+		toSerialize["creationFailureReason"] = o.CreationFailureReason
+	}
+	if !IsNil(o.CreationErrorMessage) {
+		toSerialize["creationErrorMessage"] = o.CreationErrorMessage
+	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}

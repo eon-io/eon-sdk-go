@@ -18578,8 +18578,55 @@ components:
       required:
       - cloudProvider
       type: object
+    VaultStatus:
+      description: |
+        Vault lifecycle status.
+        `UNSPECIFIED` is supported only in responses.
+      enum:
+      - UNSPECIFIED
+      - CREATING
+      - CREATION_FAILED
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - CLEANUP_FAILED
+      - PENDING_DELETION
+      example: ACTIVE
+      type: string
+      x-enum-varnames:
+      - VAULT_STATUS_UNSPECIFIED
+      - VAULT_STATUS_CREATING
+      - VAULT_STATUS_CREATION_FAILED
+      - VAULT_STATUS_ACTIVE
+      - VAULT_STATUS_DELETING
+      - VAULT_STATUS_DELETED
+      - VAULT_STATUS_CLEANUP_FAILED
+      - VAULT_STATUS_PENDING_DELETION
+    BackupVaultCreationFailureReason:
+      description: |
+        Why the vault's creation failed. `UNSPECIFIED` for a vault whose creation didn't fail, or that failed before reasons were recorded.
+        `creationErrorMessage` explains the failure and what to do about it.
+      enum:
+      - UNSPECIFIED
+      - INTERNAL
+      - ACCESS_DENIED
+      - ROLE_ASSUMPTION_DENIED
+      - TIMED_OUT
+      - CLOUD_OPERATION_FAILED
+      - USER_ERROR
+      example: ACCESS_DENIED
+      type: string
+      x-enum-varnames:
+      - BACKUP_VAULT_CREATION_FAILURE_REASON_UNSPECIFIED
+      - BACKUP_VAULT_CREATION_FAILURE_REASON_INTERNAL
+      - BACKUP_VAULT_CREATION_FAILURE_REASON_ACCESS_DENIED
+      - BACKUP_VAULT_CREATION_FAILURE_REASON_ROLE_ASSUMPTION_DENIED
+      - BACKUP_VAULT_CREATION_FAILURE_REASON_TIMED_OUT
+      - BACKUP_VAULT_CREATION_FAILURE_REASON_CLOUD_OPERATION_FAILED
+      - BACKUP_VAULT_CREATION_FAILURE_REASON_USER_ERROR
     BackupVault:
       example:
+        creationFailureReason: ACCESS_DENIED
         providerAccountId: "123412341234"
         name: AWS US East 1
         vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -18590,6 +18637,11 @@ components:
         id: 37732835-d768-5990-ba93-a7c2d2e6d754
         isManagedByEon: true
         region: us-east-1
+        creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created this
+          vault. Make sure the vault role allows this action and that no service control
+          policy or permissions boundary denies it. Then delete this vault and create
+          a new one.
+        status: ACTIVE
         labels:
         - platform
         - cost-center 1234
@@ -18620,6 +18672,20 @@ components:
           type: boolean
         vaultAttributes:
           $ref: '#/components/schemas/VaultProviderAttributes'
+        status:
+          $ref: '#/components/schemas/VaultStatus'
+        creationFailureReason:
+          $ref: '#/components/schemas/BackupVaultCreationFailureReason'
+        creationErrorMessage:
+          description: |
+            Why the vault's creation failed, and what to do about it.
+            Set only for a vault whose creation failed.
+          example: AWS denied 's3:PutBucketPolicy' while Eon created this vault. Make
+            sure the vault role allows this action and that no service control policy
+            or permissions boundary denies it. Then delete this vault and create a
+            new one.
+          type: string
+          x-internal: false
         labels:
           description: |
             List of labels for filtering and searching for vaults.
@@ -18668,6 +18734,7 @@ components:
           expirationTime: 2025-01-20T09:40:26Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
+          creationFailureReason: ACCESS_DENIED
           providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -18678,6 +18745,11 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+            this vault. Make sure the vault role allows this action and that no service
+            control policy or permissions boundary denies it. Then delete this vault
+            and create a new one.
+          status: ACTIVE
           labels:
           - platform
           - cost-center 1234
@@ -18727,6 +18799,7 @@ components:
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            creationFailureReason: ACCESS_DENIED
             providerAccountId: "123412341234"
             name: AWS US East 1
             vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -18737,6 +18810,11 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+              this vault. Make sure the vault role allows this action and that no
+              service control policy or permissions boundary denies it. Then delete
+              this vault and create a new one.
+            status: ACTIVE
             labels:
             - platform
             - cost-center 1234
@@ -18767,6 +18845,7 @@ components:
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            creationFailureReason: ACCESS_DENIED
             providerAccountId: "123412341234"
             name: AWS US East 1
             vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -18777,6 +18856,11 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+              this vault. Make sure the vault role allows this action and that no
+              service control policy or permissions boundary denies it. Then delete
+              this vault and create a new one.
+            status: ACTIVE
             labels:
             - platform
             - cost-center 1234
@@ -18831,6 +18915,7 @@ components:
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            creationFailureReason: ACCESS_DENIED
             providerAccountId: "123412341234"
             name: AWS US East 1
             vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -18841,6 +18926,11 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+              this vault. Make sure the vault role allows this action and that no
+              service control policy or permissions boundary denies it. Then delete
+              this vault and create a new one.
+            status: ACTIVE
             labels:
             - platform
             - cost-center 1234
@@ -19300,6 +19390,7 @@ components:
           expirationTime: 2025-01-20T09:40:26Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
+          creationFailureReason: ACCESS_DENIED
           providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -19310,6 +19401,11 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+            this vault. Make sure the vault role allows this action and that no service
+            control policy or permissions boundary denies it. Then delete this vault
+            and create a new one.
+          status: ACTIVE
           labels:
           - platform
           - cost-center 1234
@@ -19380,6 +19476,7 @@ components:
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            creationFailureReason: ACCESS_DENIED
             providerAccountId: "123412341234"
             name: AWS US East 1
             vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -19390,6 +19487,11 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+              this vault. Make sure the vault role allows this action and that no
+              service control policy or permissions boundary denies it. Then delete
+              this vault and create a new one.
+            status: ACTIVE
             labels:
             - platform
             - cost-center 1234
@@ -19438,6 +19540,7 @@ components:
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            creationFailureReason: ACCESS_DENIED
             providerAccountId: "123412341234"
             name: AWS US East 1
             vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -19448,6 +19551,11 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+              this vault. Make sure the vault role allows this action and that no
+              service control policy or permissions boundary denies it. Then delete
+              this vault and create a new one.
+            status: ACTIVE
             labels:
             - platform
             - cost-center 1234
@@ -19520,6 +19628,7 @@ components:
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
+            creationFailureReason: ACCESS_DENIED
             providerAccountId: "123412341234"
             name: AWS US East 1
             vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -19530,6 +19639,11 @@ components:
             id: 37732835-d768-5990-ba93-a7c2d2e6d754
             isManagedByEon: true
             region: us-east-1
+            creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+              this vault. Make sure the vault role allows this action and that no
+              service control policy or permissions boundary denies it. Then delete
+              this vault and create a new one.
+            status: ACTIVE
             labels:
             - platform
             - cost-center 1234
@@ -20445,6 +20559,7 @@ components:
       example: STANDARD
       type: string
       x-docs-internal-enum:
+      - OKTA
       - AWS_NATIVE_HIGH_FREQUENCY
       - BIGQUERY_NATIVE_PITR
       - AZURE_FILES_STANDARD
@@ -24737,6 +24852,7 @@ components:
     CreateVaultResponse:
       example:
         vault:
+          creationFailureReason: ACCESS_DENIED
           providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -24747,6 +24863,11 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+            this vault. Make sure the vault role allows this action and that no service
+            control policy or permissions boundary denies it. Then delete this vault
+            and create a new one.
+          status: ACTIVE
           labels:
           - platform
           - cost-center 1234
@@ -24759,6 +24880,7 @@ components:
     GetVaultResponse:
       example:
         vault:
+          creationFailureReason: ACCESS_DENIED
           providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -24769,6 +24891,11 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+            this vault. Make sure the vault role allows this action and that no service
+            control policy or permissions boundary denies it. Then delete this vault
+            and create a new one.
+          status: ACTIVE
           labels:
           - platform
           - cost-center 1234
@@ -24806,6 +24933,7 @@ components:
     UpdateVaultResponse:
       example:
         vault:
+          creationFailureReason: ACCESS_DENIED
           providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -24816,6 +24944,11 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+            this vault. Make sure the vault role allows this action and that no service
+            control policy or permissions boundary denies it. Then delete this vault
+            and create a new one.
+          status: ACTIVE
           labels:
           - platform
           - cost-center 1234
@@ -24863,30 +24996,6 @@ components:
             type: string
           type: array
       type: object
-    VaultStatus:
-      description: |
-        Vault lifecycle status.
-        `UNSPECIFIED` is supported only in responses.
-      enum:
-      - UNSPECIFIED
-      - CREATING
-      - CREATION_FAILED
-      - ACTIVE
-      - DELETING
-      - DELETED
-      - CLEANUP_FAILED
-      - PENDING_DELETION
-      example: ACTIVE
-      type: string
-      x-enum-varnames:
-      - VAULT_STATUS_UNSPECIFIED
-      - VAULT_STATUS_CREATING
-      - VAULT_STATUS_CREATION_FAILED
-      - VAULT_STATUS_ACTIVE
-      - VAULT_STATUS_DELETING
-      - VAULT_STATUS_DELETED
-      - VAULT_STATUS_CLEANUP_FAILED
-      - VAULT_STATUS_PENDING_DELETION
     VaultStatusFilters:
       additionalProperties: false
       example:
@@ -25025,7 +25134,8 @@ components:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
         vaults:
-        - providerAccountId: "123412341234"
+        - creationFailureReason: ACCESS_DENIED
+          providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           vaultAttributes:
@@ -25035,10 +25145,16 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+            this vault. Make sure the vault role allows this action and that no service
+            control policy or permissions boundary denies it. Then delete this vault
+            and create a new one.
+          status: ACTIVE
           labels:
           - platform
           - cost-center 1234
-        - providerAccountId: "123412341234"
+        - creationFailureReason: ACCESS_DENIED
+          providerAccountId: "123412341234"
           name: AWS US East 1
           vaultAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           vaultAttributes:
@@ -25048,6 +25164,11 @@ components:
           id: 37732835-d768-5990-ba93-a7c2d2e6d754
           isManagedByEon: true
           region: us-east-1
+          creationErrorMessage: AWS denied 's3:PutBucketPolicy' while Eon created
+            this vault. Make sure the vault role allows this action and that no service
+            control policy or permissions boundary denies it. Then delete this vault
+            and create a new one.
+          status: ACTIVE
           labels:
           - platform
           - cost-center 1234

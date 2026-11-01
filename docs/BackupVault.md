@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **Region** | **string** | Region where the vault is located. | 
 **IsManagedByEon** | **bool** | Whether the vault is in an Eon-managed vault account. | 
 **VaultAttributes** | [**VaultProviderAttributes**](VaultProviderAttributes.md) |  | 
+**Status** | Pointer to [**VaultStatus**](VaultStatus.md) |  | [optional] 
+**CreationFailureReason** | Pointer to [**BackupVaultCreationFailureReason**](BackupVaultCreationFailureReason.md) |  | [optional] 
+**CreationErrorMessage** | Pointer to **string** | Why the vault&#39;s creation failed, and what to do about it. Set only for a vault whose creation failed.  | [optional] 
 **Labels** | Pointer to **[]string** | List of labels for filtering and searching for vaults. Doesn&#39;t affect backup behavior, access control, or the tags Eon sets on your cloud resources.  | [optional] 
 
 ## Methods
@@ -171,6 +174,81 @@ and a boolean to check if the value has been set.
 
 SetVaultAttributes sets VaultAttributes field to given value.
 
+
+### GetStatus
+
+`func (o *BackupVault) GetStatus() VaultStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *BackupVault) GetStatusOk() (*VaultStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *BackupVault) SetStatus(v VaultStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *BackupVault) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### GetCreationFailureReason
+
+`func (o *BackupVault) GetCreationFailureReason() BackupVaultCreationFailureReason`
+
+GetCreationFailureReason returns the CreationFailureReason field if non-nil, zero value otherwise.
+
+### GetCreationFailureReasonOk
+
+`func (o *BackupVault) GetCreationFailureReasonOk() (*BackupVaultCreationFailureReason, bool)`
+
+GetCreationFailureReasonOk returns a tuple with the CreationFailureReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreationFailureReason
+
+`func (o *BackupVault) SetCreationFailureReason(v BackupVaultCreationFailureReason)`
+
+SetCreationFailureReason sets CreationFailureReason field to given value.
+
+### HasCreationFailureReason
+
+`func (o *BackupVault) HasCreationFailureReason() bool`
+
+HasCreationFailureReason returns a boolean if a field has been set.
+
+### GetCreationErrorMessage
+
+`func (o *BackupVault) GetCreationErrorMessage() string`
+
+GetCreationErrorMessage returns the CreationErrorMessage field if non-nil, zero value otherwise.
+
+### GetCreationErrorMessageOk
+
+`func (o *BackupVault) GetCreationErrorMessageOk() (*string, bool)`
+
+GetCreationErrorMessageOk returns a tuple with the CreationErrorMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreationErrorMessage
+
+`func (o *BackupVault) SetCreationErrorMessage(v string)`
+
+SetCreationErrorMessage sets CreationErrorMessage field to given value.
+
+### HasCreationErrorMessage
+
+`func (o *BackupVault) HasCreationErrorMessage() bool`
+
+HasCreationErrorMessage returns a boolean if a field has been set.
 
 ### GetLabels
 
