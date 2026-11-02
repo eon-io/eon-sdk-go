@@ -30955,6 +30955,8 @@ components:
       - GCP_CLOUD_SQL_SQL_SERVER_METERING_DIMENSION
       - GCP_BIG_QUERY_METERING_DIMENSION
       - MONGO_ATLAS_CLUSTER_METERING_DIMENSION
+      - MONGO_ATLAS_CLUSTER_TO_GCP_VAULT_METERING_DIMENSION
+      - MONGO_ATLAS_CLUSTER_TO_AZURE_VAULT_METERING_DIMENSION
       - DATA_TRANSFER_METERING_DIMENSION
       - CLASSIFICATION_METERING_DIMENSION
       - AWS_EC2_TO_AZURE_VAULT_METERING_DIMENSION
@@ -31021,6 +31023,8 @@ components:
       - GCP_CLOUD_SQL_TO_AWS_VAULT_METERING_DIMENSION
       - AZURE_SQL_DATABASE_TO_AWS_VAULT_METERING_DIMENSION
       - AZURE_POSTGRESQL_TO_AWS_VAULT_METERING_DIMENSION
+      - MONGO_ATLAS_CLUSTER_TO_GCP_VAULT_METERING_DIMENSION
+      - MONGO_ATLAS_CLUSTER_TO_AZURE_VAULT_METERING_DIMENSION
       - SAAS_BACKUP_STORAGE_METERING_DIMENSION
       - SAAS_BACKUP_SEATS_METERING_DIMENSION
       - SAAS_BACKUP_SEATS_RANSOMWARE_METERING_DIMENSION
@@ -34462,6 +34466,60 @@ components:
       - timestamp
       - type
       type: object
+    WebhookV1ResourceBlockerNotificationArguments:
+      description: Details of a blocker added to a resource.
+      properties:
+        resourceId:
+          description: Eon ID of the resource.
+          type: string
+        resourceName:
+          description: Name of the resource.
+          type: string
+        resourceType:
+          description: Resource type.
+          type: string
+        blockerType:
+          description: Key of the blocker that keeps the resource from being backed
+            up.
+          type: string
+        message:
+          description: Description of the blocker.
+          type: string
+      type: object
+    WebhookV1StandardPayloadResourceBlocker:
+      description: Standard envelope of the notifications sent when a resource gets
+        a blocker that keeps it from being backed up.
+      properties:
+        id:
+          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
+          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
+          type: string
+        projectId:
+          description: ID of the project the notification policy is in.
+          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
+          type: string
+        timestamp:
+          description: |
+            Time the notification was created, in RFC 3339 format with second precision.
+            Also sent in the `X-Eon-Timestamp` header.
+          example: 2024-03-04T05:06:07Z
+          format: date-time
+          type: string
+        type:
+          description: Notification type. Also sent in the `X-Eon-Notification-Type`
+            header.
+          enum:
+          - RESOURCE_BLOCKER_ADDED
+          type: string
+        arguments:
+          $ref: '#/components/schemas/WebhookV1StandardPayloadResourceBlocker_arguments'
+      required:
+      - arguments
+      - id
+      - projectId
+      - timestamp
+      - type
+      type: object
     WebhookV1JobMetricsReportFailedArguments:
       description: Details of the failed job metrics report.
       properties:
@@ -34941,6 +34999,7 @@ components:
           VIOLATIONS_RESOLVED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
           ISSUE_MUTED_ON_RESOURCE: '#/components/schemas/WebhookV1StandardPayloadIssueMuted'
           ISSUE_UNMUTED_ON_RESOURCE: '#/components/schemas/WebhookV1StandardPayloadIssueMuted'
+          RESOURCE_BLOCKER_ADDED: '#/components/schemas/WebhookV1StandardPayloadResourceBlocker'
           JOB_METRICS_REPORT_FAILED: '#/components/schemas/WebhookV1StandardPayloadJobMetricsReportFailed'
           NOTIFICATION_TARGET_CREATED: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
           NOTIFICATION_TARGET_UPDATED: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
@@ -34986,6 +35045,7 @@ components:
       - $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadViolations'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadIssueMuted'
+      - $ref: '#/components/schemas/WebhookV1StandardPayloadResourceBlocker'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadJobMetricsReportFailed'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadNotificationTargetChange'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadCreditsUsage'
@@ -35377,6 +35437,15 @@ components:
           $ref: '#/components/schemas/WebhookV1IssueMutedNotificationArguments'
       required:
       - issueMutedNotificationArguments
+      type: object
+    WebhookV1StandardPayloadResourceBlocker_arguments:
+      description: |
+        Details of the notification. Notifications of this type always carry `resourceBlockerNotification`.
+      properties:
+        resourceBlockerNotification:
+          $ref: '#/components/schemas/WebhookV1ResourceBlockerNotificationArguments'
+      required:
+      - resourceBlockerNotification
       type: object
     WebhookV1StandardPayloadJobMetricsReportFailed_arguments:
       description: |

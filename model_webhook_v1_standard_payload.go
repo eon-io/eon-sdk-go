@@ -38,6 +38,7 @@ type WebhookV1StandardPayload struct {
 	WebhookV1StandardPayloadPolicyAssignment *WebhookV1StandardPayloadPolicyAssignment
 	WebhookV1StandardPayloadPolicyChange *WebhookV1StandardPayloadPolicyChange
 	WebhookV1StandardPayloadResource *WebhookV1StandardPayloadResource
+	WebhookV1StandardPayloadResourceBlocker *WebhookV1StandardPayloadResourceBlocker
 	WebhookV1StandardPayloadRestoreJobFailed *WebhookV1StandardPayloadRestoreJobFailed
 	WebhookV1StandardPayloadRestoreJobRejected *WebhookV1StandardPayloadRestoreJobRejected
 	WebhookV1StandardPayloadRestoreJobSucceeded *WebhookV1StandardPayloadRestoreJobSucceeded
@@ -191,6 +192,13 @@ func WebhookV1StandardPayloadPolicyChangeAsWebhookV1StandardPayload(v *WebhookV1
 func WebhookV1StandardPayloadResourceAsWebhookV1StandardPayload(v *WebhookV1StandardPayloadResource) WebhookV1StandardPayload {
 	return WebhookV1StandardPayload{
 		WebhookV1StandardPayloadResource: v,
+	}
+}
+
+// WebhookV1StandardPayloadResourceBlockerAsWebhookV1StandardPayload is a convenience function that returns WebhookV1StandardPayloadResourceBlocker wrapped in WebhookV1StandardPayload
+func WebhookV1StandardPayloadResourceBlockerAsWebhookV1StandardPayload(v *WebhookV1StandardPayloadResourceBlocker) WebhookV1StandardPayload {
+	return WebhookV1StandardPayload{
+		WebhookV1StandardPayloadResourceBlocker: v,
 	}
 }
 
@@ -521,6 +529,19 @@ func (dst *WebhookV1StandardPayload) UnmarshalJSON(data []byte) error {
 		dst.WebhookV1StandardPayloadResource = nil
 	}
 
+	// try to unmarshal data into WebhookV1StandardPayloadResourceBlocker
+	err = newStrictDecoder(data).Decode(&dst.WebhookV1StandardPayloadResourceBlocker)
+	if err == nil {
+		jsonWebhookV1StandardPayloadResourceBlocker, _ := json.Marshal(dst.WebhookV1StandardPayloadResourceBlocker)
+		if string(jsonWebhookV1StandardPayloadResourceBlocker) == "{}" { // empty struct
+			dst.WebhookV1StandardPayloadResourceBlocker = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.WebhookV1StandardPayloadResourceBlocker = nil
+	}
+
 	// try to unmarshal data into WebhookV1StandardPayloadRestoreJobFailed
 	err = newStrictDecoder(data).Decode(&dst.WebhookV1StandardPayloadRestoreJobFailed)
 	if err == nil {
@@ -635,6 +656,7 @@ func (dst *WebhookV1StandardPayload) UnmarshalJSON(data []byte) error {
 		dst.WebhookV1StandardPayloadPolicyAssignment = nil
 		dst.WebhookV1StandardPayloadPolicyChange = nil
 		dst.WebhookV1StandardPayloadResource = nil
+		dst.WebhookV1StandardPayloadResourceBlocker = nil
 		dst.WebhookV1StandardPayloadRestoreJobFailed = nil
 		dst.WebhookV1StandardPayloadRestoreJobRejected = nil
 		dst.WebhookV1StandardPayloadRestoreJobSucceeded = nil
@@ -735,6 +757,10 @@ func (src WebhookV1StandardPayload) MarshalJSON() ([]byte, error) {
 
 	if src.WebhookV1StandardPayloadResource != nil {
 		return json.Marshal(&src.WebhookV1StandardPayloadResource)
+	}
+
+	if src.WebhookV1StandardPayloadResourceBlocker != nil {
+		return json.Marshal(&src.WebhookV1StandardPayloadResourceBlocker)
 	}
 
 	if src.WebhookV1StandardPayloadRestoreJobFailed != nil {
@@ -855,6 +881,10 @@ func (obj *WebhookV1StandardPayload) GetActualInstance() (interface{}) {
 
 	if obj.WebhookV1StandardPayloadResource != nil {
 		return obj.WebhookV1StandardPayloadResource
+	}
+
+	if obj.WebhookV1StandardPayloadResourceBlocker != nil {
+		return obj.WebhookV1StandardPayloadResourceBlocker
 	}
 
 	if obj.WebhookV1StandardPayloadRestoreJobFailed != nil {
