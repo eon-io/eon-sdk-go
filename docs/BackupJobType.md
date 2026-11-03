@@ -35,6 +35,8 @@
 
 * `AWS_EKS_CLUSTER_BACKUP` (value: `"AWS_EKS_CLUSTER_BACKUP"`)
 
+* `AWS_KEYSPACES_BACKUP` (value: `"AWS_KEYSPACES_BACKUP"`)
+
 * `AWS_KEYSPACES_BACKUP_FULL` (value: `"AWS_KEYSPACES_BACKUP_FULL"`)
 
 * `AWS_CASSANDRA_CLUSTER_BACKUP` (value: `"AWS_CASSANDRA_CLUSTER_BACKUP"`)
@@ -82,6 +84,8 @@
 * `MICROSOFT_365_BACKUP` (value: `"MICROSOFT_365_BACKUP"`)
 
 * `AZURE_ENTRA_ID_BACKUP` (value: `"AZURE_ENTRA_ID_BACKUP"`)
+
+* `OKTA_BACKUP` (value: `"OKTA_BACKUP"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

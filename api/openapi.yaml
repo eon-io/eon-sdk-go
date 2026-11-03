@@ -12332,6 +12332,8 @@ components:
       - data_catalog_pipelines.manage
       - dashboard.manage
       - ai_assistant.use
+      - agent_protection.view
+      - agent_protection_settings.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -12389,6 +12391,8 @@ components:
       - saas_backup_policies.manage
       - dashboard.manage
       - ai_assistant.use
+      - agent_protection.view
+      - agent_protection_settings.manage
     Permission:
       example:
         permissionType: inventory.view
@@ -18112,6 +18116,7 @@ components:
       - AWS_DYNAMO_DB_BACKUP_FULL_EXPORT
       - AWS_EKS_NAMESPACE_BACKUP
       - AWS_EKS_CLUSTER_BACKUP
+      - AWS_KEYSPACES_BACKUP
       - AWS_KEYSPACES_BACKUP_FULL
       - AWS_CASSANDRA_CLUSTER_BACKUP
       - AWS_OPENSEARCH_BACKUP
@@ -18136,6 +18141,7 @@ components:
       - GOOGLE_WORKSPACE_BACKUP
       - MICROSOFT_365_BACKUP
       - AZURE_ENTRA_ID_BACKUP
+      - OKTA_BACKUP
       example: AWS_EC2_BACKUP
       type: string
       x-extensible-enum: true
@@ -18145,6 +18151,7 @@ components:
       - AWS_S3_LLG_BACKUP
       - AWS_DOCUMENTDB_BACKUP
       - AWS_NEPTUNE_BACKUP
+      - AWS_KEYSPACES_BACKUP
       - AWS_KEYSPACES_BACKUP_FULL
       - AWS_CASSANDRA_CLUSTER_BACKUP
       - AWS_OPENSEARCH_BACKUP
@@ -18157,6 +18164,7 @@ components:
       - MICROSOFT_365_BACKUP
       - AZURE_ENTRA_ID_BACKUP
       - CLAUDE_ENTERPRISE_BACKUP
+      - OKTA_BACKUP
     BackupJobTypeFilters:
       additionalProperties: false
       example:
@@ -20559,7 +20567,6 @@ components:
       example: STANDARD
       type: string
       x-docs-internal-enum:
-      - OKTA
       - AWS_NATIVE_HIGH_FREQUENCY
       - BIGQUERY_NATIVE_PITR
       - AZURE_FILES_STANDARD
@@ -20567,6 +20574,7 @@ components:
       - GOOGLE_WORKSPACE
       - MICROSOFT_365
       - AZURE_ENTRA_ID
+      - OKTA
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
