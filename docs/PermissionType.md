@@ -153,6 +153,8 @@
 
 * `SAAS_TEAMS_RESTORE` (value: `"saas_teams.restore"`)
 
+* `SAAS_CONTACTS_RESTORE` (value: `"saas_contacts.restore"`)
+
 * `THREAT_DETECTION_CENTER_VIEW` (value: `"threat_detection_center.view"`)
 
 * `THREAT_DETECTION_EXCLUSION_MANAGE` (value: `"threat_detection_exclusion.manage"`)

@@ -95,6 +95,7 @@ const (
 	SAAS_USER_RESTORE PermissionType = "saas_user.restore"
 	SAAS_TEAMS_SEARCH PermissionType = "saas_teams.search"
 	SAAS_TEAMS_RESTORE PermissionType = "saas_teams.restore"
+	SAAS_CONTACTS_RESTORE PermissionType = "saas_contacts.restore"
 	THREAT_DETECTION_CENTER_VIEW PermissionType = "threat_detection_center.view"
 	THREAT_DETECTION_EXCLUSION_MANAGE PermissionType = "threat_detection_exclusion.manage"
 	SAAS_DASHBOARD_VIEW PermissionType = "saas_dashboard.view"
@@ -199,6 +200,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"saas_user.restore",
 	"saas_teams.search",
 	"saas_teams.restore",
+	"saas_contacts.restore",
 	"threat_detection_center.view",
 	"threat_detection_exclusion.manage",
 	"saas_dashboard.view",

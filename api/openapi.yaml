@@ -12309,6 +12309,7 @@ components:
       - saas_user.restore
       - saas_teams.search
       - saas_teams.restore
+      - saas_contacts.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -12371,6 +12372,7 @@ components:
       - saas_user.restore
       - saas_teams.search
       - saas_teams.restore
+      - saas_contacts.restore
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
