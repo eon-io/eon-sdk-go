@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **HighFrequencyPlan** | Pointer to [**NullableHighFrequencyBackupPolicyPlan**](HighFrequencyBackupPolicyPlan.md) |  | [optional] 
 **AwsNativePitrPlan** | Pointer to [**NullableAwsNativePitrBackupPolicyPlan**](AwsNativePitrBackupPolicyPlan.md) |  | [optional] 
 **AwsNativeStandardPlan** | Pointer to [**NullableAwsNativeStandardBackupPolicyPlan**](AwsNativeStandardBackupPolicyPlan.md) |  | [optional] 
+**GoogleWorkspacePlan** | Pointer to [**NullableGoogleWorkspaceBackupPolicyPlan**](GoogleWorkspaceBackupPolicyPlan.md) |  | [optional] 
 
 ## Methods
 
@@ -189,6 +190,41 @@ HasAwsNativeStandardPlan returns a boolean if a field has been set.
 `func (o *BackupPolicyPlan) UnsetAwsNativeStandardPlan()`
 
 UnsetAwsNativeStandardPlan ensures that no value is present for AwsNativeStandardPlan, not even an explicit nil
+### GetGoogleWorkspacePlan
+
+`func (o *BackupPolicyPlan) GetGoogleWorkspacePlan() GoogleWorkspaceBackupPolicyPlan`
+
+GetGoogleWorkspacePlan returns the GoogleWorkspacePlan field if non-nil, zero value otherwise.
+
+### GetGoogleWorkspacePlanOk
+
+`func (o *BackupPolicyPlan) GetGoogleWorkspacePlanOk() (*GoogleWorkspaceBackupPolicyPlan, bool)`
+
+GetGoogleWorkspacePlanOk returns a tuple with the GoogleWorkspacePlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGoogleWorkspacePlan
+
+`func (o *BackupPolicyPlan) SetGoogleWorkspacePlan(v GoogleWorkspaceBackupPolicyPlan)`
+
+SetGoogleWorkspacePlan sets GoogleWorkspacePlan field to given value.
+
+### HasGoogleWorkspacePlan
+
+`func (o *BackupPolicyPlan) HasGoogleWorkspacePlan() bool`
+
+HasGoogleWorkspacePlan returns a boolean if a field has been set.
+
+### SetGoogleWorkspacePlanNil
+
+`func (o *BackupPolicyPlan) SetGoogleWorkspacePlanNil(b bool)`
+
+ SetGoogleWorkspacePlanNil sets the value for GoogleWorkspacePlan to be an explicit nil
+
+### UnsetGoogleWorkspacePlan
+`func (o *BackupPolicyPlan) UnsetGoogleWorkspacePlan()`
+
+UnsetGoogleWorkspacePlan ensures that no value is present for GoogleWorkspacePlan, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

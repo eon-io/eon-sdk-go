@@ -26,6 +26,7 @@ type BackupPolicyPlan struct {
 	HighFrequencyPlan NullableHighFrequencyBackupPolicyPlan `json:"highFrequencyPlan,omitempty"`
 	AwsNativePitrPlan NullableAwsNativePitrBackupPolicyPlan `json:"awsNativePitrPlan,omitempty"`
 	AwsNativeStandardPlan NullableAwsNativeStandardBackupPolicyPlan `json:"awsNativeStandardPlan,omitempty"`
+	GoogleWorkspacePlan NullableGoogleWorkspaceBackupPolicyPlan `json:"googleWorkspacePlan,omitempty"`
 }
 
 type _BackupPolicyPlan BackupPolicyPlan
@@ -240,6 +241,48 @@ func (o *BackupPolicyPlan) UnsetAwsNativeStandardPlan() {
 	o.AwsNativeStandardPlan.Unset()
 }
 
+// GetGoogleWorkspacePlan returns the GoogleWorkspacePlan field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BackupPolicyPlan) GetGoogleWorkspacePlan() GoogleWorkspaceBackupPolicyPlan {
+	if o == nil || IsNil(o.GoogleWorkspacePlan.Get()) {
+		var ret GoogleWorkspaceBackupPolicyPlan
+		return ret
+	}
+	return *o.GoogleWorkspacePlan.Get()
+}
+
+// GetGoogleWorkspacePlanOk returns a tuple with the GoogleWorkspacePlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BackupPolicyPlan) GetGoogleWorkspacePlanOk() (*GoogleWorkspaceBackupPolicyPlan, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GoogleWorkspacePlan.Get(), o.GoogleWorkspacePlan.IsSet()
+}
+
+// HasGoogleWorkspacePlan returns a boolean if a field has been set.
+func (o *BackupPolicyPlan) HasGoogleWorkspacePlan() bool {
+	if o != nil && o.GoogleWorkspacePlan.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGoogleWorkspacePlan gets a reference to the given NullableGoogleWorkspaceBackupPolicyPlan and assigns it to the GoogleWorkspacePlan field.
+func (o *BackupPolicyPlan) SetGoogleWorkspacePlan(v GoogleWorkspaceBackupPolicyPlan) {
+	o.GoogleWorkspacePlan.Set(&v)
+}
+// SetGoogleWorkspacePlanNil sets the value for GoogleWorkspacePlan to be an explicit nil
+func (o *BackupPolicyPlan) SetGoogleWorkspacePlanNil() {
+	o.GoogleWorkspacePlan.Set(nil)
+}
+
+// UnsetGoogleWorkspacePlan ensures that no value is present for GoogleWorkspacePlan, not even an explicit nil
+func (o *BackupPolicyPlan) UnsetGoogleWorkspacePlan() {
+	o.GoogleWorkspacePlan.Unset()
+}
+
 func (o BackupPolicyPlan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -262,6 +305,9 @@ func (o BackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AwsNativeStandardPlan.IsSet() {
 		toSerialize["awsNativeStandardPlan"] = o.AwsNativeStandardPlan.Get()
+	}
+	if o.GoogleWorkspacePlan.IsSet() {
+		toSerialize["googleWorkspacePlan"] = o.GoogleWorkspacePlan.Get()
 	}
 	return toSerialize, nil
 }

@@ -41,6 +41,7 @@ const (
 	RESOURCES_RESTORE PermissionType = "resources.restore"
 	CONFIGURATION_VALIDATE PermissionType = "configuration.validate"
 	FILES_RESTORE PermissionType = "files.restore"
+	FILES_PREVIEW_DOWNLOAD PermissionType = "files.preview_download"
 	DATABASES_QUERY PermissionType = "databases.query"
 	DATA_CLASSES_OVERRIDE PermissionType = "data_classes.override"
 	ENVIRONMENTS_OVERRIDE PermissionType = "environments.override"
@@ -96,6 +97,7 @@ const (
 	SAAS_TEAMS_SEARCH PermissionType = "saas_teams.search"
 	SAAS_TEAMS_RESTORE PermissionType = "saas_teams.restore"
 	SAAS_CONTACTS_RESTORE PermissionType = "saas_contacts.restore"
+	SAAS_FILES_PREVIEW_DOWNLOAD PermissionType = "saas_files.preview_download"
 	THREAT_DETECTION_CENTER_VIEW PermissionType = "threat_detection_center.view"
 	THREAT_DETECTION_EXCLUSION_MANAGE PermissionType = "threat_detection_exclusion.manage"
 	SAAS_DASHBOARD_VIEW PermissionType = "saas_dashboard.view"
@@ -146,6 +148,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"resources.restore",
 	"configuration.validate",
 	"files.restore",
+	"files.preview_download",
 	"databases.query",
 	"data_classes.override",
 	"environments.override",
@@ -201,6 +204,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"saas_teams.search",
 	"saas_teams.restore",
 	"saas_contacts.restore",
+	"saas_files.preview_download",
 	"threat_detection_center.view",
 	"threat_detection_exclusion.manage",
 	"saas_dashboard.view",

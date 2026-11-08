@@ -45,6 +45,8 @@
 
 * `FILES_RESTORE` (value: `"files.restore"`)
 
+* `FILES_PREVIEW_DOWNLOAD` (value: `"files.preview_download"`)
+
 * `DATABASES_QUERY` (value: `"databases.query"`)
 
 * `DATA_CLASSES_OVERRIDE` (value: `"data_classes.override"`)
@@ -154,6 +156,8 @@
 * `SAAS_TEAMS_RESTORE` (value: `"saas_teams.restore"`)
 
 * `SAAS_CONTACTS_RESTORE` (value: `"saas_contacts.restore"`)
+
+* `SAAS_FILES_PREVIEW_DOWNLOAD` (value: `"saas_files.preview_download"`)
 
 * `THREAT_DETECTION_CENTER_VIEW` (value: `"threat_detection_center.view"`)
 

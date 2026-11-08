@@ -12255,6 +12255,7 @@ components:
       - resources.restore
       - configuration.validate
       - files.restore
+      - files.preview_download
       - databases.query
       - data_classes.override
       - environments.override
@@ -12310,6 +12311,7 @@ components:
       - saas_teams.search
       - saas_teams.restore
       - saas_contacts.restore
+      - saas_files.preview_download
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -12373,6 +12375,8 @@ components:
       - saas_teams.search
       - saas_teams.restore
       - saas_contacts.restore
+      - saas_files.preview_download
+      - files.preview_download
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -20575,7 +20579,6 @@ components:
       - BIGQUERY_NATIVE_PITR
       - AZURE_FILES_STANDARD
       - AZURE_SQL_DATABASE_NATIVE_PITR
-      - GOOGLE_WORKSPACE
       - MICROSOFT_365
       - AZURE_ENTRA_ID
       - OKTA
@@ -21553,6 +21556,29 @@ components:
       required:
       - backupSchedules
       type: object
+    GoogleWorkspaceBackupPolicyPlan:
+      example:
+        vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+        backupRetentionDays: 30
+      nullable: true
+      properties:
+        vaultId:
+          description: |
+            Vault the Google Workspace backups are written to. Must be a GCP vault.
+          example: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          format: uuid
+          type: string
+        backupRetentionDays:
+          description: |
+            Backup retention period, in days.
+          example: 30
+          minimum: 1
+          type: integer
+      required:
+      - backupRetentionDays
+      - vaultId
+      type: object
+      x-internal: false
     BackupPolicyPlan:
       example:
         backupPolicyType: STANDARD
@@ -21639,6 +21665,9 @@ components:
             backupRetentionDays: 30
           scheduleTimezone: UTC
           reuseExistingSnapshots: true
+        googleWorkspacePlan:
+          vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          backupRetentionDays: 30
         standardPlan:
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -21800,6 +21829,8 @@ components:
           $ref: '#/components/schemas/AwsNativePitrBackupPolicyPlan'
         awsNativeStandardPlan:
           $ref: '#/components/schemas/AwsNativeStandardBackupPolicyPlan'
+        googleWorkspacePlan:
+          $ref: '#/components/schemas/GoogleWorkspaceBackupPolicyPlan'
       required:
       - backupPolicyType
       type: object
@@ -21891,6 +21922,9 @@ components:
               backupRetentionDays: 30
             scheduleTimezone: UTC
             reuseExistingSnapshots: true
+          googleWorkspacePlan:
+            vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            backupRetentionDays: 30
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -22271,6 +22305,9 @@ components:
               backupRetentionDays: 30
             scheduleTimezone: UTC
             reuseExistingSnapshots: true
+          googleWorkspacePlan:
+            vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            backupRetentionDays: 30
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -22658,6 +22695,9 @@ components:
                 backupRetentionDays: 30
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
+            googleWorkspacePlan:
+              vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionDays: 30
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -23043,6 +23083,9 @@ components:
                 backupRetentionDays: 30
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
+            googleWorkspacePlan:
+              vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionDays: 30
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -23392,6 +23435,9 @@ components:
                 backupRetentionDays: 30
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
+            googleWorkspacePlan:
+              vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionDays: 30
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -23761,6 +23807,9 @@ components:
                 backupRetentionDays: 30
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
+            googleWorkspacePlan:
+              vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionDays: 30
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -24118,6 +24167,9 @@ components:
               backupRetentionDays: 30
             scheduleTimezone: UTC
             reuseExistingSnapshots: true
+          googleWorkspacePlan:
+            vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            backupRetentionDays: 30
           standardPlan:
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
@@ -24499,6 +24551,9 @@ components:
                 backupRetentionDays: 30
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
+            googleWorkspacePlan:
+              vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionDays: 30
             standardPlan:
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
