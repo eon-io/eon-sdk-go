@@ -10369,6 +10369,7 @@ components:
       - AWS_EKS_CLUSTER
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
+      - AWS_SQL_VM
       - AWS_CASSANDRA_CLUSTER
       - AWS_OPENSEARCH
       - AWS_AGENTCORE
@@ -12237,6 +12238,7 @@ components:
       - permission_id_unspecified
       - global_settings.view
       - vault_accounts.manage
+      - scanning_accounts.manage
       - cost_explorer.view
       - user_access.manage
       - saml_group_access.manage
@@ -12295,6 +12297,7 @@ components:
       - data_catalog.query
       - saas_backup_scope.manage
       - saas_mail.search
+      - saas_contacts.search
       - saas_user_drive.search
       - saas_group_data.search
       - saas_shared_drive.search
@@ -12359,6 +12362,7 @@ components:
       - classification_policies.manage
       - saas_backup_scope.manage
       - saas_mail.search
+      - saas_contacts.search
       - saas_user_drive.search
       - saas_group_data.search
       - saas_shared_drive.search
@@ -31002,6 +31006,7 @@ components:
       - AWS_RDS_METERING_DIMENSION
       - AWS_RDS_ORACLE_METERING_DIMENSION
       - AWS_RDS_AURORA_METERING_DIMENSION
+      - AWS_RDS_AURORA_FULL_SNAPSHOT_METERING_DIMENSION
       - AWS_EC2_CASSANDRA_METERING_DIMENSION
       - AWS_S3_METERING_DIMENSION
       - AWS_S3_DLSG_METERING_DIMENSION
@@ -31071,6 +31076,7 @@ components:
       - GCP_SQL_VM_TO_AZURE_VAULT_METERING_DIMENSION
       - AWS_RDS_ORACLE_METERING_DIMENSION
       - AWS_RDS_AURORA_METERING_DIMENSION
+      - AWS_RDS_AURORA_FULL_SNAPSHOT_METERING_DIMENSION
       - AWS_EC2_CASSANDRA_METERING_DIMENSION
       - AZURE_VM_CASSANDRA_METERING_DIMENSION
       - GCP_VM_CASSANDRA_METERING_DIMENSION

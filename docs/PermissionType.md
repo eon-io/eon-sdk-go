@@ -9,6 +9,8 @@
 
 * `VAULT_ACCOUNTS_MANAGE` (value: `"vault_accounts.manage"`)
 
+* `SCANNING_ACCOUNTS_MANAGE` (value: `"scanning_accounts.manage"`)
+
 * `COST_EXPLORER_VIEW` (value: `"cost_explorer.view"`)
 
 * `USER_ACCESS_MANAGE` (value: `"user_access.manage"`)
@@ -124,6 +126,8 @@
 * `SAAS_BACKUP_SCOPE_MANAGE` (value: `"saas_backup_scope.manage"`)
 
 * `SAAS_MAIL_SEARCH` (value: `"saas_mail.search"`)
+
+* `SAAS_CONTACTS_SEARCH` (value: `"saas_contacts.search"`)
 
 * `SAAS_USER_DRIVE_SEARCH` (value: `"saas_user_drive.search"`)
 

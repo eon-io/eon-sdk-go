@@ -23,6 +23,7 @@ const (
 	PERMISSION_ID_UNSPECIFIED PermissionType = "permission_id_unspecified"
 	GLOBAL_SETTINGS_VIEW PermissionType = "global_settings.view"
 	VAULT_ACCOUNTS_MANAGE PermissionType = "vault_accounts.manage"
+	SCANNING_ACCOUNTS_MANAGE PermissionType = "scanning_accounts.manage"
 	COST_EXPLORER_VIEW PermissionType = "cost_explorer.view"
 	USER_ACCESS_MANAGE PermissionType = "user_access.manage"
 	SAML_GROUP_ACCESS_MANAGE PermissionType = "saml_group_access.manage"
@@ -81,6 +82,7 @@ const (
 	DATA_CATALOG_QUERY PermissionType = "data_catalog.query"
 	SAAS_BACKUP_SCOPE_MANAGE PermissionType = "saas_backup_scope.manage"
 	SAAS_MAIL_SEARCH PermissionType = "saas_mail.search"
+	SAAS_CONTACTS_SEARCH PermissionType = "saas_contacts.search"
 	SAAS_USER_DRIVE_SEARCH PermissionType = "saas_user_drive.search"
 	SAAS_GROUP_DATA_SEARCH PermissionType = "saas_group_data.search"
 	SAAS_SHARED_DRIVE_SEARCH PermissionType = "saas_shared_drive.search"
@@ -130,6 +132,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"permission_id_unspecified",
 	"global_settings.view",
 	"vault_accounts.manage",
+	"scanning_accounts.manage",
 	"cost_explorer.view",
 	"user_access.manage",
 	"saml_group_access.manage",
@@ -188,6 +191,7 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"data_catalog.query",
 	"saas_backup_scope.manage",
 	"saas_mail.search",
+	"saas_contacts.search",
 	"saas_user_drive.search",
 	"saas_group_data.search",
 	"saas_shared_drive.search",
