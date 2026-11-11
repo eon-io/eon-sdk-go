@@ -33,6 +33,16 @@ type AzureDiskSettings struct {
 	SizeBytes *int64 `json:"sizeBytes,omitempty"`
 	// Tags to apply to the restored disk as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
+	// Availability zone to create the restored disk in (for example `1`). Only for restoring a disk on its own; a VM restore rejects it. When omitted, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore. The zone must be available for the disk type in the destination region. 
+	Zone *string `json:"zone,omitempty"`
+	// Provisioned IOPS of the restored disk. Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types. When omitted, Azure applies the default for the disk type and size. 
+	DiskIopsReadWrite *int64 `json:"diskIopsReadWrite,omitempty"`
+	// Provisioned throughput of the restored disk, in MB/s. Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types. When omitted, Azure applies the default for the disk type and size. 
+	DiskMBpsReadWrite *int64 `json:"diskMBpsReadWrite,omitempty"`
+	// Network access policy of the restored disk, which controls how it can be exported or imported. Defaults to `AllowAll`. 
+	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty"`
+	// Whether the restored disk can be exported or imported over the public network. Defaults to `Enabled`. 
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty"`
 }
 
 type _AzureDiskSettings AzureDiskSettings
@@ -225,6 +235,166 @@ func (o *AzureDiskSettings) SetTags(v map[string]string) {
 	o.Tags = &v
 }
 
+// GetZone returns the Zone field value if set, zero value otherwise.
+func (o *AzureDiskSettings) GetZone() string {
+	if o == nil || IsNil(o.Zone) {
+		var ret string
+		return ret
+	}
+	return *o.Zone
+}
+
+// GetZoneOk returns a tuple with the Zone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureDiskSettings) GetZoneOk() (*string, bool) {
+	if o == nil || IsNil(o.Zone) {
+		return nil, false
+	}
+	return o.Zone, true
+}
+
+// HasZone returns a boolean if a field has been set.
+func (o *AzureDiskSettings) HasZone() bool {
+	if o != nil && !IsNil(o.Zone) {
+		return true
+	}
+
+	return false
+}
+
+// SetZone gets a reference to the given string and assigns it to the Zone field.
+func (o *AzureDiskSettings) SetZone(v string) {
+	o.Zone = &v
+}
+
+// GetDiskIopsReadWrite returns the DiskIopsReadWrite field value if set, zero value otherwise.
+func (o *AzureDiskSettings) GetDiskIopsReadWrite() int64 {
+	if o == nil || IsNil(o.DiskIopsReadWrite) {
+		var ret int64
+		return ret
+	}
+	return *o.DiskIopsReadWrite
+}
+
+// GetDiskIopsReadWriteOk returns a tuple with the DiskIopsReadWrite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureDiskSettings) GetDiskIopsReadWriteOk() (*int64, bool) {
+	if o == nil || IsNil(o.DiskIopsReadWrite) {
+		return nil, false
+	}
+	return o.DiskIopsReadWrite, true
+}
+
+// HasDiskIopsReadWrite returns a boolean if a field has been set.
+func (o *AzureDiskSettings) HasDiskIopsReadWrite() bool {
+	if o != nil && !IsNil(o.DiskIopsReadWrite) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskIopsReadWrite gets a reference to the given int64 and assigns it to the DiskIopsReadWrite field.
+func (o *AzureDiskSettings) SetDiskIopsReadWrite(v int64) {
+	o.DiskIopsReadWrite = &v
+}
+
+// GetDiskMBpsReadWrite returns the DiskMBpsReadWrite field value if set, zero value otherwise.
+func (o *AzureDiskSettings) GetDiskMBpsReadWrite() int64 {
+	if o == nil || IsNil(o.DiskMBpsReadWrite) {
+		var ret int64
+		return ret
+	}
+	return *o.DiskMBpsReadWrite
+}
+
+// GetDiskMBpsReadWriteOk returns a tuple with the DiskMBpsReadWrite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureDiskSettings) GetDiskMBpsReadWriteOk() (*int64, bool) {
+	if o == nil || IsNil(o.DiskMBpsReadWrite) {
+		return nil, false
+	}
+	return o.DiskMBpsReadWrite, true
+}
+
+// HasDiskMBpsReadWrite returns a boolean if a field has been set.
+func (o *AzureDiskSettings) HasDiskMBpsReadWrite() bool {
+	if o != nil && !IsNil(o.DiskMBpsReadWrite) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskMBpsReadWrite gets a reference to the given int64 and assigns it to the DiskMBpsReadWrite field.
+func (o *AzureDiskSettings) SetDiskMBpsReadWrite(v int64) {
+	o.DiskMBpsReadWrite = &v
+}
+
+// GetNetworkAccessPolicy returns the NetworkAccessPolicy field value if set, zero value otherwise.
+func (o *AzureDiskSettings) GetNetworkAccessPolicy() string {
+	if o == nil || IsNil(o.NetworkAccessPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.NetworkAccessPolicy
+}
+
+// GetNetworkAccessPolicyOk returns a tuple with the NetworkAccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureDiskSettings) GetNetworkAccessPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.NetworkAccessPolicy) {
+		return nil, false
+	}
+	return o.NetworkAccessPolicy, true
+}
+
+// HasNetworkAccessPolicy returns a boolean if a field has been set.
+func (o *AzureDiskSettings) HasNetworkAccessPolicy() bool {
+	if o != nil && !IsNil(o.NetworkAccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkAccessPolicy gets a reference to the given string and assigns it to the NetworkAccessPolicy field.
+func (o *AzureDiskSettings) SetNetworkAccessPolicy(v string) {
+	o.NetworkAccessPolicy = &v
+}
+
+// GetPublicNetworkAccess returns the PublicNetworkAccess field value if set, zero value otherwise.
+func (o *AzureDiskSettings) GetPublicNetworkAccess() string {
+	if o == nil || IsNil(o.PublicNetworkAccess) {
+		var ret string
+		return ret
+	}
+	return *o.PublicNetworkAccess
+}
+
+// GetPublicNetworkAccessOk returns a tuple with the PublicNetworkAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureDiskSettings) GetPublicNetworkAccessOk() (*string, bool) {
+	if o == nil || IsNil(o.PublicNetworkAccess) {
+		return nil, false
+	}
+	return o.PublicNetworkAccess, true
+}
+
+// HasPublicNetworkAccess returns a boolean if a field has been set.
+func (o *AzureDiskSettings) HasPublicNetworkAccess() bool {
+	if o != nil && !IsNil(o.PublicNetworkAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetPublicNetworkAccess gets a reference to the given string and assigns it to the PublicNetworkAccess field.
+func (o *AzureDiskSettings) SetPublicNetworkAccess(v string) {
+	o.PublicNetworkAccess = &v
+}
+
 func (o AzureDiskSettings) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -246,6 +416,21 @@ func (o AzureDiskSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
+	}
+	if !IsNil(o.Zone) {
+		toSerialize["zone"] = o.Zone
+	}
+	if !IsNil(o.DiskIopsReadWrite) {
+		toSerialize["diskIopsReadWrite"] = o.DiskIopsReadWrite
+	}
+	if !IsNil(o.DiskMBpsReadWrite) {
+		toSerialize["diskMBpsReadWrite"] = o.DiskMBpsReadWrite
+	}
+	if !IsNil(o.NetworkAccessPolicy) {
+		toSerialize["networkAccessPolicy"] = o.NetworkAccessPolicy
+	}
+	if !IsNil(o.PublicNetworkAccess) {
+		toSerialize["publicNetworkAccess"] = o.PublicNetworkAccess
 	}
 	return toSerialize, nil
 }

@@ -19022,6 +19022,7 @@ components:
       - AWS_KEYSPACES_RECORD_RESTORE
       - AWS_CASSANDRA_CLUSTER_RESTORE
       - AWS_OPENSEARCH_DOMAIN_RESTORE
+      - AWS_OPENSEARCH_RECORD_RESTORE
       - ATLAS_CLUSTER_RESTORE
       - ATLAS_CLUSTER_RECORD_RESTORE
       - MICROSOFT_365_RESTORE
@@ -19052,6 +19053,7 @@ components:
       - AWS_KEYSPACES_RECORD_RESTORE
       - AWS_CASSANDRA_CLUSTER_RESTORE
       - AWS_OPENSEARCH_DOMAIN_RESTORE
+      - AWS_OPENSEARCH_RECORD_RESTORE
       - MICROSOFT_365_RESTORE
       - GOOGLE_WORKSPACE_RESTORE
       - AZURE_ENTRA_ID_RESTORE
@@ -26364,9 +26366,14 @@ components:
       x-internal: false
     AzureDiskSettings:
       example:
+        publicNetworkAccess: Enabled
+        diskMBpsReadWrite: 200
         tier: Standard
+        zone: "1"
+        diskIopsReadWrite: 5000
         name: my-disk-12345
         hyperVGeneration: V1
+        networkAccessPolicy: AllowAll
         type: Standard_LRS
         sizeBytes: 10737418240
         tags:
@@ -26406,6 +26413,45 @@ components:
 
             **Example:** `{"eon_api_restore": "true"}`
           type: object
+        zone:
+          description: |
+            Availability zone to create the restored disk in (for example `1`). Only for restoring a disk on its own; a VM restore rejects it.
+            When omitted, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore.
+            The zone must be available for the disk type in the destination region.
+          example: "1"
+          type: string
+        diskIopsReadWrite:
+          description: |
+            Provisioned IOPS of the restored disk.
+            Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types.
+            When omitted, Azure applies the default for the disk type and size.
+          example: 5000
+          format: int64
+          type: integer
+        diskMBpsReadWrite:
+          description: |
+            Provisioned throughput of the restored disk, in MB/s.
+            Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types.
+            When omitted, Azure applies the default for the disk type and size.
+          example: 200
+          format: int64
+          type: integer
+        networkAccessPolicy:
+          description: |
+            Network access policy of the restored disk, which controls how it can be exported or imported.
+            Defaults to `AllowAll`.
+          enum:
+          - AllowAll
+          - DenyAll
+          type: string
+        publicNetworkAccess:
+          description: |
+            Whether the restored disk can be exported or imported over the public network.
+            Defaults to `Enabled`.
+          enum:
+          - Enabled
+          - Disabled
+          type: string
       required:
       - name
       - tier
@@ -26414,9 +26460,14 @@ components:
     RestoreAzureInstanceDiskInput:
       example:
         settings:
+          publicNetworkAccess: Enabled
+          diskMBpsReadWrite: 200
           tier: Standard
+          zone: "1"
+          diskIopsReadWrite: 5000
           name: my-disk-12345
           hyperVGeneration: V1
+          networkAccessPolicy: AllowAll
           type: Standard_LRS
           sizeBytes: 10737418240
           tags:
@@ -26461,9 +26512,14 @@ components:
         resourceGroupName: my-resource-group-12345
         disks:
         - settings:
+            publicNetworkAccess: Enabled
+            diskMBpsReadWrite: 200
             tier: Standard
+            zone: "1"
+            diskIopsReadWrite: 5000
             name: my-disk-12345
             hyperVGeneration: V1
+            networkAccessPolicy: AllowAll
             type: Standard_LRS
             sizeBytes: 10737418240
             tags:
@@ -26471,9 +26527,14 @@ components:
           providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
           diskEncryptionSetId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/diskEncryptionSets/my-disk-encryption-set
         - settings:
+            publicNetworkAccess: Enabled
+            diskMBpsReadWrite: 200
             tier: Standard
+            zone: "1"
+            diskIopsReadWrite: 5000
             name: my-disk-12345
             hyperVGeneration: V1
+            networkAccessPolicy: AllowAll
             type: Standard_LRS
             sizeBytes: 10737418240
             tags:
@@ -26559,9 +26620,14 @@ components:
           resourceGroupName: my-resource-group-12345
           disks:
           - settings:
+              publicNetworkAccess: Enabled
+              diskMBpsReadWrite: 200
               tier: Standard
+              zone: "1"
+              diskIopsReadWrite: 5000
               name: my-disk-12345
               hyperVGeneration: V1
+              networkAccessPolicy: AllowAll
               type: Standard_LRS
               sizeBytes: 10737418240
               tags:
@@ -26569,9 +26635,14 @@ components:
             providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
             diskEncryptionSetId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/diskEncryptionSets/my-disk-encryption-set
           - settings:
+              publicNetworkAccess: Enabled
+              diskMBpsReadWrite: 200
               tier: Standard
+              zone: "1"
+              diskIopsReadWrite: 5000
               name: my-disk-12345
               hyperVGeneration: V1
+              networkAccessPolicy: AllowAll
               type: Standard_LRS
               sizeBytes: 10737418240
               tags:
@@ -26610,9 +26681,14 @@ components:
             resourceGroupName: my-resource-group-12345
             disks:
             - settings:
+                publicNetworkAccess: Enabled
+                diskMBpsReadWrite: 200
                 tier: Standard
+                zone: "1"
+                diskIopsReadWrite: 5000
                 name: my-disk-12345
                 hyperVGeneration: V1
+                networkAccessPolicy: AllowAll
                 type: Standard_LRS
                 sizeBytes: 10737418240
                 tags:
@@ -26620,9 +26696,14 @@ components:
               providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
               diskEncryptionSetId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/diskEncryptionSets/my-disk-encryption-set
             - settings:
+                publicNetworkAccess: Enabled
+                diskMBpsReadWrite: 200
                 tier: Standard
+                zone: "1"
+                diskIopsReadWrite: 5000
                 name: my-disk-12345
                 hyperVGeneration: V1
+                networkAccessPolicy: AllowAll
                 type: Standard_LRS
                 sizeBytes: 10737418240
                 tags:
@@ -26722,9 +26803,14 @@ components:
     AzureDiskTarget:
       example:
         settings:
+          publicNetworkAccess: Enabled
+          diskMBpsReadWrite: 200
           tier: Standard
+          zone: "1"
+          diskIopsReadWrite: 5000
           name: my-disk-12345
           hyperVGeneration: V1
+          networkAccessPolicy: AllowAll
           type: Standard_LRS
           sizeBytes: 10737418240
           tags:
@@ -26758,9 +26844,14 @@ components:
       example:
         azureDisk:
           settings:
+            publicNetworkAccess: Enabled
+            diskMBpsReadWrite: 200
             tier: Standard
+            zone: "1"
+            diskIopsReadWrite: 5000
             name: my-disk-12345
             hyperVGeneration: V1
+            networkAccessPolicy: AllowAll
             type: Standard_LRS
             sizeBytes: 10737418240
             tags:
@@ -26779,9 +26870,14 @@ components:
         destination:
           azureDisk:
             settings:
+              publicNetworkAccess: Enabled
+              diskMBpsReadWrite: 200
               tier: Standard
+              zone: "1"
+              diskIopsReadWrite: 5000
               name: my-disk-12345
               hyperVGeneration: V1
+              networkAccessPolicy: AllowAll
               type: Standard_LRS
               sizeBytes: 10737418240
               tags:
@@ -29929,9 +30025,14 @@ components:
     AzureDisk:
       example:
         settings:
+          publicNetworkAccess: Enabled
+          diskMBpsReadWrite: 200
           tier: Standard
+          zone: "1"
+          diskIopsReadWrite: 5000
           name: my-disk-12345
           hyperVGeneration: V1
+          networkAccessPolicy: AllowAll
           type: Standard_LRS
           sizeBytes: 10737418240
           tags:
@@ -29955,18 +30056,28 @@ components:
       example:
         disks:
         - settings:
+            publicNetworkAccess: Enabled
+            diskMBpsReadWrite: 200
             tier: Standard
+            zone: "1"
+            diskIopsReadWrite: 5000
             name: my-disk-12345
             hyperVGeneration: V1
+            networkAccessPolicy: AllowAll
             type: Standard_LRS
             sizeBytes: 10737418240
             tags:
               key: tags
           providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
         - settings:
+            publicNetworkAccess: Enabled
+            diskMBpsReadWrite: 200
             tier: Standard
+            zone: "1"
+            diskIopsReadWrite: 5000
             name: my-disk-12345
             hyperVGeneration: V1
+            networkAccessPolicy: AllowAll
             type: Standard_LRS
             sizeBytes: 10737418240
             tags:
@@ -29996,18 +30107,28 @@ components:
         azureVm:
           disks:
           - settings:
+              publicNetworkAccess: Enabled
+              diskMBpsReadWrite: 200
               tier: Standard
+              zone: "1"
+              diskIopsReadWrite: 5000
               name: my-disk-12345
               hyperVGeneration: V1
+              networkAccessPolicy: AllowAll
               type: Standard_LRS
               sizeBytes: 10737418240
               tags:
                 key: tags
             providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
           - settings:
+              publicNetworkAccess: Enabled
+              diskMBpsReadWrite: 200
               tier: Standard
+              zone: "1"
+              diskIopsReadWrite: 5000
               name: my-disk-12345
               hyperVGeneration: V1
+              networkAccessPolicy: AllowAll
               type: Standard_LRS
               sizeBytes: 10737418240
               tags:
@@ -30057,18 +30178,28 @@ components:
           azureVm:
             disks:
             - settings:
+                publicNetworkAccess: Enabled
+                diskMBpsReadWrite: 200
                 tier: Standard
+                zone: "1"
+                diskIopsReadWrite: 5000
                 name: my-disk-12345
                 hyperVGeneration: V1
+                networkAccessPolicy: AllowAll
                 type: Standard_LRS
                 sizeBytes: 10737418240
                 tags:
                   key: tags
               providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
             - settings:
+                publicNetworkAccess: Enabled
+                diskMBpsReadWrite: 200
                 tier: Standard
+                zone: "1"
+                diskIopsReadWrite: 5000
                 name: my-disk-12345
                 hyperVGeneration: V1
+                networkAccessPolicy: AllowAll
                 type: Standard_LRS
                 sizeBytes: 10737418240
                 tags:
@@ -30135,18 +30266,28 @@ components:
             azureVm:
               disks:
               - settings:
+                  publicNetworkAccess: Enabled
+                  diskMBpsReadWrite: 200
                   tier: Standard
+                  zone: "1"
+                  diskIopsReadWrite: 5000
                   name: my-disk-12345
                   hyperVGeneration: V1
+                  networkAccessPolicy: AllowAll
                   type: Standard_LRS
                   sizeBytes: 10737418240
                   tags:
                     key: tags
                 providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
               - settings:
+                  publicNetworkAccess: Enabled
+                  diskMBpsReadWrite: 200
                   tier: Standard
+                  zone: "1"
+                  diskIopsReadWrite: 5000
                   name: my-disk-12345
                   hyperVGeneration: V1
+                  networkAccessPolicy: AllowAll
                   type: Standard_LRS
                   sizeBytes: 10737418240
                   tags:
@@ -30288,18 +30429,28 @@ components:
               azureVm:
                 disks:
                 - settings:
+                    publicNetworkAccess: Enabled
+                    diskMBpsReadWrite: 200
                     tier: Standard
+                    zone: "1"
+                    diskIopsReadWrite: 5000
                     name: my-disk-12345
                     hyperVGeneration: V1
+                    networkAccessPolicy: AllowAll
                     type: Standard_LRS
                     sizeBytes: 10737418240
                     tags:
                       key: tags
                   providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
                 - settings:
+                    publicNetworkAccess: Enabled
+                    diskMBpsReadWrite: 200
                     tier: Standard
+                    zone: "1"
+                    diskIopsReadWrite: 5000
                     name: my-disk-12345
                     hyperVGeneration: V1
+                    networkAccessPolicy: AllowAll
                     type: Standard_LRS
                     sizeBytes: 10737418240
                     tags:
@@ -30451,18 +30602,28 @@ components:
               azureVm:
                 disks:
                 - settings:
+                    publicNetworkAccess: Enabled
+                    diskMBpsReadWrite: 200
                     tier: Standard
+                    zone: "1"
+                    diskIopsReadWrite: 5000
                     name: my-disk-12345
                     hyperVGeneration: V1
+                    networkAccessPolicy: AllowAll
                     type: Standard_LRS
                     sizeBytes: 10737418240
                     tags:
                       key: tags
                   providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
                 - settings:
+                    publicNetworkAccess: Enabled
+                    diskMBpsReadWrite: 200
                     tier: Standard
+                    zone: "1"
+                    diskIopsReadWrite: 5000
                     name: my-disk-12345
                     hyperVGeneration: V1
+                    networkAccessPolicy: AllowAll
                     type: Standard_LRS
                     sizeBytes: 10737418240
                     tags:
@@ -30519,18 +30680,28 @@ components:
               azureVm:
                 disks:
                 - settings:
+                    publicNetworkAccess: Enabled
+                    diskMBpsReadWrite: 200
                     tier: Standard
+                    zone: "1"
+                    diskIopsReadWrite: 5000
                     name: my-disk-12345
                     hyperVGeneration: V1
+                    networkAccessPolicy: AllowAll
                     type: Standard_LRS
                     sizeBytes: 10737418240
                     tags:
                       key: tags
                   providerDiskId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group-12345/providers/Microsoft.Compute/disks/my-disk-12345
                 - settings:
+                    publicNetworkAccess: Enabled
+                    diskMBpsReadWrite: 200
                     tier: Standard
+                    zone: "1"
+                    diskIopsReadWrite: 5000
                     name: my-disk-12345
                     hyperVGeneration: V1
+                    networkAccessPolicy: AllowAll
                     type: Standard_LRS
                     sizeBytes: 10737418240
                     tags:
@@ -31074,6 +31245,9 @@ components:
       - GCP_SQL_VM_METERING_DIMENSION
       - GCP_SQL_VM_TO_AWS_VAULT_METERING_DIMENSION
       - GCP_SQL_VM_TO_AZURE_VAULT_METERING_DIMENSION
+      - AWS_SQL_VM_METERING_DIMENSION
+      - AWS_SQL_VM_TO_AZURE_VAULT_METERING_DIMENSION
+      - AWS_SQL_VM_TO_GCP_VAULT_METERING_DIMENSION
       - AWS_RDS_ORACLE_METERING_DIMENSION
       - AWS_RDS_AURORA_METERING_DIMENSION
       - AWS_RDS_AURORA_FULL_SNAPSHOT_METERING_DIMENSION
