@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored volume as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **VolumeEncryptionKeyId** | **string** | ID of the key you want Eon to use for encrypting the restored volume. | 
 **AvailabilityZone** | **string** | Availability zone to restore the volume to. | 
+**RestoreServerNetworkParams** | Pointer to [**AwsRestoreServerNetworkParams**](AwsRestoreServerNetworkParams.md) |  | [optional] 
 **VolumeSettings** | [**VolumeSettings**](VolumeSettings.md) |  | 
 
 ## Methods
@@ -118,6 +119,31 @@ and a boolean to check if the value has been set.
 
 SetAvailabilityZone sets AvailabilityZone field to given value.
 
+
+### GetRestoreServerNetworkParams
+
+`func (o *EbsTarget) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams`
+
+GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field if non-nil, zero value otherwise.
+
+### GetRestoreServerNetworkParamsOk
+
+`func (o *EbsTarget) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool)`
+
+GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreServerNetworkParams
+
+`func (o *EbsTarget) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams)`
+
+SetRestoreServerNetworkParams sets RestoreServerNetworkParams field to given value.
+
+### HasRestoreServerNetworkParams
+
+`func (o *EbsTarget) HasRestoreServerNetworkParams() bool`
+
+HasRestoreServerNetworkParams returns a boolean if a field has been set.
 
 ### GetVolumeSettings
 

@@ -29,6 +29,7 @@ type EbsTarget struct {
 	VolumeEncryptionKeyId string `json:"volumeEncryptionKeyId"`
 	// Availability zone to restore the volume to.
 	AvailabilityZone string `json:"availabilityZone"`
+	RestoreServerNetworkParams *AwsRestoreServerNetworkParams `json:"restoreServerNetworkParams,omitempty"`
 	VolumeSettings VolumeSettings `json:"volumeSettings"`
 }
 
@@ -166,6 +167,38 @@ func (o *EbsTarget) SetAvailabilityZone(v string) {
 	o.AvailabilityZone = v
 }
 
+// GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field value if set, zero value otherwise.
+func (o *EbsTarget) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		var ret AwsRestoreServerNetworkParams
+		return ret
+	}
+	return *o.RestoreServerNetworkParams
+}
+
+// GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EbsTarget) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool) {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		return nil, false
+	}
+	return o.RestoreServerNetworkParams, true
+}
+
+// HasRestoreServerNetworkParams returns a boolean if a field has been set.
+func (o *EbsTarget) HasRestoreServerNetworkParams() bool {
+	if o != nil && !IsNil(o.RestoreServerNetworkParams) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreServerNetworkParams gets a reference to the given AwsRestoreServerNetworkParams and assigns it to the RestoreServerNetworkParams field.
+func (o *EbsTarget) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams) {
+	o.RestoreServerNetworkParams = &v
+}
+
 // GetVolumeSettings returns the VolumeSettings field value
 func (o *EbsTarget) GetVolumeSettings() VolumeSettings {
 	if o == nil {
@@ -208,6 +241,9 @@ func (o EbsTarget) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["volumeEncryptionKeyId"] = o.VolumeEncryptionKeyId
 	toSerialize["availabilityZone"] = o.AvailabilityZone
+	if !IsNil(o.RestoreServerNetworkParams) {
+		toSerialize["restoreServerNetworkParams"] = o.RestoreServerNetworkParams
+	}
 	toSerialize["volumeSettings"] = o.VolumeSettings
 	return toSerialize, nil
 }

@@ -31,6 +31,7 @@ type AwsEc2InstanceRestoreTarget struct {
 	SecurityGroupIds []string `json:"securityGroupIds,omitempty"`
 	// Primary private IPv4 address for the restored instance. Must fall within the selected subnet's CIDR range. Omit to let AWS auto-assign an address. 
 	PrivateIpAddress *string `json:"privateIpAddress,omitempty"`
+	RestoreServerNetworkParams *AwsRestoreServerNetworkParams `json:"restoreServerNetworkParams,omitempty"`
 	// Tags to apply to the restored instance as key-value pairs, where key and value are both strings.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
 	// Volumes to restore and attach to the restored instance. Each item in the list corresponds to a volume to be restored, where `providerVolumeId` matches the volume's ID at the time of the snapshot. The root volume must be present in the list. 
@@ -202,6 +203,38 @@ func (o *AwsEc2InstanceRestoreTarget) SetPrivateIpAddress(v string) {
 	o.PrivateIpAddress = &v
 }
 
+// GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field value if set, zero value otherwise.
+func (o *AwsEc2InstanceRestoreTarget) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		var ret AwsRestoreServerNetworkParams
+		return ret
+	}
+	return *o.RestoreServerNetworkParams
+}
+
+// GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsEc2InstanceRestoreTarget) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool) {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		return nil, false
+	}
+	return o.RestoreServerNetworkParams, true
+}
+
+// HasRestoreServerNetworkParams returns a boolean if a field has been set.
+func (o *AwsEc2InstanceRestoreTarget) HasRestoreServerNetworkParams() bool {
+	if o != nil && !IsNil(o.RestoreServerNetworkParams) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreServerNetworkParams gets a reference to the given AwsRestoreServerNetworkParams and assigns it to the RestoreServerNetworkParams field.
+func (o *AwsEc2InstanceRestoreTarget) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams) {
+	o.RestoreServerNetworkParams = &v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *AwsEc2InstanceRestoreTarget) GetTags() map[string]string {
 	if o == nil || IsNil(o.Tags) {
@@ -308,6 +341,9 @@ func (o AwsEc2InstanceRestoreTarget) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PrivateIpAddress) {
 		toSerialize["privateIpAddress"] = o.PrivateIpAddress
+	}
+	if !IsNil(o.RestoreServerNetworkParams) {
+		toSerialize["restoreServerNetworkParams"] = o.RestoreServerNetworkParams
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags

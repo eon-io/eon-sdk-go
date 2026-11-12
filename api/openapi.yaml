@@ -12338,8 +12338,6 @@ components:
       - data_catalog_pipelines.manage
       - dashboard.manage
       - ai_assistant.use
-      - agent_protection.view
-      - agent_protection_settings.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -12401,8 +12399,6 @@ components:
       - saas_backup_policies.manage
       - dashboard.manage
       - ai_assistant.use
-      - agent_protection.view
-      - agent_protection_settings.manage
     Permission:
       example:
         permissionType: inventory.view
@@ -20588,6 +20584,7 @@ components:
       - MICROSOFT_365
       - AZURE_ENTRA_ID
       - OKTA
+      - CLAUDE_ENTERPRISE
       x-enum-varnames:
       - BACKUP_POLICY_TYPE_UNSPECIFIED
       - BACKUP_POLICY_TYPE_STANDARD
@@ -25387,6 +25384,33 @@ components:
       - isDirectory
       - path
       type: object
+    AwsRestoreServerNetworkParams:
+      example:
+        subnetId: subnet-01234567890123456
+        securityGroupIds:
+        - sg-01234567890123456
+        vpcId: vpc-01234567890123456
+      properties:
+        vpcId:
+          description: VPC ID used by the restore server.
+          example: vpc-01234567890123456
+          type: string
+        subnetId:
+          description: Subnet ID used by the restore server.
+          example: subnet-01234567890123456
+          type: string
+        securityGroupIds:
+          description: Security group IDs used by the restore server.
+          example:
+          - sg-01234567890123456
+          items:
+            type: string
+          type: array
+      required:
+      - subnetId
+      - vpcId
+      type: object
+      x-internal: false
     RestoreFilesRequest:
       example:
         restoreAccountId: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
@@ -25408,6 +25432,11 @@ components:
           isDirectory: true
         - path: path
           isDirectory: true
+        restoreServerNetworkParams:
+          subnetId: subnet-01234567890123456
+          securityGroupIds:
+          - sg-01234567890123456
+          vpcId: vpc-01234567890123456
       properties:
         destination:
           $ref: '#/components/schemas/ObjectStorageDestination'
@@ -25420,6 +25449,8 @@ components:
           description: Eon-assigned ID of the restore account.
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           type: string
+        restoreServerNetworkParams:
+          $ref: '#/components/schemas/AwsRestoreServerNetworkParams'
       required:
       - destination
       - files
@@ -25479,6 +25510,11 @@ components:
             bucketName: my-restore-bucket-12345
             encryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b1514358
             prefix: my-restore-prefix
+        restoreServerNetworkParams:
+          subnetId: subnet-01234567890123456
+          securityGroupIds:
+          - sg-01234567890123456
+          vpcId: vpc-01234567890123456
       properties:
         destination:
           $ref: '#/components/schemas/ObjectStorageDestination'
@@ -25486,6 +25522,8 @@ components:
           description: Eon-assigned ID of the restore account.
           example: 1ee34dc5-0a7c-4e56-a820-917371e05c8d
           type: string
+        restoreServerNetworkParams:
+          $ref: '#/components/schemas/AwsRestoreServerNetworkParams'
       required:
       - destination
       - restoreAccountId
@@ -25606,6 +25644,11 @@ components:
     EbsTarget:
       example:
         description: Restored through the Eon API
+        restoreServerNetworkParams:
+          subnetId: subnet-01234567890123456
+          securityGroupIds:
+          - sg-01234567890123456
+          vpcId: vpc-01234567890123456
         volumeSettings:
           iops: 3000
           throughput: 125
@@ -25642,6 +25685,8 @@ components:
           description: Availability zone to restore the volume to.
           example: eu-central-1a
           type: string
+        restoreServerNetworkParams:
+          $ref: '#/components/schemas/AwsRestoreServerNetworkParams'
         volumeSettings:
           $ref: '#/components/schemas/VolumeSettings'
       required:
@@ -25653,6 +25698,11 @@ components:
       example:
         awsEbs:
           description: Restored through the Eon API
+          restoreServerNetworkParams:
+            subnetId: subnet-01234567890123456
+            securityGroupIds:
+            - sg-01234567890123456
+            vpcId: vpc-01234567890123456
           volumeSettings:
             iops: 3000
             throughput: 125
@@ -25673,6 +25723,11 @@ components:
         destination:
           awsEbs:
             description: Restored through the Eon API
+            restoreServerNetworkParams:
+              subnetId: subnet-01234567890123456
+              securityGroupIds:
+              - sg-01234567890123456
+              vpcId: vpc-01234567890123456
             volumeSettings:
               iops: 3000
               throughput: 125
@@ -25822,6 +25877,11 @@ components:
         dbInstanceClass: db.t3.micro
         subnetGroup: subnetGroup
         restoreRegion: eu-west-1
+        restoreServerNetworkParams:
+          subnetId: subnet-01234567890123456
+          securityGroupIds:
+          - sg-01234567890123456
+          vpcId: vpc-01234567890123456
         securityGroups:
         - securityGroups
         - securityGroups
@@ -25882,6 +25942,8 @@ components:
             If `restoredName` is empty, name is set to the original cluster identifier from the snapshot.
             Applies only to Aurora clusters.
           type: boolean
+        restoreServerNetworkParams:
+          $ref: '#/components/schemas/AwsRestoreServerNetworkParams'
       required:
       - encryptionKeyId
       - restoreRegion
@@ -25895,6 +25957,11 @@ components:
           dbInstanceClass: db.t3.micro
           subnetGroup: subnetGroup
           restoreRegion: eu-west-1
+          restoreServerNetworkParams:
+            subnetId: subnet-01234567890123456
+            securityGroupIds:
+            - sg-01234567890123456
+            vpcId: vpc-01234567890123456
           securityGroups:
           - securityGroups
           - securityGroups
@@ -25919,6 +25986,11 @@ components:
             dbInstanceClass: db.t3.micro
             subnetGroup: subnetGroup
             restoreRegion: eu-west-1
+            restoreServerNetworkParams:
+              subnetId: subnet-01234567890123456
+              securityGroupIds:
+              - sg-01234567890123456
+              vpcId: vpc-01234567890123456
             securityGroups:
             - securityGroups
             - securityGroups
@@ -26020,6 +26092,11 @@ components:
           volumeEncryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
           tags:
             key: tags
+        restoreServerNetworkParams:
+          subnetId: subnet-01234567890123456
+          securityGroupIds:
+          - sg-01234567890123456
+          vpcId: vpc-01234567890123456
         region: us-east-1
         privateIpAddress: 10.0.0.50
         tags:
@@ -26049,6 +26126,8 @@ components:
             Omit to let AWS auto-assign an address.
           example: 10.0.0.50
           type: string
+        restoreServerNetworkParams:
+          $ref: '#/components/schemas/AwsRestoreServerNetworkParams'
         tags:
           additionalProperties:
             type: string
@@ -26107,6 +26186,11 @@ components:
             volumeEncryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
             tags:
               key: tags
+          restoreServerNetworkParams:
+            subnetId: subnet-01234567890123456
+            securityGroupIds:
+            - sg-01234567890123456
+            vpcId: vpc-01234567890123456
           region: us-east-1
           privateIpAddress: 10.0.0.50
           tags:
@@ -26147,6 +26231,11 @@ components:
               volumeEncryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
               tags:
                 key: tags
+            restoreServerNetworkParams:
+              subnetId: subnet-01234567890123456
+              securityGroupIds:
+              - sg-01234567890123456
+              vpcId: vpc-01234567890123456
             region: us-east-1
             privateIpAddress: 10.0.0.50
             tags:

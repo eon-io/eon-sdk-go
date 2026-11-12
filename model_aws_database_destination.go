@@ -38,6 +38,7 @@ type AwsDatabaseDestination struct {
 	PasswordConfig NullableRdsPasswordConfig `json:"passwordConfig,omitempty"`
 	// When true, restores cluster members with their original instance names from the snapshot. If `restoredName` is empty, name is set to the original cluster identifier from the snapshot. Applies only to Aurora clusters. 
 	PreserveInstanceNames *bool `json:"preserveInstanceNames,omitempty"`
+	RestoreServerNetworkParams *AwsRestoreServerNetworkParams `json:"restoreServerNetworkParams,omitempty"`
 }
 
 type _AwsDatabaseDestination AwsDatabaseDestination
@@ -340,6 +341,38 @@ func (o *AwsDatabaseDestination) SetPreserveInstanceNames(v bool) {
 	o.PreserveInstanceNames = &v
 }
 
+// GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field value if set, zero value otherwise.
+func (o *AwsDatabaseDestination) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		var ret AwsRestoreServerNetworkParams
+		return ret
+	}
+	return *o.RestoreServerNetworkParams
+}
+
+// GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AwsDatabaseDestination) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool) {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		return nil, false
+	}
+	return o.RestoreServerNetworkParams, true
+}
+
+// HasRestoreServerNetworkParams returns a boolean if a field has been set.
+func (o *AwsDatabaseDestination) HasRestoreServerNetworkParams() bool {
+	if o != nil && !IsNil(o.RestoreServerNetworkParams) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreServerNetworkParams gets a reference to the given AwsRestoreServerNetworkParams and assigns it to the RestoreServerNetworkParams field.
+func (o *AwsDatabaseDestination) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams) {
+	o.RestoreServerNetworkParams = &v
+}
+
 func (o AwsDatabaseDestination) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -370,6 +403,9 @@ func (o AwsDatabaseDestination) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PreserveInstanceNames) {
 		toSerialize["preserveInstanceNames"] = o.PreserveInstanceNames
+	}
+	if !IsNil(o.RestoreServerNetworkParams) {
+		toSerialize["restoreServerNetworkParams"] = o.RestoreServerNetworkParams
 	}
 	return toSerialize, nil
 }

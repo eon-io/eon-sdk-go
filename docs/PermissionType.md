@@ -209,10 +209,6 @@
 
 * `AI_ASSISTANT_USE` (value: `"ai_assistant.use"`)
 
-* `AGENT_PROTECTION_VIEW` (value: `"agent_protection.view"`)
-
-* `AGENT_PROTECTION_SETTINGS_MANAGE` (value: `"agent_protection_settings.manage"`)
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

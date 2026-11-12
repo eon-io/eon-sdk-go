@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Destination** | [**ObjectStorageDestination**](ObjectStorageDestination.md) |  | 
 **Files** | [**[]FilePath**](FilePath.md) | List of file paths to restore. | 
 **RestoreAccountId** | **string** | Eon-assigned ID of the restore account. | 
+**RestoreServerNetworkParams** | Pointer to [**AwsRestoreServerNetworkParams**](AwsRestoreServerNetworkParams.md) |  | [optional] 
 
 ## Methods
 
@@ -86,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetRestoreAccountId sets RestoreAccountId field to given value.
 
+
+### GetRestoreServerNetworkParams
+
+`func (o *RestoreFilesRequest) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams`
+
+GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field if non-nil, zero value otherwise.
+
+### GetRestoreServerNetworkParamsOk
+
+`func (o *RestoreFilesRequest) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool)`
+
+GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreServerNetworkParams
+
+`func (o *RestoreFilesRequest) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams)`
+
+SetRestoreServerNetworkParams sets RestoreServerNetworkParams field to given value.
+
+### HasRestoreServerNetworkParams
+
+`func (o *RestoreFilesRequest) HasRestoreServerNetworkParams() bool`
+
+HasRestoreServerNetworkParams returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

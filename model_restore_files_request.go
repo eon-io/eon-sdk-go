@@ -26,6 +26,7 @@ type RestoreFilesRequest struct {
 	Files []FilePath `json:"files"`
 	// Eon-assigned ID of the restore account.
 	RestoreAccountId string `json:"restoreAccountId"`
+	RestoreServerNetworkParams *AwsRestoreServerNetworkParams `json:"restoreServerNetworkParams,omitempty"`
 }
 
 type _RestoreFilesRequest RestoreFilesRequest
@@ -122,6 +123,38 @@ func (o *RestoreFilesRequest) SetRestoreAccountId(v string) {
 	o.RestoreAccountId = v
 }
 
+// GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field value if set, zero value otherwise.
+func (o *RestoreFilesRequest) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		var ret AwsRestoreServerNetworkParams
+		return ret
+	}
+	return *o.RestoreServerNetworkParams
+}
+
+// GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreFilesRequest) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool) {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		return nil, false
+	}
+	return o.RestoreServerNetworkParams, true
+}
+
+// HasRestoreServerNetworkParams returns a boolean if a field has been set.
+func (o *RestoreFilesRequest) HasRestoreServerNetworkParams() bool {
+	if o != nil && !IsNil(o.RestoreServerNetworkParams) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreServerNetworkParams gets a reference to the given AwsRestoreServerNetworkParams and assigns it to the RestoreServerNetworkParams field.
+func (o *RestoreFilesRequest) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams) {
+	o.RestoreServerNetworkParams = &v
+}
+
 func (o RestoreFilesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -135,6 +168,9 @@ func (o RestoreFilesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["destination"] = o.Destination
 	toSerialize["files"] = o.Files
 	toSerialize["restoreAccountId"] = o.RestoreAccountId
+	if !IsNil(o.RestoreServerNetworkParams) {
+		toSerialize["restoreServerNetworkParams"] = o.RestoreServerNetworkParams
+	}
 	return toSerialize, nil
 }
 
