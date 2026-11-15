@@ -27,6 +27,8 @@ type NetworkInterfaceConfig struct {
 	NicId *string `json:"nicId,omitempty"`
 	// Name for the new NIC. Applicable when `mode` is set to create a new NIC.  Defaults to `<vmName>-nic`. 
 	NicName *string `json:"nicName,omitempty"`
+	// Static private IPv4 address for the new NIC. It must be an unused address inside the subnet's address range. Applicable only when `mode` is set to create a new NIC; rejected when `mode` is set to use an existing NIC.  When omitted, Azure assigns an address dynamically. 
+	PrivateIpAddress *string `json:"privateIpAddress,omitempty"`
 	Vnet *VNetConfig `json:"vnet,omitempty"`
 	Subnet *SubnetConfig `json:"subnet,omitempty"`
 }
@@ -139,6 +141,38 @@ func (o *NetworkInterfaceConfig) SetNicName(v string) {
 	o.NicName = &v
 }
 
+// GetPrivateIpAddress returns the PrivateIpAddress field value if set, zero value otherwise.
+func (o *NetworkInterfaceConfig) GetPrivateIpAddress() string {
+	if o == nil || IsNil(o.PrivateIpAddress) {
+		var ret string
+		return ret
+	}
+	return *o.PrivateIpAddress
+}
+
+// GetPrivateIpAddressOk returns a tuple with the PrivateIpAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceConfig) GetPrivateIpAddressOk() (*string, bool) {
+	if o == nil || IsNil(o.PrivateIpAddress) {
+		return nil, false
+	}
+	return o.PrivateIpAddress, true
+}
+
+// HasPrivateIpAddress returns a boolean if a field has been set.
+func (o *NetworkInterfaceConfig) HasPrivateIpAddress() bool {
+	if o != nil && !IsNil(o.PrivateIpAddress) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateIpAddress gets a reference to the given string and assigns it to the PrivateIpAddress field.
+func (o *NetworkInterfaceConfig) SetPrivateIpAddress(v string) {
+	o.PrivateIpAddress = &v
+}
+
 // GetVnet returns the Vnet field value if set, zero value otherwise.
 func (o *NetworkInterfaceConfig) GetVnet() VNetConfig {
 	if o == nil || IsNil(o.Vnet) {
@@ -219,6 +253,9 @@ func (o NetworkInterfaceConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NicName) {
 		toSerialize["nicName"] = o.NicName
+	}
+	if !IsNil(o.PrivateIpAddress) {
+		toSerialize["privateIpAddress"] = o.PrivateIpAddress
 	}
 	if !IsNil(o.Vnet) {
 		toSerialize["vnet"] = o.Vnet

@@ -26422,6 +26422,7 @@ components:
           addressPrefix: 10.0.0.0/24
           name: my-subnet
         nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
+        privateIpAddress: 10.0.0.10
       properties:
         mode:
           description: Whether to use an existing NIC or create a new one.
@@ -26444,6 +26445,15 @@ components:
 
             Defaults to `<vmName>-nic`.
           example: my-new-nic
+          type: string
+        privateIpAddress:
+          description: |
+            Static private IPv4 address for the new NIC. It must be an unused address inside the subnet's address range.
+            Applicable only when `mode` is set to create a new NIC; rejected when `mode` is set to use an existing NIC.
+
+            When omitted, Azure assigns an address dynamically.
+          example: 10.0.0.10
+          format: ipv4
           type: string
         vnet:
           $ref: '#/components/schemas/VNetConfig'
@@ -26598,6 +26608,7 @@ components:
             addressPrefix: 10.0.0.0/24
             name: my-subnet
           nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
+          privateIpAddress: 10.0.0.10
         resourceGroupName: my-resource-group-12345
         disks:
         - settings:
@@ -26706,6 +26717,7 @@ components:
               addressPrefix: 10.0.0.0/24
               name: my-subnet
             nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
+            privateIpAddress: 10.0.0.10
           resourceGroupName: my-resource-group-12345
           disks:
           - settings:
@@ -26767,6 +26779,7 @@ components:
                 addressPrefix: 10.0.0.0/24
                 name: my-subnet
               nicId: /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/networkInterfaces/my-nic
+              privateIpAddress: 10.0.0.10
             resourceGroupName: my-resource-group-12345
             disks:
             - settings:

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Mode** | **string** | Whether to use an existing NIC or create a new one. | 
 **NicId** | Pointer to **string** | Full Azure resource ID of an existing NIC. Required when &#x60;mode&#x60; is set to use an existing NIC.  Format: &#x60;/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/networkInterfaces/{name}&#x60;  | [optional] 
 **NicName** | Pointer to **string** | Name for the new NIC. Applicable when &#x60;mode&#x60; is set to create a new NIC.  Defaults to &#x60;&lt;vmName&gt;-nic&#x60;.  | [optional] 
+**PrivateIpAddress** | Pointer to **string** | Static private IPv4 address for the new NIC. It must be an unused address inside the subnet&#39;s address range. Applicable only when &#x60;mode&#x60; is set to create a new NIC; rejected when &#x60;mode&#x60; is set to use an existing NIC.  When omitted, Azure assigns an address dynamically.  | [optional] 
 **Vnet** | Pointer to [**VNetConfig**](VNetConfig.md) |  | [optional] 
 **Subnet** | Pointer to [**SubnetConfig**](SubnetConfig.md) |  | [optional] 
 
@@ -98,6 +99,31 @@ SetNicName sets NicName field to given value.
 `func (o *NetworkInterfaceConfig) HasNicName() bool`
 
 HasNicName returns a boolean if a field has been set.
+
+### GetPrivateIpAddress
+
+`func (o *NetworkInterfaceConfig) GetPrivateIpAddress() string`
+
+GetPrivateIpAddress returns the PrivateIpAddress field if non-nil, zero value otherwise.
+
+### GetPrivateIpAddressOk
+
+`func (o *NetworkInterfaceConfig) GetPrivateIpAddressOk() (*string, bool)`
+
+GetPrivateIpAddressOk returns a tuple with the PrivateIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateIpAddress
+
+`func (o *NetworkInterfaceConfig) SetPrivateIpAddress(v string)`
+
+SetPrivateIpAddress sets PrivateIpAddress field to given value.
+
+### HasPrivateIpAddress
+
+`func (o *NetworkInterfaceConfig) HasPrivateIpAddress() bool`
+
+HasPrivateIpAddress returns a boolean if a field has been set.
 
 ### GetVnet
 
