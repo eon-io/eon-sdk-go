@@ -429,6 +429,7 @@ type ApiListBackupPoliciesRequest struct {
 	projectId string
 	pageToken *string
 	pageSize *int32
+	listBackupPoliciesRequest *ListBackupPoliciesRequest
 }
 
 // Cursor that points to the first record of the next page of results. Get this value from the previous response. To preserve the results in the same order, use the same sorting and filters in the first request as all subsequent requests. 
@@ -440,6 +441,11 @@ func (r ApiListBackupPoliciesRequest) PageToken(pageToken string) ApiListBackupP
 // Maximum number of items to return in the response.
 func (r ApiListBackupPoliciesRequest) PageSize(pageSize int32) ApiListBackupPoliciesRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiListBackupPoliciesRequest) ListBackupPoliciesRequest(listBackupPoliciesRequest ListBackupPoliciesRequest) ApiListBackupPoliciesRequest {
+	r.listBackupPoliciesRequest = &listBackupPoliciesRequest
 	return r
 }
 
@@ -497,7 +503,7 @@ func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoli
 		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -512,6 +518,11 @@ func (a *BackupPoliciesAPIService) ListBackupPoliciesExecute(r ApiListBackupPoli
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	// A nil optional body must be omitted rather than encoded as JSON null, which fails schema validation.
+	if r.listBackupPoliciesRequest != nil {
+		localVarPostBody = r.listBackupPoliciesRequest
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

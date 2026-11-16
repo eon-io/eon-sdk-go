@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Region** | Pointer to [**VaultRegionFilters**](VaultRegionFilters.md) |  | [optional] 
 **Status** | Pointer to [**VaultStatusFilters**](VaultStatusFilters.md) |  | [optional] 
 **VaultType** | Pointer to [**VaultTypeFilters**](VaultTypeFilters.md) |  | [optional] 
+**Labels** | Pointer to [**VaultLabelFilters**](VaultLabelFilters.md) |  | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetVaultType sets VaultType field to given value.
 `func (o *VaultsFilterConditions) HasVaultType() bool`
 
 HasVaultType returns a boolean if a field has been set.
+
+### GetLabels
+
+`func (o *VaultsFilterConditions) GetLabels() VaultLabelFilters`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *VaultsFilterConditions) GetLabelsOk() (*VaultLabelFilters, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *VaultsFilterConditions) SetLabels(v VaultLabelFilters)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *VaultsFilterConditions) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

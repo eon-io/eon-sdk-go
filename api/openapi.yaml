@@ -4914,6 +4914,11 @@ paths:
           minimum: 1
           type: integer
         style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBackupPoliciesRequest'
       responses:
         "200":
           content:
@@ -22996,6 +23001,75 @@ components:
         actionApprovalRequest:
           $ref: '#/components/schemas/MPARequest'
       type: object
+    BackupPolicyLabelFilters:
+      additionalProperties: false
+      description: |
+        Filters on the backup policy's labels, matched as exact strings.
+        If you set more than one operator, a backup policy must satisfy all of them.
+      example:
+        containsAllOf:
+        - containsAllOf
+        - containsAllOf
+        containsNoneOf:
+        - containsNoneOf
+        - containsNoneOf
+        containsAnyOf:
+        - containsAnyOf
+        - containsAnyOf
+      properties:
+        containsAnyOf:
+          description: Returns backup policies that have at least one of these labels.
+          items:
+            type: string
+          type: array
+        containsAllOf:
+          description: Returns backup policies that have all of these labels.
+          items:
+            type: string
+          type: array
+        containsNoneOf:
+          description: Returns backup policies that have none of these labels.
+          items:
+            type: string
+          type: array
+      type: object
+    BackupPolicyFilterConditions:
+      additionalProperties: false
+      description: |
+        Filter conditions.
+        If omitted, no filtering is applied.
+      example:
+        labels:
+          containsAllOf:
+          - containsAllOf
+          - containsAllOf
+          containsNoneOf:
+          - containsNoneOf
+          - containsNoneOf
+          containsAnyOf:
+          - containsAnyOf
+          - containsAnyOf
+      properties:
+        labels:
+          $ref: '#/components/schemas/BackupPolicyLabelFilters'
+      type: object
+    ListBackupPoliciesRequest:
+      example:
+        filters:
+          labels:
+            containsAllOf:
+            - containsAllOf
+            - containsAllOf
+            containsNoneOf:
+            - containsNoneOf
+            - containsNoneOf
+            containsAnyOf:
+            - containsAnyOf
+            - containsAnyOf
+      properties:
+        filters:
+          $ref: '#/components/schemas/BackupPolicyFilterConditions'
+      type: object
     ListBackupPoliciesResponse:
       example:
         nextToken: Y2NiMGYyZmMtYjYyZi00OTc5LTgzNjQtYmQ2YjEyYzdjZTNifDE=
@@ -25125,6 +25199,38 @@ components:
             $ref: '#/components/schemas/VaultType'
           type: array
       type: object
+    VaultLabelFilters:
+      additionalProperties: false
+      description: |
+        Filters on the vault's labels, matched as exact strings.
+        If you set more than one operator, a vault must satisfy all of them.
+      example:
+        containsAllOf:
+        - containsAllOf
+        - containsAllOf
+        containsNoneOf:
+        - containsNoneOf
+        - containsNoneOf
+        containsAnyOf:
+        - containsAnyOf
+        - containsAnyOf
+      properties:
+        containsAnyOf:
+          description: Returns vaults that have at least one of these labels.
+          items:
+            type: string
+          type: array
+        containsAllOf:
+          description: Returns vaults that have all of these labels.
+          items:
+            type: string
+          type: array
+        containsNoneOf:
+          description: Returns vaults that have none of these labels.
+          items:
+            type: string
+          type: array
+      type: object
     VaultsFilterConditions:
       additionalProperties: false
       description: |
@@ -25156,6 +25262,16 @@ components:
           - ACTIVE
           notIn:
           - DELETED
+        labels:
+          containsAllOf:
+          - containsAllOf
+          - containsAllOf
+          containsNoneOf:
+          - containsNoneOf
+          - containsNoneOf
+          containsAnyOf:
+          - containsAnyOf
+          - containsAnyOf
       properties:
         name:
           $ref: '#/components/schemas/FreeTextFilters'
@@ -25167,6 +25283,8 @@ components:
           $ref: '#/components/schemas/VaultStatusFilters'
         vaultType:
           $ref: '#/components/schemas/VaultTypeFilters'
+        labels:
+          $ref: '#/components/schemas/VaultLabelFilters'
       type: object
     ListVaultsRequest:
       example:
@@ -25196,6 +25314,16 @@ components:
             - ACTIVE
             notIn:
             - DELETED
+          labels:
+            containsAllOf:
+            - containsAllOf
+            - containsAllOf
+            containsNoneOf:
+            - containsNoneOf
+            - containsNoneOf
+            containsAnyOf:
+            - containsAnyOf
+            - containsAnyOf
       properties:
         filters:
           $ref: '#/components/schemas/VaultsFilterConditions'

@@ -24,6 +24,7 @@ type VaultsFilterConditions struct {
 	Region *VaultRegionFilters `json:"region,omitempty"`
 	Status *VaultStatusFilters `json:"status,omitempty"`
 	VaultType *VaultTypeFilters `json:"vaultType,omitempty"`
+	Labels *VaultLabelFilters `json:"labels,omitempty"`
 }
 
 // NewVaultsFilterConditions instantiates a new VaultsFilterConditions object
@@ -203,6 +204,38 @@ func (o *VaultsFilterConditions) SetVaultType(v VaultTypeFilters) {
 	o.VaultType = &v
 }
 
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *VaultsFilterConditions) GetLabels() VaultLabelFilters {
+	if o == nil || IsNil(o.Labels) {
+		var ret VaultLabelFilters
+		return ret
+	}
+	return *o.Labels
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VaultsFilterConditions) GetLabelsOk() (*VaultLabelFilters, bool) {
+	if o == nil || IsNil(o.Labels) {
+		return nil, false
+	}
+	return o.Labels, true
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *VaultsFilterConditions) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given VaultLabelFilters and assigns it to the Labels field.
+func (o *VaultsFilterConditions) SetLabels(v VaultLabelFilters) {
+	o.Labels = &v
+}
+
 func (o VaultsFilterConditions) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -227,6 +260,9 @@ func (o VaultsFilterConditions) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.VaultType) {
 		toSerialize["vaultType"] = o.VaultType
+	}
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
 	}
 	return toSerialize, nil
 }

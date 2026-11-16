@@ -99,7 +99,9 @@ docs/BackupJobsFilterConditions.md
 docs/BackupPoliciesAPI.md
 docs/BackupPolicy.md
 docs/BackupPolicyExpression.md
+docs/BackupPolicyFilterConditions.md
 docs/BackupPolicyGroupCondition.md
+docs/BackupPolicyLabelFilters.md
 docs/BackupPolicyPlan.md
 docs/BackupPolicyResourceSelector.md
 docs/BackupPolicyType.md
@@ -289,6 +291,7 @@ docs/ListAwsVpcsResponse.md
 docs/ListAwsVpcsResponseVpcsInner.md
 docs/ListBackupJobsRequest.md
 docs/ListBackupJobsResponse.md
+docs/ListBackupPoliciesRequest.md
 docs/ListBackupPoliciesResponse.md
 docs/ListBackupPostureControlsRequest.md
 docs/ListBackupPostureControlsResponse.md
@@ -521,6 +524,7 @@ docs/UpdateVaultResponse.md
 docs/Usage.md
 docs/UsageUnit.md
 docs/VNetConfig.md
+docs/VaultLabelFilters.md
 docs/VaultProtectionMode.md
 docs/VaultProviderAttributes.md
 docs/VaultProviderAttributesInput.md
@@ -710,7 +714,9 @@ model_backup_job_type_filters.go
 model_backup_jobs_filter_conditions.go
 model_backup_policy.go
 model_backup_policy_expression.go
+model_backup_policy_filter_conditions.go
 model_backup_policy_group_condition.go
+model_backup_policy_label_filters.go
 model_backup_policy_plan.go
 model_backup_policy_resource_selector.go
 model_backup_policy_type.go
@@ -888,6 +894,7 @@ model_list_aws_vpcs_response.go
 model_list_aws_vpcs_response_vpcs_inner.go
 model_list_backup_jobs_request.go
 model_list_backup_jobs_response.go
+model_list_backup_policies_request.go
 model_list_backup_policies_response.go
 model_list_backup_posture_controls_request.go
 model_list_backup_posture_controls_response.go
@@ -1115,6 +1122,7 @@ model_update_vault_response.go
 model_usage.go
 model_usage_unit.go
 model_v_net_config.go
+model_vault_label_filters.go
 model_vault_protection_mode.go
 model_vault_provider_attributes.go
 model_vault_provider_attributes_input.go
