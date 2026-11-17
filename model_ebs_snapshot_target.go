@@ -29,6 +29,7 @@ type EbsSnapshotTarget struct {
 	Tags *map[string]string `json:"tags,omitempty"`
 	// ID of the key you want Eon to use for encrypting the EBS snapshot.
 	SnapshotEncryptionKeyId string `json:"snapshotEncryptionKeyId"`
+	RestoreServerNetworkParams *AwsRestoreServerNetworkParams `json:"restoreServerNetworkParams,omitempty"`
 }
 
 type _EbsSnapshotTarget EbsSnapshotTarget
@@ -164,6 +165,38 @@ func (o *EbsSnapshotTarget) SetSnapshotEncryptionKeyId(v string) {
 	o.SnapshotEncryptionKeyId = v
 }
 
+// GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field value if set, zero value otherwise.
+func (o *EbsSnapshotTarget) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		var ret AwsRestoreServerNetworkParams
+		return ret
+	}
+	return *o.RestoreServerNetworkParams
+}
+
+// GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EbsSnapshotTarget) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool) {
+	if o == nil || IsNil(o.RestoreServerNetworkParams) {
+		return nil, false
+	}
+	return o.RestoreServerNetworkParams, true
+}
+
+// HasRestoreServerNetworkParams returns a boolean if a field has been set.
+func (o *EbsSnapshotTarget) HasRestoreServerNetworkParams() bool {
+	if o != nil && !IsNil(o.RestoreServerNetworkParams) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreServerNetworkParams gets a reference to the given AwsRestoreServerNetworkParams and assigns it to the RestoreServerNetworkParams field.
+func (o *EbsSnapshotTarget) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams) {
+	o.RestoreServerNetworkParams = &v
+}
+
 func (o EbsSnapshotTarget) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -182,6 +215,9 @@ func (o EbsSnapshotTarget) ToMap() (map[string]interface{}, error) {
 		toSerialize["tags"] = o.Tags
 	}
 	toSerialize["snapshotEncryptionKeyId"] = o.SnapshotEncryptionKeyId
+	if !IsNil(o.RestoreServerNetworkParams) {
+		toSerialize["restoreServerNetworkParams"] = o.RestoreServerNetworkParams
+	}
 	return toSerialize, nil
 }
 
