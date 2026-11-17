@@ -12343,7 +12343,6 @@ components:
       - data_catalog_pipelines.manage
       - dashboard.manage
       - ai_assistant.use
-      - agent_protection.view
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -12405,7 +12404,6 @@ components:
       - saas_backup_policies.manage
       - dashboard.manage
       - ai_assistant.use
-      - agent_protection.view
     Permission:
       example:
         permissionType: inventory.view
@@ -25887,11 +25885,6 @@ components:
       example:
         snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
         description: Restored through the Eon API
-        restoreServerNetworkParams:
-          subnetId: subnet-01234567890123456
-          securityGroupIds:
-          - sg-01234567890123456
-          vpcId: vpc-01234567890123456
         region: eu-central-1
         tags:
           eon_api_restore: "true"
@@ -25918,8 +25911,6 @@ components:
           description: ID of the key you want Eon to use for encrypting the EBS snapshot.
           example: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
           type: string
-        restoreServerNetworkParams:
-          $ref: '#/components/schemas/AwsRestoreServerNetworkParams'
       required:
       - region
       - snapshotEncryptionKeyId
@@ -25929,11 +25920,6 @@ components:
         awsEbs:
           snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
           description: Restored through the Eon API
-          restoreServerNetworkParams:
-            subnetId: subnet-01234567890123456
-            securityGroupIds:
-            - sg-01234567890123456
-            vpcId: vpc-01234567890123456
           region: eu-central-1
           tags:
             eon_api_restore: "true"
@@ -25949,11 +25935,6 @@ components:
           awsEbs:
             snapshotEncryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
             description: Restored through the Eon API
-            restoreServerNetworkParams:
-              subnetId: subnet-01234567890123456
-              securityGroupIds:
-              - sg-01234567890123456
-              vpcId: vpc-01234567890123456
             region: eu-central-1
             tags:
               eon_api_restore: "true"

@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description to apply to the EBS snapshot. | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the EBS snapshot as key-value pairs, where key and value are both strings.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
 **SnapshotEncryptionKeyId** | **string** | ID of the key you want Eon to use for encrypting the EBS snapshot. | 
-**RestoreServerNetworkParams** | Pointer to [**AwsRestoreServerNetworkParams**](AwsRestoreServerNetworkParams.md) |  | [optional] 
 
 ## Methods
 
@@ -118,31 +117,6 @@ and a boolean to check if the value has been set.
 
 SetSnapshotEncryptionKeyId sets SnapshotEncryptionKeyId field to given value.
 
-
-### GetRestoreServerNetworkParams
-
-`func (o *EbsSnapshotTarget) GetRestoreServerNetworkParams() AwsRestoreServerNetworkParams`
-
-GetRestoreServerNetworkParams returns the RestoreServerNetworkParams field if non-nil, zero value otherwise.
-
-### GetRestoreServerNetworkParamsOk
-
-`func (o *EbsSnapshotTarget) GetRestoreServerNetworkParamsOk() (*AwsRestoreServerNetworkParams, bool)`
-
-GetRestoreServerNetworkParamsOk returns a tuple with the RestoreServerNetworkParams field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRestoreServerNetworkParams
-
-`func (o *EbsSnapshotTarget) SetRestoreServerNetworkParams(v AwsRestoreServerNetworkParams)`
-
-SetRestoreServerNetworkParams sets RestoreServerNetworkParams field to given value.
-
-### HasRestoreServerNetworkParams
-
-`func (o *EbsSnapshotTarget) HasRestoreServerNetworkParams() bool`
-
-HasRestoreServerNetworkParams returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
