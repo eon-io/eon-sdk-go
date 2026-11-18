@@ -21,6 +21,7 @@ var _ MappedNullable = &Role{}
 
 // Role Role.
 type Role struct {
+	FilePreviewDownloadLimits *FilePreviewDownloadLimits `json:"filePreviewDownloadLimits,omitempty"`
 	// Role ID.
 	Id string `json:"id"`
 	// Role display name.
@@ -57,6 +58,38 @@ func NewRole(id string, name string, isBuiltInRole bool, permissionGrants []Perm
 func NewRoleWithDefaults() *Role {
 	this := Role{}
 	return &this
+}
+
+// GetFilePreviewDownloadLimits returns the FilePreviewDownloadLimits field value if set, zero value otherwise.
+func (o *Role) GetFilePreviewDownloadLimits() FilePreviewDownloadLimits {
+	if o == nil || IsNil(o.FilePreviewDownloadLimits) {
+		var ret FilePreviewDownloadLimits
+		return ret
+	}
+	return *o.FilePreviewDownloadLimits
+}
+
+// GetFilePreviewDownloadLimitsOk returns a tuple with the FilePreviewDownloadLimits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Role) GetFilePreviewDownloadLimitsOk() (*FilePreviewDownloadLimits, bool) {
+	if o == nil || IsNil(o.FilePreviewDownloadLimits) {
+		return nil, false
+	}
+	return o.FilePreviewDownloadLimits, true
+}
+
+// HasFilePreviewDownloadLimits returns a boolean if a field has been set.
+func (o *Role) HasFilePreviewDownloadLimits() bool {
+	if o != nil && !IsNil(o.FilePreviewDownloadLimits) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilePreviewDownloadLimits gets a reference to the given FilePreviewDownloadLimits and assigns it to the FilePreviewDownloadLimits field.
+func (o *Role) SetFilePreviewDownloadLimits(v FilePreviewDownloadLimits) {
+	o.FilePreviewDownloadLimits = &v
 }
 
 // GetId returns the Id field value
@@ -323,6 +356,9 @@ func (o Role) MarshalJSON() ([]byte, error) {
 
 func (o Role) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.FilePreviewDownloadLimits) {
+		toSerialize["filePreviewDownloadLimits"] = o.FilePreviewDownloadLimits
+	}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["isBuiltInRole"] = o.IsBuiltInRole

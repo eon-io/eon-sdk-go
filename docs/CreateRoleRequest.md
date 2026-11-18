@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**FilePreviewDownloadLimits** | Pointer to [**FilePreviewDownloadLimits**](FilePreviewDownloadLimits.md) |  | [optional] 
 **Name** | **string** | Role display name. Must be unique in your Eon account.  | 
 **PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | Permissions granted by the role. | 
 **AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | If present, the ID of the set of access conditions that restrict the resources the permission is granted for. The ID must be present in an entry in &#x60;accessConditions&#x60;, and the permission itself must support access conditions. If omitted, the permission is granted for all resources.  | [optional] 
@@ -29,6 +30,31 @@ will change when the set of required properties is changed
 NewCreateRoleRequestWithDefaults instantiates a new CreateRoleRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetFilePreviewDownloadLimits
+
+`func (o *CreateRoleRequest) GetFilePreviewDownloadLimits() FilePreviewDownloadLimits`
+
+GetFilePreviewDownloadLimits returns the FilePreviewDownloadLimits field if non-nil, zero value otherwise.
+
+### GetFilePreviewDownloadLimitsOk
+
+`func (o *CreateRoleRequest) GetFilePreviewDownloadLimitsOk() (*FilePreviewDownloadLimits, bool)`
+
+GetFilePreviewDownloadLimitsOk returns a tuple with the FilePreviewDownloadLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilePreviewDownloadLimits
+
+`func (o *CreateRoleRequest) SetFilePreviewDownloadLimits(v FilePreviewDownloadLimits)`
+
+SetFilePreviewDownloadLimits sets FilePreviewDownloadLimits field to given value.
+
+### HasFilePreviewDownloadLimits
+
+`func (o *CreateRoleRequest) HasFilePreviewDownloadLimits() bool`
+
+HasFilePreviewDownloadLimits returns a boolean if a field has been set.
 
 ### GetName
 

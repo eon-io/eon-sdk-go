@@ -12262,7 +12262,6 @@ components:
       - resources.restore
       - configuration.validate
       - files.restore
-      - files.preview_download
       - databases.query
       - data_classes.override
       - environments.override
@@ -12319,7 +12318,6 @@ components:
       - saas_teams.search
       - saas_teams.restore
       - saas_contacts.restore
-      - saas_files.preview_download
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -12383,8 +12381,6 @@ components:
       - saas_teams.search
       - saas_teams.restore
       - saas_contacts.restore
-      - saas_files.preview_download
-      - files.preview_download
       - threat_detection_center.view
       - threat_detection_exclusion.manage
       - saas_dashboard.view
@@ -12449,6 +12445,16 @@ components:
           type: array
       required:
       - permissions
+      type: object
+    FilePreviewDownloadLimits:
+      example:
+        disabled: true
+      properties:
+        disabled:
+          description: Whether previewing and downloading files is disabled.
+          type: boolean
+      required:
+      - disabled
       type: object
     PermissionGrantInput:
       example:
@@ -13062,7 +13068,11 @@ components:
           - env=prod
           - tier=gold
           operator: CONTAINS_ANY_OF
+        filePreviewDownloadLimits:
+          disabled: true
       properties:
+        filePreviewDownloadLimits:
+          $ref: '#/components/schemas/FilePreviewDownloadLimits'
         name:
           description: |
             Role display name.
@@ -13298,7 +13308,11 @@ components:
           - tier=gold
           operator: CONTAINS_ANY_OF
         id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+        filePreviewDownloadLimits:
+          disabled: true
       properties:
+        filePreviewDownloadLimits:
+          $ref: '#/components/schemas/FilePreviewDownloadLimits'
         id:
           description: Role ID.
           example: daa42222-6ad2-5d37-bb26-4f2a9cba73da
@@ -13531,6 +13545,8 @@ components:
             - tier=gold
             operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+          filePreviewDownloadLimits:
+            disabled: true
       properties:
         role:
           $ref: '#/components/schemas/Role'
@@ -13728,6 +13744,8 @@ components:
             - tier=gold
             operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+          filePreviewDownloadLimits:
+            disabled: true
         - restoreDestinationLimits:
             effect: INCLUSIVE
             restoreAccountProviderIds:
@@ -13915,6 +13933,8 @@ components:
             - tier=gold
             operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+          filePreviewDownloadLimits:
+            disabled: true
         totalCount: 0
       properties:
         roles:
@@ -14123,6 +14143,8 @@ components:
             - tier=gold
             operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+          filePreviewDownloadLimits:
+            disabled: true
       properties:
         role:
           $ref: '#/components/schemas/Role'
@@ -14316,7 +14338,11 @@ components:
           - env=prod
           - tier=gold
           operator: CONTAINS_ANY_OF
+        filePreviewDownloadLimits:
+          disabled: true
       properties:
+        filePreviewDownloadLimits:
+          $ref: '#/components/schemas/FilePreviewDownloadLimits'
         name:
           description: Name of the role.
           type: string
@@ -14530,6 +14556,8 @@ components:
             - tier=gold
             operator: CONTAINS_ANY_OF
           id: daa42222-6ad2-5d37-bb26-4f2a9cba73da
+          filePreviewDownloadLimits:
+            disabled: true
       properties:
         role:
           $ref: '#/components/schemas/Role'
@@ -26404,6 +26432,11 @@ components:
         encryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
         restoreRegion: eu-west-1
         writeCapacityUnits: 50000
+        restoreServerNetworkParams:
+          subnetId: subnet-01234567890123456
+          securityGroupIds:
+          - sg-01234567890123456
+          vpcId: vpc-01234567890123456
         restoredName: my-restored-table
         tags:
           eon_api_restore: "true"
@@ -26437,6 +26470,8 @@ components:
           example:
             eon_api_restore: "true"
           type: object
+        restoreServerNetworkParams:
+          $ref: '#/components/schemas/AwsRestoreServerNetworkParams'
       required:
       - restoreRegion
       - restoredName
@@ -26447,6 +26482,11 @@ components:
           encryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
           restoreRegion: eu-west-1
           writeCapacityUnits: 50000
+          restoreServerNetworkParams:
+            subnetId: subnet-01234567890123456
+            securityGroupIds:
+            - sg-01234567890123456
+            vpcId: vpc-01234567890123456
           restoredName: my-restored-table
           tags:
             eon_api_restore: "true"
@@ -26462,6 +26502,11 @@ components:
             encryptionKeyId: arn:aws:kms:eu-central-1:123456789012:key/1e61541a-5039-413a-b821-0f4f596b785b
             restoreRegion: eu-west-1
             writeCapacityUnits: 50000
+            restoreServerNetworkParams:
+              subnetId: subnet-01234567890123456
+              securityGroupIds:
+              - sg-01234567890123456
+              vpcId: vpc-01234567890123456
             restoredName: my-restored-table
             tags:
               eon_api_restore: "true"

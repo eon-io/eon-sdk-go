@@ -21,6 +21,7 @@ var _ MappedNullable = &CreateRoleRequest{}
 
 // CreateRoleRequest struct for CreateRoleRequest
 type CreateRoleRequest struct {
+	FilePreviewDownloadLimits *FilePreviewDownloadLimits `json:"filePreviewDownloadLimits,omitempty"`
 	// Role display name. Must be unique in your Eon account. 
 	Name string `json:"name"`
 	// Permissions granted by the role.
@@ -51,6 +52,38 @@ func NewCreateRoleRequest(name string, permissionGrants []PermissionGrantInput) 
 func NewCreateRoleRequestWithDefaults() *CreateRoleRequest {
 	this := CreateRoleRequest{}
 	return &this
+}
+
+// GetFilePreviewDownloadLimits returns the FilePreviewDownloadLimits field value if set, zero value otherwise.
+func (o *CreateRoleRequest) GetFilePreviewDownloadLimits() FilePreviewDownloadLimits {
+	if o == nil || IsNil(o.FilePreviewDownloadLimits) {
+		var ret FilePreviewDownloadLimits
+		return ret
+	}
+	return *o.FilePreviewDownloadLimits
+}
+
+// GetFilePreviewDownloadLimitsOk returns a tuple with the FilePreviewDownloadLimits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateRoleRequest) GetFilePreviewDownloadLimitsOk() (*FilePreviewDownloadLimits, bool) {
+	if o == nil || IsNil(o.FilePreviewDownloadLimits) {
+		return nil, false
+	}
+	return o.FilePreviewDownloadLimits, true
+}
+
+// HasFilePreviewDownloadLimits returns a boolean if a field has been set.
+func (o *CreateRoleRequest) HasFilePreviewDownloadLimits() bool {
+	if o != nil && !IsNil(o.FilePreviewDownloadLimits) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilePreviewDownloadLimits gets a reference to the given FilePreviewDownloadLimits and assigns it to the FilePreviewDownloadLimits field.
+func (o *CreateRoleRequest) SetFilePreviewDownloadLimits(v FilePreviewDownloadLimits) {
+	o.FilePreviewDownloadLimits = &v
 }
 
 // GetName returns the Name field value
@@ -269,6 +302,9 @@ func (o CreateRoleRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateRoleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.FilePreviewDownloadLimits) {
+		toSerialize["filePreviewDownloadLimits"] = o.FilePreviewDownloadLimits
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["permissionGrants"] = o.PermissionGrants
 	if !IsNil(o.AccessConditions) {

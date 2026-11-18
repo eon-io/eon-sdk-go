@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**FilePreviewDownloadLimits** | Pointer to [**FilePreviewDownloadLimits**](FilePreviewDownloadLimits.md) |  | [optional] 
 **Name** | **string** | Name of the role. | 
 **PermissionGrants** | [**[]PermissionGrantInput**](PermissionGrantInput.md) | Permissions of the role. | 
 **AccessConditions** | Pointer to [**[]AccessCondition**](AccessCondition.md) | Condition of the role, keyed by name. | [optional] 
@@ -29,6 +30,31 @@ will change when the set of required properties is changed
 NewUpdateRoleRequestWithDefaults instantiates a new UpdateRoleRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetFilePreviewDownloadLimits
+
+`func (o *UpdateRoleRequest) GetFilePreviewDownloadLimits() FilePreviewDownloadLimits`
+
+GetFilePreviewDownloadLimits returns the FilePreviewDownloadLimits field if non-nil, zero value otherwise.
+
+### GetFilePreviewDownloadLimitsOk
+
+`func (o *UpdateRoleRequest) GetFilePreviewDownloadLimitsOk() (*FilePreviewDownloadLimits, bool)`
+
+GetFilePreviewDownloadLimitsOk returns a tuple with the FilePreviewDownloadLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilePreviewDownloadLimits
+
+`func (o *UpdateRoleRequest) SetFilePreviewDownloadLimits(v FilePreviewDownloadLimits)`
+
+SetFilePreviewDownloadLimits sets FilePreviewDownloadLimits field to given value.
+
+### HasFilePreviewDownloadLimits
+
+`func (o *UpdateRoleRequest) HasFilePreviewDownloadLimits() bool`
+
+HasFilePreviewDownloadLimits returns a boolean if a field has been set.
 
 ### GetName
 

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**FilePreviewDownloadLimits** | Pointer to [**FilePreviewDownloadLimits**](FilePreviewDownloadLimits.md) |  | [optional] 
 **Id** | **string** | Role ID. | 
 **Name** | **string** | Role display name. | 
 **IsBuiltInRole** | **bool** | Whether the role is a default role. If &#x60;true&#x60;, the role is a default role provided by Eon and can&#39;t be modified or deleted. If &#x60;false&#x60;, the role is a custom, user-created role.  | 
@@ -31,6 +32,31 @@ will change when the set of required properties is changed
 NewRoleWithDefaults instantiates a new Role object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetFilePreviewDownloadLimits
+
+`func (o *Role) GetFilePreviewDownloadLimits() FilePreviewDownloadLimits`
+
+GetFilePreviewDownloadLimits returns the FilePreviewDownloadLimits field if non-nil, zero value otherwise.
+
+### GetFilePreviewDownloadLimitsOk
+
+`func (o *Role) GetFilePreviewDownloadLimitsOk() (*FilePreviewDownloadLimits, bool)`
+
+GetFilePreviewDownloadLimitsOk returns a tuple with the FilePreviewDownloadLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilePreviewDownloadLimits
+
+`func (o *Role) SetFilePreviewDownloadLimits(v FilePreviewDownloadLimits)`
+
+SetFilePreviewDownloadLimits sets FilePreviewDownloadLimits field to given value.
+
+### HasFilePreviewDownloadLimits
+
+`func (o *Role) HasFilePreviewDownloadLimits() bool`
+
+HasFilePreviewDownloadLimits returns a boolean if a field has been set.
 
 ### GetId
 
