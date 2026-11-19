@@ -19,7 +19,7 @@ import (
 // checks if the WebhookV1StandardPayloadResourceBlockerArguments type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadResourceBlockerArguments{}
 
-// WebhookV1StandardPayloadResourceBlockerArguments Details of the notification. Notifications of this type always carry `resourceBlockerNotification`. 
+// WebhookV1StandardPayloadResourceBlockerArguments Details of the notification. Always `resourceBlockerNotification`. 
 type WebhookV1StandardPayloadResourceBlockerArguments struct {
 	ResourceBlockerNotification WebhookV1ResourceBlockerNotificationArguments `json:"resourceBlockerNotification"`
 }

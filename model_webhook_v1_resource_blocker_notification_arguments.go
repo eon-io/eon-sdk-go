@@ -19,7 +19,7 @@ var _ MappedNullable = &WebhookV1ResourceBlockerNotificationArguments{}
 
 // WebhookV1ResourceBlockerNotificationArguments Details of a blocker added to a resource.
 type WebhookV1ResourceBlockerNotificationArguments struct {
-	// Eon ID of the resource.
+	// Eon-assigned ID of the resource.
 	ResourceId *string `json:"resourceId,omitempty"`
 	// Name of the resource.
 	ResourceName *string `json:"resourceName,omitempty"`

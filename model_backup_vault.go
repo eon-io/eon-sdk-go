@@ -36,7 +36,7 @@ type BackupVault struct {
 	VaultAttributes VaultProviderAttributes `json:"vaultAttributes"`
 	Status *VaultStatus `json:"status,omitempty"`
 	CreationFailureReason *BackupVaultCreationFailureReason `json:"creationFailureReason,omitempty"`
-	// Why the vault's creation failed, and what to do about it. Set only for a vault whose creation failed. 
+	// Explanation of why the vault creation failed and what to do about it. Set only for a vault whose creation failed. 
 	CreationErrorMessage *string `json:"creationErrorMessage,omitempty"`
 	// List of labels for filtering and searching for vaults. Doesn't affect backup behavior, access control, or the tags Eon sets on your cloud resources. 
 	Labels []string `json:"labels,omitempty"`

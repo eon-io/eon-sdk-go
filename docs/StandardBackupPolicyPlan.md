@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupSchedules** | [**[]StandardBackupSchedules**](StandardBackupSchedules.md) | List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault.  | 
 **ScheduleTimezone** | Pointer to [**ScheduleTimezone**](ScheduleTimezone.md) |  | [optional] [default to SCHEDULE_TIMEZONE_UTC]
+**VaultStorageTier** | Pointer to [**VaultStorageTier**](VaultStorageTier.md) |  | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ SetScheduleTimezone sets ScheduleTimezone field to given value.
 `func (o *StandardBackupPolicyPlan) HasScheduleTimezone() bool`
 
 HasScheduleTimezone returns a boolean if a field has been set.
+
+### GetVaultStorageTier
+
+`func (o *StandardBackupPolicyPlan) GetVaultStorageTier() VaultStorageTier`
+
+GetVaultStorageTier returns the VaultStorageTier field if non-nil, zero value otherwise.
+
+### GetVaultStorageTierOk
+
+`func (o *StandardBackupPolicyPlan) GetVaultStorageTierOk() (*VaultStorageTier, bool)`
+
+GetVaultStorageTierOk returns a tuple with the VaultStorageTier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVaultStorageTier
+
+`func (o *StandardBackupPolicyPlan) SetVaultStorageTier(v VaultStorageTier)`
+
+SetVaultStorageTier sets VaultStorageTier field to given value.
+
+### HasVaultStorageTier
+
+`func (o *StandardBackupPolicyPlan) HasVaultStorageTier() bool`
+
+HasVaultStorageTier returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

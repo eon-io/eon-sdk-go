@@ -27,7 +27,7 @@ type NetworkInterfaceConfig struct {
 	NicId *string `json:"nicId,omitempty"`
 	// Name for the new NIC. Applicable when `mode` is set to create a new NIC.  Defaults to `<vmName>-nic`. 
 	NicName *string `json:"nicName,omitempty"`
-	// Static private IPv4 address for the new NIC. It must be an unused address inside the subnet's address range. Applicable only when `mode` is set to create a new NIC; rejected when `mode` is set to use an existing NIC.  When omitted, Azure assigns an address dynamically. 
+	// Static private IP address for the new NIC. Must be an unused address in the subnet's address range. Applies only when `mode` is `create`. It's rejected when `mode` is `existing`.  When omitted, Azure assigns an address dynamically. 
 	PrivateIpAddress *string `json:"privateIpAddress,omitempty"`
 	Vnet *VNetConfig `json:"vnet,omitempty"`
 	Subnet *SubnetConfig `json:"subnet,omitempty"`

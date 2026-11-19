@@ -33,15 +33,15 @@ type AzureDiskSettings struct {
 	SizeBytes *int64 `json:"sizeBytes,omitempty"`
 	// Tags to apply to the restored disk as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** `{\"eon_api_restore\": \"true\"}` 
 	Tags *map[string]string `json:"tags,omitempty"`
-	// Availability zone to create the restored disk in (for example `1`). Only for restoring a disk on its own; a VM restore rejects it. When omitted, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore. The zone must be available for the disk type in the destination region. 
+	// Availability zone to create the restored disk in. Applies only when restoring a disk on its own. A VM restore rejects it.  If you don't specify a zone, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore. The zone must be available for the disk type in the destination region. 
 	Zone *string `json:"zone,omitempty"`
-	// Provisioned IOPS of the restored disk. Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types. When omitted, Azure applies the default for the disk type and size. 
+	// Provisioned IOPS of the restored disk. Applies only to the `PremiumV2_LRS` and `UltraSSD_LRS` disk types. If you don't specify a value, Azure applies the default for the disk type and size. 
 	DiskIopsReadWrite *int64 `json:"diskIopsReadWrite,omitempty"`
-	// Provisioned throughput of the restored disk, in MB/s. Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types. When omitted, Azure applies the default for the disk type and size. 
+	// Provisioned throughput of the restored disk, in MB/s. Applies only to the `PremiumV2_LRS` and `UltraSSD_LRS` disk types. If you don't specify a value, Azure applies the default for the disk type and size. 
 	DiskMBpsReadWrite *int64 `json:"diskMBpsReadWrite,omitempty"`
-	// Network access policy of the restored disk, which controls how it can be exported or imported. Defaults to `AllowAll`. 
+	// Network access policy of the restored disk, which controls how it can be exported or imported. 
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty"`
-	// Whether the restored disk can be exported or imported over the public network. Defaults to `Enabled`. 
+	// Whether the restored disk can be exported or imported over the public network. 
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty"`
 }
 

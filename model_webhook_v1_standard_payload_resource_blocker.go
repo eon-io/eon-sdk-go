@@ -20,7 +20,7 @@ import (
 // checks if the WebhookV1StandardPayloadResourceBlocker type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookV1StandardPayloadResourceBlocker{}
 
-// WebhookV1StandardPayloadResourceBlocker Standard envelope of the notifications sent when a resource gets a blocker that keeps it from being backed up.
+// WebhookV1StandardPayloadResourceBlocker Notification of a blocker added to a resource.
 type WebhookV1StandardPayloadResourceBlocker struct {
 	// Notification ID. Also sent in the `X-Eon-Notification-Id` header.
 	Id string `json:"id"`

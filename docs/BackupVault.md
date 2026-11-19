@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **VaultAttributes** | [**VaultProviderAttributes**](VaultProviderAttributes.md) |  | 
 **Status** | Pointer to [**VaultStatus**](VaultStatus.md) |  | [optional] 
 **CreationFailureReason** | Pointer to [**BackupVaultCreationFailureReason**](BackupVaultCreationFailureReason.md) |  | [optional] 
-**CreationErrorMessage** | Pointer to **string** | Why the vault&#39;s creation failed, and what to do about it. Set only for a vault whose creation failed.  | [optional] 
+**CreationErrorMessage** | Pointer to **string** | Explanation of why the vault creation failed and what to do about it. Set only for a vault whose creation failed.  | [optional] 
 **Labels** | Pointer to **[]string** | List of labels for filtering and searching for vaults. Doesn&#39;t affect backup behavior, access control, or the tags Eon sets on your cloud resources.  | [optional] 
 
 ## Methods

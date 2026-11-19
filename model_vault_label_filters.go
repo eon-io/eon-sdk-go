@@ -17,13 +17,13 @@ import (
 // checks if the VaultLabelFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VaultLabelFilters{}
 
-// VaultLabelFilters Filters on the vault's labels, matched as exact strings. If you set more than one operator, a vault must satisfy all of them. 
+// VaultLabelFilters Filter conditions for the `labels` list. Labels are matched as exact strings. If you set more than one operator, a vault must satisfy all of them. 
 type VaultLabelFilters struct {
-	// Returns vaults that have at least one of these labels.
+	// Matches if any value in this list is in the `labels` list.
 	ContainsAnyOf []string `json:"containsAnyOf,omitempty"`
-	// Returns vaults that have all of these labels.
+	// Matches if all values in this list are in the `labels` list.
 	ContainsAllOf []string `json:"containsAllOf,omitempty"`
-	// Returns vaults that have none of these labels.
+	// Matches if none of the values in this list are in the `labels` list.
 	ContainsNoneOf []string `json:"containsNoneOf,omitempty"`
 }
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Mode** | **string** | Whether to use an existing NIC or create a new one. | 
 **NicId** | Pointer to **string** | Full Azure resource ID of an existing NIC. Required when &#x60;mode&#x60; is set to use an existing NIC.  Format: &#x60;/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/networkInterfaces/{name}&#x60;  | [optional] 
 **NicName** | Pointer to **string** | Name for the new NIC. Applicable when &#x60;mode&#x60; is set to create a new NIC.  Defaults to &#x60;&lt;vmName&gt;-nic&#x60;.  | [optional] 
-**PrivateIpAddress** | Pointer to **string** | Static private IPv4 address for the new NIC. It must be an unused address inside the subnet&#39;s address range. Applicable only when &#x60;mode&#x60; is set to create a new NIC; rejected when &#x60;mode&#x60; is set to use an existing NIC.  When omitted, Azure assigns an address dynamically.  | [optional] 
+**PrivateIpAddress** | Pointer to **string** | Static private IP address for the new NIC. Must be an unused address in the subnet&#39;s address range. Applies only when &#x60;mode&#x60; is &#x60;create&#x60;. It&#39;s rejected when &#x60;mode&#x60; is &#x60;existing&#x60;.  When omitted, Azure assigns an address dynamically.  | [optional] 
 **Vnet** | Pointer to [**VNetConfig**](VNetConfig.md) |  | [optional] 
 **Subnet** | Pointer to [**SubnetConfig**](SubnetConfig.md) |  | [optional] 
 

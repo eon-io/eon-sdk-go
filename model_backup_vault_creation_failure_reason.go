@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// BackupVaultCreationFailureReason Why the vault's creation failed. `UNSPECIFIED` for a vault whose creation didn't fail, or that failed before reasons were recorded. `creationErrorMessage` explains the failure and what to do about it. 
+// BackupVaultCreationFailureReason Reason the vault creation failed. `UNSPECIFIED` is returned for a vault whose creation didn't fail or whose creation failed before reasons were recorded.  For an explanation of the failure and what to do about it, see `creationErrorMessage`. 
 type BackupVaultCreationFailureReason string
 
 // List of BackupVaultCreationFailureReason

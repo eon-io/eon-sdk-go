@@ -19,7 +19,7 @@ import (
 // checks if the AwsRestoreServerNetworkParams type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AwsRestoreServerNetworkParams{}
 
-// AwsRestoreServerNetworkParams struct for AwsRestoreServerNetworkParams
+// AwsRestoreServerNetworkParams Network settings for the temporary restore server that Eon launches during an AWS restore.
 type AwsRestoreServerNetworkParams struct {
 	// VPC ID used by the restore server.
 	VpcId string `json:"vpcId"`

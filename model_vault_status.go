@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// VaultStatus Vault lifecycle status. `UNSPECIFIED` is supported only in responses. 
+// VaultStatus Vault status. `UNSPECIFIED` is supported only in responses. 
 type VaultStatus string
 
 // List of VaultStatus

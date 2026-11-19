@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResourceId** | Pointer to **string** | Eon ID of the resource. | [optional] 
+**ResourceId** | Pointer to **string** | Eon-assigned ID of the resource. | [optional] 
 **ResourceName** | Pointer to **string** | Name of the resource. | [optional] 
 **ResourceType** | Pointer to **string** | Resource type. | [optional] 
 **BlockerType** | Pointer to **string** | Key of the blocker that keeps the resource from being backed up. | [optional] 

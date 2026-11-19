@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ContainsAnyOf** | Pointer to **[]string** | Returns vaults that have at least one of these labels. | [optional] 
-**ContainsAllOf** | Pointer to **[]string** | Returns vaults that have all of these labels. | [optional] 
-**ContainsNoneOf** | Pointer to **[]string** | Returns vaults that have none of these labels. | [optional] 
+**ContainsAnyOf** | Pointer to **[]string** | Matches if any value in this list is in the &#x60;labels&#x60; list. | [optional] 
+**ContainsAllOf** | Pointer to **[]string** | Matches if all values in this list are in the &#x60;labels&#x60; list. | [optional] 
+**ContainsNoneOf** | Pointer to **[]string** | Matches if none of the values in this list are in the &#x60;labels&#x60; list. | [optional] 
 
 ## Methods
 

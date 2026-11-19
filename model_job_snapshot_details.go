@@ -28,9 +28,9 @@ type JobSnapshotDetails struct {
 	PointInTime time.Time `json:"pointInTime"`
 	// Date and time the snapshot's retention is expected to expire, after which it's marked for deletion.
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
-	// Bytes the job's snapshot stored. The full size for a full backup, the delta for an incremental. Absent for native snapshots.
+	// Size of the data the job's snapshot stored, in bytes. For a full backup, this is the full size. For an incremental backup, this is the delta. Omitted for native snapshots. 
 	SnapshotSizeBytes NullableInt64 `json:"snapshotSizeBytes,omitempty"`
-	// Logical size of the source at backup time. Absent for native snapshots and when the size is unknown.
+	// Logical size of the source at backup time, in bytes. Omitted for native snapshots and when the size is unknown. 
 	SourceSizeBytes NullableInt64 `json:"sourceSizeBytes,omitempty"`
 }
 

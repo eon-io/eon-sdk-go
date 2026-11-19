@@ -10,11 +10,11 @@ Name | Type | Description | Notes
 **HyperVGeneration** | Pointer to **string** | Hyper-V generation of the disk. When restoring, defaults to the original Hyper-V generation captured by the snapshot.  | [optional] 
 **SizeBytes** | Pointer to **int64** | Size of the disk, in bytes. When restoring, defaults to the original disk size captured by the snapshot.  | [optional] 
 **Tags** | Pointer to **map[string]string** | Tags to apply to the restored disk as key-value pairs, where key and value are both strings. If not provided, defaults to an empty object, with no tags applied.  **Example:** &#x60;{\&quot;eon_api_restore\&quot;: \&quot;true\&quot;}&#x60;  | [optional] 
-**Zone** | Pointer to **string** | Availability zone to create the restored disk in (for example &#x60;1&#x60;). Only for restoring a disk on its own; a VM restore rejects it. When omitted, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore. The zone must be available for the disk type in the destination region.  | [optional] 
-**DiskIopsReadWrite** | Pointer to **int64** | Provisioned IOPS of the restored disk. Only valid for the &#x60;PremiumV2_LRS&#x60; and &#x60;UltraSSD_LRS&#x60; disk types. When omitted, Azure applies the default for the disk type and size.  | [optional] 
-**DiskMBpsReadWrite** | Pointer to **int64** | Provisioned throughput of the restored disk, in MB/s. Only valid for the &#x60;PremiumV2_LRS&#x60; and &#x60;UltraSSD_LRS&#x60; disk types. When omitted, Azure applies the default for the disk type and size.  | [optional] 
-**NetworkAccessPolicy** | Pointer to **string** | Network access policy of the restored disk, which controls how it can be exported or imported. Defaults to &#x60;AllowAll&#x60;.  | [optional] 
-**PublicNetworkAccess** | Pointer to **string** | Whether the restored disk can be exported or imported over the public network. Defaults to &#x60;Enabled&#x60;.  | [optional] 
+**Zone** | Pointer to **string** | Availability zone to create the restored disk in. Applies only when restoring a disk on its own. A VM restore rejects it.  If you don&#39;t specify a zone, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore. The zone must be available for the disk type in the destination region.  | [optional] 
+**DiskIopsReadWrite** | Pointer to **int64** | Provisioned IOPS of the restored disk. Applies only to the &#x60;PremiumV2_LRS&#x60; and &#x60;UltraSSD_LRS&#x60; disk types. If you don&#39;t specify a value, Azure applies the default for the disk type and size.  | [optional] 
+**DiskMBpsReadWrite** | Pointer to **int64** | Provisioned throughput of the restored disk, in MB/s. Applies only to the &#x60;PremiumV2_LRS&#x60; and &#x60;UltraSSD_LRS&#x60; disk types. If you don&#39;t specify a value, Azure applies the default for the disk type and size.  | [optional] 
+**NetworkAccessPolicy** | Pointer to **string** | Network access policy of the restored disk, which controls how it can be exported or imported.  | [optional] 
+**PublicNetworkAccess** | Pointer to **string** | Whether the restored disk can be exported or imported over the public network.  | [optional] 
 
 ## Methods
 

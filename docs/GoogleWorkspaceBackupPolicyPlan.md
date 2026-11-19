@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VaultId** | **string** | Vault the Google Workspace backups are written to. Must be a GCP vault.  | 
+**VaultId** | **string** | ID of the vault the Google Workspace backups are written to. Must be a GCP vault.  | 
 **BackupRetentionDays** | **int32** | Backup retention period, in days.  | 
 
 ## Methods

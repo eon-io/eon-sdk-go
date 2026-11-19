@@ -532,6 +532,7 @@ docs/VaultProviderAttributesInput.md
 docs/VaultRegionFilters.md
 docs/VaultStatus.md
 docs/VaultStatusFilters.md
+docs/VaultStorageTier.md
 docs/VaultType.md
 docs/VaultTypeFilters.md
 docs/VaultsAPI.md
@@ -1131,6 +1132,7 @@ model_vault_provider_attributes_input.go
 model_vault_region_filters.go
 model_vault_status.go
 model_vault_status_filters.go
+model_vault_storage_tier.go
 model_vault_type.go
 model_vault_type_filters.go
 model_vaults_filter_conditions.go

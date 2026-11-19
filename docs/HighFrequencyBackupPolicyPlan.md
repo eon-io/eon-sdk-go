@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **BackupSchedules** | [**[]HighFrequencyBackupSchedules**](HighFrequencyBackupSchedules.md) | List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault.  | 
 **ScheduleTimezone** | Pointer to [**ScheduleTimezone**](ScheduleTimezone.md) |  | [optional] [default to SCHEDULE_TIMEZONE_UTC]
 **ReuseExistingSnapshots** | Pointer to **NullableBool** | No longer used. Snapshot reuse is now decided per project rather than per policy, so this field is accepted and ignored, and omitted from responses.  | [optional] 
+**VaultStorageTier** | Pointer to [**VaultStorageTier**](VaultStorageTier.md) |  | [optional] 
 
 ## Methods
 
@@ -128,6 +129,31 @@ HasReuseExistingSnapshots returns a boolean if a field has been set.
 `func (o *HighFrequencyBackupPolicyPlan) UnsetReuseExistingSnapshots()`
 
 UnsetReuseExistingSnapshots ensures that no value is present for ReuseExistingSnapshots, not even an explicit nil
+### GetVaultStorageTier
+
+`func (o *HighFrequencyBackupPolicyPlan) GetVaultStorageTier() VaultStorageTier`
+
+GetVaultStorageTier returns the VaultStorageTier field if non-nil, zero value otherwise.
+
+### GetVaultStorageTierOk
+
+`func (o *HighFrequencyBackupPolicyPlan) GetVaultStorageTierOk() (*VaultStorageTier, bool)`
+
+GetVaultStorageTierOk returns a tuple with the VaultStorageTier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVaultStorageTier
+
+`func (o *HighFrequencyBackupPolicyPlan) SetVaultStorageTier(v VaultStorageTier)`
+
+SetVaultStorageTier sets VaultStorageTier field to given value.
+
+### HasVaultStorageTier
+
+`func (o *HighFrequencyBackupPolicyPlan) HasVaultStorageTier() bool`
+
+HasVaultStorageTier returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

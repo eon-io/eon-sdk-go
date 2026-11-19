@@ -17,6 +17,8 @@
 
 * `SNAPSHOT_HOLD_REASON_RECENT_RESTORE` (value: `"RECENT_RESTORE"`)
 
+* `SNAPSHOT_HOLD_REASON_RESTORE_IN_PROGRESS` (value: `"RESTORE_IN_PROGRESS"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

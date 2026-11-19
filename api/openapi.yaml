@@ -8977,6 +8977,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenResponse'
           description: Authenticated.
+        "400":
+          description: Invalid request.
+        "401":
+          description: Invalid client credentials.
         "404":
           content:
             application/json:
@@ -9043,6 +9047,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Oauth2TokenResponse'
           description: Authenticated.
+        "400":
+          description: Invalid request.
+        "401":
+          description: Invalid client credentials.
         "404":
           content:
             application/json:
@@ -18560,8 +18568,8 @@ components:
       description: Eon snapshot.
       example:
         pointInTime: 2024-10-29T23:01:30Z
-        snapshotSizeBytes: 0
-        sourceSizeBytes: 0
+        snapshotSizeBytes: 5368709120
+        sourceSizeBytes: 10737418240
         expirationTime: 2025-01-20T09:40:26Z
         id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
       nullable: true
@@ -18582,15 +18590,20 @@ components:
           format: date-time
           type: string
         snapshotSizeBytes:
-          description: "Bytes the job's snapshot stored. The full size for a full\
-            \ backup, the delta for an incremental. Absent for native snapshots."
+          description: |
+            Size of the data the job's snapshot stored, in bytes.
+            For a full backup, this is the full size. For an incremental backup, this is the delta.
+            Omitted for native snapshots.
+          example: 5368709120
           format: int64
           minimum: 0
           nullable: true
           type: integer
         sourceSizeBytes:
-          description: Logical size of the source at backup time. Absent for native
-            snapshots and when the size is unknown.
+          description: |
+            Logical size of the source at backup time, in bytes.
+            Omitted for native snapshots and when the size is unknown.
+          example: 10737418240
           format: int64
           minimum: 0
           nullable: true
@@ -18629,7 +18642,7 @@ components:
       type: object
     VaultStatus:
       description: |
-        Vault lifecycle status.
+        Vault status.
         `UNSPECIFIED` is supported only in responses.
       enum:
       - UNSPECIFIED
@@ -18653,8 +18666,10 @@ components:
       - VAULT_STATUS_PENDING_DELETION
     BackupVaultCreationFailureReason:
       description: |
-        Why the vault's creation failed. `UNSPECIFIED` for a vault whose creation didn't fail, or that failed before reasons were recorded.
-        `creationErrorMessage` explains the failure and what to do about it.
+        Reason the vault creation failed.
+        `UNSPECIFIED` is returned for a vault whose creation didn't fail or whose creation failed before reasons were recorded.
+
+        For an explanation of the failure and what to do about it, see `creationErrorMessage`.
       enum:
       - UNSPECIFIED
       - INTERNAL
@@ -18727,7 +18742,7 @@ components:
           $ref: '#/components/schemas/BackupVaultCreationFailureReason'
         creationErrorMessage:
           description: |
-            Why the vault's creation failed, and what to do about it.
+            Explanation of why the vault creation failed and what to do about it.
             Set only for a vault whose creation failed.
           example: AWS denied 's3:PutBucketPolicy' while Eon created this vault. Make
             sure the vault role allows this action and that no service control policy
@@ -18778,8 +18793,8 @@ components:
           status: JOB_PENDING
         snapshotDetails:
           pointInTime: 2024-10-29T23:01:30Z
-          snapshotSizeBytes: 0
-          sourceSizeBytes: 0
+          snapshotSizeBytes: 5368709120
+          sourceSizeBytes: 10737418240
           expirationTime: 2025-01-20T09:40:26Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
@@ -18843,8 +18858,8 @@ components:
             status: JOB_PENDING
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
-            snapshotSizeBytes: 0
-            sourceSizeBytes: 0
+            snapshotSizeBytes: 5368709120
+            sourceSizeBytes: 10737418240
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
@@ -18889,8 +18904,8 @@ components:
             status: JOB_PENDING
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
-            snapshotSizeBytes: 0
-            sourceSizeBytes: 0
+            snapshotSizeBytes: 5368709120
+            sourceSizeBytes: 10737418240
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
@@ -18959,8 +18974,8 @@ components:
             status: JOB_PENDING
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
-            snapshotSizeBytes: 0
-            sourceSizeBytes: 0
+            snapshotSizeBytes: 5368709120
+            sourceSizeBytes: 10737418240
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
@@ -19091,6 +19106,11 @@ components:
       - OKTA_RESTORE
       - AZURE_ENTRA_ID_MICROSOFT_365_RESTORE
       - EXPORT_ACCESS_DENIED_ITEMS
+      - INSTANT_FILE_DOWNLOAD
+      - INSTANT_FILE_PREVIEW
+      - AWS_EC2_IN_PLACE_DISK_RESTORE
+      - AZURE_VM_IN_PLACE_DISK_RESTORE
+      - GCP_COMPUTE_ENGINE_IN_PLACE_DISK_RESTORE
     RestoreJobTypeFilters:
       additionalProperties: false
       example:
@@ -19438,8 +19458,8 @@ components:
           status: JOB_PENDING
         snapshotDetails:
           pointInTime: 2024-10-29T23:01:30Z
-          snapshotSizeBytes: 0
-          sourceSizeBytes: 0
+          snapshotSizeBytes: 5368709120
+          sourceSizeBytes: 10737418240
           expirationTime: 2025-01-20T09:40:26Z
           id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
         vault:
@@ -19524,8 +19544,8 @@ components:
             status: JOB_PENDING
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
-            snapshotSizeBytes: 0
-            sourceSizeBytes: 0
+            snapshotSizeBytes: 5368709120
+            sourceSizeBytes: 10737418240
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
@@ -19588,8 +19608,8 @@ components:
             status: JOB_PENDING
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
-            snapshotSizeBytes: 0
-            sourceSizeBytes: 0
+            snapshotSizeBytes: 5368709120
+            sourceSizeBytes: 10737418240
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
@@ -19676,8 +19696,8 @@ components:
             status: JOB_PENDING
           snapshotDetails:
             pointInTime: 2024-10-29T23:01:30Z
-            snapshotSizeBytes: 0
-            sourceSizeBytes: 0
+            snapshotSizeBytes: 5368709120
+            sourceSizeBytes: 10737418240
             expirationTime: 2025-01-20T09:40:26Z
             id: 67e0447a-10a4-5cde-8fc2-2a8cac051e16
           vault:
@@ -20970,6 +20990,26 @@ components:
       x-enum-varnames:
       - SCHEDULE_TIMEZONE_UTC
       - SCHEDULE_TIMEZONE_RESOURCE
+    VaultStorageTier:
+      description: |
+        Storage tier used for snapshot data in the Eon vault.
+        - `STANDARD`: all data is in the standard tier.
+        - `COLD`: all data is in the cold tier.
+        - `FROM_SOURCE_STORAGE_CLASS`: each S3 object follows its source storage class. Objects in S3 Standard are in the
+          standard tier; objects in S3 Standard-IA, S3 One Zone-IA and S3 Glacier Instant Retrieval are in the cold tier;
+          objects in S3 Intelligent-Tiering are in the cold tier once they were last modified more than 30 days before the
+          backup.
+      enum:
+      - STANDARD
+      - COLD
+      - FROM_SOURCE_STORAGE_CLASS
+      example: COLD
+      type: string
+      x-extensible-enum: true
+      x-enum-varnames:
+      - VAULT_STORAGE_TIER_STANDARD
+      - VAULT_STORAGE_TIER_COLD
+      - VAULT_STORAGE_TIER_FROM_SOURCE_STORAGE_CLASS
     StandardBackupPolicyPlan:
       example:
         backupSchedules:
@@ -21045,6 +21085,7 @@ components:
                 minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
+        vaultStorageTier: COLD
         scheduleTimezone: UTC
       nullable: true
       properties:
@@ -21057,6 +21098,8 @@ components:
           type: array
         scheduleTimezone:
           $ref: '#/components/schemas/ScheduleTimezone'
+        vaultStorageTier:
+          $ref: '#/components/schemas/VaultStorageTier'
       required:
       - backupSchedules
       type: object
@@ -21300,6 +21343,7 @@ components:
                 minute: 30
             frequency: WEEKLY
           backupRetentionDays: 30
+        vaultStorageTier: COLD
         scheduleTimezone: UTC
         reuseExistingSnapshots: true
       nullable: true
@@ -21326,6 +21370,8 @@ components:
           nullable: true
           type: boolean
           x-docs-omit: true
+        vaultStorageTier:
+          $ref: '#/components/schemas/VaultStorageTier'
       required:
       - backupSchedules
       - resourceTypes
@@ -21595,6 +21641,7 @@ components:
       - backupSchedules
       type: object
     GoogleWorkspaceBackupPolicyPlan:
+      description: Options for Google Workspace backup policies.
       example:
         vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
         backupRetentionDays: 30
@@ -21602,7 +21649,8 @@ components:
       properties:
         vaultId:
           description: |
-            Vault the Google Workspace backups are written to. Must be a GCP vault.
+            ID of the vault the Google Workspace backups are written to.
+            Must be a GCP vault.
           example: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           format: uuid
           type: string
@@ -21701,6 +21749,7 @@ components:
                   minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
+          vaultStorageTier: COLD
           scheduleTimezone: UTC
           reuseExistingSnapshots: true
         googleWorkspacePlan:
@@ -21780,6 +21829,7 @@ components:
                   minute: 30
               frequency: WEEKLY
             backupRetentionDays: 30
+          vaultStorageTier: COLD
           scheduleTimezone: UTC
         awsNativeStandardPlan:
           backupSchedules:
@@ -21958,6 +22008,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            vaultStorageTier: COLD
             scheduleTimezone: UTC
             reuseExistingSnapshots: true
           googleWorkspacePlan:
@@ -22037,6 +22088,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            vaultStorageTier: COLD
             scheduleTimezone: UTC
           awsNativeStandardPlan:
             backupSchedules:
@@ -22341,6 +22393,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            vaultStorageTier: COLD
             scheduleTimezone: UTC
             reuseExistingSnapshots: true
           googleWorkspacePlan:
@@ -22420,6 +22473,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            vaultStorageTier: COLD
             scheduleTimezone: UTC
           awsNativeStandardPlan:
             backupSchedules:
@@ -22731,6 +22785,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
             googleWorkspacePlan:
@@ -22810,6 +22865,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
             awsNativeStandardPlan:
               backupSchedules:
@@ -23034,7 +23090,8 @@ components:
     BackupPolicyLabelFilters:
       additionalProperties: false
       description: |
-        Filters on the backup policy's labels, matched as exact strings.
+        Filter conditions for the `labels` list.
+        Labels are matched as exact strings.
         If you set more than one operator, a backup policy must satisfy all of them.
       example:
         containsAllOf:
@@ -23048,17 +23105,18 @@ components:
         - containsAnyOf
       properties:
         containsAnyOf:
-          description: Returns backup policies that have at least one of these labels.
+          description: Matches if any value in this list is in the `labels` list.
           items:
             type: string
           type: array
         containsAllOf:
-          description: Returns backup policies that have all of these labels.
+          description: Matches if all values in this list are in the `labels` list.
           items:
             type: string
           type: array
         containsNoneOf:
-          description: Returns backup policies that have none of these labels.
+          description: Matches if none of the values in this list are in the `labels`
+            list.
           items:
             type: string
           type: array
@@ -23188,6 +23246,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
             googleWorkspacePlan:
@@ -23267,6 +23326,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
             awsNativeStandardPlan:
               backupSchedules:
@@ -23540,6 +23600,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
             googleWorkspacePlan:
@@ -23619,6 +23680,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
             awsNativeStandardPlan:
               backupSchedules:
@@ -23912,6 +23974,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
             googleWorkspacePlan:
@@ -23991,6 +24054,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
             awsNativeStandardPlan:
               backupSchedules:
@@ -24272,6 +24336,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            vaultStorageTier: COLD
             scheduleTimezone: UTC
             reuseExistingSnapshots: true
           googleWorkspacePlan:
@@ -24351,6 +24416,7 @@ components:
                     minute: 30
                 frequency: WEEKLY
               backupRetentionDays: 30
+            vaultStorageTier: COLD
             scheduleTimezone: UTC
           awsNativeStandardPlan:
             backupSchedules:
@@ -24656,6 +24722,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
               reuseExistingSnapshots: true
             googleWorkspacePlan:
@@ -24735,6 +24802,7 @@ components:
                       minute: 30
                   frequency: WEEKLY
                 backupRetentionDays: 30
+              vaultStorageTier: COLD
               scheduleTimezone: UTC
             awsNativeStandardPlan:
               backupSchedules:
@@ -25232,7 +25300,8 @@ components:
     VaultLabelFilters:
       additionalProperties: false
       description: |
-        Filters on the vault's labels, matched as exact strings.
+        Filter conditions for the `labels` list.
+        Labels are matched as exact strings.
         If you set more than one operator, a vault must satisfy all of them.
       example:
         containsAllOf:
@@ -25246,17 +25315,18 @@ components:
         - containsAnyOf
       properties:
         containsAnyOf:
-          description: Returns vaults that have at least one of these labels.
+          description: Matches if any value in this list is in the `labels` list.
           items:
             type: string
           type: array
         containsAllOf:
-          description: Returns vaults that have all of these labels.
+          description: Matches if all values in this list are in the `labels` list.
           items:
             type: string
           type: array
         containsNoneOf:
-          description: Returns vaults that have none of these labels.
+          description: Matches if none of the values in this list are in the `labels`
+            list.
           items:
             type: string
           type: array
@@ -25543,6 +25613,8 @@ components:
       - path
       type: object
     AwsRestoreServerNetworkParams:
+      description: Network settings for the temporary restore server that Eon launches
+        during an AWS restore.
       example:
         subnetId: subnet-01234567890123456
         securityGroupIds:
@@ -26640,8 +26712,9 @@ components:
           type: string
         privateIpAddress:
           description: |
-            Static private IPv4 address for the new NIC. It must be an unused address inside the subnet's address range.
-            Applicable only when `mode` is set to create a new NIC; rejected when `mode` is set to use an existing NIC.
+            Static private IP address for the new NIC.
+            Must be an unused address in the subnet's address range.
+            Applies only when `mode` is `create`. It's rejected when `mode` is `existing`.
 
             When omitted, Azure assigns an address dynamically.
           example: 10.0.0.10
@@ -26706,42 +26779,45 @@ components:
           type: object
         zone:
           description: |
-            Availability zone to create the restored disk in (for example `1`). Only for restoring a disk on its own; a VM restore rejects it.
-            When omitted, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore.
+            Availability zone to create the restored disk in.
+            Applies only when restoring a disk on its own.
+            A VM restore rejects it.
+
+            If you don't specify a zone, the disk is created without a zone, except for Premium SSD v2 disks, which follow the zone of the restore.
             The zone must be available for the disk type in the destination region.
           example: "1"
           type: string
         diskIopsReadWrite:
           description: |
             Provisioned IOPS of the restored disk.
-            Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types.
-            When omitted, Azure applies the default for the disk type and size.
+            Applies only to the `PremiumV2_LRS` and `UltraSSD_LRS` disk types.
+            If you don't specify a value, Azure applies the default for the disk type and size.
           example: 5000
           format: int64
           type: integer
         diskMBpsReadWrite:
           description: |
             Provisioned throughput of the restored disk, in MB/s.
-            Only valid for the `PremiumV2_LRS` and `UltraSSD_LRS` disk types.
-            When omitted, Azure applies the default for the disk type and size.
+            Applies only to the `PremiumV2_LRS` and `UltraSSD_LRS` disk types.
+            If you don't specify a value, Azure applies the default for the disk type and size.
           example: 200
           format: int64
           type: integer
         networkAccessPolicy:
           description: |
             Network access policy of the restored disk, which controls how it can be exported or imported.
-            Defaults to `AllowAll`.
           enum:
           - AllowAll
           - DenyAll
+          example: AllowAll
           type: string
         publicNetworkAccess:
           description: |
             Whether the restored disk can be exported or imported over the public network.
-            Defaults to `Enabled`.
           enum:
           - Enabled
           - Disabled
+          example: Enabled
           type: string
       required:
       - name
@@ -28178,7 +28254,7 @@ components:
       deprecated: true
       description: |
         Eon backup status.
-        For an explanation of statuses, see [Backup Statuses](/data-protection/backup-and-protection/backup-management/backup-statuses).
+        For an explanation of statuses, see [Resource Statuses](/data-protection/backup-and-protection/backup-management/resource-statuses).
         `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses.
 
         Replaced by `configurationStatus` and `complianceStatus`.
@@ -30198,6 +30274,7 @@ components:
       - LAST_SNAPSHOT_GRACE
       - LINEAGE_ANCHOR_GRACE
       - RECENT_RESTORE
+      - RESTORE_IN_PROGRESS
       example: LAST_SNAPSHOT_GRACE
       type: string
       x-docs-public-description: |
@@ -30214,6 +30291,7 @@ components:
       - SNAPSHOT_HOLD_REASON_LAST_SNAPSHOT_GRACE
       - SNAPSHOT_HOLD_REASON_LINEAGE_ANCHOR_GRACE
       - SNAPSHOT_HOLD_REASON_RECENT_RESTORE
+      - SNAPSHOT_HOLD_REASON_RESTORE_IN_PROGRESS
     InventorySnapshotVolume:
       example:
         providerVolumeId: vol-00b7506c1a2bc8cfd
@@ -35013,7 +35091,7 @@ components:
       description: Details of a blocker added to a resource.
       properties:
         resourceId:
-          description: Eon ID of the resource.
+          description: Eon-assigned ID of the resource.
           type: string
         resourceName:
           description: Name of the resource.
@@ -35030,8 +35108,7 @@ components:
           type: string
       type: object
     WebhookV1StandardPayloadResourceBlocker:
-      description: Standard envelope of the notifications sent when a resource gets
-        a blocker that keeps it from being backed up.
+      description: Notification of a blocker added to a resource.
       properties:
         id:
           description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
@@ -35983,7 +36060,8 @@ components:
       type: object
     WebhookV1StandardPayloadResourceBlocker_arguments:
       description: |
-        Details of the notification. Notifications of this type always carry `resourceBlockerNotification`.
+        Details of the notification.
+        Always `resourceBlockerNotification`.
       properties:
         resourceBlockerNotification:
           $ref: '#/components/schemas/WebhookV1ResourceBlockerNotificationArguments'

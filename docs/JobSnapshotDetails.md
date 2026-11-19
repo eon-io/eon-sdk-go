@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Snapshot ID. | [optional] 
 **PointInTime** | **time.Time** | Date and time of the resource that&#39;s preserved by the snapshot. | 
 **ExpirationTime** | Pointer to **time.Time** | Date and time the snapshot&#39;s retention is expected to expire, after which it&#39;s marked for deletion. | [optional] 
-**SnapshotSizeBytes** | Pointer to **NullableInt64** | Bytes the job&#39;s snapshot stored. The full size for a full backup, the delta for an incremental. Absent for native snapshots. | [optional] 
-**SourceSizeBytes** | Pointer to **NullableInt64** | Logical size of the source at backup time. Absent for native snapshots and when the size is unknown. | [optional] 
+**SnapshotSizeBytes** | Pointer to **NullableInt64** | Size of the data the job&#39;s snapshot stored, in bytes. For a full backup, this is the full size. For an incremental backup, this is the delta. Omitted for native snapshots.  | [optional] 
+**SourceSizeBytes** | Pointer to **NullableInt64** | Logical size of the source at backup time, in bytes. Omitted for native snapshots and when the size is unknown.  | [optional] 
 
 ## Methods
 

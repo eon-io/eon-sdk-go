@@ -17,13 +17,13 @@ import (
 // checks if the BackupPolicyLabelFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BackupPolicyLabelFilters{}
 
-// BackupPolicyLabelFilters Filters on the backup policy's labels, matched as exact strings. If you set more than one operator, a backup policy must satisfy all of them. 
+// BackupPolicyLabelFilters Filter conditions for the `labels` list. Labels are matched as exact strings. If you set more than one operator, a backup policy must satisfy all of them. 
 type BackupPolicyLabelFilters struct {
-	// Returns backup policies that have at least one of these labels.
+	// Matches if any value in this list is in the `labels` list.
 	ContainsAnyOf []string `json:"containsAnyOf,omitempty"`
-	// Returns backup policies that have all of these labels.
+	// Matches if all values in this list are in the `labels` list.
 	ContainsAllOf []string `json:"containsAllOf,omitempty"`
-	// Returns backup policies that have none of these labels.
+	// Matches if none of the values in this list are in the `labels` list.
 	ContainsNoneOf []string `json:"containsNoneOf,omitempty"`
 }
 

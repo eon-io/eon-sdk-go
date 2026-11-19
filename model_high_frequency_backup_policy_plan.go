@@ -29,6 +29,7 @@ type HighFrequencyBackupPolicyPlan struct {
 	// No longer used. Snapshot reuse is now decided per project rather than per policy, so this field is accepted and ignored, and omitted from responses. 
 	// Deprecated
 	ReuseExistingSnapshots NullableBool `json:"reuseExistingSnapshots,omitempty"`
+	VaultStorageTier *VaultStorageTier `json:"vaultStorageTier,omitempty"`
 }
 
 type _HighFrequencyBackupPolicyPlan HighFrequencyBackupPolicyPlan
@@ -181,6 +182,38 @@ func (o *HighFrequencyBackupPolicyPlan) UnsetReuseExistingSnapshots() {
 	o.ReuseExistingSnapshots.Unset()
 }
 
+// GetVaultStorageTier returns the VaultStorageTier field value if set, zero value otherwise.
+func (o *HighFrequencyBackupPolicyPlan) GetVaultStorageTier() VaultStorageTier {
+	if o == nil || IsNil(o.VaultStorageTier) {
+		var ret VaultStorageTier
+		return ret
+	}
+	return *o.VaultStorageTier
+}
+
+// GetVaultStorageTierOk returns a tuple with the VaultStorageTier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HighFrequencyBackupPolicyPlan) GetVaultStorageTierOk() (*VaultStorageTier, bool) {
+	if o == nil || IsNil(o.VaultStorageTier) {
+		return nil, false
+	}
+	return o.VaultStorageTier, true
+}
+
+// HasVaultStorageTier returns a boolean if a field has been set.
+func (o *HighFrequencyBackupPolicyPlan) HasVaultStorageTier() bool {
+	if o != nil && !IsNil(o.VaultStorageTier) {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultStorageTier gets a reference to the given VaultStorageTier and assigns it to the VaultStorageTier field.
+func (o *HighFrequencyBackupPolicyPlan) SetVaultStorageTier(v VaultStorageTier) {
+	o.VaultStorageTier = &v
+}
+
 func (o HighFrequencyBackupPolicyPlan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -198,6 +231,9 @@ func (o HighFrequencyBackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ReuseExistingSnapshots.IsSet() {
 		toSerialize["reuseExistingSnapshots"] = o.ReuseExistingSnapshots.Get()
+	}
+	if !IsNil(o.VaultStorageTier) {
+		toSerialize["vaultStorageTier"] = o.VaultStorageTier
 	}
 	return toSerialize, nil
 }

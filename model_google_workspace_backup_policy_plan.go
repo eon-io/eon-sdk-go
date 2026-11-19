@@ -19,9 +19,9 @@ import (
 // checks if the GoogleWorkspaceBackupPolicyPlan type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GoogleWorkspaceBackupPolicyPlan{}
 
-// GoogleWorkspaceBackupPolicyPlan struct for GoogleWorkspaceBackupPolicyPlan
+// GoogleWorkspaceBackupPolicyPlan Options for Google Workspace backup policies.
 type GoogleWorkspaceBackupPolicyPlan struct {
-	// Vault the Google Workspace backups are written to. Must be a GCP vault. 
+	// ID of the vault the Google Workspace backups are written to. Must be a GCP vault. 
 	VaultId string `json:"vaultId"`
 	// Backup retention period, in days. 
 	BackupRetentionDays int32 `json:"backupRetentionDays"`

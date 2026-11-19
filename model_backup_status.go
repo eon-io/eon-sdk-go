@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// BackupStatus Eon backup status. For an explanation of statuses, see [Backup Statuses](/data-protection/backup-and-protection/backup-management/backup-statuses). `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses.  Replaced by `configurationStatus` and `complianceStatus`. Supported until April 30, 2027. 
+// BackupStatus Eon backup status. For an explanation of statuses, see [Resource Statuses](/data-protection/backup-and-protection/backup-management/resource-statuses). `BACKUP_POSTURE_STATUS_UNSPECIFIED` is supported only in responses.  Replaced by `configurationStatus` and `complianceStatus`. Supported until April 30, 2027. 
 type BackupStatus string
 
 // List of BackupStatus

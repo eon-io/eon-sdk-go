@@ -24,6 +24,7 @@ type StandardBackupPolicyPlan struct {
 	// List of backup schedules. Each schedule specifies a backup frequency, retention period, and vault. 
 	BackupSchedules []StandardBackupSchedules `json:"backupSchedules"`
 	ScheduleTimezone *ScheduleTimezone `json:"scheduleTimezone,omitempty"`
+	VaultStorageTier *VaultStorageTier `json:"vaultStorageTier,omitempty"`
 }
 
 type _StandardBackupPolicyPlan StandardBackupPolicyPlan
@@ -106,6 +107,38 @@ func (o *StandardBackupPolicyPlan) SetScheduleTimezone(v ScheduleTimezone) {
 	o.ScheduleTimezone = &v
 }
 
+// GetVaultStorageTier returns the VaultStorageTier field value if set, zero value otherwise.
+func (o *StandardBackupPolicyPlan) GetVaultStorageTier() VaultStorageTier {
+	if o == nil || IsNil(o.VaultStorageTier) {
+		var ret VaultStorageTier
+		return ret
+	}
+	return *o.VaultStorageTier
+}
+
+// GetVaultStorageTierOk returns a tuple with the VaultStorageTier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StandardBackupPolicyPlan) GetVaultStorageTierOk() (*VaultStorageTier, bool) {
+	if o == nil || IsNil(o.VaultStorageTier) {
+		return nil, false
+	}
+	return o.VaultStorageTier, true
+}
+
+// HasVaultStorageTier returns a boolean if a field has been set.
+func (o *StandardBackupPolicyPlan) HasVaultStorageTier() bool {
+	if o != nil && !IsNil(o.VaultStorageTier) {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultStorageTier gets a reference to the given VaultStorageTier and assigns it to the VaultStorageTier field.
+func (o *StandardBackupPolicyPlan) SetVaultStorageTier(v VaultStorageTier) {
+	o.VaultStorageTier = &v
+}
+
 func (o StandardBackupPolicyPlan) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -119,6 +152,9 @@ func (o StandardBackupPolicyPlan) ToMap() (map[string]interface{}, error) {
 	toSerialize["backupSchedules"] = o.BackupSchedules
 	if !IsNil(o.ScheduleTimezone) {
 		toSerialize["scheduleTimezone"] = o.ScheduleTimezone
+	}
+	if !IsNil(o.VaultStorageTier) {
+		toSerialize["vaultStorageTier"] = o.VaultStorageTier
 	}
 	return toSerialize, nil
 }

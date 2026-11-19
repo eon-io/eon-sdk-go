@@ -27,6 +27,7 @@ const (
 	SNAPSHOT_HOLD_REASON_LAST_SNAPSHOT_GRACE SnapshotHoldReason = "LAST_SNAPSHOT_GRACE"
 	SNAPSHOT_HOLD_REASON_LINEAGE_ANCHOR_GRACE SnapshotHoldReason = "LINEAGE_ANCHOR_GRACE"
 	SNAPSHOT_HOLD_REASON_RECENT_RESTORE SnapshotHoldReason = "RECENT_RESTORE"
+	SNAPSHOT_HOLD_REASON_RESTORE_IN_PROGRESS SnapshotHoldReason = "RESTORE_IN_PROGRESS"
 )
 
 // All allowed values of SnapshotHoldReason enum
@@ -38,6 +39,7 @@ var AllowedSnapshotHoldReasonEnumValues = []SnapshotHoldReason{
 	"LAST_SNAPSHOT_GRACE",
 	"LINEAGE_ANCHOR_GRACE",
 	"RECENT_RESTORE",
+	"RESTORE_IN_PROGRESS",
 }
 
 func (v *SnapshotHoldReason) UnmarshalJSON(src []byte) error {
