@@ -24,6 +24,8 @@ const (
 	GLOBAL_SETTINGS_VIEW PermissionType = "global_settings.view"
 	VAULT_ACCOUNTS_MANAGE PermissionType = "vault_accounts.manage"
 	SCANNING_ACCOUNTS_MANAGE PermissionType = "scanning_accounts.manage"
+	DIRECT_BACKUP_ACCESS_VIEW PermissionType = "direct_backup_access.view"
+	DIRECT_BACKUP_ACCESS_MANAGE PermissionType = "direct_backup_access.manage"
 	COST_EXPLORER_VIEW PermissionType = "cost_explorer.view"
 	USER_ACCESS_MANAGE PermissionType = "user_access.manage"
 	SAML_GROUP_ACCESS_MANAGE PermissionType = "saml_group_access.manage"
@@ -130,6 +132,8 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"global_settings.view",
 	"vault_accounts.manage",
 	"scanning_accounts.manage",
+	"direct_backup_access.view",
+	"direct_backup_access.manage",
 	"cost_explorer.view",
 	"user_access.manage",
 	"saml_group_access.manage",

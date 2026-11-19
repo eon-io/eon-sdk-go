@@ -11,6 +11,10 @@
 
 * `SCANNING_ACCOUNTS_MANAGE` (value: `"scanning_accounts.manage"`)
 
+* `DIRECT_BACKUP_ACCESS_VIEW` (value: `"direct_backup_access.view"`)
+
+* `DIRECT_BACKUP_ACCESS_MANAGE` (value: `"direct_backup_access.manage"`)
+
 * `COST_EXPLORER_VIEW` (value: `"cost_explorer.view"`)
 
 * `USER_ACCESS_MANAGE` (value: `"user_access.manage"`)

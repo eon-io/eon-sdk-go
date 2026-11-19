@@ -12252,6 +12252,8 @@ components:
       - global_settings.view
       - vault_accounts.manage
       - scanning_accounts.manage
+      - direct_backup_access.view
+      - direct_backup_access.manage
       - cost_explorer.view
       - user_access.manage
       - saml_group_access.manage
@@ -12354,6 +12356,8 @@ components:
       type: string
       x-extensible-enum: true
       x-docs-internal-enum:
+      - direct_backup_access.view
+      - direct_backup_access.manage
       - zero_etl_policies.manage
       - action_approval_rules.manage
       - action_approval_rules.view
