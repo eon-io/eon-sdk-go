@@ -10403,6 +10403,7 @@ components:
       - AZURE_ENTRA_ID_RESOURCE
       - CLAUDE_ENTERPRISE_RESOURCE
       - OKTA_RESOURCE
+      - VSPHERE_VIRTUAL_MACHINE
     ResourceTypeCondition:
       example:
         resourceTypes:
@@ -10547,6 +10548,7 @@ components:
       - AZURE_ENTRA_ID
       - CLAUDE_ENTERPRISE
       - OKTA
+      - VSPHERE
     CloudProviderCondition:
       example:
         cloudProviders:
@@ -31657,6 +31659,7 @@ components:
       - AWS_S3_COLD_TIER_MANAGED_OBJECTS_METERING_DIMENSION
       - AWS_S3_COLD_TIER_RESTORE_METERING_DIMENSION
       - AI_AGENT_ECU_METERING_DIMENSION
+      - VSPHERE_VM_METERING_DIMENSION
     Cost:
       example:
         amount: 150.75
