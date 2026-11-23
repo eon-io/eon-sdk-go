@@ -26,6 +26,8 @@ type HighFrequencyBackupSchedules struct {
 	ScheduleConfig HighFrequencyBackupScheduleConfig `json:"scheduleConfig"`
 	// Backup retention period, in days.
 	BackupRetentionDays int32 `json:"backupRetentionDays"`
+	// Extra retention hours (0-23) on top of `backupRetentionDays`. Only allowed for interval schedules in projects whose minimum high-frequency retention is below one day.
+	BackupRetentionHours *int32 `json:"backupRetentionHours,omitempty"`
 }
 
 type _HighFrequencyBackupSchedules HighFrequencyBackupSchedules
@@ -122,6 +124,38 @@ func (o *HighFrequencyBackupSchedules) SetBackupRetentionDays(v int32) {
 	o.BackupRetentionDays = v
 }
 
+// GetBackupRetentionHours returns the BackupRetentionHours field value if set, zero value otherwise.
+func (o *HighFrequencyBackupSchedules) GetBackupRetentionHours() int32 {
+	if o == nil || IsNil(o.BackupRetentionHours) {
+		var ret int32
+		return ret
+	}
+	return *o.BackupRetentionHours
+}
+
+// GetBackupRetentionHoursOk returns a tuple with the BackupRetentionHours field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HighFrequencyBackupSchedules) GetBackupRetentionHoursOk() (*int32, bool) {
+	if o == nil || IsNil(o.BackupRetentionHours) {
+		return nil, false
+	}
+	return o.BackupRetentionHours, true
+}
+
+// HasBackupRetentionHours returns a boolean if a field has been set.
+func (o *HighFrequencyBackupSchedules) HasBackupRetentionHours() bool {
+	if o != nil && !IsNil(o.BackupRetentionHours) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupRetentionHours gets a reference to the given int32 and assigns it to the BackupRetentionHours field.
+func (o *HighFrequencyBackupSchedules) SetBackupRetentionHours(v int32) {
+	o.BackupRetentionHours = &v
+}
+
 func (o HighFrequencyBackupSchedules) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -135,6 +169,9 @@ func (o HighFrequencyBackupSchedules) ToMap() (map[string]interface{}, error) {
 	toSerialize["vaultId"] = o.VaultId
 	toSerialize["scheduleConfig"] = o.ScheduleConfig
 	toSerialize["backupRetentionDays"] = o.BackupRetentionDays
+	if !IsNil(o.BackupRetentionHours) {
+		toSerialize["backupRetentionHours"] = o.BackupRetentionHours
+	}
 	return toSerialize, nil
 }
 

@@ -10382,7 +10382,6 @@ components:
       - AWS_EKS_CLUSTER
       - AWS_EBS_VOLUME
       - AWS_KEYSPACES_TABLE
-      - AWS_SQL_VM
       - AWS_CASSANDRA_CLUSTER
       - AWS_OPENSEARCH
       - AWS_AGENTCORE
@@ -21018,6 +21017,9 @@ components:
       - VAULT_STORAGE_TIER_FROM_SOURCE_STORAGE_CLASS
     StandardBackupPolicyPlan:
       example:
+        resourceTypes:
+        - AWS_EC2
+        - AWS_EC2
         backupSchedules:
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           scheduleConfig:
@@ -21095,6 +21097,14 @@ components:
         scheduleTimezone: UTC
       nullable: true
       properties:
+        resourceTypes:
+          description: |
+            Optional resource types covered by this policy. On creation, omission or an empty array covers
+            all supported standard backup resource types. On update, omission keeps the existing scope;
+            an empty array clears it. A specified set also limits manual inclusions.
+          items:
+            $ref: '#/components/schemas/ResourceType'
+          type: array
         backupSchedules:
           description: |
             List of backup schedules.
@@ -21219,6 +21229,7 @@ components:
     HighFrequencyBackupSchedules:
       example:
         vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+        backupRetentionHours: 12
         scheduleConfig:
           monthlyConfig:
             startWindowMinutes: 240
@@ -21266,6 +21277,14 @@ components:
           description: "Backup retention period, in days."
           example: 30
           type: integer
+        backupRetentionHours:
+          description: Extra retention hours (0-23) on top of `backupRetentionDays`.
+            Only allowed for interval schedules in projects whose minimum high-frequency
+            retention is below one day.
+          example: 12
+          maximum: 23
+          minimum: 0
+          type: integer
       required:
       - backupRetentionDays
       - scheduleConfig
@@ -21278,6 +21297,7 @@ components:
         - resourceType: AWS_S3
         backupSchedules:
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          backupRetentionHours: 12
           scheduleConfig:
             monthlyConfig:
               startWindowMinutes: 240
@@ -21314,6 +21334,7 @@ components:
             frequency: WEEKLY
           backupRetentionDays: 30
         - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+          backupRetentionHours: 12
           scheduleConfig:
             monthlyConfig:
               startWindowMinutes: 240
@@ -21684,6 +21705,7 @@ components:
           - resourceType: AWS_S3
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            backupRetentionHours: 12
             scheduleConfig:
               monthlyConfig:
                 startWindowMinutes: 240
@@ -21720,6 +21742,7 @@ components:
               frequency: WEEKLY
             backupRetentionDays: 30
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+            backupRetentionHours: 12
             scheduleConfig:
               monthlyConfig:
                 startWindowMinutes: 240
@@ -21762,6 +21785,9 @@ components:
           vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
           backupRetentionDays: 30
         standardPlan:
+          resourceTypes:
+          - AWS_EC2
+          - AWS_EC2
           backupSchedules:
           - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             scheduleConfig:
@@ -21943,6 +21969,7 @@ components:
             - resourceType: AWS_S3
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionHours: 12
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
@@ -21979,6 +22006,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionHours: 12
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
@@ -22021,6 +22049,9 @@ components:
             vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             backupRetentionDays: 30
           standardPlan:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -22328,6 +22359,7 @@ components:
             - resourceType: AWS_S3
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionHours: 12
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
@@ -22364,6 +22396,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionHours: 12
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
@@ -22406,6 +22439,9 @@ components:
             vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             backupRetentionDays: 30
           standardPlan:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -22720,6 +22756,7 @@ components:
               - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -22756,6 +22793,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -22798,6 +22836,9 @@ components:
               vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -23181,6 +23222,7 @@ components:
               - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -23217,6 +23259,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -23259,6 +23302,9 @@ components:
               vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -23535,6 +23581,7 @@ components:
               - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -23571,6 +23618,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -23613,6 +23661,9 @@ components:
               vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -23909,6 +23960,7 @@ components:
               - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -23945,6 +23997,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -23987,6 +24040,9 @@ components:
               vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -24271,6 +24327,7 @@ components:
             - resourceType: AWS_S3
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionHours: 12
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
@@ -24307,6 +24364,7 @@ components:
                 frequency: WEEKLY
               backupRetentionDays: 30
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+              backupRetentionHours: 12
               scheduleConfig:
                 monthlyConfig:
                   startWindowMinutes: 240
@@ -24349,6 +24407,9 @@ components:
             vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
             backupRetentionDays: 30
           standardPlan:
+            resourceTypes:
+            - AWS_EC2
+            - AWS_EC2
             backupSchedules:
             - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               scheduleConfig:
@@ -24657,6 +24718,7 @@ components:
               - resourceType: AWS_S3
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -24693,6 +24755,7 @@ components:
                   frequency: WEEKLY
                 backupRetentionDays: 30
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
+                backupRetentionHours: 12
                 scheduleConfig:
                   monthlyConfig:
                     startWindowMinutes: 240
@@ -24735,6 +24798,9 @@ components:
               vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
               backupRetentionDays: 30
             standardPlan:
+              resourceTypes:
+              - AWS_EC2
+              - AWS_EC2
               backupSchedules:
               - vaultId: 0b8d140a-f4fe-58bf-afd7-a57f073d72c5
                 scheduleConfig:
@@ -34816,6 +34882,7 @@ components:
           - DATA_ANOMALY_REMEDIATED
           - AI_DATA_RISK_REMEDIATED
           - DATA_EXPOSURE_RISK_REMEDIATED
+          - VULNERABLE_APPLICATION_REMEDIATED
           type: string
         arguments:
           $ref: '#/components/schemas/WebhookV1StandardPayloadResource_arguments'
@@ -34871,6 +34938,7 @@ components:
           - DATA_ANOMALY_DETECTED_IN_SNAPSHOT
           - AI_DATA_RISK_DETECTED_IN_SNAPSHOT
           - DATA_EXPOSURE_RISK_DETECTED_IN_SNAPSHOT
+          - VULNERABLE_APPLICATION_DETECTED_IN_SNAPSHOT
           type: string
         arguments:
           $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshot_arguments'
@@ -35612,11 +35680,13 @@ components:
           DATA_ANOMALY_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
           AI_DATA_RISK_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
           DATA_EXPOSURE_RISK_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
+          VULNERABLE_APPLICATION_REMEDIATED: '#/components/schemas/WebhookV1StandardPayloadResource'
           RANSOMWARE_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
           MALWARE_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
           DATA_ANOMALY_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
           AI_DATA_RISK_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
           DATA_EXPOSURE_RISK_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
+          VULNERABLE_APPLICATION_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
           SNAPSHOT_USER_PROTECTED: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
           SNAPSHOT_USER_UNPROTECTED: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
           SNAPSHOT_INCLUDES_ACCESS_DENIED_ITEMS: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied'

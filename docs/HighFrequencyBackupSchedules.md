@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **VaultId** | **string** | Vault ID. | 
 **ScheduleConfig** | [**HighFrequencyBackupScheduleConfig**](HighFrequencyBackupScheduleConfig.md) |  | 
 **BackupRetentionDays** | **int32** | Backup retention period, in days. | 
+**BackupRetentionHours** | Pointer to **int32** | Extra retention hours (0-23) on top of &#x60;backupRetentionDays&#x60;. Only allowed for interval schedules in projects whose minimum high-frequency retention is below one day. | [optional] 
 
 ## Methods
 
@@ -86,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetBackupRetentionDays sets BackupRetentionDays field to given value.
 
+
+### GetBackupRetentionHours
+
+`func (o *HighFrequencyBackupSchedules) GetBackupRetentionHours() int32`
+
+GetBackupRetentionHours returns the BackupRetentionHours field if non-nil, zero value otherwise.
+
+### GetBackupRetentionHoursOk
+
+`func (o *HighFrequencyBackupSchedules) GetBackupRetentionHoursOk() (*int32, bool)`
+
+GetBackupRetentionHoursOk returns a tuple with the BackupRetentionHours field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupRetentionHours
+
+`func (o *HighFrequencyBackupSchedules) SetBackupRetentionHours(v int32)`
+
+SetBackupRetentionHours sets BackupRetentionHours field to given value.
+
+### HasBackupRetentionHours
+
+`func (o *HighFrequencyBackupSchedules) HasBackupRetentionHours() bool`
+
+HasBackupRetentionHours returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
