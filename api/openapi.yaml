@@ -12353,6 +12353,9 @@ components:
       - dashboard.manage
       - ai_assistant.use
       - agent_protection.view
+      - era.view
+      - era_companies.manage
+      - era_access.manage
       example: inventory.view
       type: string
       x-extensible-enum: true
@@ -12415,6 +12418,9 @@ components:
       - dashboard.manage
       - ai_assistant.use
       - agent_protection.view
+      - era.view
+      - era_companies.manage
+      - era_access.manage
     Permission:
       example:
         permissionType: inventory.view

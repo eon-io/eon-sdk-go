@@ -211,6 +211,12 @@
 
 * `AGENT_PROTECTION_VIEW` (value: `"agent_protection.view"`)
 
+* `ERA_VIEW` (value: `"era.view"`)
+
+* `ERA_COMPANIES_MANAGE` (value: `"era_companies.manage"`)
+
+* `ERA_ACCESS_MANAGE` (value: `"era_access.manage"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
