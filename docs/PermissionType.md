@@ -209,6 +209,10 @@
 
 * `AI_ASSISTANT_USE` (value: `"ai_assistant.use"`)
 
+* `BI_AGENT_USE` (value: `"bi_agent.use"`)
+
+* `BI_AGENT_MANAGE` (value: `"bi_agent.manage"`)
+
 * `AGENT_PROTECTION_VIEW` (value: `"agent_protection.view"`)
 
 * `ERA_VIEW` (value: `"era.view"`)

@@ -37,6 +37,10 @@ tags:
 - description: Define and manage backup policies and schedules.
   name: backupPolicies
   x-displayName: Backup Policies
+- description: "Send notifications about events in your project to Slack, email, SIEM\
+    \ tools and other destinations."
+  name: notificationPolicies
+  x-displayName: Notification Policies
 - description: Require approval before sensitive actions can run.
   name: actionApprovals
   x-displayName: Action Approvals
@@ -12352,6 +12356,8 @@ components:
       - data_catalog_pipelines.manage
       - dashboard.manage
       - ai_assistant.use
+      - bi_agent.use
+      - bi_agent.manage
       - agent_protection.view
       - era.view
       - era_companies.manage
@@ -12417,6 +12423,8 @@ components:
       - saas_backup_policies.manage
       - dashboard.manage
       - ai_assistant.use
+      - bi_agent.use
+      - bi_agent.manage
       - agent_protection.view
       - era.view
       - era_companies.manage

@@ -123,6 +123,8 @@ const (
 	DATA_CATALOG_PIPELINES_MANAGE PermissionType = "data_catalog_pipelines.manage"
 	DASHBOARD_MANAGE PermissionType = "dashboard.manage"
 	AI_ASSISTANT_USE PermissionType = "ai_assistant.use"
+	BI_AGENT_USE PermissionType = "bi_agent.use"
+	BI_AGENT_MANAGE PermissionType = "bi_agent.manage"
 	AGENT_PROTECTION_VIEW PermissionType = "agent_protection.view"
 	ERA_VIEW PermissionType = "era.view"
 	ERA_COMPANIES_MANAGE PermissionType = "era_companies.manage"
@@ -234,6 +236,8 @@ var AllowedPermissionTypeEnumValues = []PermissionType{
 	"data_catalog_pipelines.manage",
 	"dashboard.manage",
 	"ai_assistant.use",
+	"bi_agent.use",
+	"bi_agent.manage",
 	"agent_protection.view",
 	"era.view",
 	"era_companies.manage",
