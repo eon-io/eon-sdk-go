@@ -26,6 +26,7 @@ type ActionApprovalRuleExpression struct {
 	Apps NullableAppsCondition `json:"apps,omitempty"`
 	SensitivityAnnotations NullableSensitivityAnnotationsCondition `json:"sensitivityAnnotations,omitempty"`
 	SecurityScanConclusion NullableSecurityScanConclusionCondition `json:"securityScanConclusion,omitempty"`
+	RestoreThreatDetected NullableRestoreThreatDetectedCondition `json:"restoreThreatDetected,omitempty"`
 	CloudProvider NullableCloudProviderCondition `json:"cloudProvider,omitempty"`
 	AccountId NullableAccountIdCondition `json:"accountId,omitempty"`
 	SourceRegion NullableRegionCondition `json:"sourceRegion,omitempty"`
@@ -348,6 +349,48 @@ func (o *ActionApprovalRuleExpression) SetSecurityScanConclusionNil() {
 // UnsetSecurityScanConclusion ensures that no value is present for SecurityScanConclusion, not even an explicit nil
 func (o *ActionApprovalRuleExpression) UnsetSecurityScanConclusion() {
 	o.SecurityScanConclusion.Unset()
+}
+
+// GetRestoreThreatDetected returns the RestoreThreatDetected field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ActionApprovalRuleExpression) GetRestoreThreatDetected() RestoreThreatDetectedCondition {
+	if o == nil || IsNil(o.RestoreThreatDetected.Get()) {
+		var ret RestoreThreatDetectedCondition
+		return ret
+	}
+	return *o.RestoreThreatDetected.Get()
+}
+
+// GetRestoreThreatDetectedOk returns a tuple with the RestoreThreatDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ActionApprovalRuleExpression) GetRestoreThreatDetectedOk() (*RestoreThreatDetectedCondition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RestoreThreatDetected.Get(), o.RestoreThreatDetected.IsSet()
+}
+
+// HasRestoreThreatDetected returns a boolean if a field has been set.
+func (o *ActionApprovalRuleExpression) HasRestoreThreatDetected() bool {
+	if o != nil && o.RestoreThreatDetected.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreThreatDetected gets a reference to the given NullableRestoreThreatDetectedCondition and assigns it to the RestoreThreatDetected field.
+func (o *ActionApprovalRuleExpression) SetRestoreThreatDetected(v RestoreThreatDetectedCondition) {
+	o.RestoreThreatDetected.Set(&v)
+}
+// SetRestoreThreatDetectedNil sets the value for RestoreThreatDetected to be an explicit nil
+func (o *ActionApprovalRuleExpression) SetRestoreThreatDetectedNil() {
+	o.RestoreThreatDetected.Set(nil)
+}
+
+// UnsetRestoreThreatDetected ensures that no value is present for RestoreThreatDetected, not even an explicit nil
+func (o *ActionApprovalRuleExpression) UnsetRestoreThreatDetected() {
+	o.RestoreThreatDetected.Unset()
 }
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -842,6 +885,9 @@ func (o ActionApprovalRuleExpression) ToMap() (map[string]interface{}, error) {
 	}
 	if o.SecurityScanConclusion.IsSet() {
 		toSerialize["securityScanConclusion"] = o.SecurityScanConclusion.Get()
+	}
+	if o.RestoreThreatDetected.IsSet() {
+		toSerialize["restoreThreatDetected"] = o.RestoreThreatDetected.Get()
 	}
 	if o.CloudProvider.IsSet() {
 		toSerialize["cloudProvider"] = o.CloudProvider.Get()

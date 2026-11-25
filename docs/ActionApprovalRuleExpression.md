@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Apps** | Pointer to [**NullableAppsCondition**](AppsCondition.md) |  | [optional] 
 **SensitivityAnnotations** | Pointer to [**NullableSensitivityAnnotationsCondition**](SensitivityAnnotationsCondition.md) |  | [optional] 
 **SecurityScanConclusion** | Pointer to [**NullableSecurityScanConclusionCondition**](SecurityScanConclusionCondition.md) |  | [optional] 
+**RestoreThreatDetected** | Pointer to [**NullableRestoreThreatDetectedCondition**](RestoreThreatDetectedCondition.md) |  | [optional] 
 **CloudProvider** | Pointer to [**NullableCloudProviderCondition**](CloudProviderCondition.md) |  | [optional] 
 **AccountId** | Pointer to [**NullableAccountIdCondition**](AccountIdCondition.md) |  | [optional] 
 **SourceRegion** | Pointer to [**NullableRegionCondition**](RegionCondition.md) |  | [optional] 
@@ -287,6 +288,41 @@ HasSecurityScanConclusion returns a boolean if a field has been set.
 `func (o *ActionApprovalRuleExpression) UnsetSecurityScanConclusion()`
 
 UnsetSecurityScanConclusion ensures that no value is present for SecurityScanConclusion, not even an explicit nil
+### GetRestoreThreatDetected
+
+`func (o *ActionApprovalRuleExpression) GetRestoreThreatDetected() RestoreThreatDetectedCondition`
+
+GetRestoreThreatDetected returns the RestoreThreatDetected field if non-nil, zero value otherwise.
+
+### GetRestoreThreatDetectedOk
+
+`func (o *ActionApprovalRuleExpression) GetRestoreThreatDetectedOk() (*RestoreThreatDetectedCondition, bool)`
+
+GetRestoreThreatDetectedOk returns a tuple with the RestoreThreatDetected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreThreatDetected
+
+`func (o *ActionApprovalRuleExpression) SetRestoreThreatDetected(v RestoreThreatDetectedCondition)`
+
+SetRestoreThreatDetected sets RestoreThreatDetected field to given value.
+
+### HasRestoreThreatDetected
+
+`func (o *ActionApprovalRuleExpression) HasRestoreThreatDetected() bool`
+
+HasRestoreThreatDetected returns a boolean if a field has been set.
+
+### SetRestoreThreatDetectedNil
+
+`func (o *ActionApprovalRuleExpression) SetRestoreThreatDetectedNil(b bool)`
+
+ SetRestoreThreatDetectedNil sets the value for RestoreThreatDetected to be an explicit nil
+
+### UnsetRestoreThreatDetected
+`func (o *ActionApprovalRuleExpression) UnsetRestoreThreatDetected()`
+
+UnsetRestoreThreatDetected ensures that no value is present for RestoreThreatDetected, not even an explicit nil
 ### GetCloudProvider
 
 `func (o *ActionApprovalRuleExpression) GetCloudProvider() CloudProviderCondition`

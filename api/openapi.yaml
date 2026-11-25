@@ -31689,6 +31689,8 @@ components:
       - SAAS_BACKUP_SEATS_METERING_DIMENSION
       - SAAS_BACKUP_SEATS_RANSOMWARE_METERING_DIMENSION
       - SAAS_BACKUP_FRONTLINE_SEATS_METERING_DIMENSION
+      - SAAS_BACKUP_FRONTLINE_SEATS_RANSOMWARE_METERING_DIMENSION
+      - SAAS_BACKUP_FRONTLINE_STORAGE_METERING_DIMENSION
       example: AWS_EC2_METERING_DIMENSION
       type: string
       x-extensible-enum: true
@@ -31727,6 +31729,8 @@ components:
       - SAAS_BACKUP_SEATS_METERING_DIMENSION
       - SAAS_BACKUP_SEATS_RANSOMWARE_METERING_DIMENSION
       - SAAS_BACKUP_FRONTLINE_SEATS_METERING_DIMENSION
+      - SAAS_BACKUP_FRONTLINE_SEATS_RANSOMWARE_METERING_DIMENSION
+      - SAAS_BACKUP_FRONTLINE_STORAGE_METERING_DIMENSION
       - AWS_S3_COLD_TIER_STORAGE_METERING_DIMENSION
       - AWS_S3_COLD_TIER_MANAGED_OBJECTS_METERING_DIMENSION
       - AWS_S3_COLD_TIER_RESTORE_METERING_DIMENSION
@@ -32001,6 +32005,8 @@ components:
         For multiple conditions using `AND` or `OR` logic, group expressions with `group`.
         You can nest multiple groups to create more complex expressions.
       example:
+        restoreThreatDetected:
+          detected: true
         resourceId:
           operator: IN
           resourceIds:
@@ -32110,6 +32116,8 @@ components:
           $ref: '#/components/schemas/SensitivityAnnotationsCondition'
         securityScanConclusion:
           $ref: '#/components/schemas/SecurityScanConclusionCondition'
+        restoreThreatDetected:
+          $ref: '#/components/schemas/RestoreThreatDetectedCondition'
         cloudProvider:
           $ref: '#/components/schemas/CloudProviderCondition'
         accountId:
@@ -32253,6 +32261,20 @@ components:
       - operator
       - securityScanConclusions
       type: object
+    RestoreThreatDetectedCondition:
+      description: "For restore rules only. Matches any non-clean verdict that isn't\
+        \ awaiting approval on the selected snapshot, regardless of detector. Unscanned\
+        \ and snapshotless restores do not match."
+      example:
+        detected: true
+      nullable: true
+      properties:
+        detected:
+          description: Must be true.
+          type: boolean
+      required:
+      - detected
+      type: object
     ActionApprovalRuleResourceSelector:
       description: |
         Configuration that determines which entities the action approval rule applies to.
@@ -32260,6 +32282,8 @@ components:
         If the rule applies to backup policies, `CONDITIONAL` selection is unavailable.
       example:
         expression:
+          restoreThreatDetected:
+            detected: true
           resourceId:
             operator: IN
             resourceIds:
@@ -32396,6 +32420,8 @@ components:
         id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a30
         resourceSelector:
           expression:
+            restoreThreatDetected:
+              detected: true
             resourceId:
               operator: IN
               resourceIds:
@@ -32580,6 +32606,8 @@ components:
           id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a30
           resourceSelector:
             expression:
+              restoreThreatDetected:
+                detected: true
               resourceId:
                 operator: IN
                 resourceIds:
@@ -32692,6 +32720,8 @@ components:
           id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a30
           resourceSelector:
             expression:
+              restoreThreatDetected:
+                detected: true
               resourceId:
                 operator: IN
                 resourceIds:
@@ -32827,6 +32857,8 @@ components:
         description: description
         resourceSelector:
           expression:
+            restoreThreatDetected:
+              detected: true
             resourceId:
               operator: IN
               resourceIds:
@@ -32991,6 +33023,8 @@ components:
           id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a30
           resourceSelector:
             expression:
+              restoreThreatDetected:
+                detected: true
               resourceId:
                 operator: IN
                 resourceIds:
@@ -33121,6 +33155,8 @@ components:
           id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a30
           resourceSelector:
             expression:
+              restoreThreatDetected:
+                detected: true
               resourceId:
                 operator: IN
                 resourceIds:
@@ -33241,6 +33277,8 @@ components:
         description: description
         resourceSelector:
           expression:
+            restoreThreatDetected:
+              detected: true
             resourceId:
               operator: IN
               resourceIds:
@@ -33399,6 +33437,8 @@ components:
           id: 018f3b3f-4818-7c31-a0d7-2e02f2f83a30
           resourceSelector:
             expression:
+              restoreThreatDetected:
+                detected: true
               resourceId:
                 operator: IN
                 resourceIds:

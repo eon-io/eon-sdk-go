@@ -424,6 +424,7 @@ docs/RestoreSecurityGroupsSecurityGroupsInner.md
 docs/RestoreTemplate.md
 docs/RestoreTemplateResourceType.md
 docs/RestoreTemplatesAPI.md
+docs/RestoreThreatDetectedCondition.md
 docs/RestoreVolumeToEbsRequest.md
 docs/RestoreVolumeToEbsSnapshotRequest.md
 docs/Role.md
@@ -1025,6 +1026,7 @@ model_restore_security_groups.go
 model_restore_security_groups_security_groups_inner.go
 model_restore_template.go
 model_restore_template_resource_type.go
+model_restore_threat_detected_condition.go
 model_restore_volume_to_ebs_request.go
 model_restore_volume_to_ebs_snapshot_request.go
 model_role.go
