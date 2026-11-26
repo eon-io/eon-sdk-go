@@ -25,6 +25,10 @@
 
 * `COST_GROUP_BY_AI_AGENT_APP` (value: `"AI_AGENT_APP"`)
 
+* `COST_GROUP_BY_ERA_COMPANY` (value: `"ERA_COMPANY"`)
+
+* `COST_GROUP_BY_ERA_CONNECTOR` (value: `"ERA_CONNECTOR"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
