@@ -43,7 +43,6 @@ type WebhookV1StandardPayload struct {
 	WebhookV1StandardPayloadRestoreJobRejected *WebhookV1StandardPayloadRestoreJobRejected
 	WebhookV1StandardPayloadRestoreJobSucceeded *WebhookV1StandardPayloadRestoreJobSucceeded
 	WebhookV1StandardPayloadSnapshot *WebhookV1StandardPayloadSnapshot
-	WebhookV1StandardPayloadSnapshotAccessDenied *WebhookV1StandardPayloadSnapshotAccessDenied
 	WebhookV1StandardPayloadSnapshotUserProtection *WebhookV1StandardPayloadSnapshotUserProtection
 	WebhookV1StandardPayloadViolations *WebhookV1StandardPayloadViolations
 }
@@ -227,13 +226,6 @@ func WebhookV1StandardPayloadRestoreJobSucceededAsWebhookV1StandardPayload(v *We
 func WebhookV1StandardPayloadSnapshotAsWebhookV1StandardPayload(v *WebhookV1StandardPayloadSnapshot) WebhookV1StandardPayload {
 	return WebhookV1StandardPayload{
 		WebhookV1StandardPayloadSnapshot: v,
-	}
-}
-
-// WebhookV1StandardPayloadSnapshotAccessDeniedAsWebhookV1StandardPayload is a convenience function that returns WebhookV1StandardPayloadSnapshotAccessDenied wrapped in WebhookV1StandardPayload
-func WebhookV1StandardPayloadSnapshotAccessDeniedAsWebhookV1StandardPayload(v *WebhookV1StandardPayloadSnapshotAccessDenied) WebhookV1StandardPayload {
-	return WebhookV1StandardPayload{
-		WebhookV1StandardPayloadSnapshotAccessDenied: v,
 	}
 }
 
@@ -594,19 +586,6 @@ func (dst *WebhookV1StandardPayload) UnmarshalJSON(data []byte) error {
 		dst.WebhookV1StandardPayloadSnapshot = nil
 	}
 
-	// try to unmarshal data into WebhookV1StandardPayloadSnapshotAccessDenied
-	err = newStrictDecoder(data).Decode(&dst.WebhookV1StandardPayloadSnapshotAccessDenied)
-	if err == nil {
-		jsonWebhookV1StandardPayloadSnapshotAccessDenied, _ := json.Marshal(dst.WebhookV1StandardPayloadSnapshotAccessDenied)
-		if string(jsonWebhookV1StandardPayloadSnapshotAccessDenied) == "{}" { // empty struct
-			dst.WebhookV1StandardPayloadSnapshotAccessDenied = nil
-		} else {
-			match++
-		}
-	} else {
-		dst.WebhookV1StandardPayloadSnapshotAccessDenied = nil
-	}
-
 	// try to unmarshal data into WebhookV1StandardPayloadSnapshotUserProtection
 	err = newStrictDecoder(data).Decode(&dst.WebhookV1StandardPayloadSnapshotUserProtection)
 	if err == nil {
@@ -661,7 +640,6 @@ func (dst *WebhookV1StandardPayload) UnmarshalJSON(data []byte) error {
 		dst.WebhookV1StandardPayloadRestoreJobRejected = nil
 		dst.WebhookV1StandardPayloadRestoreJobSucceeded = nil
 		dst.WebhookV1StandardPayloadSnapshot = nil
-		dst.WebhookV1StandardPayloadSnapshotAccessDenied = nil
 		dst.WebhookV1StandardPayloadSnapshotUserProtection = nil
 		dst.WebhookV1StandardPayloadViolations = nil
 
@@ -777,10 +755,6 @@ func (src WebhookV1StandardPayload) MarshalJSON() ([]byte, error) {
 
 	if src.WebhookV1StandardPayloadSnapshot != nil {
 		return json.Marshal(&src.WebhookV1StandardPayloadSnapshot)
-	}
-
-	if src.WebhookV1StandardPayloadSnapshotAccessDenied != nil {
-		return json.Marshal(&src.WebhookV1StandardPayloadSnapshotAccessDenied)
 	}
 
 	if src.WebhookV1StandardPayloadSnapshotUserProtection != nil {
@@ -901,10 +875,6 @@ func (obj *WebhookV1StandardPayload) GetActualInstance() (interface{}) {
 
 	if obj.WebhookV1StandardPayloadSnapshot != nil {
 		return obj.WebhookV1StandardPayloadSnapshot
-	}
-
-	if obj.WebhookV1StandardPayloadSnapshotAccessDenied != nil {
-		return obj.WebhookV1StandardPayloadSnapshotAccessDenied
 	}
 
 	if obj.WebhookV1StandardPayloadSnapshotUserProtection != nil {

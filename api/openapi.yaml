@@ -35056,65 +35056,6 @@ components:
       - timestamp
       - type
       type: object
-    WebhookV1SnapshotAccessDeniedArguments:
-      description: Details of the snapshot that includes items Eon was denied access
-        to.
-      properties:
-        jobId:
-          description: ID of the backup job that created the snapshot.
-          type: string
-        resourceName:
-          description: Name of the resource.
-          type: string
-        resourceProviderId:
-          description: Cloud-provider-assigned ID of the resource.
-          type: string
-        accessDeniedItems:
-          description: Number of items the backup couldn't access.
-          format: int64
-          type: integer
-        accessDeniedBytes:
-          description: "Total size, in bytes, of the items the backup couldn't access."
-          format: int64
-          type: integer
-        resourceType:
-          description: Resource type.
-          type: string
-      type: object
-    WebhookV1StandardPayloadSnapshotAccessDenied:
-      description: Notification of a snapshot with items that Eon was denied access
-        to.
-      properties:
-        id:
-          description: Notification ID. Also sent in the `X-Eon-Notification-Id` header.
-          example: 5f0c4d3e-6a1b-4c2d-9e8f-0a1b2c3d4e5f
-          type: string
-        projectId:
-          description: ID of the project the notification policy is in.
-          example: 7b1d4f2a-3c5e-4a6b-8d9e-1f2a3b4c5d6e
-          type: string
-        timestamp:
-          description: |
-            Time the notification was created, in RFC 3339 format with second precision.
-            Also sent in the `X-Eon-Timestamp` header.
-          example: 2024-03-04T05:06:07Z
-          format: date-time
-          type: string
-        type:
-          description: Notification type. Also sent in the `X-Eon-Notification-Type`
-            header.
-          enum:
-          - SNAPSHOT_INCLUDES_ACCESS_DENIED_ITEMS
-          type: string
-        arguments:
-          $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied_arguments'
-      required:
-      - arguments
-      - id
-      - projectId
-      - timestamp
-      - type
-      type: object
     WebhookV1ViolationsDetectionNotificationArguments:
       description: Details of control violations detected or resolved on resources.
       properties:
@@ -35751,7 +35692,6 @@ components:
           VULNERABLE_APPLICATION_DETECTED_IN_SNAPSHOT: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
           SNAPSHOT_USER_PROTECTED: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
           SNAPSHOT_USER_UNPROTECTED: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
-          SNAPSHOT_INCLUDES_ACCESS_DENIED_ITEMS: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied'
           HIGH_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
           MEDIUM_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
           LOW_SEVERITY_VIOLATIONS_DETECTED_ON_RESOURCES: '#/components/schemas/WebhookV1StandardPayloadViolations'
@@ -35801,7 +35741,6 @@ components:
       - $ref: '#/components/schemas/WebhookV1StandardPayloadResource'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshot'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotUserProtection'
-      - $ref: '#/components/schemas/WebhookV1StandardPayloadSnapshotAccessDenied'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadViolations'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadIssueMuted'
       - $ref: '#/components/schemas/WebhookV1StandardPayloadResourceBlocker'
@@ -36166,16 +36105,6 @@ components:
       required:
       - initiatorArguments
       - snapshotArguments
-      type: object
-    WebhookV1StandardPayloadSnapshotAccessDenied_arguments:
-      description: |
-        Details of the notification.
-        Always `snapshotAccessDenied`.
-      properties:
-        snapshotAccessDenied:
-          $ref: '#/components/schemas/WebhookV1SnapshotAccessDeniedArguments'
-      required:
-      - snapshotAccessDenied
       type: object
     WebhookV1StandardPayloadViolations_arguments:
       description: |
